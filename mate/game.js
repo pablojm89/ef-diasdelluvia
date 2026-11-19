@@ -145,10 +145,10 @@ function frame(now){
    accumulator+=delta;let steps=0;
    while(accumulator>=1/60&&steps<6){if(!game.paused){setInput(game,localId,controls());consumeActions();}stepGame(game);accumulator-=1/60;steps++;}
    if(room?.isHost&&now-lastBroadcast>=66){room.broadcastState(snapshot(game));lastBroadcast=now;}
-   if(now-lastUi>100||$('game-view').dataset.phase!==game.phase){updateStateUI(game);lastUi=now;}playSound(game);renderer.render(game,localId,controls(),latency,now);
+   if(now-lastUi>100||$('game-view').dataset.phase!==game.phase){updateStateUI(game);lastUi=now;}playSound(game);renderer.render(game,localId,controls(),latency,now,mode==='online');
   } else if(remote){
    if(now-lastSend>=45&&!networkDisconnected){room?.input(controls());consumeActions();lastSend=now;}
-   if(now-lastClientDraw>32){renderer.render(interpolateRemote(now),localId,controls(),latency,now);lastClientDraw=now;}playSound(remote);
+   if(now-lastClientDraw>32){renderer.render(interpolateRemote(now),localId,controls(),latency,now,true);lastClientDraw=now;}playSound(remote);
    if(now-lastRemoteAt>4500&&!networkDisconnected&&!remote.paused){networkDisconnected=true;$('connection-message').textContent='La partida ha dejado de responder. Espera unos segundos o intenta recuperar tu plaza.';$('connection-overlay').hidden=false;clearKeys();}
   } else renderer.render(demo,null,{},0,now);
  }

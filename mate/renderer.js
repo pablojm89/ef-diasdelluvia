@@ -25,7 +25,7 @@ export class ArenaRenderer {
   for(const [x,label,color] of [[370,'COMETAS','#75efdf'],[830,'RAYOS','#ffb38e']]){c.fillStyle=color;rounded(c,x-85,654,170,26,7);c.fill();text(c,label,x,668,13,'#18323e');}
   c.fillStyle='#071627';c.fillRect(0,693,1200,67);c.fillStyle='#2d455c';c.fillRect(0,693,1200,2);
  }
- render(g,localId,controls={},latency=0,now=performance.now()) {
+ render(g,localId,controls={},latency=0,now=performance.now(),online=false) {
   const c=this.ctx;c.clearRect(0,0,1200,760);c.drawImage(this.background,0,0);
   if(!g)return;
   const local=g.players.find(p=>p.id===localId),active=[0,1].map(team=>g.players.filter(p=>p.team===team&&!p.prison).length);
@@ -65,7 +65,7 @@ export class ArenaRenderer {
   if(local){
    const team=TEAM_COLORS[local.team];text(c,`${local.name.toUpperCase()} · ${team.name}`,25,714,13,team.light,'left');text(c,local.prison?'EN LA CÁRCEL: DA A UN RIVAL PARA VOLVER':b.holder===local.id?'TIENES LA PELOTA · APUNTA Y LANZA':'ESQUIVA, ATRAPA Y BUSCA LA PELOTA',25,738,11,'#a9c4d5','left');
    this.cooldown(c,620,'E  ATRAPAR',local.catchCooldown,1.05,local.catchTime>0,'#7eead7');this.cooldown(c,810,'SHIFT  ESQUIVAR',local.dashCooldown,1.4,local.dashTime>0,'#f4c779');
-   text(c,latency?`${latency} ms`:'LOCAL',1157,714,11,'#89abbd','right');text(c,'ESPACIO LANZA · Q PASA',1157,738,10,'#bdd0db','right');
+   text(c,latency?`${latency} ms`:online?'ONLINE':'LOCAL',1157,714,11,'#89abbd','right');text(c,'ESPACIO LANZA · Q PASA',1157,738,10,'#bdd0db','right');
   }
   if(g.phase!=='playing'||g.paused)this.overlay(g);
  }
