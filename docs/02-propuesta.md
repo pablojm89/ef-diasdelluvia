@@ -2,7 +2,7 @@
 
 ## La idea
 
-«Fuera llueve. Dentro se juega». Un club de misiones de aula en el que una tripulación recupera seis señales: coordinación, equilibrio, ritmo, expresión, cooperación y calma. Identidad visual de estación meteorológica y club deportivo: azul profundo, lima, coral y papel blanco; ilustraciones geométricas originales, sin personajes infantiles obligatorios ni referencias a franquicias.
+«Fuera llueve. Dentro se juega». Un club de misiones de aula en el que una tripulación recupera seis señales: coordinación, equilibrio, ritmo, expresión, cooperación y calma. La dirección visual actual es una aventura de islas flotantes: azul nocturno, oro cálido, vegetación y luces de refugio. Chispa, un robot explorador con capa amarilla, acompaña al grupo. El mapa abre las tres experiencias; las balizas, el escenario de baile y la arena forman parte de la interfaz jugable. Las capturas actuales están en el README. No se utilizan personajes de franquicias.
 
 El profesor abre la app, decide cómo está el aula, cuánto tiempo tiene y cuántos dispositivos usará. El sistema propone una sesión. Los alumnos reciben una consigna breve, dejan el dispositivo en un lugar estable y actúan. Vuelven a la pantalla para elegir, responder o dar feedback.
 

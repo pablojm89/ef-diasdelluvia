@@ -4,6 +4,14 @@ Una propuesta de coordinación, ritmo, expresión y cooperación para 5.º y 6.�
 
 **Estado: investigación y diseño de producto + prototipo funcional local.** Tres experiencias desde un único dispositivo. Las salas online y las votaciones entre tablets están diseñadas, pero todavía no implementadas. No hay seguimiento del movimiento con cámara.
 
+## El mundo de Chispa
+
+La entrada es un mapa de islas flotantes con tres destinos interactivos. Misión Refugio tiene una ruta de seis balizas, Pulso Lab un escenario con ritmo visual y Liga Relámpago una arena de equipos. Chispa acompaña al grupo y celebra el cierre de la misión.
+
+![Mapa interactivo del mundo de Chispa](docs/images/world-desktop.webp)
+
+![Ruta de balizas y reto de Misión Refugio](docs/images/mission-desktop.webp)
+
 ## Abrir el prototipo
 
 Sirve la raíz con `python -m http.server 8000` y abre `http://localhost:8000`. No requiere instalación ni claves. Rutas relativas compatibles con GitHub Pages en `/ef-diasdelluvia/`.
@@ -25,8 +33,8 @@ El progreso se guarda en el navegador si permite almacenamiento local. En Liga l
 
 ## Comprobar y publicar
 
-`npm test` ejecuta pruebas del banco y las reglas mediante Node. `node --check app.js` valida sintaxis. No hay dependencias de producción ni compilación.
+`npm test` ejecuta pruebas del banco y las reglas mediante Node. `npm run test:browser` ejecuta el recorrido completo y genera capturas en `artifacts/`; requiere Playwright disponible en el entorno y Chromium instalado (ruta opcional `CHROMIUM_PATH`). El runner sirve los archivos en memoria, sin servidor público. `node --check app.js` valida sintaxis. No hay dependencias de producción ni compilación.
 
 El workflow de Pages se ejecuta manualmente. Primero activar **Settings → Pages → Source: GitHub Actions**. El repositorio es privado: Pages requiere un plan compatible. No se cambia su visibilidad automáticamente. [Documentación de GitHub](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).
 
-Textos, interfaz e ilustraciones SVG creados para el proyecto. Las fuentes son referencias, no contenidos redistribuidos. No se incluyen vídeos, música ni marcas de Just Dance o Genially. Licencia de redistribución todavía por decidir.
+Textos e interfaz creados para el proyecto. Escenario y personaje generados con IA para esta dirección artística y optimizados en WebP; también se conservan las ilustraciones SVG iniciales. Las fuentes son referencias, no contenidos redistribuidos. No se incluyen vídeos, música ni marcas de Just Dance o Genially. Licencia de redistribución todavía por decidir.

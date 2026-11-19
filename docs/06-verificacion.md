@@ -11,10 +11,14 @@
 - Revisión de que el registro de un equipo no reinicia el temporizador activo de Liga.
 - Rutas de recursos relativas, sin dependencias remotas obligatorias.
 - `git diff --check` antes de guardar la entrega.
+- Rediseño visual: prueba automatizada en Chromium del mapa, misión completa, pausa de reloj, persistencia al recargar, escenario y pulso activo, Liga de seis rondas y filtros. Sin errores de JavaScript.
+- Capturas en 1440 px, 1024 px, 768 px, 390 px y 320 px. Comprobado que no hay desbordamiento horizontal en las pantallas de mundo, misión, baile y arena. Revisión visual de capturas de escritorio, móvil y tablet.
+- El workflow de Pages incluye las imágenes WebP del escenario y de Chispa.
 
 ## No comprobado aún
 
-- Recorrido real en navegador, disposición visual, teclado, lectores de pantalla, audio y almacenamiento de cada navegador. El servicio de preview falló al abrir el puerto del navegador y la herramienta de escritorio devolvió un error de sandbox. No se considera pasada la revisión visual.
+- Escritorio compartido: la herramienta continúa bloqueada por un error de sandbox. La comprobación automatizada se realizó con el Chromium instalado, aislando las peticiones a los archivos locales del proyecto.
+- Auditoría completa con teclado y lector de pantalla, reproducción audible y compatibilidad en navegadores del centro. El guardado y los recorridos se probaron en Chromium, no en todos los navegadores.
 - Publicación de GitHub Pages: la consulta a su API devolvió 403, «Resource not accessible by integration». Se entrega workflow manual, sin afirmar que esté desplegado. El repo es privado; hace falta un plan compatible para mantenerlo privado y usar Pages.
 - Uso con alumnos, tiempos de clase y adecuación de las variantes al grupo concreto.
 - Multijugador remoto, permisos de sala y votos: sólo especificados, no implementados.
