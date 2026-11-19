@@ -2,7 +2,7 @@
 
 Una propuesta de coordinación, ritmo, expresión y cooperación para 5.º y 6.º de Primaria.
 
-**Estado: investigación y diseño de producto + prototipo funcional local.** Tres experiencias desde un único dispositivo. Las salas online y las votaciones entre tablets están diseñadas, pero todavía no implementadas. No hay seguimiento del movimiento con cámara.
+**Estado: tres experiencias físicas de aula y Mate Arena, un videojuego de balón prisionero con entrenamiento y salas online.** Las salas de Mate Arena están implementadas; las votaciones y las salas de los otros juegos siguen pendientes. No hay seguimiento del movimiento con cámara.
 
 ## El mundo de Chispa
 
@@ -12,16 +12,24 @@ La entrada es un mapa de islas flotantes con tres destinos interactivos. Misión
 
 ![Ruta de balizas y reto de Misión Refugio](docs/images/mission-desktop.webp)
 
-## Abrir el prototipo
+## Mate Arena · videojuego online
 
-Sirve la raíz con `python -m http.server 8000` y abre `http://localhost:8000`. No requiere instalación ni claves. Rutas relativas compatibles con GitHub Pages en `/ef-diasdelluvia/`.
+Ocho personajes de pixel art, movimiento libre en cada campo, lanzamientos, pases, esquivas, recepción al vuelo, cárceles y rescates. Entrenamiento contra IA o salas por código para hasta 12 jugadores (6 contra 6). Reglas del mate escolar con dos variantes de recepción configurables.
+
+Abre **`/mate/`**, pulsa **Crear sala online** y comparte la invitación. Tus compañeros eligen personaje, entran con el código y marcan **Estoy listo**. El anfitrión inicia el partido y mantiene la pestaña abierta. Las plazas libres se completan con IA. El juego intenta WebRTC y ofrece relevo WSS. Los servicios públicos por defecto permiten probarlo sin configurar cuentas; para uso habitual se puede conectar un servicio propio del centro. [Reglas, arquitectura, pruebas y límites](docs/07-mate-arena.md).
+
+![Mate Arena: balón prisionero arcade](docs/images/mate-arena.webp)
+
+## Abrir la aplicación
+
+Ejecuta `npm run dev` y abre `http://localhost:3000`; el videojuego está en `http://localhost:3000/mate/`. También se puede servir la raíz con cualquier servidor estático. No requiere instalación ni claves. Rutas relativas compatibles con GitHub Pages en `/ef-diasdelluvia/`.
 
 - **Misión Refugio:** seis retos, temporizador, alternativas sentadas y avance cooperativo o individual.
 - **Pulso Lab:** secuencia de cuatro movimientos, metrónomo opcional y fases de creación, ensayo y muestra.
 - **Liga Relámpago:** rondas para 2–6 equipos y puntuación manual validada por el docente en pantalla común.
 - Biblioteca de 24 retos originales, filtros y guía rápida.
 
-El progreso se guarda en el navegador si permite almacenamiento local. En Liga los resultados se introducen en el mismo dispositivo: no hay sincronización entre ordenadores.
+Misión y las experiencias físicas guardan progreso local si el navegador lo permite. Liga Relámpago sigue usando una pantalla común. Mate Arena sincroniza su propia partida entre los ordenadores de la sala; no guarda un historial de alumnos.
 
 ## Documentación
 
@@ -30,10 +38,11 @@ El progreso se guarda en el navegador si permite almacenamiento local. En Liga l
 3. [Sesiones, inclusión y observación](docs/03-guia-docente.md).
 4. [Arquitectura y contrato del multijugador](docs/04-arquitectura.md).
 5. [Plan y criterios de aceptación](docs/05-plan.md).
+6. [Mate Arena: juego, online y verificación](docs/07-mate-arena.md).
 
 ## Comprobar y publicar
 
-`npm test` ejecuta pruebas del banco y las reglas mediante Node. `npm run test:browser` ejecuta el recorrido completo y genera capturas en `artifacts/`; requiere Playwright disponible en el entorno y Chromium instalado (ruta opcional `CHROMIUM_PATH`). El runner sirve los archivos en memoria, sin servidor público. `node --check app.js` valida sintaxis. No hay dependencias de producción ni compilación.
+`npm test` ejecuta pruebas del banco y las reglas mediante Node. `npm run test:browser` ejecuta el recorrido completo y genera capturas en `artifacts/`; requiere Playwright disponible en el entorno y Chromium instalado (ruta opcional `CHROMIUM_PATH`). El runner sirve los archivos en memoria, sin servidor público. `node --check app.js` valida sintaxis. No hay compilación. Mate incluye una copia local de PeerJS 1.5.5 con su licencia MIT; el renderizado y el motor de juego son propios. `npm run test:mate` realiza las pruebas online reales y requiere internet, Playwright y Chromium. `MATE_CLIENTS=12 MATE_FULL_MATCH=0 npm run test:mate` prueba una sala de doce clientes.
 
 El workflow de Pages se ejecuta manualmente. Primero activar **Settings → Pages → Source: GitHub Actions**. El repositorio es privado: Pages requiere un plan compatible. No se cambia su visibilidad automáticamente. [Documentación de GitHub](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).
 

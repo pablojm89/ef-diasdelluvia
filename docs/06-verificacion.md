@@ -21,6 +21,10 @@
 - Auditoría completa con teclado y lector de pantalla, reproducción audible y compatibilidad en navegadores del centro. El guardado y los recorridos se probaron en Chromium, no en todos los navegadores.
 - Publicación de GitHub Pages: la consulta a su API devolvió 403, «Resource not accessible by integration». Se entrega workflow manual, sin afirmar que esté desplegado. El repo es privado; hace falta un plan compatible para mantenerlo privado y usar Pages.
 - Uso con alumnos, tiempos de clase y adecuación de las variantes al grupo concreto.
-- Multijugador remoto, permisos de sala y votos: sólo especificados, no implementados.
+- Las salas y votos de las experiencias físicas siguen especificados y pendientes. El multijugador de Mate Arena ya está implementado y tiene pruebas propias; véase [su documentación](07-mate-arena.md).
 
 Antes del primer pilotaje: abrir en el navegador del centro y verificar Misión completa, una Liga, cambios de variante, sonido opcional y recarga. Después realizar la observación didáctica descrita en la guía.
+
+## Mate Arena
+
+El videojuego se verifica por separado con `tests/mate.test.js` y `tests/mate-browser.cjs`. Las pruebas de navegador usan contextos independientes y el servicio externo WSS real. Se ha comprobado una sala de doce clientes, movimiento remoto, pausa del anfitrión, reconexión con la misma plaza y lanzamientos compartidos. Las capturas de su menú y pista se revisaron también en móvil, tablet y portátil. Los resultados completos y límites de infraestructura se documentan en [Mate Arena](07-mate-arena.md).

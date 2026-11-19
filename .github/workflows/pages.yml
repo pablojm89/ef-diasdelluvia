@@ -1,4 +1,4 @@
-name: Publicar prototipo en Pages
+name: Publicar Patio Interior y Mate Arena
 on:
   workflow_dispatch:
 permissions:
@@ -26,6 +26,7 @@ jobs:
           mkdir -p _site/assets
           cp index.html app.js content.js engine.js styles.css _site/
           cp assets/*.svg assets/*.webp _site/assets/
+          cp -R mate _site/mate
           touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:

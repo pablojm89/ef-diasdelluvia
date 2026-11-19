@@ -1,5 +1,7 @@
 # Arquitectura y multijugador
 
+**Actualización: Mate Arena ya incorpora su propio multijugador**, con anfitrión autoritativo, WebRTC y relevo WSS. Véase [su arquitectura y verificación](07-mate-arena.md). El plan que sigue se refiere a las experiencias físicas originales y sus futuras votaciones, no al videojuego de mate.
+
 ## Estado de esta entrega
 
 Aplicación estática sin dependencias: HTML, CSS, módulos JavaScript, SVG y almacenamiento local opcional. Todo el juego ocurre en el dispositivo que abre la app. No hay cuentas, salas, votos remotos, base de datos ni verificación automática del movimiento. La interfaz identifica ese alcance.
