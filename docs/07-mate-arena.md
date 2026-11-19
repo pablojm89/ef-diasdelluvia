@@ -95,3 +95,9 @@ Los contextos de prueba se ejecutan en el mismo entorno de cómputo; esto verifi
 El navegador gestionado del entorno impide candidatos WebRTC directos por una política administrativa. Se mantuvo esa política: la prueba online se realiza mediante el relevo WSS real. La vía directa necesita comprobarse adicionalmente en los navegadores y la red del centro.
 
 La aplicación es estática y se publica en GitHub Pages junto con el resto del proyecto. El workflow copia también `mate/` y su biblioteca local. El estado de publicación en Pages es independiente de que la partida funcione en el servidor estático de pruebas.
+
+## Intento de publicación en GitHub Pages
+
+La entrega de código `3fbb6b0` se subió a `main` y se ejecutó el workflow [44559142510](https://github.com/pablojm89/ef-diasdelluvia/actions/runs/44559142510). Las 26 pruebas pasaron también en GitHub Actions. El despliegue se detuvo en `actions/configure-pages@v5`: GitHub respondió `Not Found` al consultar el sitio Pages y pidió comprobar que estuviera habilitado con origen GitHub Actions.
+
+La conexión disponible devuelve acceso denegado a la API administrativa de Pages y no puede habilitarlo. Por tanto **no se afirma que exista una web publicada**. El siguiente paso en la cuenta propietaria es abrir **Settings → Pages**, elegir **GitHub Actions** como origen y volver a ejecutar **Publicar Patio Interior y Mate Arena**. Al ser un repositorio privado hace falta un plan compatible con Pages privado; no se ha cambiado su visibilidad ni contratado ningún plan.

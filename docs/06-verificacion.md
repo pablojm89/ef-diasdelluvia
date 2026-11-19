@@ -28,3 +28,5 @@ Antes del primer pilotaje: abrir en el navegador del centro y verificar Misión 
 ## Mate Arena
 
 El videojuego se verifica por separado con `tests/mate.test.js` y `tests/mate-browser.cjs`. Las pruebas de navegador usan contextos independientes y el servicio externo WSS real. Se ha comprobado una sala de doce clientes, movimiento remoto, pausa del anfitrión, reconexión con la misma plaza y lanzamientos compartidos. Las capturas de su menú y pista se revisaron también en móvil, tablet y portátil. Los resultados completos y límites de infraestructura se documentan en [Mate Arena](07-mate-arena.md).
+
+El workflow [44559142510](https://github.com/pablojm89/ef-diasdelluvia/actions/runs/44559142510) pasó las 26 pruebas del código de Mate Arena y se detuvo en la configuración de Pages por `Not Found`. No llegó a desplegar. La activación administrativa del sitio queda pendiente en la cuenta propietaria.
