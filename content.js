@@ -1,0 +1,44 @@
+export const families = {
+  coordinacion: 'Coordinación', equilibrio: 'Control corporal', ritmo: 'Ritmo',
+  expresion: 'Expresión', cooperacion: 'Cooperación', calma: 'Calma',
+};
+
+// Contenido original. La variante sentada mantiene el objetivo, no la forma exacta.
+const rows = [
+  ['c1','coordinacion','Cruces en clave',40,1,'Alterna mano derecha a rodilla izquierda y mano izquierda a rodilla derecha. Despacio, sin inclinarte demasiado.','Con los pies apoyados, alterna cada mano hacia el muslo contrario.','Cruzar la línea media con control.','Mantengo la alternancia sin acelerar.'],
+  ['c2','coordinacion','Cuatro gestos',45,1,'Haz palma, hombros, muslos y manos abiertas. Repite el orden y luego inténtalo de memoria.','Haz la misma secuencia sentado, con amplitud cómoda.','Recordar una secuencia motriz.','Conservo el orden de los cuatro gestos.'],
+  ['c3','coordinacion','Dos mandos',40,1,'Una mano dibuja círculos pequeños y la otra sube y baja. Prueba lentamente y cambia de mano.','Apoya los pies y realiza los dibujos a la altura del pecho.','Disociar movimientos de brazos.','Puedo cambiar de mano tras una pausa.'],
+  ['c4','coordinacion','Código espejo',45,2,'Frente a tu pareja y sin tocaros, guía tres gestos lentos. Tu pareja los refleja. Cambiad de guía a mitad.','Sentados frente a frente, usad gestos pequeños de manos y hombros.','Ajustar el gesto al de otra persona.','Los dos hemos podido guiar y seguir.'],
+  ['e1','equilibrio','Estatua con apoyos',40,1,'Con ambos pies en el suelo, cambia lentamente el peso de un lado al otro. Vuelve al centro y crea una pose estable.','Con ambos pies apoyados, cambia suavemente la orientación de los brazos y vuelve al centro.','Explorar estabilidad y control postural.','Termino en una posición estable y cómoda.'],
+  ['e2','equilibrio','Robot suave',40,1,'Desde tu sitio, mueve una articulación cada vez: dedos, muñecas, codos y hombros. Congela y relaja sin rigidez.','Con espalda cómoda, mueve dedos, muñecas, codos y hombros uno a uno.','Regular tensión y movimiento segmentario.','Distingo mover, parar y relajar.'],
+  ['e3','equilibrio','Brújula personal',45,1,'Sin desplazarte, orienta las manos hacia delante, hacia un lado y hacia arriba. Vuelve al centro entre señales.','Orienta tus manos en las tres direcciones con recorrido cómodo y pies apoyados.','Orientar segmentos y recuperar la posición.','Regreso al centro después de cada señal.'],
+  ['e4','equilibrio','Museo de poses',45,1,'Inventa tres poses con ambos pies apoyados: sorpresa, calma y celebración. Cambia lentamente entre ellas.','Expresa las tres poses con brazos, manos y cara desde la silla.','Controlar transiciones expresivas.','Paso de una pose a otra sin movimientos bruscos.'],
+  ['r1','ritmo','Eco de cuatro',40,1,'Haz dos palmas suaves y dos toques de muslos a ritmo regular. Repite, deja cuatro pulsos de silencio y vuelve.','Repite el patrón sentado con los pies apoyados. También puedes marcarlo sólo con dedos.','Mantener un pulso durante un silencio.','Vuelvo al patrón después de la pausa.'],
+  ['r2','ritmo','Ocho pulsos',45,1,'Marca cuatro pulsos alternando talones sin desplazarte y cuatro abriendo y cerrando las manos. Repite.','Alterna cuatro toques de manos en los muslos y cuatro aperturas de manos.','Combinar dos patrones de ocho tiempos.','Cambio de gesto al llegar al quinto pulso.'],
+  ['r3','ritmo','Pregunta rítmica',45,2,'Una persona propone cuatro gestos al pulso. La otra responde con cuatro distintos. Intercambiad papeles.','Usad gestos de manos y brazos de amplitud cómoda, sentados.','Crear y responder frases rítmicas.','Mi respuesta dura los mismos cuatro pulsos.'],
+  ['r4','ritmo','Lluvia por capas',50,2,'El grupo hace ocho pulsos con dedos; después suma palmas suaves durante ocho pulsos. Bajad juntos al sonido inicial.','La misma secuencia sentados; si preferís silencio, abrid y cerrad manos.','Coordinar entradas y cambios de intensidad.','Cambiamos de capa con una señal compartida.'],
+  ['x1','expresion','Objeto invisible',45,1,'Imagina sostener una pluma y después una caja grande. Representa el peso con gestos pequeños sin coger objetos.','Representa ambos objetos con manos y cara, manteniendo una postura cómoda.','Comunicar cualidades con el cuerpo.','Se nota la diferencia entre mis dos objetos.'],
+  ['x2','expresion','Cambio de emoción',45,1,'Haz el mismo gesto de saludar con sorpresa, alegría y tranquilidad. Cambia la cara, la amplitud y el ritmo.','Saluda con manos y cara desde la silla, probando las tres emociones.','Transformar un gesto para expresar una emoción.','Explico qué cambié para expresar cada emoción.'],
+  ['x3','expresion','Deporte sin material',50,2,'Representa un deporte sólo con gestos, sin correr ni golpear. Tu pareja lo interpreta y después cambiáis.','Representa el deporte con manos, brazos y cara, sin abandonar la silla.','Representar e interpretar acciones.','Doy una pista corporal y escucho la interpretación.'],
+  ['x4','expresion','Historia en tres poses',60,2,'En pareja, inventad inicio, problema y final de una aventura. Contadla con tres poses en vuestra zona.','Contad la historia con tres poses de brazos y cara desde las sillas.','Componer una secuencia expresiva.','Podemos explicar qué cuenta cada pose.'],
+  ['p1','cooperacion','Guía por turnos',50,2,'Cada miembro propone un gesto cómodo. Unidlos en una secuencia y repetidla juntos. Todos aportan.','Cada persona aporta un gesto de manos o brazos que todo el grupo pueda hacer sentado.','Construir un patrón con aportaciones compartidas.','La secuencia incluye una idea de cada persona.'],
+  ['p2','cooperacion','Mismo final',45,2,'En pareja, elegid una señal y tres gestos. Ensayad para terminar juntos sin contar en voz alta.','Elegid tres gestos de manos y una señal visual, sentados.','Coordinarse mediante señales acordadas.','Acordamos una señal y la respetamos.'],
+  ['p3','cooperacion','Mejora compartida',60,2,'Una persona propone dos gestos; otra los adapta para que resulten más cómodos. Probad ambas versiones y cambiad de papel.','Proponed y adaptad dos gestos de manos o brazos desde la silla.','Adaptar una creación escuchando a los demás.','Probamos una mejora propuesta por otra persona.'],
+  ['p4','cooperacion','Cadena de gestos',60,2,'Cada persona repite el gesto anterior y añade uno propio. Si se olvida, el grupo ayuda. Reiniciad tras cuatro gestos.','Construid una cadena de hasta cuatro gestos de brazos y manos sentados.','Ayudar a recordar un patrón colectivo.','Damos pistas sin eliminar a nadie.'],
+  ['k1','calma','Nube tranquila',40,1,'Con ambos pies apoyados, abre suavemente las manos al inspirar y ciérralas al soltar el aire. Respira con naturalidad.','Con pies apoyados y hombros cómodos, acompaña tu respiración natural abriendo y cerrando manos.','Reconocer un ritmo respiratorio cómodo.','Puedo describir cómo me siento tras la pausa.'],
+  ['k2','calma','Radar corporal',45,1,'Afloja manos y hombros. Nota tus apoyos y elige una zona que puedas relajar sin cambiar de sitio.','Con pies apoyados, afloja manos y hombros y encuentra una postura cómoda.','Reconocer tensión y regularla.','Identifico una zona que he relajado.'],
+  ['k3','calma','Bajar el volumen',40,1,'Abre y cierra las manos. Haz cada repetición un poco más lenta y pequeña hasta terminar en quietud cómoda.','Realiza la secuencia con manos o dedos sentado.','Reducir gradualmente velocidad y amplitud.','Mi último gesto es más lento que el primero.'],
+  ['k4','calma','Mi señal de pausa',45,1,'Inventa un gesto pequeño para pedir una pausa. Practícalo y piensa cuándo te ayudaría durante un juego.','Inventa la señal con manos o cara desde la silla y piensa cuándo usarla.','Comunicar una necesidad de autorregulación.','Explico cuándo utilizaría mi señal.'],
+];
+
+export const challenges = rows.map(([id,family,title,seconds,minPlayers,standing,seated,goal,criterion]) =>
+  ({id,family,title,seconds,minPlayers,standing,seated,goal,criterion}));
+
+export const moves = [
+  {id:'marcha',name:'Alterna',standing:'Alterna talones en tu sitio.',seated:'Alterna manos sobre los muslos.',symbol:'◒'},
+  {id:'abre',name:'Abre',standing:'Abre y cierra las manos frente al pecho.',seated:'Abre y cierra las manos frente al pecho.',symbol:'✳'},
+  {id:'cruza',name:'Cruza',standing:'Lleva cada mano hacia el hombro contrario.',seated:'Lleva cada mano hacia el hombro contrario.',symbol:'╳'},
+  {id:'palmas',name:'Marca',standing:'Marca el pulso con palmas suaves o dedos.',seated:'Marca el pulso con palmas suaves o dedos.',symbol:'◈'},
+  {id:'ola',name:'Ola',standing:'Dibuja una ola pequeña con cada mano.',seated:'Dibuja una ola pequeña con cada mano.',symbol:'≈'},
+  {id:'pose',name:'Pose',standing:'Crea una pose estable con los dos pies apoyados.',seated:'Crea una pose con brazos y cara, con pies apoyados.',symbol:'✦'},
+];
