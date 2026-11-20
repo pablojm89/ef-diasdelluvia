@@ -10,7 +10,7 @@ Un colegio que se juega: cada actividad de Educación Física vive en un lugar d
 
 **Privacidad:** el repositorio es público y sólo contiene recursos genéricos y personajes ficticios. No incorporar datos reales de alumnos. [Política y comprobaciones de publicación](PRIVACY.md).
 
-**Estado:** abiertos El Gimnasio (aventura *Equipment Rescue*), La Pista (Mate Arena, con entrenamiento y salas online) y Las Espalderas (ruleta de retos para la pantalla digital). El Tatami, La Pizarra, El Aula y La Grada están planificados. No hay seguimiento del movimiento con cámara.
+**Estado:** abiertos El Gimnasio (aventura *Equipment Rescue*), La Pista (Mate Arena, con entrenamiento y salas online), Las Espalderas (ruleta de retos), El Aula (oca cooperativa y bingo en movimiento), La Pizarra (rosco de EF), El Tatami (yoga) y La Grada (partidos de mate en directo). Varias pantallas usan figuras provisionales mientras llegan las imágenes de [arte/ENCARGO.md](arte/ENCARGO.md). El envío de notas a la hoja del profe está programado pero sin probar con Google real. No hay seguimiento del movimiento con cámara.
 
 **Presentación inmersiva:** el escenario ocupa toda la ventana; diálogos y controles se integran sobre la escena. Misión, mochila y ajustes se abren desde el menú del juego.
 

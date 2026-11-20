@@ -133,6 +133,8 @@ function drawLocker() {
   ['Aventura del gimnasio', mine?.gymDone ? 'Completada' : mine?.gymPhase ? `Fase ${mine.gymPhase} de 5 superada` : 'Sin empezar'],
   ['Partidos de mate', mine?.matches ? `${mine.matches} jugados · ${mine.wins} ganados` : 'Ninguno todavía'],
   ['Mejor puntuación en mate', mine?.bestPoints ? `${mine.bestPoints} puntos` : '—'],
+  ['Yoga', mine?.poses.length || mine?.sequences || mine?.practices ? `${mine.poses.length} posturas vistas · ${mine.sequences} secuencias creadas · ${mine.practices} practicadas` : 'Sin empezar'],
+  ['Rosco de EF', mine?.roscos ? `${mine.roscos} jugados · mejor: ${mine.bestRosco} aciertos` : 'Ninguno todavía'],
  ];
  $('locker-list').innerHTML = lines.map(([label, value]) => `<li><span>${esc(label)}</span><b>${esc(value)}</b></li>`).join('');
  $('locker-recover').hidden = !connection();
@@ -189,8 +191,8 @@ const when = iso => new Date(iso).toLocaleString('es-ES', {day: 'numeric', month
 function drawDesk() {
  const rows = summary();
  const marks = row => row.marks.length ? row.marks.map(m => `${m.criterio} · ${String(m.nota).replace('.', ',')} ${m.calificacion}`).join('<br>') : '—';
- $('desk-summary').innerHTML = rows.length ? `<table><thead><tr><th>Jugador</th><th>Última vez</th><th>Aventura del gimnasio</th><th>Mate: partidos · ganados · mejor</th><th>Retos de ruleta</th><th>Nota orientativa</th></tr></thead><tbody>${rows.map(row =>
-  `<tr><th scope="row">${esc(row.who)}</th><td>${esc(when(row.last))}</td><td>${row.gymDone ? 'Completada' : row.gymPhase ? `Fase ${row.gymPhase} de 5` : '—'}</td><td>${row.matches ? `${row.matches} · ${row.wins} · ${row.bestPoints}` : '—'}</td><td>${row.challenges}</td><td>${marks(row)}</td></tr>`).join('')}</tbody></table>`
+ $('desk-summary').innerHTML = rows.length ? `<table><thead><tr><th>Jugador</th><th>Última vez</th><th>Aventura del gimnasio</th><th>Mate: partidos · ganados · mejor</th><th>Yoga: posturas · creadas · practicadas</th><th>Rosco: jugados · mejor</th><th>Ruleta · oca · bingo</th><th>Nota orientativa</th></tr></thead><tbody>${rows.map(row =>
+  `<tr><th scope="row">${esc(row.who)}</th><td>${esc(when(row.last))}</td><td>${row.gymDone ? 'Completada' : row.gymPhase ? `Fase ${row.gymPhase} de 5` : '—'}</td><td>${row.matches ? `${row.matches} · ${row.wins} · ${row.bestPoints}` : '—'}</td><td>${row.poses.length || row.sequences || row.practices ? `${row.poses.length} · ${row.sequences} · ${row.practices}` : '—'}</td><td>${row.roscos ? `${row.roscos} · ${row.bestRosco}` : '—'}</td><td>${row.challenges || row.boards || row.bingos ? `${row.challenges} · ${row.boards} · ${row.bingos}` : '—'}</td><td>${marks(row)}</td></tr>`).join('')}</tbody></table>`
   : '<p>Todavía no se ha jugado nada en este ordenador.</p>';
  $('desk-download').disabled = $('desk-clear').disabled = !entries().length;
  drawCloud();

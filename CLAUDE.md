@@ -17,6 +17,8 @@ Un colegio que se juega. Cada actividad vive en un **lugar** del pabellón. Tres
 | `backend/` | Servidor `aula.gs` (Apps Script + Hojas de Google), común con La Lupa |
 | `gimnasio/` | Aventura gráfica Equipment Rescue. Es el modelo de estética |
 | `mate/` | Mate Arena: balón prisionero. Simulación en `sim.js`, red en `network.js` |
+| `grada/` | Partidos de Mate Arena en directo para la pantalla (espectador) |
+| `tatami/`, `pizarra/`, `aula/` | Yoga, rosco de EF, y oca cooperativa con bingo. Cada lugar es autocontenido y tiene su lote en `arte/lotes/` |
 | `content.js`, `engine.js` | Banco de 24 retos con variante sentada y criterio |
 | `patio.html`, `app.js`, `styles.css` | Actividades de la primera etapa, apartadas. No ampliar |
 | `arte/` | Encargo de imágenes a la IA ilustradora: lotes, `ENCARGO.md` generado y `entrega/` |

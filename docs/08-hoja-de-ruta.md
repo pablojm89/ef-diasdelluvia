@@ -23,10 +23,10 @@ Cada lugar es una puerta. Sólo se pintan puertas abiertas o a punto de abrirse;
 | **El Gimnasio** | Aventura gráfica bilingüe con el profe Robles; hoy, *Equipment Rescue* en el cuarto de material | — | Alumno · Pantalla | Abierto |
 | **La Pista** | Mate Arena: balón prisionero con habilidades, entrenamiento y salas | — | Alumno | Abierto |
 | **Las Espalderas** | Ruleta de retos: gira, sale un tipo de reto y toda la clase lo hace a la vez con cronómetro | Ruletas de Wordwall | Pantalla | Abierto |
-| **El Tatami** | Yoga: aprender posturas, crear secuencias entre todos y practicarlas | Yoga en vídeo y cuentos de yoga | Alumno · Pantalla | Siguiente |
-| **La Pizarra** | Rosco de EF que se responde con el cuerpo; reglas y jugadas | Pasapalabra y trivial de EF | Alumno · Pantalla | Siguiente |
-| **El Aula** | La oca cooperativa y el bingo en movimiento | Ocas y tableros de Genially; Movement bingo | Pantalla + tabletas | Después |
-| **La Grada** | Ver en la pantalla los partidos de mate que se están jugando y el marcador de la clase | — | Pantalla | Después |
+| **El Tatami** | Yoga: aprender doce posturas, crear secuencias propias o entre todos y practicarlas con respiraciones contadas | Yoga en vídeo y cuentos de yoga | Alumno · Pantalla | Abierto, con figura provisional |
+| **La Pizarra** | Rosco de EF: la clase responde con una postura y cada acierto abre un microrreto; individual en el ordenador del alumno | Pasapalabra y trivial de EF | Alumno · Pantalla | Abierto |
+| **El Aula** | La oca cooperativa y el bingo en movimiento con cartones únicos | Ocas y tableros de Genially; Movement bingo | Pantalla + tabletas | Abierto |
+| **La Grada** | Ver en la pantalla, por código de sala, hasta cuatro partidos de mate a la vez | — | Pantalla | Abierto |
 | **El Vestuario** | La taquilla del alumno: personaje, lo que lleva hecho, insignias | — | Alumno | Hoy es un botón; puerta propia más adelante |
 | **El Despacho** | Zona del profe: registro, lugares abiertos, preparar la sesión | — | Profe | Abierto, básico |
 | El Armario de los candados | Campaña por capítulos: retos de clase que dan un dígito y abren un armario | Breakout de los Pluvianos | Pantalla | Reserva |
@@ -50,9 +50,9 @@ Cada lugar es una puerta. Sólo se pintan puertas abiertas o a punto de abrirse;
 
 ## Las tres formas de entrar
 
-**Alumno.** Botón grande «Entrar a jugar». Elige curso, grupo, número de lista y uno de los ocho personajes; no escribe nada. Ese personaje es el mismo en el gimnasio y en la pista. Ve como mucho tres puertas. Su taquilla le enseña lo que lleva hecho. *Hecho.* Falta que el profe pueda decidir qué puertas ve cada clase.
+**Alumno.** Botón grande «Entrar a jugar». Elige curso, grupo, número de lista y uno de los ocho personajes; no escribe nada. Si el ordenador tiene el paquete de clase de La Lupa y el profe lo activa, elige su alias de clase en una lista. Ese personaje es el mismo en el gimnasio y en la pista. Ve como mucho cuatro puertas. Su taquilla le enseña lo que lleva hecho. *Hecho.* Falta que el profe pueda decidir qué puertas ve cada clase.
 
-**Pantalla digital.** Sin jugador: lo que ocurre se anota como clase. Puertas pensadas para proyectar y moverse todos a la vez. *Hecho con la ruleta y el gimnasio.* Faltan La Grada y las actividades de El Aula.
+**Pantalla digital.** Sin jugador: lo que ocurre se anota como clase. Puertas pensadas para proyectar y moverse todos a la vez: ruleta, oca y bingo, rosco, yoga, gimnasio y la grada. *Hecho.*
 
 **Profe.** Una clave de 4 a 8 números por ordenador abre el despacho: registro de ese ordenador, descarga, lista de lugares y acceso a las actividades antiguas. *Hecho en lo básico.* La clave sólo evita que el alumnado entre desde ese ordenador; no es una cuenta. Falta: abrir y cerrar lugares, preparar sesiones y ver el registro de toda la clase.
 
@@ -73,14 +73,16 @@ Mismo sistema que Agencia La Lupa, del repo de multiplicopolis: una hoja de Goog
 
 ## Orden de trabajo
 
-| Fase | Qué entrega | Depende de |
+| Fase | Qué entrega | Estado |
 |---|---|---|
-| **A. Casa nueva** — hecha | Inicio de juego, tres formas de entrar, jugador sin nombres, registro local, despacho, ruleta en Las Espalderas, nombre y estética comunes, actividades antiguas apartadas | — |
-| **B. Notas** | Hoja de Google conectada, registro de toda la clase en un sitio, pestaña de notas por criterio | Que el profe cree la hoja y decida qué evidencia cuenta |
-| **C. El Tatami** | Yoga completo: aprender, crear y practicar | Dibujos de posturas |
-| **D. La Pizarra y El Aula** | Rosco motor, oca cooperativa, bingo en movimiento | Imágenes de tablero y puertas |
-| **E. La Grada** | Partidos de mate en directo en la pantalla; espectador sin plaza en la sala | Probar el online en la red del centro |
-| **F. Remate** | Pista pintada y menús de Mate en la estética común, gimnasio en móvil, segunda misión del gimnasio, retirada definitiva de las actividades antiguas | Imágenes |
+| **A. Casa nueva** | Inicio de juego, tres formas de entrar, jugador sin nombres, registro local, despacho, ruleta, nombre y estética comunes, actividades antiguas apartadas | Hecha |
+| **B. Notas** | Mismo sistema que La Lupa: protocolo, servidor común `aula.gs`, conexión desde el despacho, alias de clase, tabla de qué da nota | Programada y probada contra hojas simuladas. **Falta probarla con Google real** y que el profe decida qué cuenta para nota |
+| **C. El Tatami** | Yoga completo: aprender, crear y practicar | Hecha con figura provisional; faltan los dibujos |
+| **D. La Pizarra y El Aula** | Rosco motor, oca cooperativa, bingo en movimiento | Hecha; faltan tablero, fondos y posturas pintados |
+| **E. La Grada** | Partidos de mate en directo; espectador sin plaza | Hecha y vista funcionar por conexión directa. Sin probar por el relevo ni en la red del centro |
+| **F. Remate** | Gimnasio táctil y con el pedido en la escena; pista pintada y menús de Mate en la estética común; segunda misión del gimnasio; retirada de las actividades antiguas | En curso |
+| **G. Arte** | Las imágenes de `arte/ENCARGO.md` sustituyen a lo provisional según llegan | Pendiente de la ilustradora |
+| **H. Lo que sigue** | El profe abre y cierra lugares por clase; el Vestuario como puerta; lugares de la reserva; descubrir solas las salas de mate de una clase | Sin empezar |
 
 ## Decisiones abiertas
 

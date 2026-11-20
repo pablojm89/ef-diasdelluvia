@@ -86,3 +86,20 @@ test('registro: sin hoja conectada nada sale del navegador y lo anotado antes se
  assert.equal(existsSync(root+'config.js'),false,'la dirección de la hoja no se escribe en el código público');
  assert.doesNotMatch(read('registro.js')+read('hub.js')+read('index.html'),/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]{20,}/);
 });
+test('registro: el resumen cuenta también yoga, rosco, oca y bingo',()=>{
+ localStorage.clear();sessionStorage.clear();
+ registro.setPlayer({course:5,group:'A',number:4,avatar:3});
+ registro.record('tatami','yoga','postura',{id:'arbol'});
+ registro.record('tatami','yoga','postura',{id:'arbol'});
+ registro.record('tatami','yoga','postura',{id:'gato'});
+ registro.record('tatami','yoga','secuencia-creada',{posturas:'arbol-gato',n:2});
+ registro.record('tatami','yoga','secuencia-practicada',{posturas:'arbol-gato',segundos:90,silla:false});
+ registro.record('pizarra','rosco','partida',{rosco:'5',aciertos:18,fallos:6,pasadas:3});
+ registro.record('pizarra','rosco','partida',{rosco:'5',aciertos:21,fallos:4,pasadas:2});
+ registro.record('aula','bingo','carton',{carton:12,lineas:2,bingo:false});
+ registro.setMode('pantalla');
+ registro.record('aula','oca','partida',{equipos:4,rondas:8,retos:11,completada:true});
+ const [mine,screen]=registro.summary();
+ assert.deepEqual([mine.poses.length,mine.sequences,mine.practices,mine.roscos,mine.bestRosco,mine.bingos],[2,1,1,2,21,1]);
+ assert.equal(screen.boards,1);
+});
