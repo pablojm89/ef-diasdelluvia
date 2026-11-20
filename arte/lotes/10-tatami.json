@@ -1,0 +1,303 @@
+{
+ "_titulo": "El Tatami: yoga",
+ "_nota": "Hojas de animación de las posturas (preparación, a medio camino y postura), la versión en silla de cada una, la sala y el profe. tatami/figura.js usa cada hoja en cuanto aparece en el índice; mientras tanto dibuja una figura provisional. La puerta de El Tatami ya está pedida en el lote 01-puertas.",
+ "_indice": {
+  "archivo": "tatami/assets/pintadas.js",
+  "nombre": "PINTADAS"
+ },
+ "pose-mountain": {
+  "nombre": "La montaña · hoja de animación",
+  "destino": "tatami/assets/pose-mountain.webp",
+  "ancho": 1536,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Hoja de animación de 1536 × 640: tres dibujos de 512 × 640 en fila, sin separación ni marcos, de izquierda a derecha: preparación, a medio camino y la postura terminada. La salida se anima recorriéndolos al revés. Los tres a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto, centrada); el pie o la mano que no se mueve queda exactamente en el mismo punto en los tres dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los tres dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1 (preparación): de pie en la esterilla, pies juntos, brazos a los lados. Dibujo 2 (a medio camino): brazos subiendo por los lados a la altura de los hombros. Dibujo 3 (postura): de pie y erguida, brazos estirados por encima de la cabeza con las palmas enfrentadas, hombros relajados.",
+  "clave": "mountain"
+ },
+ "pose-tree": {
+  "nombre": "El árbol · hoja de animación",
+  "destino": "tatami/assets/pose-tree.webp",
+  "ancho": 1536,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Hoja de animación de 1536 × 640: tres dibujos de 512 × 640 en fila, sin separación ni marcos, de izquierda a derecha: preparación, a medio camino y la postura terminada. La salida se anima recorriéndolos al revés. Los tres a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto, centrada); el pie o la mano que no se mueve queda exactamente en el mismo punto en los tres dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los tres dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1 (preparación): de pie con las manos juntas en el pecho. Dibujo 2 (a medio camino): el peso sobre la pierna izquierda y la punta del pie derecho apoyada junto al tobillo izquierdo, rodilla hacia fuera. Dibujo 3 (postura): de pie sobre la pierna izquierda, la planta del pie derecho apoyada en la parte interna de la pantorrilla izquierda (no en la rodilla), rodilla derecha abierta hacia fuera, brazos arriba en V como ramas.",
+  "clave": "tree"
+ },
+ "pose-chair": {
+  "nombre": "La silla · hoja de animación",
+  "destino": "tatami/assets/pose-chair.webp",
+  "ancho": 1536,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Hoja de animación de 1536 × 640: tres dibujos de 512 × 640 en fila, sin separación ni marcos, de izquierda a derecha: preparación, a medio camino y la postura terminada. La salida se anima recorriéndolos al revés. Los tres a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto, centrada); el pie o la mano que no se mueve queda exactamente en el mismo punto en los tres dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los tres dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1 (preparación): de pie con los pies separados a la anchura de las caderas, brazos a los lados. Dibujo 2 (a medio camino): rodillas algo dobladas y brazos estirados al frente. Dibujo 3 (postura): rodillas dobladas y cadera atrás como sentada en una silla invisible, rodillas por detrás de la punta de los pies, espalda recta inclinada y brazos arriba en la línea de la espalda.",
+  "clave": "chair"
+ },
+ "pose-warrior1": {
+  "nombre": "El guerrero I · hoja de animación",
+  "destino": "tatami/assets/pose-warrior1.webp",
+  "ancho": 1536,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Hoja de animación de 1536 × 640: tres dibujos de 512 × 640 en fila, sin separación ni marcos, de izquierda a derecha: preparación, a medio camino y la postura terminada. La salida se anima recorriéndolos al revés. Los tres a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto, centrada); el pie o la mano que no se mueve queda exactamente en el mismo punto en los tres dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los tres dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1 (preparación): de pie, brazos a los lados. Dibujo 2 (a medio camino): dando un paso largo atrás con el pie izquierdo, manos al pecho. Dibujo 3 (postura): zancada: rodilla derecha doblada justo encima del tobillo, pierna izquierda estirada atrás con el talón apoyado y el pie girado hacia fuera, tronco vertical y brazos estirados arriba.",
+  "clave": "warrior1"
+ },
+ "pose-warrior2": {
+  "nombre": "El guerrero II · hoja de animación",
+  "destino": "tatami/assets/pose-warrior2.webp",
+  "ancho": 1536,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Hoja de animación de 1536 × 640: tres dibujos de 512 × 640 en fila, sin separación ni marcos, de izquierda a derecha: preparación, a medio camino y la postura terminada. La salida se anima recorriéndolos al revés. Los tres a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto, centrada); el pie o la mano que no se mueve queda exactamente en el mismo punto en los tres dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los tres dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1 (preparación): de pie, brazos a los lados. Dibujo 2 (a medio camino): piernas muy separadas y estiradas, brazos subiendo. Dibujo 3 (postura): piernas muy separadas, rodilla derecha doblada encima del tobillo, pierna izquierda estirada, tronco vertical, brazos abiertos en horizontal a la altura de los hombros y la mirada sobre la mano derecha.",
+  "clave": "warrior2"
+ },
+ "pose-triangle": {
+  "nombre": "El triángulo · hoja de animación",
+  "destino": "tatami/assets/pose-triangle.webp",
+  "ancho": 1536,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Hoja de animación de 1536 × 640: tres dibujos de 512 × 640 en fila, sin separación ni marcos, de izquierda a derecha: preparación, a medio camino y la postura terminada. La salida se anima recorriéndolos al revés. Los tres a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto, centrada); el pie o la mano que no se mueve queda exactamente en el mismo punto en los tres dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los tres dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1 (preparación): de pie, brazos a los lados. Dibujo 2 (a medio camino): piernas separadas y estiradas, brazos abiertos en cruz. Dibujo 3 (postura): piernas separadas y estiradas, tronco inclinado hacia la derecha, mano derecha apoyada en la espinilla derecha, brazo izquierdo estirado hacia el techo, mirada al frente o a la mano de arriba.",
+  "clave": "triangle"
+ },
+ "pose-cat": {
+  "nombre": "El gato · hoja de animación",
+  "destino": "tatami/assets/pose-cat.webp",
+  "ancho": 1536,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Hoja de animación de 1536 × 640: tres dibujos de 512 × 640 en fila, sin separación ni marcos, de izquierda a derecha: preparación, a medio camino y la postura terminada. La salida se anima recorriéndolos al revés. Los tres a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto, centrada); el pie o la mano que no se mueve queda exactamente en el mismo punto en los tres dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los tres dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1 (preparación): a cuatro patas con la espalda plana: manos bajo los hombros, rodillas bajo las caderas, empeines en el suelo. Dibujo 2 (a medio camino): la espalda empezando a redondearse. Dibujo 3 (postura): la espalda redondeada hacia el techo como un gato que se estira, cabeza relajada mirando al ombligo.",
+  "clave": "cat"
+ },
+ "pose-cow": {
+  "nombre": "La vaca · hoja de animación",
+  "destino": "tatami/assets/pose-cow.webp",
+  "ancho": 1536,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Hoja de animación de 1536 × 640: tres dibujos de 512 × 640 en fila, sin separación ni marcos, de izquierda a derecha: preparación, a medio camino y la postura terminada. La salida se anima recorriéndolos al revés. Los tres a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto, centrada); el pie o la mano que no se mueve queda exactamente en el mismo punto en los tres dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los tres dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1 (preparación): a cuatro patas con la espalda plana: manos bajo los hombros, rodillas bajo las caderas, empeines en el suelo. Dibujo 2 (a medio camino): la tripa empezando a bajar. Dibujo 3 (postura): la tripa baja con suavidad, el pecho hacia delante y la mirada al frente, sin echar la cabeza atrás.",
+  "clave": "cow"
+ },
+ "pose-downdog": {
+  "nombre": "El perro boca abajo · hoja de animación",
+  "destino": "tatami/assets/pose-downdog.webp",
+  "ancho": 1536,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Hoja de animación de 1536 × 640: tres dibujos de 512 × 640 en fila, sin separación ni marcos, de izquierda a derecha: preparación, a medio camino y la postura terminada. La salida se anima recorriéndolos al revés. Los tres a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto, centrada); el pie o la mano que no se mueve queda exactamente en el mismo punto en los tres dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los tres dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1 (preparación): a cuatro patas con los dedos de los pies apoyados. Dibujo 2 (a medio camino): rodillas despegando del suelo y cadera subiendo. Dibujo 3 (postura): V invertida: manos apoyadas, cadera arriba, espalda larga, rodillas un poco dobladas, talones hacia el suelo, cabeza relajada entre los brazos sin tocar el suelo.",
+  "clave": "downdog"
+ },
+ "pose-cobra": {
+  "nombre": "La cobra · hoja de animación",
+  "destino": "tatami/assets/pose-cobra.webp",
+  "ancho": 1536,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Hoja de animación de 1536 × 640: tres dibujos de 512 × 640 en fila, sin separación ni marcos, de izquierda a derecha: preparación, a medio camino y la postura terminada. La salida se anima recorriéndolos al revés. Los tres a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto, centrada); el pie o la mano que no se mueve queda exactamente en el mismo punto en los tres dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los tres dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1 (preparación): tumbada boca abajo, piernas estiradas, manos bajo los hombros y la frente en el suelo. Dibujo 2 (a medio camino): pecho empezando a despegarse. Dibujo 3 (postura): cobra pequeña: cadera y piernas en el suelo, pecho un poco levantado, codos doblados y pegados al cuerpo, hombros lejos de las orejas, mirada al frente y cuello largo.",
+  "clave": "cobra"
+ },
+ "pose-butterfly": {
+  "nombre": "La mariposa · hoja de animación",
+  "destino": "tatami/assets/pose-butterfly.webp",
+  "ancho": 1536,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Hoja de animación de 1536 × 640: tres dibujos de 512 × 640 en fila, sin separación ni marcos, de izquierda a derecha: preparación, a medio camino y la postura terminada. La salida se anima recorriéndolos al revés. Los tres a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto, centrada); el pie o la mano que no se mueve queda exactamente en el mismo punto en los tres dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los tres dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1 (preparación): sentada en el suelo con las rodillas dobladas hacia arriba y los pies apoyados. Dibujo 2 (a medio camino): rodillas abriéndose hacia los lados. Dibujo 3 (postura): sentada con la espalda recta, plantas de los pies juntas, rodillas abiertas hacia los lados y las manos sujetando los pies.",
+  "clave": "butterfly"
+ },
+ "pose-child": {
+  "nombre": "La postura del niño · hoja de animación",
+  "destino": "tatami/assets/pose-child.webp",
+  "ancho": 1536,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Hoja de animación de 1536 × 640: tres dibujos de 512 × 640 en fila, sin separación ni marcos, de izquierda a derecha: preparación, a medio camino y la postura terminada. La salida se anima recorriéndolos al revés. Los tres a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto, centrada); el pie o la mano que no se mueve queda exactamente en el mismo punto en los tres dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los tres dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1 (preparación): de rodillas sentada sobre los talones, espalda recta, manos en los muslos. Dibujo 2 (a medio camino): tronco inclinándose hacia delante, brazos deslizándose al frente. Dibujo 3 (postura): sentada sobre los talones con el tronco apoyado en los muslos, la frente en la esterilla y los brazos estirados al frente, relajada.",
+  "clave": "child"
+ },
+ "pose-calma": {
+  "nombre": "Vuelta a la calma · hoja de animación",
+  "destino": "tatami/assets/pose-calma.webp",
+  "ancho": 1536,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Hoja de animación de 1536 × 640: tres dibujos de 512 × 640 en fila, sin separación ni marcos, de izquierda a derecha: preparación, a medio camino y la postura terminada. La salida se anima recorriéndolos al revés. Los tres a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto, centrada); el pie o la mano que no se mueve queda exactamente en el mismo punto en los tres dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los tres dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1 (preparación): sentada con las piernas cruzadas y las manos en las rodillas. Dibujo 2 (a medio camino): manos subiendo hacia la tripa. Dibujo 3 (postura): sentada con las piernas cruzadas, espalda larga, ojos cerrados y las dos manos sobre la tripa.",
+  "clave": "calma"
+ },
+ "pose-mountain-silla": {
+  "nombre": "La montaña · en silla",
+  "destino": "tatami/assets/pose-mountain-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la montaña: sentada al borde, espalda larga y brazos estirados arriba.",
+  "clave": "mountain-silla"
+ },
+ "pose-tree-silla": {
+  "nombre": "El árbol · en silla",
+  "destino": "tatami/assets/pose-tree-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de el árbol: sentada, un talón junto al tobillo contrario con la rodilla hacia fuera y brazos arriba como ramas.",
+  "clave": "tree-silla"
+ },
+ "pose-chair-silla": {
+  "nombre": "La silla · en silla",
+  "destino": "tatami/assets/pose-chair-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la silla: sentada al borde, espalda recta un poco inclinada hacia delante y brazos arriba junto a las orejas.",
+  "clave": "chair-silla"
+ },
+ "pose-warrior1-silla": {
+  "nombre": "El guerrero I · en silla",
+  "destino": "tatami/assets/pose-warrior1-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de el guerrero i: sentada al borde, una pierna doblada delante con la rodilla sobre el tobillo, la otra estirada atrás por el lado de la silla, brazos arriba.",
+  "clave": "warrior1-silla"
+ },
+ "pose-warrior2-silla": {
+  "nombre": "El guerrero II · en silla",
+  "destino": "tatami/assets/pose-warrior2-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de el guerrero ii: sentada al borde con las piernas abiertas y los brazos en cruz, mirando por encima de una mano.",
+  "clave": "warrior2-silla"
+ },
+ "pose-triangle-silla": {
+  "nombre": "El triángulo · en silla",
+  "destino": "tatami/assets/pose-triangle-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de el triángulo: sentada con las piernas abiertas, un antebrazo apoyado en el muslo, inclinada hacia ese lado y el otro brazo hacia el techo.",
+  "clave": "triangle-silla"
+ },
+ "pose-cat-silla": {
+  "nombre": "El gato · en silla",
+  "destino": "tatami/assets/pose-cat-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de el gato: sentada con las manos en las rodillas y la espalda redondeada, mirando al ombligo.",
+  "clave": "cat-silla"
+ },
+ "pose-cow-silla": {
+  "nombre": "La vaca · en silla",
+  "destino": "tatami/assets/pose-cow-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la vaca: sentada con las manos en las rodillas, el pecho hacia delante y la mirada al frente.",
+  "clave": "cow-silla"
+ },
+ "pose-downdog-silla": {
+  "nombre": "El perro boca abajo · en silla",
+  "destino": "tatami/assets/pose-downdog-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de el perro boca abajo: sentada al borde, brazos estirados al frente y la espalda larga inclinada desde la cadera.",
+  "clave": "downdog-silla"
+ },
+ "pose-cobra-silla": {
+  "nombre": "La cobra · en silla",
+  "destino": "tatami/assets/pose-cobra-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la cobra: sentada, manos agarrando los lados del asiento por detrás, pecho abierto y hombros atrás, mirando al frente.",
+  "clave": "cobra-silla"
+ },
+ "pose-butterfly-silla": {
+  "nombre": "La mariposa · en silla",
+  "destino": "tatami/assets/pose-butterfly-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la mariposa: sentada al borde, talones juntos en el suelo y rodillas abiertas hacia los lados.",
+  "clave": "butterfly-silla"
+ },
+ "pose-child-silla": {
+  "nombre": "La postura del niño · en silla",
+  "destino": "tatami/assets/pose-child-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la postura del niño: sentada, inclinada hacia delante con el pecho sobre los muslos y los brazos colgando relajados.",
+  "clave": "child-silla"
+ },
+ "room": {
+  "nombre": "Sala de El Tatami",
+  "destino": "tatami/assets/room.webp",
+  "ancho": 1536,
+  "alto": 1024,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Sala de expresión corporal del mismo colegio que gimnasio/assets/gym.webp, misma luz dorada de tarde entrando por un ventanal grande a la izquierda con naranjos detrás. Pared ocre melocotón, zócalo verde azulado, cenefa de azulejo azul y naranja, suelo de parqué anaranjado. Al fondo, un espejo ancho de pared con barra de madera; a la derecha, esterillas de colores enrolladas en una estantería baja y unos cojines. El centro y la mitad izquierda del suelo, despejados y sin objetos: ahí se dibuja la alumna sobre su esterilla. La mitad derecha de la imagen, tranquila y sin detalles fuertes, porque encima va un cartel con el nombre de la postura. Sin personas.",
+  "clave": "room"
+ },
+ "robles-yoga": {
+  "nombre": "El profe Robles en la vuelta a la calma",
+  "destino": "tatami/assets/robles-yoga.webp",
+  "ancho": 760,
+  "alto": 550,
+  "transparente": true,
+  "listo": false,
+  "prompt": "El profe Robles de gimnasio/assets/robles-rest.webp, con la misma cara, pelo, cinta y ropa, sentado con las piernas cruzadas sobre una esterilla turquesa, espalda recta, sonriendo y con una mano en la tripa y la otra con el pulgar arriba. De frente, cuerpo entero, centrado y con el mismo tamaño de figura que robles-rest.",
+  "clave": "robles-yoga"
+ }
+}

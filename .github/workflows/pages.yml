@@ -47,6 +47,7 @@ jobs:
           cp -R aula _site/aula
           cp -R pizarra _site/pizarra
           cp -R grada _site/grada
+          cp -R tatami _site/tatami
           cp -R gimnasio _site/gimnasio
           touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v3
