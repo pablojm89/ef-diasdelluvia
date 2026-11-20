@@ -1,5 +1,6 @@
 import {equipment,targets,find,request,fresh,valid,act} from './mission.js';
-import {walkTo, enterRoom} from './walk.js?v=stride-5';
+import {walkTo, enterRoom} from './walk.js?v=tidy-1';
+import {stored as parts} from './store-layout.js';
 import {speakAndPoint} from './robles.js';
 const icon = id => '<img alt="" draggable="false" src="assets/prop-' + id + '.webp">';
 const $=id=>document.getElementById(id), key='ef-gym-mission-v1';
@@ -16,7 +17,37 @@ const prompts=()=>[
 ][state.stage];
 const hints=[()=>`Busca ${equipment.find(e=>e.id===find[state.found.length])?.es}. Puedes mirar los nombres en los controles accesibles.`,()=> 'El cono naranja está delante del acceso. Selecciónalo y elige «Cone stand».',()=> 'Balones al rack; conos a su soporte; aros y raquetas al soporte de pared; cuerdas, petos y saquitos a las cajas; colchoneta a su zona baja.',()=> 'Toca cuatro veces el cono, dos veces el aro y una vez la pelota verde. Después comprueba el carro.',()=> 'Revisa la salida bloqueada y la colchoneta situada en alto. Toca ambos avisos y elige la razón relacionada con la seguridad.',()=> 'Explica a un compañero cómo prepararías una estación real y qué paso debe quedar libre.'];
 function persist(){try{localStorage.setItem(key,JSON.stringify({state,support,reduced}));}catch{$('feedback').textContent+=' El navegador no permite guardar; puedes continuar sin cerrar esta pestaña.';}}
-function dispatch(event){const result=act(state,event);state=result.state;if(result.ok)selected=null;persist();render();$('feedback').textContent=result.message||'Pedido actualizado.';}
+function dispatch(event){
+ const from=event.type==='place'?document.querySelector(`.equipment[data-item="${event.id}"]`)?.getBoundingClientRect():null;
+ const result=act(state,event);state=result.state;if(result.ok)selected=null;persist();render();$('feedback').textContent=result.message||'Pedido actualizado.';
+ if(result.ok&&from)fly(event.id,from);
+}
+// The room picture itself shows what is already put away: one painted part per item.
+function showStored(){
+ const layer=$('stored'),tidy=room==='store'&&state.stored.length===equipment.length;
+ $('scene').classList.toggle('tidy',tidy);
+ const wanted=room==='store'&&!tidy?state.stored:[];
+ for(const part of [...layer.children])if(!wanted.includes(part.dataset.part))part.remove();
+ for(const id of wanted){
+  if(layer.querySelector(`[data-part="${id}"]`))continue;
+  const [left,top,width,height]=parts[id],part=new Image();
+  part.src=`assets/set-${id}.webp`;part.alt='';part.draggable=false;part.dataset.part=id;
+  Object.assign(part.style,{left:left+'%',top:top+'%',width:width+'%',height:height+'%'});
+  layer.append(part);
+ }
+}
+function fly(id,from){
+ const part=$('stored').querySelector(`[data-part="${id}"]`);
+ if(!part||reduced||matchMedia('(prefers-reduced-motion: reduce)').matches||!part.animate)return;
+ const to=part.getBoundingClientRect(),ghost=new Image();
+ ghost.src=`assets/prop-${id}.webp`;ghost.alt='';ghost.className='ghost';
+ Object.assign(ghost.style,{left:from.left+'px',top:from.top+'px',width:from.width+'px',height:from.height+'px'});
+ document.body.append(ghost);part.style.opacity=0;
+ const dx=to.left+to.width/2-from.left-from.width/2,dy=to.top+to.height/2-from.top-from.height/2;
+ const flight=ghost.animate([{transform:'translate(0,0)',opacity:1},{transform:`translate(${dx*.6}px,${dy-34}px) scale(.94)`,opacity:1,offset:.62},{transform:`translate(${dx}px,${dy}px) scale(${Math.min(1,to.width/from.width)})`,opacity:.2}],{duration:560,easing:'ease-in-out'});
+ const land=()=>{ghost.remove();part.style.opacity='';};
+ flight.onfinish=land;flight.oncancel=land;
+}
 function choose(id){
  if($('inventory-dialog').open)$('inventory-dialog').close();
  if(room!=='store'){room='store';render();}
@@ -35,7 +66,7 @@ function render(){
  const [en,es]=room==='gym'&&state.stage<5?['Meet me by the equipment room.','Camina hasta mí o toca la puerta del almacén.']:prompts();$('english').textContent=en;$('spanish').textContent=es;$('spanish').hidden=!support;
  $('selection').textContent=selected?`${equipment.find(e=>e.id===selected).en} seleccionado · Elige un destino`:room==='gym'?'Toca el suelo para caminar. Toca al profe para hablar.':state.stage===3?'Toca el material para añadir una unidad al carro.':'Selecciona un material · Después elige su lugar';
  $('objects').replaceChildren();$('destinations').replaceChildren();$('hotspots').replaceChildren();$('object-list').replaceChildren();$('target-list').replaceChildren();$('actions').replaceChildren();
- enterRoom(room);
+ enterRoom(room);showStored();
  if(room==='gym'){
   const door=button('ALMACÉN',()=>{room='store';selected=null;render();},'scene-link door');$('hotspots').append(door);
   const board=button('PISTA · MATE',()=>{location.href='../mate/';},'scene-link board');$('hotspots').append(board);
@@ -48,12 +79,22 @@ function render(){
     const t=button(en,()=>place(id),'destination');t.style.left=x+'%';t.style.top=y+'%';t.disabled=!selected;t.setAttribute('aria-label',`${en} · ${es}`);$('destinations').append(t);
     $('target-list').append(button(`${en} · ${es}`,()=>place(id)));
    }
-   equipment.forEach((e,i)=>{
-    const stored=state.stored.includes(e.id);if(state.stage===3&&!['cone','hoop','softball'].includes(e.id))return;
-    const b=button('',()=>choose(e.id),`equipment ${stored?'stored':''} ${selected===e.id?'selected':''}`);b.innerHTML=icon(e.id)+`<span>${e.en}</span>`;b.setAttribute('aria-label',`${e.en} · ${e.es}${stored?' · guardado':''}`);
-    let x=e.id==='cone'?14:e.x,y=e.y;if(stored&&state.stage!==3){const home=targets[e.home];x=home[2]+(i%3-1)*3;y=home[3]+(e.home==='platform'?-1:12)+(i%2)*2;}if(state.stage===3){x=24+['cone','hoop','softball'].indexOf(e.id)*24;y=67;}
-    b.dataset.item=e.id; b.style.left=x+'%';b.style.top=y+'%';b.disabled=stored&&state.stage===2;$('objects').append(b);
-    const alt=button(`${e.en}${support?' · '+e.es:''}${stored?' ✓':''}`,()=>choose(e.id));alt.disabled=stored&&state.stage===2;$('object-list').append(alt);
+   equipment.forEach(e=>{
+    const stored=state.stored.includes(e.id);
+    const alt=button(`${e.en}${support?' · '+e.es:''}${stored?' ✓':''}`,()=>choose(e.id));alt.disabled=stored&&state.stage===2;
+    if(state.stage===3){
+     // The order is collected from where each thing is kept.
+     if(!(e.id in request))return;
+     const [left,top,width,height]=parts[e.id],have=state.cart[e.id]||0;
+     const b=button('',()=>choose(e.id),'pick'+(have>=request[e.id]?' enough':''));b.innerHTML=`<span>${e.en}</span><b>${have} / ${request[e.id]}</b>`;
+     b.setAttribute('aria-label',`${e.en} · ${e.es} · ${have} de ${request[e.id]} en el carro`);b.dataset.item=e.id;
+     Object.assign(b.style,{left:left+width/2+'%',top:top+height/2+'%',width:Math.max(width,5)+'%',height:Math.max(height,7)+'%'});
+     $('objects').append(b);$('object-list').append(alt);return;
+    }
+    $('object-list').append(alt);
+    if(stored)return;
+    const b=button('',()=>choose(e.id),`equipment ${selected===e.id?'selected':''}`);b.innerHTML=icon(e.id)+`<span>${e.en}</span>`;b.setAttribute('aria-label',`${e.en} · ${e.es}`);
+    b.dataset.item=e.id;b.style.left=(e.id==='cone'?14:e.x)+'%';b.style.top=e.y+'%';$('objects').append(b);
    });
   }
   if(state.stage===4){
@@ -95,7 +136,7 @@ $('inventory').onclick=()=>$('inventory-dialog').showModal();
 $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{$('feedback').textContent='El navegador no permite activar pantalla completa. La escena sigue ocupando toda la ventana.';}};
 const showFeedback=()=>{$('feedback').classList.add('visible');clearTimeout(showFeedback.timer);showFeedback.timer=setTimeout(()=>$('feedback').classList.remove('visible'),8500);};
 new MutationObserver(showFeedback).observe($('feedback'),{childList:true,characterData:true,subtree:true});
-showFeedback();
+$('feedback').textContent=state.stage===0?'Habla con el profe y explora el gimnasio.':state.stage===5?'Misión completada. Puedes reiniciarla desde el menú.':'Continúas la misión donde la dejaste.';
 
 // Approach the clicked landmark before executing its room-specific action.
 $('scene').addEventListener('click', event => {

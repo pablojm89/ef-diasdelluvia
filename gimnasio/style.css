@@ -41,8 +41,8 @@ button:disabled {cursor:default}
 .scene-link:hover:not(:disabled),.destination:hover:not(:disabled){background:#ffe6ab}
 .destination:disabled {pointer-events:none!important}
 .door {left:80%;top:41%}.board {left:21%;top:43%}.return-door {left:9%;top:40%}
-.hazard {position:absolute;z-index:5}.exit-risk {left:3%;top:57%}.shelf-risk {right:7%;top:35%}
-.risk-mat {left:83%;top:38%;width:11%}.risk-cone {left:10%;top:80%;width:4%}
+.hazard {position:absolute;z-index:5}.exit-risk {left:3%;top:57%}.shelf-risk {left:44%;top:27%}
+.risk-mat {left:52.4%;top:42.7%;width:9.6%}.risk-cone {left:15.5%;top:79%;width:4%}
 .location-hud,.game-tools,.interaction,.exit-control,.toast,.mission-actions {position:absolute;z-index:8}
 .location-hud {left:2vw;top:2vh;pointer-events:none;text-shadow:0 2px 6px #112521,0 0 16px #172924}
 .eyebrow,.speaker {font-size:.69rem;letter-spacing:.13em;font-weight:bold;color:var(--gold)}
@@ -74,3 +74,18 @@ dialog::backdrop {background:#0a242ad9}dialog .eyebrow{color:#74613b}dialog butt
 .prof img {position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:auto;height:100%;max-width:none}
 .door {left:84.1%;top:43.4%}.board {left:8%;top:52%}.return-door {left:14%;top:50%}
 .portrait img {width:310%;margin-left:-80%}
+/* Stored equipment is painted into the room: one part of the tidy picture per item. */
+#stored {position:absolute;inset:0;pointer-events:none}
+#stored img {position:absolute;display:block;transition:opacity .35s ease-out}
+.store.tidy .architecture {background-image:url('assets/store-tidy.webp')}
+.ghost {position:fixed;z-index:20;object-fit:contain;pointer-events:none;filter:drop-shadow(2px 8px 5px #221c1f66)}
+.equipment {filter:drop-shadow(2px 5px 3px #3a221660)}
+.pick {position:absolute;z-index:3;transform:translate(-50%,-50%);padding:0;background:none;border:2px dashed #fff0a3aa;border-radius:12px}
+.pick:hover:not(:disabled),.pick:focus-visible {background:#fff0a326;border-style:solid}
+.pick span {display:none;position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);padding:3px 8px;background:var(--ink);border-radius:3px;white-space:nowrap}
+.pick:is(:hover,:focus-visible) span {display:block}
+.pick b {position:absolute;top:calc(100% + 3px);left:50%;transform:translateX(-50%);padding:1px 7px;border-radius:9px;background:var(--ink);border:1px solid var(--gold);font-size:.74rem;white-space:nowrap}
+.pick.enough {border-color:#a9e6a6}.pick.enough b {background:#2c5a3c;border-color:#a9e6a6}
+.hazard {background:#7a2f22;border-color:#ffcf8a;box-shadow:0 2px 6px #2a141088}
+.hazard:disabled {background:#2c5a3c;border-color:#a9e6a6;opacity:1}
+body.reduced #stored img {transition:none}

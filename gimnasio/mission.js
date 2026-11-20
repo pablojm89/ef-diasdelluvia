@@ -1,7 +1,7 @@
 export const equipment = [
  ['cone','cone','cono','rack',18,81],['hoop','hoop','aro','hooks',45,80],['rope','skipping rope','cuerda','bins',72,84],['racket','racket','raqueta','hooks',59,76],['bib','bib','peto','bins',31,85],['mat','mat','colchoneta','platform',81,79],['beanbag','beanbag','saquito','bins',38,74],['basketball','basketball','balón de baloncesto','balls',23,70],['football','football','balón de fútbol','balls',65,88],['softball','soft ball','pelota blanda','balls',52,88]
 ].map(([id,en,es,home,x,y])=>({id,en,es,home,x,y}));
-export const targets={rack:['Cone stand','Soporte de conos',41.5,47],balls:['Ball rack','Rack de balones',27.5,53],bins:['Storage bins','Cajas de material',56,44],hooks:['Wall rack','Soporte de pared',76,40],platform:['Mat area','Zona de colchonetas',86,67]};
+export const targets={rack:['Cone stand','Soporte de conos',41.6,56.9],balls:['Ball rack','Rack de balones',27.5,53],bins:['Storage bins','Cajas de material',55.6,41.3],hooks:['Wall rack','Soporte de pared',76,40],platform:['Mat area','Zona de colchonetas',86,67]};
 export const find=['hoop','cone','rope'];
 export const request={cone:4,hoop:2,softball:1};
 export function fresh(){return {version:1,stage:0,found:[],stored:[],cart:{},hazards:[],reason:false,attempts:0,hints:0};}
