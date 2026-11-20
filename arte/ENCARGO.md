@@ -30,7 +30,7 @@ Sube cada imagen a `arte/entrega/` con el nombre exacto que indica su pedido, en
 
 Mantén su estilo, luz y acabado: `gimnasio/assets/gym.webp`, `gimnasio/assets/store.webp`, `gimnasio/assets/robles-rest.webp`, `gimnasio/assets/pupil-0.webp`, `gimnasio/assets/prop-cone.webp`, `mate/assets/roster/vega.png`.
 
-## Pendientes: 84
+## Pendientes: 96
 
 ### Lote `01-puertas` · Puertas de los lugares
 
@@ -91,6 +91,25 @@ Estilo pixel art. Necesita integración en mate/renderer.js (buildBackground).
 | Archivo que entregar | Qué es | Tamaño | Fondo | Qué debe verse |
 |---|---|---|---|---|
 | `court.png` | Pista del partido | 1200 × 760 | opaco | Pabellón escolar visto desde arriba con ligera perspectiva de recreativa. Parqué claro; campo izquierdo con tinte turquesa y derecho con tinte coral; línea central y círculo central en crema; una franja de cárcel a cada lado. Grada con público al fondo. Geometría en píxeles: campo de juego de x 157 a 1043 y de y 150 a 640; línea central en x 600; círculo central de radio 88 en (600, 394); cárcel izquierda de x 60 a 150 y derecha de x 1050 a 1140; grada entre y 86 y 141; los 86 px superiores libres para el marcador y una banda oscura lisa en los 67 px inferiores. Pixel art. |
+
+### Lote `11-pizarra` · La Pizarra · Rosco de Educación Física
+
+Lugar La Pizarra (pizarra/). Mientras no llegan, la pizarra, las posturas y la tiza están dibujadas con CSS y SVG; cada imagen integrada sustituye sola a su versión provisional gracias al índice pizarra/assets/pintados.js.
+
+| Archivo que entregar | Qué es | Tamaño | Fondo | Qué debe verse |
+|---|---|---|---|---|
+| `pizarra-fondo.png` | Pizarra de frente | 1536 × 1024 | opaco | La pizarra verde del gimnasio (la de la izquierda de gimnasio/assets/gym.webp) vista totalmente de frente, sin perspectiva, llenando todo el lienzo. Marco de madera color miel con vetas, recto y del mismo grosor en los cuatro lados: ocupa exactamente los 64 px exteriores de cada borde y llega hasta el borde de la imagen, sin pared alrededor y sin repisa. El interior es pizarra verde oliva mate (#3c4a35 a #4a5540) con restos muy suaves de tiza borrada y alguna marca de borrador, repartidos de forma uniforme y sin dibujos, letras ni jugadas: el centro debe quedar despejado porque el juego dibuja encima el rosco. Luz cálida y suave desde la izquierda. Se usará estirada como marco de nueve partes, así que las esquinas deben ser limpias. |
+| `pizarra-borrador.png` | Borrador de pizarra | 360 × 160 | transparente | Borrador de pizarra de madera clara con fieltro gris claro manchado de tiza blanca, visto de frente y un poco desde arriba, tumbado como si descansara en la repisa. Como el de assets/door-pizarra.webp. |
+| `pizarra-tizas.png` | Tizas de colores | 360 × 120 | transparente | Cuatro tizas cilíndricas tumbadas en fila horizontal, ligeramente desordenadas: blanca, amarilla, rosa y azul claro, gastadas por un extremo y con un poco de polvo de su color. Vistas de frente y un poco desde arriba. |
+| `pizarra-postura-a.png` | Respuesta A: brazos arriba | 400 × 560 | transparente | La alumna de gimnasio/assets/pupil-0.webp (misma cara, pelo y chándal), de cuerpo entero y totalmente de frente, de pie con los pies separados a la anchura de las caderas y los dos brazos estirados hacia arriba formando una V, palmas hacia delante, sonriendo. Postura clara y simétrica que se reconozca a 120 px de alto. Las seis posturas de este lote son la misma niña con la misma ropa, encuadre y escala. |
+| `pizarra-postura-b.png` | Respuesta B: manos a la cintura | 400 × 560 | transparente | La misma alumna de pizarra-postura-a, de cuerpo entero y totalmente de frente, de pie con los pies separados y las dos manos apoyadas en la cintura con los codos hacia fuera (brazos en jarras), sonriendo. Mismo encuadre y escala que pizarra-postura-a. |
+| `pizarra-postura-c.png` | Respuesta C: en cuclillas | 400 × 560 | transparente | La misma alumna de pizarra-postura-a, de frente, agachada en cuclillas con los talones apoyados, la espalda recta y los brazos estirados hacia delante a la altura de los hombros para mantener el equilibrio. Pies a la misma altura que en pizarra-postura-a: la figura ocupa sólo la mitad inferior del lienzo. |
+| `pizarra-postura-a-sentado.png` | Respuesta A sentada: brazos arriba | 400 × 560 | transparente | La misma alumna de pizarra-postura-a, sentada de frente en una silla escolar (asiento y respaldo de madera clara, patas metálicas verde azulado), con la espalda recta, los pies apoyados en el suelo y los dos brazos estirados hacia arriba formando una V. Mismo encuadre y escala que pizarra-postura-a. |
+| `pizarra-postura-b-sentado.png` | Respuesta B sentada: manos a la cintura | 400 × 560 | transparente | La misma alumna y la misma silla de pizarra-postura-a-sentado, sentada de frente con la espalda recta, los pies apoyados y las dos manos en la cintura con los codos hacia fuera (brazos en jarras). |
+| `pizarra-postura-c-sentado.png` | Respuesta C sentada: manos a los tobillos | 400 × 560 | transparente | La misma alumna y la misma silla de pizarra-postura-a-sentado, vista de frente, con el tronco inclinado hacia delante sobre las rodillas y las dos manos tocando los tobillos, la cabeza baja pero visible. Es la versión sentada de «abajo». |
+| `pizarra-robles-aplaude.png` | El profe Robles aplaude | 760 × 550 | transparente | El profe Robles de gimnasio/assets/robles-rest.webp (misma cara, cinta del pelo, polo naranja, silbato y pantalón azul), de cuerpo entero, en tres cuartos mirando hacia la derecha, aplaudiendo contento con las manos a la altura del pecho. Mismo encuadre y escala que robles-rest.webp: figura centrada con aire a los lados. |
+| `pizarra-tiza-acierto.png` | Marca de tiza: acierto | 160 × 160 | transparente | Trazo de tiza verde claro sobre fondo transparente: un círculo dibujado a mano de un solo gesto, algo irregular y que se cierra pasándose un poco, con grano de tiza y bordes polvorientos. El círculo llena el lienzo dejando 10 px de margen; el centro vacío. |
+| `pizarra-tiza-fallo.png` | Marca de tiza: fallo | 160 × 160 | transparente | Trazo de tiza rosa coral sobre fondo transparente: un aspa grande de dos trazos rápidos dibujada a mano, con grano de tiza y bordes polvorientos. Llena el lienzo dejando 14 px de margen. |
 
 ### Lote `12-aula` · El Aula: la oca cooperativa y el bingo en movimiento
 

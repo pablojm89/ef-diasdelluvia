@@ -15,14 +15,14 @@ const PLACES = {
  gimnasio: {name: 'El Gimnasio', kicker: 'Aventura: Equipment Rescue', art: 'door-gimnasio', href: './gimnasio/', modes: 'Alumno · Pantalla', state: 'open'},
  pista: {name: 'La Pista', kicker: 'Mate Arena: balón prisionero', art: 'door-mate', pixel: true, href: './mate/', modes: 'Alumno', state: 'open'},
  espalderas: {name: 'Las Espalderas', kicker: 'Ruleta de retos para toda la clase', art: 'door-espalderas', action: 'wheel', modes: 'Pantalla', state: 'open'},
- pizarra: {name: 'La Pizarra', kicker: 'Rosco de Educación Física', art: 'door-pizarra', modes: 'Alumno · Pantalla', state: 'soon'},
+ pizarra: {name: 'La Pizarra', kicker: 'Rosco de Educación Física', art: 'door-pizarra', href: './pizarra/', modes: 'Alumno · Pantalla', state: 'open'},
  tatami: {name: 'El Tatami', kicker: 'Yoga: posturas y secuencias', art: 'door-cerrada', modes: 'Alumno · Pantalla', state: 'soon'},
  grada: {name: 'La Grada', kicker: 'Partidos de mate en directo', art: 'door-cerrada', modes: 'Pantalla', state: 'soon'},
  aula: {name: 'El Aula', kicker: 'La oca y el bingo en movimiento', art: 'door-cerrada', href: './aula/', modes: 'Pantalla · Tabletas', state: 'open'},
 };
 const MAPS = {
- alumno: {title: '¿A dónde vamos hoy?', places: ['gimnasio', 'pista', 'tatami']},
- pantalla: {title: 'Pantalla digital: elegid un lugar', places: ['espalderas', 'aula', 'gimnasio', 'tatami', 'grada']},
+ alumno: {title: '¿A dónde vamos hoy?', places: ['gimnasio', 'pista', 'pizarra', 'tatami']},
+ pantalla: {title: 'Pantalla digital: elegid un lugar', places: ['espalderas', 'aula', 'pizarra', 'gimnasio', 'tatami', 'grada']},
 };
 // Earlier experiments that no longer match the look of the school; only the teacher can still open them.
 const REVIEW = [
@@ -60,6 +60,7 @@ function showMap(kind) {
  const map = MAPS[kind], current = player();
  $('map-title').textContent = map.title;
  $('doors').innerHTML = map.places.map(doorMarkup).join('');
+ $('doors').classList.toggle('many', map.places.length > 4);
  const pupil = kind === 'alumno' && current;
  $('locker-button').hidden = !pupil;
  $('mode-tag').hidden = kind !== 'pantalla';

@@ -50,7 +50,7 @@ main:focus{outline:none}
 .wall{flex:1;display:flex;flex-direction:column;background:linear-gradient(#f6d3a433,#c98a4a2e),url('../assets/wall.webp') 0 0/360px 360px,var(--wall)}
 .frieze{height:26px;flex:none;background:url('../assets/frieze.webp') 0 50%/auto 100% repeat-x;border-bottom:2px solid #a67a4a;box-shadow:0 3px 8px #5a3a1a55}
 .skirting{height:22px;flex:none;margin-top:auto;background:linear-gradient(#2c7570,#1f5753);border-top:3px solid #17403d}
-.wall-inner{width:100%;max-width:1180px;margin:0 auto;padding:clamp(16px,3.4dvh,34px) clamp(14px,4vw,44px) clamp(22px,4dvh,40px)}
+.wall-inner{width:100%;max-width:1280px;margin:0 auto;padding:clamp(16px,3.4dvh,34px) clamp(14px,4vw,44px) clamp(22px,4dvh,40px)}
 .wall h1{font:600 clamp(1.5rem,3.6vw,2.2rem)/1.15 var(--serif);color:#3a2a14;text-align:center}
 .wall h2{font:600 1.25rem/1.2 var(--serif);color:#1f3b39}
 

@@ -19,6 +19,9 @@ body[data-view=title] .hub-top{display:none}
 .bubble span[lang=en]{font:600 1.05rem/1.25 var(--serif);color:#1f3b39}
 
 .doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,228px));justify-content:center;gap:clamp(16px,3vw,38px);margin-top:clamp(16px,3.4dvh,34px)}
+.doors.many{grid-template-columns:repeat(auto-fit,minmax(140px,178px));gap:clamp(12px,1.7vw,22px)}
+.doors.many .plate{font-size:clamp(.9rem,1.35vw,1.08rem);padding:5px 12px}
+.doors.many .kicker{font-size:.84rem}
 .door{display:grid;justify-items:center;gap:7px;width:100%;padding:0;border:0;background:none;color:inherit;text-align:center}
 .arch{position:relative;display:block;width:100%;aspect-ratio:4/5;border-radius:50% 50% 6px 6px/40% 40% 6px 6px;border:8px solid var(--teal);overflow:hidden;background:#17302f;box-shadow:0 0 0 2px #0f2d2b,inset 0 0 0 2px #0f2d2b,0 10px 22px #5a3a1a66,0 0 34px #ffd98a66;transition:transform .16s,box-shadow .16s}
 .arch img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s}
