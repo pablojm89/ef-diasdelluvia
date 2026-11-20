@@ -16,7 +16,9 @@ Quedan fuera: nombres y apellidos reales, correos de alumnos, identificadores es
 
 Revisar manualmente textos e imágenes. Utilizar únicamente personajes ficticios en capturas. Mantener fuera del proyecto cualquier archivo real de alumnos; las rutas y formatos de datos habituales también se excluyen mediante `.gitignore`.
 
-`node scripts/check-public-content.mjs` bloquea rutas privadas, hojas de cálculo, bases de datos, correos no autorizados y determinados patrones de credenciales en los archivos versionados. El workflow ejecuta la comprobación antes de desplegar. No puede reconocer todos los nombres reales, la información visible dentro de una imagen ni todos los secretos posibles: **no sustituye la revisión manual**.
+`node scripts/check-public-content.mjs` revisa el contenido exacto preparado en el índice de Git y rechaza rutas privadas, hojas de cálculo, bases de datos, correos no autorizados y determinados patrones de credenciales. En este entorno se activa también antes de cada commit mediante `.githooks/pre-commit`; en otro clon se instala con `git config --local core.hooksPath .githooks`.
+
+El workflow repite la comprobación. Si Pages usa GitHub Actions como origen, se ejecuta antes de su despliegue. Con publicación automática desde una rama, la comprobación de CI es independiente de esa publicación y no la bloquea. Un control de CI tampoco puede retirar un commit que ya se haya enviado a un repositorio público. No puede reconocer todos los nombres reales, la información visible dentro de una imagen ni todos los secretos posibles: **no sustituye la revisión manual antes de confirmar y enviar cambios**.
 
 Si se detecta una publicación accidental, retirar el acceso al contenido y revisar también el historial y las copias públicas. Borrar sólo el archivo del último commit no elimina lo publicado anteriormente. No subir el dato otra vez al describir la incidencia.
 

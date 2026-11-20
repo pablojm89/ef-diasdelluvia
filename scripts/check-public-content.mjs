@@ -1,7 +1,6 @@
 // Guardrail for a public educational repository. It cannot identify real names
 // or inspect the content of photographs; human review remains necessary.
 import {execFileSync} from 'node:child_process';
-import {readFileSync} from 'node:fs';
 
 const files=execFileSync('git',['ls-files','-z'],{encoding:'utf8'}).split('\0').filter(Boolean);
 const privatePath=/(?:^|\/)(?:private|privado|alumnado|alumnos|datos-alumnos|student-data|exports|recordings)(?:\/|$)|(?:^|\/)\.env(?:\.|$)|\.(?:csv|tsv|xlsx?|ods|sqlite3?|db|jsonl|ndjson|parquet)$/i;
@@ -12,7 +11,7 @@ const problems=[];
 for(const file of files){
  if(privatePath.test(file))problems.push(`${file}: formato o ruta reservados a datos privados`);
  let bytes;
- try{bytes=readFileSync(file);}catch{continue;}
+ try{bytes=execFileSync('git',['show',`:${file}`]);}catch{continue;}
  if(bytes.includes(0))continue;
  const text=bytes.toString('utf8');
  if(credential.test(text))problems.push(`${file}: posible credencial`);

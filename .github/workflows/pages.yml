@@ -1,6 +1,8 @@
 name: Publicar Patio Interior y Mate Arena
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
 permissions:
   contents: read
   pages: write
@@ -22,16 +24,20 @@ jobs:
       - name: Revisar contenido público
         run: node scripts/check-public-content.mjs
       - run: npm test
-      - name: Usar publicación de Pages por GitHub Actions
+      - name: Comprobar origen de publicación de Pages
+        id: pages-mode
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           build_type=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq '.build_type')
-          if [ "$build_type" != "workflow" ]; then
-            gh api --method PUT "repos/$GITHUB_REPOSITORY/pages" -f build_type=workflow > /dev/null
+          echo "build_type=$build_type" >> "$GITHUB_OUTPUT"
+          if [ "$build_type" = "legacy" ]; then
+            echo "Pages publica desde la rama configurada. Este workflow verifica el contenido; no cambia esa configuración."
           fi
       - uses: actions/configure-pages@v5
+        if: steps.pages-mode.outputs.build_type == 'workflow'
       - name: Preparar archivos públicos
+        if: steps.pages-mode.outputs.build_type == 'workflow'
         run: |
           mkdir -p _site/assets
           cp index.html app.js content.js engine.js styles.css _site/
@@ -39,7 +45,9 @@ jobs:
           cp -R mate _site/mate
           touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v3
+        if: steps.pages-mode.outputs.build_type == 'workflow'
         with:
           path: _site
       - uses: actions/deploy-pages@v4
+        if: steps.pages-mode.outputs.build_type == 'workflow'
         id: deployment
