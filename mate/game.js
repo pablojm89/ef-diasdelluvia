@@ -1,12 +1,15 @@
 import {makeGame,stepGame,setInput,snapshot,normalizeRules,emit} from './sim.js';
-import {CHARACTERS,TEAM_COLORS,portrait} from './characters.js';
+import {HEROES} from './roster.js';
+import {buildLineup} from './selection.js';
+import {TEAM_COLORS,portrait} from './characters.js';
 import {ArenaRenderer} from './renderer.js';
 import {Room} from './network.js';
 import {validCode} from './protocol.js';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let selected=0;
-try{const n=Number(localStorage.getItem('mate-character'));if(Number.isInteger(n)&&n>=0&&n<8)selected=n;}catch{}
+try{const n=Number(localStorage.getItem('mate-character'));if(Number.isInteger(n)&&n>=0&&n<HEROES.length)selected=n;}catch{}
+let lastLockerMarkup;
 let view='menu',room=null,lobby=null,game=null,remote=null,previousRemote=null,remoteAt=0,localId='local',mode='training',busy=false,networkDisconnected=false;
 let toastTimeout,lastFrame=performance.now(),accumulator=0,lastSend=0,lastBroadcast=0,lastAnnouncement=0,lastAudioEvent=0,latency=0,lastRemoteAt=0,lastUi=0,lastClientDraw=0;
 let rules=normalizeRules(),manualAim=false,pointerAt=0,targetIndex=0,audio=null,lastDemo=0;
@@ -18,9 +21,16 @@ function showView(next){view=next;for(const name of ['menu','lobby','game'])$(na
 function toast(message){$('toast').textContent=message;$('toast').classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>$('toast').classList.remove('show'),5500);}
 function setBusy(value,message=''){busy=value;for(const id of ['host-button','train-button','join-button'])$(id).disabled=value;$('menu-status').textContent=message;}
 function saveCharacter(){try{localStorage.setItem('mate-character',selected);}catch{}}
+function talentCard(index, team = 0) {
+ const hero = HEROES[index];
+ return `<div class="hero-portrait"><img src="${portrait(index,team)}" alt="" width="88" height="112"></div>
+  <div class="hero-bio"><strong>${esc(hero.name)} <small>· ${esc(hero.tag)}</small></strong><h3>${esc(hero.ability)}</h3><p>${esc(hero.description)}</p></div>`;
+}
 function drawChoices(){
- $('character-grid').innerHTML=CHARACTERS.map((c,i)=>`<button class="character-choice" data-character="${i}" aria-pressed="${i===selected}" aria-label="Elegir a ${c.name}, ${c.tag}"><img src="${portrait(i)}" alt="" width="63" height="80"><span>${c.name}</span></button>`).join('');
- $('character-description').innerHTML=`<strong>${CHARACTERS[selected].name}</strong> · ${CHARACTERS[selected].tag} <small>— Tu habilidad marca la diferencia.</small>`;
+ $('character-grid').innerHTML=HEROES.map((hero,index)=>
+  `<button class="character-choice" data-character="${index}" aria-pressed="${index===selected}" aria-label="${esc(hero.name)}, ${esc(hero.ability)}">
+   <img src="${portrait(index)}" alt="" width="63" height="80"><span>${esc(hero.name)}</span></button>`).join('');
+ $('character-description').innerHTML = talentCard(selected);
 }
 function profile(){return {character:selected};}
 function readRules(){return normalizeRules({teamSize:Number($('team-size').value),roundSeconds:Number($('round-seconds').value),bestOf:Number($('best-of').value),catchEliminates:$('catch-eliminates').checked,catchRescues:$('catch-rescues').checked});}
@@ -37,7 +47,8 @@ function callbacks(){
    if(room?.isHost)localId=room.myId;
    if(!data.started){
     if(view==='game'){game=null;remote=null;previousRemote=null;room.started=false;}
-    showView('lobby');renderLobby();
+    if(view!=='lobby')showView('lobby');
+    renderLobby();
    }
   },
   onStart(data){
@@ -66,12 +77,30 @@ function renderLobby(){
  fillRules(lobby.rules,host);
  $('lobby-teams').innerHTML=[0,1].map(team=>{
   const members=roster.filter(m=>m.team===team);
-  return `<article class="team-card team-${team}"><h2>${TEAM_COLORS[team].name}<small>${members.length} HUMANO${members.length===1?'':'S'} · ${lobby.rules.teamSize} PLAZAS</small></h2>${Array.from({length:lobby.rules.teamSize},(_,i)=>{
-   const m=members[i];return m?`<div class="player-slot ${m.id===room.myId?'mine':''}"><img src="${portrait(m.character,team)}" alt="" width="39" height="51"><div><strong>${esc(m.name)}${m.id===room.myId?' · TÚ':''}</strong><small>${m.host?'ANFITRIÓN':'JUGADOR ONLINE'}</small></div><span class="${m.ready?'ready-tag':'wait-tag'}">${m.ready?'LISTO':'PREPARÁNDOSE'}</span></div>`:`<div class="player-slot empty"><img src="${portrait((i+team*3)%8,team)}" alt="" width="33" height="42"><span>Plaza libre<br>La IA la cubre al empezar</span></div>`;
+  return `<article class="team-card team-${team}"><h2>${TEAM_COLORS[team].name}<small>${members.length} HUMANO${members.length===1?'':'S'} · ${lobby.rules.teamSize} PLAZAS</small></h2>${buildLineup(roster, team, lobby.rules.teamSize).map(({member:m,character})=>{
+   return m?`<div class="player-slot ${m.id===room.myId?'mine':''}"><img src="${portrait(m.character,team)}" alt="" width="39" height="51"><div><strong>${esc(m.name)}${m.id===room.myId?' · TÚ':''}</strong><small>${m.host?'Anfitrión':'Online'} · ${esc(HEROES[m.character].ability)}</small></div><span class="${m.ready?'ready-tag':'wait-tag'}">${m.ready?'LISTO':'PREPARÁNDOSE'}</span></div>`:`<div class="player-slot empty"><img src="${portrait(character,team)}" alt="" width="39" height="51"><div><strong>${esc(HEROES[character].name)}</strong><small>Plaza libre · IA al empezar</small></div></div>`;
   }).join('')}</article>`;
  }).join('');
- $('lobby-self').innerHTML=`<img src="${portrait(me?.character??selected,me?.team??0)}" alt="Tu personaje"><label>Tu personaje <select id="lobby-character" aria-label="Cambiar personaje">${CHARACTERS.map((c,i)=>`<option value="${i}" ${i===(me?.character??selected)?'selected':''}>${c.name} · ${c.tag}</option>`).join('')}</select></label>`;
- document.querySelectorAll('[data-team]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.team)===me?.team)));
+ const ownTeam = me?.team ?? 0, ownHero = me?.character ?? selected;
+ if(me && selected!==ownHero){ selected=ownHero; saveCharacter(); drawChoices(); }
+ const occupied = new Set(lobby.members.filter(m=>m.team===ownTeam && m.id!==room.myId).map(m=>m.character));
+ const hadSelectFocus = document.activeElement?.id==='lobby-character';
+ const lockerMarkup = `<div class="hero-dossier">${talentCard(ownHero,ownTeam)}</div>
+  <label for="lobby-character">Personaje de tu equipo</label>
+  <select id="lobby-character">${HEROES.map((hero,index)=>
+   `<option value="${index}" ${index===ownHero?'selected':''} ${occupied.has(index)?'disabled':''}>${esc(hero.name)} · ${esc(hero.ability)}${occupied.has(index)?' (ocupado)':''}</option>`).join('')}</select>
+  <p>Un personaje por equipo. El equipo rival puede elegir el mismo.</p>`;
+ if (lastLockerMarkup !== lockerMarkup) {
+  $('lobby-self').innerHTML = lockerMarkup;
+  lastLockerMarkup = lockerMarkup;
+  if (hadSelectFocus) $('lobby-character').focus({preventScroll:true});
+ }
+ $('lobby-character').value = String(ownHero);
+ document.querySelectorAll('[data-team]').forEach(button=>{
+  const team = Number(button.dataset.team);
+  button.setAttribute('aria-pressed',String(team===ownTeam));
+  button.disabled=team!==ownTeam && roster.filter(member=>member.team===team).length>=lobby.rules.teamSize;
+ });
  $('ready-button').hidden=host;$('start-button').hidden=!host;
  $('ready-button').textContent=me?.ready?'Listo ✓ · Cambiar':'Estoy listo';
  const waiting=roster.filter(m=>!m.ready).length;
@@ -89,14 +118,21 @@ async function joinRoom(code){
 }
 function stopRoom(){room?.close();room=null;lobby=null;game=null;remote=null;previousRemote=null;networkDisconnected=false;latency=0;clearKeys();}
 function training(){
- if(busy)return;stopRoom();mode='training';localId='local';targetIndex=0;manualAim=false;game=makeGame([{id:localId,team:0,character:selected,name:CHARACTERS[selected].name}],rules,crypto.getRandomValues(new Uint32Array(1))[0]);lastAnnouncement=0;lastAudioEvent=0;renderer.lastEvent=0;renderer.fx=[];accumulator=0;$('connection-label').textContent='ENTRENAMIENTO LOCAL';$('connection-overlay').hidden=true;showView('game');updateMatchUI();$('court').focus({preventScroll:true});
+ if(busy)return;stopRoom();mode='training';localId='local';targetIndex=0;manualAim=false;game=makeGame([{id:localId,team:0,character:selected,name:HEROES[selected].name}],rules,crypto.getRandomValues(new Uint32Array(1))[0]);lastAnnouncement=0;lastAudioEvent=0;renderer.lastEvent=0;renderer.fx=[];accumulator=0;$('connection-label').textContent='ENTRENAMIENTO LOCAL';$('connection-overlay').hidden=true;showView('game');updateMatchUI();$('court').focus({preventScroll:true});
 }
 function updateMatchUI(){
  $('match-mode').textContent=mode==='online'?`SALA ${room?.code||''}`:'ENTRENAMIENTO';
- $('match-player').textContent=CHARACTERS[selected].name;
+ const member = lobby?.members.find(m=>m.id===localId);
+ showMatchHero(member?.character ?? selected, member?.team ?? 0);
  $('pause-button').hidden=mode==='online'&&!room?.isHost;
  $('rematch-button').hidden=true;
  $('match-announcement').textContent='Espacio lanza · E atrapa al vuelo · Shift esquiva. ¡Buen juego!';
+}
+function showMatchHero(index,team) {
+ const hero = HEROES[index];
+ $('match-player').textContent = hero.name + ' · ' + TEAM_COLORS[team].name;
+ $('match-talent-name').textContent = hero.ability;
+ $('match-talent-detail').textContent = hero.description;
 }
 function currentState(){return game||remote;}
 function updateStateUI(state){
@@ -106,7 +142,7 @@ function updateStateUI(state){
  $('game-view').dataset.phase=state.phase;
  $('rematch-button').hidden=state.phase!=='matchOver'||(mode==='online'&&!room?.isHost);
  $('rematch-button').textContent=mode==='online'?'Volver a la sala':'Jugar otra partida';
- if(mine)$('match-player').textContent=`${mine.name} · ${TEAM_COLORS[mine.team].name}`;
+ if(mine && $('match-talent-name').textContent!==HEROES[mine.character].ability)showMatchHero(mine.character,mine.team);
  const event=state.events?.findLast(e=>e.id>lastAnnouncement&&['catch','hit','rescue','round','match','referee'].includes(e.type));
  if(event){lastAnnouncement=event.id;const p=state.players.find(p=>p.id===event.player);const messages={catch:`¡${p?.name||'Un jugador'} atrapa al vuelo!`,hit:`${p?.name||'Un jugador'} va a la cárcel. Puede volver si alcanza a un rival.`,rescue:`¡${p?.name||'Un jugador'} vuelve al campo!`,round:event.winner===null?'Ronda empatada.':`Ronda para ${TEAM_COLORS[event.winner??0].name}.`,match:event.winner===null?'¡Partido empatado! Buen juego.':`¡${TEAM_COLORS[event.winner??0].name} ganan el partido!`,referee:'El árbitro devuelve una pelota que había quedado fuera de alcance.'};$('match-announcement').textContent=messages[event.type];}
  if(mine?.prison&&!event)$('match-announcement').textContent='Estás en la cárcel detrás del rival. Si le das a un jugador de campo, vuelves a jugar.';
@@ -159,7 +195,7 @@ $('train-button').addEventListener('click',training);$('host-button').addEventLi
 $('join-form').addEventListener('submit',event=>{event.preventDefault();joinRoom($('room-code').value);});
 $('room-code').addEventListener('input',()=>{$('room-code').value=$('room-code').value.toUpperCase().replace(/[^A-HJ-NP-Z2-9]/g,'');});
 $('rules-form').addEventListener('change',()=>{if(room?.isHost)room.configure(readRules());});
-$('lobby-self').addEventListener('change',event=>{if(event.target.id==='lobby-character'){selected=Number(event.target.value);saveCharacter();drawChoices();room?.choose(profile());}});
+$('lobby-self').addEventListener('change',event=>{if(event.target.id==='lobby-character'){room?.choose({character:Number(event.target.value)});}});
 for(const b of document.querySelectorAll('[data-team]'))b.addEventListener('click',()=>room?.changeTeam(room.myId,Number(b.dataset.team)));
 $('ready-button').addEventListener('click',()=>{const me=lobby?.members.find(m=>m.id===room?.myId);room?.ready(!me?.ready);});
 $('start-button').addEventListener('click',()=>room?.start());
@@ -174,6 +210,7 @@ $('sound-enabled').addEventListener('change',async()=>{if($('sound-enabled').che
 window.addEventListener('keydown',event=>{
  if(view!=='game'||networkDisconnected||event.target.matches('input,select,textarea'))return;
  const used=['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','KeyW','KeyA','KeyS','KeyD','Space','KeyE','ShiftLeft','ShiftRight','KeyQ','KeyR','KeyP','KeyF','KeyG'];
+ if(event.code==='Space' && event.target.closest('summary,button'))return;
  if(!used.includes(event.code))return;event.preventDefault();keys.add(event.code);
  if(event.repeat)return;
  if(event.code==='KeyG')actions.gaze=true;

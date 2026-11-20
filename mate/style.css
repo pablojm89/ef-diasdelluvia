@@ -14,3 +14,64 @@
 
 .menu-copy{min-width:0}
 @media(max-width:700px){.menu-hero{grid-template-columns:minmax(0,1fr)}}
+
+/* Character selection and the team locker. */
+.hero-dossier {
+ display:grid;
+ grid-template-columns:auto minmax(0,1fr);
+ align-items:center;
+ column-gap:18px;
+ min-height:134px;
+ padding:12px 18px 12px 9px;
+ margin-bottom:16px;
+ background:linear-gradient(110deg,#254551 0 24%,#172e40 54%);
+ border:1px solid #5c888c;
+ border-left:4px solid var(--mint);
+ border-radius:8px;
+}
+.hero-portrait {display:grid;place-items:center;align-self:stretch;min-width:74px}
+.hero-portrait img {display:block;width:76px;height:100px;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(2px 3px #112431)}
+.hero-bio strong {display:block;font-size:1.36rem;color:#fff1cc;line-height:1.05}
+.hero-bio h3 {font-size:.92rem;color:var(--mint);margin:7px 0 4px}
+.hero-bio p {font-size:.8rem;line-height:1.45;color:#d2dee4}
+.character-grid {grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:7px}
+.character-choice {position:relative;padding:5px 2px 6px;border-radius:5px}
+.character-choice img {width:48px;height:60px}
+.character-choice[aria-pressed=true]::after {content:'✓';position:absolute;right:4px;top:1px;color:#fff0a8;font-size:.77rem}
+.lobby-actions {
+ display:grid;
+ grid-template-columns:minmax(0,1.25fr) minmax(240px,.75fr);
+ gap:22px;
+ margin:0 0 23px;
+ background:#1b3146;
+ border:1px solid var(--border);
+ border-radius:14px;
+ padding:18px;
+}
+.lobby-self {display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:10px;row-gap:7px}
+.lobby-self .hero-dossier,.lobby-self>p {grid-column:1/-1}
+.lobby-self .hero-dossier {margin:0 0 4px;min-height:105px}
+.lobby-self .hero-portrait img {width:63px;height:84px}
+.lobby-self label {font-size:.8rem;font-weight:bold}
+.lobby-self select {width:100%;max-width:none}
+.lobby-self>p,.lobby-controls p {color:#b7cbd8;font-size:.78rem;line-height:1.45}
+.lobby-controls {display:grid;justify-items:center;align-content:center;gap:10px;text-align:center}
+.lobby-controls .button,.lobby-controls .team-switch {width:min(100%,280px)}
+.team-switch button {flex:1}
+.team-switch button:disabled {cursor:default}
+.lobby-bottom {grid-template-columns:1fr}
+.match-talent {position:relative;z-index:2}
+.match-talent summary {font-size:.75rem;color:var(--mint);width:max-content}
+.match-talent p {position:absolute;top:calc(100% + 7px);left:0;width:min(235px,75vw);padding:10px 13px;background:#14293d;border:1px solid #67988b;border-radius:5px;color:#d9e9e8;line-height:1.5;font-size:.8rem;box-shadow:0 6px 16px #0005}
+@media(max-width:700px){
+ .lobby-actions {grid-template-columns:1fr;gap:16px;padding:14px}
+ .character-grid {grid-template-columns:repeat(auto-fit,minmax(55px,1fr))}
+ .hero-dossier {column-gap:10px;padding:10px}
+ .hero-portrait {min-width:57px}
+ .hero-portrait img {width:60px;height:84px}
+ .hero-bio strong {font-size:1.15rem}
+ .character-choice img {width:43px;height:54px}
+ .lobby-self {grid-template-columns:1fr}
+ .lobby-controls .button,.lobby-controls .team-switch {width:100%}
+}
+.hero-bio strong small {font-size:.71rem;color:#c0d4d9;font-weight:600;white-space:nowrap}

@@ -1,5 +1,6 @@
 import {NETWORK_CONFIG} from './config.js';
-import {CHARACTERS} from './characters.js';
+import {HEROES} from './roster.js';
+import {availableCharacter} from './selection.js';
 import {normalizeRules} from './sim.js';
 import {RelayHub} from './relay.js';
 import {PROTOCOL,validCode,validToken,cleanProfile,inputPacket,isSnapshot} from './protocol.js';
@@ -18,7 +19,7 @@ const errorText={
 };
 export class Room {
  constructor(callbacks={}) {
-  this.cb=callbacks;this.peer=null;this.isHost=false;this.members=new Map();this.connections=new Map();this.closed=false;this.started=false;this.seq=0;this.lastStateTick=-1;this.lobbyRevision=0;this.lastLobbyRevision=0;this.timers=[];this.latency=0;this.transport='direct';this.relay=null;this.hostLink=null;this.myId=null;this.code=null;
+  this.cb=callbacks;this.peer=null;this.isHost=false;this.members=new Map();this.departed=new Map();this.connections=new Map();this.closed=false;this.started=false;this.seq=0;this.lastStateTick=-1;this.lobbyRevision=0;this.lastLobbyRevision=0;this.timers=[];this.latency=0;this.transport='direct';this.relay=null;this.hostLink=null;this.myId=null;this.code=null;
  }
  status(text){this.cb.onStatus?.(text);}
  publicRoster(){return [...this.members.values()].map(({resumeToken,...m})=>m);}
@@ -48,7 +49,7 @@ export class Room {
   this.isHost=true;this.code=makeCode();this.rules=normalizeRules(rules);this.status('Abriendo la sala…');
   this.myId=NETWORK_CONFIG.roomPrefix+this.code;this.hostId=this.myId;
   const c=cleanProfile(profile).character;
-  this.members.set(this.myId,{id:this.myId,team:0,character:c,name:CHARACTERS[c].name,ready:true,connected:true,host:true});
+  this.members.set(this.myId,{id:this.myId,team:0,character:c,name:HEROES[c].name,ready:true,connected:true,host:true});
   this.relay=new RelayHub(NETWORK_CONFIG.relay,this.code);
   const results=await Promise.allSettled([
    this.openPeer(this.myId).then(()=>this.peer.on('connection',conn=>this.acceptConnection(conn))),
@@ -69,23 +70,35 @@ export class Room {
    if(Date.now()-rateStart>1000){rate=0;rateStart=Date.now();}
    if(++rate>100){conn.close();return;}
    if(!memberId){
-    if(data.type!=='hello'||data.v!==PROTOCOL||!validToken(data.clientId))return conn.close();
+    if(data.type!=='hello'||!validToken(data.clientId))return conn.close();
+    if(data.v!==PROTOCOL)return this.reject(conn,'El anfitrión y tu navegador tienen versiones distintas. Recargad Mate Arena para jugar juntos.');
     const candidate='c-'+data.clientId,existing=this.members.get(candidate);
+    let reassigned=false;
     if(existing){
      if(data.resumeToken!==existing.resumeToken)return this.reject(conn,'No se puede recuperar esa plaza. Vuelve a entrar desde la pantalla inicial.');
-     memberId=candidate;existing.connected=true;existing.ready=true;
-     const previous=this.connections.get(memberId);if(previous&&previous!==conn)previous.close();
+     memberId=candidate;existing.connected=true;
+     const previous=this.connections.get(memberId);
+     this.connections.set(memberId,conn);
+     if(previous&&previous!==conn)previous.close();
     } else {
      if(this.started)return this.reject(conn,'La partida ya ha empezado. Espera a que termine para entrar.');
      const humans=this.publicRoster().filter(m=>m.connected),counts=[0,1].map(t=>humans.filter(m=>m.team===t).length);
      if(humans.length>=Math.min(NETWORK_CONFIG.maxHumans,this.rules.teamSize*2))return this.reject(conn,'La sala está llena. El anfitrión puede ampliar los equipos antes de empezar.');
-     const team=counts[0]<=counts[1]?0:1,c=cleanProfile(data.profile).character;
+     const lastSeat=this.departed.get(candidate);
+     if(lastSeat&&lastSeat.resumeToken!==data.resumeToken)return this.reject(conn,'No se puede recuperar esa plaza.');
+     const preferred=lastSeat?.character??cleanProfile(data.profile).character;
+     const smallerTeam=counts[0]<=counts[1]?0:1;
+     const team=lastSeat&&counts[lastSeat.team]<this.rules.teamSize?lastSeat.team:smallerTeam;
+     const c=availableCharacter(preferred,this.occupied(team));
+     reassigned=preferred!==c;
+     this.departed.delete(candidate);
      memberId=candidate;
-     this.members.set(memberId,{id:memberId,team,character:c,name:CHARACTERS[c].name,ready:false,connected:true,host:false,resumeToken:token()});
+     this.members.set(memberId,{id:memberId,team,character:c,name:HEROES[c].name,ready:false,connected:true,host:false,resumeToken:lastSeat?.resumeToken??token()});
     }
     clearTimeout(deadline);this.connections.set(memberId,conn);
     this.send(conn,{type:'welcome',v:PROTOCOL,id:memberId,hostId:this.myId,code:this.code,started:this.started,matchId:this.matchId||null,rules:this.rules,resumeToken:this.members.get(memberId).resumeToken});
     this.cb.onParticipant?.(memberId,true);this.emitLobby();
+    if(reassigned)this.notifyMember(memberId,'Tu personaje ya estaba elegido en este equipo. Juegas con '+this.members.get(memberId).name+'.');
     if(this.started)this.send(conn,{type:'start',rules:this.rules,matchId:this.matchId,reconnecting:true});
     return;
    }
@@ -96,12 +109,23 @@ export class Room {
    if(this.started)return;
    const m=this.members.get(memberId);
    if(data.type==='ready'&&typeof data.ready==='boolean'){m.ready=data.ready;this.emitLobby();}
-   if(data.type==='profile'){m.character=cleanProfile(data.profile).character;m.name=CHARACTERS[m.character].name;this.emitLobby();}
+   if(data.type==='profile')this.pickMember(memberId,cleanProfile(data.profile).character);
    if(data.type==='team'&&(data.team===0||data.team===1))this.changeTeam(memberId,data.team);
   });
   conn.on('close',()=>{
    clearTimeout(deadline);
-   if(memberId&&this.connections.get(memberId)===conn){this.connections.delete(memberId);const m=this.members.get(memberId);if(m)m.connected=false;if(!this.started)this.members.delete(memberId);this.cb.onParticipant?.(memberId,false);this.emitLobby();}
+   if(!memberId||this.connections.get(memberId)!==conn)return;
+   this.connections.delete(memberId);
+   const m=this.members.get(memberId);
+   m.connected=false;
+   if(!this.started){
+    // Remember a returning guest's preference while freeing their lobby seat.
+    this.departed.set(memberId,m);
+    this.members.delete(memberId);
+    if(this.departed.size>NETWORK_CONFIG.maxHumans)this.departed.delete(this.departed.keys().next().value);
+   }
+   this.cb.onParticipant?.(memberId,false);
+   this.emitLobby();
   });
   conn.on('error',()=>conn.close());
  }
@@ -142,6 +166,7 @@ export class Room {
     if(data.type==='rejected'){clearTimeout(timeout);reject(new Error(String(data.message).slice(0,200)));this.cb.onError?.(String(data.message).slice(0,200));}
     if(!welcomed)return;
     if(data.type==='lobby'&&Number.isSafeInteger(data.revision)&&data.revision>this.lastLobbyRevision&&Array.isArray(data.members)&&data.members.length<=26){this.lastLobbyRevision=data.revision;this.rules=normalizeRules(data.rules);if(!data.started)this.started=false;this.cb.onLobby?.(data);if(data.started)this.beginRemote(data);}
+    if(data.type==='notice')this.cb.onError?.(String(data.message).slice(0,200));
     if(data.type==='start')this.beginRemote(data);
     if(data.type==='state'&&!this.ended&&this.started&&data.matchId===this.matchId&&isSnapshot(data.state)&&data.state.tick>this.lastStateTick){this.lastStateTick=data.state.tick;this.cb.onState?.(data.state);}
     if(data.type==='pong'){this.latency=Math.max(0,Math.round((performance.now()-data.at)/2));this.cb.onLatency?.(this.latency);}
@@ -153,13 +178,36 @@ export class Room {
   });
  }
  beginRemote(data){if(typeof data.matchId!=='string'||data.matchId===this.matchId)return;this.matchId=data.matchId;this.started=true;this.lastStateTick=-1;this.cb.onStart?.(data);}
- choose(profile){if(this.isHost){const m=this.members.get(this.myId);m.character=cleanProfile(profile).character;m.name=CHARACTERS[m.character].name;this.emitLobby();}else this.send(this.hostLink,{type:'profile',profile:cleanProfile(profile)});}
+ occupied(team,exceptId) {
+  return new Set([...this.members.values()].filter(m=>m.team===team&&m.id!==exceptId).map(m=>m.character));
+ }
+ notifyMember(id,message) {
+  if(id===this.myId)this.cb.onError?.(message);
+  else this.send(this.connections.get(id),{type:'notice',message});
+ }
+ pickMember(id,character) {
+  const m=this.members.get(id);
+  if(!this.isHost||this.started||!m)return;
+  if(this.occupied(m.team,id).has(character))this.notifyMember(id,HEROES[character].name+' ya está en tu equipo. Elige un personaje libre.');
+  else {m.character=character;m.name=HEROES[character].name;}
+  this.emitLobby();
+ }
+ choose(profile){
+  if(this.started)return;
+  const clean=cleanProfile(profile);
+  if(this.isHost)this.pickMember(this.myId,clean.character);
+  else this.send(this.hostLink,{type:'profile',profile:clean});
+ }
  ready(value){if(this.isHost)return;this.send(this.hostLink,{type:'ready',ready:value});}
  changeTeam(id,team) {
   if(!this.isHost){this.send(this.hostLink,{type:'team',team});return;}
   if(this.started||!this.members.has(id)||![0,1].includes(team))return;
-  if(this.publicRoster().filter(m=>m.team===team&&m.id!==id&&m.connected).length>=this.rules.teamSize){this.cb.onError?.('Ese equipo está completo.');return;}
-  this.members.get(id).team=team;this.emitLobby();
+  if(this.publicRoster().filter(m=>m.team===team&&m.id!==id&&m.connected).length>=this.rules.teamSize){this.notifyMember(id,'Ese equipo está completo.');return;}
+  const m=this.members.get(id);
+  const character=availableCharacter(m.character,this.occupied(team,id));
+  if(character!==m.character)this.notifyMember(id,HEROES[m.character].name+' ya está en ese equipo. Juegas con '+HEROES[character].name+'.');
+  Object.assign(m,{team,character,name:HEROES[character].name});
+  this.emitLobby();
  }
  configure(rules){if(!this.isHost||this.started)return false;const r=normalizeRules(rules);if([0,1].some(t=>this.publicRoster().filter(m=>m.team===t&&m.connected).length>r.teamSize)){this.cb.onError?.('Ese tamaño no permite a todos los compañeros conectados.');return false;}this.rules=r;this.emitLobby();return true;}
  start(){

@@ -1,9 +1,10 @@
 import {sanitizeInput} from './sim.js';
-export const PROTOCOL=1;
+import {validCharacter} from './selection.js';
+export const PROTOCOL=2;
 export const validCode=code=>typeof code==='string'&&/^[A-HJ-NP-Z2-9]{6}$/.test(code);
 export const validToken=value=>typeof value==='string'&&/^[a-zA-Z0-9-]{20,80}$/.test(value);
 export function cleanProfile(raw={}) {
- return {character:Number.isInteger(raw.character)&&raw.character>=0&&raw.character<8?raw.character:0};
+ return {character:validCharacter(raw?.character)?raw.character:0};
 }
 export function inputPacket(raw,lastSeq=-1) {
  if(raw?.type!=='input'||!Number.isSafeInteger(raw.seq)||raw.seq<=lastSeq||raw.seq>1e9)return null;

@@ -1,14 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {makeGame,stepGame,setInput,imprison,rescue,throwBall,snapshot,normalizeRules,sanitizeInput,bounds} from '../mate/sim.js';
-import {inputPacket,validCode,cleanProfile} from '../mate/protocol.js';
+import {inputPacket,validCode,cleanProfile,PROTOCOL} from '../mate/protocol.js';
 const controls=(extra={})=>({mx:0,my:0,ax:900,ay:390,fire:false,catch:false,dash:false,pass:false,...extra});
 
 test('mate: el perfil descarta datos identificativos y sólo conserva el personaje',()=>{
  assert.deepEqual(cleanProfile({character:3,name:'PRUEBA',email:'prueba@example.test',school:'CENTRO DE PRUEBA',pupilId:'DEMO'}),{character:3});
 });
 function setup(rules={}) {
- const g=makeGame([{id:'a',team:0,name:'Vega'},{id:'b',team:1,name:'Kai'}],{teamSize:2,...rules});
+ const g=makeGame([{id:'a',team:0,name:'Vega'},{id:'b',team:1,name:'Kai',character:1}],{teamSize:2,...rules});
  g.phase='playing';for(const p of g.players){p.bot=false;p.invulnerable=0;p.y=300;}g.players.find(p=>p.id==='a').x=500;g.players.find(p=>p.id==='b').x=800;
  g.players.filter(p=>!['a','b'].includes(p.id)).forEach(p=>p.y=600);
  return g;
@@ -127,7 +127,7 @@ test('mate: un invitado no inicia ni pausa la sala y sólo controla su propia pl
  const calls=[],room=new Room({onInput:(id,input)=>calls.push({id,input})});
  room.isHost=true;room.code='ABC234';room.myId='host';room.rules=normalizeRules({teamSize:1});room.members.set('host',{id:'host',team:0,character:0,name:'Vega',host:true,connected:true,ready:true});
  const conn=new Connection(),clientId='12345678-1234-4123-8123-123456789abc';room.acceptConnection(conn);
- conn.emit('data',{type:'hello',v:1,clientId,profile:{character:3}});
+ conn.emit('data',{type:'hello',v:PROTOCOL,clientId,profile:{character:3}});
  assert.equal(room.members.size,2);assert.ok(conn.sent.some(m=>m.type==='welcome'));
  const lobby=conn.sent.find(m=>m.type==='lobby');assert.ok(lobby.members.every(m=>m.resumeToken===undefined));
  conn.emit('data',{type:'start'});conn.emit('data',{type:'pause',paused:true});assert.equal(room.started,false);
@@ -178,4 +178,75 @@ test('Imparable atraviesa una recepción y respeta la recarga individual',()=>{
  assert.equal(throwBall(game,caster,rival,false,true),false);
  assert.equal(throwBall(game,caster,rival),true);
  assert.equal(game.ball.special,false);
+});
+
+function heroGame(character) {
+ const g=makeGame([{id:'hero',team:0,character},{id:'ally',team:0},{id:'rival',team:1}],{teamSize:2});
+ g.phase='playing';
+ const [hero,ally,rival,other]=g.players;
+ for(const p of g.players){p.bot=false;p.invulnerable=0;p.y=350;}
+ hero.x=420;ally.x=220;ally.y=500;rival.x=800;other.y=600;
+ return {g,hero,ally,rival};
+}
+
+test('mate: cada personaje tiene la especialidad que aparece en su ficha',()=>{
+ for(const [index,action,expected] of [
+  [0, 'pass', 715], [4, 'fire', 910], [3, 'run', 270], [9, 'carry', 225],
+  [6,'dash',775], [7,'dashRecovery',1], [2,'catchWindow',.5], [8,'catchRecovery',.7],
+ ]) {
+  const {g,hero,rival}=heroGame(index);
+  if(['pass','fire'].includes(action)){
+   setInput(g,hero.id,controls({[action]:true}));stepGame(g);
+   const speed=Math.hypot(g.ball.vx,g.ball.vy);
+   assert.ok(Math.abs(speed-expected)<.001, action);
+  }else{
+   if(action!=='carry')g.ball.holder=rival.id;
+   setInput(g,hero.id,controls({my:1,dash:action.startsWith('dash'),catch:action.startsWith('catch')}));
+   stepGame(g);
+   const observed={run:hero.vy,carry:hero.vy,dash:hero.vy,dashRecovery:hero.dashCooldown,catchWindow:hero.catchTime,catchRecovery:hero.catchCooldown};
+   assert.equal(observed[action],expected,action);
+  }
+ }
+ for(const [index,live,offset] of [[1,false,36],[5,true,39]]){
+  for(const character of [0,index]){
+   const {g,hero,rival}=heroGame(character);
+   shotAt(g,hero,rival,live);g.ball.x=hero.x;g.ball.y=hero.y+offset;
+   setInput(g,hero.id,controls({catch:live}));stepGame(g);
+   assert.equal(g.ball.holder===hero.id,character===index);
+  }
+ }
+});
+
+test('mate: Sol sólo carga su contraataque tras una recepción y lo consume al lanzar',()=>{
+ const {g,hero,rival}=heroGame(10);
+ assert.equal(throwBall(g,hero,{x:900,y:350}),true);assert.equal(g.ball.vx,790);
+ shotAt(g,hero,rival);setInput(g,hero.id,controls({catch:true}));stepGame(g);
+ assert.equal(g.ball.holder,hero.id);assert.equal(g.ball.counterReady,true);
+ assert.equal(throwBall(g,hero,{x:900,y:350}),true);assert.equal(g.ball.vx,990);assert.equal(g.ball.counterReady,false);
+});
+
+test('mate: Teo sólo acelera al recibir un pase aliado e Inés al salir de prisión',()=>{
+ for(const index of [11,12]){
+  const {g,hero,ally}=heroGame(index);
+  if(index===11){
+   shotAt(g,hero,ally,false);stepGame(g);assert.equal(hero.boostTime,0);
+   shotAt(g,hero,ally,false);g.ball.pass=true;stepGame(g);assert.equal(hero.boostTime,3);
+  }else{
+   imprison(g,hero);assert.equal(hero.boostTime,0);rescue(g,hero);assert.equal(hero.boostTime,4);
+   for(let n=0;n<18;n++)stepGame(g);
+  }
+  setInput(g,hero.id,controls({my:1}));stepGame(g);
+  assert.equal(hero.vy,225);
+  g.paused=true;const remaining=hero.boostTime;stepGame(g);assert.equal(hero.boostTime,remaining);
+  g.paused=false;for(let n=0;n<245;n++)stepGame(g);
+  assert.equal(hero.boostTime,0);
+ }
+});
+
+test('mate: un pase a larga distancia permite activar el relevo de Teo',()=>{
+ const {g,hero,ally}=heroGame(11);
+ ally.x=200;ally.y=hero.y;hero.x=540;g.ball.holder=ally.id;
+ throwBall(g,ally,hero,true);
+ for(let tick=0;tick<60 && g.ball.holder!==hero.id;tick++)stepGame(g);
+ assert.equal(g.ball.holder,hero.id);assert.equal(hero.boostTime,3);
 });

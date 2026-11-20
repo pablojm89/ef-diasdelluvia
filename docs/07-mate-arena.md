@@ -4,9 +4,9 @@ Un videojuego independiente dentro de Patio Interior, accesible desde la isla de
 
 ## Qué incluye
 
-- Ocho personajes originales dibujados por código: Vega, Kai, Lúa, Neo, Ada, Max, Nora y Leo. Peinados, siluetas, colores y poses diferentes; las habilidades son iguales para mantener el equilibrio.
+- Trece protagonistas de pixel art. Los ocho alumnos del gimnasio comparten pista con Iris, Bruno, Sol, Teo e Inés. Cada personaje tiene un talento propio que se activa al realizar la acción correspondiente.
 - Pista con dos campos, dos zonas de cárcel y una pelota. Movimiento, apuntado, lanzamiento, pase, recepción temporal y esquiva rápida.
-- Entrenamiento contra IA y salas online por código. Hasta seis plazas por equipo; las vacantes se completan con IA.
+- Entrenamiento contra IA y salas online por código. Hasta trece plazas por equipo. La IA cubre las vacantes con personajes disponibles.
 - Sala de espera, elección de personaje y equipo, confirmación de listos, reglas configurables y comienzo controlado por el anfitrión.
 - Marcador, reloj, rondas, resultado del partido y vuelta a la sala para repetir.
 - Pausa del anfitrión, control de posesión de cinco segundos, recuperación de pelota inaccesible, ayudas de apuntado, efectos de sonido opcionales y controles táctiles.
@@ -24,6 +24,10 @@ Un videojuego independiente dentro de Patio Interior, accesible desde la isla de
 8. El anfitrión puede activar dos variantes: atrapar elimina al lanzador; atrapar rescata a un preso del equipo. Por defecto ambas están desactivadas.
 
 No hay una regla escolar única para todas las regiones. Estas son las reglas implementadas y visibles en la aplicación; el motor permite modificarlas cuando el docente concrete sus variantes.
+
+## Elección de personaje
+
+Cada equipo puede alinear una vez a cada personaje. Por ejemplo, Cometas y Rayos pueden tener una Lúa cada uno. El vestuario muestra quién está ocupado en tu equipo. Si dos personas piden el mismo personaje a la vez, el anfitrión confirma la primera elección que recibe. La ficha de cada protagonista explica su talento antes del partido.
 
 ## Habilidades de pista
 
@@ -56,6 +60,8 @@ Para una clase mayor que la capacidad de una sala se pueden abrir varias salas i
 | Esquiva rápida | Shift más dirección |
 | Pasar al compañero más cercano | Q |
 | Cambiar objetivo automático | R |
+| Tiro imparable | F |
+| Mirada intensa | G |
 | Pausar o reanudar | P; sólo anfitrión en online |
 
 Hay controles táctiles. La pista está pensada principalmente para portátil o pantalla en horizontal. El botón de pantalla completa depende de las capacidades y políticas del navegador. El audio se activa expresamente.
@@ -64,7 +70,7 @@ Hay controles táctiles. La pista está pensada principalmente para portátil o 
 
 `sim.js` contiene la simulación a 60 pasos por segundo, sin navegador ni red. El anfitrión es la autoridad sobre movimientos, posesión, colisiones, cárcel, rescates, tiempo y resultado. Los invitados envían direcciones y acciones; no envían coordenadas finales, impactos ni puntuaciones. Se validan los tipos, rangos y la secuencia de las entradas. Las entradas antiguas caducan para impedir que una tecla quede atascada al desconectar.
 
-`renderer.js` dibuja la pista, sprites, pelota, marcador y efectos en Canvas. `characters.js` genera sprites y retratos propios. Los clientes interpolan posiciones recibidas; no deciden colisiones.
+`renderer.js` dibuja la pista, sprites, pelota, marcador y efectos en Canvas. `characters.js` carga los retratos y selecciona el fotograma de cada jugador en las hojas de animación de Cometas y Rayos. Los clientes interpolan posiciones recibidas; no deciden colisiones.
 
 `network.js` gestiona códigos, miembros, preparación, comienzo, pausa, reconexión y cambios de partida. Las instantáneas llevan un identificador de partido para no confundir paquetes antiguos con una revancha. La entrada se vincula a la conexión aceptada. Las credenciales de recuperación no se incluyen en la lista pública de miembros.
 
