@@ -1,4 +1,4 @@
-# Patio Interior · EF en días de lluvia
+# El Gimnasio · aventura de Educación Física bilingüe
 
 Una propuesta de coordinación, ritmo, expresión y cooperación para 5.º y 6.º de Primaria.
 
@@ -6,7 +6,9 @@ Una propuesta de coordinación, ritmo, expresión y cooperación para 5.º y 6.�
 
 **Estado: tres experiencias físicas de aula y Mate Arena, un videojuego de balón prisionero con entrenamiento y salas online.** Las salas de Mate Arena están implementadas; las votaciones y las salas de los otros juegos siguen pendientes. No hay seguimiento del movimiento con cámara.
 
-**Nueva propuesta en fase de diseño:** [El Gimnasio, aventura gráfica bilingüe para EF de 5.º–6.º en Andalucía](docs/hub-ef/README.md). Incluye investigación, dirección artística, arquitectura y el guion de la primera misión del almacén. Esta propuesta todavía no sustituye la aplicación publicada.
+**Primera aventura implementada:** [Equipment Rescue](gimnasio/), gimnasio y almacén con cinco fases, objetos manipulables, instrucciones bilingües y progreso local. La entrada principal abre esta aventura; las experiencias anteriores siguen en [Patio Interior](patio.html) y Mate Arena conserva su ruta.
+
+**Dossier de diseño:** [El Gimnasio, aventura gráfica bilingüe para EF de 5.º–6.º en Andalucía](docs/hub-ef/README.md). Incluye investigación, dirección artística, arquitectura y el guion de la primera misión del almacén. La primera misión ya está implementada; los demás espacios del dossier siguen planificados.
 
 ## El mundo de Chispa
 

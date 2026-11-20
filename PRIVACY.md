@@ -25,3 +25,7 @@ Si se detecta una publicación accidental, retirar el acceso al contenido y revi
 ## Revisión del 20 de noviembre de 2026
 
 Se revisaron los archivos versionados y los 63 blobs distintos alcanzables en el historial existente. No se encontraron datos identificables de alumnos ni patrones de claves privadas en esa revisión. El único correo dentro de los textos era el contacto público de soporte incluido en PeerJS. Los siete blobs binarios correspondían a ilustraciones generadas y capturas de pruebas del juego; no a imágenes de alumnos.
+
+## Aventura del gimnasio
+
+La misión Equipment Rescue no solicita datos personales. Guarda únicamente el estado de la misión y dos preferencias en la clave local `ef-gym-mission-v1`. Los ajustes permiten borrar ese progreso. No se envían resultados a un servidor. La lectura en inglés utiliza la síntesis de voz que ofrezca el navegador; su disponibilidad y el posible procesamiento por el proveedor dependen del dispositivo. No se accede al micrófono.

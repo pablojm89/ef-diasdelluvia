@@ -1,6 +1,6 @@
 # El Gimnasio · propuesta de aventura gráfica bilingüe
 
-Documento de diseño, 20 de noviembre de 2026. Público: tercer ciclo de Primaria en Andalucía. **Propuesta pendiente de implementación:** la aplicación publicada y Mate Arena conservan su funcionamiento actual.
+Documento de diseño, 20 de noviembre de 2026. Público: tercer ciclo de Primaria en Andalucía. **Primera misión implementada:** [Equipment Rescue](../../gimnasio/). Gimnasio y almacén, cinco fases, apoyo bilingüe y progreso local. Los otros espacios descritos siguen siendo propuesta. Las actividades anteriores están en `patio.html` y Mate Arena conserva su ruta.
 
 ## Una escuela que se puede jugar
 

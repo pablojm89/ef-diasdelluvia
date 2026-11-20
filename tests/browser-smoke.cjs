@@ -18,7 +18,7 @@ const out=path.join(base,'artifacts');
  const page=await context.newPage(),errors=[];
  page.on('pageerror',e=>errors.push(e.message));
  await fs.mkdir(out,{recursive:true});
- await page.goto('https://patio.test/');
+ await page.goto('https://patio.test/patio.html');
  await page.waitForSelector('.world-location');
  assert.equal(await page.locator('.world-location').count(),3);
  assert.equal(await page.locator('.world-backdrop').evaluate(i=>i.complete&&i.naturalWidth>0),true);
@@ -41,7 +41,7 @@ const out=path.join(base,'artifacts');
  await page.reload();
  await page.waitForSelector('.victory-content');
  await page.screenshot({path:path.join(out,'victory-desktop.png'),fullPage:true});
- await page.goto('https://patio.test/#pulso');
+ await page.goto('https://patio.test/patio.html#pulso');
  await page.locator('[data-action="beat"]').click();
  await page.waitForTimeout(750);
  assert.equal(await page.locator('.dance-stage.playing').count(),1);
@@ -49,7 +49,7 @@ const out=path.join(base,'artifacts');
  await page.screenshot({path:path.join(out,'pulse-desktop.png'),fullPage:true});
  await page.locator('[data-action="beat"]').click();
  assert.equal(await page.locator('.dance-stage.playing').count(),0);
- await page.goto('https://patio.test/#liga');
+ await page.goto('https://patio.test/patio.html#liga');
  await page.selectOption('#team-count','2');
  await page.locator('#league-setup button').click();
  for(let round=0;round<6;round++){
@@ -64,7 +64,7 @@ const out=path.join(base,'artifacts');
  }
  assert.equal(await page.locator('.ranking>div').count(),2);
  assert.match(await page.locator('.ranking').textContent(),/36 \/ 36/);
- await page.goto('https://patio.test/#biblioteca');
+ await page.goto('https://patio.test/patio.html#biblioteca');
  await page.selectOption('#players-filter','solo');
  await page.selectOption('#family-filter','coordinacion');
  assert.equal(await page.locator('.challenge-grid .challenge').count(),3);
@@ -74,7 +74,7 @@ const out=path.join(base,'artifacts');
  for(const [width,height,name] of [[390,844,'mobile'],[768,1024,'tablet'],[320,740,'small-mobile'],[1024,768,'small-desktop']]){
   await page.setViewportSize({width,height});
   for(const [hash,screen] of [['inicio','world'],['mision','mission'],['pulso','pulse'],['liga','arena']]){
-   await page.goto(`https://patio.test/#${hash}`);
+   await page.goto(`https://patio.test/patio.html#${hash}`);
    await page.waitForTimeout(150);
    await page.evaluate(()=>window.scrollTo(0,0));
    const sizes=await page.evaluate(()=>({content:document.documentElement.scrollWidth,viewport:innerWidth}));
