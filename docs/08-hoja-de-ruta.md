@@ -1,6 +1,6 @@
 # Plan de El Pabellón, el hub de Educación Física
 
-20 de noviembre de 2026. Sustituye al plan anterior, que giraba en torno a los días de lluvia. Documentos que lo acompañan: [qué actividades digitales de EF existen y cuáles versionar](09-investigacion-dias-de-lluvia.md), [registro y notas](10-registro-y-notas.md) e [imágenes pendientes de pintar](arte/peticiones-imagenes.md).
+20 de noviembre de 2026. Sustituye al plan anterior, que giraba en torno a los días de lluvia. Documentos que lo acompañan: [qué actividades digitales de EF existen y cuáles versionar](09-investigacion-dias-de-lluvia.md), [registro y notas](10-registro-y-notas.md) e [encargo de imágenes](../arte/ENCARGO.md).
 
 ## Qué es
 
@@ -65,7 +65,7 @@ Petición del profe. Diseño:
 - **Practicar.** La pantalla guía la secuencia: nombre en los dos idiomas, la animación de entrada, las respiraciones contadas y la salida. La clase la hace en directo.
 - **Qué queda anotado.** Posturas vistas, secuencias creadas y secuencias practicadas.
 - **Primer lote:** doce posturas adecuadas para Primaria y practicables junto al pupitre o en colchoneta, sin inversiones ni apoyos de cuello.
-- **Depende de:** los dibujos, pedidos en [arte/peticiones-imagenes.md](arte/peticiones-imagenes.md). El constructor y la reproducción se pueden programar antes con siluetas provisionales.
+- **Depende de:** los dibujos, pedidos en el [encargo de imágenes](../arte/ENCARGO.md). El constructor y la reproducción se pueden programar antes con siluetas provisionales.
 
 ## Registro y notas
 

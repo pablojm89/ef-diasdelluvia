@@ -43,6 +43,7 @@ jobs:
           cp index.html hub.css hub.js registro.js config.js patio.html app.js content.js engine.js styles.css _site/
           cp assets/*.svg assets/*.webp _site/assets/
           cp -R mate _site/mate
+          cp -R comun _site/comun
           cp -R gimnasio _site/gimnasio
           touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v3

@@ -1,0 +1,217 @@
+{
+ "_titulo": "Iconos de habilidad de Mate Arena",
+ "_nota": "Estilo pixel art (ver estilo_pixel). Cada icono integrado sustituye solo a su versión vectorial.",
+ "_indice": {
+  "archivo": "mate/assets/abilities/pintados.js",
+  "nombre": "PINTADOS"
+ },
+ "icono-fire": {
+  "nombre": "Lanzar",
+  "destino": "mate/assets/abilities/fire.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/fire.svg. Motivo: pelota volando hacia arriba a la derecha con tres estelas. Color del medallón: ámbar.",
+  "pixel": true,
+  "clave": "fire"
+ },
+ "icono-pass": {
+  "nombre": "Pasar",
+  "destino": "mate/assets/abilities/pass.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/pass.svg. Motivo: pelota que describe un arco con flecha hacia un compañero. Color del medallón: azul cielo.",
+  "pixel": true,
+  "clave": "pass"
+ },
+ "icono-catch": {
+  "nombre": "Atrapar",
+  "destino": "mate/assets/abilities/catch.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/catch.svg. Motivo: mano abierta bajo una pelota que llega. Color del medallón: turquesa.",
+  "pixel": true,
+  "clave": "catch"
+ },
+ "icono-dash": {
+  "nombre": "Esquivar",
+  "destino": "mate/assets/abilities/dash.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/dash.svg. Motivo: dos galones hacia la derecha con líneas de velocidad. Color del medallón: naranja tostado.",
+  "pixel": true,
+  "clave": "dash"
+ },
+ "icono-special": {
+  "nombre": "Tiro imparable",
+  "destino": "mate/assets/abilities/special.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/special.svg. Motivo: pelota envuelta en una llama de cometa. Color del medallón: magenta.",
+  "pixel": true,
+  "clave": "special"
+ },
+ "icono-gaze": {
+  "nombre": "Mirada intensa",
+  "destino": "mate/assets/abilities/gaze.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/gaze.svg. Motivo: ojo grande con destellos encima. Color del medallón: violeta.",
+  "pixel": true,
+  "clave": "gaze"
+ },
+ "icono-pase-expres": {
+  "nombre": "Vega · Pase exprés",
+  "destino": "mate/assets/abilities/pase-expres.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/pase-expres.svg. Motivo: doble flecha de avance rápido empujando una pelota. Color del medallón: celeste.",
+  "pixel": true,
+  "clave": "pase-expres"
+ },
+ "icono-iman": {
+  "nombre": "Kai · Imán",
+  "destino": "mate/assets/abilities/iman.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/iman.svg. Motivo: imán de herradura atrayendo una pelota. Color del medallón: rojo coral.",
+  "pixel": true,
+  "clave": "iman"
+ },
+ "icono-lectura": {
+  "nombre": "Lúa · Lectura de juego",
+  "destino": "mate/assets/abilities/lectura.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/lectura.svg. Motivo: pizarra táctica con un aspa, un círculo y una flecha punteada. Color del medallón: verde.",
+  "pixel": true,
+  "clave": "lectura"
+ },
+ "icono-zancada": {
+  "nombre": "Neo · Zancada",
+  "destino": "mate/assets/abilities/zancada.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/zancada.svg. Motivo: rayo. Color del medallón: amarillo.",
+  "pixel": true,
+  "clave": "zancada"
+ },
+ "icono-tirachinas": {
+  "nombre": "Ada · Tirachinas",
+  "destino": "mate/assets/abilities/tirachinas.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/tirachinas.svg. Motivo: tirachinas con una pelota en la goma. Color del medallón: marrón anaranjado.",
+  "pixel": true,
+  "clave": "tirachinas"
+ },
+ "icono-guante": {
+  "nombre": "Max · Guante largo",
+  "destino": "mate/assets/abilities/guante.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/guante.svg. Motivo: mano abierta dentro de un círculo de puntos que marca su alcance. Color del medallón: azul.",
+  "pixel": true,
+  "clave": "guante"
+ },
+ "icono-cometa": {
+  "nombre": "Nora · Paso de cometa",
+  "destino": "mate/assets/abilities/cometa.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/cometa.svg. Motivo: cometa de rombo con su cola. Color del medallón: añil.",
+  "pixel": true,
+  "clave": "cometa"
+ },
+ "icono-finta": {
+  "nombre": "Leo · Segunda finta",
+  "destino": "mate/assets/abilities/finta.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/finta.svg. Motivo: flecha circular de recarga con dos galones dentro. Color del medallón: naranja.",
+  "pixel": true,
+  "clave": "finta"
+ },
+ "icono-manos": {
+  "nombre": "Iris · Manos listas",
+  "destino": "mate/assets/abilities/manos.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/manos.svg. Motivo: dos manos abiertas con una estrella encima. Color del medallón: verde agua.",
+  "pixel": true,
+  "clave": "manos"
+ },
+ "icono-avance": {
+  "nombre": "Bruno · Avance firme",
+  "destino": "mate/assets/abilities/avance.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/avance.svg. Motivo: escudo con una pelota en el centro. Color del medallón: lila.",
+  "pixel": true,
+  "clave": "avance"
+ },
+ "icono-contraataque": {
+  "nombre": "Sol · Contraataque",
+  "destino": "mate/assets/abilities/contraataque.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/contraataque.svg. Motivo: flecha que da media vuelta, con una estrella. Color del medallón: rojo frambuesa.",
+  "pixel": true,
+  "clave": "contraataque"
+ },
+ "icono-relevo": {
+  "nombre": "Teo · Relevo",
+  "destino": "mate/assets/abilities/relevo.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/relevo.svg. Motivo: testigo de relevos en diagonal con líneas de velocidad. Color del medallón: dorado.",
+  "pixel": true,
+  "clave": "relevo"
+ },
+ "icono-salida": {
+  "nombre": "Inés · Salida veloz",
+  "destino": "mate/assets/abilities/salida.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/salida.svg. Motivo: candado abierto con líneas de velocidad. Color del medallón: verde hoja.",
+  "pixel": true,
+  "clave": "salida"
+ }
+}

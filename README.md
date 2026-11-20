@@ -48,7 +48,7 @@ La aventura del gimnasio guarda su progreso en el navegador. Mate Arena sincroni
 6. [Mate Arena: juego, online y verificación](docs/07-mate-arena.md).
 7. [Plan del hub: lugares, formas de entrar y orden de trabajo](docs/08-hoja-de-ruta.md).
 8. [Qué actividades digitales de EF para lluvia existen y cuáles rehacer](docs/09-investigacion-dias-de-lluvia.md).
-9. [Peticiones de imágenes pendientes de pintar](docs/arte/peticiones-imagenes.md).
+9. [Encargo de imágenes para la IA ilustradora](arte/ENCARGO.md), generado desde `arte/lotes/`; las entregas van a `arte/entrega/` y las coloca `python3 scripts/integrar_arte.py`.
 10. [Registro y notas](docs/10-registro-y-notas.md).
 
 ## Comprobar y publicar

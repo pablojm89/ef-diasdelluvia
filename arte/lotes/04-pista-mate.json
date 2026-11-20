@@ -1,0 +1,14 @@
+{
+ "_titulo": "Pista de Mate Arena",
+ "_nota": "Estilo pixel art. Necesita integración en mate/renderer.js (buildBackground).",
+ "court": {
+  "nombre": "Pista del partido",
+  "destino": "mate/assets/court.webp",
+  "ancho": 1200,
+  "alto": 760,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Pabellón escolar visto desde arriba con ligera perspectiva de recreativa. Parqué claro; campo izquierdo con tinte turquesa y derecho con tinte coral; línea central y círculo central en crema; una franja de cárcel a cada lado. Grada con público al fondo. Geometría en píxeles: campo de juego de x 157 a 1043 y de y 150 a 640; línea central en x 600; círculo central de radio 88 en (600, 394); cárcel izquierda de x 60 a 150 y derecha de x 1050 a 1140; grada entre y 86 y 141; los 86 px superiores libres para el marcador y una banda oscura lisa en los 67 px inferiores.",
+  "pixel": true
+ }
+}

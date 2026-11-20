@@ -1,10 +1,11 @@
 // What the player can do, in the order of the ability bar, and the picture of each ability.
 import {HEROES} from './roster.js';
 
+import {PINTADOS} from './assets/abilities/pintados.js';
+
 const art = new URL('./assets/abilities/', import.meta.url);
-// Change to 'webp' once the painted icons described in docs/arte/peticiones-imagenes.md are in place.
-const ART_FORMAT = 'svg';
-export const abilityArt = id => new URL(id + '.' + ART_FORMAT, art).href;
+// Painted icons replace the vector ones one by one as scripts/integrar_arte.py brings them in.
+export const abilityArt = id => new URL(id + (PINTADOS.includes(id) ? '.webp' : '.svg'), art).href;
 
 export const ACTIONS = [
  {id: 'pass', key: 'Q', name: 'Pasar', detail: 'Pasa la pelota al compañero más cercano.'},
