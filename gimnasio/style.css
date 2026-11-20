@@ -3,11 +3,15 @@
   --ink: #142e30;
   --cream: #fff3d9;
   --gold: #ebc884;
-  --rail: clamp(112px, 17dvh, 145px);
+  --paper: #fbf0d8;
+  --wood: #463e28;
   font: 16px/1.45 'Trebuchet MS', system-ui, sans-serif;
   color: var(--cream);
   background: var(--ink);
 }
+/* Height of the teacher's dialogue at the foot of the screen; the scene fills the rest. */
+body {--rail:148px}
+body.folded {--rail:62px}
 * {box-sizing:border-box}
 body {margin:0;overflow:hidden}
 button,select,a {font:inherit}
@@ -17,75 +21,206 @@ button:hover:not(:disabled),a:hover {background:#385451}
 button:focus-visible,a:focus-visible,select:focus-visible,#camera:focus-visible {outline:3px solid #ffdb84;outline-offset:3px}
 button:disabled {cursor:default}
 .hidden,[hidden] {display:none!important}
+svg {fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .adventure {position:fixed;inset:0;background:#162d30}
-#camera {position:absolute;inset:0 0 var(--rail);overflow:auto hidden;scrollbar-width:none}
-.scene {position:relative;isolation:isolate;width:max(100%,calc((100dvh - var(--rail))*1.5));height:100%;overflow:hidden}
-.architecture {position:absolute;inset:0;background-position:center;background-size:cover;pointer-events:none}
-.gym .architecture {background-image:url('assets/gym.webp')}
-.store .architecture {background-image:url('assets/store.webp')}
-#world {position:absolute;width:100%;aspect-ratio:1.5;left:0;top:50%;transform:translateY(-50%)}
-#world .architecture {background-size:100% 100%}
-#objects,#destinations,#hotspots {position:absolute;inset:0;pointer-events:none}
-#objects button,#destinations button,#hotspots button {pointer-events:auto}
-.prof,#walker,.equipment,.risk-mat,.risk-cone {position:absolute;transform:translate(-50%,-100%);background:none;border:0;padding:0;filter:drop-shadow(1px 3px 2px #221c1f50)}
-.prof {z-index:2;width:17%;height:37%;left:62%;top:79%}
-.prof img,.equipment img,.risk-mat img,.risk-cone img {display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
-.prof:hover:not(:disabled),.equipment:hover:not(:disabled){background:none;filter:drop-shadow(0 0 4px #ffe4a3)}
-#walker {pointer-events:none;width:auto}
-.equipment {z-index:3;min-width:27px;min-height:27px}
-.equipment.stored {z-index:1}
-.equipment span {display:none;position:absolute;bottom:100%;left:50%;transform:translateX(-50%);padding:3px 8px;background:var(--ink);border-radius:3px;color:var(--cream);white-space:nowrap}
-.equipment:is(:hover,:focus-visible,.selected) span {display:block}
-.equipment.selected {filter:drop-shadow(0 0 4px #fff0a3)}
-.scene-link,.destination {position:absolute;z-index:2;transform:translate(-50%,-50%);border:1px solid #463e28;border-radius:2px;background:#e3cd9e;color:#332c20;box-shadow:0 2px 2px #32241277;padding:2px 5px;font:bold clamp(10px,1.4vh,16px) Georgia,serif;letter-spacing:.03em}
-.scene-link:hover:not(:disabled),.destination:hover:not(:disabled){background:#ffe6ab}
-.destination:disabled {pointer-events:none!important}
-.door {left:80%;top:41%}.board {left:21%;top:43%}.return-door {left:9%;top:40%}
-.hazard {position:absolute;z-index:5}.exit-risk {left:3%;top:57%}.shelf-risk {left:44%;top:27%}
-.risk-mat {left:52.4%;top:42.7%;width:9.6%}.risk-cone {left:15.5%;top:79%;width:4%}
-.location-hud,.game-tools,.interaction,.exit-control,.toast,.mission-actions {position:absolute;z-index:8}
-.location-hud {left:2vw;top:2vh;pointer-events:none;text-shadow:0 2px 6px #112521,0 0 16px #172924}
-.eyebrow,.speaker {font-size:.69rem;letter-spacing:.13em;font-weight:bold;color:var(--gold)}
-h1 {font:600 clamp(23px,3vw,40px)/1 Georgia,serif;margin:4px 0}
-.game-tools {right:2vw;top:2vh;display:flex;gap:5px}.game-tools button,.interaction button,.exit-control,#listen {background:#173736eb;font-size:.82rem}
-.exit-control {left:2vw;bottom:calc(var(--rail) + 12px)}
-.interaction {right:2vw;bottom:calc(var(--rail) + 12px)}.interaction span,.scene-caption {display:none}
-.dialogue {position:absolute;bottom:0;width:100%;height:var(--rail);display:flex;align-items:center;gap:1.3rem;padding:8px max(3vw,calc((100vw - 920px)/2));border-top:2px solid #be994e;background:linear-gradient(100deg,#122729,#284344 52%,#192f32)}
-.portrait {width:76px;height:92%;overflow:hidden;flex:none}.portrait img {display:block;width:145%;margin-left:-20%}
-.speech {flex:1}.speech p {margin:.25rem 0}.speech #english {font:clamp(17px,2.1vw,25px)/1.2 Georgia,serif}.speech #spanish {color:#dfded0;font-size:.9rem}
-.toast {left:50%;top:11vh;transform:translateX(-50%);pointer-events:none;opacity:0;padding:.6rem 1rem;background:#163431ed;max-width:min(90vw,560px);border-radius:4px;text-align:center}.toast.visible {opacity:1}
-.mission-actions:not(:empty){top:11vh;right:2vw;padding:12px;background:#163431f2;border:1px solid #b99a61;border-radius:6px;width:min(240px,46vw);max-height:40dvh;overflow:auto}
-.cart,.mission-actions {display:grid;gap:5px}.mission-actions button,.mission-actions p {font-size:.82rem}.completion p {margin:.35rem 0}
-dialog {color:#273c38;background:#f9efd8;border:1px solid #d5b679;border-radius:8px;padding:24px;width:min(480px,92vw);max-height:85dvh;overflow:auto}
-dialog::backdrop {background:#0a242ad9}dialog .eyebrow{color:#74613b}dialog button,dialog a {color:#fff3d9}dialog h2 {font:2rem Georgia,serif}dialog label,dialog .menu-links {display:block;margin:1rem 0}dialog a {display:inline-block;background:#214240;padding:8px;margin:3px;border-radius:4px}.close {float:right}#steps {list-style:none;padding:0}#steps li {margin:.6rem 0}#steps li span{padding-right:10px}.current{font-weight:bold}#object-list,#target-list {display:flex;flex-wrap:wrap;gap:5px;margin:10px 0}
-@media(max-width:720px){.game-tools{top:9vh;left:2vw;right:auto}.game-tools button{padding:.3rem .5rem}.dialogue{padding:6px 10px;gap:8px}.portrait{width:46px;height:65px}.speech #spanish{font-size:.76rem}.toast{top:16vh;width:max-content}.mission-actions:not(:empty){top:17vh}.scene-link,.destination{font-size:10px}#listen{padding:.3rem;font-size:.7rem}}
-#world {width:auto;height:100%;left:50%;top:0;transform:translateX(-50%)}
+
+/* The scene: the room picture is sized by walk.js and scrolls sideways when it is wider than the screen. */
+#camera {position:absolute;inset:0 0 var(--rail);overflow:auto hidden;scrollbar-width:none;overscroll-behavior-x:contain}
+#camera::-webkit-scrollbar {display:none}
+#camera:focus-visible {outline-offset:-3px}
+.scene {position:relative;isolation:isolate;min-width:100%;height:100%;overflow:hidden;background-size:cover;background-position:center}
 .scene::before {content:'';position:absolute;inset:-8px;background:inherit;background-size:cover;filter:blur(8px) brightness(.64)}
 .scene.gym {background-image:url('assets/gym.webp')}.scene.store {background-image:url('assets/store.webp')}
-.scene {background-size:cover;background-position:center}
-.equipment {width:5%;height:7%}
+#world {position:absolute;left:0;top:0;width:100%;aspect-ratio:1.5}
+.architecture {position:absolute;inset:0;background-size:100% 100%;pointer-events:none}
+.gym .architecture {background-image:url('assets/gym.webp')}
+.store .architecture {background-image:url('assets/store.webp')}
+.store.tidy .architecture {background-image:url('assets/store-tidy.webp')}
+#objects,#destinations,#hotspots {position:absolute;inset:0;pointer-events:none}
+#objects button,#destinations button,#hotspots button {pointer-events:auto}
+#destinations button:disabled {pointer-events:none}
+
+/* Things in the room. Every touchable thing reaches at least 44 px with an invisible margin. */
+.prof,#walker,.equipment,.risk,.trolley {position:absolute;transform:translate(-50%,-100%);background:none;border:0;padding:0;filter:drop-shadow(1px 3px 2px #221c1f50)}
+.equipment::before,.risk::before,.unit::before,.pick::before,.scene-link::before {content:'';position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%)}
+.prof {z-index:2;width:12%;height:37%;left:62%;top:79%}
+.prof img {position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:auto;height:100%;max-width:none;pointer-events:none}
+.equipment img,.risk img {display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
+.prof:hover:not(:disabled),.equipment:hover:not(:disabled),.risk:hover:not(:disabled) {background:none;filter:drop-shadow(0 0 4px #ffe4a3)}
+#walker {pointer-events:none;width:auto}
+.equipment {z-index:3;width:5%;height:7%;filter:drop-shadow(2px 5px 3px #3a221660);transition:translate .18s ease-out}
 .equipment[data-item=hoop] {width:8%;height:10%}
 .equipment[data-item=mat] {width:13%;height:9%}
 .equipment[data-item=racket],.equipment[data-item=rope] {width:7%;height:9%}
 .equipment[data-item=beanbag] {width:3%;height:4%}
-.equipment.stored {scale:.77;transform-origin:0 0}
-#world {width:100%;height:auto;top:auto;bottom:0;left:0;transform:none}
-#camera .prof {width:12%}
-.prof img {position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:auto;height:100%;max-width:none}
+.equipment span,.pick span {display:none;pointer-events:none;position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);padding:3px 8px;background:var(--ink);border-radius:4px;color:var(--cream);white-space:nowrap;font-size:.82rem}
+.equipment:is(:hover,:focus-visible,.selected) span,.pick:is(:hover,:focus-visible) span {display:block}
+.equipment.selected {translate:0 -8px;filter:drop-shadow(0 0 3px #fff7c9) drop-shadow(0 0 7px #ffd76a) drop-shadow(2px 12px 4px #3a221650)}
+
+/* Cream signs painted on the wall: doors and the places where things are kept. */
+.scene-link,.destination span {border:1px solid var(--wood);border-radius:2px;background:#e3cd9e;color:#332c20;box-shadow:0 2px 2px #32241277;padding:2px 6px;font:bold clamp(10px,1.5vh,16px) Georgia,serif;letter-spacing:.03em;white-space:nowrap}
+.scene-link {position:absolute;z-index:2;transform:translate(-50%,-50%)}
+.scene-link:hover:not(:disabled) {background:#ffe6ab}
 .door {left:84.1%;top:43.4%}.board {left:8%;top:52%}.return-door {left:14%;top:50%}
-.portrait img {width:310%;margin-left:-80%}
+.destination {position:absolute;z-index:2;padding:0;background:none;border:2px dashed transparent;border-radius:10px}
+.destination span {position:absolute;transform:translate(-50%,-50%);pointer-events:none}
+.destination:not(:disabled) {border-color:#fff0a3c0;background:#fff0a314}
+.destination:not(:disabled) span {background:#ffe6ab}
+.destination:hover:not(:disabled),.destination:focus-visible {background:#fff0a338;border-style:solid}
+
 /* Stored equipment is painted into the room: one part of the tidy picture per item. */
 #stored {position:absolute;inset:0;pointer-events:none}
-#stored img {position:absolute;display:block;transition:opacity .35s ease-out}
-.store.tidy .architecture {background-image:url('assets/store-tidy.webp')}
+#stored img,.spare-cone {position:absolute;display:block;transition:opacity .35s ease-out}
+.pick {position:absolute;z-index:3;transform:translate(-50%,-50%);padding:0;background:none;border:2px dashed #fff0a35c;border-radius:10px}
+.pick:hover:not(:disabled),.pick:focus-visible {background:#fff0a326;border:2px solid #fff0a3cc}
+.pick.looking {border:2px solid #ffe6ab;background:#fff0a326}
+.closer {display:flex;align-items:center;gap:6px}
+.closer b {font:bold .9rem Georgia,serif;color:var(--gold);margin-right:2px}
+.look {display:grid;justify-items:center;gap:1px;min-width:58px;min-height:58px;padding:4px 6px;background:var(--paper);color:#2c2417;border:2px solid var(--wood);border-radius:10px;font-size:.72rem;line-height:1}
+.look img {width:38px;height:38px;object-fit:contain;pointer-events:none}
+.look:hover:not(:disabled) {background:#ffe6ab}
+.look-close {min-width:44px;min-height:44px;padding:0;border-radius:50%}
 .ghost {position:fixed;z-index:20;object-fit:contain;pointer-events:none;filter:drop-shadow(2px 8px 5px #221c1f66)}
-.equipment {filter:drop-shadow(2px 5px 3px #3a221660)}
-.pick {position:absolute;z-index:3;transform:translate(-50%,-50%);padding:0;background:none;border:2px dashed #fff0a3aa;border-radius:12px}
-.pick:hover:not(:disabled),.pick:focus-visible {background:#fff0a326;border-style:solid}
-.pick span {display:none;position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);padding:3px 8px;background:var(--ink);border-radius:3px;white-space:nowrap}
-.pick:is(:hover,:focus-visible) span {display:block}
-.pick b {position:absolute;top:calc(100% + 3px);left:50%;transform:translateX(-50%);padding:1px 7px;border-radius:9px;background:var(--ink);border:1px solid var(--gold);font-size:.74rem;white-space:nowrap}
-.pick.enough {border-color:#a9e6a6}.pick.enough b {background:#2c5a3c;border-color:#a9e6a6}
-.hazard {background:#7a2f22;border-color:#ffcf8a;box-shadow:0 2px 6px #2a141088}
-.hazard:disabled {background:#2c5a3c;border-color:#a9e6a6;opacity:1}
-body.reduced #stored img {transition:none}
+
+/* The order trolley and the units on it. */
+.trolley {z-index:3;aspect-ratio:420/380;pointer-events:none;filter:none}
+.trolley-art {position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(2px 6px 4px #3a221660)}
+.trolley .unit {position:absolute;transform:translateX(-50%);display:block;padding:0;background:none;border:0;border-radius:4px;filter:drop-shadow(1px 3px 2px #3a221655)}
+.trolley .unit img {display:block;width:100%;height:auto;pointer-events:none}
+.trolley button.unit:hover {background:none;filter:drop-shadow(0 0 4px #ffe4a3)}
+
+/* The review: the risky things themselves are touched. */
+.risk {z-index:3}
+.risk-cone {left:15.5%;top:79%;width:4%}
+.risk-mat {left:52.4%;top:42.7%;width:9.6%;rotate:-7deg}
+.risk-mat.flagged {filter:drop-shadow(0 0 3px #ffb35c) drop-shadow(0 0 6px #ff9a3c)}
+.help-sign {position:absolute;z-index:4;left:42%;top:37.6%;transform:translate(-50%,-50%);display:grid;margin:0;padding:3px 8px;border:1px solid var(--wood);border-top:4px solid #c2552c;border-radius:3px;background:#f3e2b8;color:#332c20;box-shadow:0 2px 3px #32241277;font:clamp(9px,1.4vh,14px)/1.15 Georgia,serif;text-align:center;white-space:nowrap}
+.help-sign b {font-size:1.05em}
+
+/* Top of the screen: the way back, where we are and the game buttons. */
+.hud-top {position:absolute;z-index:8;top:0;left:0;right:0;display:flex;align-items:flex-start;gap:12px;padding:max(10px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 0 max(12px,env(safe-area-inset-left));pointer-events:none}
+.hud-top a,.hud-top button {pointer-events:auto}
+.hud-btn {display:inline-flex;align-items:center;justify-content:center;gap:7px;min-width:44px;min-height:44px;padding:0 13px;background:#173736eb;border:1px solid #aa966c;border-radius:8px;color:var(--cream);font-size:.86rem;text-decoration:none;box-shadow:0 2px 6px #0c1d1f66}
+.hud-btn svg {width:22px;height:22px;flex:none}
+.hud-btn img.icon,.round img.icon {width:26px;height:26px;object-fit:contain;pointer-events:none}.rotate-tip img.icon {width:30px;height:30px}
+.home {font-weight:700}
+.location-hud {flex:1;min-width:0;pointer-events:none;text-shadow:0 2px 6px #112521,0 0 16px #172924}
+.eyebrow,.speaker {font-size:.69rem;letter-spacing:.13em;font-weight:bold;color:var(--gold)}
+h1 {font:600 clamp(22px,2.8vw,38px)/1 Georgia,serif;margin:4px 0}
+.game-tools {display:flex;gap:6px}
+.rotate-tip {display:none;position:absolute;z-index:8;left:12px;right:12px;top:calc(max(10px,env(safe-area-inset-top)) + 52px);align-items:center;gap:10px;margin:0;padding:4px 4px 4px 12px;background:var(--paper);color:#2c2417;border:2px solid var(--wood);border-radius:10px;box-shadow:0 3px 0 #2a2415;font-size:.84rem;line-height:1.25}
+.rotate-tip svg {width:28px;height:28px;flex:none;color:#1f5753}
+.rotate-tip span {flex:1}
+.rotate-tip button {min-width:44px;min-height:44px;padding:0;background:none;border:0;color:#2c2417;font-size:1.1rem}
+@media (orientation:portrait) {body.scrolls:not(.rotate-ok) .rotate-tip {display:flex}}
+
+/* The teacher's dialogue: portrait, a cream speech bubble, what can be answered and the talk buttons. */
+.dialogue {position:absolute;z-index:9;left:0;right:0;bottom:0;height:var(--rail);display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;grid-template-areas:"face bubble choices tools";align-items:center;gap:14px;padding:10px max(16px,calc((100vw - 1180px)/2)) max(10px,env(safe-area-inset-bottom));border-top:2px solid #be994e;background:linear-gradient(100deg,#122729,#284344 52%,#192f32)}
+.portrait {grid-area:face;align-self:end;width:84px;height:100%;padding:0;border:0;border-radius:0;background:none;overflow:hidden}
+.portrait:hover:not(:disabled) {background:none}
+.portrait img {display:block;width:310%;margin-left:-80%;pointer-events:none}
+.bubble {grid-area:bubble;position:relative;align-self:stretch;display:flex;flex-direction:column;min-width:0;padding:6px 16px;background:var(--paper);color:#2c2417;border:2px solid var(--wood);border-radius:12px;box-shadow:0 3px 0 #0b1a1b;overflow:auto;scrollbar-width:thin}
+.bubble::before {content:'';position:absolute;left:-11px;bottom:22px;border:9px solid transparent;border-right:11px solid var(--wood);border-left:0}
+.speaker-row {display:flex;flex-wrap:wrap;gap:0 6px;font-size:.66rem;letter-spacing:.12em;font-weight:bold;color:#8a6a2c}
+.speaker-row .speaker {color:#6b5222}
+.bubble p {margin:0}
+/* Centred while it fits; scrolls from the top when it does not. */
+.bubble>:first-child {margin-top:auto}.bubble>:last-child {margin-bottom:auto!important}
+.reaction {display:none;margin:2px 0 1px!important;font-weight:700;font-size:.86rem;line-height:1.25;color:#2c6b4a}
+.reaction.visible {display:block}
+.reaction[data-tone=retry] {color:#9a4512}
+#english {margin:1px 0!important;font:clamp(16px,1.8vw,23px)/1.2 Georgia,serif;color:#1d2622}
+#spanish {font-size:.86rem;line-height:1.3;color:#5c4a2e}
+.choices {grid-area:choices;display:grid;gap:6px;width:max-content;min-width:200px;max-width:min(330px,30vw);align-content:center}
+.choices:empty {display:none}
+.choice {display:flex;align-items:center;justify-content:center;min-height:46px;padding:6px 14px;border-radius:9px;font-size:.92rem;line-height:1.2;text-align:center;text-decoration:none}
+.choice.primary {background:#1f5753;border:2px solid var(--gold);color:var(--cream);font-weight:700}
+.choice.primary:hover {background:#2a6b66}
+.choice.answer {background:#e9d3a2;border:2px solid var(--wood);color:#2f2819;box-shadow:0 2px 0 #2a2415}
+.choice.answer:hover:not(:disabled) {background:#ffe6ab}
+.order {display:flex;justify-content:center;gap:6px;margin:0}
+.chip {display:inline-flex;align-items:center;gap:4px;padding:2px 9px 2px 3px;border-radius:99px;background:var(--paper);color:#2c2417;border:2px solid #b99a61;font-size:.88rem}
+.chip img {width:26px;height:26px;object-fit:contain}
+.chip.enough {background:#dcefd3;border-color:#4f8a5a}
+.talk-tools {grid-area:tools;display:flex;gap:6px}
+.round {display:grid;justify-items:center;align-content:center;gap:2px;min-width:56px;min-height:56px;padding:5px 4px;border-radius:10px;background:#173736;border:1px solid #aa966c;font-size:.7rem;line-height:1.1}
+.round svg {width:22px;height:22px}
+body.folded .fold svg {rotate:180deg}
+
+/* Folded: one line of the bubble, so the scene keeps almost all the screen. */
+body.folded .dialogue {gap:10px;padding-top:6px;padding-bottom:max(6px,env(safe-area-inset-bottom))}
+body.folded .portrait {width:44px}
+body.folded .bubble {padding:2px 14px}
+body.folded :is(.speaker-row,#spanish,.choices,#hint) {display:none}
+body.folded #english,body.folded .reaction {white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:15px}
+body.folded .bubble:has(.reaction.visible) #english {display:none}
+body.folded .round {min-height:46px;min-width:46px}
+body.folded .round span {display:none}
+
+dialog {color:#273c38;background:#f9efd8;border:1px solid #d5b679;border-radius:8px;padding:24px;width:min(480px,92vw);max-height:85dvh;overflow:auto}
+dialog::backdrop {background:#0a242ad9}dialog .eyebrow{color:#74613b}dialog button,dialog a {color:#fff3d9;min-height:44px}dialog h2 {font:2rem Georgia,serif}dialog h3 {margin:1rem 0 .3rem;font:1.05rem Georgia,serif}dialog label,dialog .menu-links {display:block;margin:1rem 0}dialog a {display:inline-flex;align-items:center;background:#214240;padding:8px 12px;margin:3px;border-radius:4px}dialog input {width:20px;height:20px;vertical-align:-4px}dialog select {min-height:40px}.close {float:right}#steps {list-style:none;padding:0}#steps li {margin:.6rem 0}#steps li span{padding-right:10px}.current{font-weight:bold}#object-list,#target-list {display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}#object-list .selected {outline:3px solid #c99a3a}.fine {font-size:.82rem;color:#5d5a48}
+
+body.reduced #stored img,body.reduced .equipment {transition:none}
+
+/* Narrower screens: the game buttons keep only their icon. */
+@media (max-width:980px) {
+  .hud-btn:not(.home) span {display:none}
+  .hud-btn:not(.home) {padding:0}
+}
+@media (max-width:1100px) {
+  .round span {display:none}
+  .round {min-width:48px;min-height:48px}
+}
+@media (max-width:760px) {
+  .home span {display:none}
+  .home {padding:0}
+}
+/* Short landscape phones: buttons move to the side margins and the dialogue gets compact. */
+@media (orientation:landscape) and (max-height:520px) {
+  body {--rail:112px}
+  body.folded {--rail:56px}
+  .hud-top {position:static;display:block}
+  .location-hud {display:none}
+  .home span {display:none}
+  .home {padding:0;position:absolute;z-index:8;left:max(8px,env(safe-area-inset-left));top:8px}
+  .game-tools {position:absolute;z-index:8;right:max(8px,env(safe-area-inset-right));top:8px;flex-direction:column}
+  .dialogue {gap:8px;padding:7px max(10px,env(safe-area-inset-right)) max(7px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))}
+  .portrait {width:52px}
+  .bubble {padding:3px 12px}
+  .bubble::before {bottom:14px}
+  .speaker-row {display:none}
+  #english {font-size:15px}
+  #spanish {font-size:.76rem;line-height:1.25}
+  .reaction {font-size:.78rem}
+  .choices {min-width:0;max-width:min(270px,34vw);gap:5px}
+  .choices:has(.answer) {width:min(300px,36vw);max-width:none}
+  .choices:has(.answer) {grid-template-columns:1fr 1fr}
+  .choice {min-height:44px;padding:4px 8px;font-size:.8rem}
+  .chip {font-size:.78rem;padding-right:7px}
+  .chip img {width:20px;height:20px}
+  .choices:has(.closer) {max-width:none}
+  .closer b {display:none}
+  .round {min-width:44px;min-height:44px}
+  .round span {display:none}
+}
+/* Portrait phones: the room scrolls sideways under the game buttons, the dialogue sits below. */
+@media (orientation:portrait) and (max-width:700px) {
+  body {--rail:226px}
+  body.folded {--rail:62px}
+  .location-hud {visibility:hidden}
+  .dialogue {grid-template-columns:50px minmax(0,1fr) auto;grid-template-rows:minmax(0,1fr) auto;grid-template-areas:"face bubble tools" "choices choices choices";gap:8px;padding:8px 10px max(8px,env(safe-area-inset-bottom))}
+  body.folded .dialogue {grid-template-rows:1fr;grid-template-areas:"face bubble tools"}
+  .portrait {width:50px;align-self:start;height:80px}
+  .bubble {padding:5px 11px}
+  .bubble::before {top:22px;bottom:auto}
+  #english {font-size:16px}
+  #spanish {font-size:.8rem}
+  .talk-tools {flex-direction:column;align-self:start}
+  body.folded .talk-tools {flex-direction:row;align-self:center}
+  .round {min-width:44px;min-height:44px}
+  .round span {display:none}
+  .choices {width:auto;max-width:none}
+  .choices:has(.answer) {grid-template-columns:1fr 1fr}
+  .choices:has(.order) {grid-template-columns:auto 1fr}
+  .choice {font-size:.84rem;padding:4px 10px}
+}

@@ -1,27 +1,57 @@
-import {equipment,targets,find,request,fresh,valid,act} from './mission.js';
-import {walkTo, enterRoom} from './walk.js?v=tidy-2';
+import {equipment,targets,find,request,fresh,valid,act} from './mission.js?v=touch-1';
+import {walkTo, enterRoom, position} from './walk.js?v=touch-1';
 import {stored as parts} from './store-layout.js';
 import {record} from '../registro.js';
+import {backToHub} from '../comun/lugar.js';
 import {speakAndPoint} from './robles.js';
+import {trolley, slotOf} from './trolley.js?v=touch-1';
+import {play, setSound} from './sound.js?v=touch-1';
+import {PINTADOS} from './assets/pintados.js';
 const icon = id => '<img alt="" draggable="false" src="assets/prop-' + id + '.webp">';
 const $=id=>document.getElementById(id), key='ef-gym-mission-v1';
-let state=fresh(),room='gym',selected=null,support=true,reduced=false;
-try{const saved=JSON.parse(localStorage.getItem(key));if(valid(saved?.state)){state=saved.state;support=saved.support!==false;reduced=!!saved.reduced;}}catch{}
+const item=id=>equipment.find(e=>e.id===id);
+let closer=null,state=fresh(),room='gym',selected=null,support=true,reduced=false,sound=true,folded=false,lastPrompt='';
+try{const saved=JSON.parse(localStorage.getItem(key));if(valid(saved?.state)){state=saved.state;support=saved.support!==false;reduced=!!saved.reduced;sound=saved.sound!==false;}}catch{}
+setSound(sound);
 const steps=['Localiza el material','Despeja la puerta','Cada cosa en su lugar','Prepara el pedido','Revisa y explica'];
-const prompts=()=>[
- [`Find a ${equipment.find(e=>e.id===find[state.found.length])?.en||'hoop'}.`,`Localiza: ${equipment.find(e=>e.id===find[state.found.length])?.es||'aro'}.`],
- ['Keep the doorway clear. Put the cone on the cone stand.','Despeja la puerta. Coloca el cono en su soporte.'],
- ['Put the equipment away. Choose an item, then its place.','Guarda el material. Selecciona un objeto y después su lugar.'],
- ['We need four cones, two hoops and one soft ball.','Necesitamos cuatro conos, dos aros y una pelota blanda.'],
- ['Find two safety problems. Then explain why we fix them.','Localiza dos riesgos y explica por qué los corregimos.'],
- ['The gym is ready. Thank you, team!','El gimnasio está listo. ¡Gracias, equipo!']
-][state.stage];
-const hints=[()=>`Busca ${equipment.find(e=>e.id===find[state.found.length])?.es}. Puedes mirar los nombres en los controles accesibles.`,()=> 'El cono naranja está delante del acceso. Selecciónalo y elige «Cone stand».',()=> 'Balones al rack; conos a su soporte; aros y raquetas al soporte de pared; cuerdas, petos y saquitos a las cajas; colchoneta a su zona baja.',()=> 'Toca cuatro veces el cono, dos veces el aro y una vez la pelota verde. Después comprueba el carro.',()=> 'Revisa la salida bloqueada y la colchoneta situada en alto. Toca ambos avisos y elige la razón relacionada con la seguridad.',()=> 'Explica a un compañero cómo prepararías una estación real y qué paso debe quedar libre.'];
-function persist(){try{localStorage.setItem(key,JSON.stringify({state,support,reduced}));}catch{$('feedback').textContent+=' El navegador no permite guardar; puedes continuar sin cerrar esta pestaña.';}}
+// Furniture of the store as tappable areas, in % of the room picture: left, top, width, height.
+const furniture={balls:[20.8,51.3,13.7,17.1],rack:[37,43.5,9.2,24.9],bins:[47.4,41.5,16.7,26.9],hooks:[67.7,38,15.3,16.7],platform:[72.6,61.3,27.4,8.5]};
+// The trolley stands on the store floor while the order is prepared and next to Robles before and after.
+const trolleyAt={store:[56,95.5,24],gym:[37,79,13]};
+// A second cone fits on the next peg of the stand once the cone by the door is put away.
+const spareCone=[40.75,43.26,3.84,6.25];
+const names=Object.fromEntries(equipment.map(e=>[e.id,[e.en,e.es]]));
+const plural={cone:['cones','conos'],hoop:['hoops','aros'],softball:['soft ball','pelota blanda']};
+const prompts=()=>{
+ const next=item(find[state.found.length]);
+ if(room==='gym'&&state.stage<5)return state.stage===0?['Can you help me get the equipment ready? Let’s go to the equipment room.','¿Me ayudas a preparar el material? Vamos al almacén.']:['Let’s go back to the equipment room. There is more to do.',`Volvamos al cuarto de materiales. Ahora toca: ${steps[state.stage].toLowerCase()}.`];
+ return [
+  [`Find a ${next?.en||'hoop'}.`,`Busca y toca: ${next?.es||'aro'}.`],
+  ['Look at the door. Keep the doorway clear: put the cone on the cone stand.','Mira la puerta. Despeja el paso: toca el cono y después su soporte.'],
+  ['Now put the equipment away. Choose an item, then its place.','Ahora guarda el material. Toca un objeto y después su lugar.'],
+  ['We need four cones, two hoops and one soft ball. Put them on the trolley.','Cuatro conos, dos aros y una pelota blanda: cógelos de su sitio y ponlos en el carro.'],
+  state.hazards.length<2?['Look at the door and the shelves. Find two safety problems.','Mira la puerta y lo alto de las estanterías. Toca los dos riesgos.']:['Well spotted! Why do we fix these problems?','¡Bien visto! ¿Por qué los corregimos? Elige la razón.'],
+  ['Mission complete! Tell your partner: where do the hoops go?','¡Misión cumplida! Explica a tu compañero dónde van los aros y qué paso dejarías libre en el gimnasio real.']
+ ][state.stage];
+};
+const hints=[()=>`Busca ${item(find[state.found.length])?.es}. Si no lo ves, abre la mochila: tiene la lista de objetos.`,()=> 'El cono naranja está delante de la puerta. Tócalo y después toca el soporte de conos («Cone stand»).',()=> 'Balones al rack; conos a su soporte; aros y raquetas al soporte de pared; cuerdas, petos y saquitos a las cajas; colchoneta a su zona baja.',()=> 'Coge del soporte cuatro conos, de la pared dos aros y del rack la pelota verde. Si sobra algo, toca esa unidad en el carro para devolverla. Después, «Comprobar el carro».',()=> state.hazards.length<2?'Mira el suelo delante de la puerta y lo alto de la estantería de las cajas. Toca el objeto que puede hacer daño.':'Piensa en tropiezos y en material que puede caer.',()=> 'Explica a un compañero cómo prepararías una estación real y qué paso debe quedar libre.'];
+function persist(){try{localStorage.setItem(key,JSON.stringify({state,support,reduced,sound}));}catch{say(' El navegador no permite guardar; puedes continuar sin cerrar esta pestaña.',false,true);}}
+function say(text,ok,append){const f=$('feedback');f.dataset.tone=ok===true?'ok':ok===false?'retry':'';f.textContent=append?f.textContent+text:text;}
+const rect=el=>el?.getBoundingClientRect();
 function dispatch(event){
- const from=event.type==='place'?document.querySelector(`.equipment[data-item="${event.id}"]`)?.getBoundingClientRect():null;
- const before=state.stage,result=act(state,event);state=result.state;if(result.ok)selected=null;persist();render();$('feedback').textContent=result.message||'Pedido actualizado.';
- if(result.ok&&from)fly(event.id,from);
+ const before=state.stage,from=event.type==='place'?rect(document.querySelector(`.equipment[data-item="${event.id}"]`)):event.type==='add'?rect(document.querySelector(`.pick[data-item="${event.id}"]`)):event.type==='remove'?rect([...document.querySelectorAll(`.trolley .unit[data-item="${event.id}"]`)].pop()):event.type==='hazard'&&event.id==='door'?rect(document.querySelector('.risk-cone')):null;
+ const result=act(state,event);state=result.state;if(result.ok)selected=null;if(state.stage!==before)closer=null;persist();render();
+ let message=result.message;
+ if(event.type==='remove')message=result.ok?`Back on the shelf. ${names[event.id][1][0].toUpperCase()+names[event.id][1].slice(1)} devuelto a su sitio.`:'No hay de eso en el carro.';
+ if(event.type==='hazard'&&!result.ok)message=state.hazards.includes(event.id)?'Ese riesgo ya está revisado.':'That one is fine. Eso está bien guardado; busca otro riesgo.';
+ say(message,result.ok);
+ play(!result.ok?'wrong':state.stage===5&&before<5?'done':event.type==='add'?'pick':event.type==='remove'?'back':event.type==='place'?'place':'right');
+ if(result.ok&&from&&!reduced&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  if(event.type==='place')fly(event.id,from,$('stored').querySelector(`[data-part="${event.id}"]`));
+  if(event.type==='add')fly(event.id,from,slotOf(document.querySelector('.trolley'),event.id,state.cart[event.id]-1));
+  if(event.type==='remove')fly(event.id,from,document.querySelector(`.pick[data-item="${event.id}"]`),true);
+  if(event.type==='hazard')fly('cone',from,document.querySelector('.spare-cone'));
+ }
  // Each finished phase goes to the player's record, with how many tries and hints it took so far.
  if(state.stage>before)record('material','equipment-rescue',state.stage===5?'completada':'fase',{fase:state.stage,intentos:state.attempts,pistas:state.hints});
 }
@@ -39,16 +69,16 @@ function showStored(){
   layer.append(part);
  }
 }
-function fly(id,from){
- const part=$('stored').querySelector(`[data-part="${id}"]`);
- if(!part||reduced||matchMedia('(prefers-reduced-motion: reduce)').matches||!part.animate)return;
- const to=part.getBoundingClientRect(),ghost=new Image();
+// An item travels in an arc from where it was to where it lands; the landing spot waits hidden.
+function fly(id,from,target,back){
+ if(!target||!target.animate)return;
+ const to=target.getBoundingClientRect(),ghost=new Image();
  ghost.src=`assets/prop-${id}.webp`;ghost.alt='';ghost.className='ghost';
  Object.assign(ghost.style,{left:from.left+'px',top:from.top+'px',width:from.width+'px',height:from.height+'px'});
- document.body.append(ghost);part.style.opacity=0;
+ document.body.append(ghost);target.style.opacity=0;
  const dx=to.left+to.width/2-from.left-from.width/2,dy=to.top+to.height/2-from.top-from.height/2;
- const flight=ghost.animate([{transform:'translate(0,0)',opacity:1},{transform:`translate(${dx*.6}px,${dy-34}px) scale(.94)`,opacity:1,offset:.62},{transform:`translate(${dx}px,${dy}px) scale(${Math.min(1,to.width/from.width)})`,opacity:.2}],{duration:560,easing:'ease-in-out'});
- const land=()=>{ghost.remove();part.style.opacity='';};
+ const flight=ghost.animate([{transform:'translate(0,0)',opacity:1},{transform:`translate(${dx*.6}px,${dy-34}px) scale(.94)`,opacity:1,offset:.62},{transform:`translate(${dx}px,${dy}px) scale(${Math.min(1.4,to.width/from.width)})`,opacity:back?.2:.6}],{duration:560,easing:'ease-in-out'});
+ const land=()=>{ghost.remove();target.style.opacity='';};
  flight.onfinish=land;flight.oncancel=land;
 }
 function choose(id){
@@ -56,91 +86,150 @@ function choose(id){
  if(room!=='store'){room='store';render();}
  if(state.stage===0){dispatch({type:'find',id});return;}
  if(state.stage===3){dispatch({type:'add',id});return;}
- selected=id;render();$('feedback').textContent=`${equipment.find(e=>e.id===id).en}: elige dónde colocarlo.`;
+ if(state.stage===4){dispatch({type:'hazard',id});return;}
+ selected=selected===id?null:id;render();say(selected?`${item(id).en[0].toUpperCase()+item(id).en.slice(1)}: ahora toca su lugar.`:'Nada seleccionado.');
 }
-function place(target){if($('inventory-dialog').open)$('inventory-dialog').close();if(!selected){$('feedback').textContent='Primero selecciona un material.';return;}dispatch({type:'place',id:selected,target});}
-function button(text,fn,cls=''){const b=document.createElement('button');b.textContent=text;b.className=cls;b.onclick=fn;return b;}
+function place(target){if($('inventory-dialog').open)$('inventory-dialog').close();if(!selected){say('Primero toca un material.',false);return;}dispatch({type:'place',id:selected,target});}
+function button(text,fn,cls='',focus){const b=document.createElement('button');b.textContent=text;b.className=cls;b.onclick=fn;if(focus)b.dataset.focus=focus;return b;}
+// Every action chosen from the backpack list closes it, so the change is seen in the room.
+const fromBag=event=>()=>{$('inventory-dialog').close();dispatch(event);};
+function go(next){room=next;selected=null;closer=null;render();}
+// Things kept close together are too small to touch apart on a phone: the shelf is shown up close in the bubble.
+function touchPart(id){
+ const home=item(id).home,group=equipment.filter(e=>e.home===home);
+ if(group.length>1&&group.some(e=>(document.querySelector(`.pick[data-item="${e.id}"]`)?.getBoundingClientRect().width??99)<44)){closer=home;render();say(`${targets[home][0]}: ¿cuál? Tócalo aquí abajo.`);return;}
+ choose(id);
+}
+// A small painted-looking thing placed on the room picture, anchored at its feet.
+function anchor(el,[x,bottom,width]){Object.assign(el.style,{left:x+'%',top:bottom+'%',width:width+'%'});return el;}
 function render(){
- const focused=document.activeElement;const focusText=focused?.tagName==='BUTTON'?focused.textContent:null;
- document.body.dataset.stage=state.stage;document.body.classList.toggle('reduced',reduced);$('translation').checked=support;$('motion').checked=reduced;
- $('scene').className=`scene ${room}`;$('room-title').textContent=room==='gym'?'El gimnasio':'El cuarto de materiales';$('location').textContent=room==='gym'?'THE GYM · TU PUNTO DE ENCUENTRO':'THE EQUIPMENT ROOM · MISIÓN EN CURSO';$('switch-room').textContent=room==='gym'?'Entrar al almacén':'Volver al gimnasio';
+ const focusKey=document.activeElement?.dataset?.focus;
+ document.body.dataset.stage=state.stage;document.body.dataset.room=room;document.body.classList.toggle('reduced',reduced);$('translation').checked=support;$('motion').checked=reduced;$('sound').checked=sound;
+ $('scene').className=`scene ${room}`;$('room-title').textContent=room==='gym'?'El gimnasio':'El cuarto de materiales';$('location').textContent=room==='gym'?'THE GYM':'THE EQUIPMENT ROOM';
  $('prof').classList.toggle('hidden',room==='store');
  $('steps').innerHTML=steps.map((s,i)=>`<li class="${i<state.stage?'done':i===state.stage?'current':''}"><span>${i<state.stage?'✓':i+1}</span>${s}</li>`).join('');$('stage-count').textContent=state.stage===5?'COMPLETADA':`${state.stage+1} / 5`;
- const [en,es]=room==='gym'&&state.stage<5?['Meet me by the equipment room.','Camina hasta mí o toca la puerta del almacén.']:prompts();$('english').textContent=en;$('spanish').textContent=es;$('spanish').hidden=!support;
- $('selection').textContent=selected?`${equipment.find(e=>e.id===selected).en} seleccionado · Elige un destino`:room==='gym'?'Toca el suelo para caminar. Toca al profe para hablar.':state.stage===3?'Toca el material para añadir una unidad al carro.':'Selecciona un material · Después elige su lugar';
- $('objects').replaceChildren();$('destinations').replaceChildren();$('hotspots').replaceChildren();$('object-list').replaceChildren();$('target-list').replaceChildren();$('actions').replaceChildren();
+ const [en,es]=prompts();$('english').textContent=en;$('spanish').textContent=es;$('spanish').hidden=!support;
+ $('step-tag').textContent=state.stage===5?'· MISIÓN COMPLETADA':`· ${state.stage+1}/5 ${steps[state.stage].toUpperCase()}`+(state.stage===0?` · ${state.found.length}/3`:state.stage===4?` · ${state.hazards.length}/2`:'');
+ // A new instruction always opens the speech bubble again.
+ if(en!==lastPrompt){lastPrompt=en;fold(false);}
+ for(const id of ['objects','destinations','hotspots','object-list','target-list','choices'])$(id).replaceChildren();
  enterRoom(room);showStored();
+ const choices=$('choices'),list=$('object-list'),targetList=$('target-list');
+ let help='Selecciona un objeto y después su destino. Puedes usar Tab y Enter; no necesitas arrastrar.',objectTitle='Material',targetTitle='Lugares';
  if(room==='gym'){
-  const door=button('ALMACÉN',()=>{room='store';selected=null;render();},'scene-link door');$('hotspots').append(door);
-  const board=button('PISTA · MATE',()=>{location.href='../mate/';},'scene-link board');$('hotspots').append(board);
-  $('scene-caption').textContent=state.stage===5?'Todo listo para la próxima sesión.':'El profe necesita tu ayuda para preparar la sesión.';
+  $('hotspots').append(button('ALMACÉN',()=>go('store'),'scene-link door','door'),button('PISTA · MATE',()=>{location.href='../mate/';},'scene-link board','board'));
+  if(state.stage<3||state.stage===5)$('objects').append(anchor(trolley(state.stage===5?state.cart:{},names,null,state.stage===5),trolleyAt.gym));
+  help=state.stage===5?'Misión completada.':'El material está en el cuarto de materiales.';objectTitle='';targetTitle='Ir a';
+  if(state.stage<5)targetList.append(button('Entrar al almacén',()=>{$('inventory-dialog').close();go('store');},'','list-go-store'));
+  choices.append(state.stage===5?Object.assign(document.createElement('a'),{className:'choice primary',href:backToHub(),textContent:'Volver a El Pabellón'}):button('Entrar al almacén',()=>go('store'),'choice primary','go-store'));
  }else{
-  $('hotspots').append(button('GIMNASIO',()=>{room='gym';selected=null;render();},'scene-link return-door'));
-  $('scene-caption').textContent=state.stage===5?'¡Buen trabajo! El almacén está preparado.':state.stage===3?'Prepara el carro con el pedido del profe.':'Mira, selecciona y coloca. Cada cosa tiene su lugar.';
-  if(state.stage<4){
+  $('hotspots').append(button('GIMNASIO',()=>go('gym'),'scene-link return-door','return-door'));
+  if(state.stage<3){
    for(const [id,[en,es,x,y]] of Object.entries(targets)){
-    const t=button(en,()=>place(id),'destination');t.style.left=x+'%';t.style.top=y+'%';t.disabled=!selected;t.setAttribute('aria-label',`${en} · ${es}`);$('destinations').append(t);
-    $('target-list').append(button(`${en} · ${es}`,()=>place(id)));
+    const [left,top,width,height]=furniture[id];
+    const t=button('',()=>place(id),'destination','to-'+id);t.innerHTML=`<span style="left:${(x-left)/width*100}%;top:${(y-top)/height*100}%">${en}</span>`;
+    Object.assign(t.style,{left:left+'%',top:top+'%',width:width+'%',height:height+'%'});t.disabled=!selected;t.setAttribute('aria-label',`${en} · ${es}`);$('destinations').append(t);
+    if(state.stage>0)targetList.append(button(`${en} · ${es}`,()=>place(id),'',`list-to-${id}`));
    }
    equipment.forEach(e=>{
     const stored=state.stored.includes(e.id);
-    const alt=button(`${e.en}${support?' · '+e.es:''}${stored?' ✓':''}`,()=>choose(e.id));alt.disabled=stored&&state.stage===2;
-    if(state.stage===3){
-     // The order is collected from where each thing is kept.
-     if(!(e.id in request))return;
-     const [left,top,width,height]=parts[e.id],have=state.cart[e.id]||0;
-     const b=button('',()=>choose(e.id),'pick'+(have>=request[e.id]?' enough':''));b.innerHTML=`<span>${e.en}</span><b>${have} / ${request[e.id]}</b>`;
-     b.setAttribute('aria-label',`${e.en} · ${e.es} · ${have} de ${request[e.id]} en el carro`);b.dataset.item=e.id;
-     Object.assign(b.style,{left:left+width/2+'%',top:top+height/2+'%',width:Math.max(width,5)+'%',height:Math.max(height,7)+'%'});
-     $('objects').append(b);$('object-list').append(alt);return;
-    }
-    $('object-list').append(alt);
+    const alt=button(`${e.en}${support?' · '+e.es:''}${stored?' ✓':''}`,()=>choose(e.id),selected===e.id?'selected':'',`list-${e.id}`);alt.disabled=stored&&state.stage>0;list.append(alt);
     if(stored)return;
-    const b=button('',()=>choose(e.id),`equipment ${selected===e.id?'selected':''}`);b.innerHTML=icon(e.id)+`<span>${e.en}</span>`;b.setAttribute('aria-label',`${e.en} · ${e.es}`);
+    const b=button('',()=>choose(e.id),`equipment ${selected===e.id?'selected':''}`,'item-'+e.id);b.innerHTML=icon(e.id)+`<span>${e.en}</span>`;b.setAttribute('aria-label',`${e.en} · ${e.es}`);b.setAttribute('aria-pressed',selected===e.id);
     b.dataset.item=e.id;b.style.left=(e.id==='cone'?14:e.x)+'%';b.style.top=e.y+'%';$('objects').append(b);
    });
+   if(state.stage===0){help='Toca en la lista el objeto que pide el profe.';targetTitle='';}
   }
-  if(state.stage===4){
-   const a=button(state.hazards.includes('door')?'✓ Salida despejada':'Revisar salida bloqueada',()=>dispatch({type:'hazard',id:'door'}),'hazard exit-risk');a.disabled=state.hazards.includes('door');$('objects').append(a);
-   const b=button(state.hazards.includes('shelf')?'✓ Ayuda del profe solicitada':'Revisar colchoneta en alto',()=>dispatch({type:'hazard',id:'shelf'}),'hazard shelf-risk');b.disabled=state.hazards.includes('shelf');$('objects').append(b);
-   const mat=document.createElement('div');mat.className='risk-mat';mat.innerHTML=icon('mat');if(!state.hazards.includes('shelf'))$('objects').append(mat);
-   if(!state.hazards.includes('door')){const c=document.createElement('div');c.className='risk-cone';c.innerHTML=icon('cone');$('objects').append(c);}
+  if(state.stage>=3){
+   // Everything put away can be touched: in the order to take a unit, in the review to inspect it.
+   if(state.stage<5)equipment.forEach(e=>{
+    const [left,top,width,height]=parts[e.id],have=state.cart[e.id]||0;
+    const b=button('',()=>touchPart(e.id),'pick'+(closer===e.home?' looking':''),'pick-'+e.id);b.innerHTML=`<span>${e.en}</span>`;b.dataset.item=e.id;
+    b.setAttribute('aria-label',state.stage===3?`${e.en} · ${e.es}: coger uno`+(e.id in request?` (en el carro: ${have})`:''):`${e.en} · ${e.es}: revisar`);
+    Object.assign(b.style,{left:left+width/2+'%',top:top+height/2+'%',width:width+'%',height:height+'%'});
+    $('objects').append(b);
+    list.append(button(state.stage===3?`Coger: ${e.en}${support?' · '+e.es:''}`:`Revisar: ${e.en}${support?' · '+e.es:''}`,()=>choose(e.id),'',`list-${e.id}`));
+   });
+   const cart=trolley(state.cart,names,state.stage===3?id=>dispatch({type:'remove',id}):null,state.stage>3);
+   $('objects').append(anchor(cart,trolleyAt.store));
+   if(state.stage>=4){
+    const fixed=state.hazards.includes('door'),high=state.hazards.includes('shelf');
+    if(fixed||state.stage===5){const c=new Image();c.src='assets/set-cone.webp';c.alt='';c.className='spare-cone';const [l,t,w,h]=spareCone;Object.assign(c.style,{left:l+'%',top:t+'%',width:w+'%',height:h+'%'});$('objects').append(c);}
+    if(state.stage===4){
+     if(!fixed){const c=button('',()=>dispatch({type:'hazard',id:'door'}),'risk risk-cone','risk-door');c.innerHTML=icon('cone');c.setAttribute('aria-label','Cono en el suelo delante de la puerta');$('objects').append(c);}
+     const m=button('',()=>dispatch({type:'hazard',id:'shelf'}),'risk risk-mat'+(high?' flagged':''),'risk-shelf');m.innerHTML=icon('mat');m.setAttribute('aria-label',high?'Colchoneta en lo alto: el profe la bajará':'Colchoneta en lo alto de la estantería');m.disabled=high;$('objects').append(m);
+     if(high){const s=document.createElement('p');s.className='help-sign';s.innerHTML='<b lang="en">Ask the teacher</b><span>La baja el profe</span>';$('objects').append(s);}
+     if(!fixed)targetList.append(button('Revisar: cono delante de la puerta',fromBag({type:'hazard',id:'door'}),'',`list-risk-door`));
+     if(!high)targetList.append(button('Revisar: colchoneta en lo alto',fromBag({type:'hazard',id:'shelf'}),'',`list-risk-shelf`));
+    }
+   }
+   if(closer&&state.stage<5){
+    const box=document.createElement('div');box.className='closer';box.setAttribute('role','group');box.setAttribute('aria-label',targets[closer][0]+' de cerca');
+    box.append(Object.assign(document.createElement('b'),{textContent:targets[closer][0]}));
+    for(const e of equipment.filter(e=>e.home===closer)){const b=button('',()=>choose(e.id),'look','look-'+e.id);b.innerHTML=icon(e.id)+`<span>${e.en}</span>`;b.setAttribute('aria-label',`${e.en} · ${e.es}`);box.append(b);}
+    box.append(button('✕',()=>{closer=null;render();},'look-close','look-close'));box.lastChild.setAttribute('aria-label','Cerrar la vista de cerca');
+    choices.append(box);
+   }
+   if(state.stage===3){
+    help='Coge cada unidad de donde está guardada. Si sobra algo, devuélvelo desde el carro.';objectTitle='Coger del almacén';targetTitle='En el carro';
+    for(const [id,n] of Object.entries(state.cart))if(n)targetList.append(button(`Devolver un ${names[id][0]} (${n} en el carro)`,fromBag({type:'remove',id}),'',`list-back-${id}`));
+    const order=document.createElement('p');order.className='order';order.setAttribute('aria-label','Pedido: '+Object.entries(request).map(([id,n])=>`${plural[id][1]} ${state.cart[id]||0} de ${n}`).join(', '));
+    order.innerHTML=Object.entries(request).map(([id,n])=>`<span class="chip${(state.cart[id]||0)===n?' enough':''}" aria-hidden="true">${icon(id)}<b>${state.cart[id]||0}/${n}</b></span>`).join('');
+    if(!closer)choices.append(order,button('Comprobar el carro',()=>dispatch({type:'check'}),'choice primary','check'));
+   }
+   if(state.stage===4){
+    help='Revisa el almacén: toca lo que sea un riesgo.';objectTitle='Revisar lo guardado';targetTitle='Revisar los riesgos';
+    if(state.hazards.length===2)choices.append(button('To prevent trips and falling equipment.',()=>dispatch({type:'reason',id:'safe'}),'choice answer','reason-safe'),button('Only to make the room look pretty.',()=>dispatch({type:'reason',id:'pretty'}),'choice answer','reason-pretty'));
+   }
+   if(state.stage===5){help='Misión completada. Puedes volver al gimnasio o reiniciarla desde el menú.';objectTitle='';targetTitle='';choices.append(button('Volver al gimnasio',()=>go('gym'),'choice primary','go-gym'));}
   }
  }
- if(state.stage===3){
-  const cart=document.createElement('div');cart.className='cart';cart.innerHTML='<strong>THE TROLLEY · PEDIDO</strong>';
-  for(const [id,n]of Object.entries(request)){cart.append(button(`${equipment.find(e=>e.id===id).en}: ${state.cart[id]||0} / ${n} · quitar 1`,()=>dispatch({type:'remove',id})));}
-  $('actions').append(cart,button('Comprobar pedido',()=>dispatch({type:'check'}),'primary'));
- }
- if(state.stage===4){
-  const p=document.createElement('p');p.textContent='Why do we fix these problems?';$('actions').append(p);
-  $('actions').append(button('To prevent trips and falling equipment.',()=>dispatch({type:'reason',id:'safe'}),'answer'),button('Only to make the room look pretty.',()=>dispatch({type:'reason',id:'pretty'}),'answer'));
- }
- if(state.stage===5){
-  const p=document.createElement('div');p.className='completion';p.innerHTML='<strong>MISSION COMPLETE</strong><p>Has localizado material, preparado un pedido y revisado riesgos.</p><p lang="en">Tell your partner: where do the hoops go?</p><p>Ahora explica cómo dejarías libre un paso en el gimnasio real.</p><small>Esta misión comprueba comprensión. El profe observa la práctica real.</small>';$('actions').append(p,button('Volver al gimnasio',()=>{room='gym';render();},'primary'));
- }
- if(focusText){const replacement=[...document.querySelectorAll('button')].find(b=>b.textContent===focusText&&!b.disabled);if(replacement)replacement.focus({preventScroll:true});else if(selected){$('target-list').querySelector('button')?.focus({preventScroll:true});}else{$('object-list').querySelector('button:not(:disabled)')?.focus({preventScroll:true});}}
+ $('inventory-help').textContent=help;$('object-title').textContent=objectTitle;$('target-title').textContent=targetTitle;
+ $('object-title').hidden=!list.childElementCount;$('target-title').hidden=!targetList.childElementCount;
+ $('dialogue').classList.toggle('has-choices',!!choices.childElementCount);
+ if(focusKey&&document.activeElement===document.body){const again=document.querySelector(`[data-focus="${focusKey}"]:not(:disabled)`);if(again)again.focus({preventScroll:true});else if(selected)$('destinations').querySelector('button')?.focus({preventScroll:true});else (choices.querySelector('button,a')||$('objects').querySelector('button:not(:disabled)'))?.focus({preventScroll:true});}
 }
-$('switch-room').onclick=()=>document.querySelector(room==='gym'?'.door':'.return-door').click();
+function fold(next){folded=next;document.body.classList.toggle('folded',folded);for(const b of [$('fold'),$('fold-btn')]){b.setAttribute('aria-expanded',String(!folded));b.setAttribute('aria-label',folded?'Desplegar el diálogo del profe':'Plegar el diálogo del profe');}$('fold-btn').querySelector('span').textContent=folded?'Abrir':'Plegar';}
+$('fold').onclick=$('fold-btn').onclick=()=>fold(!folded);
 $('prof').onclick=()=>{
- speakAndPoint();
- $('english').textContent=state.stage===5?'Thank you! The gym is ready.':'Can you help me get the equipment ready? Follow the equipment room sign.';
- $('spanish').textContent=state.stage===5?'¡Gracias! El gimnasio está listo.':'¿Me ayudas a preparar el material? Sigue el cartel del almacén.';
- $('feedback').textContent='Robles se gira hacia ti.';
+ speakAndPoint();fold(false);
+ $('english').textContent=state.stage===5?'Thank you! The gym is ready.':'We need the gym for our next lesson. Can you help me get the equipment ready?';
+ $('spanish').textContent=state.stage===5?'¡Gracias! El gimnasio está listo.':'Necesitamos el gimnasio para la próxima clase. ¿Me ayudas a preparar el material? Entra al almacén por la puerta.';
+ say('Robles se gira hacia ti.');
 };
-$('hint').onclick=()=>{const msg=hints[state.stage]();state=act(state,{type:'hint'}).state;persist();$('feedback').textContent=msg;};
-$('listen').onclick=()=>{if(!('speechSynthesis'in window)){$('feedback').textContent='Este navegador no ofrece voz. La instrucción está disponible por escrito.';return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance($('english').textContent);u.lang='en-GB';u.rate=.85;speechSynthesis.speak(u);};
+$('hint').onclick=()=>{const msg=hints[state.stage]();state=act(state,{type:'hint'}).state;persist();fold(false);say(msg);};
+$('listen').onclick=()=>{if(!('speechSynthesis'in window)){say('Este navegador no ofrece voz. La instrucción está disponible por escrito.');return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance($('english').textContent);u.lang='en-GB';u.rate=.85;speechSynthesis.speak(u);};
 $('settings').onclick=()=>$('settings-dialog').showModal();$('translation').onchange=e=>{support=e.target.checked;persist();render();};$('motion').onchange=e=>{reduced=e.target.checked;persist();render();};
-$('reset').onclick=()=>{if(!confirm('¿Borrar el progreso de esta misión en este navegador?'))return;state=fresh();room='gym';selected=null;persist();render();$('settings-dialog').close();$('feedback').textContent='Nueva misión. Habla con el profe y entra al almacén.';};
+$('sound').onchange=e=>{sound=e.target.checked;setSound(sound);persist();play('pick');};
+$('reset').onclick=()=>{if(!confirm('¿Borrar el progreso de esta misión en este navegador?'))return;state=fresh();room='gym';selected=null;persist();render();$('settings-dialog').close();say('Nueva misión. Habla con el profe y entra al almacén.');};
+$('home').href=$('menu-home').href=backToHub();
+// Painted icons (arte/lotes/14-gimnasio.json) replace the line drawings as soon as they are delivered.
+for(const el of document.querySelectorAll('[data-icon]'))if(PINTADOS.includes('icon-'+el.dataset.icon))el.querySelector('svg').outerHTML=`<img class="icon" alt="" draggable="false" src="assets/icon-${el.dataset.icon}.webp">`;
 render();
 
 $('journal').onclick=()=>$('journal-dialog').showModal();
 $('inventory').onclick=()=>$('inventory-dialog').showModal();
-$('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{$('feedback').textContent='El navegador no permite activar pantalla completa. La escena sigue ocupando toda la ventana.';}};
+if(!document.fullscreenEnabled)$('fullscreen').hidden=true;
+$('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{say('El navegador no permite activar pantalla completa. La escena sigue ocupando toda la ventana.');}};
+let rotateOk=false;try{rotateOk=sessionStorage.getItem('gym-rotate-ok')==='1';}catch{}
+document.body.classList.toggle('rotate-ok',rotateOk);
+$('rotate-close').onclick=()=>{document.body.classList.add('rotate-ok');try{sessionStorage.setItem('gym-rotate-ok','1');}catch{}};
 const showFeedback=()=>{$('feedback').classList.add('visible');clearTimeout(showFeedback.timer);showFeedback.timer=setTimeout(()=>$('feedback').classList.remove('visible'),8500);};
 new MutationObserver(showFeedback).observe($('feedback'),{childList:true,characterData:true,subtree:true});
-$('feedback').textContent=state.stage===0?'Habla con el profe y explora el gimnasio.':state.stage===5?'Misión completada. Puedes reiniciarla desde el menú.':'Continúas la misión donde la dejaste.';
+say(state.stage===0?'':state.stage===5?'Misión completada.':'Continúas donde lo dejaste.');
 
+// Things on the furniture and the trolley stay in sight: the pupil stops beside them, not in front,
+// on the side it comes from and away from the trolley.
+function standFor(target,bounds){
+ let focus,gap=.085;
+ if(target.classList.contains('destination')){if(!selected)return null;const [left,,width]=parts[selected];focus=(left+width/2)/100;}
+ else if(target.classList.contains('unit')){focus=trolleyAt.store[0]/100;gap=trolleyAt.store[2]/200+.05;}
+ else if(target.matches('.pick,.risk-mat,.equipment')){const hit=target.getBoundingClientRect();focus=(hit.left+hit.width/2-bounds.left)/bounds.width;}
+ else return null;
+ const from=position().x,cart=room==='store'&&state.stage>=3?[(trolleyAt.store[0]-trolleyAt.store[2]/2)/100-.04,(trolleyAt.store[0]+trolleyAt.store[2]/2)/100+.04]:null;
+ const cost=x=>(x<.04||x>.96?9:0)+(cart&&x>cart[0]&&x<cart[1]?3:0)+Math.abs(x-from);
+ return [[focus-gap,focus+gap].sort((a,b)=>cost(a)-cost(b))[0],.92];
+}
 // Approach the clicked landmark before executing its room-specific action.
 $('scene').addEventListener('click', event => {
  const target = event.target.closest('button');
@@ -149,9 +238,10 @@ $('scene').addEventListener('click', event => {
   event.stopImmediatePropagation();
   const hit = target.getBoundingClientRect();
   const isTeacher = target.id === 'prof';
+  const stand = standFor(target, bounds);
   const footX = isTeacher ? hit.left - hit.width * .14 : hit.left + hit.width / 2;
-  const x = (footX - bounds.left) / bounds.width;
-  const y = (hit.bottom - bounds.top) / bounds.height;
+  const x = stand ? stand[0] : (footX - bounds.left) / bounds.width;
+  const y = stand ? stand[1] : (hit.bottom - bounds.top) / bounds.height;
   walkTo(x, y, () => { if (target.isConnected) target.onclick?.(); }, isTeacher ? 1 : undefined);
  } else {
   walkTo((event.clientX - bounds.left) / bounds.width, (event.clientY - bounds.top) / bounds.height);
