@@ -8,8 +8,9 @@ Un videojuego independiente dentro de Patio Interior, accesible desde la isla de
 - Pista con dos campos, dos zonas de cárcel y una pelota. Movimiento, apuntado, lanzamiento, pase, recepción temporal y esquiva rápida.
 - Entrenamiento contra IA y salas online por código. Hasta trece plazas por equipo. La IA cubre las vacantes con personajes disponibles.
 - Sala de espera, elección de personaje y equipo, confirmación de listos, reglas configurables y comienzo controlado por el anfitrión.
-- Marcador, reloj, rondas, resultado del partido y vuelta a la sala para repetir.
-- Pausa del anfitrión, control de posesión de cinco segundos, recuperación de pelota inaccesible, ayudas de apuntado, efectos de sonido opcionales y controles táctiles.
+- Marcador, reloj, rondas, puntos por jugada, tabla final de jugadores y vuelta a la sala para repetir.
+- Partida a pantalla completa con barra de habilidades en círculos.
+- Pausa del anfitrión, control de posesión de cinco segundos, recuperación de pelota inaccesible, ayudas de apuntado, efectos de sonido opcionales y controles táctiles con palanca.
 - Recuperación de una plaza tras recargar o desconectarse. La IA cubre al jugador mientras vuelve. La pestaña del anfitrión debe permanecer abierta; no hay migración del anfitrión.
 
 ## Reglas de esta versión
@@ -31,12 +32,35 @@ Cada equipo puede alinear una vez a cada personaje. Por ejemplo, Cometas y Rayos
 
 ## Habilidades de pista
 
-Cada jugador dispone de dos habilidades con recargas individuales de 60 segundos de juego. Los indicadores del marcador muestran el tiempo restante y la pausa detiene los relojes.
+Cada jugador dispone de dos habilidades con recargas individuales de 60 segundos de juego. Su círculo en la barra de habilidades muestra el tiempo restante y la pausa detiene los relojes.
 
 - **F · Tiro imparable.** Con la pelota en la mano, lanza un tiro rápido con estela. Se puede esquivar. Al intentar atraparlo en vuelo, el rival queda expuesto al impacto.
 - **G · Mirada intensa.** Durante diez segundos los rivales se mueven al 50 % de su velocidad y pierden la esquiva, incluidas las esquivas ya iniciadas. Un anillo violeta marca a los afectados. Si todo el equipo sigue afectado, otra activación conserva la carga.
 
-Ambas acciones tienen botón táctil. Para una clase de 26, el anfitrión selecciona **13 contra 13** antes de que entren todos.
+Ambas acciones tienen su círculo táctil. Para una clase de 26, el anfitrión selecciona **13 contra 13** antes de que entren todos.
+
+## Pantalla de juego
+
+La pista ocupa toda la ventana y al empezar se solicita la pantalla completa del navegador. Sobre ella flotan el retrato con los puntos, los botones de sonido, pausa, pantalla completa y salida, y la barra de habilidades.
+
+- **Con teclado:** siete círculos en la parte inferior. El primero es el talento pasivo del personaje; los otros seis son pasar, atrapar, esquivar, lanzar, imparable y mirada, cada uno con su tecla escrita debajo. Un barrido oscuro y una cuenta atrás indican la recarga. El círculo se apaga si la acción no está disponible, por ejemplo lanzar sin pelota. Un anillo naranja alrededor de «Lanzar» muestra los cinco segundos de posesión.
+- **Con los dedos:** una palanca aparece bajo el pulgar en la mitad izquierda y los círculos se abren en abanico alrededor de «Lanzar» a la derecha, con el nombre en lugar de la tecla. Tocar «Lanzar» apunta al rival más cercano; arrastrarlo apunta en esa dirección y al soltar se lanza. El juego cambia de un modo a otro según se use teclado o pantalla táctil.
+- Los iconos están en `mate/assets/abilities/` y la lista de acciones, en `mate/abilities.js`.
+
+## Puntos
+
+Los puntos se calculan en la simulación del anfitrión y viajan en cada instantánea, así que todos ven lo mismo.
+
+| Jugada | Puntos |
+| --- | --- |
+| Diana: tu tiro envía a un rival a la cárcel | 100 |
+| Atrapada al vuelo | 75 |
+| Rescate: volver de la cárcel o liberar a un compañero | 50 |
+| Asistencia: tu pase acaba en diana de un compañero | 40 |
+| Esquiva de un tiro que te habría dado | 25 |
+| Ronda ganada, para cada jugador del equipo | 50 |
+
+Cada jugada muestra los puntos sobre la pista. El total propio está junto al retrato. La tabla de todos los jugadores, con el más valioso señalado, aparece al terminar el partido y también manteniendo Tab o tocando los puntos. Los puntos pertenecen al juego: no se guardan ni se usan como evaluación.
 
 ## Cómo jugar online
 
