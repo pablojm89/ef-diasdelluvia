@@ -99,7 +99,7 @@ function checkTeams(players) {
   assert.equal(await guest.locator('#match-talent-name').textContent(),talentBefore);
   await host.click('#pause-button');await guest.waitForFunction(()=>mateDiagnostics().state?.paused===false,{},{timeout:7000});
   // Actual throw travels from the host and is visible in a different browser.
-  await host.locator('#court').focus();
+  assert.equal(await host.evaluate(()=>document.activeElement.id),'court');
   const hostId=(await diag(host)).myId;
   await host.keyboard.press('Space');
   await guest.waitForFunction(id=>mateDiagnostics().state.ball.holder!==id,hostId,{timeout:8000});
