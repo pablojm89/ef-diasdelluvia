@@ -16,16 +16,17 @@ const hints=[()=>`Busca ${equipment.find(e=>e.id===find[state.found.length])?.es
 function persist(){try{localStorage.setItem(key,JSON.stringify({state,support,reduced}));}catch{$('feedback').textContent+=' El navegador no permite guardar; puedes continuar sin cerrar esta pestaña.';}}
 function dispatch(event){const result=act(state,event);state=result.state;if(result.ok)selected=null;persist();render();$('feedback').textContent=result.message||'Pedido actualizado.';}
 function choose(id){
+ if($('inventory-dialog').open)$('inventory-dialog').close();
  if(room!=='store'){room='store';render();}
  if(state.stage===0){dispatch({type:'find',id});return;}
  if(state.stage===3){dispatch({type:'add',id});return;}
  selected=id;render();$('feedback').textContent=`${equipment.find(e=>e.id===id).en}: elige dónde colocarlo.`;
 }
-function place(target){if(!selected){$('feedback').textContent='Primero selecciona un material.';return;}dispatch({type:'place',id:selected,target});}
+function place(target){if($('inventory-dialog').open)$('inventory-dialog').close();if(!selected){$('feedback').textContent='Primero selecciona un material.';return;}dispatch({type:'place',id:selected,target});}
 function button(text,fn,cls=''){const b=document.createElement('button');b.textContent=text;b.className=cls;b.onclick=fn;return b;}
 function render(){
  const focused=document.activeElement;const focusText=focused?.tagName==='BUTTON'?focused.textContent:null;
- document.body.classList.toggle('reduced',reduced);$('translation').checked=support;$('motion').checked=reduced;
+ document.body.dataset.stage=state.stage;document.body.classList.toggle('reduced',reduced);$('translation').checked=support;$('motion').checked=reduced;
  $('scene').className=`scene ${room}`;$('room-title').textContent=room==='gym'?'El gimnasio':'El cuarto de materiales';$('location').textContent=room==='gym'?'THE GYM · TU PUNTO DE ENCUENTRO':'THE EQUIPMENT ROOM · MISIÓN EN CURSO';$('switch-room').textContent=room==='gym'?'Entrar al almacén':'Volver al gimnasio';
  $('prof').innerHTML='<img src="assets/teacher-robles.webp" alt="" draggable="false">';$('prof').classList.toggle('hidden',room==='store');
  $('steps').innerHTML=steps.map((s,i)=>`<li class="${i<state.stage?'done':i===state.stage?'current':''}"><span>${i<state.stage?'✓':i+1}</span>${s}</li>`).join('');$('stage-count').textContent=state.stage===5?'COMPLETADA':`${state.stage+1} / 5`;
@@ -46,7 +47,7 @@ function render(){
    equipment.forEach((e,i)=>{
     const stored=state.stored.includes(e.id);if(state.stage===3&&!['cone','hoop','softball'].includes(e.id))return;
     const b=button('',()=>choose(e.id),`equipment ${stored?'stored':''} ${selected===e.id?'selected':''}`);b.innerHTML=icon(e.id)+`<span>${e.en}</span>`;b.setAttribute('aria-label',`${e.en} · ${e.es}${stored?' · guardado':''}`);
-    let x=e.x,y=e.y;if(stored&&state.stage!==3){const home=targets[e.home];x=home[2]+(i%3-1)*3;y=home[3]+10+(i%2)*5;}if(state.stage===3){x=24+['cone','hoop','softball'].indexOf(e.id)*24;y=76;}
+    let x=e.x,y=e.y*.65+12;if(stored&&state.stage!==3){const home=targets[e.home];x=home[2]+(i%3-1)*3;y=home[3]+10+(i%2)*5;}if(state.stage===3){x=24+['cone','hoop','softball'].indexOf(e.id)*24;y=67;}
     b.style.left=x+'%';b.style.top=y+'%';b.disabled=stored&&state.stage===2;$('objects').append(b);
     const alt=button(`${e.en}${support?' · '+e.es:''}${stored?' ✓':''}`,()=>choose(e.id));alt.disabled=stored&&state.stage===2;$('object-list').append(alt);
    });
@@ -79,3 +80,10 @@ $('listen').onclick=()=>{if(!('speechSynthesis'in window)){$('feedback').textCon
 $('settings').onclick=()=>$('settings-dialog').showModal();$('translation').onchange=e=>{support=e.target.checked;persist();render();};$('motion').onchange=e=>{reduced=e.target.checked;persist();render();};
 $('reset').onclick=()=>{if(!confirm('¿Borrar el progreso de esta misión en este navegador?'))return;state=fresh();room='gym';selected=null;persist();render();$('settings-dialog').close();$('feedback').textContent='Nueva misión. Habla con el profe y entra al almacén.';};
 render();
+
+$('journal').onclick=()=>$('journal-dialog').showModal();
+$('inventory').onclick=()=>$('inventory-dialog').showModal();
+$('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{$('feedback').textContent='El navegador no permite activar pantalla completa. La escena sigue ocupando toda la ventana.';}};
+const showFeedback=()=>{$('feedback').classList.add('visible');clearTimeout(showFeedback.timer);showFeedback.timer=setTimeout(()=>$('feedback').classList.remove('visible'),8500);};
+new MutationObserver(showFeedback).observe($('feedback'),{childList:true,characterData:true,subtree:true});
+showFeedback();
