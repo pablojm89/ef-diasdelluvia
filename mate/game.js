@@ -108,7 +108,7 @@ function renderLobby(){
   button.setAttribute('aria-pressed',String(team===ownTeam));
   button.disabled=team!==ownTeam && roster.filter(member=>member.team===team).length>=lobby.rules.teamSize;
  });
- $('ready-button').hidden=host;$('start-button').hidden=!host;
+ $('ready-button').hidden=host;$('start-button').hidden=!host;$('copy-watch').hidden=!host;
  $('ready-button').textContent=me?.ready?'Listo ✓ · Cambiar':'Estoy listo';
  const waiting=roster.filter(m=>!m.ready).length;
  $('start-button').disabled=waiting>0;
@@ -250,6 +250,8 @@ for(const b of document.querySelectorAll('[data-team]'))b.addEventListener('clic
 $('ready-button').addEventListener('click',()=>{if(document.body.dataset.input==='touch')enterFullscreen();const me=lobby?.members.find(m=>m.id===room?.myId);room?.ready(!me?.ready);});
 $('start-button').addEventListener('click',()=>{enterFullscreen();room?.start();});
 $('copy-invite').addEventListener('click',async()=>{if(!room)return;const invite=new URL(location.href);invite.search='';invite.searchParams.set('sala',room.code);try{await navigator.clipboard.writeText(invite.href);toast('Invitación copiada. Pásasela a tus compañeros.');}catch{toast(`Código de sala: ${room.code}. También puedes copiar la dirección de esta página.`);}});
+// La Grada shows this room on the class screen as a spectator.
+$('copy-watch').addEventListener('click',async()=>{if(!room)return;const link=new URL('../grada/#sala='+room.code,location.href).href;try{await navigator.clipboard.writeText(link);toast('Enlace de La Grada copiado. Ábrelo en la pantalla de clase.');}catch{toast(`Abre La Grada en la pantalla y escribe el código ${room.code}.`);}});
 function leave(){if((view==='game'||view==='lobby')&&!confirm(room?.isHost?'¿Salir y cerrar la sala para todos?':'¿Salir de esta partida?'))return;stopRoom();setBusy(false);showView('menu');$('connection-label').textContent='ARCADE DE AULA';drawChoices();}
 $('leave-lobby').addEventListener('click',leave);$('leave-game').addEventListener('click',leave);$('back-menu-button').addEventListener('click',()=>{stopRoom();showView('menu');setBusy(false);});
 $('pause-button').addEventListener('click',togglePause);

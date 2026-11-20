@@ -17,7 +17,7 @@ const PLACES = {
  espalderas: {name: 'Las Espalderas', kicker: 'Ruleta de retos para toda la clase', art: 'door-espalderas', action: 'wheel', modes: 'Pantalla', state: 'open'},
  pizarra: {name: 'La Pizarra', kicker: 'Rosco de Educación Física', art: 'door-pizarra', href: './pizarra/', modes: 'Alumno · Pantalla', state: 'open'},
  tatami: {name: 'El Tatami', kicker: 'Yoga: posturas y secuencias', art: 'door-cerrada', modes: 'Alumno · Pantalla', state: 'soon'},
- grada: {name: 'La Grada', kicker: 'Partidos de mate en directo', art: 'door-cerrada', modes: 'Pantalla', state: 'soon'},
+ grada: {name: 'La Grada', kicker: 'Partidos de mate en directo', art: 'door-cerrada', href: './grada/', modes: 'Pantalla', state: 'open'},
  aula: {name: 'El Aula', kicker: 'La oca y el bingo en movimiento', art: 'door-cerrada', href: './aula/', modes: 'Pantalla · Tabletas', state: 'open'},
 };
 const MAPS = {

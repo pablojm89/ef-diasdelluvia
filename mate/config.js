@@ -8,4 +8,6 @@ export const NETWORK_CONFIG={
   roomPrefix:'patio-mate-v1-',
   connectTimeoutMs:18000,
   maxHumans:26,
+  // Screens watching a room (La Grada). They take no seat and send no controls.
+  maxSpectators:6,
 };

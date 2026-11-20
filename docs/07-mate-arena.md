@@ -102,6 +102,33 @@ Se intenta conectar mediante **PeerJS 1.5.5 / WebRTC DataChannel**, con la bibli
 
 En el relevo se publica una sola instantánea compartida por sala para evitar multiplicar los envíos del anfitrión por cada invitado. Los mensajes de entrada y respuestas de incorporación se separan por conexión. No se retienen partidas en el broker. Se reintenta el saludo de incorporación hasta recibir confirmación.
 
+## Espectadores: La Grada
+
+`grada/` muestra en la pantalla de clase los partidos que se están jugando, hasta cuatro salas a la vez en mosaico. Se entra con el código de la sala o con un enlace `grada/#sala=ABC234` (varias salas: `#sala=ABC234,K7M2PQ`). En la sala de espera, el anfitrión tiene el botón **Ver en la pantalla**, que copia ese enlace. La grada usa `ArenaRenderer` para la pista y `resultsMarkup` para la tabla final; el marcador, la ronda y el reloj van en grande en una placa crema junto al partido.
+
+Un espectador:
+
+- No ocupa plaza ni aparece en los equipos ni en el vestuario. No cuenta para «todos listos».
+- No envía controles. El anfitrión descarta todo lo que llegue de un espectador salvo el saludo y el ping: entradas, «listo», equipo y personaje.
+- Recibe lo mismo que un invitado: el estado de la sala, el comienzo y las instantáneas. En el relevo MQTT sigue la instantánea única por sala, así que no multiplica los envíos del anfitrión.
+- Puede entrar con la partida empezada, y después de que termine ve la vuelta al vestuario y la revancha.
+- Se reconecta solo: si se corta la conexión, la sala se cierra o deja de llegar el partido durante 7 s sin pausa, la grada lo dice y reintenta a los 2, 4, 8 y luego cada 15 s. Guarda su identificador de espectador en `sessionStorage` para que el anfitrión sustituya la conexión antigua en vez de contarla dos veces.
+- Hay un máximo de `maxSpectators` (6) por sala, en `mate/config.js`, aparte de las 26 plazas de jugador: una sala llena de jugadores sigue admitiendo espectadores.
+
+### Protocolo
+
+La versión del protocolo pasa de 2 a 3. Así, un anfitrión antiguo rechaza a un espectador con el aviso de versiones distintas en lugar de sentarlo como jugador; el flujo de los jugadores, incluida la recuperación de plaza, no cambia.
+
+| Mensaje | Dirección | Contenido |
+| --- | --- | --- |
+| `hello` | espectador → anfitrión | `{type:'hello', v:3, clientId, role:'spectator'}`. Sin perfil ni credencial de recuperación |
+| `welcome` | anfitrión → espectador | `{type:'welcome', v:3, id:'s-…', hostId, code, role:'spectator', started, matchId, rules}`. Va seguido de un `lobby` y, si se está jugando, de un `start` con `reconnecting:true` |
+| `lobby` | anfitrión → todos | Añade `spectators`: cuántas pantallas miran. Es un número; no identifica a nadie |
+| `ping` / `pong` | ambos | Igual que un invitado: mide la latencia y recupera el `lobby` perdido |
+| `ended`, `rejected` | anfitrión → espectador | Igual que un invitado. Rechazos propios: versión distinta y «Ya hay demasiadas pantallas mirando esta sala» |
+
+Los espectadores no añaden datos personales: no hay nombre, curso ni perfil, sólo un identificador aleatorio de conexión. En el cliente, `Room.watch(code)` hace de espectador con los mismos transportes que `Room.join`; `grada/sala.js` lleva los estados (buscando, vestuario, en juego, pausa, terminado, conexión perdida) y los reintentos.
+
 ## Servicios y configuración
 
 Por defecto se utilizan el servicio público de señalización de PeerJS y el broker público de EMQX, `wss://broker.emqx.io:8084/mqtt`. Permiten probar sin crear cuentas, pero son servicios externos compartidos para experimentación, sin garantía de disponibilidad ni privacidad de canales. La aplicación transmite posiciones, acciones y nombres de personajes prefijados; no ofrece nombres reales ni chat. No se deben añadir datos personales al protocolo de un broker público.

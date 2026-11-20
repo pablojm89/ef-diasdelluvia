@@ -70,7 +70,7 @@ export class RelayHub {
   this.socket.onMessage=(topic,msg)=>{
    if(topic!==this.root+'/in'||typeof msg?.cid!=='string'||!/^[a-f0-9-]{36}$/.test(msg.cid))return;
    let conn=this.connections.get(msg.cid);
-   if(!conn){if(msg.kind!=='data'||msg.data?.type!=='hello'||this.connections.size>=NETWORK_CONFIG.maxHumans+4)return;conn=new RelayConnection(this,msg.cid,true);this.connections.set(msg.cid,conn);onConnection(conn);}
+   if(!conn){if(msg.kind!=='data'||msg.data?.type!=='hello'||this.connections.size>=NETWORK_CONFIG.maxHumans+NETWORK_CONFIG.maxSpectators+4)return;conn=new RelayConnection(this,msg.cid,true);this.connections.set(msg.cid,conn);onConnection(conn);}
    conn.lastSeen=Date.now();if(msg.kind==='close')conn.close();else if(msg.kind==='data')conn.emit('data',msg.data);
   };
   this.socket.onClose=()=>{for(const c of this.connections.values()){c.open=false;c.emit('close');}this.connections.clear();};

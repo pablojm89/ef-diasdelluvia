@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta name="description" content="La Grada: los partidos de Mate Arena en directo en la pantalla de clase. Escribe el código de una sala, o de hasta cuatro, y mirad el partido.">
+ <title>La Grada · El Pabellón</title>
+ <link rel="icon" href="../assets/mark.svg" type="image/svg+xml">
+ <link rel="stylesheet" href="../comun/base.css">
+ <link rel="stylesheet" href="./grada.css">
+</head>
+<body data-count="0">
+ <a class="skip" href="#mosaic">Saltar a los partidos</a>
+ <main class="wall grada" id="main" tabindex="-1">
+  <div class="frieze" aria-hidden="true"></div>
+  <form id="add-form" class="bar" autocomplete="off">
+   <label for="add-code">Código de sala</label>
+   <input id="add-code" name="code" inputmode="text" maxlength="6" spellcheck="false" placeholder="······" aria-describedby="add-status">
+   <button class="sign" type="submit"><strong>Ver partido</strong></button>
+   <p id="add-status" class="bar-status" role="status"></p>
+   <button id="fullscreen" class="bar-quiet" type="button">Pantalla completa</button>
+  </form>
+  <section id="mosaic" class="mosaic" aria-label="Partidos en directo"></section>
+  <section id="empty" class="empty">
+   <img src="../gimnasio/assets/robles-point.webp" alt="" width="220" height="330">
+   <div class="paper">
+    <p class="eyebrow">La Grada · partidos en directo</p>
+    <h1>¿Qué partido miramos?</h1>
+    <p>Quien ha creado la sala ve un código de seis letras y números en el vestuario de Mate Arena. Escribidlo arriba. Se pueden ver hasta cuatro salas a la vez.</p>
+    <p class="fine">La pantalla sólo mira: no ocupa plaza ni juega. Si se corta la conexión, vuelve a entrar sola.</p>
+   </div>
+  </section>
+  <div class="skirting" aria-hidden="true"></div>
+ </main>
+ <template id="tile-template">
+  <article class="tile" data-status="searching"><div class="frame">
+   <header class="board">
+    <div class="side side-0"><span class="team-name">COMETAS</span><strong class="score">0</strong></div>
+    <div class="middle"><span class="room-code"></span><b class="timer">–:––</b><span class="round"></span></div>
+    <div class="side side-1"><strong class="score">0</strong><span class="team-name">RAYOS</span></div>
+   </header>
+   <div class="screen">
+    <canvas width="1200" height="760"></canvas>
+    <div class="notice"><span class="chip"></span><strong class="notice-title"></strong><p class="notice-text"></p><div class="lineup"></div></div>
+    <div class="results" hidden><p class="results-title"></p><div class="results-body"></div></div>
+    <button class="remove" type="button">Quitar</button>
+   </div>
+  </div></article>
+ </template>
+ <script src="../mate/vendor/peerjs.min.js" defer></script>
+ <script type="module" src="./grada.js"></script>
+</body>
+</html>
