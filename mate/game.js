@@ -7,6 +7,7 @@ import {Room} from './network.js';
 import {validCode} from './protocol.js';
 import {buildBar,updateBar,attachStick,resultsMarkup} from './hud.js';
 import {talentArt} from './abilities.js';
+import {record} from '../registro.js';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let selected=0;
@@ -17,7 +18,7 @@ let toastTimeout,lastFrame=performance.now(),accumulator=0,lastSend=0,lastBroadc
 let rules=normalizeRules(),manualAim=false,pointerAt=0,targetIndex=0,audio=null,lastDemo=0;
 const keys=new Set(),actions={gaze:false,special:false,fire:false,catch:false,dash:false,pass:false};
 const aim={ax:900,ay:390},stick={x:0,y:0};
-let shownPoints=0,resultsKey='',peeking=false,wantedFullscreen=false;
+let shownPoints=0,resultsKey='',peeking=false,wantedFullscreen=false,matchRecorded=false;
 // Fingers get a stick and ability circles; a keyboard gets the keys written under each circle.
 function setInputMode(mode){if(document.body.dataset.input!==mode)document.body.dataset.input=mode;}
 setInputMode(matchMedia('(pointer:coarse)').matches?'touch':'keys');
@@ -138,7 +139,7 @@ function updateMatchUI(){
  const member = lobby?.members.find(m=>m.id===localId);
  showMatchHero(member?.character ?? selected, member?.team ?? 0);
  $('pause-button').hidden=mode==='online'&&!room?.isHost;
- $('rematch-button').hidden=true;$('results').hidden=true;resultsKey='';peeking=false;shownPoints=0;$('match-points').textContent='0';
+ $('rematch-button').hidden=true;$('results').hidden=true;resultsKey='';peeking=false;shownPoints=0;matchRecorded=false;$('match-points').textContent='0';
  $('match-announcement').textContent=controlHint();
 }
 function showMatchHero(index,team) {
@@ -169,6 +170,12 @@ function updateStateUI(state){
 // The table of every player's points: fixed at the end of the match, or a peek while Tab is held.
 function showResults(state){
  const over=state.phase==='matchOver';
+ if(over&&!matchRecorded){
+  // One line per finished match in the player's record.
+  matchRecorded=true;
+  const mine=state.players.find(p=>p.id===localId);
+  if(mine)record('pista','mate','partido',{modo:mode==='online'?'online':'entrenamiento',resultado:state.winner===null?'empate':state.winner===mine.team?'victoria':'derrota',puntos:mine.points||0,dianas:mine.hits||0,atrapadas:mine.catches||0,esquivas:mine.dodges||0,asistencias:mine.assists||0,rescates:mine.rescues||0});
+ }
  if(!over&&!peeking){if(!$('results').hidden){$('results').hidden=true;resultsKey='';}return;}
  const key=(over?'end':'peek')+state.players.map(p=>p.points||0).join()+state.scores.join();
  if(key===resultsKey)return;

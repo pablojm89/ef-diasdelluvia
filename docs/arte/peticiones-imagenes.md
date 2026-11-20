@@ -1,6 +1,6 @@
 # Peticiones de imágenes
 
-Lista de imágenes que quedarían mejor pintadas por un modelo de imagen que compuestas a mano. Cada petición dice qué archivo entregar, a qué tamaño, qué debe verse y qué hay que tocar para que el juego la use. Las de la sección «Listas para soltar» no necesitan cambios de código; las de «Necesitan integración» sí, y están en la [hoja de ruta](../08-hoja-de-ruta.md).
+Lista de imágenes que quedarían mejor pintadas por un modelo de imagen que compuestas a mano. Cada petición dice qué archivo entregar, a qué tamaño, qué debe verse y qué hay que tocar para que el juego la use. Las de la sección «Listas para soltar» no necesitan cambios de código; las de «Necesitan integración» sí, y están en el [plan](../08-hoja-de-ruta.md). Toda imagen nueva sigue la estética del gimnasio pintado, salvo lo que ocurre dentro de un partido de Mate Arena, que es pixel art.
 
 Normas comunes: personajes y objetos originales, sin marcas, logotipos ni texto dentro de la imagen; ninguna persona real. Entregar en WebP. Los fondos, opacos; los objetos sueltos, con fondo transparente y sin sombra proyectada en el suelo (la pone el juego).
 
@@ -69,14 +69,52 @@ Normas comunes: personajes y objetos originales, sin marcas, logotipos ni texto 
 - **Qué pedir:** una colchoneta azul mal apoyada, sobresaliendo de lo alto de una estantería y a punto de caer; un cono naranja volcado delante de una puerta.
 - **Integración pendiente:** sustituir a los objetos sueltos que se usan ahora en esa fase.
 
-### 6. Las salas de Chispa pintadas como parte del colegio
+### 6. Puertas de los lugares
 
-- **Dónde:** `assets/door-mision.webp`, `assets/door-pulso.webp` y `assets/door-liga.webp`, 480 × 640 px cada una, sustituyendo los recortes actuales de las islas.
-- **Qué pedir:** tres estancias del mismo colegio andaluz de `gimnasio/assets/gym.webp`, con su luz cálida y su estilo de ilustración pintada, vistas a través de una puerta: un invernadero o aula de naturaleza con una baliza encendida (Misión Refugio), un aula de música con tarima y altavoces (Pulso Lab) y un patio cubierto con una pista pequeña y banderines (Liga Relámpago). Sin personas ni texto. El motivo principal, centrado, porque la imagen se recorta en forma de arco.
-- **Integración:** ninguna para la portada. Para que las salas por dentro dejen de ser islas nocturnas hay que repintar además `assets/world.webp` con el mismo criterio; eso sí requiere ajustar `styles.css`.
+- **Dónde:** `assets/door-<lugar>.webp`, 480 × 640 px, opacas. Cada imagen se ve recortada en forma de arco, así que el motivo va centrado y algo bajo.
+- **Estilo:** el de `gimnasio/assets/gym.webp`: colegio andaluz, luz cálida de tarde, pared ocre, zócalo verde azulado, madera. Sin personas ni texto.
+- **Integración:** ninguna si se respeta el nombre del archivo; el lugar se abre cambiando su estado en `hub.js`.
 
-### 7. Cielo de la portada
+| Archivo | Lugar | Qué debe verse |
+|---|---|---|
+| `door-mate` | La Pista | Pista polideportiva exterior del cole con las líneas de un campo de balón prisionero y una pelota amarilla en el centro. Sustituye al recorte en pixel art |
+| `door-tatami` | El Tatami | Sala luminosa con esterillas de yoga de colores en el suelo de madera y un espejo al fondo |
+| `door-pizarra` | La Pizarra | La pizarra verde del gimnasio de frente, con una jugada dibujada con tiza y el borrador en la repisa |
+| `door-aula` | El Aula | Aula con las mesas apartadas y un tablero grande de juego desplegado en el suelo |
+| `door-grada` | La Grada | Grada de madera de pabellón vista desde la pista, con un marcador apagado arriba |
+| `door-vestuario` | El Vestuario | Fila de taquillas verdes con un banco de madera delante |
+| `door-despacho` | El Despacho | Mesa de profe con silbato, carpeta y un tablón de corcho detrás |
 
-- **Dónde:** `assets/hub.webp`, 1920 × 1080 px.
-- **Qué pedir:** cielo de tarde lluviosa sobre los tejados de teja y los naranjos de un colegio andaluz, en tonos azul verdoso apagados, sin edificios en la mitad izquierda, donde va el título. Mismo estilo que `gimnasio/assets/gym.webp`. Panorámica: sólo se ve una franja de unos 350 px de alto.
-- **Integración pendiente:** ponerla como fondo de `.sky` en `hub.css`, detrás de la lluvia animada.
+### 7. Posturas de yoga para El Tatami
+
+- **Dónde:** `tatami/assets/pose-<postura>.webp`, una hoja por postura de 1536 × 640 px con tres dibujos de 512 × 640 en fila, fondo transparente.
+- **Los tres dibujos:** preparación, a medio camino y postura completa. La salida se anima recorriéndolos al revés, así que no hace falta dibujarla.
+- **Personaje:** siempre la misma alumna del gimnasio, Lúa (`gimnasio/assets/pupil-2.webp`), con la misma ropa, sobre una esterilla turquesa. Los pies o el punto de apoyo en el mismo sitio en los tres dibujos, para que la animación no salte. Mismo estilo de ilustración pintada que los personajes del gimnasio.
+- **Cuidado:** posturas correctas y seguras para Primaria: rodilla alineada sobre el tobillo, espalda larga, sin forzar el cuello.
+- **Integración pendiente:** el lugar entero; es la fase C del plan.
+
+| Archivo | Español | Inglés |
+|---|---|---|
+| `pose-montana` | La montaña | Mountain |
+| `pose-arbol` | El árbol | Tree |
+| `pose-silla` | La silla | Chair |
+| `pose-guerrero-1` | El guerrero I | Warrior I |
+| `pose-guerrero-2` | El guerrero II | Warrior II |
+| `pose-triangulo` | El triángulo | Triangle |
+| `pose-gato` | El gato | Cat |
+| `pose-vaca` | La vaca | Cow |
+| `pose-perro` | El perro boca abajo | Downward dog |
+| `pose-cobra` | La cobra | Cobra |
+| `pose-mariposa` | La mariposa | Butterfly |
+| `pose-nino` | La postura del niño | Child's pose |
+
+### 8. Sala del tatami
+
+- **Dónde:** `tatami/assets/room.webp`, 1536 × 1024 px, mismo punto de vista y proporción que `gimnasio/assets/gym.webp`.
+- **Qué pedir:** sala de expresión del mismo colegio: suelo de madera clara, espejo grande en la pared del fondo, ventanal a la izquierda con naranjos, esterillas enrolladas en un estante. El centro del suelo, despejado: ahí se coloca la figura que hace la postura.
+
+### 9. Tablero de la oca
+
+- **Dónde:** `aula/assets/board.webp`, 1536 × 1024 px.
+- **Qué pedir:** tablero de juego en espiral de 30 casillas pintado sobre el suelo de madera de un aula, visto desde arriba. Casillas grandes, numerables por código, en los seis colores de la ruleta (teja, verde azulado, ocre, coral, verde y azul), sin números ni texto. Salida abajo a la izquierda y meta en el centro.
+- **Integración pendiente:** la fase D del plan.

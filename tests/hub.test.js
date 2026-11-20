@@ -2,8 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync,readFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
-import {challenges,families} from '../content.js';
-import {eligibleChallenges} from '../engine.js';
+
+// The record lives in the browser's storage; a small stand-in is enough here.
+function storage(){const items=new Map();return {getItem:key=>items.has(key)?items.get(key):null,setItem:(key,value)=>{items.set(key,String(value));},removeItem:key=>{items.delete(key);},clear:()=>items.clear()};}
+globalThis.localStorage=storage();globalThis.sessionStorage=storage();
+const {challenges,families}=await import('../content.js');
+const {eligibleChallenges}=await import('../engine.js');
+const registro=await import('../registro.js');
 
 const root=fileURLToPath(new URL('..',import.meta.url));
 const read=file=>readFileSync(root+file,'utf8');
@@ -15,26 +20,74 @@ const target=(page,value)=>{
  return resolved===''||resolved.endsWith('/')?resolved+'index.html':resolved;
 };
 
-test('portada: cada puerta, imagen y hoja de estilo enlazada existe',()=>{
+test('portada: todo lo enlazado existe y un niño sólo ve una forma de entrar',()=>{
  const page=read('index.html');
  const links=[...page.matchAll(/(?:href|src)="([^"]+)"/g)].map(match=>match[1]).filter(local);
- assert.ok(links.length>15);
  for(const link of links)assert.ok(existsSync(root+target('index.html',link)),link);
- assert.equal((page.match(/class="door"/g)||[]).length,5);
  for(const style of [...read('hub.css').matchAll(/url\('([^']+)'\)/g)])assert.ok(existsSync(root+target('hub.css',style[1])),style[1]);
+ const start=page.slice(page.indexOf('id="view-title"'),page.indexOf('id="view-login"'));
+ assert.equal((start.match(/class="sign/g)||[]).length,1);
+ assert.equal((start.match(/class="quiet"/g)||[]).length,2);
+ const script=read('hub.js');
+ for(const art of [...script.matchAll(/art: '([^']+)'/g)])assert.ok(existsSync(`${root}assets/${art[1]}.webp`),art[1]);
 });
-test('portada: todas las salas enlazan de vuelta a la portada con el mismo nombre',()=>{
- for(const [page,back] of [['patio.html','./'],['mate/index.html','../'],['gimnasio/index.html','../']]){
+test('portada: las salas llevan el nombre del hub y el camino de vuelta, sin restos de nombres anteriores',()=>{
+ for(const [page,back] of [['mate/index.html','../'],['gimnasio/index.html','../']]){
   const html=read(page);
   assert.ok(html.includes(`href="${back}"`),page);
-  assert.match(html,/D[ií]as de Lluvia|DÍAS DE LLUVIA/,page);
-  assert.equal(/Patio Interior|PATIO INTERIOR/.test(html),false,page);
+  assert.match(html,/El Pabellón|EL PABELLÓN/,page);
  }
+ for(const page of ['index.html','mate/index.html','gimnasio/index.html','patio.html'])assert.equal(/Patio Interior|PATIO INTERIOR|D[IÍií]AS DE LLUVIA|Días de Lluvia/.test(read(page)),false,page);
 });
-test('reto exprés: hay retos de cada tipo y todos tienen variante sentada y criterio',()=>{
+test('ruleta: hay retos de cada tipo y todos tienen variante sentada y criterio',()=>{
  for(const family of Object.keys(families))assert.ok(eligibleChallenges({family}).length>=3,family);
  for(const challenge of challenges){
   assert.ok(challenge.seated&&challenge.standing&&challenge.criterion,challenge.id);
   assert.ok(challenge.seconds>=30&&challenge.seconds<=90,challenge.id);
  }
+});
+test('registro: el jugador es clase, número y personaje, nunca un nombre',()=>{
+ localStorage.clear();sessionStorage.clear();
+ assert.equal(registro.player(),null);
+ for(const bad of [null,{},{course:5,group:'B',number:0,avatar:1},{course:9,group:'B',number:3,avatar:1},{course:5,group:'Z',number:3,avatar:1},{course:5,group:'B',number:3,avatar:8}])assert.equal(registro.setPlayer(bad),false);
+ assert.equal(registro.setPlayer({course:5,group:'B',number:7,avatar:2,name:'DEMO'}),true);
+ assert.deepEqual(registro.player(),{course:5,group:'B',number:7,avatar:2});
+ assert.equal(registro.playerCode(registro.player()),'5B-07');
+ assert.equal(localStorage.getItem('gym-avatar'),'2');assert.equal(localStorage.getItem('mate-character'),'2');
+ registro.leave();assert.equal(registro.player(),null);
+});
+test('registro: anota por jugador, la pantalla de clase no suplanta a nadie y el resumen cuenta bien',()=>{
+ localStorage.clear();sessionStorage.clear();
+ registro.setPlayer({course:6,group:'A',number:12,avatar:0});
+ registro.record('material','equipment-rescue','fase',{fase:2,intentos:9,pistas:1});
+ registro.record('material','equipment-rescue','completada',{fase:5,intentos:30,pistas:2});
+ registro.record('pista','mate','partido',{resultado:'victoria',puntos:350});
+ registro.record('pista','mate','partido',{resultado:'derrota',puntos:125});
+ registro.setMode('pantalla');
+ registro.record('espalderas','ruleta','reto',{reto:'c1'});
+ const list=registro.entries();
+ assert.equal(list.length,5);assert.equal(list[0].who,'6A-12');assert.equal(list[4].who,null);
+ assert.equal(new Set(list.map(entry=>entry.id)).size,5);
+ const [mine,screen]=registro.summary();
+ assert.deepEqual([mine.who,mine.gymPhase,mine.gymDone,mine.matches,mine.wins,mine.bestPoints],['6A-12',5,true,2,1,350]);
+ assert.deepEqual([screen.who,screen.challenges],['Pantalla de clase',1]);
+ const sheet=registro.toSheet().split('\n');
+ assert.equal(sheet.length,6);assert.match(sheet[1],/;6A-12;material;equipment-rescue;fase;/);
+ registro.clearEntries();assert.equal(registro.entries().length,0);
+});
+test('registro: sin dirección no se envía nada; con dirección se envía una vez y se reintenta si falla',async()=>{
+ localStorage.clear();sessionStorage.clear();
+ registro.setPlayer({course:5,group:'C',number:3,avatar:1});
+ registro.record('pista','mate','partido',{resultado:'empate',puntos:75});
+ registro.record('pista','mate','partido',{resultado:'victoria',puntos:200});
+ const calls=[];
+ assert.deepEqual(await registro.sync((...args)=>{calls.push(args);},''),{sent:0,off:true});
+ assert.equal(calls.length,0);assert.equal(registro.pending(),2);
+ assert.deepEqual(await registro.sync(async()=>{throw new Error('sin red');},'https://hoja.test/'),{sent:0,failed:2});
+ assert.equal(registro.pending(),2);
+ const accept=async(url,options)=>{calls.push(JSON.parse(options.body));return {json:async()=>({ok:true})};};
+ assert.deepEqual(await registro.sync(accept,'https://hoja.test/'),{sent:2});
+ assert.equal(registro.pending(),0);
+ assert.equal(calls[0].entries.length,2);assert.equal('sent' in calls[0].entries[0],false);assert.equal(calls[0].entries[0].who,'5C-03');
+ assert.deepEqual(await registro.sync(accept,'https://hoja.test/'),{sent:0});assert.equal(calls.length,1);
 });

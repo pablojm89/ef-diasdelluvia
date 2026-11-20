@@ -1,6 +1,7 @@
 import {equipment,targets,find,request,fresh,valid,act} from './mission.js';
-import {walkTo, enterRoom} from './walk.js?v=tidy-1';
+import {walkTo, enterRoom} from './walk.js?v=tidy-2';
 import {stored as parts} from './store-layout.js';
+import {record} from '../registro.js';
 import {speakAndPoint} from './robles.js';
 const icon = id => '<img alt="" draggable="false" src="assets/prop-' + id + '.webp">';
 const $=id=>document.getElementById(id), key='ef-gym-mission-v1';
@@ -19,8 +20,10 @@ const hints=[()=>`Busca ${equipment.find(e=>e.id===find[state.found.length])?.es
 function persist(){try{localStorage.setItem(key,JSON.stringify({state,support,reduced}));}catch{$('feedback').textContent+=' El navegador no permite guardar; puedes continuar sin cerrar esta pestaña.';}}
 function dispatch(event){
  const from=event.type==='place'?document.querySelector(`.equipment[data-item="${event.id}"]`)?.getBoundingClientRect():null;
- const result=act(state,event);state=result.state;if(result.ok)selected=null;persist();render();$('feedback').textContent=result.message||'Pedido actualizado.';
+ const before=state.stage,result=act(state,event);state=result.state;if(result.ok)selected=null;persist();render();$('feedback').textContent=result.message||'Pedido actualizado.';
  if(result.ok&&from)fly(event.id,from);
+ // Each finished phase goes to the player's record, with how many tries and hints it took so far.
+ if(state.stage>before)record('material','equipment-rescue',state.stage===5?'completada':'fase',{fase:state.stage,intentos:state.attempts,pistas:state.hints});
 }
 // The room picture itself shows what is already put away: one painted part per item.
 function showStored(){

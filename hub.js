@@ -1,113 +1,243 @@
-// Front page: rain over the school, door filters, saved progress and the express challenge.
+// El Pabellón: who comes in (pupil, class screen or teacher) and the doors each one sees.
 import {families} from './content.js';
 import {eligibleChallenges} from './engine.js';
+import {AVATARS, COURSES, GROUPS, LAST_NUMBER, player, setPlayer, leave, playerCode, setMode, record, entries, clearEntries, summary, toSheet, pending, sync} from './registro.js';
+import {REGISTRO_URL} from './config.js';
 
 const $ = id => document.getElementById(id);
-const still = matchMedia('(prefers-reduced-motion: reduce)');
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+const face = index => `./gimnasio/assets/pupil-${index}.webp`;
+const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// --- Rain -------------------------------------------------------------------
-const sky = $('rain'), pen = sky.getContext('2d');
-let drops = [], lastRain = 0, raining;
-function sizeSky() {
- const scale = Math.min(2, devicePixelRatio || 1);
- sky.width = sky.clientWidth * scale;
- sky.height = sky.clientHeight * scale;
- pen.setTransform(scale, 0, 0, scale, 0, 0);
- const count = Math.round(sky.clientWidth * sky.clientHeight / 5200);
- drops = Array.from({length: count}, () => ({
-  x: Math.random() * (sky.clientWidth + 80), y: Math.random() * sky.clientHeight,
-  length: 9 + Math.random() * 16, speed: 420 + Math.random() * 380, light: .1 + Math.random() * .22,
- }));
- paintRain(0);
+// --- Places ------------------------------------------------------------------
+// One entry per place of the school. `soon` places are painted on the wall but still closed.
+const PLACES = {
+ gimnasio: {name: 'El Gimnasio', kicker: 'Aventura: Equipment Rescue', art: 'door-gimnasio', href: './gimnasio/', modes: 'Alumno · Pantalla', state: 'open'},
+ pista: {name: 'La Pista', kicker: 'Mate Arena: balón prisionero', art: 'door-mate', pixel: true, href: './mate/', modes: 'Alumno', state: 'open'},
+ espalderas: {name: 'Las Espalderas', kicker: 'Ruleta de retos para toda la clase', art: 'door-espalderas', action: 'wheel', modes: 'Pantalla', state: 'open'},
+ pizarra: {name: 'La Pizarra', kicker: 'Rosco de Educación Física', art: 'door-pizarra', modes: 'Alumno · Pantalla', state: 'soon'},
+ tatami: {name: 'El Tatami', kicker: 'Yoga: posturas y secuencias', art: 'door-cerrada', modes: 'Alumno · Pantalla', state: 'soon'},
+ grada: {name: 'La Grada', kicker: 'Partidos de mate en directo', art: 'door-cerrada', modes: 'Pantalla', state: 'soon'},
+ aula: {name: 'El Aula', kicker: 'La oca y el bingo en movimiento', art: 'door-cerrada', modes: 'Pantalla', state: 'soon'},
+};
+const MAPS = {
+ alumno: {title: '¿A dónde vamos hoy?', places: ['gimnasio', 'pista', 'tatami']},
+ pantalla: {title: 'Pantalla digital: elegid un lugar', places: ['espalderas', 'gimnasio', 'tatami', 'grada']},
+};
+// Earlier experiments that no longer match the look of the school; only the teacher can still open them.
+const REVIEW = [
+ ['Misión Refugio', 'Seis retos con cronómetro', './patio.html#mision'],
+ ['Pulso Lab', 'Secuencias de ritmo', './patio.html#pulso'],
+ ['Liga Relámpago', 'Retos por equipos con rúbrica', './patio.html#liga'],
+ ['Libro de retos', 'Los 24 retos de la ruleta', './patio.html#biblioteca'],
+];
+
+function progressNote(id) {
+ const read = key => { try { return JSON.parse(localStorage.getItem(key)); } catch { return null; } };
+ if (id !== 'gimnasio') return '';
+ const stage = read('ef-gym-mission-v1')?.state?.stage;
+ return Number.isInteger(stage) && stage > 0 ? (stage >= 5 ? 'Misión completada' : `Fase ${stage + 1} de 5`) : '';
 }
-function paintRain(seconds) {
- const width = sky.clientWidth, height = sky.clientHeight;
- pen.clearRect(0, 0, width, height);
- pen.lineCap = 'round';
- for (const drop of drops) {
-  drop.y += drop.speed * seconds;
-  drop.x -= drop.speed * seconds * .18;
-  if (drop.y > height) { drop.y = -drop.length; drop.x = Math.random() * (width + 80); }
-  pen.strokeStyle = `rgba(214,234,240,${drop.light})`;
-  pen.lineWidth = drop.length > 18 ? 1.5 : 1;
-  pen.beginPath();
-  pen.moveTo(drop.x, drop.y);
-  pen.lineTo(drop.x - drop.length * .18, drop.y + drop.length);
-  pen.stroke();
+function doorMarkup(id) {
+ const place = PLACES[id], soon = place.state === 'soon';
+ const note = soon ? 'PRÓXIMAMENTE' : progressNote(id);
+ const inside = `<span class="arch${place.pixel ? ' pixel' : ''}"><img src="./assets/${place.art}.webp" alt="" width="480" height="640">${note ? `<span class="ribbon">${esc(note)}</span>` : ''}</span>
+  <span class="plate">${esc(place.name)}</span><span class="kicker">${esc(place.kicker)}</span>`;
+ if (soon) return `<li><div class="door soon" aria-label="${esc(place.name)}, próximamente">${inside}</div></li>`;
+ if (place.action) return `<li><button type="button" class="door" data-action="${place.action}">${inside}</button></li>`;
+ return `<li><a class="door" href="${place.href}">${inside}</a></li>`;
+}
+
+// --- Views -------------------------------------------------------------------
+let view = 'title';
+function show(next) {
+ view = next;
+ document.body.dataset.view = next;
+ for (const name of ['title', 'login', 'map', 'teacher']) $('view-' + name).hidden = name !== next;
+ scrollTo(0, 0);
+}
+function showMap(kind) {
+ const map = MAPS[kind], current = player();
+ $('map-title').textContent = map.title;
+ $('doors').innerHTML = map.places.map(doorMarkup).join('');
+ const pupil = kind === 'alumno' && current;
+ $('locker-button').hidden = !pupil;
+ $('mode-tag').hidden = kind !== 'pantalla';
+ $('mode-tag').textContent = 'PANTALLA DIGITAL';
+ if (pupil) { $('player-face').src = face(current.avatar); $('player-code').textContent = playerCode(current); }
+ show('map');
+}
+function route() {
+ const where = location.hash.slice(1);
+ for (const dialog of document.querySelectorAll('dialog[open]')) dialog.close();
+ if (where === 'alumno') {
+  setMode('alumno');
+  if (player()) showMap('alumno'); else showLogin();
+ } else if (where === 'pantalla') {
+  setMode('pantalla');
+  showMap('pantalla');
+ } else if (where === 'profe') {
+  $('locker-button').hidden = true; $('mode-tag').hidden = false; $('mode-tag').textContent = 'PROFE';
+  showTeacher();
+ } else {
+  setMode(null);
+  show('title');
  }
 }
-function rain(now) {
- paintRain(Math.min(.05, (now - lastRain) / 1000));
- lastRain = now;
- raining = requestAnimationFrame(rain);
-}
-function startRain() {
- cancelAnimationFrame(raining);
- if (still.matches || document.hidden) return;
- lastRain = performance.now();
- raining = requestAnimationFrame(rain);
-}
-sizeSky();
-startRain();
-addEventListener('resize', sizeSky);
-document.addEventListener('visibilitychange', startRain);
-still.addEventListener('change', startRain);
+addEventListener('hashchange', route);
+addEventListener('pageshow', event => { if (event.persisted) route(); });
+$('enter-student').addEventListener('click', () => { location.hash = 'alumno'; });
+$('doors').addEventListener('click', event => { if (event.target.closest('[data-action="wheel"]')) openWheel(); });
 
-// --- Doors ------------------------------------------------------------------
-const doors = document.querySelector('.doors');
-for (const button of document.querySelectorAll('[data-filter]')) {
- button.addEventListener('click', () => {
-  const filter = button.dataset.filter;
-  for (const other of document.querySelectorAll('[data-filter]')) other.setAttribute('aria-pressed', String(other === button));
-  doors.classList.toggle('filtered', filter !== 'all');
-  for (const door of doors.querySelectorAll('.door')) door.classList.toggle('match', door.dataset.tags.split(' ').includes(filter));
- });
+// --- Pupil: class, list number and a character. No names -------------------------
+function fill(select, values, label) {
+ select.replaceChildren(...values.map(value => new Option(label(value), value)));
 }
-// Each room keeps its own progress in this browser; the door only reads it.
-function saved(key) { try { return JSON.parse(localStorage.getItem(key)); } catch { return null; } }
-function progress() {
- const mission = saved('patio-interior-v1')?.mission?.step, gym = saved('ef-gym-mission-v1')?.state?.stage;
- const notes = {
-  mision: Number.isInteger(mission) && mission > 0 ? (mission >= 6 ? 'Refugio encendido' : `${mission} de 6 balizas`) : '',
-  gimnasio: Number.isInteger(gym) && gym > 0 ? (gym >= 5 ? 'Misión completada' : `Fase ${gym + 1} de 5`) : '',
- };
- for (const door of document.querySelectorAll('[data-progress]')) {
-  const ribbon = door.querySelector('.ribbon'), note = notes[door.dataset.progress];
-  ribbon.textContent = note;
-  ribbon.hidden = !note;
+fill($('login-course'), COURSES, value => value + '.º');
+fill($('login-group'), GROUPS, value => value);
+fill($('login-number'), Array.from({length: LAST_NUMBER}, (_, i) => i + 1), value => value);
+$('login-avatars').innerHTML = AVATARS.map((name, index) =>
+ `<label><input type="radio" name="avatar" value="${index}" ${index === 0 ? 'checked' : ''}><img src="${face(index)}" alt="" width="100" height="215" loading="lazy">${esc(name)}</label>`).join('');
+function showLogin() {
+ $('locker-button').hidden = true; $('mode-tag').hidden = true;
+ $('login-course').value = '5';
+ show('login');
+}
+$('login-form').addEventListener('submit', event => {
+ event.preventDefault();
+ const chosen = {course: Number($('login-course').value), group: $('login-group').value, number: Number($('login-number').value),
+  avatar: Number(new FormData(event.target).get('avatar'))};
+ if (setPlayer(chosen)) { record('pabellon', 'entrada', 'entra'); showMap('alumno'); }
+});
+$('locker-button').addEventListener('click', () => {
+ const current = player();
+ if (!current) return;
+ const mine = summary(entries().filter(entry => entry.who === playerCode(current)))[0];
+ $('locker-face').src = face(current.avatar);
+ $('locker-title').textContent = `${AVATARS[current.avatar]} · ${playerCode(current)}`;
+ const lines = [
+  ['Aventura del gimnasio', mine?.gymDone ? 'Completada' : mine?.gymPhase ? `Fase ${mine.gymPhase} de 5 superada` : 'Sin empezar'],
+  ['Partidos de mate', mine?.matches ? `${mine.matches} jugados · ${mine.wins} ganados` : 'Ninguno todavía'],
+  ['Mejor puntuación en mate', mine?.bestPoints ? `${mine.bestPoints} puntos` : '—'],
+ ];
+ $('locker-list').innerHTML = lines.map(([label, value]) => `<li><span>${esc(label)}</span><b>${esc(value)}</b></li>`).join('');
+ $('locker').showModal();
+});
+$('locker-leave').addEventListener('click', () => { leave(); $('locker').close(); showLogin(); });
+
+// --- Teacher: a key for this computer and the desk behind it ---------------------
+const PIN = 'pabellon-clave', OPEN = 'pabellon-despacho';
+async function digest(text) {
+ if (!crypto.subtle) { let h = 2166136261; for (const c of text) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return (h >>> 0).toString(16); }
+ const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+ return [...new Uint8Array(bytes)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+const savedPin = () => { try { return JSON.parse(localStorage.getItem(PIN)); } catch { return null; } };
+const deskOpen = () => { try { return sessionStorage.getItem(OPEN) === '1'; } catch { return false; } };
+function showTeacher() {
+ const hasPin = !!savedPin()?.hash, open = hasPin && deskOpen();
+ $('gate').hidden = open; $('desk').hidden = !open;
+ if (open) drawDesk();
+ else {
+  $('gate-text').textContent = hasPin ? 'Escribe tu clave para entrar.' : 'Es la primera vez en este ordenador: crea una clave de 4 a 8 números.';
+  $('gate-label').textContent = hasPin ? 'Clave' : 'Clave nueva';
+  $('gate-button').textContent = hasPin ? 'Entrar' : 'Guardar y entrar';
+  $('gate-pin').value = ''; $('gate-status').textContent = '';
  }
+ show('teacher');
+ if (!open) $('gate-pin').focus();
 }
-progress();
-addEventListener('pageshow', progress);
+$('gate').addEventListener('submit', async event => {
+ event.preventDefault();
+ const pin = $('gate-pin').value, saved = savedPin();
+ if (!/^\d{4,8}$/.test(pin)) { $('gate-status').textContent = 'La clave tiene de 4 a 8 números.'; return; }
+ if (!saved?.hash) {
+  const salt = crypto.getRandomValues(new Uint32Array(2)).join('-');
+  try { localStorage.setItem(PIN, JSON.stringify({salt, hash: await digest(salt + pin)})); }
+  catch { $('gate-status').textContent = 'Este navegador no permite guardar la clave.'; return; }
+ } else if (await digest(saved.salt + pin) !== saved.hash) {
+  $('gate-status').textContent = 'Esa no es la clave.'; $('gate-pin').value = ''; return;
+ }
+ try { sessionStorage.setItem(OPEN, '1'); } catch {}
+ showTeacher();
+});
+const when = iso => new Date(iso).toLocaleString('es-ES', {day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'});
+function drawDesk() {
+ const rows = summary();
+ $('desk-summary').innerHTML = rows.length ? `<table><thead><tr><th>Jugador</th><th>Última vez</th><th>Aventura del gimnasio</th><th>Partidos de mate</th><th>Ganados</th><th>Mejor puntuación</th><th>Retos de ruleta</th></tr></thead><tbody>${rows.map(row =>
+  `<tr><th scope="row">${esc(row.who)}</th><td>${esc(when(row.last))}</td><td>${row.gymDone ? 'Completada' : row.gymPhase ? `Fase ${row.gymPhase} de 5` : '—'}</td><td>${row.matches}</td><td>${row.wins}</td><td>${row.bestPoints || '—'}</td><td>${row.challenges}</td></tr>`).join('')}</tbody></table>`
+  : '<p>Todavía no se ha jugado nada en este ordenador.</p>';
+ $('desk-download').disabled = $('desk-clear').disabled = !entries().length;
+ const waiting = pending();
+ $('desk-sync-text').textContent = !REGISTRO_URL ? 'Hoja de notas sin conectar: el registro se queda en este ordenador.' : waiting ? `${waiting} anotaciones pendientes de enviar a la hoja de notas.` : 'Todo enviado a la hoja de notas.';
+ $('desk-sync').hidden = !REGISTRO_URL || !waiting;
+ const places = Object.values(PLACES).map(place => `<tr><th scope="row">${esc(place.name)}</th><td class="wrap">${esc(place.kicker)}</td><td>${esc(place.modes)}</td><td><span class="state ${place.state}">${place.state === 'open' ? 'Abierto' : 'Próximamente'}</span></td><td>${place.href ? `<a href="${place.href}"><u>Abrir</u></a>` : ''}</td></tr>`);
+ const old = REVIEW.map(([name, what, href]) => `<tr><th scope="row">${esc(name)}</th><td class="wrap">${esc(what)}</td><td>Pantalla</td><td><span class="state review">Estética anterior</span></td><td><a href="${href}"><u>Abrir</u></a></td></tr>`);
+ $('desk-catalogue').innerHTML = `<table><thead><tr><th>Lugar</th><th>Actividad</th><th>Se juega como</th><th>Estado</th><th></th></tr></thead><tbody>${places.join('')}${old.join('')}</tbody></table>`;
+}
+$('desk-download').addEventListener('click', () => {
+ const link = document.createElement('a');
+ link.href = URL.createObjectURL(new Blob(['﻿' + toSheet()], {type: 'text/csv;charset=utf-8'}));
+ link.download = `registro-pabellon-${new Date().toISOString().slice(0, 10)}.csv`;
+ link.click();
+ setTimeout(() => URL.revokeObjectURL(link.href), 2000);
+});
+$('desk-sync').addEventListener('click', async () => { $('desk-sync').disabled = true; const result = await sync(); $('desk-sync').disabled = false; drawDesk(); if (result.failed) $('desk-sync-text').textContent = 'No se ha podido enviar. Se volverá a intentar al seguir jugando.'; });
+$('desk-clear').addEventListener('click', () => { if (confirm('¿Borrar todo el registro guardado en este ordenador? Descárgalo antes si lo necesitas.')) { clearEntries(); drawDesk(); } });
+$('desk-lock').addEventListener('click', () => { try { sessionStorage.removeItem(OPEN); } catch {} location.hash = ''; });
+$('desk-forget').addEventListener('click', () => { if (confirm('¿Borrar la clave de este ordenador para crear otra?')) { try { localStorage.removeItem(PIN); sessionStorage.removeItem(OPEN); } catch {} showTeacher(); } });
 
-// --- Express challenge ------------------------------------------------------
-const dialog = $('express'), clock = $('express-clock');
-const kind = $('express-kind'), seated = $('express-seated');
-for (const [id, name] of Object.entries(families)) kind.add(new Option(name, id));
-let bag = [], current = null, left = 0, ticking = null, sound = null;
+// --- Las Espalderas: challenge wheel for the whole class -------------------------
+const KINDS = Object.keys(families);
+const COLOURS = ['#d9703a', '#2f7f78', '#e2a63b', '#c9524a', '#4f8a4b', '#3f6fa8'];
+const SHORT = {coordinacion: 'Coordinación', equilibrio: 'Control', ritmo: 'Ritmo', expresion: 'Expresión', cooperacion: 'Cooperación', calma: 'Calma'};
+const disc = $('wheel-disc'), dial = $('wheel-clock'), seated = $('wheel-seated');
+const point = (angle, radius) => [Math.sin(angle * Math.PI / 180) * radius, -Math.cos(angle * Math.PI / 180) * radius];
+disc.innerHTML = `<circle r="103" fill="#463e28"/>` + KINDS.map((kind, index) => {
+ const [x1, y1] = point(index * 60, 98), [x2, y2] = point(index * 60 + 60, 98), [tx, ty] = point(index * 60 + 30, 62);
+ return `<path d="M0 0L${x1.toFixed(2)} ${y1.toFixed(2)}A98 98 0 0 1 ${x2.toFixed(2)} ${y2.toFixed(2)}Z" fill="${COLOURS[index]}" stroke="#fff3d9" stroke-width="1.5"/>
+  <text x="${tx.toFixed(2)}" y="${ty.toFixed(2)}" transform="rotate(${index * 60 + 30} ${tx.toFixed(2)} ${ty.toFixed(2)})" text-anchor="middle" dominant-baseline="middle" font-family="Trebuchet MS,sans-serif" font-size="10.5" font-weight="800" fill="#fff">${SHORT[kind]}</text>`;
+}).join('') + `<circle r="17" fill="#fff3d9" stroke="#463e28" stroke-width="4"/>`;
+const bags = {};
+let turned = 0, spinning = false, current = null, left = 0, ticking = null, sound = null;
 const time = seconds => `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
-function draw() {
- // Deal from a shuffled bag so a challenge does not come back until the others have been used.
- if (!bag.length) {
-  bag = eligibleChallenges({family: kind.value});
+function draw(kind) {
+ // A shuffled bag per kind, so a challenge does not come back until the others have been used.
+ if (!bags[kind]?.length) {
+  const bag = eligibleChallenges({family: kind});
   for (let i = bag.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [bag[i], bag[j]] = [bag[j], bag[i]]; }
-  if (current && bag.length > 1 && bag.at(-1).id === current.id) bag.unshift(bag.pop());
+  bags[kind] = bag;
  }
- return bag.pop();
+ return bags[kind].pop();
 }
-function stop() { clearInterval(ticking); ticking = null; $('express-start').firstElementChild.textContent = left > 0 && left < current.seconds ? 'Seguir' : 'Empezar'; }
-function show(challenge) {
- stop();
+function stopClock() { clearInterval(ticking); ticking = null; }
+function reveal(challenge) {
  current = challenge; left = challenge.seconds;
- $('express-family').textContent = families[challenge.family];
- $('express-players').textContent = challenge.minPlayers > 1 ? 'En parejas o grupos' : 'Cada uno en su sitio';
- $('express-title').textContent = challenge.title;
- $('express-text').textContent = seated.checked ? challenge.seated : challenge.standing;
- $('express-criterion').textContent = challenge.criterion;
- clock.textContent = time(left);
- clock.parentElement.classList.remove('done');
- $('express-status').textContent = '';
- $('express-start').firstElementChild.textContent = 'Empezar';
+ $('wheel-family').textContent = families[challenge.family];
+ $('wheel-players').textContent = challenge.minPlayers > 1 ? ' · En parejas o grupos' : ' · Cada uno en su sitio';
+ $('wheel-title').textContent = challenge.title;
+ $('wheel-text').textContent = seated.checked ? challenge.seated : challenge.standing;
+ $('wheel-criterion').textContent = challenge.criterion;
+ $('wheel-observe').hidden = $('wheel-clock-box').hidden = false;
+ $('wheel-clock-box').classList.remove('done');
+ dial.textContent = time(left);
+ $('wheel-start').firstElementChild.textContent = 'Empezar';
+ $('wheel-status').textContent = '';
+ $('wheel-spin').firstElementChild.textContent = 'Girar otra vez';
+}
+function spin() {
+ if (spinning) return;
+ stopClock();
+ const index = Math.floor(Math.random() * KINDS.length), challenge = draw(KINDS[index]);
+ // Stop with the middle of the chosen sector under the pin.
+ turned = Math.ceil(turned / 360) * 360 + 360 * 4 - (index * 60 + 30) + (Math.random() * 36 - 18);
+ disc.style.transform = `rotate(${turned}deg)`;
+ if (still()) { reveal(challenge); return; }
+ spinning = true; $('wheel-spin').disabled = true;
+ $('wheel-title').textContent = '…'; $('wheel-status').textContent = '';
+ const land = () => { if (!spinning) return; spinning = false; $('wheel-spin').disabled = false; reveal(challenge); };
+ disc.addEventListener('transitionend', land, {once: true});
+ setTimeout(land, 3200);
 }
 function chime() {
  try {
@@ -124,22 +254,24 @@ function chime() {
 }
 function tick() {
  left--;
- clock.textContent = time(Math.max(0, left));
+ dial.textContent = time(Math.max(0, left));
  if (left > 0) return;
- stop();
- clock.parentElement.classList.add('done');
- $('express-status').textContent = '¡Tiempo! Comentad el criterio y probad otro reto.';
- $('express-start').firstElementChild.textContent = 'Repetir';
+ stopClock();
+ $('wheel-clock-box').classList.add('done');
+ $('wheel-status').textContent = '¡Tiempo! Comentad el criterio y girad otra vez.';
+ $('wheel-start').firstElementChild.textContent = 'Repetir';
+ record('espalderas', 'ruleta', 'reto', {reto: current.id, tipo: current.family, sentado: seated.checked});
  chime();
 }
-$('express-start').addEventListener('click', () => {
- if (ticking) { stop(); return; }
- if (left <= 0) { left = current.seconds; clock.textContent = time(left); clock.parentElement.classList.remove('done'); $('express-status').textContent = ''; }
+$('wheel-start').addEventListener('click', () => {
+ if (ticking) { stopClock(); $('wheel-start').firstElementChild.textContent = 'Seguir'; return; }
+ if (left <= 0) { left = current.seconds; dial.textContent = time(left); $('wheel-clock-box').classList.remove('done'); $('wheel-status').textContent = ''; }
  ticking = setInterval(tick, 1000);
- $('express-start').firstElementChild.textContent = 'Pausar';
+ $('wheel-start').firstElementChild.textContent = 'Pausar';
 });
-$('express-next').addEventListener('click', () => show(draw()));
-seated.addEventListener('change', () => { if (current) $('express-text').textContent = seated.checked ? current.seated : current.standing; });
-kind.addEventListener('change', () => { bag = []; show(draw()); });
-dialog.addEventListener('close', stop);
-$('quick-challenge').addEventListener('click', () => { show(draw()); dialog.showModal(); });
+$('wheel-spin').addEventListener('click', spin);
+seated.addEventListener('change', () => { if (current) $('wheel-text').textContent = seated.checked ? current.seated : current.standing; });
+$('wheel').addEventListener('close', stopClock);
+function openWheel() { $('wheel').showModal(); }
+
+route();

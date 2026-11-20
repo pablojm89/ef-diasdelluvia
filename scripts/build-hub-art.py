@@ -17,13 +17,13 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / 'assets'
 gym = Image.open(ROOT / 'gimnasio/assets/gym.webp').convert('RGB')
 store = Image.open(ROOT / 'gimnasio/assets/store.webp').convert('RGB')
-world = Image.open(ROOT / 'assets/world.webp').convert('RGB')
 
+# Every door shows a corner of the gym that already exists in the painted art.
 doors = {
     'gimnasio': (gym, (540, 0, 1308, 1024)),
-    'mision': (world, (600, 0, 1080, 640)),
-    'pulso': (world, (20, 300, 470, 900)),
-    'liga': (world, (1030, 330, 1480, 930)),
+    'espalderas': (gym, (235, 380, 505, 740)),
+    'pizarra': (gym, (0, 350, 240, 670)),
+    'cerrada': (gym, (1205, 440, 1385, 680)),
 }
 if len(sys.argv) > 1:
     doors['mate'] = (Image.open(sys.argv[1]).convert('RGB'), (385, 120, 825, 706))

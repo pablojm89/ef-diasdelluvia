@@ -1,114 +1,93 @@
-# Hoja de ruta: de tres prototipos a un hub de EF para días de lluvia
+# Plan de El Pabellón, el hub de Educación Física
 
-20 de noviembre de 2026. Sustituye como guía de trabajo a [05-plan.md](05-plan.md), que queda como registro de la primera entrega. La investigación que la sustenta está en [09-investigacion-dias-de-lluvia.md](09-investigacion-dias-de-lluvia.md) y las imágenes pendientes de pintar, en [arte/peticiones-imagenes.md](arte/peticiones-imagenes.md).
+20 de noviembre de 2026. Sustituye al plan anterior, que giraba en torno a los días de lluvia. Documentos que lo acompañan: [qué actividades digitales de EF existen y cuáles versionar](09-investigacion-dias-de-lluvia.md), [registro y notas](10-registro-y-notas.md) e [imágenes pendientes de pintar](arte/peticiones-imagenes.md).
 
-## Dónde estamos
+## Qué es
 
-Hay tres productos que no se conocen entre sí:
+Un colegio que se juega. El hub es el pabellón de Educación Física y cada actividad vive en uno de sus lugares. Sirve para cualquier sesión que se haga en el aula o con ordenadores, llueva o no.
 
-| Pieza | Qué es | Estado | Lo que cojea |
-|---|---|---|---|
-| **El Gimnasio** (`/gimnasio/`) | Aventura gráfica bilingüe; una misión de cinco fases en gimnasio y almacén | Jugable de principio a fin | Una sola misión; en móvil los paneles pisan la escena; el pedido se hace en un panel de texto; sin sonido |
-| **Mate Arena** (`/mate/`) | Balón prisionero arcade, entrenamiento y salas online de hasta 26 | Jugable; online probado por la entrega anterior | Pista dibujada por código, sin arte propio; sin tutorial; la IA tiene un único nivel |
-| **Patio Interior** (`/patio.html`) | Tres experiencias de aula con movimiento real y 24 retos | Jugable con proyector | Otra estética y otro nombre; es lo único que hace moverse a la clase y está escondido tras dos enlaces |
+Cinco reglas que ordenan todo lo demás:
 
-Problemas de conjunto al empezar:
+1. **Una sola estética: la del gimnasio pintado.** Colegio andaluz, luz cálida, madera, pared ocre, zócalo verde azulado, cenefa de azulejo, carteles crema con letra de imprenta. El profe Robles es el anfitrión. Nada de islas, robots ni mundos de fantasía.
+2. **Parece un juego y enseña pocas opciones.** Quien entra ve un botón grande. Los datos de duración, material o criterios son para el profe y están en su despacho.
+3. **Tres formas de entrar:** alumno, pantalla digital y profe.
+4. **Versiones propias de formatos que los docentes ya usan** (ruleta, oca, bingo, rosco, breakout, yoga), corrigiendo sus fallos: esperas, sedentarismo, falta de inglés, una sola pantalla.
+5. **Lo que hace el alumnado queda anotado** para que pueda servir de evidencia al evaluar. Sin nombres en la web ni en el repositorio.
 
-- **No había portada.** `index.html` redirigía al gimnasio. Resuelto en la fase 1.
-- **Tres identidades.** Tres nombres, tres paletas y tres estilos de imagen: ilustración pintada en el gimnasio, pixel art en Mate e islas en 3D en las salas de Chispa. El nombre y la cabecera ya son comunes; el arte, todavía no.
-- **Poco movimiento real.** El gimnasio y Mate son de pantalla. Un «día de lluvia» de EF necesita que la clase se mueva; hoy sólo lo consigue Patio Interior.
-- **El hub casi no tiene contenido.** Comparado con lo que usan los docentes (tableros, ruletas, bingos, breakouts), faltan los formatos de «tengo cinco minutos» y «tengo la hora entera».
+## Los lugares
 
-## Hecho en esta entrega
+Cada lugar es una puerta. Sólo se pintan puertas abiertas o a punto de abrirse; el resto de la lista es la reserva de ideas.
 
-**Mate Arena**
-
-- Pantalla de juego a ventana completa; entra en pantalla completa real al empezar si el navegador lo permite.
-- Barra de habilidades tipo MOBA: un círculo con la imagen de cada habilidad, su tecla debajo, barrido de recarga con cuenta atrás, y estados de lista, activa, no disponible y bloqueada. El talento pasivo del personaje tiene su propio círculo.
-- 19 iconos propios: 6 acciones y los 13 talentos (`mate/assets/abilities/`).
-- En tableta y móvil: palanca flotante a la izquierda y círculos en abanico alrededor de «Lanzar» a la derecha, sin teclas. Arrastrar «Lanzar» apunta; soltar lanza.
-- Sistema de puntos dentro de la simulación, de modo que se sincroniza en online: diana 100, atrapada 75, rescate 50, asistencia 40, esquiva 25 y 50 a cada jugador del equipo que gana la ronda. Los puntos saltan sobre la pista, se acumulan junto al retrato y hay tabla de todos los jugadores con MVP al acabar o manteniendo Tab.
-
-**El Gimnasio**
-
-- El material guardado ya no flota sobre el fondo: cada objeto revela su parte de una imagen del cuarto ordenado (balones tras la rejilla del carro, cestas, ganchos, colchoneta apilada). Al completar el orden, el fondo pasa a la imagen ordenada entera.
-- El objeto vuela a su sitio al guardarlo.
-- El pedido se recoge tocando cada material en su sitio, con contador sobre la escena.
-- La colchoneta de riesgo está sobre la estantería en lugar de flotar en la pared.
-- `scripts/build-store-states.py` regenera el cuarto ordenado y sus partes; con `--from-tidy` las recorta de una imagen repintada.
-
-**Portada e identidad (fase 1)**
-
-- `index.html` ya no redirige: es la fachada del cole en un día de lluvia, con cinco arcos que dejan ver cada sala. Cada puerta indica duración, si hay movimiento real y qué dispositivos necesita, y se puede filtrar por esos tres criterios. Las puertas muestran el progreso guardado.
-- «Tengo 5 minutos» abre un reto exprés para toda la clase, con cronómetro, variante sentada y elección de tipo, servido desde el banco común de 24 retos. «Tengo toda la sesión» lleva a los planes de 20, 35 y 50 minutos.
-- Nombre de trabajo **Días de Lluvia** en todas las salas, con el mismo distintivo arriba a la izquierda y enlace de vuelta a la portada. Patio Interior pasa a llamarse **El mundo de Chispa**.
-- Pendiente de esta fase: las tres salas de Chispa conservan su arte de islas nocturnas. Para que parezcan del mismo colegio hacen falta las imágenes pedidas en [arte/peticiones-imagenes.md](arte/peticiones-imagenes.md); hasta entonces sólo comparten cabecera.
-
-**Documentación**
-
-- Investigación de 23 recursos reales de EF para lluvia y qué rehacer de ellos.
-- Peticiones de imágenes listas para generar, con nombre de archivo, tamaño y punto de integración.
-
-## Plan
-
-El orden busca que cada fase deje algo usable en clase.
-
-### Fase 1 · Una sola casa
-
-1. **Portada del hub. Hecho.** La fachada del cole con una puerta por actividad, filtros y los accesos «Tengo 5 minutos» y «Tengo toda la sesión».
-2. **Un nombre y una identidad. Hecho en lo común.** Nombre de trabajo, distintivo y vuelta a la portada iguales en todas las salas. La ilustración pintada del gimnasio es la identidad del hub; el pixel art queda como estilo propio de Mate Arena, igual que una recreativa dentro del colegio.
-3. **Las salas de Chispa dentro del colegio. A medias.** Misión Refugio, Pulso Lab y Liga Relámpago se abren desde la portada y su banco de retos alimenta el reto exprés. Falta repintar su arte, que sigue siendo de islas nocturnas: depende de las imágenes pedidas.
-
-### Fase 2 · Pulir lo que hay
-
-**El Gimnasio**
-
-- Disposición táctil y de pantalla pequeña: diálogo plegable, botones de tamaño de dedo, paneles que no tapen la escena.
-- Carro del pedido como objeto de la escena que se va llenando (imagen pedida).
-- Riesgos de la fase 4 como parte de la imagen, sin botones rojos encima.
-- Sonido ambiente de lluvia y efectos al guardar; voz del profe ya disponible con la síntesis del navegador.
-- Segunda misión: **la pizarra de reglas**, que enseña las reglas del mate y desemboca en una partida de Mate Arena con esas mismas reglas.
-
-**Mate Arena**
-
-- Pista pintada en pixel art en lugar de la dibujada por código (imagen pedida), con gradas animadas.
-- Tutorial jugable de un minuto: moverse, lanzar, atrapar, esquivar.
-- Tres niveles de IA y elección de nivel en entrenamiento.
-- Modo proyector: una pantalla sólo de espectador con marcador grande para la clase.
-- Efectos de sonido propios y música corta de menú.
-- Insignias de fin de partido que premien el juego de equipo (más asistencias, más rescates), además del MVP por puntos.
-
-### Fase 3 · Actividades nuevas con movimiento real
-
-Rehechas desde cero a partir de los formatos que los docentes ya usan, corrigiendo sus carencias: esperas largas, movimiento ausente o reducido a repeticiones, sin inglés, una sola pantalla.
-
-| Orden | Actividad | En qué mejora lo que existe | Dispositivos | Tamaño |
+| Lugar | Qué se hace allí | Versión propia de | Se juega como | Estado |
 |---|---|---|---|---|
-| 1 | **Ruleta de retos** con filtros (de pie, sentado, parejas, calma) y temporizador | Banco curado sin repeticiones máximas ni carreras entre mesas; variante sentada siempre | Proyector | Pequeño |
-| 2 | **This or That activo**: se elige con el cuerpo y siguen 20–30 s de movimiento | Cero espera; frase modelo en inglés; sin vídeo externo | Proyector | Pequeño |
-| 3 | **Tablero cooperativo**: todos los equipos ejecutan cada casilla a la vez | Sin turnos perdidos, pozos ni retrocesos; dado y cronómetro integrados | Proyector | Medio |
-| 4 | **Bingo de movimiento** por equipos | Cartones únicos generados en el navegador; cantadas ES/EN; líneas cooperativas | Proyector + tablets | Medio |
-| 5 | **Campaña de lluvia por capítulos**: cada día de lluvia se supera un capítulo con retos de pupitre y un código | Progreso entre sesiones guardado; sin material voluminoso; el docente valida cada reto | Proyector | Grande |
-| 6 | **Rosco motor**: se responde con el cuerpo y cada acierto abre un microrreto | Quita el sedentarismo al formato más abundante; definiciones en inglés con apoyo visual | Proyector | Medio |
-| 7 | **Tabata de pupitre** con estaciones en el sitio | Versión sentada equivalente; pictogramas propios | Proyector | Pequeño |
+| **El Gimnasio** | Aventura gráfica bilingüe con el profe Robles; hoy, *Equipment Rescue* en el cuarto de material | — | Alumno · Pantalla | Abierto |
+| **La Pista** | Mate Arena: balón prisionero con habilidades, entrenamiento y salas | — | Alumno | Abierto |
+| **Las Espalderas** | Ruleta de retos: gira, sale un tipo de reto y toda la clase lo hace a la vez con cronómetro | Ruletas de Wordwall | Pantalla | Abierto |
+| **El Tatami** | Yoga: aprender posturas, crear secuencias entre todos y practicarlas | Yoga en vídeo y cuentos de yoga | Alumno · Pantalla | Siguiente |
+| **La Pizarra** | Rosco de EF que se responde con el cuerpo; reglas y jugadas | Pasapalabra y trivial de EF | Alumno · Pantalla | Siguiente |
+| **El Aula** | La oca cooperativa y el bingo en movimiento | Ocas y tableros de Genially; Movement bingo | Pantalla + tabletas | Después |
+| **La Grada** | Ver en la pantalla los partidos de mate que se están jugando y el marcador de la clase | — | Pantalla | Después |
+| **El Vestuario** | La taquilla del alumno: personaje, lo que lleva hecho, insignias | — | Alumno | Hoy es un botón; puerta propia más adelante |
+| **El Despacho** | Zona del profe: registro, lugares abiertos, preparar la sesión | — | Profe | Abierto, básico |
+| El Armario de los candados | Campaña por capítulos: retos de clase que dan un dígito y abren un armario | Breakout de los Pluvianos | Pantalla | Reserva |
+| La Sala de Espejos | Expresión corporal, mímica, «This or That» y ritmo | Vídeos de elección activa | Pantalla | Reserva |
+| El Botiquín | Hábitos saludables, calentamiento y primeros auxilios | Escape rooms de salud | Alumno | Reserva |
+| El Patio Cubierto | Juegos populares y tradicionales de Andalucía | — | Pantalla | Reserva |
+| La Vitrina | Logros de la clase y reto de la semana | — | Pantalla | Reserva |
+| El Circuito | Orientación con el plano del cole | — | Alumno | Reserva |
 
-La ruleta y This or That salen primero porque reutilizan el banco de retos ya escrito y dan al docente algo que usar en cinco minutos. La campaña es la que da personalidad al hub, pero necesita el banco ampliado y la portada.
+## Qué pasa con lo que había
 
-### Criterios para todo lo nuevo
+| Antes | Decisión |
+|---|---|
+| Equipment Rescue, gimnasio y almacén | Se queda. Es el modelo de estética y de interacción |
+| Mate Arena | Se queda como La Pista. Su pixel art se mantiene dentro del partido; menús y puerta pasarán a la estética común |
+| Banco de 24 retos | Se queda. Alimenta la ruleta y alimentará la oca y el bingo |
+| Misión Refugio, Pulso Lab, Liga Relámpago, Chispa y las islas | Fuera del recorrido de alumnado y pantalla. Siguen abribles desde el despacho hasta que sus sustitutos existan; después se retiran |
+| Mecánica de secuencias de Pulso Lab | Se reaprovecha en el constructor de secuencias de yoga |
+| Portada con filtros y fichas | Sustituida por la pantalla de inicio. La información de fichas vive en el despacho |
+| Nombre «Días de Lluvia» y lema de la lluvia | Retirados. Nombre de trabajo: **El Pabellón** |
 
-- **Movimiento real en poco espacio.** Cada actividad nueva tiene a toda la clase moviéndose a la vez la mayor parte del tiempo.
-- **Variante sentada o adaptada en cada reto**, visible, no escondida en ajustes.
-- **Bilingüe con función.** El inglés hace falta para jugar: la consigna, la frase modelo, la cantada.
-- **Sin cuentas ni datos de alumnos.** Progreso sólo en el navegador. Ver [PRIVACY.md](../PRIVACY.md).
-- **Proyector primero.** Legible desde el fondo del aula; las tablets suman, no son requisito.
-- **Arte propio.** Sin personajes ni música de terceros.
+## Las tres formas de entrar
+
+**Alumno.** Botón grande «Entrar a jugar». Elige curso, grupo, número de lista y uno de los ocho personajes; no escribe nada. Ese personaje es el mismo en el gimnasio y en la pista. Ve como mucho tres puertas. Su taquilla le enseña lo que lleva hecho. *Hecho.* Falta que el profe pueda decidir qué puertas ve cada clase.
+
+**Pantalla digital.** Sin jugador: lo que ocurre se anota como clase. Puertas pensadas para proyectar y moverse todos a la vez. *Hecho con la ruleta y el gimnasio.* Faltan La Grada y las actividades de El Aula.
+
+**Profe.** Una clave de 4 a 8 números por ordenador abre el despacho: registro de ese ordenador, descarga, lista de lugares y acceso a las actividades antiguas. *Hecho en lo básico.* La clave sólo evita que el alumnado entre desde ese ordenador; no es una cuenta. Falta: abrir y cerrar lugares, preparar sesiones y ver el registro de toda la clase.
+
+## El Tatami: yoga
+
+Petición del profe. Diseño:
+
+- **Aprender.** Fichas de postura con su nombre en español y en inglés, dibujo, qué se nota en el cuerpo y una indicación de seguridad. Cada postura tiene tres dibujos: entrada, postura y salida, que se animan en ese orden.
+- **Crear.** Una secuencia se monta poniendo posturas en fila. En el ordenador del alumno, la suya. En la pantalla o por grupos, colaborativa: cada persona añade una postura por turno hasta completar la secuencia de la clase.
+- **Practicar.** La pantalla guía la secuencia: nombre en los dos idiomas, la animación de entrada, las respiraciones contadas y la salida. La clase la hace en directo.
+- **Qué queda anotado.** Posturas vistas, secuencias creadas y secuencias practicadas.
+- **Primer lote:** doce posturas adecuadas para Primaria y practicables junto al pupitre o en colchoneta, sin inversiones ni apoyos de cuello.
+- **Depende de:** los dibujos, pedidos en [arte/peticiones-imagenes.md](arte/peticiones-imagenes.md). El constructor y la reproducción se pueden programar antes con siluetas provisionales.
+
+## Registro y notas
+
+Hoy cada ordenador guarda lo que se juega en él y el profe puede descargarlo. El envío a una hoja de cálculo privada del profe está programado y apagado: se enciende pegando una dirección en `config.js`. El diseño completo, con la hoja de Google propuesta y qué convierte una anotación en nota, está en [10-registro-y-notas.md](10-registro-y-notas.md).
+
+## Orden de trabajo
+
+| Fase | Qué entrega | Depende de |
+|---|---|---|
+| **A. Casa nueva** — hecha | Inicio de juego, tres formas de entrar, jugador sin nombres, registro local, despacho, ruleta en Las Espalderas, nombre y estética comunes, actividades antiguas apartadas | — |
+| **B. Notas** | Hoja de Google conectada, registro de toda la clase en un sitio, pestaña de notas por criterio | Que el profe cree la hoja y decida qué evidencia cuenta |
+| **C. El Tatami** | Yoga completo: aprender, crear y practicar | Dibujos de posturas |
+| **D. La Pizarra y El Aula** | Rosco motor, oca cooperativa, bingo en movimiento | Imágenes de tablero y puertas |
+| **E. La Grada** | Partidos de mate en directo en la pantalla; espectador sin plaza en la sala | Probar el online en la red del centro |
+| **F. Remate** | Pista pintada y menús de Mate en la estética común, gimnasio en móvil, segunda misión del gimnasio, retirada definitiva de las actividades antiguas | Imágenes |
 
 ## Decisiones abiertas
 
 | Decisión | Propuesta | Por qué importa |
 |---|---|---|
-| Nombre del hub | «Días de Lluvia» como nombre de trabajo, ya aplicado | Si se prefiere otro, es un cambio de texto en cuatro archivos HTML |
-| Estilo de los iconos de Mate | Pixel art, como retratos y jugadores | Los iconos actuales son vectoriales y funcionan, pero el pixel art los integraría mejor |
-| Puntos en Mate | Mantenerlos como parte del juego arcade, fuera de cualquier evaluación | El dossier del hub pedía no usar clasificaciones como medida de aprendizaje |
-| Pantalla completa automática | Activa al empezar la partida | En ordenadores de aula puede sorprender; se desactiva con una línea |
-| Cuarto ordenado definitivo | Repintarlo con el modelo de imagen a partir de la composición actual | La composición actual es correcta pero es un montaje de los objetos sueltos |
+| Nombre del hub | «El Pabellón» como nombre de trabajo | Aparece en el inicio y en todas las salas; cambiarlo es sustituir un texto |
+| Dónde se guardan las notas | Hoja de Google en la cuenta del profe, mejor la del centro | Notion no admite escritura directa desde una web sin exponer su clave |
+| Identidad del alumno | Curso, grupo y número de lista | No hay nombres en la web; la correspondencia con el nombre sólo está en la hoja del profe |
+| Pixel art de Mate | Mantenerlo dentro del partido | Rehacer trece personajes animados en estilo pintado es mucho trabajo de imagen |
+| Qué evidencia cuenta para nota | Definirlo por criterio antes de la fase B | Completar un juego no equivale a superar un criterio |

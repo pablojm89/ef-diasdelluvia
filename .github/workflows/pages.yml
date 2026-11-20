@@ -1,4 +1,4 @@
-name: Publicar Días de Lluvia
+name: Publicar El Pabellón
 on:
   workflow_dispatch:
   push:
@@ -40,7 +40,7 @@ jobs:
         if: steps.pages-mode.outputs.build_type == 'workflow'
         run: |
           mkdir -p _site/assets
-          cp index.html hub.css hub.js patio.html app.js content.js engine.js styles.css _site/
+          cp index.html hub.css hub.js registro.js config.js patio.html app.js content.js engine.js styles.css _site/
           cp assets/*.svg assets/*.webp _site/assets/
           cp -R mate _site/mate
           cp -R gimnasio _site/gimnasio
