@@ -158,7 +158,15 @@ function aimFor(state){
 }
 function controls(){const state=currentState();return {mx:(keys.has('ArrowRight')||keys.has('KeyD')?1:0)-(keys.has('ArrowLeft')||keys.has('KeyA')?1:0),my:(keys.has('ArrowDown')||keys.has('KeyS')?1:0)-(keys.has('ArrowUp')||keys.has('KeyW')?1:0),...aimFor(state),...actions};}
 function consumeActions(){for(const key of Object.keys(actions))actions[key]=false;}
-function togglePause(){if(!game||(mode==='online'&&!room?.isHost)||game.phase==='matchOver')return;game.paused=!game.paused;game.tick++;clearKeys();if(room?.isHost)room.broadcastState(snapshot(game));updateStateUI(game);}
+function togglePause(){
+ if(!game||(mode==='online'&&!room?.isHost)||game.phase==='matchOver')return;
+ game.paused=!game.paused;
+ game.tick++;
+ clearKeys();
+ if(room?.isHost)room.broadcastState(snapshot(game));
+ updateStateUI(game);
+ if(!game.paused)$('court').focus({preventScroll:true});
+}
 function playSound(state){
  if(!$('sound-enabled').checked||!audio||audio.state!=='running')return;
  for(const e of state.events||[])if(e.id>lastAudioEvent){lastAudioEvent=e.id;if(!['throw','catch','hit','rescue','start','match'].includes(e.type))continue;

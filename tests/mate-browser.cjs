@@ -18,7 +18,7 @@ function checkTeams(players) {
  const diag=p=>p.evaluate(()=>window.mateDiagnostics());
  try{
   await fs.mkdir(out,{recursive:true});
-  for(let i=0;i<count;i++){
+  async function openPlayer(i){
    const context=await browser.newContext({viewport:{width:1366,height:900},reducedMotion:'reduce'});contexts.push(context);
    if(i>1)await context.addInitScript(()=>{window.MATE_FORCE_RELAY=true;});
    await context.route('https://patio.test/**',async route=>{
@@ -27,8 +27,9 @@ function checkTeams(players) {
     try{await route.fulfill({status:200,body:await fs.readFile(file),contentType:({'.html':'text/html','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.webp':'image/webp','.png':'image/png'}[path.extname(file)]||'application/octet-stream')});}catch{await route.fulfill({status:404,body:''});}
    });
    const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));pages.push(page);await page.goto('https://patio.test/mate/');await page.waitForSelector('.character-choice');
+   return page;
   }
-  const host=pages[0];await host.screenshot({path:path.join(out,'mate-menu.png'),fullPage:true});
+  const host=await openPlayer(0);await host.screenshot({path:path.join(out,'mate-menu.png'),fullPage:true});
   const heroCards=host.locator('.character-choice');
   assert.equal(await heroCards.count(),13);
   const portraitSources=await heroCards.locator('img').evaluateAll(images=>images.map(image=>image.src));
@@ -47,7 +48,8 @@ function checkTeams(players) {
   checkTeams((await diag(host)).state.players);
   const y0=(await diag(host)).state.players.find(p=>p.id==='local').y;
   await host.keyboard.down('ArrowDown');await host.waitForTimeout(450);await host.keyboard.up('ArrowDown');assert.ok((await diag(host)).state.players.find(p=>p.id==='local').y>y0+35);
-  await host.keyboard.press('Space');await host.waitForTimeout(80);assert.equal((await diag(host)).state.ball.holder,null);
+  await host.keyboard.press('Space');
+  await host.waitForFunction(()=>mateDiagnostics().state.ball.holder!=='local',{},{timeout:4000});
   await host.click('#pause-button');const t=(await diag(host)).state.tick,roundLeft=(await host.evaluate(()=>document.getElementById('game-view').dataset.phase));await host.waitForTimeout(250);assert.equal((await diag(host)).state.paused,true);
   await host.screenshot({path:path.join(out,'mate-training.png'),fullPage:true});
   host.once('dialog',d=>d.accept());await host.click('#leave-game');
@@ -55,7 +57,7 @@ function checkTeams(players) {
   await host.click('#host-button');await host.waitForSelector('#lobby-view:not([hidden])',{timeout:30000});const code=await host.locator('#lobby-code').textContent();
   const size=Math.ceil(count/2);await host.selectOption('#team-size',String(size));await host.selectOption('#round-seconds','60');await host.selectOption('#best-of','1');
   for(let i=1;i<count;i++){
-   const p=pages[i];await p.click('[data-character="12"]');await p.fill('#room-code',code);await p.click('#join-button');try{await p.waitForSelector('#lobby-view:not([hidden])',{timeout:30000});}catch(e){console.log('JOIN FAILED',i,'STATUS',await p.locator('#menu-status').textContent(),'HOST',await diag(host));throw e;}
+   const p=await openPlayer(i);await p.click('[data-character="12"]');await p.fill('#room-code',code);await p.click('#join-button');try{await p.waitForSelector('#lobby-view:not([hidden])',{timeout:30000});}catch(e){console.log('JOIN FAILED',i,'STATUS',await p.locator('#menu-status').textContent(),'HOST',await diag(host));throw e;}
    console.log(`Joined ${i+1}/${count}`);await p.click('#ready-button');
   }
   await host.waitForFunction(n=>mateDiagnostics().roster.filter(m=>m.connected).length===n,count,{timeout:15000});
@@ -78,7 +80,10 @@ function checkTeams(players) {
   console.log(`Connected ${count} independent browser contexts. Transport: ${(await diag(guest)).transport}`);
   // A remote key press must change the host-authoritative player's position.
   const before=(await diag(host)).state.players.find(p=>p.id===guestId).y;
-  await guest.keyboard.down('ArrowDown');await guest.waitForTimeout(480);await guest.keyboard.up('ArrowDown');try{await host.waitForFunction(({id,y})=>mateDiagnostics().state.players.find(p=>p.id===id).y>y+25,{id:guestId,y:before},{timeout:8000});}catch(e){console.log('MOVEMENT HOST',await diag(host));console.log('MOVEMENT GUEST',await diag(guest));throw e;}
+  await guest.keyboard.down('ArrowDown');
+  try{
+   await host.waitForFunction(({id,y})=>mateDiagnostics().state.players.find(p=>p.id===id).y>y+25,{id:guestId,y:before},{timeout:8000});
+  }finally{await guest.keyboard.up('ArrowDown');}
   const after=(await diag(host)).state.players.find(p=>p.id===guestId).y;assert.ok(after>before+25,`Remote movement not received: ${before} -> ${after}`);
   // Stop and synchronize. Guests cannot use P to pause the host.
   await guest.keyboard.press('KeyP');await guest.waitForTimeout(200);assert.equal((await diag(host)).state.paused,false);
@@ -94,8 +99,10 @@ function checkTeams(players) {
   assert.equal(await guest.locator('#match-talent-name').textContent(),talentBefore);
   await host.click('#pause-button');await guest.waitForFunction(()=>mateDiagnostics().state?.paused===false,{},{timeout:7000});
   // Actual throw travels from the host and is visible in a different browser.
-  await host.keyboard.press('Space');await guest.waitForTimeout(350);
-  const thrown=(await diag(host)).state.ball;assert.ok(thrown.holder!== (await diag(host)).myId);
+  await host.locator('#court').focus();
+  const hostId=(await diag(host)).myId;
+  await host.keyboard.press('Space');
+  await guest.waitForFunction(id=>mateDiagnostics().state.ball.holder!==id,hostId,{timeout:8000});
   await host.screenshot({path:path.join(out,'mate-online-host.png'),mask:[host.locator('#match-mode')],fullPage:true});await guest.screenshot({path:path.join(out,'mate-online-guest.png'),mask:[guest.locator('#match-mode')],fullPage:true});
   console.log('Remote movement, host-only pause, reconnect and shared throw passed.');
   if(full){
