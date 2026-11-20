@@ -75,3 +75,9 @@
  .lobby-controls .button,.lobby-controls .team-switch {width:100%}
 }
 .hero-bio strong small {font-size:.71rem;color:#c0d4d9;font-weight:600;white-space:nowrap}
+
+/* Same lockup as the front page, so every room shows the way back. */
+.world-link{display:flex;align-items:center;gap:10px;line-height:1.1;font-size:.6rem;font-weight:700;letter-spacing:.16em;color:var(--gold)}
+.world-link img{display:block;width:34px;height:34px}
+.world-link strong{font-size:1.58em;font-weight:900;letter-spacing:.1em;color:#fff}
+@media(max-width:700px){.world-link span{display:none}.world-link img{width:30px;height:30px}}

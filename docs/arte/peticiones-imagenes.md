@@ -69,8 +69,14 @@ Normas comunes: personajes y objetos originales, sin marcas, logotipos ni texto 
 - **Qué pedir:** una colchoneta azul mal apoyada, sobresaliendo de lo alto de una estantería y a punto de caer; un cono naranja volcado delante de una puerta.
 - **Integración pendiente:** sustituir a los objetos sueltos que se usan ahora en esa fase.
 
-### 6. Portada del hub
+### 6. Las salas de Chispa pintadas como parte del colegio
+
+- **Dónde:** `assets/door-mision.webp`, `assets/door-pulso.webp` y `assets/door-liga.webp`, 480 × 640 px cada una, sustituyendo los recortes actuales de las islas.
+- **Qué pedir:** tres estancias del mismo colegio andaluz de `gimnasio/assets/gym.webp`, con su luz cálida y su estilo de ilustración pintada, vistas a través de una puerta: un invernadero o aula de naturaleza con una baliza encendida (Misión Refugio), un aula de música con tarima y altavoces (Pulso Lab) y un patio cubierto con una pista pequeña y banderines (Liga Relámpago). Sin personas ni texto. El motivo principal, centrado, porque la imagen se recorta en forma de arco.
+- **Integración:** ninguna para la portada. Para que las salas por dentro dejen de ser islas nocturnas hay que repintar además `assets/world.webp` con el mismo criterio; eso sí requiere ajustar `styles.css`.
+
+### 7. Cielo de la portada
 
 - **Dónde:** `assets/hub.webp`, 1920 × 1080 px.
-- **Qué pedir:** el colegio andaluz del gimnasio visto desde el patio cubierto en un día de lluvia: charcos, luz cálida saliendo de las ventanas, galería con arcos. Cuatro puertas bien separadas y reconocibles sin texto: gimnasio, cuarto de materiales, pista de mate y aula. Mismo estilo que `gimnasio/assets/gym.webp`. Dejar el tercio superior despejado para el título.
-- **Integración pendiente:** la portada de la fase 1 de la hoja de ruta.
+- **Qué pedir:** cielo de tarde lluviosa sobre los tejados de teja y los naranjos de un colegio andaluz, en tonos azul verdoso apagados, sin edificios en la mitad izquierda, donde va el título. Mismo estilo que `gimnasio/assets/gym.webp`. Panorámica: sólo se ve una franja de unos 350 px de alto.
+- **Integración pendiente:** ponerla como fondo de `.sky` en `hub.css`, detrás de la lluvia animada.

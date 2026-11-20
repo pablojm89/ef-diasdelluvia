@@ -18,6 +18,29 @@ const out=path.join(base,'artifacts');
  const page=await context.newPage(),errors=[];
  page.on('pageerror',e=>errors.push(e.message));
  await fs.mkdir(out,{recursive:true});
+ // Front page: five doors, filters and the express challenge with its clock.
+ await page.goto('https://patio.test/index.html');
+ assert.equal(await page.locator('.door').count(),5);
+ assert.equal(await page.locator('.door img').evaluateAll(images=>images.every(image=>image.complete&&image.naturalWidth>0)),true);
+ await page.locator('[data-filter="move"]').click();
+ assert.equal(await page.locator('.door.match').count(),3);
+ await page.locator('[data-filter="all"]').click();
+ await page.locator('#quick-challenge').click();
+ const firstChallenge=await page.locator('#express-title').textContent();
+ assert.ok(firstChallenge.length>3);
+ const before=await page.locator('#express-clock').textContent();
+ await page.locator('#express-start').click();
+ await page.waitForTimeout(1250);
+ assert.notEqual(await page.locator('#express-clock').textContent(),before);
+ await page.locator('#express-next').click();
+ assert.notEqual(await page.locator('#express-title').textContent(),firstChallenge);
+ await page.screenshot({path:path.join(out,'hub-desktop.png'),fullPage:true});
+ await page.locator('#express .close').click();
+ for(const width of [320,390,768]){
+  await page.setViewportSize({width,height:800});
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`portada at ${width}: horizontal overflow`);
+ }
+ await page.setViewportSize({width:1440,height:1000});
  await page.goto('https://patio.test/patio.html');
  await page.waitForSelector('.world-location');
  assert.equal(await page.locator('.world-location').count(),3);

@@ -1,6 +1,8 @@
-# El Gimnasio · aventura de Educación Física bilingüe
+# Días de Lluvia · Educación Física
 
-Una propuesta de coordinación, ritmo, expresión y cooperación para 5.º y 6.º de Primaria.
+Un colegio para los días de lluvia: juegos de aula con movimiento real, una aventura bilingüe en el gimnasio y balón prisionero arcade. Para 5.º y 6.º de Primaria.
+
+**Portada:** la entrada es la fachada del cole, con una puerta por actividad. Cada puerta dice cuánto dura, si hay movimiento real y qué dispositivos necesita. «Tengo 5 minutos» abre un reto exprés con cronómetro, sacado del banco de 24 retos; «Tengo toda la sesión» lleva a los planes de 20, 35 y 50 minutos. Todas las salas comparten nombre, cabecera y camino de vuelta a la portada.
 
 **Privacidad:** el repositorio es público y sólo contiene recursos genéricos y personajes ficticios. No incorporar datos reales de alumnos. [Política y comprobaciones de publicación](PRIVACY.md).
 
@@ -8,7 +10,7 @@ Una propuesta de coordinación, ritmo, expresión y cooperación para 5.º y 6.�
 
 **Presentación inmersiva:** el escenario ocupa toda la ventana; diálogos y controles se integran sobre la escena. Misión, mochila y ajustes se abren desde el menú del juego.
 
-**Primera aventura implementada:** [Equipment Rescue](gimnasio/), gimnasio y almacén con cinco fases, objetos manipulables, instrucciones bilingües y progreso local. El material guardado forma parte del propio fondo: cada objeto revela su parte de la imagen del cuarto ordenado. La entrada principal abre esta aventura; las experiencias anteriores siguen en [Patio Interior](patio.html) y Mate Arena conserva su ruta.
+**Primera aventura implementada:** [Equipment Rescue](gimnasio/), gimnasio y almacén con cinco fases, objetos manipulables, instrucciones bilingües y progreso local. El material guardado forma parte del propio fondo: cada objeto revela su parte de la imagen del cuarto ordenado. Las experiencias de aula están en [El mundo de Chispa](patio.html) y Mate Arena conserva su ruta.
 
 **Dossier de diseño:** [El Gimnasio, aventura gráfica bilingüe para EF de 5.º–6.º en Andalucía](docs/hub-ef/README.md). Incluye investigación, dirección artística, arquitectura y el guion de la primera misión del almacén. La primera misión ya está implementada; los demás espacios del dossier siguen planificados.
 
@@ -55,8 +57,8 @@ Misión y las experiencias físicas guardan progreso local si el navegador lo pe
 
 ## Comprobar y publicar
 
-`npm test` ejecuta pruebas del banco y las reglas mediante Node. `npm run test:browser` ejecuta el recorrido completo y genera capturas en `artifacts/`; requiere Playwright disponible en el entorno y Chromium instalado (ruta opcional `CHROMIUM_PATH`). El runner sirve los archivos en memoria, sin servidor público. `node --check app.js` valida sintaxis. No hay compilación. `python3 scripts/build-store-states.py` vuelve a generar el cuarto de materiales ordenado y requiere Pillow. Mate incluye una copia local de PeerJS 1.5.5 con su licencia MIT; el renderizado y el motor de juego son propios. `npm run test:mate` realiza las pruebas online reales y requiere internet, Playwright y Chromium. `MATE_CLIENTS=12 MATE_FULL_MATCH=0 npm run test:mate` prueba una sala de doce clientes.
+`npm test` ejecuta pruebas del banco y las reglas mediante Node. `npm run test:browser` ejecuta el recorrido completo y genera capturas en `artifacts/`; requiere Playwright disponible en el entorno y Chromium instalado (ruta opcional `CHROMIUM_PATH`). El runner sirve los archivos en memoria, sin servidor público. `node --check app.js` valida sintaxis. No hay compilación. `python3 scripts/build-store-states.py` vuelve a generar el cuarto de materiales ordenado y `python3 scripts/build-hub-art.py` las imágenes de la portada; ambos requieren Pillow. Mate incluye una copia local de PeerJS 1.5.5 con su licencia MIT; el renderizado y el motor de juego son propios. `npm run test:mate` realiza las pruebas online reales y requiere internet, Playwright y Chromium. `MATE_CLIENTS=12 MATE_FULL_MATCH=0 npm run test:mate` prueba una sala de doce clientes.
 
-La web está publicada en [Patio Interior](https://pablojm89.github.io/ef-diasdelluvia/) y [Mate Arena](https://pablojm89.github.io/ef-diasdelluvia/mate/). El 20 de noviembre de 2026 el propietario hizo público el repositorio y activó Pages desde `main` y la raíz. El workflow comprueba contenido y pruebas; si se elige **GitHub Actions** como origen de Pages, también despliega un paquete limitado a la aplicación. Con publicación desde rama, el control de CI no bloquea la publicación automática. [Documentación de GitHub](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).
+La web está publicada en [Días de Lluvia](https://pablojm89.github.io/ef-diasdelluvia/) y [Mate Arena](https://pablojm89.github.io/ef-diasdelluvia/mate/). El 20 de noviembre de 2026 el propietario hizo público el repositorio y activó Pages desde `main` y la raíz. El workflow comprueba contenido y pruebas; si se elige **GitHub Actions** como origen de Pages, también despliega un paquete limitado a la aplicación. Con publicación desde rama, el control de CI no bloquea la publicación automática. [Documentación de GitHub](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).
 
 Textos e interfaz creados para el proyecto. Escenario y personaje generados con IA para esta dirección artística y optimizados en WebP; también se conservan las ilustraciones SVG iniciales. Las fuentes son referencias, no contenidos redistribuidos. No se incluyen vídeos, música ni marcas de Just Dance o Genially. Licencia de redistribución todavía por decidir.

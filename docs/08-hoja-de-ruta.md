@@ -12,10 +12,10 @@ Hay tres productos que no se conocen entre sí:
 | **Mate Arena** (`/mate/`) | Balón prisionero arcade, entrenamiento y salas online de hasta 26 | Jugable; online probado por la entrega anterior | Pista dibujada por código, sin arte propio; sin tutorial; la IA tiene un único nivel |
 | **Patio Interior** (`/patio.html`) | Tres experiencias de aula con movimiento real y 24 retos | Jugable con proyector | Otra estética y otro nombre; es lo único que hace moverse a la clase y está escondido tras dos enlaces |
 
-Problemas de conjunto:
+Problemas de conjunto al empezar:
 
-- **No hay portada.** `index.html` redirige al gimnasio. Quien llega no ve que existen tres cosas ni para qué sirve cada una.
-- **Tres identidades.** Tres nombres, tres paletas y tres tipografías. El gimnasio es ilustración pintada, Mate es pixel art y Patio es interfaz plana.
+- **No había portada.** `index.html` redirigía al gimnasio. Resuelto en la fase 1.
+- **Tres identidades.** Tres nombres, tres paletas y tres estilos de imagen: ilustración pintada en el gimnasio, pixel art en Mate e islas en 3D en las salas de Chispa. El nombre y la cabecera ya son comunes; el arte, todavía no.
 - **Poco movimiento real.** El gimnasio y Mate son de pantalla. Un «día de lluvia» de EF necesita que la clase se mueva; hoy sólo lo consigue Patio Interior.
 - **El hub casi no tiene contenido.** Comparado con lo que usan los docentes (tableros, ruletas, bingos, breakouts), faltan los formatos de «tengo cinco minutos» y «tengo la hora entera».
 
@@ -37,6 +37,13 @@ Problemas de conjunto:
 - La colchoneta de riesgo está sobre la estantería en lugar de flotar en la pared.
 - `scripts/build-store-states.py` regenera el cuarto ordenado y sus partes; con `--from-tidy` las recorta de una imagen repintada.
 
+**Portada e identidad (fase 1)**
+
+- `index.html` ya no redirige: es la fachada del cole en un día de lluvia, con cinco arcos que dejan ver cada sala. Cada puerta indica duración, si hay movimiento real y qué dispositivos necesita, y se puede filtrar por esos tres criterios. Las puertas muestran el progreso guardado.
+- «Tengo 5 minutos» abre un reto exprés para toda la clase, con cronómetro, variante sentada y elección de tipo, servido desde el banco común de 24 retos. «Tengo toda la sesión» lleva a los planes de 20, 35 y 50 minutos.
+- Nombre de trabajo **Días de Lluvia** en todas las salas, con el mismo distintivo arriba a la izquierda y enlace de vuelta a la portada. Patio Interior pasa a llamarse **El mundo de Chispa**.
+- Pendiente de esta fase: las tres salas de Chispa conservan su arte de islas nocturnas. Para que parezcan del mismo colegio hacen falta las imágenes pedidas en [arte/peticiones-imagenes.md](arte/peticiones-imagenes.md); hasta entonces sólo comparten cabecera.
+
 **Documentación**
 
 - Investigación de 23 recursos reales de EF para lluvia y qué rehacer de ellos.
@@ -46,11 +53,11 @@ Problemas de conjunto:
 
 El orden busca que cada fase deje algo usable en clase.
 
-### Fase 1 · Una sola casa (corta)
+### Fase 1 · Una sola casa
 
-1. **Portada del hub.** Sustituir la redirección por una portada: el colegio en día de lluvia, con una puerta por actividad y dos accesos rápidos, «Tengo 5 minutos» y «Tengo la clase entera». Indicar en cada puerta si se juega con proyector, con tablets o ambos, y si hay movimiento real.
-2. **Un nombre y una identidad.** Decidir el nombre del hub (ver decisiones abiertas). Unificar tipografía, botones, cabecera y la forma de volver a la portada. La ilustración pintada del gimnasio es la identidad del hub; el pixel art queda como estilo propio de Mate Arena, igual que una recreativa dentro del colegio.
-3. **Patio Interior dentro del colegio.** Reubicar Misión Refugio, Pulso Lab y Liga Relámpago como salas del mismo edificio y repintar su interfaz con la identidad común. Su banco de 24 retos pasa a ser el banco compartido de todo el hub.
+1. **Portada del hub. Hecho.** La fachada del cole con una puerta por actividad, filtros y los accesos «Tengo 5 minutos» y «Tengo toda la sesión».
+2. **Un nombre y una identidad. Hecho en lo común.** Nombre de trabajo, distintivo y vuelta a la portada iguales en todas las salas. La ilustración pintada del gimnasio es la identidad del hub; el pixel art queda como estilo propio de Mate Arena, igual que una recreativa dentro del colegio.
+3. **Las salas de Chispa dentro del colegio. A medias.** Misión Refugio, Pulso Lab y Liga Relámpago se abren desde la portada y su banco de retos alimenta el reto exprés. Falta repintar su arte, que sigue siendo de islas nocturnas: depende de las imágenes pedidas.
 
 ### Fase 2 · Pulir lo que hay
 
@@ -100,7 +107,7 @@ La ruleta y This or That salen primero porque reutilizan el banco de retos ya es
 
 | Decisión | Propuesta | Por qué importa |
 |---|---|---|
-| Nombre del hub | Elegir uno entre «El Gimnasio», «Patio Interior» u otro nuevo | Hoy conviven tres nombres; la portada necesita uno |
+| Nombre del hub | «Días de Lluvia» como nombre de trabajo, ya aplicado | Si se prefiere otro, es un cambio de texto en cuatro archivos HTML |
 | Estilo de los iconos de Mate | Pixel art, como retratos y jugadores | Los iconos actuales son vectoriales y funcionan, pero el pixel art los integraría mejor |
 | Puntos en Mate | Mantenerlos como parte del juego arcade, fuera de cualquier evaluación | El dossier del hub pedía no usar clasificaciones como medida de aprendizaje |
 | Pantalla completa automática | Activa al empezar la partida | En ordenadores de aula puede sorprender; se desactiva con una línea |

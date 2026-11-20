@@ -1,1 +1,73 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=gimnasio/"><title>El Gimnasio · EF bilingüe</title><link rel="canonical" href="gimnasio/"></head><body><p><a href="gimnasio/">Entrar en El Gimnasio · aventura de Educación Física bilingüe</a></p><p><a href="patio.html">Actividades de aula</a> · <a href="mate/">Mate Arena</a></p></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+ <meta name="theme-color" content="#1d3a44">
+ <meta name="description" content="Educación Física para días de lluvia: juegos de aula con movimiento real, una aventura bilingüe en el gimnasio y balón prisionero arcade. Para 5.º y 6.º de Primaria.">
+ <title>Días de Lluvia · Educación Física</title>
+ <link rel="icon" href="./assets/mark.svg" type="image/svg+xml">
+ <link rel="stylesheet" href="./hub.css">
+</head>
+<body>
+ <a class="skip" href="#puertas">Saltar a las actividades</a>
+ <header class="hub-top">
+  <a class="lockup" href="./" aria-label="Días de Lluvia, portada"><img src="./assets/mark.svg" alt="" width="40" height="40"><span><small>EDUCACIÓN FÍSICA</small><strong>DÍAS DE LLUVIA</strong></span></a>
+  <nav aria-label="Para preparar la clase"><a href="./patio.html#biblioteca">Libro de retos</a><a href="./patio.html#guia">Rincón del profe</a></nav>
+ </header>
+ <main>
+  <section class="sky" aria-labelledby="lema">
+   <canvas id="rain" aria-hidden="true"></canvas>
+   <div class="intro">
+    <p class="eyebrow">5.º y 6.º de Primaria · Español e inglés</p>
+    <h1 id="lema">Fuera llueve.<br><em>Dentro se juega.</em></h1>
+    <p class="lead">Elige una puerta del cole. Hay juego para cinco minutos y para la sesión entera.</p>
+    <div class="quick">
+     <button type="button" id="quick-challenge" class="sign gold"><strong>Tengo 5 minutos</strong><small>Un reto exprés para toda la clase</small></button>
+     <a href="#sesion" class="sign"><strong>Tengo toda la sesión</strong><small>Planes de 20, 35 y 50 minutos</small></a>
+    </div>
+   </div>
+   <figure class="host"><img src="./gimnasio/assets/robles-talk.webp" alt="El profe Robles saluda" width="760" height="550"><figcaption class="bubble"><span lang="en">It's raining outside. What shall we play today?</span><span>Fuera llueve. ¿A qué jugamos hoy?</span></figcaption></figure>
+  </section>
+  <section class="facade" id="puertas" aria-labelledby="puertas-titulo">
+   <div class="frieze" aria-hidden="true"></div>
+   <div class="facade-inner">
+    <div class="facade-head">
+     <h2 id="puertas-titulo">Las puertas del cole</h2>
+     <div class="filters" role="group" aria-label="Mostrar actividades">
+      <button type="button" data-filter="all" aria-pressed="true">Todas</button>
+      <button type="button" data-filter="move" aria-pressed="false">Con movimiento real</button>
+      <button type="button" data-filter="projector" aria-pressed="false">Con un proyector</button>
+      <button type="button" data-filter="devices" aria-pressed="false">Con tabletas u ordenadores</button>
+     </div>
+    </div>
+    <ul class="doors">
+     <li><a class="door" href="./patio.html#mision" data-tags="move projector" data-progress="mision"><span class="arch"><img src="./assets/door-mision.webp" alt="" width="480" height="640" loading="lazy"><i class="ribbon" hidden></i></span><span class="plate">Misión Refugio</span><span class="kicker">Aventura cooperativa de seis retos</span><span class="facts"><b class="move">Movimiento real</b><span>12–20 min</span><span>Proyector</span></span></a></li>
+     <li><a class="door" href="./patio.html#pulso" data-tags="move projector"><span class="arch"><img src="./assets/door-pulso.webp" alt="" width="480" height="640" loading="lazy"></span><span class="plate">Pulso Lab</span><span class="kicker">Crea y ensaya tu propio ritmo</span><span class="facts"><b class="move">Movimiento real</b><span>15–25 min</span><span>Proyector</span></span></a></li>
+     <li><a class="door" href="./patio.html#liga" data-tags="move projector"><span class="arch"><img src="./assets/door-liga.webp" alt="" width="480" height="640" loading="lazy"></span><span class="plate">Liga Relámpago</span><span class="kicker">Retos simultáneos por equipos</span><span class="facts"><b class="move">Movimiento real</b><span>15–20 min</span><span>Proyector</span></span></a></li>
+     <li><a class="door" href="./gimnasio/" data-tags="projector devices" data-progress="gimnasio"><span class="arch"><img src="./assets/door-gimnasio.webp" alt="" width="480" height="640" loading="lazy"><i class="ribbon" hidden></i></span><span class="plate">El Gimnasio</span><span class="kicker">Aventura bilingüe: Equipment Rescue</span><span class="facts"><b>En pantalla</b><span>15–20 min</span><span>Proyector o por parejas</span></span></a></li>
+     <li><a class="door" href="./mate/" data-tags="devices"><span class="arch pixel"><img src="./assets/door-mate.webp" alt="" width="480" height="640" loading="lazy"></span><span class="plate">Mate Arena</span><span class="kicker">Balón prisionero arcade y online</span><span class="facts"><b>En pantalla</b><span>5–10 min por partido</span><span>Un dispositivo por jugador</span></span></a></li>
+    </ul>
+    <div class="session" id="sesion">
+     <div><h2>¿Tienes toda la sesión?</h2><p>El rincón del profe trae la clase preparada: activación, juego y vuelta a la calma.</p></div>
+     <div class="session-links"><a class="sign" href="./patio.html#guia-20"><strong>20 min</strong></a><a class="sign" href="./patio.html#guia-35"><strong>35 min</strong></a><a class="sign" href="./patio.html#guia-50"><strong>50 min</strong></a></div>
+    </div>
+   </div>
+   <div class="skirting" aria-hidden="true"></div>
+  </section>
+ </main>
+ <footer class="hub-foot"><span>Sin cuentas ni datos de alumnos. El progreso se guarda sólo en este navegador.</span><a href="https://github.com/pablojm89/ef-diasdelluvia/blob/main/PRIVACY.md">Privacidad</a></footer>
+
+ <dialog id="express" aria-labelledby="express-title">
+  <form method="dialog"><button class="close" aria-label="Cerrar el reto">Cerrar</button></form>
+  <p class="eyebrow"><span id="express-family"></span> · <span id="express-players"></span></p>
+  <h2 id="express-title"></h2>
+  <p id="express-text" class="express-text"></p>
+  <p class="observe"><strong>Qué observar</strong><span id="express-criterion"></span></p>
+  <div class="clock"><output id="express-clock" aria-live="off">0:40</output><div class="clock-buttons"><button type="button" id="express-start" class="sign gold"><strong>Empezar</strong></button><button type="button" id="express-next" class="sign"><strong>Otro reto</strong></button></div></div>
+  <div class="express-options"><label><input type="checkbox" id="express-seated"> Variante sentada</label><label>Tipo de reto <select id="express-kind"><option value="all">Sorpréndeme</option></select></label></div>
+  <p id="express-status" class="express-status" role="status"></p>
+ </dialog>
+ <script type="module" src="./hub.js"></script>
+</body>
+</html>
