@@ -27,7 +27,7 @@ function render(){
  const focused=document.activeElement;const focusText=focused?.tagName==='BUTTON'?focused.textContent:null;
  document.body.classList.toggle('reduced',reduced);$('translation').checked=support;$('motion').checked=reduced;
  $('scene').className=`scene ${room}`;$('room-title').textContent=room==='gym'?'El gimnasio':'El cuarto de materiales';$('location').textContent=room==='gym'?'THE GYM · TU PUNTO DE ENCUENTRO':'THE EQUIPMENT ROOM · MISIÓN EN CURSO';$('switch-room').textContent=room==='gym'?'Entrar al almacén':'Volver al gimnasio';
- $('prof').innerHTML='<img src="assets/teacher.webp" alt="" draggable="false">';$('prof').classList.toggle('hidden',room==='store');
+ $('prof').innerHTML='<img src="assets/teacher-robles.webp" alt="" draggable="false">';$('prof').classList.toggle('hidden',room==='store');
  $('steps').innerHTML=steps.map((s,i)=>`<li class="${i<state.stage?'done':i===state.stage?'current':''}"><span>${i<state.stage?'✓':i+1}</span>${s}</li>`).join('');$('stage-count').textContent=state.stage===5?'COMPLETADA':`${state.stage+1} / 5`;
  const [en,es]=prompts();$('english').textContent=en;$('spanish').textContent=es;$('spanish').hidden=!support;
  $('selection').textContent=selected?`${equipment.find(e=>e.id===selected).en} seleccionado · Elige un destino`:room==='gym'?'Habla con el profe o entra al almacén.':state.stage===3?'Toca el material para añadir una unidad al carro.':'Selecciona un material · Después elige su lugar';
@@ -70,7 +70,7 @@ function render(){
  if(state.stage===5){
   const p=document.createElement('div');p.className='completion';p.innerHTML='<strong>MISSION COMPLETE</strong><p>Has localizado material, preparado un pedido y revisado riesgos.</p><p lang="en">Tell your partner: where do the hoops go?</p><p>Ahora explica cómo dejarías libre un paso en el gimnasio real.</p><small>Esta misión comprueba comprensión. El profe observa la práctica real.</small>';$('actions').append(p,button('Volver al gimnasio',()=>{room='gym';render();},'primary'));
  }
- if(focusText){const replacement=[...document.querySelectorAll('button')].find(b=>b.textContent===focusText&&!b.disabled);if(replacement)replacement.focus({preventScroll:true});else if(selected){$('target-list').querySelector('button')?.focus({preventScroll:true});}}
+ if(focusText){const replacement=[...document.querySelectorAll('button')].find(b=>b.textContent===focusText&&!b.disabled);if(replacement)replacement.focus({preventScroll:true});else if(selected){$('target-list').querySelector('button')?.focus({preventScroll:true});}else{$('object-list').querySelector('button:not(:disabled)')?.focus({preventScroll:true});}}
 }
 $('switch-room').onclick=()=>{room=room==='gym'?'store':'gym';selected=null;render();};
 $('prof').onclick=()=>{$('feedback').textContent='¡Hola, equipo! Hay que preparar el gimnasio. Entra al almacén y sigue mis instrucciones. Puedes explorar sin prisa.';};
