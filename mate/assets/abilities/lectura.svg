@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Lectura de juego">
+<defs><radialGradient id="g" cx="34%" cy="26%" r="80%"><stop offset="0" stop-color="#d4f7c9"/><stop offset="1" stop-color="#3c9a55"/></radialGradient></defs>
+<circle cx="48" cy="48" r="46" fill="url(#g)"/>
+<path d="M12 40A37 37 0 0 1 60 13" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/>
+<g fill="#fff6da" stroke="#17233b" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+<rect x="18" y="22" width="60" height="52" rx="7"/><path d="M28 34L38 44M38 34L28 44" fill="none"/><circle cx="62" cy="60" r="6" fill="none"/><path d="M34 62Q44 48 58 40" fill="none" stroke-dasharray="1 7"/><path d="M64 36L54 36L60 45Z" fill="#17233b"/>
+</g>
+</svg>

@@ -1,0 +1,123 @@
+/* Match screen: the court fills the window and the controls float over it. */
+body[data-view=game]{overflow:hidden;overscroll-behavior:none}
+body[data-view=game] .arcade-header,body[data-view=game] .skip{display:none}
+#game-view{position:fixed;inset:0;z-index:10;max-width:none;margin:0;padding:0;display:grid;place-items:center;background:#0a1626;overflow:hidden;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
+ --s:clamp(46px,7.4dvh,66px);--edge:max(10px,env(safe-area-inset-left));--top:max(8px,env(safe-area-inset-top));--low:max(8px,env(safe-area-inset-bottom))}
+#game-view[hidden]{display:none}
+#game-view .court-frame{position:relative;width:min(100vw,calc(100dvh*1200/760));max-width:none;aspect-ratio:1200/760;margin:0;padding:0;border:0;border-radius:0;box-shadow:none;background:none;overflow:visible}
+#game-view #court{width:100%;height:100%;border-radius:0;outline-offset:-3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+
+.feed{position:absolute;left:50%;top:12.1%;transform:translateX(-50%);max-width:74%;margin:0;padding:.28em 1em;border-radius:99px;background:#0b1b2ed9;border:1px solid #47617680;color:#e9f3f1;font-size:clamp(.6rem,1.45vw,.92rem);font-weight:700;line-height:1.35;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+
+.player-chip{position:absolute;z-index:4;top:var(--top);left:var(--edge);display:flex;align-items:center;gap:9px;padding:5px 12px 5px 5px;border-radius:99px;background:#0d1e33e6;border:1px solid #476176;box-shadow:0 4px 14px #0006}
+.player-chip>img{width:clamp(38px,6.4dvh,52px);height:clamp(38px,6.4dvh,52px);border-radius:50%;background:#1f3a55;border:2px solid var(--gold);object-fit:cover;image-rendering:pixelated}
+.chip-text{display:grid;line-height:1.15}
+.chip-text .eyebrow{font-size:.5rem;letter-spacing:.12em}
+#match-player{font-size:.78rem;color:#fff3cf;white-space:nowrap}
+.chip-points{justify-self:start;padding:0;border:0;background:none;color:var(--gold);font-size:.62rem;font-weight:850;letter-spacing:.08em}
+.chip-points b{font-size:1.02rem;letter-spacing:0;font-variant-numeric:tabular-nums}
+.chip-points.bump b{display:inline-block;animation:bump .35s ease-out}
+@keyframes bump{40%{transform:scale(1.35);color:#fff}}
+.player-chip .match-talent{position:relative}
+.player-chip .match-talent summary{display:flex;align-items:center;gap:6px;list-style:none;cursor:pointer;font-size:.68rem;font-weight:800;color:var(--mint);width:auto}
+.player-chip .match-talent summary::-webkit-details-marker{display:none}
+.player-chip .match-talent summary img{width:clamp(26px,4.4dvh,34px);height:clamp(26px,4.4dvh,34px);border-radius:50%;box-shadow:0 0 0 2px #ffe9a8}
+.player-chip .match-talent p{top:calc(100% + 9px);left:auto;right:-12px}
+
+.match-buttons{position:absolute;z-index:4;top:var(--top);right:max(10px,env(safe-area-inset-right));display:flex;gap:6px;margin:0}
+.tool{position:relative;display:grid;place-items:center;width:clamp(34px,5.6dvh,42px);height:clamp(34px,5.6dvh,42px);padding:0;border-radius:50%;border:1px solid #476176;background:#0d1e33e6;color:#e4edf2;cursor:pointer;box-shadow:0 3px 10px #0006}
+.tool:hover{background:#1c3550}
+.tool svg{width:56%;height:56%;fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tool input{position:absolute;inset:0;margin:0;opacity:0;cursor:pointer}
+.sound-label{opacity:.55}.sound-label:has(input:checked){opacity:1;color:var(--mint)}.sound-label:not(:has(input:checked)) .waves{display:none}
+.sound-label:has(input:focus-visible){outline:3px solid #ffdb84;outline-offset:2px}
+#pause-button .play-art{display:none}
+#pause-button[data-paused=true]{color:var(--gold)}#pause-button[data-paused=true] .pause-art{display:none}#pause-button[data-paused=true] .play-art{display:block}
+
+/* Ability bar: a picture in a circle, its key underneath, recharge sweeping round. */
+.ability-bar{position:absolute;z-index:4;left:50%;bottom:var(--low);transform:translateX(-50%);display:flex;align-items:flex-start;gap:calc(var(--s)*.2);padding:6px 14px 4px;border-radius:calc(var(--s)*.7);background:#081525b8;border:1px solid #47617666;backdrop-filter:blur(3px)}
+.ability{position:relative;display:grid;justify-items:center;gap:3px;width:var(--s);padding:0;border:0;background:none;color:inherit;cursor:pointer;touch-action:none;-webkit-tap-highlight-color:transparent}
+.ability:disabled{opacity:1}
+.ability .disc{position:relative;display:block;width:var(--s);height:var(--s);border-radius:50%;box-shadow:0 0 0 2px #0a1626,0 0 0 4px #7d95a8,0 4px 10px #000a;transition:transform .08s}
+.ability .disc img{display:block;width:100%;height:100%;border-radius:50%;pointer-events:none}
+.ability .sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,#06101ed9 var(--turn,0deg),transparent 0);pointer-events:none}
+.ability .count{position:absolute;inset:0;display:grid;place-items:center;font-size:calc(var(--s)*.36);font-weight:900;color:#fff;text-shadow:0 2px 4px #000,0 0 6px #000;font-variant-numeric:tabular-nums;pointer-events:none}
+.ability kbd{display:block;min-width:1.9em;padding:1px 6px;font-size:clamp(.52rem,1.25dvh,.68rem);letter-spacing:.04em;border-bottom-width:2px;text-align:center;white-space:nowrap}
+.ability em{display:none;line-height:1.25;font-style:normal;font-size:.56rem;font-weight:850;letter-spacing:.06em;text-transform:uppercase;color:#e6eef2;text-shadow:0 1px 3px #000;white-space:nowrap}
+.ability:active .disc{transform:scale(.93)}
+.ability[data-mode=ready] .disc{box-shadow:0 0 0 2px #0a1626,0 0 0 4px #ffe7a0,0 0 14px #ffd36b88,0 4px 10px #000a}
+.ability[data-mode=active] .disc{box-shadow:0 0 0 2px #0a1626,0 0 0 5px #fff,0 0 20px #fff9;transform:scale(1.07)}
+.ability[data-mode=off] .disc img{filter:grayscale(.85) brightness(.6)}
+.ability[data-mode=wait] .disc img{filter:saturate(.6) brightness(.8)}
+.ability[data-mode=locked] .disc img{filter:grayscale(1) brightness(.5)}
+.ability[data-mode=locked] .disc{box-shadow:0 0 0 2px #0a1626,0 0 0 4px #c7a1ff,0 4px 10px #000a}
+.ability[data-command=fire] .disc::after{content:'';position:absolute;inset:-7px;border-radius:50%;background:conic-gradient(#ff8a5c var(--hold,0deg),transparent 0);mask:radial-gradient(closest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));-webkit-mask:radial-gradient(closest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));pointer-events:none}
+.ability.passive{cursor:help;margin-right:calc(var(--s)*.18);padding-right:calc(var(--s)*.3);width:auto;border-right:1px solid #47617699}
+.ability.passive .disc{width:calc(var(--s)*.84);height:calc(var(--s)*.84);margin-top:calc(var(--s)*.08);box-shadow:0 0 0 2px #0a1626,0 0 0 4px #ffe9a8,0 4px 10px #000a}
+.ability.passive kbd{background:#5a4a1e;border-color:#ffe9a8;color:#fff3cf}
+
+/* Movement stick, shown for fingers only. */
+.stick-zone{display:none;position:absolute;z-index:3;left:0;bottom:0;width:46%;top:calc(var(--top) + 64px);touch-action:none}
+.stick{position:absolute;left:calc(var(--edge) + var(--j)*.75);bottom:calc(var(--low) + var(--j)*.3);width:var(--j);height:var(--j);margin:calc(var(--j)*-.5) 0 0 calc(var(--j)*-.5);border-radius:50%;background:radial-gradient(#ffffff1f,#ffffff0a 62%,#ffffff24 64%,#ffffff12);border:2px solid #ffffff55;opacity:.75;pointer-events:none;--j:clamp(104px,30dvh,150px)}
+.stick:not(.held){margin:0;left:calc(var(--edge) + 14px);bottom:calc(var(--low) + 14px)}
+.stick.held{opacity:1}
+.stick i{position:absolute;left:50%;top:50%;width:44%;height:44%;margin:-22% 0 0 -22%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6da,#ffcf7d 60%,#c98a2f);box-shadow:0 4px 10px #0009,inset 0 -3px 6px #0003}
+
+/* Fingers: stick on the left, ability circles fanned around the throw button on the right. */
+body[data-input=touch] .stick-zone{display:block}
+body[data-input=touch] #game-view{--s:clamp(46px,13.6dvh,70px)}
+body[data-input=touch] .ability-bar{left:auto;right:max(4px,env(safe-area-inset-right));bottom:var(--low);transform:none;width:calc(var(--s)*4.3);height:calc(var(--s)*4.35);padding:0;border:0;background:none;backdrop-filter:none;display:block;pointer-events:none}
+body[data-input=touch] .ability{position:absolute;pointer-events:auto}
+body[data-input=touch] .ability kbd{display:none}
+body[data-input=touch] .ability em{display:block;margin-top:-1px}
+body[data-input=touch] .ability.passive{display:none}
+body[data-input=touch] .ability .disc{opacity:.94}
+body[data-input=touch] .ability[data-command=fire]{right:calc(var(--s)*.35);bottom:calc(var(--s)*.3);width:calc(var(--s)*1.5)}
+body[data-input=touch] .ability[data-command=fire] .disc{width:calc(var(--s)*1.5);height:calc(var(--s)*1.5)}
+body[data-input=touch] .ability[data-command=fire] em{font-size:.66rem}
+body[data-input=touch] .ability[data-command=catch]{right:calc(var(--s)*2.2);bottom:calc(var(--s)*.36)}
+body[data-input=touch] .ability[data-command=dash]{right:calc(var(--s)*1.84);bottom:calc(var(--s)*1.62)}
+body[data-input=touch] .ability[data-command=pass]{right:calc(var(--s)*.66);bottom:calc(var(--s)*2.2)}
+body[data-input=touch] .ability[data-command=special]{right:calc(var(--s)*3.24);bottom:calc(var(--s)*1.34)}
+body[data-input=touch] .ability[data-command=gaze]{right:calc(var(--s)*1.81);bottom:calc(var(--s)*3.05)}
+body[data-input=touch] .player-chip .match-talent summary span{display:none}
+
+/* Players' score table: at the end of the match, or while Tab is held. */
+.results{position:absolute;inset:0;z-index:8;display:grid;place-items:center;padding:12px;background:#07142499;backdrop-filter:blur(4px)}
+.results[hidden]{display:none}
+.results-card{width:min(760px,100%);max-height:100%;display:flex;flex-direction:column;gap:10px;padding:clamp(12px,2.6dvh,24px);border-radius:16px;background:#11263bf2;border:2px solid #c8a76d;box-shadow:0 18px 50px #000a;text-align:center}
+.results-card h2{font-size:clamp(1.1rem,3.4dvh,1.7rem);color:#ffe2a2}
+.results-teams{display:flex;justify-content:center;align-items:center;gap:18px;margin-bottom:6px}
+.results-teams div{display:grid;min-width:120px}.results-teams span{font-size:.7rem;font-weight:850;letter-spacing:.12em}.results-teams strong{font-size:clamp(1.6rem,6dvh,2.6rem);line-height:1}.results-teams small{color:var(--muted);font-size:.7rem}
+.results-teams .team-0{color:#9cffee}.results-teams .team-1{color:#ffd295}.results-teams i{color:#ffebad;font-size:1.4rem;font-style:normal}
+.results-scroll{overflow:auto;min-height:0;border-radius:10px;border:1px solid #2f4a63}
+.results table{width:100%;border-collapse:collapse;font-size:clamp(.66rem,1.9dvh,.86rem);font-variant-numeric:tabular-nums}
+.results thead th{position:sticky;top:0;padding:6px 8px;background:#0c1d30;color:var(--muted);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase}
+.results td,.results tbody th{padding:4px 8px;border-top:1px solid #23394f;text-align:center}
+.results tbody th{display:flex;align-items:center;gap:8px;text-align:left;font-weight:800}
+.results tbody th img{width:34px;height:34px;border-radius:50%;background:#1f3a55;image-rendering:pixelated;object-fit:cover}
+.results tbody th small{display:block;font-size:.58rem;letter-spacing:.1em;font-weight:700}
+.results tr.team-0 th small{color:#75efdf}.results tr.team-1 th small{color:#ffb38e}
+.results tr.mine{background:#ffe9a81f}.results tr.mine th{color:#ffedac}
+.results .points{font-weight:900;color:var(--gold);font-size:1.05em}.results .place{color:var(--muted)}
+.mvp{margin-left:5px;padding:1px 6px;border-radius:99px;background:var(--gold);color:#3a2b0a;font-size:.58rem;letter-spacing:.08em}
+.results-legend{font-size:.64rem;color:var(--muted);line-height:1.4}
+.results-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.results-actions .button{min-width:0;width:auto;flex-direction:row;align-items:center;min-height:40px;padding:9px 18px;font-size:.9rem}
+.results.peek .results-actions,.results.peek #results-kicker{display:none}
+.results.peek{pointer-events:none}
+
+/* A phone held upright: court on top, controls underneath. */
+@media(orientation:portrait){
+ #game-view{place-items:start center;padding-top:calc(var(--top) + 62px)}
+ body[data-input=touch] #game-view{--s:clamp(48px,15vw,72px)}
+ .stick{--j:clamp(104px,34vw,150px)}
+ .stick-zone{top:calc(var(--top) + 62px + 63vw)}
+ .ability-bar{max-width:100vw}
+ #game-view{--s:clamp(38px,11vw,66px)}
+}
+@media(max-width:1500px){.player-chip .match-talent summary span{display:none}.player-chip{padding-right:6px}}
+@media(max-width:480px){.player-chip .match-talent{display:none}.match-buttons{gap:4px}}
+@media(max-width:640px){.chip-text .eyebrow{display:none}}
+@media(prefers-reduced-motion:reduce){.chip-points.bump b{animation:none}}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Pasar">
+<defs><radialGradient id="g" cx="34%" cy="26%" r="80%"><stop offset="0" stop-color="#b9e4ff"/><stop offset="1" stop-color="#2f79b8"/></radialGradient></defs>
+<circle cx="48" cy="48" r="46" fill="url(#g)"/>
+<path d="M12 40A37 37 0 0 1 60 13" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/>
+<g fill="#fff6da" stroke="#17233b" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+<path d="M22 58Q48 14 72 50" fill="none" stroke="#17233b" stroke-width="9"/><path d="M22 58Q48 14 72 50" fill="none" stroke="#fff6da" stroke-width="4"/><path d="M76 58L62 52L74 40Z"/><circle cx="24" cy="64" r="9" fill="#ffd36b"/><path d="M17.2 60.0Q24.0 63.1 31.2 59.5M18.6 70.3Q24.0 66.2 29.9 70.3" fill="none" stroke-width="2.2"/><circle cx="74" cy="70" r="7"/>
+</g>
+</svg>

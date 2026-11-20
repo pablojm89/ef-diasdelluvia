@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Tiro imparable">
+<defs><radialGradient id="g" cx="34%" cy="26%" r="80%"><stop offset="0" stop-color="#ffc2e2"/><stop offset="1" stop-color="#b5358a"/></radialGradient></defs>
+<circle cx="48" cy="48" r="46" fill="url(#g)"/>
+<path d="M12 40A37 37 0 0 1 60 13" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/>
+<g fill="#fff6da" stroke="#17233b" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+<path d="M12 70Q30 62 38 44Q22 50 16 40Q34 40 44 26Q62 10 78 24Q92 40 76 58Q60 72 40 66Q28 74 12 70Z" fill="#ff8a5c"/><path d="M30 60Q42 56 46 44Q40 34 54 26Q68 20 76 32Q82 46 70 56Q56 64 30 60Z" fill="#ffd36b"/><circle cx="62" cy="41" r="11" fill="#fff6da"/><path d="M53.8 36.0Q62.0 39.9 70.8 35.5M55.4 48.7Q62.0 43.8 69.2 48.7" fill="none" stroke-width="2.2"/>
+</g>
+</svg>

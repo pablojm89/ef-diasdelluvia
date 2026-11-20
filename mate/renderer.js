@@ -1,7 +1,6 @@
 import {paintCharacter,TEAM_COLORS} from './characters.js';
 import {FIELD} from './sim.js';
 const TAU=Math.PI*2;
-const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const rounded=(c,x,y,w,h,r=12)=>{c.beginPath();c.roundRect(x,y,w,h,r);};
 function text(c,s,x,y,size=20,color='#e5f1ee',align='center',weight=800){c.fillStyle=color;c.font=`${weight} ${size}px "Trebuchet MS",system-ui,sans-serif`;c.textAlign=align;c.textBaseline='middle';c.fillText(s,x,y);}
 export class ArenaRenderer {
@@ -22,18 +21,17 @@ export class ArenaRenderer {
   c.save();c.globalAlpha=.16;c.fillStyle='#effad5';c.beginPath();c.moveTo(390,310);c.lineTo(340,388);c.lineTo(382,388);c.lineTo(357,460);c.lineTo(440,368);c.lineTo(397,368);c.closePath();c.fill();c.translate(405,0);c.beginPath();c.moveTo(390,310);c.lineTo(340,388);c.lineTo(382,388);c.lineTo(357,460);c.lineTo(440,368);c.lineTo(397,368);c.closePath();c.fill();c.restore();
   for(const x of [151,1045]){c.fillStyle='#152c3e';c.fillRect(x-3,144,6,503);c.fillStyle='#ffe9ac';for(let y=151;y<640;y+=34)c.fillRect(x-1,y,2,19);}
   c.save();c.translate(105,390);c.rotate(-Math.PI/2);text(c,'CÁRCEL RAYOS',0,0,14,'#ffddc4');c.restore();c.save();c.translate(1095,390);c.rotate(Math.PI/2);text(c,'CÁRCEL COMETAS',0,0,14,'#b0fff0');c.restore();
-  for(const [x,label,color] of [[370,'COMETAS','#75efdf'],[830,'RAYOS','#ffb38e']]){c.fillStyle=color;rounded(c,x-85,654,170,26,7);c.fill();text(c,label,x,668,13,'#18323e');}
   c.fillStyle='#071627';c.fillRect(0,693,1200,67);c.fillStyle='#2d455c';c.fillRect(0,693,1200,2);
  }
  render(g,localId,controls={},latency=0,now=performance.now(),online=false) {
-  const c=this.ctx;c.clearRect(0,0,1200,760);c.drawImage(this.background,0,0);
+  const c=this.ctx;this.localId=localId;c.clearRect(0,0,1200,760);c.drawImage(this.background,0,0);
   if(!g)return;
   const local=g.players.find(p=>p.id===localId),active=[0,1].map(team=>g.players.filter(p=>p.team===team&&!p.prison).length);
   for(let team=0;team<2;team++){
-   const x=team===0?55:845;c.fillStyle='#10263a';rounded(c,x,13,300,63,12);c.fill();c.strokeStyle=TEAM_COLORS[team].dark;c.lineWidth=2;c.stroke();
-   text(c,TEAM_COLORS[team].name,x+20,34,17,TEAM_COLORS[team].light,'left');text(c,`${active[team]} EN CAMPO`,x+20,57,11,'#9cbacb','left');text(c,String(g.scores[team]),x+266,43,40,TEAM_COLORS[team].light);
+   const x=team===0?272:658;c.fillStyle='#10263a';rounded(c,x,13,270,63,12);c.fill();c.strokeStyle=TEAM_COLORS[team].dark;c.lineWidth=2;c.stroke();
+   text(c,TEAM_COLORS[team].name,x+20,34,17,TEAM_COLORS[team].light,'left');text(c,`${active[team]} EN CAMPO`,x+20,57,11,'#9cbacb','left');text(c,String(g.scores[team]),x+236,43,40,TEAM_COLORS[team].light);
   }
-  const seconds=Math.max(0,Math.ceil(g.roundLeft));text(c,`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`,600,35,32,seconds<20?'#ffb183':'#fff0b7');text(c,`RONDA ${g.round} · MEJOR DE ${g.rules.bestOf}`,600,66,11,'#9bb3c9');
+  const seconds=Math.max(0,Math.ceil(g.roundLeft));text(c,`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`,600,35,32,seconds<20?'#ffb183':'#fff0b7');text(c,`RONDA ${g.round}`,600,66,11,'#9bb3c9');
   // Aim aid is visual only; the host still validates the input and collision.
   if(local&&g.ball.holder===local.id&&g.phase==='playing'){
    const dx=(controls.ax??(local.team===0?1000:200))-local.x,dy=(controls.ay??local.y)-local.y,len=Math.hypot(dx,dy)||1;
@@ -90,18 +88,16 @@ export class ArenaRenderer {
   c.fillStyle=b.live?'#ffe67a':'#ffca64';c.strokeStyle='#6d4828';c.lineWidth=2;c.beginPath();c.arc(bx,by,9,0,TAU);c.fill();c.stroke();c.strokeStyle='#e07c3e';c.lineWidth=2;c.beginPath();c.arc(bx+5,by,9,1.9,4.3);c.stroke();c.fillStyle='#fff6c0';c.fillRect(bx-4,by-5,4,3);
   if(!b.holder&&!b.live){text(c,'RECOGE',bx,by-20,9,'#fff3ba');}
   this.drawEffects(g,now);
-  if(local){
-   const team=TEAM_COLORS[local.team];text(c,`${local.name.toUpperCase()} · ${team.name}`,25,714,13,team.light,'left');text(c,local.prison?'EN LA CÁRCEL: DA A UN RIVAL PARA VOLVER':b.holder===local.id?'TIENES LA PELOTA · APUNTA Y LANZA':'ESQUIVA, ATRAPA Y BUSCA LA PELOTA',25,738,11,'#a9c4d5','left');
-   this.cooldown(c,268,'G  MIRADA',local.gazeCooldown||0,60,false,'#caa9ff');this.cooldown(c,440,'F  IMPARABLE',local.specialCooldown||0,60,b.live&&b.special,'#ff9acc');this.cooldown(c,620,'E  ATRAPAR',local.catchCooldown,1.05,local.catchTime>0,'#7eead7');this.cooldown(c,810,local.slowed>0?'SIN ESQUIVA':'SHIFT  ESQUIVAR',local.slowed||local.dashCooldown,local.slowed>0?10:1.4,local.dashTime>0,'#f4c779');
-   text(c,latency?`${latency} ms`:online?'ONLINE':'LOCAL',1157,714,11,'#89abbd','right');text(c,'ESPACIO LANZA · Q PASA',1157,738,10,'#bdd0db','right');
-  }
+  // Abilities, player and points live in the page overlay (hud.js); the canvas keeps the court.
+  if(local)text(c,latency?`${latency} ms`:online?'ONLINE':'LOCAL',1180,744,10,'#6f8ea3','right');
   if(g.phase!=='playing'||g.paused)this.overlay(g);
  }
- cooldown(c,x,label,left,total,active,color){c.fillStyle='#20364a';rounded(c,x,709,165,32,7);c.fill();c.fillStyle=active?color:left>0?'#6a796c':color;rounded(c,x+3,735,159*(1-clamp(left/total,0,1)),3,2);c.fill();text(c,left>0?`${label} ${left.toFixed(1)}`:label,x+82,724,11,active?'#fff5be':'#c9dde5');}
  drawEffects(g,now){
-  for(const e of g.events||[])if(e.id>this.lastEvent){this.lastEvent=e.id;if(['gaze','special','impact','catch','rescue','hit','dodge'].includes(e.type))this.fx.push({...e,born:now});}
-  this.fx=this.fx.filter(f=>now-f.born<850);
-  for(const e of this.fx){const age=(now-e.born)/850,c=this.ctx,alpha=1-age;c.save();c.globalAlpha=alpha;
+  for(const e of g.events||[])if(e.id>this.lastEvent){this.lastEvent=e.id;if(['gaze','special','impact','catch','rescue','hit','dodge','points'].includes(e.type))this.fx.push({...e,born:now,mine:e.player===this.localId});}
+  this.fx=this.fx.filter(f=>now-f.born<(f.type==='points'?1100:850));
+  for(const e of this.fx){const c=this.ctx;
+   if(e.type==='points'){const age=(now-e.born)/1100;c.save();c.globalAlpha=Math.min(1,(1-age)*1.6);c.lineWidth=4;c.strokeStyle='#0b1b2e';c.lineJoin='round';c.font=`900 ${e.mine?24:15}px "Trebuchet MS",system-ui,sans-serif`;c.textAlign='center';c.textBaseline='middle';c.strokeText('+'+e.amount,e.x,e.y-78-age*34);c.fillStyle=e.mine?'#ffe18b':'#fff6da';c.fillText('+'+e.amount,e.x,e.y-78-age*34);c.restore();continue;}
+   const age=(now-e.born)/850,alpha=1-age;c.save();c.globalAlpha=alpha;
    const color=e.type==='catch'?'#b7fff1':e.type==='rescue'?'#d0f97e':e.type==='dodge'?'#bddfff':'#ffe49e';c.strokeStyle=color;c.lineWidth=3;c.beginPath();c.arc(e.x,e.y-15,16+age*50,0,TAU);c.stroke();
    for(let i=0;i<9;i++){const a=i*TAU/9,d=15+age*70;c.fillStyle=color;c.fillRect(e.x+Math.cos(a)*d-3,e.y-15+Math.sin(a)*d-3,5,5);}
    if(e.type==='gaze'){c.strokeStyle='#deb2ff';c.beginPath();c.ellipse(e.x,e.y-42,16+age*32,7+age*10,0,0,TAU);c.stroke();text(c,'MIRADA INTENSA',e.x,e.y-70,15,'#e6c6ff');}

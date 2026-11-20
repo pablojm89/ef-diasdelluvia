@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Atrapar">
+<defs><radialGradient id="g" cx="34%" cy="26%" r="80%"><stop offset="0" stop-color="#b9fff1"/><stop offset="1" stop-color="#1f9d8f"/></radialGradient></defs>
+<circle cx="48" cy="48" r="46" fill="url(#g)"/>
+<path d="M12 40A37 37 0 0 1 60 13" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/>
+<g fill="#fff6da" stroke="#17233b" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+<rect x="34.2" y="51.7" width="31.5" height="27.3" rx="9.5" fill="#fff6da"/><rect x="34.2" y="37.0" width="7.6" height="27.3" rx="3.8" fill="#fff6da"/><rect x="42.2" y="31.8" width="7.6" height="32.6" rx="3.8" fill="#fff6da"/><rect x="50.2" y="32.8" width="7.6" height="31.5" rx="3.8" fill="#fff6da"/><rect x="58.1" y="38.1" width="7.6" height="26.2" rx="3.8" fill="#fff6da"/><path d="M36.3 62.2L24.8 51.7" stroke-width="8.9" stroke="#17233b"/><path d="M36.3 62.2L24.8 51.7" stroke-width="4.4" stroke="#fff6da"/><rect x="35.9" y="54.8" width="28.1" height="22.1" rx="7.4" fill="#fff6da" stroke="none"/><circle cx="48" cy="24" r="10" fill="#ffd36b"/><path d="M40.5 19.5Q48.0 23.0 56.0 19.0M42.0 31.0Q48.0 26.5 54.5 31.0" fill="none" stroke-width="2.2"/>
+</g>
+</svg>

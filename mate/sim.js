@@ -27,14 +27,18 @@ export function makeGame(roster=[],rawRules={},seed=1234567) {
  for(let team=0;team<2;team++) {
   const lineup=buildLineup(roster,team,rules.teamSize);
   for(const [slot,{member,character}] of lineup.entries()) {
-   players.push({id:member?.id||`bot-${team}-${slot}`,name:HEROES[character].name,character,team,bot:!member||member.bot===true,slot,prison:false,x:0,y:0,vx:0,vy:0,face:team===0?1:-1,catchTime:0,catchCooldown:0,dashTime:0,dashCooldown:0,invulnerable:0,stun:0,throwFlash:0,specialCooldown:0,gazeCooldown:0,slowed:0,input:null,lastInput:0,aiThink:0,aiAim:0});
+   players.push({id:member?.id||`bot-${team}-${slot}`,name:HEROES[character].name,character,team,bot:!member||member.bot===true,slot,prison:false,x:0,y:0,vx:0,vy:0,face:team===0?1:-1,catchTime:0,catchCooldown:0,dashTime:0,dashCooldown:0,invulnerable:0,stun:0,throwFlash:0,specialCooldown:0,gazeCooldown:0,slowed:0,points:0,hits:0,catches:0,dodges:0,assists:0,rescues:0,input:null,lastInput:0,aiThink:0,aiAim:0});
   }
  }
  const g={v:1,rules,seed:seed>>>0||1,tick:0,time:0,phase:'countdown',phaseTime:2.7,paused:false,round:1,roundLeft:rules.roundSeconds,scores:[0,0],winner:null,roundWinner:null,players,ball:null,events:[],eventId:0};
  resetRound(g);
  return g;
 }
-export function emit(g,type,data={}) {g.events.push({id:++g.eventId,t:g.time,type,...data});if(g.events.length>18)g.events.shift();}
+export function emit(g,type,data={}) {g.events.push({id:++g.eventId,t:g.time,type,...data});if(g.events.length>24)g.events.shift();}
+// Points reward the plays that help a team: hitting, catching, dodging, assisting and freeing.
+export const POINTS={hit:100,catch:75,rescue:50,assist:40,dodge:25,round:50};
+const TALLY={hit:'hits',catch:'catches',rescue:'rescues',assist:'assists',dodge:'dodges'};
+function award(g,p,play){p.points+=POINTS[play];p[TALLY[play]]++;emit(g,'points',{player:p.id,x:p.x,y:p.y,team:p.team,amount:POINTS[play],play});}
 function random(g){let x=g.seed;x^=x<<13;x^=x>>>17;x^=x<<5;g.seed=x>>>0;return g.seed/4294967296;}
 function spawn(g,p) {
  p.prison=false;p.slowed=0;p.boostTime=0;
@@ -105,6 +109,7 @@ export function throwBall(g,p,aim,passing=false,special=false) {
  const shotSpeed=b.counterReady ? stats.counterSpeed : stats.shotSpeed;
  const speed=special?1050:passing?stats.passSpeed:shotSpeed;
  b.counterReady=false;
+ b.dodged=null;
  b.special=special;
  if(special)p.specialCooldown=60;
  b.holder=null;b.owner=p.id;b.team=p.team;b.live=!passing;b.pass=passing;b.age=0;b.loose=0;b.held=0;
@@ -118,24 +123,32 @@ function hold(g,p,type='pickup') {
  const receivedPass=type==='pickup' && b.pass && b.team===p.team && b.owner!==p.id;
  if(receivedPass && stats.relaySeconds) p.boostTime=stats.relaySeconds;
  b.counterReady=type==='catch' && stats.counterSpeed>stats.shotSpeed;
+ // A pass that leads to a hit earns the passer an assist.
+ b.assist=receivedPass?b.owner:null;
  b.special=false;
  b.holder=p.id;b.team=p.team;b.owner=p.id;b.x=p.x;b.y=p.y;b.vx=0;b.vy=0;b.live=false;b.pass=false;b.held=0;b.loose=0;emit(g,type,{player:p.id,x:p.x,y:p.y,team:p.team});}
 export function imprison(g,p,thrower=null) {
  if(p.prison)return false;
  p.boostTime=0;p.prison=true;p.x=p.team===0?1090:110;p.y=clamp(p.y,185,600);p.invulnerable=.9;p.catchTime=0;p.dashTime=0;p.stun=.35;
  emit(g,'hit',{player:p.id,x:p.x,y:p.y,team:p.team,by:thrower?.id});
+ if(thrower&&thrower.team!==p.team){
+  award(g,thrower,'hit');
+  const passer=g.players.find(q=>q.id===g.ball?.assist&&q.id!==thrower.id&&q.team===thrower.team);
+  if(passer)award(g,passer,'assist');
+ }
  if(thrower?.prison)rescue(g,thrower);
  return true;
 }
-export function rescue(g,p) {
+export function rescue(g,p,by=p) {
  if(!p?.prison)return false;
+ if(by)award(g,by,'rescue');
  p.boostTime=HEROES[p.character].stats.rescueSeconds;
  p.prison=false;p.x=p.team===0?235:965;p.y=clamp(p.y,185,600);p.invulnerable=1.2;p.stun=.25;
  emit(g,'rescue',{player:p.id,x:p.x,y:p.y,team:p.team});return true;
 }
 function endRound(g,winner,reason) {
  g.roundWinner=winner;g.phase='roundOver';g.phaseTime=3.5;
- if(winner!==null)g.scores[winner]++;
+ if(winner!==null){g.scores[winner]++;for(const p of g.players)if(p.team===winner)p.points+=POINTS.round;}
  emit(g,'round',{winner,reason});
 }
 function checkWin(g) {
@@ -159,15 +172,16 @@ function stepBall(g,dt) {
   const d=sweptDistance(p,ox,oy,b.x,b.y);
   if(b.live&&p.team!==b.team){
    if(!b.special&&d<HEROES[p.character].stats.catchRadius&&p.catchTime>0&&p.stun<=0){
-    const sender=g.players.find(q=>q.id===b.owner);hold(g,p,'catch');p.catchTime=0;
+    const sender=g.players.find(q=>q.id===b.owner);hold(g,p,'catch');p.catchTime=0;award(g,p,'catch');
     if(g.rules.catchEliminates&&sender&&!sender.prison)imprison(g,sender);
-    if(g.rules.catchRescues){const prisoner=g.players.find(q=>q.team===p.team&&q.prison&&q.id!==p.id);if(prisoner)rescue(g,prisoner);}
+    if(g.rules.catchRescues){const prisoner=g.players.find(q=>q.team===p.team&&q.prison&&q.id!==p.id);if(prisoner)rescue(g,prisoner,p);}
     return;
    }
    if(d<FIELD.radius+7&&p.invulnerable<=0&&p.dashTime<=0&&p.stun<=0&&!p.prison){
     const thrower=g.players.find(q=>q.id===b.owner);imprison(g,p,thrower);b.live=false;b.vx*=.28;b.vy*=.28;b.loose=0;
     emit(g,'impact',{x:ox,y:oy,team:p.team});return;
    }
+   if(d<FIELD.radius+7&&p.dashTime>0&&!p.prison&&!b.dodged?.includes(p.id)){(b.dodged||=[]).push(p.id);award(g,p,'dodge');}
   } else if(!b.live&&d<HEROES[p.character].stats.pickupRadius&&p.stun<=0){hold(g,p);return;}
  }
  if(!b.live&&!b.pass){

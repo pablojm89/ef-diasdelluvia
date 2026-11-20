@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Esquivar">
+<defs><radialGradient id="g" cx="34%" cy="26%" r="80%"><stop offset="0" stop-color="#ffe7b0"/><stop offset="1" stop-color="#c9822a"/></radialGradient></defs>
+<circle cx="48" cy="48" r="46" fill="url(#g)"/>
+<path d="M12 40A37 37 0 0 1 60 13" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/>
+<g fill="#fff6da" stroke="#17233b" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+<path d="M40 24L64 48L40 72L32 64L48 48L32 32Z"/><path d="M62 24L86 48L62 72L54 64L70 48L54 32Z" transform="translate(-6 0)"/><path d="M10 36L24 36M8 48L20 48M10 60L24 60" fill="none" stroke="#17233b" stroke-width="8"/><path d="M10 36L24 36M8 48L20 48M10 60L24 60" fill="none" stroke="#fff6da" stroke-width="3"/>
+</g>
+</svg>
