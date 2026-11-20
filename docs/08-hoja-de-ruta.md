@@ -69,7 +69,7 @@ Petición del profe. Diseño:
 
 ## Registro y notas
 
-Hoy cada ordenador guarda lo que se juega en él y el profe puede descargarlo. El envío a una hoja de cálculo privada del profe está programado y apagado: se enciende pegando una dirección en `config.js`. El diseño completo, con la hoja de Google propuesta y qué convierte una anotación en nota, está en [10-registro-y-notas.md](10-registro-y-notas.md).
+Mismo sistema que Agencia La Lupa, del repo de multiplicopolis: una hoja de Google con su Apps Script, el mismo protocolo de envío y una sola dirección y código de aula para los dos proyectos. La conexión se pone en el despacho y se guarda en el navegador; si La Lupa ya la tenía en ese ordenador, El Pabellón ofrece usarla. Cada ordenador guarda lo suyo y lo envía cuando hay conexión; sólo da por enviado lo que la hoja confirma. Qué anotación da nota se declara en un único sitio, `notas.js`. Todo el detalle está en [10-registro-y-notas.md](10-registro-y-notas.md), el servidor en [`backend/`](../backend/README.md) y lo acordado entre los dos repos en [`intercambio/`](../intercambio/CONTRATO.md). Falta probarlo contra Google real.
 
 ## Orden de trabajo
 

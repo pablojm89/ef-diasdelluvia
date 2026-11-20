@@ -37,12 +37,13 @@
    <div class="frieze" aria-hidden="true"></div>
    <form id="login-form" class="paper login">
     <h1 id="login-title">¿Quién eres?</h1>
-    <p>Elige tu clase y tu número de lista. No hace falta tu nombre.</p>
-    <div class="pickers">
+    <p id="login-text">Elige tu clase y tu número de lista. No hace falta tu nombre.</p>
+    <div class="pickers" id="login-pickers">
      <label>Curso<select id="login-course" required></select></label>
      <label>Grupo<select id="login-group" required></select></label>
      <label>Número<select id="login-number" required></select></label>
     </div>
+    <fieldset id="login-class" hidden><legend id="login-class-title">Tu alias de la clase</legend><div id="login-aliases" class="aliases"></div></fieldset>
     <fieldset><legend>Tu personaje</legend><div id="login-avatars" class="avatars"></div></fieldset>
     <button class="sign gold big"><strong>¡A jugar!</strong></button>
    </form>
@@ -72,7 +73,23 @@
     </form>
     <div id="desk" hidden>
      <h1>Despacho del profe</h1>
-     <section class="paper"><h2>Registro de este ordenador</h2><p class="fine">Cada ordenador guarda lo que se ha jugado en él, por clase y número de lista, sin nombres.</p><div id="desk-summary" class="table-scroll"></div><p id="desk-sync-text" class="status" role="status"></p><div class="desk-buttons"><button type="button" id="desk-sync" class="sign gold" hidden><strong>Enviar ahora</strong></button><button type="button" id="desk-download" class="sign"><strong>Descargar registro</strong></button><button type="button" id="desk-clear" class="sign danger"><strong>Borrar registro</strong></button></div></section>
+     <section class="paper"><h2>Registro de este ordenador</h2><p class="fine">Cada ordenador guarda lo que se ha jugado en él, por clase y número de lista o por alias, sin nombres. La nota orientativa sólo sale de lo que se ha decidido que cuenta; el resto es evidencia.</p><div id="desk-summary" class="table-scroll"></div><div class="desk-buttons"><button type="button" id="desk-download" class="sign"><strong>Descargar registro</strong></button><button type="button" id="desk-clear" class="sign danger"><strong>Borrar registro</strong></button></div></section>
+     <section class="paper cloud" aria-labelledby="cloud-title">
+      <h2 id="cloud-title">Hoja de notas</h2>
+      <p class="fine">Con tu hoja de Google y su Apps Script, lo que se juega en este ordenador llega a la misma hoja que La Lupa: alumnado, notas por criterio y registro. Viaja el código de lista o el alias, nunca un nombre. Se guarda sólo en este navegador. Pasos en <code>backend/README.md</code> del repositorio.</p>
+      <div id="cloud-lupa" class="notice" hidden><p id="cloud-lupa-text"></p><button type="button" id="cloud-use-lupa" class="sign gold"><strong>Usar la misma conexión</strong></button></div>
+      <form id="cloud-form" class="cloud-form" autocomplete="off">
+       <label>Dirección del Apps Script<input id="cloud-url" type="url" inputmode="url" spellcheck="false" placeholder="https://script.google.com/macros/s/…/exec"></label>
+       <label>Código de aula<input id="cloud-code" maxlength="20" spellcheck="false" placeholder="5B-2027"></label>
+       <div class="desk-buttons"><button class="sign gold"><strong>Guardar</strong></button><button type="button" id="cloud-test" class="sign"><strong>Probar conexión</strong></button><button type="button" id="cloud-forget" class="sign danger"><strong>Quitar la conexión</strong></button></div>
+      </form>
+      <p id="cloud-test-result" class="status" role="status"></p>
+      <div id="cloud-state" class="cloud-state" role="status"></div>
+      <div class="desk-buttons"><button type="button" id="desk-sync" class="sign gold"><strong>Enviar ahora</strong></button><button type="button" id="cloud-resend" class="sign"><strong>Volver a enviar todo</strong></button></div>
+      <h3>Cómo entra el alumnado</h3>
+      <p id="cloud-package" class="fine"></p>
+      <label class="check" id="alias-entry-label" hidden><input type="checkbox" id="alias-entry"> Que el alumnado entre eligiendo su alias de la clase, el mismo que en La Lupa</label>
+     </section>
      <section class="paper"><h2>Lugares y actividades</h2><div id="desk-catalogue" class="table-scroll"></div></section>
      <section class="paper"><h2>Clave del despacho</h2><p class="fine">Cierra el despacho al terminar, sobre todo en un ordenador compartido.</p><div class="desk-buttons"><button type="button" id="desk-lock" class="sign"><strong>Cerrar el despacho</strong></button><button type="button" id="desk-forget" class="sign danger"><strong>Cambiar la clave</strong></button></div></section>
     </div>
@@ -104,7 +121,8 @@
   <form method="dialog"><button class="close" aria-label="Cerrar la taquilla">Cerrar</button></form>
   <div class="locker-head"><img id="locker-face" alt="" width="96" height="96"><div><p class="eyebrow">Mi taquilla</p><h2 id="locker-title"></h2></div></div>
   <ul id="locker-list" class="locker-list"></ul>
-  <button type="button" id="locker-leave" class="sign"><strong>No soy yo: cambiar de jugador</strong></button>
+  <div class="desk-buttons"><button type="button" id="locker-recover" class="sign gold" hidden><strong>Recuperar mi progreso</strong></button><button type="button" id="locker-leave" class="sign"><strong>No soy yo: cambiar de jugador</strong></button></div>
+  <p id="locker-status" class="status" role="status"></p>
  </dialog>
  <script type="module" src="./hub.js"></script>
 </body>

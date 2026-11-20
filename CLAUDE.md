@@ -12,7 +12,9 @@ Un colegio que se juega. Cada actividad vive en un **lugar** del pabellón. Tres
 |---|---|
 | `index.html`, `hub.js`, `hub.css` | Inicio, puertas, entrada del alumno, despacho del profe y ruleta. La tabla `PLACES` de `hub.js` decide qué puertas existen |
 | `comun/base.css`, `comun/lugar.js` | Aspecto y cabecera comunes. Todo lugar los usa |
-| `registro.js` | Quién juega (curso, grupo, número, personaje) y qué ha hecho. `record(lugar, actividad, evento, datos)` |
+| `registro.js` | Quién juega (curso, grupo, número o alias de clase, y personaje), qué ha hecho y su envío a la hoja del profe. `record(lugar, actividad, evento, datos)` |
+| `notas.js` | Tabla única de qué anotación genera qué nota; lo demás viaja como evidencia |
+| `backend/` | Servidor `aula.gs` (Apps Script + Hojas de Google), común con La Lupa |
 | `gimnasio/` | Aventura gráfica Equipment Rescue. Es el modelo de estética |
 | `mate/` | Mate Arena: balón prisionero. Simulación en `sim.js`, red en `network.js` |
 | `content.js`, `engine.js` | Banco de 24 retos con variante sentada y criterio |

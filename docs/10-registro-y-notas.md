@@ -1,81 +1,59 @@
 # Registro y notas
 
-Cómo lo que hace el alumnado en El Pabellón llega a ser una evidencia que el profe puede usar para evaluar, sin que el repositorio público ni la web guarden datos de menores.
+Cómo lo que hace el alumnado en El Pabellón llega a ser una evidencia y, cuando se ha decidido, una nota orientativa que el profe usa para evaluar Educación Física. Funciona igual que La Lupa (multiplicopolis): misma hoja, mismo Apps Script, mismo protocolo y misma escala. Lo común está en [`intercambio/CONTRATO.md`](../intercambio/CONTRATO.md); los pasos para crear la hoja, en [`backend/README.md`](../backend/README.md).
 
-## Qué hay hoy
+> **Estado (20/11/2026):** programado y probado en local contra hojas simuladas. **No se ha probado con Google.** No usar con alumnado real hasta hacer la comprobación de `backend/README.md` y decidir lo de abajo.
 
-- **Jugador sin nombre.** El alumno elige curso, grupo, número de lista y personaje. Su código es, por ejemplo, `5B-12`. No hay campo de texto libre, así que no puede escribir su nombre.
-- **Registro en el navegador.** Cada actividad anota una línea con fecha, código, lugar, actividad, evento y datos. Ejemplos: fase superada de la aventura con intentos y pistas; partido de mate con resultado, puntos, dianas, atrapadas, esquivas, asistencias y rescates; reto de ruleta completado por la clase.
-- **Despacho.** Muestra un resumen por jugador de lo anotado en ese ordenador y permite descargarlo como hoja de cálculo o borrarlo.
-- **Límite.** El registro está repartido: cada ordenador tiene el suyo. Si un alumno cambia de ordenador, su taquilla empieza vacía en el nuevo.
+## Cómo funciona
 
-## Dónde reunirlo: hoja de Google en la cuenta del profe
+1. **Quién juega.** Sin nombres ni texto libre. Dos formas, que decide el profe en el despacho:
+   - *Con el paquete de clase de La Lupa en ese navegador:* el alumno elige su alias en una lista. Es el mismo alias que en La Lupa, así que es la misma fila en la hoja.
+   - *Sin paquete:* curso, grupo y número de lista → código `5B-12`.
+   En los dos casos elige además uno de los ocho personajes para jugar.
+2. **Qué se anota.** Cada lugar llama a `record(lugar, actividad, evento, datos)` (desde `comun/lugar.js`). La anotación queda en el navegador con su id, fecha y alumno.
+3. **Envío.** Si el despacho tiene la hoja conectada, las anotaciones se envían por lotes a la hoja de Google del profe. Sólo se dan por enviadas cuando la hoja lo confirma; si no, se reintenta sola (1, 2, 4… hasta 10 minutos) sin borrar nada, y repetir un envío no duplica filas.
+4. **En la hoja.** «Alumnos» (una fila por niño), «Notas» (una fila por criterio de cada resultado, junto a las de La Lupa) y «Registro EF» (una fila legible por anotación). Para Séneca: tabla dinámica de «Notas» por alumno y criterio, filtrando `app = pabellon`.
+5. **Otro ordenador.** En la taquilla, «Recuperar mi progreso» trae lo que la hoja tiene de ese jugador.
 
-Propuesta: una hoja de cálculo en Google Drive con un pequeño programa de Apps Script que recibe las anotaciones. Es la opción que encaja con una web estática:
+## El despacho
 
-| Opción | Encaja | Motivo |
-|---|---|---|
-| **Hoja de Google + Apps Script** | Sí | El programa vive en la cuenta del profe y recibe datos sin que la web lleve ninguna clave. La hoja es a la vez base de datos y cuaderno de notas |
-| Notion | No directamente | Su API exige una clave secreta y no admite llamadas desde el navegador. Haría falta un servicio intermedio que mantener |
-| Base de datos externa | Sí, con más trabajo | Añade un proveedor, cuentas y una revisión de protección de datos; innecesario para empezar |
+Sección **Hoja de notas**: dirección del Apps Script y código de aula (se guardan sólo en ese navegador, en la clave compartida `aula-nube`; nunca en el código), «Probar conexión», «Enviar ahora», «Volver a enviar todo», «Quitar la conexión», pendientes, último envío confirmado y avisos de envío no confirmado o rechazado. Si La Lupa ya está conectada en ese navegador, ofrece «Usar la misma conexión». Debajo, si hay paquete de clase, la casilla para entrar con alias.
 
-Si el centro dispone de cuentas de Google para el profesorado, conviene usar esa cuenta y no una personal: son datos de alumnado, aunque vayan sin nombre.
-
-### Cómo funcionará
-
-1. El profe crea la hoja y pega el programa de abajo en Extensiones → Apps Script. Lo publica como aplicación web con acceso para cualquiera y copia su dirección.
-2. Esa dirección se escribe en `config.js`. A partir de ahí cada anotación se envía al momento; si no hay conexión se queda pendiente y se reintenta al seguir jugando. El despacho indica cuántas faltan por enviar.
-3. La pestaña `Registro` recibe una fila por anotación. Una pestaña `Alumnado`, que sólo existe en la hoja, relaciona cada código con su nombre. Una pestaña `Notas` calcula con fórmulas los indicadores por alumno.
-
-La dirección del programa queda visible en el código de la web. Quien la conozca podría enviar filas falsas; el programa sólo acepta anotaciones con la forma correcta y descarta las repetidas. Si hiciera falta más control, el siguiente paso es un código de sesión que el profe abre desde el despacho y sin el cual no se acepta nada.
-
-### Programa propuesto para la hoja
-
-Escrito pero **sin probar todavía contra Google**: hay que comprobarlo al crear la hoja.
-
-```js
-const CAMPOS = ['id', 't', 'who', 'place', 'activity', 'event'];
-
-function doPost(e) {
-  const hoja = SpreadsheetApp.getActive().getSheetByName('Registro') || SpreadsheetApp.getActive().insertSheet('Registro');
-  if (hoja.getLastRow() === 0) hoja.appendRow(['id', 'fecha', 'jugador', 'lugar', 'actividad', 'evento', 'datos']);
-  let lote;
-  try { lote = JSON.parse(e.postData.contents); } catch (error) { return responder({ok: false}); }
-  if (!lote || lote.v !== 1 || !Array.isArray(lote.entries) || lote.entries.length > 100) return responder({ok: false});
-  const vistos = new Set(hoja.getRange(1, 1, Math.max(1, hoja.getLastRow()), 1).getValues().flat());
-  const filas = lote.entries.filter(valida).filter(x => !vistos.has(x.id))
-    .map(x => [x.id, x.t, x.who || 'pantalla', x.place, x.activity, x.event, JSON.stringify(x.data)]);
-  if (filas.length) hoja.getRange(hoja.getLastRow() + 1, 1, filas.length, 7).setValues(filas);
-  return responder({ok: true, nuevas: filas.length});
-}
-
-function valida(x) {
-  return x && CAMPOS.every(c => c === 'who' ? (x.who === null || /^[1-6][A-D]-\d{2}$/.test(x.who)) : typeof x[c] === 'string' && x[c].length < 60)
-    && x.data && typeof x.data === 'object' && JSON.stringify(x.data).length < 600;
-}
-
-function responder(cuerpo) {
-  return ContentService.createTextOutput(JSON.stringify(cuerpo)).setMimeType(ContentService.MimeType.JSON);
-}
-```
+La tabla del registro de ese ordenador muestra la nota orientativa de cada jugador cuando la hay.
 
 ## De anotación a nota
 
-El juego aporta evidencias; la nota la pone el profe. Antes de construir la pestaña `Notas` hay que decidir, criterio por criterio, qué cuenta. Punto de partida para discutir:
+**El único sitio donde se decide es la tabla `NOTAS` de [`notas.js`](../notas.js).** Cada línea dice qué anotación (lugar, actividad, evento) da nota, para qué criterio y cursos, y cómo se cuentan aciertos e intentos. Lo que no está en la tabla viaja como evidencia, sin nota. La escala es la de La Lupa: nota = aciertos / intentos sobre 10 (mínimo 1, un decimal) y IN/SU/BI/NT/SB.
 
-| Evidencia anotada | Qué puede indicar | Qué no demuestra |
+Decidido hoy, con prudencia:
+
+| Anotación | ¿Nota? | Cómo |
 |---|---|---|
-| Fases de la aventura, intentos y pistas | Comprensión de consignas en inglés y reconocimiento de riesgos con el material | Que actúe con seguridad en el gimnasio real |
-| Partidos de mate: asistencias y rescates | Juego de equipo dentro del videojuego | Su conducta en un partido real |
-| Partidos de mate: puntos y victorias | Destreza con el juego | Nada evaluable en EF; mejor no puntuarlo |
-| Posturas y secuencias de yoga creadas | Conocimiento de posturas y composición | La ejecución, que se observa en clase |
-| Retos de ruleta completados por la clase | Participación del grupo | Nada individual |
+| Equipment Rescue completada (`material`, `equipment-rescue`, `completada`) | **Sí, orientativa**, criterio **1.3** (`1.3.a` en 5.º, `1.3.b` en 6.º): reconocer riesgos y usar el material con seguridad | aciertos = las 24 acciones mínimas para terminar; intentos = acciones hechas. Ej.: 25 intentos → 9,6 SB |
+| Fases sueltas de la aventura, intentos y pistas | No | Evidencia en «Registro EF» |
+| Partidos de mate: asistencias, rescates, puntos, resultado | No | Evidencia. Destreza en un videojuego, no conducta motriz |
+| Ruleta de retos en la pantalla | No | Evidencia de la clase (`pantalla`), nada individual |
+| Yoga, rosco, oca, bingo (`tatami`, `pizarra`, `aula`) | No, hasta que se añadan a `NOTAS` | Llegan como evidencia en cuanto anoten |
+| Cursos de 1.º a 4.º | No | La letra `.a/.b` sólo está definida para el tercer ciclo |
 
-Lo observado en clase se podrá apuntar desde el despacho en la misma hoja, para que juego y observación queden juntos.
+Completar un juego no equivale a superar un criterio: la nota del juego es una evidencia más, junto a lo observado en clase. Lo observado se puede apuntar en la misma hoja, en columnas propias.
+
+### Para añadir una nota (otros lugares)
+
+Añadir una línea a `NOTAS` en `notas.js`: `{place, activity, event, criterio, cursos, tipo, titulo, medir: data => ({aciertos, intentos})}`, con `aciertos ≤ intentos` enteros. Añadir su prueba en `tests/registro-nube.test.js` y una fila en la tabla de arriba con lo que Pablo haya decidido.
+
+## Lo que decide Pablo
+
+1. **Identidad.** ¿Usar los alias del paquete de La Lupa también en EF (recomendado: cada niño una fila) o el código de curso, grupo y número (y relacionarlos a mano en la hoja)? El paquete sólo existe en los navegadores donde se importó en La Lupa.
+2. **Equipment Rescue como evidencia del criterio 1.3.** ¿Cuenta para la nota o sólo como información? ¿Con qué peso frente a la observación?
+3. **Qué cuenta de las actividades nuevas** (yoga, rosco, oca, bingo) antes de abrirlas: criterio, cursos y qué es acierto.
+4. **Cuenta de Google**: la del centro, con permiso de la dirección y consulta a la DPD; familias informadas.
+5. **Recuperar progreso** con sólo el código o el alias: aceptable para EF (sólo hay juego, no notas), o pedir un código por alumno como el propuesto en La Lupa.
 
 ## Privacidad
 
-- En el repositorio y en la web no hay ni habrá nombres, listados ni notas. La comprobación automática previa a cada publicación sigue activa.
-- Curso, grupo y número de lista permiten al profe saber quién es cada alumno, así que siguen siendo datos personales aunque no lleven nombre. Sólo se guardan en el navegador del ordenador usado y, cuando se conecte, en la hoja del profe.
-- Un ordenador compartido conserva el último jugador hasta que alguien pulsa «No soy yo» en la taquilla. Conviene enseñarlo como rutina de clase.
+- En el repositorio y en la web no hay nombres, listas, notas, direcciones de Apps Script ni códigos de aula reales. La comprobación previa a publicar sigue activa.
+- Curso, grupo y número, o el alias, siguen siendo datos personales para quien tiene la lista. Viajan sólo a la hoja del profe cuando él la conecta.
+- No viajan: avatares del paquete, PIN del despacho, nada de La Lupa.
+- Un ordenador compartido conserva el último jugador hasta «No soy yo» en la taquilla.
 - La clave del despacho es una barrera para el alumnado en ese ordenador, no una protección de datos.

@@ -1,8 +1,8 @@
 // El Pabellón: who comes in (pupil, class screen or teacher) and the doors each one sees.
 import {families} from './content.js';
 import {eligibleChallenges} from './engine.js';
-import {AVATARS, COURSES, GROUPS, LAST_NUMBER, player, setPlayer, leave, playerCode, setMode, record, entries, clearEntries, summary, toSheet, pending, sync} from './registro.js';
-import {REGISTRO_URL} from './config.js';
+import {AVATARS, COURSES, GROUPS, LAST_NUMBER, player, setPlayer, leave, playerCode, studentId, setMode, record, entries, clearEntries, summary, toSheet,
+ sync, connection, lupaConnection, setConnection, forgetConnection, testConnection, resendAll, cloudState, recover, classPackage, aliasEntry, setAliasEntry} from './registro.js';
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -98,21 +98,34 @@ fill($('login-group'), GROUPS, value => value);
 fill($('login-number'), Array.from({length: LAST_NUMBER}, (_, i) => i + 1), value => value);
 $('login-avatars').innerHTML = AVATARS.map((name, index) =>
  `<label><input type="radio" name="avatar" value="${index}" ${index === 0 ? 'checked' : ''}><img src="${face(index)}" alt="" width="100" height="215" loading="lazy">${esc(name)}</label>`).join('');
-function showLogin() {
+// With the class package of La Lupa on this computer, and if the teacher wants it, pupils pick their alias
+// from the list instead of class and number: then they are the same person in both games' sheet.
+let roll = null;
+async function showLogin() {
  $('locker-button').hidden = true; $('mode-tag').hidden = true;
  $('login-course').value = '5';
+ roll = aliasEntry() ? await classPackage() : null;
+ $('login-pickers').hidden = !!roll; $('login-class').hidden = !roll;
+ $('login-text').textContent = roll ? 'Busca tu alias de la clase. No hace falta tu nombre.' : 'Elige tu clase y tu número de lista. No hace falta tu nombre.';
+ if (roll) {
+  $('login-class-title').textContent = `Tu alias de ${roll.clase || 'la clase'}`;
+  $('login-aliases').innerHTML = roll.alumnos.map((pupil, index) => `<label><input type="radio" name="alias" value="${index}" required>${pupil.avatar ? `<img src="${pupil.avatar}" alt="" width="64" height="64">` : `<span class="initial" aria-hidden="true">${esc(pupil.alias.slice(0, 1).toUpperCase())}</span>`}<span>${esc(pupil.alias)}</span></label>`).join('');
+ } else $('login-aliases').replaceChildren();
  show('login');
 }
 $('login-form').addEventListener('submit', event => {
  event.preventDefault();
- const chosen = {course: Number($('login-course').value), group: $('login-group').value, number: Number($('login-number').value),
-  avatar: Number(new FormData(event.target).get('avatar'))};
+ const form = new FormData(event.target), avatar = Number(form.get('avatar'));
+ const pupil = roll?.alumnos[Number(form.get('alias'))];
+ if (roll && !pupil) return;
+ const chosen = pupil ? {course: roll.course, alias: pupil.alias, avatar}
+  : {course: Number($('login-course').value), group: $('login-group').value, number: Number($('login-number').value), avatar};
  if (setPlayer(chosen)) { record('pabellon', 'entrada', 'entra'); showMap('alumno'); }
 });
-$('locker-button').addEventListener('click', () => {
+function drawLocker() {
  const current = player();
- if (!current) return;
- const mine = summary(entries().filter(entry => entry.who === playerCode(current)))[0];
+ if (!current) return false;
+ const mine = summary(entries().filter(entry => entry.sid === studentId(current)))[0];
  $('locker-face').src = face(current.avatar);
  $('locker-title').textContent = `${AVATARS[current.avatar]} · ${playerCode(current)}`;
  const lines = [
@@ -121,7 +134,17 @@ $('locker-button').addEventListener('click', () => {
   ['Mejor puntuación en mate', mine?.bestPoints ? `${mine.bestPoints} puntos` : '—'],
  ];
  $('locker-list').innerHTML = lines.map(([label, value]) => `<li><span>${esc(label)}</span><b>${esc(value)}</b></li>`).join('');
- $('locker').showModal();
+ $('locker-recover').hidden = !connection();
+ return true;
+}
+$('locker-button').addEventListener('click', () => { $('locker-status').textContent = ''; if (drawLocker()) $('locker').showModal(); });
+// Another computer: what the teacher's sheet holds for this player joins this record.
+$('locker-recover').addEventListener('click', async () => {
+ $('locker-recover').disabled = true; $('locker-status').textContent = 'Buscando en la hoja del profe…';
+ const result = await recover();
+ $('locker-recover').disabled = false;
+ $('locker-status').textContent = !result.ok ? result.motivo : result.added ? `¡Recuperado! ${result.added} ${result.added === 1 ? 'cosa' : 'cosas'} de otro ordenador.` : 'Ya lo tenías todo en este ordenador.';
+ drawLocker();
 });
 $('locker-leave').addEventListener('click', () => { leave(); $('locker').close(); showLogin(); });
 
@@ -164,13 +187,12 @@ $('gate').addEventListener('submit', async event => {
 const when = iso => new Date(iso).toLocaleString('es-ES', {day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'});
 function drawDesk() {
  const rows = summary();
- $('desk-summary').innerHTML = rows.length ? `<table><thead><tr><th>Jugador</th><th>Última vez</th><th>Aventura del gimnasio</th><th>Partidos de mate</th><th>Ganados</th><th>Mejor puntuación</th><th>Retos de ruleta</th></tr></thead><tbody>${rows.map(row =>
-  `<tr><th scope="row">${esc(row.who)}</th><td>${esc(when(row.last))}</td><td>${row.gymDone ? 'Completada' : row.gymPhase ? `Fase ${row.gymPhase} de 5` : '—'}</td><td>${row.matches}</td><td>${row.wins}</td><td>${row.bestPoints || '—'}</td><td>${row.challenges}</td></tr>`).join('')}</tbody></table>`
+ const marks = row => row.marks.length ? row.marks.map(m => `${m.criterio} · ${String(m.nota).replace('.', ',')} ${m.calificacion}`).join('<br>') : '—';
+ $('desk-summary').innerHTML = rows.length ? `<table><thead><tr><th>Jugador</th><th>Última vez</th><th>Aventura del gimnasio</th><th>Mate: partidos · ganados · mejor</th><th>Retos de ruleta</th><th>Nota orientativa</th></tr></thead><tbody>${rows.map(row =>
+  `<tr><th scope="row">${esc(row.who)}</th><td>${esc(when(row.last))}</td><td>${row.gymDone ? 'Completada' : row.gymPhase ? `Fase ${row.gymPhase} de 5` : '—'}</td><td>${row.matches ? `${row.matches} · ${row.wins} · ${row.bestPoints}` : '—'}</td><td>${row.challenges}</td><td>${marks(row)}</td></tr>`).join('')}</tbody></table>`
   : '<p>Todavía no se ha jugado nada en este ordenador.</p>';
  $('desk-download').disabled = $('desk-clear').disabled = !entries().length;
- const waiting = pending();
- $('desk-sync-text').textContent = !REGISTRO_URL ? 'Hoja de notas sin conectar: el registro se queda en este ordenador.' : waiting ? `${waiting} anotaciones pendientes de enviar a la hoja de notas.` : 'Todo enviado a la hoja de notas.';
- $('desk-sync').hidden = !REGISTRO_URL || !waiting;
+ drawCloud();
  const places = Object.values(PLACES).map(place => `<tr><th scope="row">${esc(place.name)}</th><td class="wrap">${esc(place.kicker)}</td><td>${esc(place.modes)}</td><td><span class="state ${place.state}">${place.state === 'open' ? 'Abierto' : 'Próximamente'}</span></td><td>${place.href ? `<a href="${place.href}"><u>Abrir</u></a>` : ''}</td></tr>`);
  const old = REVIEW.map(([name, what, href]) => `<tr><th scope="row">${esc(name)}</th><td class="wrap">${esc(what)}</td><td>Pantalla</td><td><span class="state review">Estética anterior</span></td><td><a href="${href}"><u>Abrir</u></a></td></tr>`);
  $('desk-catalogue').innerHTML = `<table><thead><tr><th>Lugar</th><th>Actividad</th><th>Se juega como</th><th>Estado</th><th></th></tr></thead><tbody>${places.join('')}${old.join('')}</tbody></table>`;
@@ -182,7 +204,56 @@ $('desk-download').addEventListener('click', () => {
  link.click();
  setTimeout(() => URL.revokeObjectURL(link.href), 2000);
 });
-$('desk-sync').addEventListener('click', async () => { $('desk-sync').disabled = true; const result = await sync(); $('desk-sync').disabled = false; drawDesk(); if (result.failed) $('desk-sync-text').textContent = 'No se ha podido enviar. Se volverá a intentar al seguir jugando.'; });
+
+// --- Teacher: the sheet where the marks of every computer meet ------------------------
+// The address and the class code live in this browser (key `aula-nube`, shared with La Lupa), never in the code.
+const same = (a, b) => !!a && !!b && a.url === b.url && a.classCode.toUpperCase() === b.classCode.toUpperCase();
+function drawCloudState() {
+ const on = connection(), {pending: waiting, last, state, dropped} = cloudState();
+ const lines = [];
+ if (!on) lines.push(`<b>Sin conectar:</b> el registro se queda en este ordenador${waiting ? ` (${waiting} anotaciones esperan a la hoja)` : ''}.`);
+ else {
+  lines.push(`Aula <b>${esc(on.classCode)}</b> · Pendientes de enviar: <b id="cloud-pending">${waiting}</b> · ${last ? `último envío confirmado: ${esc(when(last))}` : 'todavía no se ha confirmado ningún envío'}`);
+  if (state?.ok === false) lines.push(`<span class="warn">No se ha podido confirmar el último envío (${esc(when(state.at))}): ${esc(state.motivo || '')} No se ha borrado nada; se reintenta solo.</span>`);
+  if (state?.ok && state.rechazados) lines.push(`<span class="warn">La hoja ha rechazado ${Number(state.rechazados)} elemento(s) del último envío: ${esc(state.motivo || '')}</span>`);
+ }
+ if (dropped) lines.push(`<span class="warn">El registro de este ordenador se llenó y se soltaron ${dropped} anotaciones sin enviar.</span>`);
+ $('cloud-state').innerHTML = lines.map(line => `<p>${line}</p>`).join('');
+ $('desk-sync').disabled = $('cloud-resend').disabled = !on || !entries().length;
+}
+async function drawCloud() {
+ const on = connection(), lupa = lupaConnection();
+ if (document.activeElement !== $('cloud-url') && document.activeElement !== $('cloud-code')) { $('cloud-url').value = on?.url || ''; $('cloud-code').value = on?.classCode || ''; }
+ $('cloud-forget').hidden = $('cloud-test').hidden = !on;
+ $('cloud-lupa').hidden = !lupa || same(on, lupa);
+ if (lupa) $('cloud-lupa-text').innerHTML = `En este navegador, <b>Agencia La Lupa</b> ya envía sus notas a una hoja, con el código de aula <b>${esc(lupa.classCode)}</b>. Usa la misma y todo quedará junto. Para que esa hoja acepte también a El Pabellón, su Apps Script tiene que ser <code>aula.gs</code>: «Probar conexión» lo comprueba.`;
+ drawCloudState();
+ const found = await classPackage();
+ $('cloud-package').textContent = found ? `Hay un paquete de clase de La Lupa en este navegador: ${found.clase || 'clase'}, ${found.alumnos.length} alias.` : 'No hay paquete de clase de La Lupa en este navegador: el alumnado entra con curso, grupo y número de lista. Si importas el paquete en La Lupa, aquí podrás usar los mismos alias.';
+ $('alias-entry-label').hidden = !found;
+ $('alias-entry').checked = aliasEntry();
+}
+function saveConnection(next) {
+ const result = setConnection(next);
+ $('cloud-test-result').textContent = result.ok ? 'Guardado en este navegador. Prueba la conexión.' : result.motivo;
+ drawCloud();
+ return result.ok;
+}
+$('cloud-form').addEventListener('submit', event => { event.preventDefault(); saveConnection({url: $('cloud-url').value, classCode: $('cloud-code').value}); });
+$('cloud-use-lupa').addEventListener('click', () => { if (saveConnection(lupaConnection())) runTest(); });
+async function runTest() {
+ $('cloud-test-result').textContent = 'Probando…';
+ const result = await testConnection();
+ $('cloud-test-result').textContent = result.ok ? 'Conexión correcta: la hoja confirma los envíos.' : result.motivo;
+ if (result.ok) { await sync({now: true}); drawCloudState(); }
+}
+$('cloud-test').addEventListener('click', runTest);
+$('cloud-forget').addEventListener('click', () => { if (confirm('¿Quitar la conexión con la hoja en este navegador? Lo pendiente se queda en este ordenador; la hoja no se borra.')) { forgetConnection(); $('cloud-test-result').textContent = ''; drawCloud(); } });
+$('desk-sync').addEventListener('click', async () => { $('desk-sync').disabled = true; await sync({now: true}); drawCloudState(); });
+$('cloud-resend').addEventListener('click', async () => { resendAll(); await sync({now: true}); drawCloudState(); });
+$('alias-entry').addEventListener('change', event => setAliasEntry(event.target.checked));
+// What is sent while the desk is open shows up without reloading.
+setInterval(() => { if (view === 'teacher' && !$('desk').hidden) drawCloudState(); }, 4000);
 $('desk-clear').addEventListener('click', () => { if (confirm('¿Borrar todo el registro guardado en este ordenador? Descárgalo antes si lo necesitas.')) { clearEntries(); drawDesk(); } });
 $('desk-lock').addEventListener('click', () => { try { sessionStorage.removeItem(OPEN); } catch {} location.hash = ''; });
 $('desk-forget').addEventListener('click', () => { if (confirm('¿Borrar la clave de este ordenador para crear otra?')) { try { localStorage.removeItem(PIN); sessionStorage.removeItem(OPEN); } catch {} showTeacher(); } });

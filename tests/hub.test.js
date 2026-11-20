@@ -75,19 +75,14 @@ test('registro: anota por jugador, la pantalla de clase no suplanta a nadie y el
  assert.equal(sheet.length,6);assert.match(sheet[1],/;6A-12;material;equipment-rescue;fase;/);
  registro.clearEntries();assert.equal(registro.entries().length,0);
 });
-test('registro: sin dirección no se envía nada; con dirección se envía una vez y se reintenta si falla',async()=>{
+test('registro: sin hoja conectada nada sale del navegador y lo anotado antes se sigue entendiendo',async()=>{
  localStorage.clear();sessionStorage.clear();
- registro.setPlayer({course:5,group:'C',number:3,avatar:1});
- registro.record('pista','mate','partido',{resultado:'empate',puntos:75});
- registro.record('pista','mate','partido',{resultado:'victoria',puntos:200});
+ // An entry written by the first version of the record: no student id, no course.
+ localStorage.setItem('pabellon-registro',JSON.stringify([{id:'lx0-aaaaaa',t:'2026-11-19T09:00:00.000Z',who:'5C-03',place:'pista',activity:'mate',event:'partido',data:{resultado:'empate',puntos:75},sent:false},{id:'lx1-bbbbbb',t:'2026-11-19T09:05:00.000Z',who:null,place:'espalderas',activity:'ruleta',event:'reto',data:{reto:'c1'},sent:false}]));
+ assert.deepEqual(registro.entries().map(e=>[e.who,e.sid,e.curso]),[['5C-03','5c-03','5'],[null,'pantalla','']]);
  const calls=[];
- assert.deepEqual(await registro.sync((...args)=>{calls.push(args);},''),{sent:0,off:true});
+ assert.deepEqual(await registro.sync({send:(...args)=>{calls.push(args);},now:true}),{ok:false,off:true});
  assert.equal(calls.length,0);assert.equal(registro.pending(),2);
- assert.deepEqual(await registro.sync(async()=>{throw new Error('sin red');},'https://hoja.test/'),{sent:0,failed:2});
- assert.equal(registro.pending(),2);
- const accept=async(url,options)=>{calls.push(JSON.parse(options.body));return {json:async()=>({ok:true})};};
- assert.deepEqual(await registro.sync(accept,'https://hoja.test/'),{sent:2});
- assert.equal(registro.pending(),0);
- assert.equal(calls[0].entries.length,2);assert.equal('sent' in calls[0].entries[0],false);assert.equal(calls[0].entries[0].who,'5C-03');
- assert.deepEqual(await registro.sync(accept,'https://hoja.test/'),{sent:0});assert.equal(calls.length,1);
+ assert.equal(existsSync(root+'config.js'),false,'la dirección de la hoja no se escribe en el código público');
+ assert.doesNotMatch(read('registro.js')+read('hub.js')+read('index.html'),/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]{20,}/);
 });
