@@ -19,7 +19,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Revisar contenido público
+        run: node scripts/check-public-content.mjs
       - run: npm test
+      - name: Usar publicación de Pages por GitHub Actions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          build_type=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq '.build_type')
+          if [ "$build_type" != "workflow" ]; then
+            gh api --method PUT "repos/$GITHUB_REPOSITORY/pages" -f build_type=workflow > /dev/null
+          fi
       - uses: actions/configure-pages@v5
       - name: Preparar archivos públicos
         run: |

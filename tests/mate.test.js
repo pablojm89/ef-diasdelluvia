@@ -3,6 +3,10 @@ import assert from 'node:assert/strict';
 import {makeGame,stepGame,setInput,imprison,rescue,throwBall,snapshot,normalizeRules,sanitizeInput,bounds} from '../mate/sim.js';
 import {inputPacket,validCode,cleanProfile} from '../mate/protocol.js';
 const controls=(extra={})=>({mx:0,my:0,ax:900,ay:390,fire:false,catch:false,dash:false,pass:false,...extra});
+
+test('mate: el perfil descarta datos identificativos y sólo conserva el personaje',()=>{
+ assert.deepEqual(cleanProfile({character:3,name:'PRUEBA',email:'prueba@example.test',school:'CENTRO DE PRUEBA',pupilId:'DEMO'}),{character:3});
+});
 function setup(rules={}) {
  const g=makeGame([{id:'a',team:0,name:'Vega'},{id:'b',team:1,name:'Kai'}],{teamSize:2,...rules});
  g.phase='playing';for(const p of g.players){p.bot=false;p.invulnerable=0;p.y=300;}g.players.find(p=>p.id==='a').x=500;g.players.find(p=>p.id==='b').x=800;

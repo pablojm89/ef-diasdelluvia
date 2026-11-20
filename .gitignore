@@ -4,3 +4,26 @@ playwright-report/
 test-results/
 .openai/
 artifacts/
+
+# Información privada: nunca forma parte del repositorio público.
+.env
+.env.*
+private/
+privado/
+alumnado/
+alumnos/
+datos-alumnos/
+student-data/
+exports/
+recordings/
+*.csv
+*.tsv
+*.xls
+*.xlsx
+*.ods
+*.sqlite
+*.sqlite3
+*.db
+*.jsonl
+*.ndjson
+*.parquet

@@ -2,6 +2,8 @@
 
 Una propuesta de coordinación, ritmo, expresión y cooperación para 5.º y 6.º de Primaria.
 
+**Privacidad:** el repositorio es público y sólo contiene recursos genéricos y personajes ficticios. No incorporar datos reales de alumnos. [Política y comprobaciones de publicación](PRIVACY.md).
+
 **Estado: tres experiencias físicas de aula y Mate Arena, un videojuego de balón prisionero con entrenamiento y salas online.** Las salas de Mate Arena están implementadas; las votaciones y las salas de los otros juegos siguen pendientes. No hay seguimiento del movimiento con cámara.
 
 ## El mundo de Chispa
