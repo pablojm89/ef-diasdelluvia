@@ -1,30 +1,109 @@
 <!doctype html>
 <html lang="es">
 <head>
- <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101e31">
- <meta name="description" content="Mate Arena: balón prisionero arcade. Elige personaje, entrena contra la máquina o juega online con tus compañeros en salas por código.">
- <title>Mate Arena · El Pabellón</title><link rel="icon" href="../assets/mark.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./hud.css">
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#142e30">
+ <meta name="description" content="La Pista de El Pabellón: Mate Arena, balón prisionero. Elige personaje, entrena contra la máquina o juega con tu clase en una sala por código.">
+ <title>La Pista · Mate Arena · El Pabellón</title>
+ <link rel="icon" href="../assets/mark.svg" type="image/svg+xml"><link rel="up" href="../">
+ <link rel="stylesheet" href="../comun/base.css"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./hud.css">
 </head>
 <body>
  <a class="skip" href="#main">Saltar al juego</a>
- <header class="arcade-header"><a href="../" class="world-link" aria-label="El Pabellón, inicio"><img src="../assets/mark.svg" alt="" width="34" height="34"><span>EDUCACIÓN FÍSICA<br><strong>EL PABELLÓN</strong></span></a><a href="./" class="game-brand" aria-label="Mate Arena, inicio"><span class="brand-ball" aria-hidden="true"></span>MATE <b>ARENA</b></a><span id="connection-label" class="connection-label">ARCADE DE AULA</span></header>
- <main id="main">
-  <section id="menu-view" class="view menu-view">
-   <div class="menu-hero"><div class="menu-copy"><p class="eyebrow">EL BALÓN PRISIONERO SE VIENE ARRIBA</p><h1>APUNTA. <br>ESQUIVA. <br><em>¡MATE!</em></h1><p>Tu equipo, una pelota y toda la pista.<br>El siguiente lanzamiento puede cambiarlo todo.</p><div class="arcade-tags"><span>PERSONAJES PROPIOS</span><span>1–26 JUGADORES</span><span>ONLINE POR CÓDIGO</span></div></div><div class="preview-frame"><span class="preview-ticket">PATIO CUP <b>★</b></span><canvas id="preview" aria-label="Demostración de una partida de balón prisionero entre los Cometas y los Rayos"></canvas><div class="preview-caption"><span>COMETAS</span><b>VS</b><span>RAYOS</span></div></div></div>
-   <div class="menu-columns"><section class="character-panel"><div class="section-label"><h2>Elige a tu protagonista</h2><span>13 personajes</span></div><div id="character-description" class="hero-dossier" aria-live="polite" aria-atomic="true"></div><div id="character-grid" class="character-grid" role="group" aria-label="Seleccionar personaje"></div></section>
-   <section class="play-panel"><div class="section-label"><h2>La pista te espera</h2><span>SIN CUENTAS</span></div><div class="start-buttons"><button id="train-button" class="button mint">Entrenar contra la máquina <small>Entra directamente a la pista</small></button><button id="host-button" class="button gold">Crear sala online <small>Invita a tus compañeros con un código</small></button></div><form id="join-form" class="join-form"><label for="room-code">¿Te han pasado un código?</label><div><input id="room-code" name="code" type="text" placeholder="ABC234" minlength="6" maxlength="6" pattern="[A-HJ-NP-Za-hj-np-z2-9]{6}" autocomplete="off" autocapitalize="characters" spellcheck="false" required aria-label="Código de sala, seis letras o números"><button class="button outline" id="join-button">Entrar</button></div></form><p id="menu-status" class="menu-status" role="status"></p></section></div>
-   <details class="rules-details"><summary>Reglas de esta partida y controles</summary><div class="rules-content"><div><h3>El mate del cole</h3><p>Un impacto sin bote te envía a la cárcel, detrás del campo rival. Atrapar al vuelo te salva y te da la pelota. Si desde la cárcel alcanzas a un rival, vuelves a tu campo. Una pelota que toca el suelo o la pared ya no elimina. El equipo que deja sin jugadores de campo al rival gana la ronda.</p><p>Cada jugada suma puntos: diana 100, atrapada 75, rescate 50, asistencia 40 y esquiva 25. Al acabar se muestra la tabla de todos los jugadores.</p><p>Los partidos son al mejor de tres rondas. Si se acaba el tiempo, gana quien conserve más jugadores en campo. Un empate no suma victoria. Tras dos rondas extra se decide por el marcador o se comparte el empate.</p></div><div><h3>Con teclado y ratón</h3><p>En tableta o móvil: palanca a la izquierda para moverte y círculos de habilidad a la derecha. Arrastra el círculo de lanzar para apuntar.</p><p><kbd>W A S D</kbd> o flechas: moverte.<br><kbd>Espacio</kbd> o clic: lanzar.<br><kbd>E</kbd> o clic derecho: atrapar al vuelo.<br><kbd>Shift</kbd>: esquiva rápida.<br><kbd>Q</kbd>: pasar a un compañero.<br><kbd>F</kbd> activa el tiro imparable si tienes la pelota.<br><kbd>G</kbd> ralentiza al equipo rival y bloquea su esquiva durante 10 s.<br><kbd>R</kbd> cambia el objetivo automático.<br><kbd>P</kbd>: pausa del anfitrión.<br><kbd>Tab</kbd>: mantener para ver la tabla de puntos.</p><p>Apunta con el ratón o usa la ayuda automática. La recepción y la esquiva tienen tiempo de recarga. Si retienes la pelota más de cinco segundos, la sueltas.</p></div></div></details>
-   <p class="network-note">En online, el anfitrión mantiene abierta la partida. Las plazas libres se completan con IA. Necesita internet. Intenta conexión directa y dispone de relevo WSS para otras redes. Las salas de prueba usan servicios públicos de conexión.</p>
+ <main id="main" class="wall">
+  <div class="frieze" aria-hidden="true"></div>
+
+  <section id="menu-view" class="view menu">
+   <div class="menu-grid">
+    <section class="pick paper" aria-labelledby="pick-title">
+     <p class="eyebrow">Mate Arena · balón prisionero</p>
+     <h1 id="pick-title">¿Quién sale a la pista?</h1>
+     <div id="character-description" class="dossier" aria-live="polite" aria-atomic="true"></div>
+     <div id="character-grid" class="roster" role="group" aria-label="Elegir personaje"></div>
+    </section>
+    <section class="play" aria-label="Jugar">
+     <figure class="court-window"><div class="court-crop"><canvas id="preview" aria-label="Demostración: los Cometas y los Rayos juegan un partido de balón prisionero"></canvas></div>
+      <figcaption class="plate"><span class="t0">Cometas</span> contra <span class="t1">Rayos</span></figcaption></figure>
+     <div class="play-board board">
+      <div class="play-buttons">
+       <button id="train-button" class="sign gold"><strong>Entrenar</strong><small>tú contra la máquina</small></button>
+       <button id="host-button" class="sign"><strong>Crear sala</strong><small>juega con tu clase</small></button>
+      </div>
+      <form id="join-form" class="join">
+       <label for="room-code">¿Te han dado un código?</label>
+       <div><input id="room-code" name="code" type="text" placeholder="······" minlength="6" maxlength="6" pattern="[A-HJ-NP-Za-hj-np-z2-9]{6}" autocomplete="off" autocapitalize="characters" spellcheck="false" required aria-label="Código de sala, seis letras o números"><button class="sign" id="join-button">Entrar</button></div>
+      </form>
+      <p id="menu-status" class="status" role="status"></p>
+     </div>
+    </section>
+   </div>
+   <details class="rules paper">
+    <summary>Reglas y controles</summary>
+    <div class="rules-content">
+     <div><h2>El mate del cole</h2>
+      <p>Un impacto sin bote te envía a la cárcel, detrás del campo rival. Atrapar al vuelo te salva y te da la pelota. Si desde la cárcel alcanzas a un rival, vuelves a tu campo. Una pelota que toca el suelo o la pared ya no elimina. Gana la ronda el equipo que deja al rival sin jugadores en el campo.</p>
+      <p>Cada jugada suma: diana 100, atrapada 75, rescate 50, asistencia 40 y esquiva 25. Al acabar se ve la tabla de todos.</p>
+      <p>Se juega al mejor de tres rondas. Si se acaba el tiempo, gana quien conserve más jugadores en el campo. Tras dos rondas extra se decide por el marcador o se comparte el empate.</p></div>
+     <div><h2>Controles</h2>
+      <p>En tableta o móvil: palanca a la izquierda para moverte y círculos a la derecha. Arrastra el círculo de lanzar para apuntar.</p>
+      <ul class="keys">
+       <li><kbd>W A S D</kbd> o flechas: moverte</li><li><kbd>Espacio</kbd> o clic: lanzar</li><li><kbd>E</kbd> o clic derecho: atrapar</li>
+       <li><kbd>Shift</kbd>: esquiva rápida</li><li><kbd>Q</kbd>: pasar a un compañero</li><li><kbd>F</kbd>: tiro imparable</li>
+       <li><kbd>G</kbd>: mirada intensa, frena al rival 10 s</li><li><kbd>R</kbd>: cambiar de objetivo</li><li><kbd>P</kbd>: pausa del anfitrión</li>
+       <li><kbd>Tab</kbd>: ver la tabla de puntos</li>
+      </ul>
+      <p>Apunta con el ratón o deja la ayuda automática. Si retienes la pelota más de cinco segundos, la sueltas.</p></div>
+    </div>
+    <p class="fine">En una sala, el ordenador que la crea mantiene la partida y las plazas libres las juega la máquina. Necesita internet: conecta directo y, si la red no deja, por un relevo público.</p>
+   </details>
   </section>
-  <section id="lobby-view" class="view lobby-view" hidden><div class="lobby-heading"><div><p class="eyebrow">VESTUARIO · PREPARAOS PARA EL MATE</p><h1>Ya se oye la grada.</h1><p id="lobby-instruction">Esperando a tus compañeros…</p></div><div class="room-ticket"><span>CÓDIGO DE SALA</span><strong id="lobby-code"></strong><button id="copy-invite" class="text-button">Copiar invitación</button><button id="copy-watch" class="text-button" hidden>Ver en la pantalla</button></div></div><section class="lobby-actions"><div id="lobby-self" class="lobby-self"></div><div class="lobby-controls"><div class="team-switch" role="group" aria-label="Elegir equipo"><button data-team="0">Cometas</button><button data-team="1">Rayos</button></div><button id="ready-button" class="button mint">Estoy listo</button><button id="start-button" class="button gold">¡A la pista!</button><p id="ready-status" role="status"></p><button id="leave-lobby" class="text-button">Salir de la sala</button></div></section><div id="lobby-teams" class="lobby-teams"></div><div class="lobby-bottom"><section class="lobby-config"><h2>Reglas de la sala</h2><form id="rules-form"><label>Jugadores por equipo<select id="team-size"><option value="1">1 contra 1</option><option value="2">2 contra 2</option><option value="3" selected>3 contra 3</option><option value="4">4 contra 4</option><option value="5">5 contra 5</option><option value="6">6 contra 6</option><option value="7">7 contra 7</option><option value="8">8 contra 8</option><option value="9">9 contra 9</option><option value="10">10 contra 10</option><option value="11">11 contra 11</option><option value="12">12 contra 12</option><option value="13">13 contra 13</option></select></label><label>Tiempo por ronda<select id="round-seconds"><option value="60">1 minuto</option><option value="90">1 min 30 s</option><option value="150" selected>2 min 30 s</option><option value="180">3 minutos</option></select></label><label>Partido<select id="best-of"><option value="1">Una ronda ganada</option><option value="3" selected>Mejor de tres</option></select></label><label class="check-label"><input type="checkbox" id="catch-eliminates"> Atrapar elimina al lanzador</label><label class="check-label"><input type="checkbox" id="catch-rescues"> Atrapar rescata a un preso de tu equipo</label></form><p>Siempre: impacto sin bote, cárcel tras el campo rival y regreso de un preso que alcanza a un rival. El talento de cada personaje se aplica automáticamente. Todos pueden usar el tiro imparable y la mirada intensa, cada uno con 60 s de recarga.</p></section></div></section>
+
+  <section id="lobby-view" class="view lobby" hidden>
+   <header class="lobby-head">
+    <div class="lobby-title"><p class="eyebrow">El vestuario · antes de salir a la pista</p><h1>Preparaos para el mate</h1><p id="lobby-instruction">Esperando a tus compañeros…</p></div>
+    <img class="robles" src="./assets/pista/robles-senala.webp" alt="" width="323" height="548">
+    <div class="ticket board">
+     <span class="eyebrow">Código de sala</span><strong id="lobby-code"></strong>
+     <div class="ticket-links"><button id="copy-invite" class="link">Copiar invitación</button><button id="copy-watch" class="link" hidden>Ver en la pantalla</button></div>
+     <span id="connection-label" class="connection-label"></span>
+    </div>
+   </header>
+   <div class="lobby-grid">
+    <section class="locker paper" aria-label="Tu taquilla">
+     <div id="lobby-self" class="lobby-self"></div>
+     <div class="lobby-controls">
+      <div class="team-switch" role="group" aria-label="Elegir equipo"><button data-team="0">Cometas</button><button data-team="1">Rayos</button></div>
+      <button id="ready-button" class="sign gold">Estoy listo</button><button id="start-button" class="sign gold">¡A la pista!</button>
+      <p id="ready-status" role="status"></p>
+      <button id="leave-lobby" class="link">Salir de la sala</button>
+     </div>
+    </section>
+    <div class="lobby-side">
+     <div id="lobby-teams" class="lobby-teams"></div>
+     <section class="room-rules paper">
+      <h2>Reglas de la sala</h2>
+      <form id="rules-form">
+       <label>Jugadores por equipo<select id="team-size"><option value="1">1 contra 1</option><option value="2">2 contra 2</option><option value="3" selected>3 contra 3</option><option value="4">4 contra 4</option><option value="5">5 contra 5</option><option value="6">6 contra 6</option><option value="7">7 contra 7</option><option value="8">8 contra 8</option><option value="9">9 contra 9</option><option value="10">10 contra 10</option><option value="11">11 contra 11</option><option value="12">12 contra 12</option><option value="13">13 contra 13</option></select></label>
+       <label>Tiempo por ronda<select id="round-seconds"><option value="60">1 minuto</option><option value="90">1 min 30 s</option><option value="150" selected>2 min 30 s</option><option value="180">3 minutos</option></select></label>
+       <label>Partido<select id="best-of"><option value="1">Una ronda ganada</option><option value="3" selected>Mejor de tres</option></select></label>
+       <label class="check"><input type="checkbox" id="catch-eliminates"> Atrapar elimina al lanzador</label>
+       <label class="check"><input type="checkbox" id="catch-rescues"> Atrapar rescata a un preso de tu equipo</label>
+      </form>
+      <p class="fine">Siempre: impacto sin bote, cárcel tras el campo rival y vuelta del preso que alcanza a un rival. El talento de cada personaje va solo. Todos tienen tiro imparable y mirada intensa, con 60 s de recarga.</p>
+     </section>
+    </div>
+   </div>
+  </section>
+
   <section id="game-view" class="view game-view" hidden>
-   <div class="court-frame" id="court-frame"><canvas id="court" tabindex="0" aria-label="Pista de Mate Arena. Usa las flechas para moverte, espacio para lanzar, E para atrapar y Shift para esquivar.">Este juego necesita un navegador con Canvas.</canvas><p id="match-announcement" class="feed" role="status" aria-live="polite">Busca la pelota y ayuda a tu equipo.</p><div id="connection-overlay" class="connection-overlay" hidden><h2>Tiempo muerto</h2><p id="connection-message"></p><button id="reconnect-button" class="button gold">Volver a conectar</button><button id="back-menu-button" class="button outline">Volver al inicio</button></div></div>
+   <div class="court-frame" id="court-frame"><canvas id="court" tabindex="0" aria-label="Pista de Mate Arena. Usa las flechas para moverte, espacio para lanzar, E para atrapar y Shift para esquivar.">Este juego necesita un navegador con Canvas.</canvas><p id="match-announcement" class="feed" role="status" aria-live="polite">Busca la pelota y ayuda a tu equipo.</p>
+    <div id="connection-overlay" class="connection-overlay" hidden><div class="timeout board"><img src="./assets/pista/robles-silbato.webp" alt="" width="188" height="548"><div><h2>Tiempo muerto</h2><p id="connection-message"></p><div class="timeout-buttons"><button id="reconnect-button" class="sign gold">Volver a conectar</button><button id="back-menu-button" class="sign">Volver al inicio</button></div></div></div></div></div>
    <div class="player-chip"><img id="match-portrait" alt="" width="52" height="52"><div class="chip-text"><span id="match-mode" class="eyebrow">ENTRENAMIENTO</span><strong id="match-player"></strong><button type="button" id="score-button" class="chip-points" aria-label="Ver la tabla de puntos" tabindex="-1"><b id="match-points">0</b> PTS</button></div><details class="match-talent"><summary><img id="match-talent-art" alt="" width="30" height="30"><span id="match-talent-name">Talento</span></summary><p id="match-talent-detail"></p></details></div>
    <div class="match-buttons"><label class="tool sound-label" title="Sonido"><input id="sound-enabled" type="checkbox"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path class="waves" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none"/></svg><span class="sr">Sonido</span></label><button type="button" id="pause-button" class="tool" aria-label="Pausar" title="Pausar (P)"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="pause-art" d="M7.5 5.5h2.5v13H7.5zM14 5.5h2.5v13H14z"/><path class="play-art" d="M8 5l11 7-11 7z"/></svg></button><button type="button" id="fullscreen-button" class="tool" aria-label="Pantalla completa" title="Pantalla completa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none"/></svg></button><button type="button" id="leave-game" class="tool" aria-label="Salir de la partida" title="Salir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none"/></svg></button></div>
    <div id="stick-zone" class="stick-zone" aria-hidden="true"><div id="stick" class="stick"><i></i></div></div>
    <div id="ability-bar" class="ability-bar" role="group" aria-label="Habilidades"></div>
-   <section id="results" class="results" hidden aria-labelledby="results-title"><div class="results-card"><p class="eyebrow" id="results-kicker">FIN DEL PARTIDO</p><h2 id="results-title">Tabla de puntos</h2><div id="results-body"></div><p class="results-legend">Diana 100 · Atrapada 75 · Rescate 50 · Asistencia 40 · Esquiva 25 · Ronda ganada 50 para todo el equipo</p><div class="results-actions"><button id="rematch-button" class="button gold" hidden>Otra partida</button><button type="button" id="results-leave" class="button outline">Salir</button></div></div></section>
+   <section id="results" class="results" hidden aria-labelledby="results-title"><div class="results-card"><p class="eyebrow" id="results-kicker">FIN DEL PARTIDO</p><h2 id="results-title">Tabla de puntos</h2><div id="results-body"></div><p class="results-legend">Diana 100 · Atrapada 75 · Rescate 50 · Asistencia 40 · Esquiva 25 · Ronda ganada 50 para todo el equipo</p><div class="results-actions"><button id="rematch-button" class="sign gold" hidden>Otra partida</button><button type="button" id="results-leave" class="sign">Salir</button></div></div></section>
   </section>
+  <div class="skirting" aria-hidden="true"></div>
  </main>
  <div id="toast" class="toast" role="status"></div>
  <script src="./vendor/peerjs.min.js" defer></script><script type="module" src="./game.js"></script>

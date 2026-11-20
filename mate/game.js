@@ -7,12 +7,20 @@ import {Room} from './network.js';
 import {validCode} from './protocol.js';
 import {buildBar,updateBar,attachStick,resultsMarkup} from './hud.js';
 import {talentArt} from './abilities.js';
-import {record} from '../registro.js';
+import {record,topBar,player,mode as placeMode} from '../comun/lugar.js';
+import {PINTADOS} from './assets/pista/pintados.js';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let selected=0;
-try{const n=Number(localStorage.getItem('mate-character'));if(Number.isInteger(n)&&n>=0&&n<HEROES.length)selected=n;}catch{}
+topBar('La Pista');
+for(const key of PINTADOS)document.body.classList.add('con-'+key);
+// A pupil who came in from the hub already has a character: the menu starts on it and says so.
+const hubHero=placeMode()==='pantalla'?null:player()?.avatar??null;
+let selected=hubHero??0;
+try{const saved=localStorage.getItem('mate-character'),n=Number(saved);if(saved!==null&&Number.isInteger(n)&&n>=0&&n<HEROES.length)selected=n;}catch{}
 let lastLockerMarkup;
+const slug=index=>HEROES[index].name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+// A painted portrait replaces the pixel one in the menus once it arrives (arte/lotes/15-pista.json).
+function face(index){const key='retrato-'+slug(index);return PINTADOS.includes(key)?{src:new URL(`./assets/pista/${key}.webp`,import.meta.url).href,pixel:false}:{src:portrait(index),pixel:true};}
 let view='menu',room=null,lobby=null,game=null,remote=null,previousRemote=null,remoteAt=0,localId='local',mode='training',busy=false,networkDisconnected=false;
 let toastTimeout,lastFrame=performance.now(),accumulator=0,lastSend=0,lastBroadcast=0,lastAnnouncement=0,lastAudioEvent=0,latency=0,lastRemoteAt=0,lastUi=0,lastClientDraw=0;
 let rules=normalizeRules(),manualAim=false,pointerAt=0,targetIndex=0,audio=null,lastDemo=0;
@@ -29,14 +37,15 @@ function toast(message){$('toast').textContent=message;$('toast').classList.add(
 function setBusy(value,message=''){busy=value;for(const id of ['host-button','train-button','join-button'])$(id).disabled=value;$('menu-status').textContent=message;}
 function saveCharacter(){try{localStorage.setItem('mate-character',selected);}catch{}}
 function talentCard(index, team = 0) {
- const hero = HEROES[index];
- return `<div class="hero-portrait"><img src="${portrait(index,team)}" alt="" width="88" height="112"></div>
-  <div class="hero-bio"><strong>${esc(hero.name)} <small>· ${esc(hero.tag)}</small></strong><h3>${esc(hero.ability)}</h3><p>${esc(hero.description)}</p></div>`;
+ const hero = HEROES[index], {src, pixel} = face(index);
+ return `<figure class="cromo team-${team}${pixel ? ' pixel' : ''}"><img src="${src}" alt="" width="96" height="96"></figure>
+  <div class="bio"><p class="bio-name"><strong>${esc(hero.name)}</strong> <small>${esc(hero.tag)}</small></p>
+  <h3><span>Talento</span> ${esc(hero.ability)}</h3><p>${esc(hero.description)}</p>${index === hubHero ? '<p class="hub-badge">Tu personaje del Pabellón</p>' : ''}</div>`;
 }
 function drawChoices(){
  $('character-grid').innerHTML=HEROES.map((hero,index)=>
   `<button class="character-choice" data-character="${index}" aria-pressed="${index===selected}" aria-label="${esc(hero.name)}, ${esc(hero.ability)}">
-   <img src="${portrait(index)}" alt="" width="63" height="80"><span>${esc(hero.name)}</span></button>`).join('');
+   <img src="${portrait(index)}" alt="" width="64" height="64"><span>${esc(hero.name)}</span></button>`).join('');
  $('character-description').innerHTML = talentCard(selected);
 }
 function profile(){return {character:selected};}
@@ -84,16 +93,16 @@ function renderLobby(){
  fillRules(lobby.rules,host);
  $('lobby-teams').innerHTML=[0,1].map(team=>{
   const members=roster.filter(m=>m.team===team);
-  return `<article class="team-card team-${team}"><h2>${TEAM_COLORS[team].name}<small>${members.length} HUMANO${members.length===1?'':'S'} · ${lobby.rules.teamSize} PLAZAS</small></h2>${buildLineup(roster, team, lobby.rules.teamSize).map(({member:m,character})=>{
-   return m?`<div class="player-slot ${m.id===room.myId?'mine':''}"><img src="${portrait(m.character,team)}" alt="" width="39" height="51"><div><strong>${esc(m.name)}${m.id===room.myId?' · TÚ':''}</strong><small>${m.host?'Anfitrión':'Online'} · ${esc(HEROES[m.character].ability)}</small></div><span class="${m.ready?'ready-tag':'wait-tag'}">${m.ready?'LISTO':'PREPARÁNDOSE'}</span></div>`:`<div class="player-slot empty"><img src="${portrait(character,team)}" alt="" width="39" height="51"><div><strong>${esc(HEROES[character].name)}</strong><small>Plaza libre · IA al empezar</small></div></div>`;
+  return `<article class="team-card team-${team}"><h2>${TEAM_COLORS[team].name}<small>${members.length} de ${lobby.rules.teamSize} en la sala</small></h2>${buildLineup(roster, team, lobby.rules.teamSize).map(({member:m,character})=>{
+   return m?`<div class="player-slot ${m.id===room.myId?'mine':''}"><img src="${portrait(m.character,team)}" alt="" width="44" height="44"><div><strong>${esc(m.name)}${m.id===room.myId?' · TÚ':''}</strong><small>${m.host?'Anfitrión':'En la sala'} · ${esc(HEROES[m.character].ability)}</small></div><span class="${m.ready?'ready-tag':'wait-tag'}">${m.ready?'Listo':'Preparándose'}</span></div>`:`<div class="player-slot empty"><img src="${portrait(character,team)}" alt="" width="44" height="44"><div><strong>${esc(HEROES[character].name)}</strong><small>Plaza libre · la juega la máquina</small></div></div>`;
   }).join('')}</article>`;
  }).join('');
  const ownTeam = me?.team ?? 0, ownHero = me?.character ?? selected;
  if(me && selected!==ownHero){ selected=ownHero; saveCharacter(); drawChoices(); }
  const occupied = new Set(lobby.members.filter(m=>m.team===ownTeam && m.id!==room.myId).map(m=>m.character));
  const hadSelectFocus = document.activeElement?.id==='lobby-character';
- const lockerMarkup = `<div class="hero-dossier">${talentCard(ownHero,ownTeam)}</div>
-  <label for="lobby-character">Personaje de tu equipo</label>
+ const lockerMarkup = `<div class="dossier">${talentCard(ownHero,ownTeam)}</div>
+  <label for="lobby-character">Tu personaje en este equipo</label>
   <select id="lobby-character">${HEROES.map((hero,index)=>
    `<option value="${index}" ${index===ownHero?'selected':''} ${occupied.has(index)?'disabled':''}>${esc(hero.name)} · ${esc(hero.ability)}${occupied.has(index)?' (ocupado)':''}</option>`).join('')}</select>
   <p>Un personaje por equipo. El equipo rival puede elegir el mismo.</p>`;
@@ -252,7 +261,7 @@ $('start-button').addEventListener('click',()=>{enterFullscreen();room?.start();
 $('copy-invite').addEventListener('click',async()=>{if(!room)return;const invite=new URL(location.href);invite.search='';invite.searchParams.set('sala',room.code);try{await navigator.clipboard.writeText(invite.href);toast('Invitación copiada. Pásasela a tus compañeros.');}catch{toast(`Código de sala: ${room.code}. También puedes copiar la dirección de esta página.`);}});
 // La Grada shows this room on the class screen as a spectator.
 $('copy-watch').addEventListener('click',async()=>{if(!room)return;const link=new URL('../grada/#sala='+room.code,location.href).href;try{await navigator.clipboard.writeText(link);toast('Enlace de La Grada copiado. Ábrelo en la pantalla de clase.');}catch{toast(`Abre La Grada en la pantalla y escribe el código ${room.code}.`);}});
-function leave(){if((view==='game'||view==='lobby')&&!confirm(room?.isHost?'¿Salir y cerrar la sala para todos?':'¿Salir de esta partida?'))return;stopRoom();setBusy(false);showView('menu');$('connection-label').textContent='ARCADE DE AULA';drawChoices();}
+function leave(){if((view==='game'||view==='lobby')&&!confirm(room?.isHost?'¿Salir y cerrar la sala para todos?':'¿Salir de esta partida?'))return;stopRoom();setBusy(false);showView('menu');$('connection-label').textContent='';drawChoices();}
 $('leave-lobby').addEventListener('click',leave);$('leave-game').addEventListener('click',leave);$('back-menu-button').addEventListener('click',()=>{stopRoom();showView('menu');setBusy(false);});
 $('pause-button').addEventListener('click',togglePause);
 $('rematch-button').addEventListener('click',()=>{if(mode==='online'&&room?.isHost){game=null;room.returnToLobby();}else training();});
