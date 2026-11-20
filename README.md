@@ -6,6 +6,8 @@ Una propuesta de coordinación, ritmo, expresión y cooperación para 5.º y 6.�
 
 **Estado: tres experiencias físicas de aula y Mate Arena, un videojuego de balón prisionero con entrenamiento y salas online.** Las salas de Mate Arena están implementadas; las votaciones y las salas de los otros juegos siguen pendientes. No hay seguimiento del movimiento con cámara.
 
+**Nueva propuesta en fase de diseño:** [El Gimnasio, aventura gráfica bilingüe para EF de 5.º–6.º en Andalucía](docs/hub-ef/README.md). Incluye investigación, dirección artística, arquitectura y el guion de la primera misión del almacén. Esta propuesta todavía no sustituye la aplicación publicada.
+
 ## El mundo de Chispa
 
 La entrada es un mapa de islas flotantes con tres destinos interactivos. Misión Refugio tiene una ruta de seis balizas, Pulso Lab un escenario con ritmo visual y Liga Relámpago una arena de equipos. Chispa acompaña al grupo y celebra el cierre de la misión.
