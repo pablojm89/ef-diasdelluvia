@@ -1,5 +1,5 @@
 import {equipment,targets,find,request,fresh,valid,act} from './mission.js';
-import {walkTo, enterRoom} from './walk.js?v=studio-4';
+import {walkTo, enterRoom} from './walk.js?v=stride-5';
 import {speakAndPoint} from './robles.js';
 const icon = id => '<img alt="" draggable="false" src="assets/prop-' + id + '.webp">';
 const $=id=>document.getElementById(id), key='ef-gym-mission-v1';
@@ -104,9 +104,11 @@ $('scene').addEventListener('click', event => {
  if (target) {
   event.stopImmediatePropagation();
   const hit = target.getBoundingClientRect();
-  const x = (hit.left + hit.width / 2 - bounds.left) / bounds.width;
+  const isTeacher = target.id === 'prof';
+  const footX = isTeacher ? hit.left - hit.width * .14 : hit.left + hit.width / 2;
+  const x = (footX - bounds.left) / bounds.width;
   const y = (hit.bottom - bounds.top) / bounds.height;
-  walkTo(x, y, () => { if (target.isConnected) target.onclick?.(); });
+  walkTo(x, y, () => { if (target.isConnected) target.onclick?.(); }, isTeacher ? 1 : undefined);
  } else {
   walkTo((event.clientX - bounds.left) / bounds.width, (event.clientY - bounds.top) / bounds.height);
  }
