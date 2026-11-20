@@ -18,11 +18,11 @@ const PLACES = {
  pizarra: {name: 'La Pizarra', kicker: 'Rosco de Educación Física', art: 'door-pizarra', modes: 'Alumno · Pantalla', state: 'soon'},
  tatami: {name: 'El Tatami', kicker: 'Yoga: posturas y secuencias', art: 'door-cerrada', modes: 'Alumno · Pantalla', state: 'soon'},
  grada: {name: 'La Grada', kicker: 'Partidos de mate en directo', art: 'door-cerrada', modes: 'Pantalla', state: 'soon'},
- aula: {name: 'El Aula', kicker: 'La oca y el bingo en movimiento', art: 'door-cerrada', modes: 'Pantalla', state: 'soon'},
+ aula: {name: 'El Aula', kicker: 'La oca y el bingo en movimiento', art: 'door-cerrada', href: './aula/', modes: 'Pantalla · Tabletas', state: 'open'},
 };
 const MAPS = {
  alumno: {title: '¿A dónde vamos hoy?', places: ['gimnasio', 'pista', 'tatami']},
- pantalla: {title: 'Pantalla digital: elegid un lugar', places: ['espalderas', 'gimnasio', 'tatami', 'grada']},
+ pantalla: {title: 'Pantalla digital: elegid un lugar', places: ['espalderas', 'aula', 'gimnasio', 'tatami', 'grada']},
 };
 // Earlier experiments that no longer match the look of the school; only the teacher can still open them.
 const REVIEW = [

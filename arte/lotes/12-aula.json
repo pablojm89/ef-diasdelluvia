@@ -1,0 +1,540 @@
+{
+ "_titulo": "El Aula: la oca cooperativa y el bingo en movimiento",
+ "_nota": "Lugar El Aula (aula/). El código ya usa cada imagen en cuanto scripts/integrar_arte.py la marca como lista: el índice aula/assets/pintados.js dice cuáles están pintadas. Hasta entonces se dibujan en SVG y CSS.",
+ "_indice": {
+  "archivo": "aula/assets/pintados.js",
+  "nombre": "PINTADOS"
+ },
+ "aula-tablero": {
+  "nombre": "Tablero de la oca sobre el suelo del aula",
+  "destino": "aula/assets/tablero.webp",
+  "ancho": 1536,
+  "alto": 1024,
+  "transparente": false,
+  "listo": false,
+  "clave": "tablero",
+  "prompt": "Vista cenital exacta, sin perspectiva, de un tablero de juego pintado directamente sobre el suelo de parqué de madera miel de un aula (lamas horizontales como las de gimnasio/assets/gym.webp), con luz cálida de tarde que entra desde la izquierda. El tablero es un camino en espiral rectangular de esquinas redondeadas formado por 31 baldosas cuadradas de 144 × 144 px con esquinas redondeadas (radio 22 px), borde marrón oscuro de 6 px y textura de pintura de gouache, unidas por un caminito de huellas pintadas en crema. Geometría exacta en píxeles: el centro de cada baldosa, en orden del recorrido, desde la salida (abajo a la izquierda) hasta la meta (cerca del centro): 0: (150, 880) salida: baldosa crema #f4e6c4 con una flecha pintada hacia arriba; 1: (150, 687) teja #d9703a; 2: (150, 494) verde azulado #2f7f78; 3: (150, 302) ocre #e2a63b; 4: (232, 152) coral #c9524a; 5: (425, 150) verde hoja #4f8a4b con una oca blanca de perfil pintada; 6: (617, 150) teja #d9703a; 7: (810, 150) verde azulado #2f7f78; 8: (1002, 150) azul #3f6fa8 con una hoja de naranjo blanca pintada; 9: (1195, 150) ocre #e2a63b; 10: (1372, 195) coral #c9524a con un puentecito de madera blanco pintado; 11: (1386, 385) verde hoja #4f8a4b; 12: (1386, 578) teja #d9703a; 13: (1386, 770) verde azulado #2f7f78; 14: (1256, 874) ocre #e2a63b con una oca blanca de perfil pintada; 15: (1063, 874) coral #c9524a; 16: (871, 874) verde hoja #4f8a4b; 17: (678, 874) azul #3f6fa8 con una hoja de naranjo blanca pintada; 18: (486, 874) teja #d9703a; 19: (341, 785) verde azulado #2f7f78; 20: (340, 593) ocre #e2a63b; 21: (347, 401) coral #c9524a; 22: (513, 340) verde hoja #4f8a4b; 23: (706, 340) teja #d9703a con una oca blanca de perfil pintada; 24: (898, 340) verde azulado #2f7f78; 25: (1091, 340) ocre #e2a63b; 26: (1196, 469) azul #3f6fa8 con una hoja de naranjo blanca pintada; 27: (1169, 656) coral #c9524a; 28: (985, 684) verde hoja #4f8a4b; 29: (792, 684) teja #d9703a; 30: (600, 684) meta: baldosa dorada #f2bd57 más grande (176 px) con una bandera de cuadros pequeña pintada. El hueco central del tablero (aprox. x 470–1100, y 430–600) queda como parqué limpio con una alfombra ovalada tenue color crema, sin dibujos. Margen exterior de parqué limpio. Sin números, letras ni flechas de texto: el juego pone los números encima. Sin personas, fichas ni dados."
+ },
+ "aula-fondo": {
+  "nombre": "El aula con las mesas apartadas",
+  "destino": "aula/assets/aula.webp",
+  "ancho": 1536,
+  "alto": 1024,
+  "transparente": false,
+  "listo": false,
+  "clave": "aula",
+  "prompt": "Aula de Primaria de un colegio andaluz al final de la tarde, misma luz y paleta que gimnasio/assets/store.webp: pared ocre melocotón, zócalo verde azulado, cenefa de azulejo azul y naranja, ventanal a la izquierda con naranjos, pizarra verde a la derecha y una pantalla digital apagada sobre la pizarra. Las mesas y sillas están apartadas y apiladas contra las paredes laterales; el centro del suelo de parqué queda libre y despejado ocupando la mitad inferior de la imagen, porque allí se pone el juego. Sin personas ni texto."
+ },
+ "aula-mesa-oca": {
+  "nombre": "Mesa de juego: la oca",
+  "destino": "aula/assets/mesa-oca.webp",
+  "ancho": 640,
+  "alto": 440,
+  "transparente": true,
+  "listo": false,
+  "clave": "mesa-oca",
+  "prompt": "Dos mesas escolares de madera juntas, vistas en tres cuartos desde arriba, con un tablero de oca desplegado encima: espiral de casillas en teja, verde azulado, ocre, coral, verde hoja y azul, un dado blanco grande y seis fichas de colores (rojo, amarillo, azul, blanco, morado y negro). Sin números ni letras."
+ },
+ "aula-mesa-bingo": {
+  "nombre": "Mesa de juego: el bingo",
+  "destino": "aula/assets/mesa-bingo.webp",
+  "ancho": 640,
+  "alto": 440,
+  "transparente": true,
+  "listo": false,
+  "clave": "mesa-bingo",
+  "prompt": "Dos mesas escolares de madera juntas, vistas en tres cuartos desde arriba, con una tableta y varios cartones de bingo en papel crema con cuadrícula de 3 × 3 y pequeños dibujos de niños moviéndose en cada casilla; algunas casillas tachadas con lápiz verde. Sin números ni letras legibles."
+ },
+ "aula-ficha-rojo": {
+  "nombre": "Ficha del equipo rojo",
+  "destino": "aula/assets/ficha-rojo.webp",
+  "ancho": 200,
+  "alto": 260,
+  "transparente": true,
+  "listo": false,
+  "clave": "ficha-rojo",
+  "exacto": true,
+  "prompt": "Ficha de juego de madera pintada, tipo peón grueso de cabeza redonda, vista de frente y un poco desde arriba, de color rojo #b8322a con brillo cálido arriba a la izquierda y contorno marrón oscuro de 4 px. La ficha ocupa todo el alto del lienzo con su base centrada abajo. Todas las fichas del lote tienen exactamente la misma forma y encuadre; sólo cambia el color."
+ },
+ "aula-ficha-amarillo": {
+  "nombre": "Ficha del equipo amarillo",
+  "destino": "aula/assets/ficha-amarillo.webp",
+  "ancho": 200,
+  "alto": 260,
+  "transparente": true,
+  "listo": false,
+  "clave": "ficha-amarillo",
+  "exacto": true,
+  "prompt": "Ficha de juego de madera pintada, tipo peón grueso de cabeza redonda, vista de frente y un poco desde arriba, de color amarillo #f2c12e con brillo cálido arriba a la izquierda y contorno marrón oscuro de 4 px. La ficha ocupa todo el alto del lienzo con su base centrada abajo. Todas las fichas del lote tienen exactamente la misma forma y encuadre; sólo cambia el color."
+ },
+ "aula-ficha-azul": {
+  "nombre": "Ficha del equipo azul",
+  "destino": "aula/assets/ficha-azul.webp",
+  "ancho": 200,
+  "alto": 260,
+  "transparente": true,
+  "listo": false,
+  "clave": "ficha-azul",
+  "exacto": true,
+  "prompt": "Ficha de juego de madera pintada, tipo peón grueso de cabeza redonda, vista de frente y un poco desde arriba, de color azul #1f4e9c con brillo cálido arriba a la izquierda y contorno marrón oscuro de 4 px. La ficha ocupa todo el alto del lienzo con su base centrada abajo. Todas las fichas del lote tienen exactamente la misma forma y encuadre; sólo cambia el color."
+ },
+ "aula-ficha-blanco": {
+  "nombre": "Ficha del equipo blanco",
+  "destino": "aula/assets/ficha-blanco.webp",
+  "ancho": 200,
+  "alto": 260,
+  "transparente": true,
+  "listo": false,
+  "clave": "ficha-blanco",
+  "exacto": true,
+  "prompt": "Ficha de juego de madera pintada, tipo peón grueso de cabeza redonda, vista de frente y un poco desde arriba, de color blanco crema #f7f1e3 con brillo cálido arriba a la izquierda y contorno marrón oscuro de 4 px. La ficha ocupa todo el alto del lienzo con su base centrada abajo. Todas las fichas del lote tienen exactamente la misma forma y encuadre; sólo cambia el color."
+ },
+ "aula-ficha-morado": {
+  "nombre": "Ficha del equipo morado",
+  "destino": "aula/assets/ficha-morado.webp",
+  "ancho": 200,
+  "alto": 260,
+  "transparente": true,
+  "listo": false,
+  "clave": "ficha-morado",
+  "exacto": true,
+  "prompt": "Ficha de juego de madera pintada, tipo peón grueso de cabeza redonda, vista de frente y un poco desde arriba, de color morado #6e3f98 con brillo cálido arriba a la izquierda y contorno marrón oscuro de 4 px. La ficha ocupa todo el alto del lienzo con su base centrada abajo. Todas las fichas del lote tienen exactamente la misma forma y encuadre; sólo cambia el color."
+ },
+ "aula-ficha-negro": {
+  "nombre": "Ficha del equipo negro",
+  "destino": "aula/assets/ficha-negro.webp",
+  "ancho": 200,
+  "alto": 260,
+  "transparente": true,
+  "listo": false,
+  "clave": "ficha-negro",
+  "exacto": true,
+  "prompt": "Ficha de juego de madera pintada, tipo peón grueso de cabeza redonda, vista de frente y un poco desde arriba, de color negro cálido #2a2522 con brillo cálido arriba a la izquierda y contorno marrón oscuro de 4 px. La ficha ocupa todo el alto del lienzo con su base centrada abajo. Todas las fichas del lote tienen exactamente la misma forma y encuadre; sólo cambia el color."
+ },
+ "aula-dado-1": {
+  "nombre": "Cara 1 del dado",
+  "destino": "aula/assets/dado-1.webp",
+  "ancho": 320,
+  "alto": 320,
+  "transparente": true,
+  "listo": false,
+  "clave": "dado-1",
+  "exacto": true,
+  "prompt": "Una cara de un dado grande de goma espuma color crema #fff3d9, vista totalmente de frente, cuadrada con esquinas muy redondeadas, que llena el lienzo; textura suave y sombreado cálido en los bordes. Puntos redondos en verde azulado oscuro #1f5753: un punto central. Las seis caras del lote tienen el mismo encuadre y tamaño."
+ },
+ "aula-dado-2": {
+  "nombre": "Cara 2 del dado",
+  "destino": "aula/assets/dado-2.webp",
+  "ancho": 320,
+  "alto": 320,
+  "transparente": true,
+  "listo": false,
+  "clave": "dado-2",
+  "exacto": true,
+  "prompt": "Una cara de un dado grande de goma espuma color crema #fff3d9, vista totalmente de frente, cuadrada con esquinas muy redondeadas, que llena el lienzo; textura suave y sombreado cálido en los bordes. Puntos redondos en verde azulado oscuro #1f5753: dos puntos en diagonal. Las seis caras del lote tienen el mismo encuadre y tamaño."
+ },
+ "aula-dado-3": {
+  "nombre": "Cara 3 del dado",
+  "destino": "aula/assets/dado-3.webp",
+  "ancho": 320,
+  "alto": 320,
+  "transparente": true,
+  "listo": false,
+  "clave": "dado-3",
+  "exacto": true,
+  "prompt": "Una cara de un dado grande de goma espuma color crema #fff3d9, vista totalmente de frente, cuadrada con esquinas muy redondeadas, que llena el lienzo; textura suave y sombreado cálido en los bordes. Puntos redondos en verde azulado oscuro #1f5753: tres puntos en diagonal. Las seis caras del lote tienen el mismo encuadre y tamaño."
+ },
+ "aula-dado-4": {
+  "nombre": "Cara 4 del dado",
+  "destino": "aula/assets/dado-4.webp",
+  "ancho": 320,
+  "alto": 320,
+  "transparente": true,
+  "listo": false,
+  "clave": "dado-4",
+  "exacto": true,
+  "prompt": "Una cara de un dado grande de goma espuma color crema #fff3d9, vista totalmente de frente, cuadrada con esquinas muy redondeadas, que llena el lienzo; textura suave y sombreado cálido en los bordes. Puntos redondos en verde azulado oscuro #1f5753: cuatro puntos en las esquinas. Las seis caras del lote tienen el mismo encuadre y tamaño."
+ },
+ "aula-dado-5": {
+  "nombre": "Cara 5 del dado",
+  "destino": "aula/assets/dado-5.webp",
+  "ancho": 320,
+  "alto": 320,
+  "transparente": true,
+  "listo": false,
+  "clave": "dado-5",
+  "exacto": true,
+  "prompt": "Una cara de un dado grande de goma espuma color crema #fff3d9, vista totalmente de frente, cuadrada con esquinas muy redondeadas, que llena el lienzo; textura suave y sombreado cálido en los bordes. Puntos redondos en verde azulado oscuro #1f5753: cuatro puntos en las esquinas y uno central. Las seis caras del lote tienen el mismo encuadre y tamaño."
+ },
+ "aula-dado-6": {
+  "nombre": "Cara 6 del dado",
+  "destino": "aula/assets/dado-6.webp",
+  "ancho": 320,
+  "alto": 320,
+  "transparente": true,
+  "listo": false,
+  "clave": "dado-6",
+  "exacto": true,
+  "prompt": "Una cara de un dado grande de goma espuma color crema #fff3d9, vista totalmente de frente, cuadrada con esquinas muy redondeadas, que llena el lienzo; textura suave y sombreado cálido en los bordes. Puntos redondos en verde azulado oscuro #1f5753: dos columnas de tres puntos. Las seis caras del lote tienen el mismo encuadre y tamaño."
+ },
+ "aula-casilla-oca": {
+  "nombre": "Símbolo: una oca blanca de perfil, caminando",
+  "destino": "aula/assets/casilla-oca.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "listo": false,
+  "clave": "casilla-oca",
+  "prompt": "Símbolo pintado de una oca blanca de perfil, caminando, en blanco crema #fff3d9 con contorno marrón oscuro de 6 px y una sombra interior cálida suave. Silueta clara, legible a 48 px sobre una baldosa de color."
+ },
+ "aula-casilla-puente": {
+  "nombre": "Símbolo: un puentecito de madera en arco",
+  "destino": "aula/assets/casilla-puente.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "listo": false,
+  "clave": "casilla-puente",
+  "prompt": "Símbolo pintado de un puentecito de madera en arco, en blanco crema #fff3d9 con contorno marrón oscuro de 6 px y una sombra interior cálida suave. Silueta clara, legible a 48 px sobre una baldosa de color."
+ },
+ "aula-casilla-calma": {
+  "nombre": "Símbolo: una hoja de naranjo con una gota",
+  "destino": "aula/assets/casilla-calma.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "listo": false,
+  "clave": "casilla-calma",
+  "prompt": "Símbolo pintado de una hoja de naranjo con una gota, en blanco crema #fff3d9 con contorno marrón oscuro de 6 px y una sombra interior cálida suave. Silueta clara, legible a 48 px sobre una baldosa de color."
+ },
+ "aula-casilla-meta": {
+  "nombre": "Símbolo: una bandera de cuadros en un mástil de madera",
+  "destino": "aula/assets/casilla-meta.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "listo": false,
+  "clave": "casilla-meta",
+  "prompt": "Símbolo pintado de una bandera de cuadros en un mástil de madera, en blanco crema #fff3d9 con contorno marrón oscuro de 6 px y una sombra interior cálida suave. Silueta clara, legible a 48 px sobre una baldosa de color."
+ },
+ "aula-casilla-salida": {
+  "nombre": "Símbolo: una zapatilla deportiva blanca de perfil",
+  "destino": "aula/assets/casilla-salida.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "listo": false,
+  "clave": "casilla-salida",
+  "prompt": "Símbolo pintado de una zapatilla deportiva blanca de perfil, en blanco crema #fff3d9 con contorno marrón oscuro de 6 px y una sombra interior cálida suave. Silueta clara, legible a 48 px sobre una baldosa de color."
+ },
+ "aula-mov-molino": {
+  "nombre": "Bingo: Brazos de molino (Windmill arms)",
+  "destino": "aula/assets/mov-molino.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-molino",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Círculos lentos con los brazos estirados, primero hacia delante y luego hacia atrás. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-crol": {
+  "nombre": "Bingo: Nadar a crol (Front crawl)",
+  "destino": "aula/assets/mov-crol.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-crol",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Brazos como si nadaras: uno entra delante mientras el otro sale por detrás. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-remar": {
+  "nombre": "Bingo: Remar (Rowing)",
+  "destino": "aula/assets/mov-remar.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-remar",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Agarra unos remos imaginarios y tira hacia ti con los dos brazos a la vez. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-limpiaparabrisas": {
+  "nombre": "Bingo: Limpiaparabrisas (Windscreen wipers)",
+  "destino": "aula/assets/mov-limpiaparabrisas.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-limpiaparabrisas",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Codos doblados y manos a la altura de la cara: muévelas juntas de lado a lado. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-tijeras": {
+  "nombre": "Bingo: Tijeras (Arm scissors)",
+  "destino": "aula/assets/mov-tijeras.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-tijeras",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Brazos estirados delante: crúzalos y descrúzalos, uno arriba y otro abajo. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-trepar": {
+  "nombre": "Bingo: Trepar la cuerda (Rope climb)",
+  "destino": "aula/assets/mov-trepar.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-trepar",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Manos alternas trepando una cuerda imaginaria, mirando hacia arriba. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-boxeo": {
+  "nombre": "Bingo: Boxeo en el aire (Shadow boxing)",
+  "destino": "aula/assets/mov-boxeo.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-boxeo",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Golpes suaves al aire hacia delante, sin tocar a nadie. Pies quietos. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-director": {
+  "nombre": "Bingo: Director de orquesta (Orchestra conductor)",
+  "destino": "aula/assets/mov-director.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-director",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Dirige una orquesta con los dos brazos, marcando el compás de una música que imaginas. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-marcha": {
+  "nombre": "Bingo: Marcha en el sitio (Marching on the spot)",
+  "destino": "aula/assets/mov-marcha.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-marcha",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Sube las rodillas por turnos sin moverte de tu sitio y acompaña con los brazos. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-talones": {
+  "nombre": "Bingo: De puntillas (Heel raises)",
+  "destino": "aula/assets/mov-talones.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-talones",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Sube despacio a puntillas y baja. Apóyate en la mesa si lo necesitas. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-sentadilla": {
+  "nombre": "Bingo: Casi me siento (Chair squat)",
+  "destino": "aula/assets/mov-sentadilla.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-sentadilla",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Baja como para sentarte en la silla y sube antes de tocarla, despacio. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-laterales": {
+  "nombre": "Bingo: Paso al lado (Side steps)",
+  "destino": "aula/assets/mov-laterales.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-laterales",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Un paso a la derecha y vuelve; un paso a la izquierda y vuelve. Junto a tu mesa. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-piesrapidos": {
+  "nombre": "Bingo: Pies rápidos (Fast feet)",
+  "destino": "aula/assets/mov-piesrapidos.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-piesrapidos",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Pisadas cortitas y rápidas en el sitio, como si el suelo quemara. Sin salir de tu sitio. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-patinador": {
+  "nombre": "Bingo: Patinador (Speed skater)",
+  "destino": "aula/assets/mov-patinador.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-patinador",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Pasa el peso de una pierna a la otra balanceando los brazos, sin desplazarte. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-estrella": {
+  "nombre": "Bingo: Estrella (Star shape)",
+  "destino": "aula/assets/mov-estrella.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-estrella",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Abre brazos y piernas como una estrella y vuelve a cerrar. Sin saltar. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-palmadarodilla": {
+  "nombre": "Bingo: Palmada bajo la rodilla (Clap under your knee)",
+  "destino": "aula/assets/mov-palmadarodilla.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-palmadarodilla",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Sube una rodilla y da una palmada por debajo. Cambia de pierna. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-tamborilero": {
+  "nombre": "Bingo: Tamborilero (Drum roll)",
+  "destino": "aula/assets/mov-tamborilero.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-tamborilero",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Tamborilea en los muslos: rápido, lento y otra vez rápido. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-hombros": {
+  "nombre": "Bingo: Toque de hombros (Shoulder taps)",
+  "destino": "aula/assets/mov-hombros.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-hombros",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Toca el hombro contrario con cada mano, alternando a un ritmo regular. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-codorodilla": {
+  "nombre": "Bingo: Codo a la rodilla (Elbow to knee)",
+  "destino": "aula/assets/mov-codorodilla.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-codorodilla",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Lleva un codo hacia la rodilla contraria, despacio, y cambia. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-eco": {
+  "nombre": "Bingo: Palmas y muslos (Clap and tap)",
+  "destino": "aula/assets/mov-eco.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-eco",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Dos palmas suaves y dos toques en los muslos. Repite sin perder el pulso. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-giro": {
+  "nombre": "Bingo: Torre que gira (Trunk twists)",
+  "destino": "aula/assets/mov-giro.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-giro",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Gira el tronco a un lado y al otro con los brazos sueltos. Los pies no se mueven. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-girasol": {
+  "nombre": "Bingo: Girasol (Sunflower stretch)",
+  "destino": "aula/assets/mov-girasol.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-girasol",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Estírate hacia el techo y abre los brazos hacia los lados como pétalos. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-cielosuelo": {
+  "nombre": "Bingo: Cielo y suelo (Reach high, reach low)",
+  "destino": "aula/assets/mov-cielosuelo.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-cielosuelo",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Brazos al techo y después dobla las rodillas para acercar las manos al suelo. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-gato": {
+  "nombre": "Bingo: Espalda de gato (Cat stretch)",
+  "destino": "aula/assets/mov-gato.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-gato",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Manos en las rodillas: redondea la espalda y después estírala. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-rayos": {
+  "nombre": "Bingo: Alcanzar el techo (Sky reaches)",
+  "destino": "aula/assets/mov-rayos.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-rayos",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Estira un brazo hacia el techo y luego el otro, como cogiendo fruta de un naranjo. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-flamenco": {
+  "nombre": "Bingo: Flamenco (Flamingo balance)",
+  "destino": "aula/assets/mov-flamenco.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-flamenco",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Sobre un pie, con una mano cerca de la mesa. A mitad, cambia de pie. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-arbol": {
+  "nombre": "Bingo: Árbol (Tree pose)",
+  "destino": "aula/assets/mov-arbol.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-arbol",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Apoya un pie en el tobillo contrario y junta las manos arriba. Cambia a mitad. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-avion": {
+  "nombre": "Bingo: Avión (Aeroplane)",
+  "destino": "aula/assets/mov-avion.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-avion",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Brazos en cruz: inclínate a un lado y al otro como un avión que gira. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-estatua": {
+  "nombre": "Bingo: Estatua (Freeze)",
+  "destino": "aula/assets/mov-estatua.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-estatua",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Muévete en tu sitio y, cuando quieras, congélate en una pose divertida. Repite. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-globo": {
+  "nombre": "Bingo: Respiración de globo (Balloon breathing)",
+  "destino": "aula/assets/mov-globo.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-globo",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Manos en la tripa: al coger aire se hincha el globo; al soltarlo, se deshincha despacio. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ },
+ "aula-mov-sacudida": {
+  "nombre": "Bingo: Sacudir y soltar (Shake it out)",
+  "destino": "aula/assets/mov-sacudida.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "listo": false,
+  "clave": "mov-sacudida",
+  "prompt": "Un alumno o alumna de 10 a 12 años con chándal, del mismo estilo que gimnasio/assets/pupil-0.webp, de cuerpo entero junto a su silla de clase, haciendo este movimiento: Sacude las manos, luego los brazos y luego una pierna y la otra. Termina quieto. El gesto se entiende de un vistazo; si hay recorrido, dibújalo con una o dos líneas de movimiento suaves. Alterna chicos y chicas y los ocho personajes de gimnasio/assets/pupil-*.webp a lo largo del lote."
+ }
+}
