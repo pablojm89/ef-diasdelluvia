@@ -1,9 +1,9 @@
 // Real browser + real external room broker. No fake sockets or shared-tab transport.
-// Requires Playwright, installed Chromium and internet. MATE_CLIENTS=12 tests a full room.
+// Requires Playwright, installed Chromium and internet. MATE_CLIENTS=26 tests a full room.
 const {chromium}=require('playwright');
 const fs=require('node:fs/promises'),nativeFs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const base=path.resolve(__dirname,'..'),out=path.join(base,'artifacts');
-const count=Math.max(2,Math.min(12,Number(process.env.MATE_CLIENTS)||4));
+const count=Math.max(2,Math.min(26,Number(process.env.MATE_CLIENTS)||4));
 const full=process.env.MATE_FULL_MATCH!=='0';
 (async()=>{
  const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||(nativeFs.existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined),args:['--no-sandbox']});
@@ -32,7 +32,7 @@ const full=process.env.MATE_FULL_MATCH!=='0';
   host.once('dialog',d=>d.accept());await host.click('#leave-game');
   // Open a real online room; the first guest exercises automatic WebRTC -> WSS fallback.
   await host.click('#host-button');await host.waitForSelector('#lobby-view:not([hidden])',{timeout:30000});const code=await host.locator('#lobby-code').textContent();
-  const size=[1,2,3,4,6].find(n=>n*2>=count);await host.selectOption('#team-size',String(size));await host.selectOption('#round-seconds','60');await host.selectOption('#best-of','1');
+  const size=Math.ceil(count/2);await host.selectOption('#team-size',String(size));await host.selectOption('#round-seconds','60');await host.selectOption('#best-of','1');
   for(let i=1;i<count;i++){
    const p=pages[i];await p.click(`[data-character="${i%8}"]`);await p.fill('#room-code',code);await p.click('#join-button');try{await p.waitForSelector('#lobby-view:not([hidden])',{timeout:30000});}catch(e){console.log('JOIN FAILED',i,'STATUS',await p.locator('#menu-status').textContent(),'HOST',await diag(host));throw e;}
    console.log(`Joined ${i+1}/${count}`);await p.click('#ready-button');

@@ -10,5 +10,5 @@ export function inputPacket(raw,lastSeq=-1) {
  const input=sanitizeInput(raw.input);return input?{seq:raw.seq,input}:null;
 }
 export function isSnapshot(raw) {
- return raw?.v===1&&Number.isSafeInteger(raw.tick)&&Array.isArray(raw.players)&&raw.players.length<=12&&['playing','countdown','roundOver','matchOver'].includes(raw.phase)&&raw.ball&&typeof raw.ball.x==='number'&&Number.isFinite(raw.ball.x);
+ return raw?.v===1&&Number.isSafeInteger(raw.tick)&&Array.isArray(raw.players)&&raw.players.length<=26&&['playing','countdown','roundOver','matchOver'].includes(raw.phase)&&raw.ball&&typeof raw.ball.x==='number'&&Number.isFinite(raw.ball.x);
 }

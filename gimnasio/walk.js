@@ -1,7 +1,13 @@
-import {CHARACTERS, paintCharacter} from '../mate/characters.js';
+const names = ['Vega', 'Kai', 'Lúa', 'Neo', 'Ada', 'Max', 'Nora', 'Leo'];
+const pupils = names.map((_, index) => {
+ const image = new Image();
+ image.src = 'assets/pupil-' + index + '.webp';
+ image.onload = () => draw();
+ return image;
+});
 
 const camera = document.getElementById('camera');
-const scene = document.getElementById('scene');
+const scene = document.getElementById('world');
 const sprite = document.getElementById('walker');
 const selector = document.getElementById('avatar');
 const ctx = sprite.getContext('2d');
@@ -9,7 +15,7 @@ const clamp = (value, low, high) => Math.min(high, Math.max(low, value));
 let room, x = .5, y = .83, facing = 1, frame;
 let avatar = 0;
 try { avatar = clamp(Number(localStorage.getItem('gym-avatar')) || 0, 0, 7); } catch {}
-CHARACTERS.forEach(({name}, index) => selector.add(new Option(name, index)));
+names.forEach((name, index) => selector.add(new Option(name, index)));
 selector.value = avatar;
 selector.onchange = () => {
  avatar = selector.selectedIndex;
@@ -19,14 +25,33 @@ selector.onchange = () => {
 
 function draw(moving = false, time = 0) {
  ctx.clearRect(0, 0, sprite.width, sprite.height);
- ctx.save();
- ctx.translate(24, 46);
- paintCharacter(ctx, {character:avatar, team:0, vx:moving ? 20 : 0}, {face:facing, time:time / 1000});
- ctx.restore();
+ const image = pupils[avatar];
+ if (image?.naturalWidth) {
+  const stride = moving ? Math.sin(time / 110) : 0;
+  const width = sprite.height * image.width / image.height;
+  ctx.save();
+  ctx.translate(sprite.width / 2, 0);
+  ctx.scale(facing, 1);
+  // Pivot the lower legs in opposite phases while keeping the upper silhouette intact.
+  const knee = Math.floor(image.height * .73);
+  const legY = sprite.height * knee / image.height;
+  ctx.translate(0, -Math.abs(stride)*3);
+  ctx.drawImage(image,0,0,image.width,knee,-width/2,0,width,legY);
+  for (const side of [-1,1]) {
+   ctx.save();
+   const half = image.width / 2;
+   ctx.translate(side * width / 4, legY);
+   ctx.rotate(stride * side * .12);
+   ctx.drawImage(image,side < 0 ? 0 : half,knee,half,image.height-knee,-width/4,-1,width/2,sprite.height-legY+1);
+   ctx.restore();
+  }
+  ctx.restore();
+ }
  sprite.style.left = x * 100 + '%';
  sprite.style.top = y * 100 + '%';
- sprite.style.height = (21 + (y - .7) * 40) + '%';
- camera.scrollLeft = x * scene.clientWidth - camera.clientWidth / 2;
+ sprite.style.height = (26 + (y - .79) * 48) + '%';
+ sprite.style.zIndex = y < .79 ? 1 : 4;
+ camera.scrollLeft = (camera.scrollWidth - scene.clientWidth) / 2 + x * scene.clientWidth - camera.clientWidth / 2;
 }
 
 export function walkTo(nextX, nextY, arrived) {

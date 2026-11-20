@@ -25,6 +25,15 @@ Un videojuego independiente dentro de Patio Interior, accesible desde la isla de
 
 No hay una regla escolar única para todas las regiones. Estas son las reglas implementadas y visibles en la aplicación; el motor permite modificarlas cuando el docente concrete sus variantes.
 
+## Habilidades de pista
+
+Cada jugador dispone de dos habilidades con recargas individuales de 60 segundos de juego. Los indicadores del marcador muestran el tiempo restante y la pausa detiene los relojes.
+
+- **F · Tiro imparable.** Con la pelota en la mano, lanza un tiro rápido con estela. Se puede esquivar. Al intentar atraparlo en vuelo, el rival queda expuesto al impacto.
+- **G · Mirada intensa.** Durante diez segundos los rivales se mueven al 50 % de su velocidad y pierden la esquiva, incluidas las esquivas ya iniciadas. Un anillo violeta marca a los afectados. Si todo el equipo sigue afectado, otra activación conserva la carga.
+
+Ambas acciones tienen botón táctil. Para una clase de 26, el anfitrión selecciona **13 contra 13** antes de que entren todos.
+
 ## Cómo jugar online
 
 1. Abrir `/mate/`, elegir personaje y pulsar **Crear sala online**.

@@ -141,7 +141,7 @@ export class Room {
     if(data.type==='welcome'&&data.v===PROTOCOL){welcomed=true;clearInterval(helloRetry);clearTimeout(timeout);this.myId=data.id;this.hostId=data.hostId;this.cb.onWelcome?.({...data,clientId:this.clientId});if(data.started)this.beginRemote(data);this.status(this.transport==='relay'?'Conectado por relevo WSS':'Conectado al anfitrión');resolve(this.code);}
     if(data.type==='rejected'){clearTimeout(timeout);reject(new Error(String(data.message).slice(0,200)));this.cb.onError?.(String(data.message).slice(0,200));}
     if(!welcomed)return;
-    if(data.type==='lobby'&&Number.isSafeInteger(data.revision)&&data.revision>this.lastLobbyRevision&&Array.isArray(data.members)&&data.members.length<=12){this.lastLobbyRevision=data.revision;this.rules=normalizeRules(data.rules);if(!data.started)this.started=false;this.cb.onLobby?.(data);if(data.started)this.beginRemote(data);}
+    if(data.type==='lobby'&&Number.isSafeInteger(data.revision)&&data.revision>this.lastLobbyRevision&&Array.isArray(data.members)&&data.members.length<=26){this.lastLobbyRevision=data.revision;this.rules=normalizeRules(data.rules);if(!data.started)this.started=false;this.cb.onLobby?.(data);if(data.started)this.beginRemote(data);}
     if(data.type==='start')this.beginRemote(data);
     if(data.type==='state'&&!this.ended&&this.started&&data.matchId===this.matchId&&isSnapshot(data.state)&&data.state.tick>this.lastStateTick){this.lastStateTick=data.state.tick;this.cb.onState?.(data.state);}
     if(data.type==='pong'){this.latency=Math.max(0,Math.round((performance.now()-data.at)/2));this.cb.onLatency?.(this.latency);}

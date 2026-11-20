@@ -4,7 +4,7 @@ export const RULE_DEFAULTS={teamSize:3,roundSeconds:150,bestOf:3,catchEliminates
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 export const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 export function normalizeRules(raw={}) {
- return {teamSize:[1,2,3,4,6].includes(Number(raw.teamSize))?Number(raw.teamSize):3,
+ return {teamSize:Number.isInteger(Number(raw.teamSize)) && Number(raw.teamSize)>=1 && Number(raw.teamSize)<=13?Number(raw.teamSize):3,
  roundSeconds:[60,90,150,180].includes(Number(raw.roundSeconds))?Number(raw.roundSeconds):150,
  bestOf:[1,3].includes(Number(raw.bestOf))?Number(raw.bestOf):3,
  catchEliminates:raw.catchEliminates===true,catchRescues:raw.catchRescues===true};
@@ -16,14 +16,14 @@ export function bounds(player) {
 export function sanitizeInput(raw) {
  if(!raw||typeof raw!=='object')return null;
  for(const key of ['mx','my','ax','ay'])if(typeof raw[key]!=='number'||!Number.isFinite(raw[key]))return null;
- return {mx:clamp(raw.mx,-1,1),my:clamp(raw.my,-1,1),ax:clamp(raw.ax,0,1200),ay:clamp(raw.ay,100,680),fire:raw.fire===true,catch:raw.catch===true,dash:raw.dash===true,pass:raw.pass===true};
+ return {mx:clamp(raw.mx,-1,1),my:clamp(raw.my,-1,1),ax:clamp(raw.ax,0,1200),ay:clamp(raw.ay,100,680),gaze:raw.gaze===true,special:raw.special===true,fire:raw.fire===true,catch:raw.catch===true,dash:raw.dash===true,pass:raw.pass===true};
 }
 export function makeGame(roster=[],rawRules={},seed=1234567) {
  const rules=normalizeRules(rawRules);
  const players=[];
  for(let team=0;team<2;team++)for(let slot=0;slot<rules.teamSize;slot++) {
   const member=roster.filter(m=>m.team===team)[slot];
-  players.push({id:member?.id||`bot-${team}-${slot}`,name:String(member?.name||`CPU ${slot+1}`).slice(0,20),character:clamp(Number(member?.character??((team*3+slot)%8))||0,0,7),team,bot:!member||member.bot===true,slot,prison:false,x:0,y:0,vx:0,vy:0,face:team===0?1:-1,catchTime:0,catchCooldown:0,dashTime:0,dashCooldown:0,invulnerable:0,stun:0,throwFlash:0,input:null,lastInput:0,aiThink:0,aiAim:0});
+  players.push({id:member?.id||`bot-${team}-${slot}`,name:String(member?.name||`CPU ${slot+1}`).slice(0,20),character:clamp(Number(member?.character??((team*3+slot)%8))||0,0,7),team,bot:!member||member.bot===true,slot,prison:false,x:0,y:0,vx:0,vy:0,face:team===0?1:-1,catchTime:0,catchCooldown:0,dashTime:0,dashCooldown:0,invulnerable:0,stun:0,throwFlash:0,specialCooldown:0,gazeCooldown:0,slowed:0,input:null,lastInput:0,aiThink:0,aiAim:0});
  }
  const g={v:1,rules,seed:seed>>>0||1,tick:0,time:0,phase:'countdown',phaseTime:2.7,paused:false,round:1,roundLeft:rules.roundSeconds,scores:[0,0],winner:null,roundWinner:null,players,ball:null,events:[],eventId:0};
  resetRound(g);
@@ -32,10 +32,16 @@ export function makeGame(roster=[],rawRules={},seed=1234567) {
 export function emit(g,type,data={}) {g.events.push({id:++g.eventId,t:g.time,type,...data});if(g.events.length>18)g.events.shift();}
 function random(g){let x=g.seed;x^=x<<13;x^=x>>>17;x^=x<<5;g.seed=x>>>0;return g.seed/4294967296;}
 function spawn(g,p) {
- p.prison=false;
+ p.prison=false;p.slowed=0;
  const total=g.players.filter(x=>x.team===p.team).length;
  p.x=p.team===0?330-(p.slot%2)*70:870+(p.slot%2)*70;
  p.y=220+(p.slot+0.5)*(340/Math.max(total,1));
+ if(total>6){
+  const columns=3,rows=Math.ceil(total/columns);
+  const left=250+(p.slot%columns)*120;
+  p.x=p.team===0?left:FIELD.width-left;
+  p.y=200+Math.floor(p.slot/columns)*380/Math.max(1,rows-1);
+ }
  p.y=clamp(p.y,185,600);p.vx=0;p.vy=0;p.catchTime=0;p.catchCooldown=0;p.dashTime=0;p.dashCooldown=0;p.invulnerable=.25;p.stun=0;p.throwFlash=0;p.input=null;
 }
 function resetRound(g) {
@@ -48,8 +54,8 @@ export function setInput(g,id,raw) {
  const p=g.players.find(p=>p.id===id), input=sanitizeInput(raw);
  if(!p||p.bot||!input)return false;
  const old=p.input;
- p.input={...input,fire:input.fire||old?.fire===true,catch:input.catch||old?.catch===true,dash:input.dash||old?.dash===true,pass:input.pass||old?.pass===true};
- if(g.paused||g.phase!=='playing')p.input.fire=p.input.catch=p.input.dash=p.input.pass=false;
+ p.input={...input,gaze:input.gaze||old?.gaze===true,special:input.special||old?.special===true,fire:input.fire||old?.fire===true,catch:input.catch||old?.catch===true,dash:input.dash||old?.dash===true,pass:input.pass||old?.pass===true};
+ if(g.paused||g.phase!=='playing')p.input.gaze=p.input.special=p.input.fire=p.input.catch=p.input.dash=p.input.pass=false;
  p.lastInput=g.tick;
  return true;
 }
@@ -79,17 +85,19 @@ function aiInput(g,p) {
  if(target&&p.prison&&b.holder===p.id){ax=target.x;ay=target.y;}
  return {mx,my,ax,ay,fire,catch:catching,dash,pass};
 }
-export function throwBall(g,p,aim,passing=false) {
- const b=g.ball;if(b.holder!==p.id||p.stun>0)return false;
+export function throwBall(g,p,aim,passing=false,special=false) {
+ const b=g.ball;if(b.holder!==p.id||p.stun>0||(special && p.specialCooldown>0))return false;
  let target=aim;
  if(passing){const ally=nearest(p,g.players.filter(q=>q.team===p.team&&q.id!==p.id));if(!ally)return false;target=ally;}
  let dx=target.x-p.x,dy=target.y-p.y,len=Math.hypot(dx,dy);
  if(len<1){dx=p.team===0?1:-1;dy=0;len=1;}
- const speed=passing?530:790;
+ const speed=special?1050:passing?530:790;
+ b.special=special;
+ if(special)p.specialCooldown=60;
  b.holder=null;b.owner=p.id;b.team=p.team;b.live=!passing;b.pass=passing;b.age=0;b.loose=0;b.held=0;
  b.x=p.x+dx/len*25;b.y=p.y+dy/len*25;b.vx=dx/len*speed;b.vy=dy/len*speed;
  p.throwFlash=.22;p.face=dx>=0?1:-1;
- emit(g,passing?'pass':'throw',{player:p.id,x:p.x,y:p.y,team:p.team});return true;
+ emit(g,special?'special':passing?'pass':'throw',{player:p.id,x:p.x,y:p.y,team:p.team});return true;
 }
 function hold(g,p,type='pickup') {const b=g.ball;b.holder=p.id;b.team=p.team;b.owner=p.id;b.x=p.x;b.y=p.y;b.vx=0;b.vy=0;b.live=false;b.pass=false;b.held=0;b.loose=0;emit(g,type,{player:p.id,x:p.x,y:p.y,team:p.team});}
 export function imprison(g,p,thrower=null) {
@@ -129,7 +137,7 @@ function stepBall(g,dt) {
   if(p.id===b.owner&&b.age<.2)continue;
   const d=sweptDistance(p,ox,oy,b.x,b.y);
   if(b.live&&p.team!==b.team){
-   if(d<32&&p.catchTime>0&&p.stun<=0){
+   if(!b.special&&d<32&&p.catchTime>0&&p.stun<=0){
     const sender=g.players.find(q=>q.id===b.owner);hold(g,p,'catch');p.catchTime=0;
     if(g.rules.catchEliminates&&sender&&!sender.prison)imprison(g,sender);
     if(g.rules.catchRescues){const prisoner=g.players.find(q=>q.team===p.team&&q.prison&&q.id!==p.id);if(prisoner)rescue(g,prisoner);}
@@ -164,21 +172,35 @@ export function stepGame(g,dt=1/60) {
   return g;
  }
  g.roundLeft=Math.max(0,g.roundLeft-dt);
+ // Resolve the team effect before movement so the roster order cannot grant a free dodge.
+ for(const caster of g.players){
+  if(!caster.input?.gaze || g.tick-caster.lastInput>22 || caster.gazeCooldown>0 || caster.stun>0)continue;
+  const rivals=g.players.filter(player=>player.team!==caster.team);
+  if(rivals.every(player=>player.slowed>0))continue;
+  caster.gazeCooldown=60;
+  for(const rival of rivals){
+   if(rival.slowed<=0)rival.slowed=10;
+   rival.dashTime=0;
+  }
+  emit(g,'gaze',{player:caster.id,x:caster.x,y:caster.y,team:caster.team});
+ }
  for(const p of g.players) {
-  for(const key of ['catchTime','catchCooldown','dashTime','dashCooldown','invulnerable','stun','throwFlash'])p[key]=Math.max(0,p[key]-dt);
+  for(const key of ['catchTime','catchCooldown','dashTime','dashCooldown','invulnerable','stun','throwFlash','specialCooldown','gazeCooldown','slowed'])p[key]=Math.max(0,p[key]-dt);
   let input=p.bot?aiInput(g,p):p.input;
   if(!input||(!p.bot&&g.tick-p.lastInput>22))input={mx:0,my:0,ax:p.x+p.face*100,ay:p.y};
   p.face=input.ax>=p.x?1:-1;
   if(input.catch&&p.catchCooldown<=0&&g.ball.holder!==p.id&&p.stun<=0){p.catchTime=.3;p.catchCooldown=1.05;emit(g,'guard',{player:p.id,x:p.x,y:p.y});}
-  if(input.dash&&p.dashCooldown<=0&&p.stun<=0){p.dashTime=.2;p.dashCooldown=1.4;p.dashX=input.mx||0;p.dashY=input.my||0;if(!p.dashX&&!p.dashY)p.dashY=p.y>390?-1:1;emit(g,'dodge',{player:p.id,x:p.x,y:p.y});}
+  if(input.dash&&p.slowed<=0&&p.dashCooldown<=0&&p.stun<=0){p.dashTime=.2;p.dashCooldown=1.4;p.dashX=input.mx||0;p.dashY=input.my||0;if(!p.dashX&&!p.dashY)p.dashY=p.y>390?-1:1;emit(g,'dodge',{player:p.id,x:p.x,y:p.y});}
+  if(input.special)throwBall(g,p,{x:input.ax,y:input.ay},false,true);
   if(input.fire)throwBall(g,p,{x:input.ax,y:input.ay});
   if(input.pass)throwBall(g,p,{x:input.ax,y:input.ay},true);
   let mx=p.dashTime>0?p.dashX:input.mx||0,my=p.dashTime>0?p.dashY:input.my||0;
   const len=Math.hypot(mx,my);if(len>1){mx/=len;my/=len;}
   const speed=p.stun>0?0:p.dashTime>0?620:g.ball.holder===p.id?180:225;
-  p.vx=mx*speed;p.vy=my*speed;
+  const pace=p.slowed>0?speed*.5:speed;
+  p.vx=mx*pace;p.vy=my*pace;
   const area=bounds(p);p.x=clamp(p.x+p.vx*dt,area.left,area.right);p.y=clamp(p.y+p.vy*dt,area.top,area.bottom);
-  if(p.input)p.input.fire=p.input.catch=p.input.dash=p.input.pass=false;
+  if(p.input)p.input.gaze=p.input.special=p.input.fire=p.input.catch=p.input.dash=p.input.pass=false;
  }
  // Separate teammates gently; collisions never push anyone across a line.
  for(let i=0;i<g.players.length;i++)for(let j=i+1;j<g.players.length;j++){

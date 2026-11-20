@@ -10,7 +10,7 @@ try{const n=Number(localStorage.getItem('mate-character'));if(Number.isInteger(n
 let view='menu',room=null,lobby=null,game=null,remote=null,previousRemote=null,remoteAt=0,localId='local',mode='training',busy=false,networkDisconnected=false;
 let toastTimeout,lastFrame=performance.now(),accumulator=0,lastSend=0,lastBroadcast=0,lastAnnouncement=0,lastAudioEvent=0,latency=0,lastRemoteAt=0,lastUi=0,lastClientDraw=0;
 let rules=normalizeRules(),manualAim=false,pointerAt=0,targetIndex=0,audio=null,lastDemo=0;
-const keys=new Set(),actions={fire:false,catch:false,dash:false,pass:false};
+const keys=new Set(),actions={gaze:false,special:false,fire:false,catch:false,dash:false,pass:false};
 const aim={ax:900,ay:390};
 const renderer=new ArenaRenderer($('court')),demoRenderer=new ArenaRenderer($('preview'));
 const demo=makeGame([],{teamSize:3,bestOf:3,roundSeconds:90},28473);demo.phase='playing';
@@ -173,10 +173,11 @@ $('fullscreen-button').addEventListener('click',async()=>{try{if(document.fullsc
 $('sound-enabled').addEventListener('change',async()=>{if($('sound-enabled').checked){try{audio ||= new (window.AudioContext||window.webkitAudioContext)();await audio.resume();lastAudioEvent=currentState()?.eventId||currentState()?.events?.at(-1)?.id||0;}catch{$('sound-enabled').checked=false;toast('El audio no está disponible en este navegador.');}}});
 window.addEventListener('keydown',event=>{
  if(view!=='game'||networkDisconnected||event.target.matches('input,select,textarea'))return;
- const used=['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','KeyW','KeyA','KeyS','KeyD','Space','KeyE','ShiftLeft','ShiftRight','KeyQ','KeyR','KeyP'];
+ const used=['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','KeyW','KeyA','KeyS','KeyD','Space','KeyE','ShiftLeft','ShiftRight','KeyQ','KeyR','KeyP','KeyF','KeyG'];
  if(!used.includes(event.code))return;event.preventDefault();keys.add(event.code);
  if(event.repeat)return;
- if(event.code==='Space')actions.fire=true;if(event.code==='KeyE')actions.catch=true;if(event.code.startsWith('Shift'))actions.dash=true;if(event.code==='KeyQ')actions.pass=true;if(event.code==='KeyR'){targetIndex++;manualAim=false;}if(event.code==='KeyP')togglePause();
+ if(event.code==='KeyG')actions.gaze=true;
+ if(event.code==='KeyF')actions.special=true;if(event.code==='Space')actions.fire=true;if(event.code==='KeyE')actions.catch=true;if(event.code.startsWith('Shift'))actions.dash=true;if(event.code==='KeyQ')actions.pass=true;if(event.code==='KeyR'){targetIndex++;manualAim=false;}if(event.code==='KeyP')togglePause();
 });
 window.addEventListener('keyup',event=>keys.delete(event.code));window.addEventListener('blur',clearKeys);
 function pointerAim(event){const rect=$('court').getBoundingClientRect();aim.ax=(event.clientX-rect.left)/rect.width*1200;aim.ay=(event.clientY-rect.top)/rect.height*760+16;manualAim=true;pointerAt=performance.now();}

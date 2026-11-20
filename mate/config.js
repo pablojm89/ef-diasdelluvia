@@ -7,5 +7,5 @@ export const NETWORK_CONFIG={
   directWaitMs:5000,
   roomPrefix:'patio-mate-v1-',
   connectTimeoutMs:18000,
-  maxHumans:12,
+  maxHumans:26,
 };

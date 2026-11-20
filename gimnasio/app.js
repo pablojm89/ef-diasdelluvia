@@ -1,6 +1,7 @@
 import {equipment,targets,find,request,fresh,valid,act} from './mission.js';
-import {walkTo, enterRoom} from './walk.js';
-import {icon} from './art.js';
+import {walkTo, enterRoom} from './walk.js?v=studio-4';
+import {speakAndPoint} from './robles.js';
+const icon = id => '<img alt="" draggable="false" src="assets/prop-' + id + '.webp">';
 const $=id=>document.getElementById(id), key='ef-gym-mission-v1';
 let state=fresh(),room='gym',selected=null,support=true,reduced=false;
 try{const saved=JSON.parse(localStorage.getItem(key));if(valid(saved?.state)){state=saved.state;support=saved.support!==false;reduced=!!saved.reduced;}}catch{}
@@ -29,7 +30,7 @@ function render(){
  const focused=document.activeElement;const focusText=focused?.tagName==='BUTTON'?focused.textContent:null;
  document.body.dataset.stage=state.stage;document.body.classList.toggle('reduced',reduced);$('translation').checked=support;$('motion').checked=reduced;
  $('scene').className=`scene ${room}`;$('room-title').textContent=room==='gym'?'El gimnasio':'El cuarto de materiales';$('location').textContent=room==='gym'?'THE GYM · TU PUNTO DE ENCUENTRO':'THE EQUIPMENT ROOM · MISIÓN EN CURSO';$('switch-room').textContent=room==='gym'?'Entrar al almacén':'Volver al gimnasio';
- $('prof').innerHTML='<img src="assets/teacher-robles.webp" alt="" draggable="false">';$('prof').classList.toggle('hidden',room==='store');
+ $('prof').classList.toggle('hidden',room==='store');
  $('steps').innerHTML=steps.map((s,i)=>`<li class="${i<state.stage?'done':i===state.stage?'current':''}"><span>${i<state.stage?'✓':i+1}</span>${s}</li>`).join('');$('stage-count').textContent=state.stage===5?'COMPLETADA':`${state.stage+1} / 5`;
  const [en,es]=room==='gym'&&state.stage<5?['Meet me by the equipment room.','Camina hasta mí o toca la puerta del almacén.']:prompts();$('english').textContent=en;$('spanish').textContent=es;$('spanish').hidden=!support;
  $('selection').textContent=selected?`${equipment.find(e=>e.id===selected).en} seleccionado · Elige un destino`:room==='gym'?'Toca el suelo para caminar. Toca al profe para hablar.':state.stage===3?'Toca el material para añadir una unidad al carro.':'Selecciona un material · Después elige su lugar';
@@ -50,8 +51,8 @@ function render(){
    equipment.forEach((e,i)=>{
     const stored=state.stored.includes(e.id);if(state.stage===3&&!['cone','hoop','softball'].includes(e.id))return;
     const b=button('',()=>choose(e.id),`equipment ${stored?'stored':''} ${selected===e.id?'selected':''}`);b.innerHTML=icon(e.id)+`<span>${e.en}</span>`;b.setAttribute('aria-label',`${e.en} · ${e.es}${stored?' · guardado':''}`);
-    let x=e.id==='cone'?6:e.x,y=e.y;if(stored&&state.stage!==3){const home=targets[e.home];x=home[2]+(i%3-1)*3;y=home[3]+10+(i%2)*5;}if(state.stage===3){x=24+['cone','hoop','softball'].indexOf(e.id)*24;y=67;}
-    b.style.left=x+'%';b.style.top=y+'%';b.disabled=stored&&state.stage===2;$('objects').append(b);
+    let x=e.id==='cone'?14:e.x,y=e.y;if(stored&&state.stage!==3){const home=targets[e.home];x=home[2]+(i%3-1)*3;y=home[3]+(e.home==='platform'?-1:12)+(i%2)*2;}if(state.stage===3){x=24+['cone','hoop','softball'].indexOf(e.id)*24;y=67;}
+    b.dataset.item=e.id; b.style.left=x+'%';b.style.top=y+'%';b.disabled=stored&&state.stage===2;$('objects').append(b);
     const alt=button(`${e.en}${support?' · '+e.es:''}${stored?' ✓':''}`,()=>choose(e.id));alt.disabled=stored&&state.stage===2;$('object-list').append(alt);
    });
   }
@@ -78,6 +79,7 @@ function render(){
 }
 $('switch-room').onclick=()=>document.querySelector(room==='gym'?'.door':'.return-door').click();
 $('prof').onclick=()=>{
+ speakAndPoint();
  $('english').textContent=state.stage===5?'Thank you! The gym is ready.':'Can you help me get the equipment ready? Follow the equipment room sign.';
  $('spanish').textContent=state.stage===5?'¡Gracias! El gimnasio está listo.':'¿Me ayudas a preparar el material? Sigue el cartel del almacén.';
  $('feedback').textContent='Robles se gira hacia ti.';
@@ -98,7 +100,7 @@ showFeedback();
 // Approach the clicked landmark before executing its room-specific action.
 $('scene').addEventListener('click', event => {
  const target = event.target.closest('button');
- const bounds = $('scene').getBoundingClientRect();
+ const bounds = $('world').getBoundingClientRect();
  if (target) {
   event.stopImmediatePropagation();
   const hit = target.getBoundingClientRect();

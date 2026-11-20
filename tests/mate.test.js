@@ -138,3 +138,44 @@ test('mate: un invitado no inicia ni pausa la sala y sólo controla su propia pl
  assert.equal(calls.length,1);assert.equal(calls[0].id,'c-'+clientId);assert.equal(calls[0].input.mx,1);
  room.close();
 });
+
+test('Mirada afecta al equipo rival durante diez segundos de juego y corta la esquiva',()=>{
+ const game=setup(),caster=game.players.find(p=>p.id==='a'),rival=game.players.find(p=>p.id==='b');
+ rival.dashTime=.2;
+ setInput(game,caster.id,controls({gaze:true}));
+ setInput(game,rival.id,controls({mx:1,dash:true}));
+ stepGame(game);
+ assert.equal(rival.dashTime,0);
+ assert.equal(rival.vx,112.5);
+ assert.ok(caster.gazeCooldown>59 && caster.gazeCooldown<=60);
+ assert.ok(game.players.filter(p=>p.team===caster.team).every(p=>p.slowed===0));
+ assert.ok(game.players.filter(p=>p.team===rival.team).every(p=>p.slowed>9.9));
+ game.paused=true;
+ const remaining=rival.slowed;
+ stepGame(game);
+ assert.equal(rival.slowed,remaining);
+ game.paused=false;
+ for(let n=0;n<601;n++)stepGame(game);
+ assert.equal(rival.slowed,0);
+ setInput(game,rival.id,controls({mx:1,dash:true}));
+ setInput(game,caster.id,controls({gaze:true}));
+ stepGame(game);
+ assert.ok(rival.dashTime>0);
+ assert.equal(rival.slowed,0);
+});
+
+test('Imparable atraviesa una recepción y respeta la recarga individual',()=>{
+ const game=setup(),caster=game.players.find(p=>p.id==='a'),rival=game.players.find(p=>p.id==='b');
+ rival.x=640;
+ setInput(game,caster.id,controls({special:true,ax:rival.x,ay:rival.y}));
+ setInput(game,rival.id,controls({catch:true}));
+ stepGame(game);
+ assert.equal(game.ball.special,true);
+ assert.equal(caster.specialCooldown,60);
+ for(let n=0;n<12;n++)stepGame(game);
+ assert.equal(rival.prison,true);
+ game.ball.holder=caster.id;
+ assert.equal(throwBall(game,caster,rival,false,true),false);
+ assert.equal(throwBall(game,caster,rival),true);
+ assert.equal(game.ball.special,false);
+});
