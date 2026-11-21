@@ -12,7 +12,7 @@
   "alto": 380,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "El mismo carro bajo de gimnasio del pedido trolley del lote 02 (madera clara y metal gris, cuatro ruedas, asa vertical a la derecha, visto en tres cuartos), con el mismo encuadre, ahora cargado con el pedido del profe: cuatro conos naranjas con franjas blancas en fila delante, dos aros amarillos de pie detrás y una pelota blanda verde junto al asa. Material igual que gimnasio/assets/prop-cone.webp, prop-hoop.webp y prop-softball.webp. Se ve en el gimnasio junto al profe cuando la misión termina."
  },
  "icon-home": {
@@ -22,7 +22,7 @@
   "alto": 128,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Icono pintado: la fachada pequeña del pabellón del cole (pared ocre, tejado de teja, puerta verde azulada) con una flecha curva crema que apunta hacia ella. Contorno marrón fino, motivo grande y centrado, legible a 24 px sobre un botón verde azulado oscuro."
  },
  "icon-mission": {
@@ -32,7 +32,7 @@
   "alto": 128,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Icono pintado: cuaderno de tapas verde azulado con goma elástica y un lápiz amarillo cruzado delante; en la tapa, tres rayas crema como de lista, sin letras. Contorno marrón fino, legible a 24 px sobre un botón verde azulado oscuro."
  },
  "icon-backpack": {
@@ -42,7 +42,7 @@
   "alto": 128,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Icono pintado: la mochila escolar verde azulada que lleva gimnasio/assets/pupil-0.webp, de frente, con bolsillo delantero y asa arriba. Contorno marrón fino, legible a 24 px sobre un botón verde azulado oscuro."
  },
  "icon-menu": {
@@ -52,7 +52,7 @@
   "alto": 128,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Icono pintado: el silbato plateado del profe Robles con su cordón naranja enrollado. Contorno marrón fino, legible a 24 px sobre un botón verde azulado oscuro."
  },
  "icon-listen": {
@@ -62,7 +62,7 @@
   "alto": 128,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Icono pintado: megáfono pequeño naranja y crema de profe de Educación Física, de perfil hacia la derecha, con tres ondas de sonido crema. Contorno marrón fino, legible a 24 px sobre un botón verde azulado oscuro."
  },
  "icon-hint": {
@@ -72,7 +72,7 @@
   "alto": 128,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Icono pintado: bombilla encendida de luz dorada cálida con casquillo metálico y cuatro rayitas de brillo alrededor. Contorno marrón fino, legible a 24 px sobre un botón verde azulado oscuro."
  },
  "icon-fullscreen": {
@@ -82,7 +82,7 @@
   "alto": 128,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Icono pintado: cuatro esquinas de marco de madera miel separadas, como un cuadro que se agranda, con pequeñas flechas crema hacia fuera en las diagonales. Contorno marrón fino, legible a 24 px sobre un botón verde azulado oscuro."
  },
  "icon-rotate": {
@@ -92,7 +92,7 @@
   "alto": 128,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Icono pintado: un teléfono móvil de carcasa verde azulada con la pantalla mostrando un trocito de suelo de parqué, inclinado a medio giro de vertical a horizontal, y una flecha curva crema que indica el giro. Contorno marrón fino, legible a 28 px sobre un cartel crema."
  },
  "robles-cheer": {
@@ -102,7 +102,7 @@
   "alto": 550,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "El profe Robles exactamente como en gimnasio/assets/robles-rest.webp (misma cara, cinta del pelo, polo naranja, chándal azul marino con franja, silbato), con el mismo tamaño y los pies en el mismo punto del lienzo, ahora sonriendo con un pulgar arriba y la otra mano en la cadera. Se alterna con las otras poses sin que el cuerpo salte."
  },
  "robles-think": {
@@ -112,7 +112,7 @@
   "alto": 550,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "El profe Robles exactamente como en gimnasio/assets/robles-rest.webp, mismo tamaño y pies en el mismo punto del lienzo, con una mano en la barbilla y la otra señalando hacia arriba con el índice, gesto amable de dar una pista."
  },
  "robles-mat": {
@@ -122,7 +122,7 @@
   "alto": 550,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "El profe Robles exactamente como en gimnasio/assets/robles-rest.webp, mismo tamaño y pies en el mismo punto del lienzo, de pie y sosteniendo con los dos brazos una colchoneta azul como gimnasio/assets/prop-mat.webp a la altura del pecho, como si la acabara de bajar de una estantería alta. Es el adulto quien carga: postura segura, espalda recta."
  },
  "teacher-robles-happy": {
@@ -132,7 +132,7 @@
   "alto": 1536,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "El mismo retrato de cuerpo entero que gimnasio/assets/teacher-robles.webp, con idéntico encuadre, tamaño y posición de la cabeza (el juego recorta la cara a la misma altura), ahora con sonrisa abierta y ojos alegres. Se muestra cuando el alumno acierta."
  },
  "teacher-robles-think": {
@@ -142,7 +142,7 @@
   "alto": 1536,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "El mismo retrato de cuerpo entero que gimnasio/assets/teacher-robles.webp, con idéntico encuadre, tamaño y posición de la cabeza, con gesto pensativo y amable (cejas un poco alzadas, media sonrisa), sin enfado. Se muestra cuando el alumno se equivoca y puede volver a intentarlo."
  },
  "paper": {
@@ -151,7 +151,7 @@
   "ancho": 512,
   "alto": 512,
   "transparente": false,
-  "listo": false,
+  "listo": true,
   "prompt": "Textura cuadrada de papel crema #fbf0d8 pintado a la acuarela, muy suave y uniforme, con grano fino y sin manchas fuertes, que se pueda repetir en mosaico sin que se noten las juntas. Fondo del bocadillo del profe y de los carteles; el texto oscuro encima debe leerse perfectamente."
  },
  "help-sign": {
@@ -161,7 +161,7 @@
   "alto": 140,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Placa crema colgada de dos cordones, de borde marrón y franja superior naranja teja, con un pictograma pintado a la izquierda: una mano levantada de niño y, a su lado, la silueta del profe con silbato. La mitad derecha de la placa queda lisa para que el juego escriba el rótulo. Sin letras."
  },
  "pupil-0-reach": {
@@ -171,7 +171,7 @@
   "alto": 440,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "El personaje de gimnasio/assets/pupil-0.webp (misma cara, peinado, chándal y mochila), de perfil hacia la derecha, flexionando las rodillas con la espalda recta y una mano extendida hacia delante y abajo para coger algo del suelo o de una balda baja. Pies en el centro del borde inferior, a la misma altura que en pupil-0.webp."
  },
  "pupil-1-reach": {
@@ -181,7 +181,7 @@
   "alto": 440,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "El personaje de gimnasio/assets/pupil-1.webp (misma cara, peinado y ropa), en la misma pose que pupil-0-reach: de perfil hacia la derecha, rodillas flexionadas, espalda recta, mano hacia delante y abajo. Pies en el centro del borde inferior."
  },
  "pupil-2-reach": {
@@ -191,7 +191,7 @@
   "alto": 440,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "El personaje de gimnasio/assets/pupil-2.webp (misma cara, peinado y ropa), en la misma pose que pupil-0-reach: de perfil hacia la derecha, rodillas flexionadas, espalda recta, mano hacia delante y abajo. Pies en el centro del borde inferior."
  },
  "pupil-3-reach": {
@@ -201,7 +201,7 @@
   "alto": 440,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "El personaje de gimnasio/assets/pupil-3.webp (misma cara, peinado y ropa), en la misma pose que pupil-0-reach: de perfil hacia la derecha, rodillas flexionadas, espalda recta, mano hacia delante y abajo. Pies en el centro del borde inferior."
  },
  "pupil-4-reach": {
@@ -211,7 +211,7 @@
   "alto": 440,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "El personaje de gimnasio/assets/pupil-4.webp (misma cara, peinado y ropa), en la misma pose que pupil-0-reach: de perfil hacia la derecha, rodillas flexionadas, espalda recta, mano hacia delante y abajo. Pies en el centro del borde inferior."
  },
  "pupil-5-reach": {
@@ -221,7 +221,7 @@
   "alto": 440,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "El personaje de gimnasio/assets/pupil-5.webp (misma cara, peinado y ropa), en la misma pose que pupil-0-reach: de perfil hacia la derecha, rodillas flexionadas, espalda recta, mano hacia delante y abajo. Pies en el centro del borde inferior."
  },
  "pupil-6-reach": {
@@ -231,7 +231,7 @@
   "alto": 440,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "El personaje de gimnasio/assets/pupil-6.webp (misma cara, peinado y ropa), en la misma pose que pupil-0-reach: de perfil hacia la derecha, rodillas flexionadas, espalda recta, mano hacia delante y abajo. Pies en el centro del borde inferior."
  },
  "pupil-7-reach": {
@@ -241,7 +241,7 @@
   "alto": 440,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "El personaje de gimnasio/assets/pupil-7.webp (misma cara, peinado y ropa), en la misma pose que pupil-0-reach: de perfil hacia la derecha, rodillas flexionadas, espalda recta, mano hacia delante y abajo. Pies en el centro del borde inferior."
  }
 }

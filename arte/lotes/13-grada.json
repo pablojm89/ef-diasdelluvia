@@ -7,7 +7,7 @@
   "ancho": 1920,
   "alto": 1080,
   "transparente": false,
-  "listo": false,
+  "listo": true,
   "prompt": "Pared interior del pabellón del cole vista de frente y a la altura de los ojos, al final de la tarde, con la misma luz y pintura que gimnasio/assets/gym.webp. Arriba, de y 0 a y 70, cenefa de azulejo azul y naranja sobre una moldura de madera. Abajo, de y 960 a y 1080, el primer escalón de una grada de madera miel con tablones horizontales y un zócalo verde azulado detrás. En los bordes izquierdo y derecho, de x 0 a x 60 y de x 1860 a x 1920, dos pilares de ladrillo enlucido. Todo lo demás, de x 60 a x 1860 y de y 70 a y 960, es pared ocre melocotón lisa con textura suave de pintura y una luz dorada que entra desde la izquierda; sin cuadros, ventanas, puertas ni objetos, porque ahí se colocan de uno a cuatro partidos encima."
  },
  "grada-marco": {
@@ -17,7 +17,7 @@
   "alto": 300,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Marco rectangular de madera miel, como el de un tablón de anuncios del colegio, visto de frente y sin perspectiva. Listón de grosor uniforme de 24 px en los cuatro lados, con un filete interior más oscuro de 3 px y esquinas en inglete con un clavo de latón pequeño en cada una. El interior del marco, de x 24 a x 456 y de y 24 a y 276, completamente transparente. Los lados deben poder estirarse: sin nudos ni vetas distintas en el centro de cada listón, para cortarlo en nueve piezas."
  },
  "grada-marcador": {
@@ -27,7 +27,7 @@
   "alto": 160,
   "transparente": true,
   "exacto": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Placa de marcador de pabellón escolar de madera, vista de frente: un tablero crema #fff3d9 con borde de madera oscura de 14 px y dos pequeñas cadenas o soportes de latón arriba, como los carteles del gimnasio. Tres huecos rebajados vacíos y del mismo alto para que el juego escriba encima: a la izquierda y a la derecha, dos recuadros verde pizarra oscuro #1f3b39 de 120 × 100 px centrados en x 150 y x 570; en el centro, un recuadro crema más claro de 220 × 100 px para el reloj. Sin números, letras ni logotipos."
  },
  "grada-publico": {
@@ -36,7 +36,7 @@
   "ancho": 1920,
   "alto": 240,
   "transparente": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Fila de alumnos y alumnas ficticios de 10 a 12 años vistos de espaldas y de medio cuerpo, sentados en una grada de madera, mirando hacia arriba a una pantalla; algunos levantan los brazos, otros aplauden, dos llevan petos turquesa y dos petos coral como los equipos Cometas y Rayos. Mismo estilo y ropa que gimnasio/assets/pupil-0.webp. Siluetas variadas y separadas, de borde a borde del lienzo, ocupando sólo la mitad inferior; arriba, transparente. Sin caras reconocibles, porque se ven de espaldas."
  },
  "grada-robles": {
@@ -45,7 +45,7 @@
   "ancho": 420,
   "alto": 640,
   "transparente": true,
-  "listo": false,
+  "listo": true,
   "prompt": "El profe Robles de gimnasio/assets/robles-rest.webp, con la misma cara, ropa y colores, de pie y girado tres cuartos hacia la derecha, con el silbato en una mano y la otra señalando hacia arriba a la derecha, como quien dice «mirad el partido». Cuerpo entero, pies apoyados en el borde inferior del lienzo."
  }
 }

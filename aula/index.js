@@ -8,7 +8,7 @@ import {$, pintado} from './aula.js';
 
 topBar('El Aula');
 const room = pintado('aula');
-if (room) { $('main').style.setProperty('--aula-bg', `url(${room}) 50% 100%`); $('main').style.setProperty('--aula-bg-size', 'cover'); }
+if (room) { $('main').style.setProperty('--aula-bg', `url(${room}) 50% 100%`); $('main').style.setProperty('--aula-bg-size', 'cover'); $('main').classList.add('painted'); }
 
 // Each table shows its painted picture, or a small drawing of the game on it.
 function miniBoard() {
