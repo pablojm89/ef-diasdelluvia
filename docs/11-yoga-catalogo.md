@@ -25,6 +25,37 @@ Las 26 nuevas aparecen de forma recurrente en guías de yoga infantil y escolar:
 
 **Nombres.** Se ha elegido el nombre más claro para 10-12 años. En otros materiales escolares españoles cambian: el bailarín es «el arco» de pie; el saltamontes es «la langosta», «el tiburón» o «el cocodrilo»; la relajación es «la estrella de mar»; la rana es «el pato»; la pinza es «el libro»; la diosa es «el jinete». «Media luna» se evitó porque en yoga adulto es un equilibrio distinto.
 
+**Nombres originales.** Cada postura lleva además su nombre de yoga, en sánscrito escrito sin signos diacríticos (campo `sa`), que se ve en la ficha, bajo el dibujo y en la práctica guiada.
+
+| Postura | Sánscrito | Postura | Sánscrito |
+|---|---|---|---|
+| Montaña | Tadasana | Tabla | Phalakasana |
+| Estrella | Utthita Tadasana | Cangrejo | Ardha Purvottanasana |
+| Luna creciente | Indudalasana | Postura del niño | Balasana |
+| Muñeco de trapo | Uttanasana | León | Simhasana |
+| Silla | Utkatasana | Zancada | Anjaneyasana |
+| Diosa | Utkata Konasana | Puerta | Parighasana |
+| Rana | Malasana | Mariposa | Baddha Konasana |
+| Guerrero I y II | Virabhadrasana I y II | Pinza | Paschimottanasana |
+| Guerrero pacífico | Viparita Virabhadrasana | Torsión sentada | Parivritta Sukhasana |
+| Triángulo | Trikonasana | Barco | Navasana |
+| Flamenco | sin nombre clásico | Cobra | Bhujangasana |
+| Árbol | Vrikshasana | Esfinge | Salamba Bhujangasana |
+| Avión | Virabhadrasana III | Saltamontes | Shalabhasana |
+| Águila | Garudasana | Puente | Setu Bandhasana |
+| Bailarín | Natarajasana | Bolita | Apanasana |
+| Gato | Marjaryasana | Bebé feliz | Ananda Balasana |
+| Vaca | Bitilasana | Torsión tumbada | Jathara Parivartanasana |
+| Mesa en equilibrio | Dandayamana Bharmanasana | Relajación | Shavasana |
+| Perro boca abajo | Adho Mukha Svanasana | Vuelta a la calma | Sukhasana |
+
+Cuatro avisos sobre estos nombres:
+
+- **El flamenco no tiene nombre clásico**: es un equilibrio de las propuestas infantiles, no una asana tradicional, y su ficha no muestra ninguno.
+- **Los nombres varían entre escuelas.** Para la luna creciente se usa Indudalasana, como la lista de posturas de pie de la [Universidad Estatal de Carolina del Norte](https://yoga.dasa.ncsu.edu/asana/standing-poses/); otras la llaman Parsva Urdhva Hastasana, y Bikram, Ardha Chandrasana. La torsión tumbada con las dos rodillas dobladas es la versión fácil de [Jathara Parivartanasana](https://en.wikipedia.org/wiki/Jathara_Parivartanasana), aunque muchos profesores la llaman Supta Matsyendrasana.
+- **La rana es Malasana** (la guirnalda, en cuclillas), no Mandukasana, que es otra postura. El muñeco de trapo es la variante de Uttanasana con los codos sujetos, a veces llamada [Baddha Hasta Uttanasana](https://www.yogapedia.com/definition/10505/ragdoll-pose).
+- **Escritura.** Se ha preferido la forma que mejor se lee en voz alta en clase (Vrikshasana, Shavasana), frente a Vrksasana o Savasana.
+
 ## 3. Lo que se ha dejado fuera
 
 | Postura | Por qué |

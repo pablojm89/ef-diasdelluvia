@@ -60,7 +60,7 @@ Cada lugar es una puerta. Sólo se pintan puertas abiertas o a punto de abrirse;
 
 Petición del profe. Diseño:
 
-- **Aprender.** Fichas de postura con su nombre en español y en inglés, dibujo, qué se nota en el cuerpo, una indicación de seguridad, la dificultad (fácil, media o reto) y la variante en silla. Las posturas se ordenan en cinco familias: de pie, equilibrio, a cuatro patas, de rodillas y sentadas, y tumbadas. Cada ficha enseña la entrada **paso a paso**: se anima sola y también se puede parar en cada dibujo con los puntos numerados.
+- **Aprender.** Fichas de postura con su nombre en español, en inglés y el original de yoga (sánscrito), dibujo, qué se nota en el cuerpo, una indicación de seguridad, la dificultad (fácil, media o reto) y la variante en silla. Las posturas se ordenan en cinco familias: de pie, equilibrio, a cuatro patas, de rodillas y sentadas, y tumbadas. Cada ficha enseña la entrada **paso a paso**: se anima sola y también se puede parar en cada dibujo con los puntos numerados.
 - **Crear.** Una secuencia se monta poniendo posturas en fila, eligiendo por familia. En el ordenador del alumno, la suya. En la pantalla o por grupos, colaborativa: cada persona añade una postura por turno hasta completar la secuencia de la clase.
 - **Practicar.** La pantalla guía la secuencia: nombre en los dos idiomas, la animación de entrada, las respiraciones contadas y la salida. La clase la hace en directo. Hay nueve secuencias preparadas, entre ellas un saludo al sol adaptado y cuatro que no necesitan colchoneta.
 - **Qué queda anotado.** Posturas vistas, secuencias creadas y secuencias practicadas.

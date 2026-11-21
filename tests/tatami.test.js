@@ -18,6 +18,8 @@ test('tatami: catálogo de posturas completo, con nombre en los dos idiomas, fam
  assert.ok(POSES.length>=36);
  for(const key of ['id','code','es','en'])assert.equal(new Set(POSES.map(pose=>pose[key])).size,POSES.length,key);
  for(const family of FAMILIES)assert.ok(POSES.filter(pose=>pose.family===family.id).length>=4,family.id);
+ assert.equal(new Set(POSES.map(pose=>pose.sa)).size,POSES.length);
+ assert.deepEqual([byId('mountain').sa,byId('downdog').sa,byId('rest').sa,CALM.sa],['Tadasana','Adho Mukha Svanasana','Shavasana','Sukhasana']);
  // Poses come grouped by family, in the order of the family signs.
  assert.deepEqual([...new Set(POSES.map(pose=>pose.family))],FAMILIES.map(family=>family.id));
  for(const pose of POSES){
@@ -29,6 +31,8 @@ test('tatami: catálogo de posturas completo, con nombre en los dos idiomas, fam
   assert.equal(typeof pose.sides,'boolean');
   assert.ok(LEVELS[pose.level]?.es,pose.id);
   assert.match(pose.chair,/^Sentad[oa]/,pose.id);
+  // The original yoga name: Sanskrit without diacritics. Only the flamingo, a children's balance, has none.
+  if(pose.id==='flamingo')assert.equal(pose.sa,'');else assert.match(pose.sa,/^[A-Z][a-z]+( [A-Z][a-z]+)*asana( I{1,3})?$/,pose.id);
  }
  // Prudent content: knees over ankles, no forcing, no head or neck loading.
  assert.match(byId('warrior1').safety,/tobillo/);

@@ -1,6 +1,7 @@
 // The poses of El Tatami: names in Spanish and British English, how to come in and out, what you feel,
 // how to stay safe at 10–12 and the chair version. No inversions, no weight on the head or neck and no deep
 // backbends. `family` groups them on screen and `level` goes from 1 (anyone, any day) to 3 (a challenge).
+// `sa` is the original yoga name, in Sanskrit written without diacritics; empty when the pose has no classical one.
 // `code` is what a pose is called in the short sequence codes: its Spanish initial, plus a digit when the
 // initial was taken. `sides` poses are done on the right and on the left.
 
@@ -15,7 +16,7 @@ export const LEVELS = [null, {es: 'Fácil', en: 'Easy'}, {es: 'Media', en: 'Medi
 
 export const POSES = [
  // --- Standing ---
- {id: 'mountain', code: 'M', es: 'La montaña', en: 'Mountain', family: 'pie', level: 1, sides: false, breaths: 5,
+ {id: 'mountain', code: 'M', es: 'La montaña', en: 'Mountain', sa: 'Tadasana', family: 'pie', level: 1, sides: false, breaths: 5,
   steps: [
    {es: 'De pie, con los pies juntos o un poco separados y el peso repartido en las dos plantas.', en: 'Stand tall, feet together.'},
    {es: 'Crece hacia el techo: hombros lejos de las orejas y mirada al frente.', en: 'Grow tall like a mountain.'},
@@ -25,7 +26,7 @@ export const POSES = [
   feel: 'Los pies bien apoyados, las piernas firmes y la espalda larga, como si un hilo tirara de tu cabeza hacia arriba.',
   safety: 'No bloquees las rodillas: déjalas un poquito blandas. Si te mareas, baja los brazos y respira normal.',
   chair: 'Sentado al borde de la silla, con los pies en el suelo, la espalda larga y los brazos arriba.'},
- {id: 'star', code: 'E', es: 'La estrella', en: 'Star', family: 'pie', level: 1, sides: false, breaths: 4,
+ {id: 'star', code: 'E', es: 'La estrella', en: 'Star', sa: 'Utthita Tadasana', family: 'pie', level: 1, sides: false, breaths: 4,
   steps: [
    {es: 'De pie, separa los pies más que el ancho de los hombros, con las puntas un poco hacia fuera.', en: 'Step your feet wide apart.'},
    {es: 'Abre los brazos en diagonal hacia el techo, con los dedos bien separados.', en: 'Arms up and out, fingers wide.'},
@@ -35,7 +36,7 @@ export const POSES = [
   feel: 'Todo el cuerpo se estira a la vez y ocupas mucho espacio: una postura para sentirte grande y despierto.',
   safety: 'Rodillas blandas, sin bloquear. Comprueba que tus brazos no chocan con nadie.',
   chair: 'Sentado al borde, abre las piernas y los brazos en aspa, con los dedos separados.'},
- {id: 'crescent', code: 'L2', es: 'La luna creciente', en: 'Crescent moon', family: 'pie', level: 1, sides: true, breaths: 3,
+ {id: 'crescent', code: 'L2', es: 'La luna creciente', en: 'Crescent moon', sa: 'Indudalasana', family: 'pie', level: 1, sides: true, breaths: 3,
   steps: [
    {es: 'Desde la montaña, sube los brazos y junta las palmas.', en: 'Arms up, palms together.'},
    {es: 'Al soltar el aire, inclínate hacia un lado, sin girar el pecho ni echarte hacia delante.', en: 'Bend to one side.'},
@@ -45,7 +46,7 @@ export const POSES = [
   feel: 'Se estira todo el costado, desde la cadera hasta la punta de los dedos.',
   safety: 'Inclínate poco: es un arco suave, no un pliegue. Si se cansan los hombros, deja una mano en la cintura.',
   chair: 'Sentado, apoya una mano en el asiento, sube el otro brazo e inclínate hacia la mano apoyada.'},
- {id: 'ragdoll', code: 'M2', es: 'El muñeco de trapo', en: 'Rag doll', family: 'pie', level: 1, sides: false, breaths: 3,
+ {id: 'ragdoll', code: 'M2', es: 'El muñeco de trapo', en: 'Rag doll', sa: 'Uttanasana', family: 'pie', level: 1, sides: false, breaths: 3,
   steps: [
    {es: 'De pie, con los pies separados a la anchura de las caderas y las rodillas un poco dobladas.', en: 'Feet apart, soft knees.'},
    {es: 'Dóblate desde la cadera y deja caer el cuerpo hacia delante, despacio.', en: 'Fold forward slowly.'},
@@ -55,7 +56,7 @@ export const POSES = [
   feel: 'Se estira la parte de atrás de las piernas y la espalda se suelta con el peso de la cabeza.',
   safety: 'Rodillas siempre un poco dobladas. Sube despacio para no marearte; si te mareas, siéntate y respira normal.',
   chair: 'Sentado con las piernas separadas, deja caer el cuerpo entre las rodillas y los brazos hacia el suelo.'},
- {id: 'chair', code: 'S', es: 'La silla', en: 'Chair', family: 'pie', level: 2, sides: false, breaths: 4,
+ {id: 'chair', code: 'S', es: 'La silla', en: 'Chair', sa: 'Utkatasana', family: 'pie', level: 2, sides: false, breaths: 4,
   steps: [
    {es: 'De pie, con los pies separados a la anchura de las caderas.', en: 'Feet hip-width apart.'},
    {es: 'Dobla las rodillas y lleva la cadera atrás, como si te sentaras en una silla invisible.', en: 'Sit back on an invisible chair.'},
@@ -65,7 +66,7 @@ export const POSES = [
   feel: 'Calor y fuerza en los muslos; la espalda se alarga desde la cadera hasta las manos.',
   safety: 'Las rodillas miran al frente y no pasan de la punta de los pies. Baja sólo hasta donde puedas aguantar sin dolor.',
   chair: 'Sentado al borde, inclínate un poco hacia delante con la espalda recta y sube los brazos junto a las orejas.'},
- {id: 'goddess', code: 'D2', es: 'La diosa', en: 'Goddess', family: 'pie', level: 2, sides: false, breaths: 4,
+ {id: 'goddess', code: 'D2', es: 'La diosa', en: 'Goddess', sa: 'Utkata Konasana', family: 'pie', level: 2, sides: false, breaths: 4,
   steps: [
    {es: 'Separa mucho los pies y gira las puntas hacia fuera.', en: 'Feet wide, toes out.'},
    {es: 'Dobla las rodillas en la misma dirección que los pies, con la espalda recta.', en: 'Bend your knees over your toes.'},
@@ -75,7 +76,7 @@ export const POSES = [
   feel: 'Los muslos y los glúteos trabajan fuerte; el pecho se abre.',
   safety: 'Las rodillas miran hacia donde miran los pies y no se caen hacia dentro. Baja sólo hasta donde aguantes sin dolor.',
   chair: 'Sentado al borde, con las piernas muy abiertas y los pies hacia fuera, sube los brazos en forma de cactus.'},
- {id: 'frog', code: 'R', es: 'La rana', en: 'Frog', family: 'pie', level: 2, sides: false, breaths: 4,
+ {id: 'frog', code: 'R', es: 'La rana', en: 'Frog', sa: 'Malasana', family: 'pie', level: 2, sides: false, breaths: 4,
   steps: [
    {es: 'Separa los pies un poco más que las caderas, con las puntas hacia fuera.', en: 'Feet apart, toes out.'},
    {es: 'Baja en cuclillas despacio, con las rodillas abiertas.', en: 'Squat down low.'},
@@ -85,7 +86,7 @@ export const POSES = [
   feel: 'Se abren las caderas y trabajan los tobillos; la espalda se alarga hacia arriba.',
   safety: 'Si los talones no llegan al suelo, sepáralos más o pon una toalla doblada debajo. Si molestan las rodillas, quédate a medio camino.',
   chair: 'Sentado al borde con las piernas abiertas, inclínate un poco, junta las palmas y apoya los codos por dentro de las rodillas.'},
- {id: 'warrior1', code: 'U', es: 'El guerrero I', en: 'Warrior I', family: 'pie', level: 2, sides: true, breaths: 3,
+ {id: 'warrior1', code: 'U', es: 'El guerrero I', en: 'Warrior I', sa: 'Virabhadrasana I', family: 'pie', level: 2, sides: true, breaths: 3,
   steps: [
    {es: 'Desde la montaña, da un paso largo atrás. El pie de atrás, un poco girado hacia fuera.', en: 'Step one foot back.'},
    {es: 'Dobla la rodilla de delante hasta que quede encima del tobillo. La pierna de atrás, estirada.', en: 'Front knee over your ankle.'},
@@ -95,7 +96,7 @@ export const POSES = [
   feel: 'Fuerza en la pierna de delante y estiramiento en la parte delantera de la cadera de atrás.',
   safety: 'La rodilla de delante va encima del tobillo, nunca por delante de los dedos. Si cuesta, acorta el paso.',
   chair: 'Sentado al borde, deja una pierna doblada delante y estira la otra hacia atrás por el lado de la silla; brazos arriba.'},
- {id: 'warrior2', code: 'D', es: 'El guerrero II', en: 'Warrior II', family: 'pie', level: 2, sides: true, breaths: 3,
+ {id: 'warrior2', code: 'D', es: 'El guerrero II', en: 'Warrior II', sa: 'Virabhadrasana II', family: 'pie', level: 2, sides: true, breaths: 3,
   steps: [
    {es: 'Separa mucho los pies. El pie de delante apunta al frente y el de atrás, de lado.', en: 'Step your feet wide apart.'},
    {es: 'Dobla la rodilla de delante encima del tobillo.', en: 'Bend your front knee.'},
@@ -105,7 +106,7 @@ export const POSES = [
   feel: 'Las piernas trabajan, el pecho se abre y los brazos se alargan hacia los dos lados.',
   safety: 'La rodilla de delante, encima del tobillo. Hombros relajados, lejos de las orejas.',
   chair: 'Sentado al borde con las piernas abiertas, abre los brazos en cruz y mira por encima de una mano.'},
- {id: 'peaceful', code: 'G2', es: 'El guerrero pacífico', en: 'Peaceful warrior', family: 'pie', level: 2, sides: true, breaths: 3,
+ {id: 'peaceful', code: 'G2', es: 'El guerrero pacífico', en: 'Peaceful warrior', sa: 'Viparita Virabhadrasana', family: 'pie', level: 2, sides: true, breaths: 3,
   steps: [
    {es: 'Colócate en el guerrero II: rodilla de delante doblada y brazos abiertos.', en: 'Start in Warrior II.'},
    {es: 'Gira la palma de delante hacia el techo y sube ese brazo.', en: 'Front arm up.'},
@@ -115,7 +116,7 @@ export const POSES = [
   feel: 'Se estira el costado de delante y las piernas siguen trabajando como en el guerrero.',
   safety: 'La rodilla de delante sigue doblada encima del tobillo. La mano de atrás roza la pierna sin cargar peso en ella.',
   chair: 'Sentado con las piernas abiertas, deja una mano sobre el muslo, sube el otro brazo e inclínate un poco hacia atrás.'},
- {id: 'triangle', code: 'T', es: 'El triángulo', en: 'Triangle', family: 'pie', level: 2, sides: true, breaths: 3,
+ {id: 'triangle', code: 'T', es: 'El triángulo', en: 'Triangle', sa: 'Trikonasana', family: 'pie', level: 2, sides: true, breaths: 3,
   steps: [
    {es: 'Piernas separadas y estiradas. El pie de delante apunta al frente.', en: 'Feet wide, legs straight.'},
    {es: 'Abre los brazos y alarga el cuerpo hacia el pie de delante.', en: 'Reach forward and tilt.'},
@@ -126,7 +127,7 @@ export const POSES = [
   safety: 'La mano descansa en la espinilla, no sobre la rodilla. No fuerces para llegar al suelo.',
   chair: 'Sentado con las piernas abiertas, apoya un antebrazo en el muslo, inclínate hacia ese lado y sube el otro brazo.'},
  // --- Balance ---
- {id: 'flamingo', code: 'F', es: 'El flamenco', en: 'Flamingo', family: 'equilibrio', level: 1, sides: true, breaths: 3,
+ {id: 'flamingo', code: 'F', es: 'El flamenco', en: 'Flamingo', sa: '', family: 'equilibrio', level: 1, sides: true, breaths: 3,
   steps: [
    {es: 'Desde la montaña, pon las manos en la cintura y pasa el peso a un pie.', en: 'Hands on hips, stand on one foot.'},
    {es: 'Sube la otra rodilla hasta la altura de la cadera.', en: 'Lift your knee.'},
@@ -136,7 +137,7 @@ export const POSES = [
   feel: 'La pierna de apoyo y la tripa trabajan para que no te tambalees.',
   safety: 'La rodilla de apoyo, blanda. Si pierdes el equilibrio, apoya la punta del pie y vuelve a subir.',
   chair: 'Sentado al borde, sin apoyar la espalda, levanta una rodilla y mantén el pie en el aire.'},
- {id: 'tree', code: 'A', es: 'El árbol', en: 'Tree', family: 'equilibrio', level: 2, sides: true, breaths: 4,
+ {id: 'tree', code: 'A', es: 'El árbol', en: 'Tree', sa: 'Vrikshasana', family: 'equilibrio', level: 2, sides: true, breaths: 4,
   steps: [
    {es: 'Desde la montaña, pasa el peso a un pie y junta las manos en el pecho.', en: 'Stand on one foot.'},
    {es: 'Apoya la planta del otro pie en el tobillo o en la pantorrilla, nunca en la rodilla. La rodilla mira hacia fuera.', en: 'Foot on your ankle or calf, not your knee.'},
@@ -146,7 +147,7 @@ export const POSES = [
   feel: 'La pierna de apoyo trabaja y el cuerpo hace pequeños ajustes para no caerse: así se entrena el equilibrio.',
   safety: 'Perder el equilibrio es normal: baja el pie y vuelve a empezar. Deja sitio con quien tengas al lado y no empujes la rodilla.',
   chair: 'Sentado, apoya un talón junto al tobillo contrario con la rodilla hacia fuera y sube los brazos como ramas.'},
- {id: 'airplane', code: 'A2', es: 'El avión', en: 'Aeroplane', family: 'equilibrio', level: 3, sides: true, breaths: 3,
+ {id: 'airplane', code: 'A2', es: 'El avión', en: 'Aeroplane', sa: 'Virabhadrasana III', family: 'equilibrio', level: 3, sides: true, breaths: 3,
   steps: [
    {es: 'Desde la montaña, pasa el peso a un pie y lleva los brazos atrás, como alas.', en: 'Stand on one foot, arms back like wings.'},
    {es: 'Inclina el cuerpo hacia delante mientras la otra pierna sube estirada hacia atrás.', en: 'Tip forward, back leg up.'},
@@ -156,7 +157,7 @@ export const POSES = [
   feel: 'Trabajan la pierna de apoyo, los glúteos y la espalda; todo el cuerpo se ajusta para no caerse.',
   safety: 'La rodilla de apoyo, un poco doblada. No hace falta llegar a la horizontal: inclínate hasta donde controles. Deja sitio delante y detrás.',
   chair: 'Sentado al borde, inclínate hacia delante con la espalda recta, estira una pierna al frente y lleva los brazos atrás como alas.'},
- {id: 'eagle', code: 'A3', es: 'El águila', en: 'Eagle', family: 'equilibrio', level: 3, sides: true, breaths: 3,
+ {id: 'eagle', code: 'A3', es: 'El águila', en: 'Eagle', sa: 'Garudasana', family: 'equilibrio', level: 3, sides: true, breaths: 3,
   steps: [
    {es: 'De pie, dobla un poco las rodillas y cruza una pierna por encima de la otra.', en: 'Bend your knees, cross one leg over.'},
    {es: 'Apoya la punta del pie de arriba en el suelo, al lado del otro pie.', en: 'Toes on the floor.'},
@@ -166,7 +167,7 @@ export const POSES = [
   feel: 'Se estira la parte alta de la espalda, entre los omóplatos, y las piernas trabajan juntas.',
   safety: 'Cruza sin forzar las rodillas: la punta del pie puede quedarse en el suelo. Si no llegas a cruzar los brazos, abrázate los hombros.',
   chair: 'Sentado, cruza una pierna sobre la otra, cruza los brazos delante del pecho y sube las manos.'},
- {id: 'dancer', code: 'B2', es: 'El bailarín', en: 'Dancer', family: 'equilibrio', level: 3, sides: true, breaths: 3,
+ {id: 'dancer', code: 'B2', es: 'El bailarín', en: 'Dancer', sa: 'Natarajasana', family: 'equilibrio', level: 3, sides: true, breaths: 3,
   steps: [
    {es: 'Desde la montaña, dobla una rodilla y sujeta ese pie por detrás con la mano del mismo lado.', en: 'Hold one foot behind you.'},
    {es: 'Sube el otro brazo hacia el techo y mira un punto fijo.', en: 'Other arm up.'},
@@ -177,7 +178,7 @@ export const POSES = [
   safety: 'Sujeta el pie, no los dedos, y no tires de él hacia arriba. La espalda se arquea muy poco. Deja sitio alrededor.',
   chair: 'Sentado de lado en la silla, lleva un pie hacia atrás, sujétalo con la mano de ese lado y sube el otro brazo.'},
  // --- On all fours ---
- {id: 'cat', code: 'G', es: 'El gato', en: 'Cat', family: 'apoyos', level: 1, sides: false, breaths: 4,
+ {id: 'cat', code: 'G', es: 'El gato', en: 'Cat', sa: 'Marjaryasana', family: 'apoyos', level: 1, sides: false, breaths: 4,
   steps: [
    {es: 'En cuatro patas: manos debajo de los hombros y rodillas debajo de las caderas.', en: 'Hands and knees.'},
    {es: 'Al soltar el aire, redondea la espalda hacia el techo, como un gato que se estira.', en: 'Round your back like a cat.'},
@@ -187,7 +188,7 @@ export const POSES = [
   feel: 'La espalda se estira entre los omóplatos y la tripa se recoge.',
   safety: 'Mueve la espalda despacio; el cuello acompaña sin tirar. Si te molestan las rodillas, pon una toalla doblada debajo.',
   chair: 'Sentado, con las manos en las rodillas, redondea la espalda y mira hacia el ombligo.'},
- {id: 'cow', code: 'V', es: 'La vaca', en: 'Cow', family: 'apoyos', level: 1, sides: false, breaths: 4,
+ {id: 'cow', code: 'V', es: 'La vaca', en: 'Cow', sa: 'Bitilasana', family: 'apoyos', level: 1, sides: false, breaths: 4,
   steps: [
    {es: 'En cuatro patas: manos debajo de los hombros y rodillas debajo de las caderas.', en: 'Hands and knees.'},
    {es: 'Al tomar aire, baja la tripa con suavidad y lleva el pecho hacia delante.', en: 'Tummy down, chest forward.'},
@@ -197,7 +198,7 @@ export const POSES = [
   feel: 'El pecho se abre y la espalda se arquea un poco, sin esfuerzo.',
   safety: 'No hundas la zona lumbar con fuerza ni eches la cabeza atrás: el cuello sigue largo y la mirada, al frente.',
   chair: 'Sentado, con las manos en las rodillas, lleva el pecho hacia delante y mira al frente.'},
- {id: 'birddog', code: 'M3', es: 'La mesa en equilibrio', en: 'Balancing table', family: 'apoyos', level: 2, sides: true, breaths: 3,
+ {id: 'birddog', code: 'M3', es: 'La mesa en equilibrio', en: 'Balancing table', sa: 'Dandayamana Bharmanasana', family: 'apoyos', level: 2, sides: true, breaths: 3,
   steps: [
    {es: 'En cuatro patas: manos debajo de los hombros y rodillas debajo de las caderas.', en: 'Hands and knees.'},
    {es: 'Estira una pierna hacia atrás, a la altura de la cadera.', en: 'One leg back.'},
@@ -207,7 +208,7 @@ export const POSES = [
   feel: 'La tripa y la espalda trabajan para que la mesa no se incline.',
   safety: 'La espalda sigue plana, sin hundirse. El brazo y la pierna no suben por encima de la espalda.',
   chair: 'Sentado al borde con la espalda larga, estira un brazo al frente y la pierna contraria.'},
- {id: 'downdog', code: 'P', es: 'El perro boca abajo', en: 'Downward dog', family: 'apoyos', level: 2, sides: false, breaths: 4,
+ {id: 'downdog', code: 'P', es: 'El perro boca abajo', en: 'Downward dog', sa: 'Adho Mukha Svanasana', family: 'apoyos', level: 2, sides: false, breaths: 4,
   steps: [
    {es: 'Desde cuatro patas, apoya los dedos de los pies en el suelo.', en: 'Tuck your toes.'},
    {es: 'Empuja el suelo con las manos y sube la cadera hacia el techo.', en: 'Hips up high.'},
@@ -217,7 +218,7 @@ export const POSES = [
   feel: 'Se estiran la espalda y la parte de atrás de las piernas; los brazos y los hombros trabajan.',
   safety: 'La cabeza cuelga relajada y no se apoya en el suelo. Si te mareas o te cansas, baja a la postura del niño.',
   chair: 'Sentado al borde, estira los brazos hacia delante y alarga la espalda inclinándote desde la cadera.'},
- {id: 'plank', code: 'T2', es: 'La tabla', en: 'Plank', family: 'apoyos', level: 2, sides: false, breaths: 3,
+ {id: 'plank', code: 'T2', es: 'La tabla', en: 'Plank', sa: 'Phalakasana', family: 'apoyos', level: 2, sides: false, breaths: 3,
   steps: [
    {es: 'En cuatro patas, con las manos debajo de los hombros y los dedos separados.', en: 'Hands under your shoulders.'},
    {es: 'Estira una pierna atrás y luego la otra, apoyando los dedos de los pies.', en: 'Step your feet back.'},
@@ -227,7 +228,7 @@ export const POSES = [
   feel: 'Trabajan los brazos, los hombros y, sobre todo, la tripa.',
   safety: 'Ni la cadera hundida ni el culo arriba. Si se cansan las muñecas o la espalda, apoya las rodillas: sigue siendo una tabla.',
   chair: 'Sentado al borde, estira las piernas con los talones en el suelo, inclínate un poco hacia atrás con la espalda recta y lleva los brazos al frente.'},
- {id: 'crab', code: 'C2', es: 'El cangrejo', en: 'Crab', family: 'apoyos', level: 2, sides: false, breaths: 3,
+ {id: 'crab', code: 'C2', es: 'El cangrejo', en: 'Crab', sa: 'Ardha Purvottanasana', family: 'apoyos', level: 2, sides: false, breaths: 3,
   steps: [
    {es: 'Siéntate con las rodillas dobladas y los pies apoyados, separados a la anchura de las caderas.', en: 'Sit with your knees bent.'},
    {es: 'Apoya las manos detrás de la cadera, con los dedos mirando hacia los pies.', en: 'Hands behind you.'},
@@ -238,7 +239,7 @@ export const POSES = [
   safety: 'No dejes caer la cabeza hacia atrás: mira hacia las rodillas, con el cuello largo. Si molestan las muñecas, baja.',
   chair: 'Sentado, agarra los lados del asiento junto a la cadera, estira las piernas al frente y abre el pecho.'},
  // --- Kneeling and sitting ---
- {id: 'child', code: 'N', es: 'La postura del niño', en: 'Child’s pose', family: 'suelo', level: 1, sides: false, breaths: 5,
+ {id: 'child', code: 'N', es: 'La postura del niño', en: 'Child’s pose', sa: 'Balasana', family: 'suelo', level: 1, sides: false, breaths: 5,
   steps: [
    {es: 'De rodillas, siéntate sobre los talones.', en: 'Sit back on your heels.'},
    {es: 'Inclina el cuerpo hacia delante y apoya la frente en el suelo.', en: 'Forehead to the floor.'},
@@ -248,7 +249,7 @@ export const POSES = [
   feel: 'La espalda se relaja y notas la respiración moverse en la espalda.',
   safety: 'Si molestan las rodillas, sepáralas un poco o pon un cojín entre los talones y la cadera.',
   chair: 'Sentado, inclínate hacia delante, apoya el pecho en los muslos y deja colgar los brazos.'},
- {id: 'lion', code: 'L', es: 'El león', en: 'Lion', family: 'suelo', level: 1, sides: false, breaths: 3,
+ {id: 'lion', code: 'L', es: 'El león', en: 'Lion', sa: 'Simhasana', family: 'suelo', level: 1, sides: false, breaths: 3,
   steps: [
    {es: 'De rodillas, siéntate sobre los talones con las manos en las rodillas.', en: 'Sit on your heels.'},
    {es: 'Toma aire por la nariz y abre bien los dedos, como garras.', en: 'Breathe in, spread your claws.'},
@@ -258,7 +259,7 @@ export const POSES = [
   feel: 'Se estiran la cara, la lengua y la garganta, y sueltas tensión con el aire.',
   safety: 'El rugido es de aire, sin gritar ni forzar la garganta. Si molestan las rodillas, hazlo sentado con las piernas cruzadas.',
   chair: 'Sentado, con las manos en las rodillas y los dedos abiertos, inclínate un poco, saca la lengua y ruge.'},
- {id: 'lunge', code: 'Z', es: 'La zancada', en: 'Low lunge', family: 'suelo', level: 2, sides: true, breaths: 3,
+ {id: 'lunge', code: 'Z', es: 'La zancada', en: 'Low lunge', sa: 'Anjaneyasana', family: 'suelo', level: 2, sides: true, breaths: 3,
   steps: [
    {es: 'De rodillas, con el cuerpo recto, adelanta un pie y apóyalo entero en el suelo.', en: 'Kneel and step one foot forward.'},
    {es: 'Lleva la cadera hacia delante hasta que la rodilla de delante quede encima del tobillo.', en: 'Front knee over your ankle.'},
@@ -268,7 +269,7 @@ export const POSES = [
   feel: 'Se estira la parte delantera de la cadera y del muslo de atrás.',
   safety: 'La rodilla de delante no pasa de la punta del pie. Pon una toalla doblada debajo de la rodilla de atrás si molesta.',
   chair: 'Sentado de lado al borde, deja una pierna doblada delante, estira la otra hacia atrás y apoya las manos en el muslo de delante.'},
- {id: 'gate', code: 'P2', es: 'La puerta', en: 'Gate', family: 'suelo', level: 2, sides: true, breaths: 3,
+ {id: 'gate', code: 'P2', es: 'La puerta', en: 'Gate', sa: 'Parighasana', family: 'suelo', level: 2, sides: true, breaths: 3,
   steps: [
    {es: 'De rodillas, con el cuerpo recto, estira una pierna hacia el lado y apoya el pie.', en: 'Kneel, one leg out to the side.'},
    {es: 'Abre los brazos en cruz.', en: 'Arms out.'},
@@ -278,7 +279,7 @@ export const POSES = [
   feel: 'Se estira el costado de arriba y la parte de dentro de la pierna estirada.',
   safety: 'La mano descansa en la pierna sin cargar el peso en la rodilla. No te eches hacia delante.',
   chair: 'Sentado, estira una pierna hacia el lado, apoya la mano en ella y pasa el otro brazo por encima de la cabeza.'},
- {id: 'butterfly', code: 'B', es: 'La mariposa', en: 'Butterfly', family: 'suelo', level: 1, sides: false, breaths: 4,
+ {id: 'butterfly', code: 'B', es: 'La mariposa', en: 'Butterfly', sa: 'Baddha Konasana', family: 'suelo', level: 1, sides: false, breaths: 4,
   steps: [
    {es: 'Siéntate en el suelo con la espalda larga y las rodillas dobladas.', en: 'Sit up tall.'},
    {es: 'Junta las plantas de los pies y deja caer las rodillas hacia los lados.', en: 'Soles together, knees out.'},
@@ -288,7 +289,7 @@ export const POSES = [
   feel: 'Se estira la parte de dentro de los muslos y la espalda se mantiene larga.',
   safety: 'No empujes las rodillas hacia abajo con las manos: bajan solas con el tiempo. Si molesta, aleja un poco los pies.',
   chair: 'Sentado al borde, junta los talones en el suelo y abre las rodillas suavemente hacia los lados.'},
- {id: 'pinza', code: 'P3', es: 'La pinza', en: 'Seated forward fold', family: 'suelo', level: 1, sides: false, breaths: 4,
+ {id: 'pinza', code: 'P3', es: 'La pinza', en: 'Seated forward fold', sa: 'Paschimottanasana', family: 'suelo', level: 1, sides: false, breaths: 4,
   steps: [
    {es: 'Siéntate con las piernas estiradas y juntas, y la espalda larga.', en: 'Sit with your legs straight.'},
    {es: 'Sube los brazos al tomar aire.', en: 'Arms up.'},
@@ -298,7 +299,7 @@ export const POSES = [
   feel: 'Se estira toda la parte de atrás: piernas y espalda.',
   safety: 'Dobla un poco las rodillas si tira mucho. No des rebotes ni dejes que nadie te empuje la espalda.',
   chair: 'Sentado al borde, estira las piernas con los talones en el suelo e inclínate desde la cadera con las manos hacia las espinillas.'},
- {id: 'twist', code: 'T3', es: 'La torsión sentada', en: 'Seated twist', family: 'suelo', level: 1, sides: true, breaths: 3,
+ {id: 'twist', code: 'T3', es: 'La torsión sentada', en: 'Seated twist', sa: 'Parivritta Sukhasana', family: 'suelo', level: 1, sides: true, breaths: 3,
   steps: [
    {es: 'Siéntate con las piernas cruzadas y la espalda larga.', en: 'Sit cross-legged, tall back.'},
    {es: 'Lleva una mano a la rodilla contraria y la otra al suelo, detrás de ti.', en: 'Hand to the opposite knee.'},
@@ -308,7 +309,7 @@ export const POSES = [
   feel: 'La espalda gira como una escalera de caracol y se sueltan los costados.',
   safety: 'Primero crece y después gira; no tires con el brazo. El giro es suave, sin llegar al tope.',
   chair: 'Sentado de frente, lleva una mano al respaldo y la otra a la rodilla contraria, y gira despacio.'},
- {id: 'boat', code: 'B3', es: 'El barco', en: 'Boat', family: 'suelo', level: 3, sides: false, breaths: 3,
+ {id: 'boat', code: 'B3', es: 'El barco', en: 'Boat', sa: 'Navasana', family: 'suelo', level: 3, sides: false, breaths: 3,
   steps: [
    {es: 'Siéntate con las rodillas dobladas y los pies en el suelo. Sujétate por detrás de los muslos.', en: 'Sit with your knees bent.'},
    {es: 'Inclínate un poco hacia atrás con la espalda recta y levanta los pies del suelo.', en: 'Lean back, feet up.'},
@@ -319,7 +320,7 @@ export const POSES = [
   safety: 'Espalda recta, sin redondearla. Si cuesta, deja las manos detrás de los muslos o la punta de los pies en el suelo.',
   chair: 'Sentado al borde, agarra los lados del asiento, inclínate un poco hacia atrás con la espalda recta y levanta los pies.'},
  // --- Lying down ---
- {id: 'cobra', code: 'C', es: 'La cobra', en: 'Cobra', family: 'tumbadas', level: 1, sides: false, breaths: 3,
+ {id: 'cobra', code: 'C', es: 'La cobra', en: 'Cobra', sa: 'Bhujangasana', family: 'tumbadas', level: 1, sides: false, breaths: 3,
   steps: [
    {es: 'Túmbate boca abajo, con las piernas estiradas y las manos debajo de los hombros.', en: 'Lie on your tummy.'},
    {es: 'Codos pegados al cuerpo. Al tomar aire, despega un poco el pecho del suelo.', en: 'Lift your chest a little.'},
@@ -329,7 +330,7 @@ export const POSES = [
   feel: 'Se estira la parte de delante del cuerpo y la espalda trabaja suave.',
   safety: 'Es una cobra pequeña: la cadera sigue en el suelo y los codos, doblados. El cuello largo, sin echar la cabeza atrás. Si molesta la espalda, sube menos.',
   chair: 'Sentado, agarra los lados del asiento por detrás, abre el pecho y lleva los hombros atrás mirando al frente.'},
- {id: 'sphinx', code: 'E2', es: 'La esfinge', en: 'Sphinx', family: 'tumbadas', level: 1, sides: false, breaths: 4,
+ {id: 'sphinx', code: 'E2', es: 'La esfinge', en: 'Sphinx', sa: 'Salamba Bhujangasana', family: 'tumbadas', level: 1, sides: false, breaths: 4,
   steps: [
    {es: 'Túmbate boca abajo, con las piernas estiradas.', en: 'Lie on your tummy.'},
    {es: 'Apoya los antebrazos en el suelo, con los codos debajo de los hombros.', en: 'Elbows under your shoulders.'},
@@ -339,7 +340,7 @@ export const POSES = [
   feel: 'El pecho se abre y la espalda trabaja muy suave; los hombros se alejan de las orejas.',
   safety: 'La cadera y los antebrazos no se despegan del suelo. Cuello largo, sin echar la cabeza atrás.',
   chair: 'Sentado, apoya los antebrazos en los muslos, lleva el pecho hacia delante y mira al frente.'},
- {id: 'locust', code: 'S2', es: 'El saltamontes', en: 'Locust', family: 'tumbadas', level: 2, sides: false, breaths: 3,
+ {id: 'locust', code: 'S2', es: 'El saltamontes', en: 'Locust', sa: 'Shalabhasana', family: 'tumbadas', level: 2, sides: false, breaths: 3,
   steps: [
    {es: 'Túmbate boca abajo, con la frente en el suelo y los brazos junto al cuerpo.', en: 'Lie on your tummy, arms by your sides.'},
    {es: 'Al tomar aire, despega un poco el pecho y los brazos del suelo.', en: 'Lift your chest and arms.'},
@@ -349,7 +350,7 @@ export const POSES = [
   feel: 'Trabaja toda la espalda, los glúteos y la parte de atrás de las piernas.',
   safety: 'Sube poco: alargar vale más que subir. El cuello sigue en línea con la espalda. Si molesta la zona lumbar, levanta sólo el pecho.',
   chair: 'Sentado al borde, inclínate un poco hacia delante con la espalda recta y lleva los brazos estirados hacia atrás.'},
- {id: 'bridge', code: 'P4', es: 'El puente', en: 'Bridge', family: 'tumbadas', level: 2, sides: false, breaths: 4,
+ {id: 'bridge', code: 'P4', es: 'El puente', en: 'Bridge', sa: 'Setu Bandhasana', family: 'tumbadas', level: 2, sides: false, breaths: 4,
   steps: [
    {es: 'Túmbate boca arriba, con las rodillas dobladas y los pies apoyados cerca de la cadera.', en: 'Lie on your back, knees bent.'},
    {es: 'Brazos a los lados, con las palmas en el suelo.', en: 'Arms by your sides.'},
@@ -359,7 +360,7 @@ export const POSES = [
   feel: 'Trabajan los glúteos y las piernas; se abre la parte delantera de la cadera y del pecho.',
   safety: 'Es un puente bajo: la cadera sube sólo hasta la línea de las rodillas y los hombros. Mira al techo y no gires la cara: el peso va a los pies y a los hombros, nunca al cuello.',
   chair: 'Sentado al borde, agarra los lados del asiento, empuja los pies contra el suelo y abre el pecho con la espalda larga.'},
- {id: 'ball', code: 'B5', es: 'La bolita', en: 'Knees to chest', family: 'tumbadas', level: 1, sides: false, breaths: 5,
+ {id: 'ball', code: 'B5', es: 'La bolita', en: 'Knees to chest', sa: 'Apanasana', family: 'tumbadas', level: 1, sides: false, breaths: 5,
   steps: [
    {es: 'Túmbate boca arriba, con las rodillas dobladas.', en: 'Lie on your back.'},
    {es: 'Lleva las rodillas al pecho, primero una y luego la otra.', en: 'Knees to your chest.'},
@@ -369,7 +370,7 @@ export const POSES = [
   feel: 'La zona baja de la espalda se relaja contra el suelo.',
   safety: 'La nuca se queda en el suelo. Abraza sin apretar: las rodillas no se aplastan contra el pecho.',
   chair: 'Sentado, sube una rodilla, abrázala con las dos manos y acércala al pecho con la espalda larga; después, la otra.'},
- {id: 'happybaby', code: 'B4', es: 'El bebé feliz', en: 'Happy baby', family: 'tumbadas', level: 1, sides: false, breaths: 4,
+ {id: 'happybaby', code: 'B4', es: 'El bebé feliz', en: 'Happy baby', sa: 'Ananda Balasana', family: 'tumbadas', level: 1, sides: false, breaths: 4,
   steps: [
    {es: 'Túmbate boca arriba y lleva las rodillas al pecho.', en: 'Knees to your chest.'},
    {es: 'Separa las rodillas y sube los pies hacia el techo, con las plantas mirando arriba.', en: 'Feet up to the ceiling.'},
@@ -379,7 +380,7 @@ export const POSES = [
   feel: 'Se abren las caderas y la espalda descansa entera en el suelo.',
   safety: 'La nuca y la zona baja de la espalda siguen en el suelo. Si no llegas a los pies, sujeta las espinillas.',
   chair: 'Sentado, sube un pie, sujétalo por fuera con la mano de ese lado y abre la rodilla; después, el otro.'},
- {id: 'lyingtwist', code: 'T4', es: 'La torsión tumbada', en: 'Lying twist', family: 'tumbadas', level: 1, sides: true, breaths: 4,
+ {id: 'lyingtwist', code: 'T4', es: 'La torsión tumbada', en: 'Lying twist', sa: 'Jathara Parivartanasana', family: 'tumbadas', level: 1, sides: true, breaths: 4,
   steps: [
    {es: 'Túmbate boca arriba, con las rodillas dobladas y los brazos en cruz.', en: 'Lie on your back, arms out.'},
    {es: 'Deja caer las dos rodillas juntas hacia un lado, despacio.', en: 'Knees to one side.'},
@@ -389,7 +390,7 @@ export const POSES = [
   feel: 'La espalda gira suave y se estira el costado; el cuerpo se va soltando.',
   safety: 'Las rodillas bajan solas, sin empujarlas. Si no llegan al suelo, no pasa nada.',
   chair: 'Sentado, cruza una pierna sobre la otra, apoya las dos manos en la rodilla de arriba y gira hacia ese lado.'},
- {id: 'rest', code: 'R2', es: 'La relajación', en: 'Resting pose', family: 'tumbadas', level: 1, sides: false, breaths: 6,
+ {id: 'rest', code: 'R2', es: 'La relajación', en: 'Resting pose', sa: 'Shavasana', family: 'tumbadas', level: 1, sides: false, breaths: 6,
   steps: [
    {es: 'Túmbate boca arriba, con las piernas estiradas y un poco separadas.', en: 'Lie on your back.'},
    {es: 'Brazos a los lados, separados del cuerpo, con las palmas hacia arriba.', en: 'Arms by your sides, palms up.'},
@@ -402,7 +403,7 @@ export const POSES = [
 ];
 
 // The cool-down at the end of every practice.
-export const CALM = {id: 'calma', es: 'Vuelta a la calma', en: 'Cool down',
+export const CALM = {id: 'calma', es: 'Vuelta a la calma', en: 'Cool down', sa: 'Sukhasana',
  steps: [{es: 'Siéntate cómodo, cierra los ojos si quieres y pon las manos en la tripa.', en: 'Hands on your tummy.'},
   {es: 'Nota cómo sube al tomar aire y baja al soltarlo.', en: 'Feel it rise and fall.'}],
  end: {es: '¡Bien hecho! Abrid los ojos despacio.', en: 'Well done!'}, breaths: 3};

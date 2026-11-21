@@ -62,7 +62,7 @@ function renderPoses() {
  shown = inFamily(learnFamily);
  familySigns($('families'), learnFamily, true);
  $('poses').innerHTML = shown.map((pose, i) => `<li><button type="button" class="pose-card" data-i="${i}">
-  <span class="pose-pic">${thumb(pose.id)}</span><span class="pose-names"><strong>${esc(pose.es)}</strong><span lang="en">${esc(pose.en)}</span></span></button></li>`).join('');
+  <span class="pose-pic">${thumb(pose.id)}</span><span class="pose-names"><strong>${esc(pose.es)}</strong><span lang="en">${esc(pose.en)}</span>${pose.sa ? `<small lang="sa">${esc(pose.sa)}</small>` : ''}</span></button></li>`).join('');
 }
 $('families').addEventListener('click', event => {
  const sign = event.target.closest('.family');
@@ -92,6 +92,8 @@ function openCard(index) {
  $('card-num').innerHTML = `${esc(family.es)} · <span lang="en">${esc(family.en)}</span> · ${cardIndex + 1} de ${shown.length}`;
  $('card-es').textContent = pose.es;
  $('card-en').textContent = pose.en;
+ $('card-sa').hidden = !pose.sa;
+ $('card-sa').lastElementChild.textContent = pose.sa;
  $('card-level').innerHTML = `<span class="pips" aria-hidden="true">${'●'.repeat(pose.level)}${'○'.repeat(3 - pose.level)}</span> ${esc(level.es)} · <span lang="en">${esc(level.en)}</span>`;
  $('card-steps').innerHTML = pose.steps.map(step => `<li>${esc(step.es)} <span lang="en">${esc(step.en)}</span></li>`).join('');
  $('card-exit').innerHTML = `${esc(pose.exit.es)} <span lang="en">${esc(pose.exit.en)}</span>`;
@@ -362,6 +364,8 @@ function enterStep() {
  }
  $('st-es').textContent = pose.es;
  $('st-en').textContent = pose.en;
+ $('st-sa').textContent = pose.sa;
+ $('st-sa').hidden = !pose.sa;
  $('st-side').textContent = step.side === null ? '' : `${SIDES[step.side].es} · ${SIDES[step.side].en}`;
  $('st-side').hidden = step.side === null;
  $('st-breath').hidden = step.kind !== 'breathe';
