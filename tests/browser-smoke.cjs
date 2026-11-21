@@ -127,6 +127,38 @@ const out=path.join(base,'artifacts');
    await page.screenshot({path:path.join(out,`${screen}-${name}.png`),fullPage:true});
   }
  }
+ // El Tatami: poses by family, the way into a pose step by step, and sequence codes with and without digits.
+ await page.setViewportSize({width:1280,height:720});
+ await page.goto('https://patio.test/tatami/index.html');
+ const allPoses=await page.locator('.pose-card').count();
+ assert.ok(allPoses>=36);
+ await page.locator('#families .family').nth(2).click();
+ assert.ok(await page.locator('.pose-card').count()<allPoses);
+ await page.locator('.pose-card').first().click();
+ await page.waitForSelector('#card[open]');
+ assert.ok(await page.locator('#card-dots button').count()>=3);
+ await page.locator('#card-dots button').nth(1).click();
+ assert.match(await page.locator('#card-phase').textContent(),/Paso 2 de \d/);
+ await page.locator('#card-add').click();
+ assert.equal(await page.locator('#sequence li').count(),1);
+ await page.fill('#code-input','msud-tm');
+ await page.locator('#code-form button[value=open]').click();
+ assert.equal(await page.locator('#code').textContent(),'MSUD-TM');
+ await page.fill('#code-input','ea2r');
+ await page.locator('#code-form button[value=append]').click();
+ assert.equal(await page.locator('#code').textContent(),'MSUD-TMEA2-R');
+ await page.locator('#seq-practise').click();
+ await page.waitForSelector('#stage:not([hidden])');
+ assert.equal(await page.locator('#st-chips li').count(),9);
+ await page.screenshot({path:path.join(out,'tatami-stage.png')});
+ await page.locator('#st-close').click();
+ for(const width of [320,390]){
+  await page.setViewportSize({width,height:800});
+  for(const hash of ['#aprender','#crear','#practicar']){
+   await page.goto('https://patio.test/tatami/index.html'+hash);
+   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`tatami ${hash} at ${width}: horizontal overflow`);
+  }
+ }
  assert.deepEqual(errors,[]);
  console.log('PASS: world navigation, mission, pause/resume, persistence, animated pulse, full league, filters and 320/390/768/1024px layout without horizontal overflow.');
  console.log('Screenshots: '+out);

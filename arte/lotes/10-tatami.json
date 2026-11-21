@@ -1,6 +1,6 @@
 {
  "_titulo": "El Tatami: yoga",
- "_nota": "Hojas de animación de las posturas (preparación, a medio camino y postura), la versión en silla de cada una, la sala y el profe. tatami/figura.js usa cada hoja en cuanto aparece en el índice; mientras tanto dibuja una figura provisional. La puerta de El Tatami ya está pedida en el lote 01-puertas.",
+ "_nota": "Cada postura tiene una hoja de pasos (pasos-<postura>: seis dibujos, del inicio a la postura terminada) y su versión en silla; además, la sala y el profe. Las doce primeras posturas y la vuelta a la calma ya tienen una hoja antigua de tres dibujos (pose-<postura>), que sigue en uso hasta que llegue su hoja de pasos. tatami/figura.js usa cada hoja en cuanto aparece en el índice; mientras tanto dibuja una figura provisional. La puerta de El Tatami ya está pedida en el lote 01-puertas.",
  "_indice": {
   "archivo": "tatami/assets/pintadas.js",
   "nombre": "PINTADAS"
@@ -299,5 +299,655 @@
   "listo": true,
   "prompt": "El profe Robles de gimnasio/assets/robles-rest.webp, con la misma cara, pelo, cinta y ropa, sentado con las piernas cruzadas sobre una esterilla turquesa, espalda recta, sonriendo y con una mano en la tripa y la otra con el pulgar arriba. De frente, cuerpo entero, centrado y con el mismo tamaño de figura que robles-rest.",
   "clave": "robles-yoga"
+ },
+ "pasos-mountain": {
+  "nombre": "La montaña · hoja de pasos",
+  "destino": "tatami/assets/pasos-mountain.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "mountain-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Los dibujos 1, 3 y 6 son los tres de la hoja ya aprobada tatami/assets/pose-mountain.webp: cópialos de ahí, con su mismo encuadre y tamaño de figura, y dibuja los otros tres entre ellos. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de pie en la esterilla, pies juntos, brazos a los lados. Dibujo 2: brazos separándose del cuerpo, a media altura entre la cadera y los hombros. Dibujo 3: brazos subiendo por los lados a la altura de los hombros. Dibujo 4: brazos en diagonal hacia arriba, con las palmas girando hacia dentro. Dibujo 5: brazos casi verticales, todavía un poco abiertos. Dibujo 6: de pie y erguida, brazos estirados por encima de la cabeza con las palmas enfrentadas, hombros relajados."
+ },
+ "pasos-star": {
+  "nombre": "La estrella · hoja de pasos",
+  "destino": "tatami/assets/pasos-star.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "star-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de pie, pies juntos, brazos a los lados. Dibujo 2: un paso hacia el lado: pies separados a la anchura de los hombros. Dibujo 3: pies más separados que los hombros, con las puntas un poco hacia fuera, y los brazos despegándose del cuerpo. Dibujo 4: brazos en cruz a la altura de los hombros. Dibujo 5: brazos subiendo en diagonal, con los dedos abriéndose. Dibujo 6: estrella: piernas separadas y estiradas, brazos estirados en diagonal hacia arriba formando una X con el cuerpo, dedos muy separados y cabeza erguida."
+ },
+ "pasos-crescent": {
+  "nombre": "La luna creciente · hoja de pasos",
+  "destino": "tatami/assets/pasos-crescent.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "crescent-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de pie, pies juntos, brazos a los lados. Dibujo 2: brazos subiendo por los lados a la altura de los hombros. Dibujo 3: brazos estirados arriba con las palmas juntas sobre la cabeza. Dibujo 4: creciendo hacia arriba, con el tronco empezando a inclinarse hacia su derecha. Dibujo 5: inclinación lateral a medio camino. Dibujo 6: luna creciente: inclinación lateral suave hacia su derecha con los brazos estirados y las palmas juntas, los dos pies apoyados por igual, caderas y pecho al frente; un arco suave, no un pliegue."
+ },
+ "pasos-ragdoll": {
+  "nombre": "El muñeco de trapo · hoja de pasos",
+  "destino": "tatami/assets/pasos-ragdoll.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "ragdoll-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de pie, pies separados a la anchura de las caderas, brazos a los lados. Dibujo 2: rodillas un poco dobladas y barbilla hacia el pecho. Dibujo 3: tronco inclinado a medias hacia delante, brazos colgando. Dibujo 4: tronco horizontal, brazos colgando, rodillas dobladas. Dibujo 5: tronco colgando hacia las piernas, las manos buscando los codos. Dibujo 6: muñeco de trapo: plegada hacia delante desde la cadera con las rodillas un poco dobladas, el tronco y la cabeza colgando relajados y cada mano sujetando el codo contrario; la cabeza no toca el suelo."
+ },
+ "pasos-chair": {
+  "nombre": "La silla · hoja de pasos",
+  "destino": "tatami/assets/pasos-chair.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "chair-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Los dibujos 1, 3 y 6 son los tres de la hoja ya aprobada tatami/assets/pose-chair.webp: cópialos de ahí, con su mismo encuadre y tamaño de figura, y dibuja los otros tres entre ellos. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de pie con los pies separados a la anchura de las caderas, brazos a los lados. Dibujo 2: brazos subiendo al frente a media altura, rodillas todavía estiradas. Dibujo 3: rodillas algo dobladas y brazos estirados al frente. Dibujo 4: cadera yendo hacia atrás, rodillas más dobladas, brazos en diagonal hacia arriba. Dibujo 5: casi en la postura: cadera atrás y brazos subiendo hacia la línea de la espalda. Dibujo 6: rodillas dobladas y cadera atrás como sentada en una silla invisible, rodillas por detrás de la punta de los pies, espalda recta inclinada y brazos arriba en la línea de la espalda."
+ },
+ "pasos-goddess": {
+  "nombre": "La diosa · hoja de pasos",
+  "destino": "tatami/assets/pasos-goddess.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "goddess-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de pie, pies juntos, brazos a los lados. Dibujo 2: un paso ancho hacia el lado, pies paralelos. Dibujo 3: pies muy separados con las puntas giradas hacia fuera, manos en la cintura. Dibujo 4: rodillas empezando a doblarse hacia fuera, brazos subiendo por los lados. Dibujo 5: rodillas más dobladas, codos a la altura de los hombros. Dibujo 6: diosa: sentadilla ancha con las rodillas dobladas en la dirección de los pies y encima de los tobillos, tronco vertical y brazos en cactus (codos a la altura de los hombros, antebrazos verticales, palmas al frente)."
+ },
+ "pasos-frog": {
+  "nombre": "La rana · hoja de pasos",
+  "destino": "tatami/assets/pasos-frog.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "frog-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de pie, pies algo más separados que las caderas con las puntas hacia fuera, brazos a los lados. Dibujo 2: rodillas doblándose hacia fuera, manos subiendo al pecho. Dibujo 3: media sentadilla con las rodillas abiertas y las palmas juntas delante del pecho. Dibujo 4: cadera bajando por debajo de las rodillas. Dibujo 5: cuclillas casi completas, codos acercándose al interior de las rodillas. Dibujo 6: rana: cuclillas profundas con los pies apoyados enteros, rodillas abiertas, espalda larga, palmas juntas delante del pecho y codos apoyados por dentro de las rodillas."
+ },
+ "pasos-warrior1": {
+  "nombre": "El guerrero I · hoja de pasos",
+  "destino": "tatami/assets/pasos-warrior1.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "warrior1-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Los dibujos 1, 3 y 6 son los tres de la hoja ya aprobada tatami/assets/pose-warrior1.webp: cópialos de ahí, con su mismo encuadre y tamaño de figura, y dibuja los otros tres entre ellos. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de pie, brazos a los lados. Dibujo 2: manos juntas al pecho, el pie izquierdo despegando hacia atrás. Dibujo 3: dando un paso largo atrás con el pie izquierdo, manos al pecho. Dibujo 4: pie izquierdo apoyado atrás, rodilla derecha empezando a doblarse, manos al pecho. Dibujo 5: rodilla derecha doblada sobre el tobillo, brazos subiendo al frente en diagonal. Dibujo 6: zancada: rodilla derecha doblada justo encima del tobillo, pierna izquierda estirada atrás con el talón apoyado y el pie girado hacia fuera, tronco vertical y brazos estirados arriba."
+ },
+ "pasos-warrior2": {
+  "nombre": "El guerrero II · hoja de pasos",
+  "destino": "tatami/assets/pasos-warrior2.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "warrior2-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Los dibujos 1, 3 y 6 son los tres de la hoja ya aprobada tatami/assets/pose-warrior2.webp: cópialos de ahí, con su mismo encuadre y tamaño de figura, y dibuja los otros tres entre ellos. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de pie, brazos a los lados. Dibujo 2: un paso hacia el lado: piernas algo separadas, brazos a los lados. Dibujo 3: piernas muy separadas y estiradas, brazos subiendo. Dibujo 4: brazos en cruz, pie derecho girado hacia fuera, piernas todavía estiradas. Dibujo 5: rodilla derecha empezando a doblarse, la cara girando hacia la mano derecha. Dibujo 6: piernas muy separadas, rodilla derecha doblada encima del tobillo, pierna izquierda estirada, tronco vertical, brazos abiertos en horizontal a la altura de los hombros y la mirada sobre la mano derecha."
+ },
+ "pasos-peaceful": {
+  "nombre": "El guerrero pacífico · hoja de pasos",
+  "destino": "tatami/assets/pasos-peaceful.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "peaceful-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de pie, brazos a los lados. Dibujo 2: piernas muy separadas y estiradas, brazos en cruz. Dibujo 3: guerrero II: rodilla derecha doblada encima del tobillo, pierna izquierda estirada, brazos en cruz. Dibujo 4: palma derecha girada hacia el techo y brazo derecho subiendo. Dibujo 5: brazo derecho casi vertical, mano izquierda bajando hacia el muslo izquierdo. Dibujo 6: guerrero pacífico: la rodilla derecha sigue doblada encima del tobillo, pierna izquierda estirada, tronco inclinado un poco hacia la pierna izquierda, brazo derecho estirado hacia arriba y atrás, mano izquierda apoyada sin peso en el muslo izquierdo y mirada hacia la mano de arriba."
+ },
+ "pasos-triangle": {
+  "nombre": "El triángulo · hoja de pasos",
+  "destino": "tatami/assets/pasos-triangle.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "triangle-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Los dibujos 1, 3 y 6 son los tres de la hoja ya aprobada tatami/assets/pose-triangle.webp: cópialos de ahí, con su mismo encuadre y tamaño de figura, y dibuja los otros tres entre ellos. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de pie, brazos a los lados. Dibujo 2: piernas algo separadas, brazos subiendo. Dibujo 3: piernas separadas y estiradas, brazos abiertos en cruz. Dibujo 4: tronco alargándose hacia su derecha, brazos todavía en cruz. Dibujo 5: tronco inclinado a medio camino, mano derecha bajando hacia la rodilla, brazo izquierdo subiendo. Dibujo 6: piernas separadas y estiradas, tronco inclinado hacia la derecha, mano derecha apoyada en la espinilla derecha, brazo izquierdo estirado hacia el techo, mirada al frente o a la mano de arriba."
+ },
+ "pasos-flamingo": {
+  "nombre": "El flamenco · hoja de pasos",
+  "destino": "tatami/assets/pasos-flamingo.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "flamingo-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de pie, brazos a los lados. Dibujo 2: manos en la cintura. Dibujo 3: el peso en la pierna izquierda y el talón derecho despegando. Dibujo 4: rodilla derecha subiendo, con el pie a la altura de la otra pantorrilla. Dibujo 5: rodilla derecha casi a la altura de la cadera. Dibujo 6: flamenco: de pie sobre la pierna izquierda con la rodilla blanda, rodilla derecha levantada al frente a la altura de la cadera con el pie colgando relajado, manos en la cintura, espalda recta y mirada al frente."
+ },
+ "pasos-tree": {
+  "nombre": "El árbol · hoja de pasos",
+  "destino": "tatami/assets/pasos-tree.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "tree-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Los dibujos 1, 3 y 6 son los tres de la hoja ya aprobada tatami/assets/pose-tree.webp: cópialos de ahí, con su mismo encuadre y tamaño de figura, y dibuja los otros tres entre ellos. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de pie con las manos juntas en el pecho. Dibujo 2: el peso pasando a la pierna izquierda, talón derecho despegado. Dibujo 3: el peso sobre la pierna izquierda y la punta del pie derecho apoyada junto al tobillo izquierdo, rodilla hacia fuera. Dibujo 4: la planta del pie derecho subiendo a la pantorrilla izquierda, manos todavía en el pecho. Dibujo 5: pie en la pantorrilla, manos juntas subiendo por delante de la cara. Dibujo 6: de pie sobre la pierna izquierda, la planta del pie derecho apoyada en la parte interna de la pantorrilla izquierda (no en la rodilla), rodilla derecha abierta hacia fuera, brazos arriba en V como ramas."
+ },
+ "pasos-airplane": {
+  "nombre": "El avión · hoja de pasos",
+  "destino": "tatami/assets/pasos-airplane.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "airplane-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de pie, brazos a los lados. Dibujo 2: brazos un poco hacia atrás con las palmas hacia dentro, el peso en la pierna derecha. Dibujo 3: tronco algo inclinado hacia delante, con la punta del pie izquierdo apoyada atrás. Dibujo 4: pie izquierdo despegado: tronco y pierna izquierda forman una línea inclinada. Dibujo 5: tronco más inclinado y pierna izquierda subiendo. Dibujo 6: avión: de pie sobre la pierna derecha con la rodilla un poco doblada, tronco inclinado hacia delante sin llegar a la horizontal, pierna izquierda estirada atrás en línea con la espalda, brazos estirados hacia atrás junto al cuerpo como alas y mirada al suelo un poco por delante."
+ },
+ "pasos-eagle": {
+  "nombre": "El águila · hoja de pasos",
+  "destino": "tatami/assets/pasos-eagle.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "eagle-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de pie, manos juntas en el pecho. Dibujo 2: rodillas un poco dobladas. Dibujo 3: pierna derecha cruzando por delante de la izquierda. Dibujo 4: punta del pie derecho apoyada en el suelo, al otro lado del pie izquierdo; brazos abiertos al frente. Dibujo 5: brazos cruzándose delante del pecho, un codo sobre el otro. Dibujo 6: águila sencilla: rodillas un poco dobladas, pierna derecha cruzada sobre la izquierda con la punta del pie apoyada en el suelo, brazos cruzados delante del pecho con los codos juntos y las manos hacia arriba a la altura de la barbilla, sin tapar la cara, espalda recta."
+ },
+ "pasos-dancer": {
+  "nombre": "El bailarín · hoja de pasos",
+  "destino": "tatami/assets/pasos-dancer.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "dancer-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de pie, brazos a los lados. Dibujo 2: el peso en la pierna derecha y la rodilla izquierda doblándose hacia atrás. Dibujo 3: la mano izquierda sujeta el empeine del pie izquierdo por detrás, rodillas juntas. Dibujo 4: brazo derecho subiendo al frente. Dibujo 5: brazo derecho arriba y el pie empezando a empujar la mano hacia atrás. Dibujo 6: bailarín suave: de pie sobre la pierna derecha, la mano izquierda sujeta el pie izquierdo por detrás y el pie empuja hacia atrás, tronco un poco inclinado hacia delante con la espalda apenas arqueada, brazo derecho estirado al frente y arriba, mirada al frente."
+ },
+ "pasos-cat": {
+  "nombre": "El gato · hoja de pasos",
+  "destino": "tatami/assets/pasos-cat.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "cat-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Los dibujos 1, 3 y 6 son los tres de la hoja ya aprobada tatami/assets/pose-cat.webp: cópialos de ahí, con su mismo encuadre y tamaño de figura, y dibuja los otros tres entre ellos. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: a cuatro patas con la espalda plana: manos bajo los hombros, rodillas bajo las caderas, empeines en el suelo. Dibujo 2: la tripa recogiéndose, espalda todavía casi plana. Dibujo 3: la espalda empezando a redondearse. Dibujo 4: la espalda más redonda y la cabeza empezando a bajar. Dibujo 5: espalda redonda, barbilla hacia el pecho. Dibujo 6: la espalda redondeada hacia el techo como un gato que se estira, cabeza relajada mirando al ombligo."
+ },
+ "pasos-cow": {
+  "nombre": "La vaca · hoja de pasos",
+  "destino": "tatami/assets/pasos-cow.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "cow-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Los dibujos 1, 3 y 6 son los tres de la hoja ya aprobada tatami/assets/pose-cow.webp: cópialos de ahí, con su mismo encuadre y tamaño de figura, y dibuja los otros tres entre ellos. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: a cuatro patas con la espalda plana: manos bajo los hombros, rodillas bajo las caderas, empeines en el suelo. Dibujo 2: el pecho avanzando un poco. Dibujo 3: la tripa empezando a bajar. Dibujo 4: la tripa más baja, hombros hacia atrás. Dibujo 5: pecho abierto hacia delante, mirada subiendo al frente. Dibujo 6: la tripa baja con suavidad, el pecho hacia delante y la mirada al frente, sin echar la cabeza atrás."
+ },
+ "pasos-birddog": {
+  "nombre": "La mesa en equilibrio · hoja de pasos",
+  "destino": "tatami/assets/pasos-birddog.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "birddog-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: a cuatro patas con la espalda plana, empeines en el suelo. Dibujo 2: pierna izquierda deslizándose hacia atrás con la punta del pie en el suelo. Dibujo 3: pierna izquierda estirada atrás, despegada a media altura. Dibujo 4: pierna izquierda a la altura de la cadera y la mano derecha despegando del suelo. Dibujo 5: brazo derecho avanzando al frente a media altura. Dibujo 6: mesa en equilibrio: apoyada en la mano izquierda y la rodilla derecha, brazo derecho estirado al frente y pierna izquierda estirada atrás, los dos a la altura de la espalda, espalda plana y mirada al suelo."
+ },
+ "pasos-downdog": {
+  "nombre": "El perro boca abajo · hoja de pasos",
+  "destino": "tatami/assets/pasos-downdog.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "downdog-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Los dibujos 1, 3 y 6 son los tres de la hoja ya aprobada tatami/assets/pose-downdog.webp: cópialos de ahí, con su mismo encuadre y tamaño de figura, y dibuja los otros tres entre ellos. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: a cuatro patas con los dedos de los pies apoyados. Dibujo 2: manos empujando el suelo, rodillas a punto de despegar. Dibujo 3: rodillas despegando del suelo y cadera subiendo. Dibujo 4: cadera a media altura, rodillas muy dobladas. Dibujo 5: cadera arriba, piernas estirándose, talones altos. Dibujo 6: V invertida: manos apoyadas, cadera arriba, espalda larga, rodillas un poco dobladas, talones hacia el suelo, cabeza relajada entre los brazos sin tocar el suelo."
+ },
+ "pasos-plank": {
+  "nombre": "La tabla · hoja de pasos",
+  "destino": "tatami/assets/pasos-plank.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "plank-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: a cuatro patas con los dedos de los pies apoyados, manos bajo los hombros. Dibujo 2: pierna derecha estirada atrás con los dedos apoyados. Dibujo 3: las dos piernas estiradas atrás, con la cadera todavía alta. Dibujo 4: cadera bajando hacia la línea del cuerpo. Dibujo 5: cuerpo casi en línea, tripa recogida. Dibujo 6: tabla: manos bajo los hombros, brazos estirados, y cabeza, espalda, cadera y talones en una línea recta inclinada, apoyada en las manos y en los dedos de los pies, mirada al suelo."
+ },
+ "pasos-crab": {
+  "nombre": "El cangrejo · hoja de pasos",
+  "destino": "tatami/assets/pasos-crab.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "crab-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: sentada con las rodillas dobladas y los pies apoyados a la anchura de las caderas, manos en las rodillas. Dibujo 2: manos apoyadas detrás de la cadera, con los dedos hacia los pies. Dibujo 3: pecho abierto, el peso pasando a manos y pies. Dibujo 4: cadera despegada un palmo del suelo. Dibujo 5: cadera a media altura. Dibujo 6: cangrejo: apoyada en manos y pies, cadera arriba a la altura de las rodillas, tronco como un tablero mirando al techo, rodillas en ángulo recto sobre los tobillos, brazos estirados y cabeza en línea con la espalda mirando hacia las rodillas; no cae hacia atrás."
+ },
+ "pasos-child": {
+  "nombre": "La postura del niño · hoja de pasos",
+  "destino": "tatami/assets/pasos-child.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "child-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Los dibujos 1, 3 y 6 son los tres de la hoja ya aprobada tatami/assets/pose-child.webp: cópialos de ahí, con su mismo encuadre y tamaño de figura, y dibuja los otros tres entre ellos. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de rodillas sentada sobre los talones, espalda recta, manos en los muslos. Dibujo 2: manos apoyándose en el suelo delante de las rodillas. Dibujo 3: tronco inclinándose hacia delante, brazos deslizándose al frente. Dibujo 4: tronco a medio camino, cabeza en línea con la espalda. Dibujo 5: pecho casi sobre los muslos, frente cerca de la esterilla. Dibujo 6: sentada sobre los talones con el tronco apoyado en los muslos, la frente en la esterilla y los brazos estirados al frente, relajada."
+ },
+ "pasos-lion": {
+  "nombre": "El león · hoja de pasos",
+  "destino": "tatami/assets/pasos-lion.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "lion-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de rodillas sentada sobre los talones, espalda recta, manos en los muslos. Dibujo 2: manos deslizándose hasta las rodillas. Dibujo 3: dedos abiertos como garras sobre las rodillas, tomando aire con la boca cerrada. Dibujo 4: tronco inclinándose un poco hacia delante, brazos estirados. Dibujo 5: boca abriéndose y ojos muy abiertos. Dibujo 6: león: sentada sobre los talones, inclinada un poco hacia delante con los brazos estirados y las manos en garra sobre las rodillas, boca muy abierta, lengua fuera hacia la barbilla y ojos muy abiertos, con gesto divertido."
+ },
+ "pasos-lunge": {
+  "nombre": "La zancada · hoja de pasos",
+  "destino": "tatami/assets/pasos-lunge.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "lunge-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de rodillas con el cuerpo recto y los muslos verticales, brazos a los lados. Dibujo 2: pie derecho adelantándose. Dibujo 3: pie derecho apoyado entero delante con la rodilla en ángulo recto, manos sobre el muslo derecho. Dibujo 4: cadera avanzando y bajando. Dibujo 5: brazos subiendo al frente. Dibujo 6: zancada baja: rodilla derecha doblada justo encima del tobillo, rodilla y empeine izquierdos apoyados atrás en la esterilla, cadera baja hacia delante, tronco vertical y brazos estirados arriba junto a las orejas."
+ },
+ "pasos-gate": {
+  "nombre": "La puerta · hoja de pasos",
+  "destino": "tatami/assets/pasos-gate.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "gate-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de rodillas con el cuerpo recto, brazos a los lados. Dibujo 2: pierna derecha saliendo hacia el lado. Dibujo 3: pierna derecha estirada hacia el lado con el pie apoyado, brazos en cruz. Dibujo 4: mano derecha apoyándose en el muslo derecho, brazo izquierdo subiendo. Dibujo 5: tronco empezando a inclinarse hacia la pierna estirada. Dibujo 6: puerta: apoyada en la rodilla izquierda, pierna derecha estirada hacia el lado con el pie en el suelo, tronco inclinado de lado hacia la pierna derecha, mano derecha descansando en la espinilla, brazo izquierdo estirado por encima siguiendo la inclinación y pecho al frente."
+ },
+ "pasos-butterfly": {
+  "nombre": "La mariposa · hoja de pasos",
+  "destino": "tatami/assets/pasos-butterfly.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "butterfly-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Los dibujos 1, 3 y 6 son los tres de la hoja ya aprobada tatami/assets/pose-butterfly.webp: cópialos de ahí, con su mismo encuadre y tamaño de figura, y dibuja los otros tres entre ellos. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: sentada en el suelo con las rodillas dobladas hacia arriba y los pies apoyados. Dibujo 2: pies acercándose a la cadera, rodillas juntas. Dibujo 3: rodillas abriéndose hacia los lados. Dibujo 4: plantas de los pies juntándose, rodillas a media altura. Dibujo 5: manos bajando a sujetar los pies, rodillas más abiertas. Dibujo 6: sentada con la espalda recta, plantas de los pies juntas, rodillas abiertas hacia los lados y las manos sujetando los pies."
+ },
+ "pasos-pinza": {
+  "nombre": "La pinza · hoja de pasos",
+  "destino": "tatami/assets/pasos-pinza.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "pinza-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: sentada con las piernas estiradas al frente y juntas, espalda recta, manos en el suelo junto a la cadera. Dibujo 2: brazos subiendo al frente. Dibujo 3: brazos estirados arriba, espalda larga. Dibujo 4: tronco inclinándose desde la cadera con la espalda recta, brazos al frente. Dibujo 5: manos llegando a las rodillas. Dibujo 6: pinza: inclinada hacia delante desde la cadera con la espalda larga, rodillas un poco dobladas, manos en las espinillas o los tobillos y cabeza en línea con la espalda, sin tocar las piernas con la frente."
+ },
+ "pasos-twist": {
+  "nombre": "La torsión sentada · hoja de pasos",
+  "destino": "tatami/assets/pasos-twist.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "twist-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: sentada con las piernas cruzadas y las manos en las rodillas. Dibujo 2: creciendo: espalda muy recta, brazos a los lados. Dibujo 3: mano izquierda cruzando hasta la rodilla derecha. Dibujo 4: mano derecha apoyada en el suelo detrás de la cadera. Dibujo 5: pecho girando hacia su derecha, la cara todavía al frente. Dibujo 6: torsión sentada: piernas cruzadas, espalda recta, mano izquierda en la rodilla derecha, mano derecha apoyada detrás, hombros y pecho girados hacia su derecha y la cara mirando por encima del hombro derecho; un giro suave."
+ },
+ "pasos-boat": {
+  "nombre": "El barco · hoja de pasos",
+  "destino": "tatami/assets/pasos-boat.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "boat-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: sentada con las rodillas dobladas y los pies apoyados, manos sujetando por detrás de los muslos. Dibujo 2: tronco inclinándose un poco hacia atrás, espalda recta. Dibujo 3: puntas de los pies apoyadas, talones despegados. Dibujo 4: pies despegados un palmo del suelo. Dibujo 5: espinillas subiendo a la horizontal, manos todavía en los muslos. Dibujo 6: medio barco: en equilibrio sobre los huesos de sentarse, tronco inclinado hacia atrás con la espalda recta, rodillas dobladas y espinillas paralelas al suelo, brazos estirados al frente a los lados de las rodillas."
+ },
+ "pasos-cobra": {
+  "nombre": "La cobra · hoja de pasos",
+  "destino": "tatami/assets/pasos-cobra.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "cobra-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Los dibujos 1, 3 y 6 son los tres de la hoja ya aprobada tatami/assets/pose-cobra.webp: cópialos de ahí, con su mismo encuadre y tamaño de figura, y dibuja los otros tres entre ellos. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: tumbada boca abajo, piernas estiradas, manos bajo los hombros y la frente en el suelo. Dibujo 2: frente despegada del suelo, mirada a la esterilla. Dibujo 3: pecho empezando a despegarse. Dibujo 4: pecho un poco más alto, codos doblados y pegados al cuerpo. Dibujo 5: hombros bajando lejos de las orejas, mirada subiendo al frente. Dibujo 6: cobra pequeña: cadera y piernas en el suelo, pecho un poco levantado, codos doblados y pegados al cuerpo, hombros lejos de las orejas, mirada al frente y cuello largo."
+ },
+ "pasos-sphinx": {
+  "nombre": "La esfinge · hoja de pasos",
+  "destino": "tatami/assets/pasos-sphinx.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "sphinx-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: tumbada boca abajo, piernas estiradas, brazos doblados con las manos junto a la cabeza y la frente en el suelo. Dibujo 2: antebrazos colocándose en el suelo, con los codos bajo los hombros. Dibujo 3: frente despegada del suelo. Dibujo 4: pecho despegando, apoyada en los antebrazos. Dibujo 5: pecho más alto, hombros bajando. Dibujo 6: esfinge: cadera y piernas en el suelo, apoyada en los antebrazos paralelos con los codos bajo los hombros, pecho abierto hacia delante, cuello largo y mirada al frente."
+ },
+ "pasos-locust": {
+  "nombre": "El saltamontes · hoja de pasos",
+  "destino": "tatami/assets/pasos-locust.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "locust-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil mirando a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: tumbada boca abajo, frente en el suelo, brazos estirados junto al cuerpo con las palmas hacia arriba, piernas juntas. Dibujo 2: frente despegada, mirada a la esterilla. Dibujo 3: pecho y hombros despegando un poco. Dibujo 4: brazos despegados del suelo, estirados hacia atrás. Dibujo 5: pies empezando a despegar. Dibujo 6: saltamontes: apoyada en la tripa y la cadera, con el pecho, los brazos y las piernas un poco despegados del suelo, brazos estirados hacia atrás junto al cuerpo, piernas estiradas y juntas, cuello en línea con la espalda y mirada al suelo un poco por delante; una elevación pequeña."
+ },
+ "pasos-bridge": {
+  "nombre": "El puente · hoja de pasos",
+  "destino": "tatami/assets/pasos-bridge.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "bridge-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil, con la cabeza a la izquierda y los pies a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: tumbada boca arriba, piernas estiradas, brazos a los lados. Dibujo 2: una rodilla doblada con el pie apoyado. Dibujo 3: las dos rodillas dobladas, pies apoyados cerca de la cadera y a su anchura, palmas en el suelo. Dibujo 4: cadera despegada un poco del suelo. Dibujo 5: cadera a media altura. Dibujo 6: puente bajo: pies y hombros apoyados, cadera arriba sólo hasta la línea que une rodillas y hombros, rodillas sobre los tobillos, brazos estirados en el suelo junto al cuerpo, nuca apoyada y cara mirando al techo."
+ },
+ "pasos-ball": {
+  "nombre": "La bolita · hoja de pasos",
+  "destino": "tatami/assets/pasos-ball.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "ball-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil, con la cabeza a la izquierda y los pies a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: tumbada boca arriba, rodillas dobladas, pies apoyados, brazos a los lados. Dibujo 2: rodilla derecha subiendo hacia el pecho. Dibujo 3: rodilla derecha abrazada, pie izquierdo todavía en el suelo. Dibujo 4: rodilla izquierda subiendo. Dibujo 5: las dos rodillas sobre el pecho, manos llegando a las espinillas. Dibujo 6: bolita: tumbada boca arriba con las dos rodillas recogidas hacia el pecho y abrazadas con las manos por las espinillas, nuca y hombros apoyados en la esterilla, gesto relajado."
+ },
+ "pasos-happybaby": {
+  "nombre": "El bebé feliz · hoja de pasos",
+  "destino": "tatami/assets/pasos-happybaby.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "happybaby-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil, con la cabeza a la izquierda y los pies a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: tumbada boca arriba, rodillas dobladas, pies apoyados, brazos a los lados. Dibujo 2: rodillas subiendo hacia el pecho. Dibujo 3: rodillas recogidas sobre el pecho, manos en las rodillas. Dibujo 4: rodillas separándose y espinillas subiendo. Dibujo 5: espinillas verticales, manos subiendo por fuera hacia los pies. Dibujo 6: bebé feliz: tumbada boca arriba, rodillas dobladas y abiertas a los lados del pecho, espinillas verticales con las plantas de los pies mirando al techo, cada mano sujeta el borde exterior de su pie, nuca y zona baja de la espalda apoyadas, sonriendo."
+ },
+ "pasos-lyingtwist": {
+  "nombre": "La torsión tumbada · hoja de pasos",
+  "destino": "tatami/assets/pasos-lyingtwist.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "lyingtwist-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil algo elevada, en tres cuartos desde arriba, con la cabeza a la izquierda y los pies a la derecha, para que se vean los dos brazos, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: tumbada boca arriba, rodillas dobladas, pies apoyados, brazos a los lados. Dibujo 2: brazos abriéndose en cruz. Dibujo 3: brazos en cruz con las palmas hacia arriba, rodillas juntas. Dibujo 4: rodillas inclinándose hacia su derecha, hacia quien mira. Dibujo 5: rodillas a medio camino del suelo. Dibujo 6: torsión tumbada: tumbada boca arriba con los brazos en cruz y los dos hombros apoyados, las dos rodillas dobladas y juntas caídas hacia su derecha descansando en la esterilla, y la cara mirando al techo."
+ },
+ "pasos-rest": {
+  "nombre": "La relajación · hoja de pasos",
+  "destino": "tatami/assets/pasos-rest.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "rest-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de perfil, con la cabeza a la izquierda y los pies a la derecha, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: sentada con las rodillas dobladas y los pies apoyados, manos junto a la cadera. Dibujo 2: tronco bajando hacia atrás, apoyada en los antebrazos. Dibujo 3: espalda apoyada en la esterilla, rodillas todavía dobladas. Dibujo 4: una pierna estirada. Dibujo 5: las dos piernas estiradas, brazos separándose del cuerpo. Dibujo 6: relajación: tumbada boca arriba, piernas estiradas y un poco separadas con los pies caídos hacia fuera, brazos separados del cuerpo con las palmas hacia arriba, ojos cerrados y cara tranquila."
+ },
+ "pasos-calma": {
+  "nombre": "Vuelta a la calma · hoja de pasos",
+  "destino": "tatami/assets/pasos-calma.webp",
+  "ancho": 1536,
+  "alto": 1280,
+  "transparente": true,
+  "exacto": true,
+  "clave": "calma-pasos",
+  "prompt": "Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Los dibujos 1, 3 y 6 son los tres de la hoja ya aprobada tatami/assets/pose-calma.webp: cópialos de ahí, con su mismo encuadre y tamaño de figura, y dibuja los otros tres entre ellos. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: sentada con las piernas cruzadas y las manos en las rodillas. Dibujo 2: una mano despegando de la rodilla. Dibujo 3: manos subiendo hacia la tripa. Dibujo 4: una mano ya sobre la tripa y la otra llegando. Dibujo 5: las dos manos sobre la tripa, ojos entornados. Dibujo 6: sentada con las piernas cruzadas, espalda larga, ojos cerrados y las dos manos sobre la tripa."
+ },
+ "pose-star-silla": {
+  "nombre": "La estrella · en silla",
+  "destino": "tatami/assets/pose-star-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "star-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la estrella: sentada al borde, piernas abiertas y estiradas con los talones en el suelo, brazos estirados en diagonal hacia arriba y dedos separados."
+ },
+ "pose-crescent-silla": {
+  "nombre": "La luna creciente · en silla",
+  "destino": "tatami/assets/pose-crescent-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "crescent-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la luna creciente: sentada, una mano apoyada en el asiento junto a la cadera, el otro brazo estirado arriba y el tronco inclinado de lado hacia la mano apoyada."
+ },
+ "pose-ragdoll-silla": {
+  "nombre": "El muñeco de trapo · en silla",
+  "destino": "tatami/assets/pose-ragdoll-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "ragdoll-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de el muñeco de trapo: sentada con las piernas separadas, el tronco caído hacia delante entre las rodillas y los brazos colgando hacia el suelo, cabeza relajada."
+ },
+ "pose-goddess-silla": {
+  "nombre": "La diosa · en silla",
+  "destino": "tatami/assets/pose-goddess-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "goddess-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la diosa: sentada al borde con las piernas muy abiertas y los pies hacia fuera, tronco vertical y brazos en cactus (codos a la altura de los hombros, antebrazos verticales)."
+ },
+ "pose-frog-silla": {
+  "nombre": "La rana · en silla",
+  "destino": "tatami/assets/pose-frog-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "frog-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la rana: sentada al borde con las piernas abiertas, un poco inclinada hacia delante, palmas juntas delante del pecho y codos apoyados por dentro de las rodillas."
+ },
+ "pose-peaceful-silla": {
+  "nombre": "El guerrero pacífico · en silla",
+  "destino": "tatami/assets/pose-peaceful-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "peaceful-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de el guerrero pacífico: sentada con las piernas abiertas, una mano descansando sobre el muslo, el otro brazo estirado arriba y el tronco un poco inclinado hacia atrás, mirando la mano de arriba."
+ },
+ "pose-flamingo-silla": {
+  "nombre": "El flamenco · en silla",
+  "destino": "tatami/assets/pose-flamingo-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "flamingo-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de el flamenco: sentada al borde sin apoyar la espalda, una rodilla levantada con el pie en el aire, manos en la cintura y espalda recta."
+ },
+ "pose-airplane-silla": {
+  "nombre": "El avión · en silla",
+  "destino": "tatami/assets/pose-airplane-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "airplane-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de el avión: sentada al borde, tronco inclinado hacia delante con la espalda recta, una pierna estirada al frente y los brazos estirados hacia atrás como alas."
+ },
+ "pose-eagle-silla": {
+  "nombre": "El águila · en silla",
+  "destino": "tatami/assets/pose-eagle-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "eagle-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de el águila: sentada, una pierna cruzada sobre la otra, brazos cruzados delante del pecho con los codos juntos y las manos hacia arriba, espalda recta."
+ },
+ "pose-dancer-silla": {
+  "nombre": "El bailarín · en silla",
+  "destino": "tatami/assets/pose-dancer-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "dancer-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de el bailarín: sentada de lado en la silla, un pie llevado hacia atrás y sujeto por la mano de ese lado, el otro brazo estirado arriba, espalda recta."
+ },
+ "pose-birddog-silla": {
+  "nombre": "La mesa en equilibrio · en silla",
+  "destino": "tatami/assets/pose-birddog-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "birddog-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la mesa en equilibrio: sentada al borde con la espalda larga, un brazo estirado al frente y la pierna contraria estirada al frente, despegada del suelo."
+ },
+ "pose-plank-silla": {
+  "nombre": "La tabla · en silla",
+  "destino": "tatami/assets/pose-plank-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "plank-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la tabla: sentada al borde, piernas estiradas con los talones en el suelo, tronco un poco inclinado hacia atrás con la espalda recta y los brazos estirados al frente."
+ },
+ "pose-crab-silla": {
+  "nombre": "El cangrejo · en silla",
+  "destino": "tatami/assets/pose-crab-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "crab-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de el cangrejo: sentada, manos agarrando los lados del asiento junto a la cadera, piernas estiradas al frente con los talones en el suelo y el pecho abierto."
+ },
+ "pose-lion-silla": {
+  "nombre": "El león · en silla",
+  "destino": "tatami/assets/pose-lion-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "lion-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de el león: sentada, manos sobre las rodillas con los dedos abiertos como garras, un poco inclinada hacia delante, boca abierta, lengua fuera y ojos muy abiertos."
+ },
+ "pose-lunge-silla": {
+  "nombre": "La zancada · en silla",
+  "destino": "tatami/assets/pose-lunge-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "lunge-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la zancada: sentada de lado al borde, una pierna doblada delante con la rodilla sobre el tobillo, la otra estirada atrás por el lado de la silla, manos sobre el muslo de delante y tronco vertical."
+ },
+ "pose-gate-silla": {
+  "nombre": "La puerta · en silla",
+  "destino": "tatami/assets/pose-gate-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "gate-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la puerta: sentada, una pierna estirada hacia el lado con el pie apoyado, la mano de ese lado sobre la pierna, el otro brazo estirado por encima y el tronco inclinado hacia la pierna estirada."
+ },
+ "pose-pinza-silla": {
+  "nombre": "La pinza · en silla",
+  "destino": "tatami/assets/pose-pinza-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "pinza-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la pinza: sentada al borde, piernas estiradas con los talones en el suelo, tronco inclinado desde la cadera con la espalda larga y las manos hacia las espinillas."
+ },
+ "pose-twist-silla": {
+  "nombre": "La torsión sentada · en silla",
+  "destino": "tatami/assets/pose-twist-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "twist-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la torsión sentada: sentada de frente, una mano en el respaldo y la otra en la rodilla contraria, hombros girados hacia el respaldo y la cara mirando por encima del hombro; un giro suave."
+ },
+ "pose-boat-silla": {
+  "nombre": "El barco · en silla",
+  "destino": "tatami/assets/pose-boat-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "boat-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de el barco: sentada al borde, manos agarrando los lados del asiento, tronco un poco inclinado hacia atrás con la espalda recta y los dos pies despegados del suelo con las rodillas dobladas."
+ },
+ "pose-sphinx-silla": {
+  "nombre": "La esfinge · en silla",
+  "destino": "tatami/assets/pose-sphinx-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "sphinx-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la esfinge: sentada, antebrazos apoyados sobre los muslos, pecho hacia delante, hombros bajos y mirada al frente."
+ },
+ "pose-locust-silla": {
+  "nombre": "El saltamontes · en silla",
+  "destino": "tatami/assets/pose-locust-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "locust-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de el saltamontes: sentada al borde, tronco un poco inclinado hacia delante con la espalda recta, brazos estirados hacia atrás con las palmas hacia dentro y el pecho abierto."
+ },
+ "pose-bridge-silla": {
+  "nombre": "El puente · en silla",
+  "destino": "tatami/assets/pose-bridge-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "bridge-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de el puente: sentada al borde, manos agarrando los lados del asiento, pies firmes en el suelo, pecho abierto hacia arriba y espalda larga."
+ },
+ "pose-ball-silla": {
+  "nombre": "La bolita · en silla",
+  "destino": "tatami/assets/pose-ball-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "ball-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la bolita: sentada, una rodilla subida y abrazada con las dos manos junto al pecho, espalda larga, el otro pie en el suelo."
+ },
+ "pose-happybaby-silla": {
+  "nombre": "El bebé feliz · en silla",
+  "destino": "tatami/assets/pose-happybaby-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "happybaby-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de el bebé feliz: sentada, un pie levantado y sujeto por fuera con la mano de ese lado, rodilla abierta, espalda larga, el otro pie en el suelo."
+ },
+ "pose-lyingtwist-silla": {
+  "nombre": "La torsión tumbada · en silla",
+  "destino": "tatami/assets/pose-lyingtwist-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "lyingtwist-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la torsión tumbada: sentada, una pierna cruzada sobre la otra, las dos manos en la rodilla de arriba y el tronco girado suavemente hacia ese lado."
+ },
+ "pose-rest-silla": {
+  "nombre": "La relajación · en silla",
+  "destino": "tatami/assets/pose-rest-silla.webp",
+  "ancho": 512,
+  "alto": 640,
+  "transparente": true,
+  "exacto": true,
+  "clave": "rest-silla",
+  "prompt": "Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Un solo dibujo de cuerpo entero, de perfil mirando a la derecha, sentada en una silla de aula (asiento y respaldo de madera miel, patas de metal verde azulado) vista de lado, sin esterilla; las patas de la silla y los pies apoyados en el suelo a unos 590 px del alto. Variante adaptada de la relajación: sentada con la espalda apoyada en el respaldo, manos descansando sobre los muslos, ojos cerrados y cara tranquila."
  }
 }
