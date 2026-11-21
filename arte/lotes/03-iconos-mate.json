@@ -220,7 +220,7 @@
   "ancho": 192,
   "alto": 192,
   "transparente": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/quietos.svg. Motivo: dos huellas de zapatilla juntas y quietas sobre una placa de hielo, con un copo de nieve encima. Color del medallón: azul hielo.",
   "pixel": true,
   "clave": "quietos"
@@ -231,7 +231,7 @@
   "ancho": 192,
   "alto": 192,
   "transparente": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/teledirigida.svg. Motivo: una pelota en el centro de un punto de mira redondo con cuatro marcas. Color del medallón: rojo.",
   "pixel": true,
   "clave": "teledirigida"
@@ -242,7 +242,7 @@
   "ancho": 192,
   "alto": 192,
   "transparente": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/burbuja.svg. Motivo: una pompa de jabón grande con su brillo y una pelota dentro, y dos pompas pequeñas al lado. Color del medallón: turquesa claro.",
   "pixel": true,
   "clave": "burbuja"
@@ -253,7 +253,7 @@
   "ancho": 192,
   "alto": 192,
   "transparente": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/espejismo.svg. Motivo: tres siluetas iguales de un jugador con gorra, la del centro sólida y las de los lados más claras, como copias. Color del medallón: violeta grisáceo.",
   "pixel": true,
   "clave": "espejismo"
@@ -264,7 +264,7 @@
   "ancho": 192,
   "alto": 192,
   "transparente": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/red.svg. Motivo: una red de voleibol tensa entre dos postes de madera, vista de frente. Color del medallón: verde.",
   "pixel": true,
   "clave": "red"
@@ -275,7 +275,7 @@
   "ancho": 192,
   "alto": 192,
   "transparente": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/gigante.svg. Motivo: un jugador enorme de brazos cruzados junto a otro muy pequeño, con una flecha hacia arriba. Color del medallón: naranja tostado.",
   "pixel": true,
   "clave": "gigante"

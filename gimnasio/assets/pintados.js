@@ -1,2 +1,2 @@
 // Generado por scripts/integrar_arte.py: qué imágenes de este lote ya están pintadas.
-export const PINTADOS = [];
+export const PINTADOS = ['help-sign', 'icon-backpack', 'icon-fullscreen', 'icon-hint', 'icon-home', 'icon-listen', 'icon-menu', 'icon-mission', 'icon-rotate', 'paper', 'pupil-0-reach', 'pupil-1-reach', 'pupil-2-reach', 'pupil-3-reach', 'pupil-4-reach', 'pupil-5-reach', 'pupil-6-reach', 'pupil-7-reach', 'robles-cheer', 'robles-mat', 'robles-think', 'teacher-robles-happy', 'teacher-robles-think', 'trolley-loaded'];

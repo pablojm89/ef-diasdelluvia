@@ -169,7 +169,7 @@ En el relevo se publica una sola instantánea compartida por sala para evitar mu
 
 ## Espectadores: La Grada
 
-`grada/` muestra en la pantalla de clase los partidos que se están jugando, hasta cuatro salas a la vez en mosaico. Se entra con el código de la sala o con un enlace `grada/#sala=ABC234` (varias salas: `#sala=ABC234,K7M2PQ`). En la sala de espera, el anfitrión tiene el botón **Ver en la pantalla**, que copia ese enlace. La grada usa `ArenaRenderer` para la pista y `resultsMarkup` para la tabla final; el marcador, la ronda y el reloj van en grande en una placa crema junto al partido.
+`grada/` muestra en la pantalla de clase los partidos que se están jugando, hasta cuatro salas a la vez en mosaico. Cada partido cuelga de un marco de madera pintado sobre la pared del pabellón, con el público en primera fila; cuando el marcador va arriba, las puntuaciones se leen en los huecos de pizarra de una placa pintada y, cuando va al lado, en papel crema con las cifras más grandes. Se entra con el código de la sala o con un enlace `grada/#sala=ABC234` (varias salas: `#sala=ABC234,K7M2PQ`). En la sala de espera, el anfitrión tiene el botón **Ver en la pantalla**, que copia ese enlace. La grada usa `ArenaRenderer` para la pista y `resultsMarkup` para la tabla final; el marcador, la ronda y el reloj van en grande en una placa crema junto al partido.
 
 Un espectador:
 

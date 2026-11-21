@@ -1,9 +1,9 @@
 import {equipment,targets,find,request,fresh,valid,act} from './mission.js?v=touch-1';
-import {walkTo, enterRoom, position} from './walk.js?v=touch-1';
+import {walkTo, enterRoom, position, reach} from './walk.js?v=touch-1';
 import {stored as parts} from './store-layout.js';
 import {record} from '../registro.js';
 import {backToHub} from '../comun/lugar.js';
-import {speakAndPoint} from './robles.js';
+import {speakAndPoint, celebrate, ponder} from './robles.js';
 import {trolley, slotOf} from './trolley.js?v=touch-1';
 import {play, setSound} from './sound.js?v=touch-1';
 import {PINTADOS} from './assets/pintados.js';
@@ -36,7 +36,13 @@ const prompts=()=>{
 };
 const hints=[()=>`Busca ${item(find[state.found.length])?.es}. Si no lo ves, abre la mochila: tiene la lista de objetos.`,()=> 'El cono naranja está delante de la puerta. Tócalo y después toca el soporte de conos («Cone stand»).',()=> 'Balones al rack; conos a su soporte; aros y raquetas al soporte de pared; cuerdas, petos y saquitos a las cajas; colchoneta a su zona baja.',()=> 'Coge del soporte cuatro conos, de la pared dos aros y del rack la pelota verde. Si sobra algo, toca esa unidad en el carro para devolverla. Después, «Comprobar el carro».',()=> state.hazards.length<2?'Mira el suelo delante de la puerta y lo alto de la estantería de las cajas. Toca el objeto que puede hacer daño.':'Piensa en tropiezos y en material que puede caer.',()=> 'Explica a un compañero cómo prepararías una estación real y qué paso debe quedar libre.'];
 function persist(){try{localStorage.setItem(key,JSON.stringify({state,support,reduced,sound}));}catch{say(' El navegador no permite guardar; puedes continuar sin cerrar esta pestaña.',false,true);}}
-function say(text,ok,append){const f=$('feedback');f.dataset.tone=ok===true?'ok':ok===false?'retry':'';f.textContent=append?f.textContent+text:text;}
+// The teacher's face in the dialogue follows what he says: pleased, encouraging or neutral.
+const faces={ok:'teacher-robles-happy',retry:'teacher-robles-think'};
+function say(text,ok,append){
+ const f=$('feedback');f.dataset.tone=ok===true?'ok':ok===false?'retry':'';f.textContent=append?f.textContent+text:text;
+ const face=PINTADOS.includes(faces[f.dataset.tone])?faces[f.dataset.tone]:'teacher-robles',image=$('fold').querySelector('img');
+ if(!image.src.endsWith(face+'.webp'))image.src='assets/'+face+'.webp';
+}
 const rect=el=>el?.getBoundingClientRect();
 function dispatch(event){
  const before=state.stage,from=event.type==='place'?rect(document.querySelector(`.equipment[data-item="${event.id}"]`)):event.type==='add'?rect(document.querySelector(`.pick[data-item="${event.id}"]`)):event.type==='remove'?rect([...document.querySelectorAll(`.trolley .unit[data-item="${event.id}"]`)].pop()):event.type==='hazard'&&event.id==='door'?rect(document.querySelector('.risk-cone')):null;
@@ -106,7 +112,7 @@ function render(){
  const focusKey=document.activeElement?.dataset?.focus;
  document.body.dataset.stage=state.stage;document.body.dataset.room=room;document.body.classList.toggle('reduced',reduced);$('translation').checked=support;$('motion').checked=reduced;$('sound').checked=sound;
  $('scene').className=`scene ${room}`;$('room-title').textContent=room==='gym'?'El gimnasio':'El cuarto de materiales';$('location').textContent=room==='gym'?'THE GYM':'THE EQUIPMENT ROOM';
- $('prof').classList.toggle('hidden',room==='store');
+ $('prof').classList.toggle('hidden',room==='store');celebrate(state.stage===5);
  $('steps').innerHTML=steps.map((s,i)=>`<li class="${i<state.stage?'done':i===state.stage?'current':''}"><span>${i<state.stage?'✓':i+1}</span>${s}</li>`).join('');$('stage-count').textContent=state.stage===5?'COMPLETADA':`${state.stage+1} / 5`;
  const [en,es]=prompts();$('english').textContent=en;$('spanish').textContent=es;$('spanish').hidden=!support;
  $('step-tag').textContent=state.stage===5?'· MISIÓN COMPLETADA':`· ${state.stage+1}/5 ${steps[state.stage].toUpperCase()}`+(state.stage===0?` · ${state.found.length}/3`:state.stage===4?` · ${state.hazards.length}/2`:'');
@@ -157,7 +163,10 @@ function render(){
     if(fixed||state.stage===5){const c=new Image();c.src='assets/set-cone.webp';c.alt='';c.className='spare-cone';const [l,t,w,h]=spareCone;Object.assign(c.style,{left:l+'%',top:t+'%',width:w+'%',height:h+'%'});$('objects').append(c);}
     if(state.stage===4){
      if(!fixed){const c=button('',()=>dispatch({type:'hazard',id:'door'}),'risk risk-cone','risk-door');c.innerHTML='<img alt="" src="assets/risk-cone.webp">';c.setAttribute('aria-label','Cono en el suelo delante de la puerta');$('objects').append(c);}
-     const m=button('',()=>dispatch({type:'hazard',id:'shelf'}),'risk risk-mat'+(high?' flagged':''),'risk-shelf');m.innerHTML='<img alt="" src="assets/risk-mat.webp">';m.setAttribute('aria-label',high?'Colchoneta en lo alto: el profe la bajará':'Colchoneta en lo alto de la estantería');m.disabled=high;$('objects').append(m);
+     // Once it is reported, the teacher is the one who takes the mat down: he stands there holding it.
+     const lowered=high&&PINTADOS.includes('robles-mat');
+     if(lowered){const r=new Image();r.src='assets/robles-mat.webp';r.alt='El profe Robles ha bajado la colchoneta';r.className='prof-mat';$('objects').append(r);}
+     else{const m=button('',()=>dispatch({type:'hazard',id:'shelf'}),'risk risk-mat'+(high?' flagged':''),'risk-shelf');m.innerHTML='<img alt="" src="assets/risk-mat.webp">';m.setAttribute('aria-label',high?'Colchoneta en lo alto: el profe la bajará':'Colchoneta en lo alto de la estantería');m.disabled=high;$('objects').append(m);}
      if(high){const s=document.createElement('p');s.className='help-sign';s.innerHTML='<b lang="en">Ask the teacher</b><span>La baja el profe</span>';$('objects').append(s);}
      if(!fixed)targetList.append(button('Revisar: cono delante de la puerta',fromBag({type:'hazard',id:'door'}),'',`list-risk-door`));
      if(!high)targetList.append(button('Revisar: colchoneta en lo alto',fromBag({type:'hazard',id:'shelf'}),'',`list-risk-shelf`));
@@ -197,13 +206,15 @@ $('prof').onclick=()=>{
  $('spanish').textContent=state.stage===5?'¡Gracias! El gimnasio está listo.':'Necesitamos el gimnasio para la próxima clase. ¿Me ayudas a preparar el material? Entra al almacén por la puerta.';
  say('Robles se gira hacia ti.');
 };
-$('hint').onclick=()=>{const msg=hints[state.stage]();state=act(state,{type:'hint'}).state;persist();fold(false);say(msg);};
+$('hint').onclick=()=>{const msg=hints[state.stage]();state=act(state,{type:'hint'}).state;persist();fold(false);say(msg);ponder();};
 $('listen').onclick=()=>{if(!('speechSynthesis'in window)){say('Este navegador no ofrece voz. La instrucción está disponible por escrito.');return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance($('english').textContent);u.lang='en-GB';u.rate=.85;speechSynthesis.speak(u);};
 $('settings').onclick=()=>$('settings-dialog').showModal();$('translation').onchange=e=>{support=e.target.checked;persist();render();};$('motion').onchange=e=>{reduced=e.target.checked;persist();render();};
 $('sound').onchange=e=>{sound=e.target.checked;setSound(sound);persist();play('pick');};
 $('reset').onclick=()=>{if(!confirm('¿Borrar el progreso de esta misión en este navegador?'))return;state=fresh();room='gym';selected=null;persist();render();$('settings-dialog').close();say('Nueva misión. Habla con el profe y entra al almacén.');};
 $('home').href=$('menu-home').href=backToHub();
-// Painted icons (arte/lotes/14-gimnasio.json) replace the line drawings as soon as they are delivered.
+// Painted pieces switch themselves on in style.css as they are delivered (arte/lotes/14-gimnasio.json).
+for(const piece of PINTADOS)document.body.classList.add('con-'+piece);
+// Painted icons replace the line drawings.
 for(const el of document.querySelectorAll('[data-icon]'))if(PINTADOS.includes('icon-'+el.dataset.icon))el.querySelector('svg').outerHTML=`<img class="icon" alt="" draggable="false" src="assets/icon-${el.dataset.icon}.webp">`;
 render();
 
@@ -242,7 +253,10 @@ $('scene').addEventListener('click', event => {
   const footX = isTeacher ? hit.left - hit.width * .14 : hit.left + hit.width / 2;
   const x = stand ? stand[0] : (footX - bounds.left) / bounds.width;
   const y = stand ? stand[1] : (hit.bottom - bounds.top) / bounds.height;
-  walkTo(x, y, () => { if (target.isConnected) target.onclick?.(); }, isTeacher ? 1 : undefined);
+  // The pupil turns to the thing and bends down for whatever is taken, left or checked.
+  const handles = target.matches('.pick,.equipment,.risk,.unit,.destination');
+  const side = handles ? ((hit.left + hit.width / 2 - bounds.left) / bounds.width >= x ? 1 : -1) : undefined;
+  walkTo(x, y, () => { if (!target.isConnected) return; if (handles && !target.disabled) reach(); target.onclick?.(); }, isTeacher ? 1 : side);
  } else {
   walkTo((event.clientX - bounds.left) / bounds.width, (event.clientY - bounds.top) / bounds.height);
  }

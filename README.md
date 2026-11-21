@@ -50,6 +50,7 @@ La aventura del gimnasio guarda su progreso en el navegador. Mate Arena sincroni
 8. [Qué actividades digitales de EF para lluvia existen y cuáles rehacer](docs/09-investigacion-dias-de-lluvia.md).
 9. [Encargo de imágenes para la IA ilustradora](arte/ENCARGO.md), generado desde `arte/lotes/`; las entregas van a `arte/entrega/` y las coloca `python3 scripts/integrar_arte.py`.
 10. [Registro y notas](docs/10-registro-y-notas.md).
+11. [El Tatami: catálogo de posturas de yoga, criterio y fuentes](docs/11-yoga-catalogo.md).
 
 ## Comprobar y publicar
 

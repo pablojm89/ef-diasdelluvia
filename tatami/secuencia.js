@@ -5,20 +5,23 @@ export const MAX = 20;
 export const KEY = 'tatami-secuencias', DRAFT = 'tatami-actual', SETTINGS = 'tatami-ajustes';
 const SAVED_LIMIT = 24;
 
-// A sequence travels as its pose letters in groups of four, e.g. MSUD-TM. Easy to read aloud and type at the board.
+// A sequence travels as its pose codes in groups of four poses, e.g. MSUD-TM or EA2R-L3N. A code is one
+// letter, or a letter and a digit for the poses that came once the alphabet ran out. Easy to read aloud
+// and to type at the board.
 export function encode(ids) {
- const letters = ids.map(id => byId(id)?.code).filter(Boolean).join('');
- return letters.match(/.{1,4}/g)?.join('-') ?? '';
+ const codes = ids.map(id => byId(id)?.code).filter(Boolean), groups = [];
+ for (let i = 0; i < codes.length; i += 4) groups.push(codes.slice(i, i + 4).join(''));
+ return groups.join('-');
 }
 export function decode(text) {
  const letters = String(text ?? '').toUpperCase().replace(/[\s\-·.]/g, '');
- if (!letters || letters.length > MAX) return null;
- const ids = [...letters].map(letter => byCode(letter)?.id);
- return ids.every(Boolean) ? ids : null;
+ if (!/^(?:[A-Z][2-9]?)+$/.test(letters)) return null;
+ const ids = letters.match(/[A-Z][2-9]?/g).map(code => byCode(code)?.id);
+ return ids.length <= MAX && ids.every(Boolean) ? ids : null;
 }
 export const hashFor = ids => '#s=' + encode(ids).replace(/-/g, '');
 export function fromHash(hash) {
- const match = /(?:^#|&)s=([A-Za-z\-]+)/.exec(hash || '');
+ const match = /(?:^#|&)s=([A-Za-z0-9\-]+)/.exec(hash || '');
  return match ? decode(match[1]) : null;
 }
 
@@ -70,12 +73,11 @@ export function plan(ids, {beat = 4} = {}) {
  return steps;
 }
 export const seconds = steps => steps.reduce((sum, step) => sum + step.duration, 0);
-// Where the figure is (0 preparation … 2 pose) at a moment of a step.
+// Where the figure is (0 preparation … 1 pose) at a moment of a step.
 export function figureTime(step, progress) {
- if (step.kind === 'enter') return 2 * progress;
- if (step.kind === 'exit') return 2 * (1 - progress);
- if (step.kind === 'breathe' || step.kind === 'end') return 2;
- return 0;
+ if (step.kind === 'enter') return progress;
+ if (step.kind === 'exit') return 1 - progress;
+ return step.kind === 'breathe' || step.kind === 'end' ? 1 : 0;
 }
 // The first step of the pose before or after the current one, for the back and next buttons.
 export function jump(steps, at, delta) {
