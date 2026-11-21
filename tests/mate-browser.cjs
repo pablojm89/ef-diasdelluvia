@@ -37,14 +37,14 @@ function checkTeams(players) {
   await heroCards.locator('img').evaluateAll(images=>Promise.all(images.map(image=>image.decode())));
   await host.setViewportSize({width:390,height:844});
   await host.click('[data-character="12"]');
-  assert.match(await host.locator('#character-description').innerText(),/Salida veloz/);
+  assert.match(await host.locator('#character-description').innerText(),/¡Fuga!/);
   assert.ok(await host.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   await host.evaluate(()=>window.scrollTo(0,0));
   await host.screenshot({path:path.join(out,'mate-mobile-roster.png'),fullPage:true});
   await host.setViewportSize({width:1366,height:900});
   // Exercise offline training first: movement, throw, pause, and touch layout.
   await host.click('[data-character="12"]');await host.click('#train-button');await host.waitForFunction(()=>mateDiagnostics().state?.phase==='playing');
-  assert.equal(await host.locator('#match-talent-name').textContent(),'Salida veloz');
+  assert.equal(await host.locator('#match-talent-name').textContent(),'¡Fuga!');
   checkTeams((await diag(host)).state.players);
   const y0=(await diag(host)).state.players.find(p=>p.id==='local').y;
   await host.keyboard.down('ArrowDown');await host.waitForTimeout(450);await host.keyboard.up('ArrowDown');assert.ok((await diag(host)).state.players.find(p=>p.id==='local').y>y0+35);
@@ -76,7 +76,7 @@ function checkTeams(players) {
   checkTeams((await diag(host)).state.players);
   const guestBefore=(await diag(guest)).state.players.find(p=>p.id===guestId);
   const talentBefore=await guest.locator('#match-talent-name').textContent();
-  assert.equal(guestBefore.character,12);assert.equal(talentBefore,'Salida veloz');
+  assert.equal(guestBefore.character,12);assert.equal(talentBefore,'¡Fuga!');
   console.log(`Connected ${count} independent browser contexts. Transport: ${(await diag(guest)).transport}`);
   // A remote key press must change the host-authoritative player's position.
   const before=(await diag(host)).state.players.find(p=>p.id===guestId).y;

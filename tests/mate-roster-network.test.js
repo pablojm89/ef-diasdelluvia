@@ -2,8 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {EventEmitter} from 'node:events';
 import {Room} from '../mate/network.js';
-import {PROTOCOL,cleanProfile} from '../mate/protocol.js';
-import {makeGame,normalizeRules} from '../mate/sim.js';
+import {PROTOCOL,cleanProfile,isSnapshot} from '../mate/protocol.js';
+import {makeGame,normalizeRules,snapshot} from '../mate/sim.js';
+import {NETWORK_CONFIG} from '../mate/config.js';
 import {HEROES} from '../mate/roster.js';
 
 class Link extends EventEmitter {
@@ -98,4 +99,94 @@ test('entrenamiento y entradas antiguas conservan las elecciones válidas y cubr
  assert.deepEqual(cleanProfile({character:12}),{character:12});
  assert.deepEqual(cleanProfile({character:13}),{character:0});
  assert.deepEqual(cleanProfile(null),{character:0});
+});
+
+// La Grada: a spectator watches a room without a seat and without controls.
+function watch(room,id=crypto.randomUUID()) {
+ const link=new Link();
+ room.acceptConnection(link);
+ link.request({type:'hello',v:PROTOCOL,clientId:id,role:'spectator'});
+ return link;
+}
+
+test('un espectador no ocupa plaza, no cuenta para «todos listos» y sus controles se descartan',t=>{
+ const room=host(t,1),inputs=[];
+ room.cb={onInput:id=>inputs.push(id)};
+ const guest=join(room,crypto.randomUUID(),3);
+ const screen=watch(room);
+ const welcome=screen.sent.find(d=>d.type==='welcome');
+ assert.equal(welcome.role,'spectator');
+ assert.equal('resumeToken' in welcome,false);
+ assert.equal(room.publicRoster().length,2);
+ assert.ok(room.publicRoster().every(m=>!m.id.startsWith('s-')));
+ assert.equal(room.lobbyPacket().spectators,1);
+ assert.equal(join(room,crypto.randomUUID()).sent.at(-1).type,'rejected'); // 1 contra 1: no quedan plazas de jugador.
+ screen.request({type:'ready',ready:false});
+ screen.request({type:'team',team:1});
+ screen.request({type:'profile',profile:{character:4}});
+ guest.request({type:'ready',ready:true});
+ assert.equal(room.start(),true);
+ assert.equal(screen.sent.some(d=>d.type==='start'),true);
+ screen.request({type:'input',seq:1,input:{mx:1,my:0,ax:0,ay:0,fire:true}});
+ guest.request({type:'input',seq:1,input:{mx:1,my:0,ax:0,ay:0}});
+ assert.deepEqual(inputs,[room.publicRoster().find(m=>!m.host).id]);
+ assert.equal(room.publicRoster().length,2);
+ room.broadcastState(snapshot(makeGame(room.publicRoster(),room.rules)));
+ const received=screen.sent.filter(d=>d.type==='state');
+ assert.equal(received.length,1);
+ assert.equal(received[0].matchId,room.matchId);
+ assert.equal(isSnapshot(received[0].state),true);
+});
+
+test('un espectador entra con la partida empezada, se reconecta con su identificador y libera su sitio al irse',t=>{
+ const room=host(t,2);
+ const guest=join(room,crypto.randomUUID());
+ guest.request({type:'ready',ready:true});
+ room.start();
+ const id=crypto.randomUUID(),first=watch(room,id);
+ const welcome=first.sent.find(d=>d.type==='welcome');
+ assert.equal(welcome.started,true);
+ assert.equal(welcome.matchId,room.matchId);
+ assert.equal(first.sent.some(d=>d.type==='start'&&d.reconnecting&&d.matchId===room.matchId),true);
+ const second=watch(room,id);
+ assert.equal(first.open,false);
+ assert.equal(room.spectators.size,1);
+ assert.equal(second.sent.some(d=>d.type==='start'&&d.reconnecting),true);
+ second.request({type:'ping',at:5,lobbyRevision:-1});
+ assert.equal(second.sent.some(d=>d.type==='pong'&&d.at===5),true);
+ second.close();
+ assert.equal(room.spectators.size,0);
+ assert.equal(room.lobbyPacket().spectators,0);
+ assert.equal(room.publicRoster().length,2);
+ assert.ok(room.publicRoster().every(m=>m.connected));
+ room.returnToLobby();
+ const later=watch(room);
+ assert.equal(later.sent.find(d=>d.type==='welcome').started,false);
+ assert.equal(later.sent.some(d=>d.type==='lobby'&&d.started===false),true);
+});
+
+test('una sala llena de jugadores sigue admitiendo espectadores hasta su límite',t=>{
+ const room=host(t,13);
+ const links=Array.from({length:25},()=>join(room,crypto.randomUUID()));
+ assert.equal(room.publicRoster().length,26);
+ assert.equal(join(room,crypto.randomUUID()).sent.at(-1).type,'rejected');
+ const screens=Array.from({length:NETWORK_CONFIG.maxSpectators},()=>watch(room));
+ assert.ok(screens.every(s=>s.sent.some(d=>d.type==='welcome')));
+ const extra=watch(room);
+ assert.equal(extra.sent.at(-1).type,'rejected');
+ assert.equal(extra.sent.some(d=>d.type==='welcome'),false);
+ assert.equal(room.spectators.size,NETWORK_CONFIG.maxSpectators);
+ for(const link of links)link.request({type:'ready',ready:true});
+ assert.equal(room.start(),true);
+ assert.equal(room.publicRoster().length,26);
+});
+
+test('un saludo de espectador de otra versión se rechaza sin darle plaza',t=>{
+ const room=host(t,3);
+ const link=new Link();
+ room.acceptConnection(link);
+ link.request({type:'hello',v:PROTOCOL-1,clientId:crypto.randomUUID(),role:'spectator'});
+ assert.equal(link.sent.at(-1).type,'rejected');
+ assert.equal(room.spectators.size,0);
+ assert.equal(room.publicRoster().length,1);
 });

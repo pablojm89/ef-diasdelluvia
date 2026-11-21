@@ -142,7 +142,7 @@ function render({focus=false}={}) {
   stopTimer(); stopBeat();
   const route=location.hash.slice(1)||'inicio';
   document.body.dataset.screen=['mision','pulso','liga','biblioteca'].includes(route)?route:route.startsWith('guia')?'guia':'inicio';
-  document.title=({mision:'Misión Refugio',pulso:'Pulso Lab',liga:'Liga Relámpago',biblioteca:'Libro de retos'}[route]||'El mundo de Chispa')+' · Patio Interior';
+  document.title=({mision:'Misión Refugio',pulso:'Pulso Lab',liga:'Liga Relámpago',biblioteca:'Libro de retos'}[route]||'El mundo de Chispa')+' · El Pabellón';
   root.innerHTML=route==='mision'?mission():route==='pulso'?pulse():route==='liga'?league():route==='biblioteca'?library():route.startsWith('guia')?guide():home();
   document.querySelectorAll('nav a').forEach(a=>{if(a.hash===`#${route}` || (route.startsWith('guia') && a.hash==='#guia'))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
   initTimer();

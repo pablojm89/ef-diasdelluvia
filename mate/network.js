@@ -3,7 +3,7 @@ import {HEROES} from './roster.js';
 import {availableCharacter} from './selection.js';
 import {normalizeRules} from './sim.js';
 import {RelayHub} from './relay.js';
-import {PROTOCOL,validCode,validToken,cleanProfile,inputPacket,isSnapshot} from './protocol.js';
+import {PROTOCOL,validCode,validToken,cleanProfile,inputPacket,isSnapshot,isSpectatorHello} from './protocol.js';
 const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const makeCode=()=>Array.from(crypto.getRandomValues(new Uint8Array(6)),n=>alphabet[n%alphabet.length]).join('');
 const token=()=>crypto.randomUUID();
@@ -19,7 +19,7 @@ const errorText={
 };
 export class Room {
  constructor(callbacks={}) {
-  this.cb=callbacks;this.peer=null;this.isHost=false;this.members=new Map();this.departed=new Map();this.connections=new Map();this.closed=false;this.started=false;this.seq=0;this.lastStateTick=-1;this.lobbyRevision=0;this.lastLobbyRevision=0;this.timers=[];this.latency=0;this.transport='direct';this.relay=null;this.hostLink=null;this.myId=null;this.code=null;
+  this.cb=callbacks;this.peer=null;this.isHost=false;this.members=new Map();this.departed=new Map();this.connections=new Map();this.closed=false;this.started=false;this.seq=0;this.lastStateTick=-1;this.lobbyRevision=0;this.lastLobbyRevision=0;this.timers=[];this.latency=0;this.transport='direct';this.relay=null;this.hostLink=null;this.myId=null;this.code=null;this.spectators=new Map();this.role='player';
  }
  status(text){this.cb.onStatus?.(text);}
  publicRoster(){return [...this.members.values()].map(({resumeToken,...m})=>m);}
@@ -62,7 +62,7 @@ export class Room {
   this.status('Sala abierta');this.emitLobby();return this.code;
  }
  acceptConnection(conn) {
-  if(this.connections.size>=NETWORK_CONFIG.maxHumans+4){conn.close();return;}
+  if(this.connections.size>=NETWORK_CONFIG.maxHumans+NETWORK_CONFIG.maxSpectators+4){conn.close();return;}
   let memberId=null,lastSeq=-1,rate=0,rateStart=Date.now();
   const deadline=this.schedule(()=>{if(!memberId)conn.close()},NETWORK_CONFIG.connectTimeoutMs);
   conn.on('data',data=>{
@@ -72,6 +72,7 @@ export class Room {
    if(!memberId){
     if(data.type!=='hello'||!validToken(data.clientId))return conn.close();
     if(data.v!==PROTOCOL)return this.reject(conn,'El anfitrión y tu navegador tienen versiones distintas. Recargad Mate Arena para jugar juntos.');
+    if(isSpectatorHello(data)){clearTimeout(deadline);memberId=this.admitSpectator(conn,data.clientId);return;}
     const candidate='c-'+data.clientId,existing=this.members.get(candidate);
     let reassigned=false;
     if(existing){
@@ -103,6 +104,8 @@ export class Room {
     return;
    }
    if(this.connections.get(memberId)!==conn)return;
+   // Spectators only watch: anything but a greeting or a ping is dropped.
+   if(this.spectators.has(memberId)){if(data.type==='hello')this.welcomeSpectator(conn,memberId);if(data.type==='ping'){if(typeof data.at==='number'&&Number.isFinite(data.at))this.send(conn,{type:'pong',at:data.at});if(data.lobbyRevision!==this.lobbyRevision)this.send(conn,{...this.lobbyPacket(),resend:true});}return;}
    if(data.type==='hello'){this.send(conn,{type:'welcome',v:PROTOCOL,id:memberId,hostId:this.myId,code:this.code,started:this.started,matchId:this.matchId||null,rules:this.rules,resumeToken:this.members.get(memberId).resumeToken});this.emitLobby();if(this.started)this.send(conn,{type:'start',rules:this.rules,matchId:this.matchId,reconnecting:true});return;}
    if(data.type==='input'&&this.started){const packet=inputPacket(data,lastSeq);if(packet){lastSeq=packet.seq;this.cb.onInput?.(memberId,packet.input);}return;}
    if(data.type==='ping') {if(typeof data.at==='number'&&Number.isFinite(data.at))this.send(conn,{type:'pong',at:data.at});if(data.lobbyRevision!==this.lobbyRevision)this.send(conn,{...this.lobbyPacket(),resend:true});return;}
@@ -116,6 +119,7 @@ export class Room {
    clearTimeout(deadline);
    if(!memberId||this.connections.get(memberId)!==conn)return;
    this.connections.delete(memberId);
+   if(this.spectators.delete(memberId)){this.emitLobby();return;}
    const m=this.members.get(memberId);
    m.connected=false;
    if(!this.started){
@@ -129,9 +133,21 @@ export class Room {
   });
   conn.on('error',()=>conn.close());
  }
+ admitSpectator(conn,clientId) {
+  const id='s-'+clientId,previous=this.connections.get(id);
+  if(!this.spectators.has(id)&&this.spectators.size>=NETWORK_CONFIG.maxSpectators){this.reject(conn,'Ya hay demasiadas pantallas mirando esta sala.');return null;}
+  this.spectators.set(id,{id});this.connections.set(id,conn);
+  if(previous&&previous!==conn)previous.close();
+  this.welcomeSpectator(conn,id);this.emitLobby();return id;
+ }
+ welcomeSpectator(conn,id) {
+  this.send(conn,{type:'welcome',v:PROTOCOL,id,hostId:this.myId,code:this.code,role:'spectator',started:this.started,matchId:this.matchId||null,rules:this.rules});
+  this.send(conn,{...this.lobbyPacket(),resend:true});
+  if(this.started)this.send(conn,{type:'start',rules:this.rules,matchId:this.matchId,reconnecting:true});
+ }
  reject(conn,message){this.send(conn,{type:'rejected',message});this.schedule(()=>conn.close(),300);}
  send(conn,data){try{if(conn?.open&&(!conn.dataChannel||conn.dataChannel.bufferedAmount<131072||data.type!=='state'))conn.send(data);}catch{ /* Disconnect is handled by the connection event. */ }}
- lobbyPacket(){return {type:'lobby',v:PROTOCOL,revision:this.lobbyRevision,members:this.publicRoster(),rules:this.rules,code:this.code,started:this.started,matchId:this.matchId||null};}
+ lobbyPacket(){return {type:'lobby',v:PROTOCOL,revision:this.lobbyRevision,members:this.publicRoster(),spectators:this.spectators.size,rules:this.rules,code:this.code,started:this.started,matchId:this.matchId||null};}
  emitLobby(){this.lobbyRevision++;const data=this.lobbyPacket();for(const c of this.connections.values())this.send(c,data);this.cb.onLobby?.(data);}
  async join(code,profile,resume={}) {
   if(!validCode(code))throw new Error('El código de sala tiene seis letras o números.');
@@ -156,7 +172,7 @@ export class Room {
   return new Promise((resolve,reject)=>{
    let welcomed=false,helloRetry=null;
    const timeout=this.schedule(()=>{if(!welcomed){clearInterval(helloRetry);conn.close();reject(new Error('No se ha podido abrir la partida entre estos ordenadores. Comprueba el código o prueba otra red.'));}},NETWORK_CONFIG.connectTimeoutMs);
-   const hello=()=>this.send(conn,{type:'hello',v:PROTOCOL,clientId:this.clientId,resumeToken:resume.resumeToken||'',profile:cleanProfile(profile)});
+   const hello=()=>this.send(conn,this.role==='spectator'?{type:'hello',v:PROTOCOL,clientId:this.clientId,role:'spectator'}:{type:'hello',v:PROTOCOL,clientId:this.clientId,resumeToken:resume.resumeToken||'',profile:cleanProfile(profile)});
    conn.on('open',hello);
    helloRetry=setInterval(()=>{if(welcomed||this.closed)clearInterval(helloRetry);else hello();},1000);
    if(conn.transport!=='relay'&&conn.open)queueMicrotask(hello);
@@ -177,6 +193,8 @@ export class Room {
    const ping=setInterval(()=>{if(this.closed)return clearInterval(ping);if(conn.open)this.send(conn,{type:'ping',at:performance.now(),lobbyRevision:this.lastLobbyRevision});},2000);this.pingTimer=ping;
   });
  }
+ // Join as a screen that only watches: no seat, no controls. Same transports and snapshots as a guest.
+ watch(code,resume={}){this.role='spectator';return this.join(code,null,resume);}
  beginRemote(data){if(typeof data.matchId!=='string'||data.matchId===this.matchId)return;this.matchId=data.matchId;this.started=true;this.lastStateTick=-1;this.cb.onStart?.(data);}
  occupied(team,exceptId) {
   return new Set([...this.members.values()].filter(m=>m.team===team&&m.id!==exceptId).map(m=>m.character));
@@ -217,7 +235,7 @@ export class Room {
   for(const c of this.connections.values())this.send(c,data);this.emitLobby();this.cb.onStart?.(data);return true;
  }
  broadcastState(state){if(!this.isHost)return;for(const c of this.connections.values())this.send(c,{type:'state',matchId:this.matchId,state});}
- input(input){if(this.isHost)this.cb.onInput?.(this.myId,input);else this.send(this.hostLink,{type:'input',seq:++this.seq,input});}
+ input(input){if(this.role==='spectator')return;if(this.isHost)this.cb.onInput?.(this.myId,input);else this.send(this.hostLink,{type:'input',seq:++this.seq,input});}
  returnToLobby(){if(!this.isHost)return;this.started=false;for(const [id,m] of this.members){if(!m.connected)this.members.delete(id);else m.ready=m.host;}this.emitLobby();}
  close(){if(this.closed)return;if(this.isHost)for(const c of this.connections.values())this.send(c,{type:'ended'});this.closed=true;for(const t of this.timers)clearTimeout(t);clearInterval(this.pingTimer);this.peer?.destroy();this.relay?.close();this.connections.clear();}
 }

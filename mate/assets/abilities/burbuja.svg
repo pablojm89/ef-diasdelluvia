@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Burbujas">
+<defs><radialGradient id="g" cx="34%" cy="26%" r="80%"><stop offset="0" stop-color="#dff9ff"/><stop offset="1" stop-color="#2f9fc0"/></radialGradient></defs>
+<circle cx="48" cy="48" r="46" fill="url(#g)"/>
+<path d="M12 40A37 37 0 0 1 60 13" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/>
+<g fill="#fff6da" stroke="#17233b" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+<circle cx="46" cy="50" r="28" fill="#c9f3ff" fill-opacity=".55"/><path d="M28 44A19 19 0 0 1 44 30" fill="none" stroke="#17233b" stroke-width="7"/><path d="M28 44A19 19 0 0 1 44 30" fill="none" stroke="#fff" stroke-width="3"/><circle cx="74" cy="24" r="9" fill="#c9f3ff" fill-opacity=".7"/><circle cx="76" cy="72" r="6" fill="#c9f3ff" fill-opacity=".7"/><circle cx="46" cy="52" r="9" fill="#ffd36b"/>
+</g>
+</svg>

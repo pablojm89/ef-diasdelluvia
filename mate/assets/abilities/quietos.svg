@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="¡Pies quietos!">
+<defs><radialGradient id="g" cx="34%" cy="26%" r="80%"><stop offset="0" stop-color="#e2f5ff"/><stop offset="1" stop-color="#3f8fc4"/></radialGradient></defs>
+<circle cx="48" cy="48" r="46" fill="url(#g)"/>
+<path d="M12 40A37 37 0 0 1 60 13" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/>
+<g fill="#fff6da" stroke="#17233b" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+<path d="M26 44Q26 30 34 30Q42 30 42 44L42 62Q42 72 34 72Q26 72 26 62Z"/><path d="M54 44Q54 30 62 30Q70 30 70 44L70 62Q70 72 62 72Q54 72 54 62Z"/><path d="M27 54L41 54M55 54L69 54" fill="none" stroke-width="2.4"/><path d="M48 8L48 26M40 12L56 22M56 12L40 22" fill="none" stroke="#17233b" stroke-width="7"/><path d="M48 8L48 26M40 12L56 22M56 12L40 22" fill="none" stroke="#fff6da" stroke-width="2.6"/><path d="M20 82L76 82" fill="none" stroke="#17233b" stroke-width="7"/><path d="M20 82L76 82" fill="none" stroke="#bfe9ff" stroke-width="2.6"/>
+</g>
+</svg>

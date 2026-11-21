@@ -18,6 +18,51 @@ const out=path.join(base,'artifacts');
  const page=await context.newPage(),errors=[];
  page.on('pageerror',e=>errors.push(e.message));
  await fs.mkdir(out,{recursive:true});
+ // Start screen: one way in for pupils, who pick class, list number and character.
+ await page.goto('https://patio.test/index.html');
+ assert.equal(await page.locator('#view-title .sign').count(),1);
+ await page.locator('#enter-student').click();
+ await page.selectOption('#login-group','B');
+ await page.selectOption('#login-number','12');
+ await page.locator('#login-avatars label').nth(2).click();
+ await page.locator('#login-form button').click();
+ assert.equal(await page.locator('#player-code').textContent(),'5B-12');
+ assert.ok(await page.locator('#doors .door').count()<=4,'pocas puertas para el alumnado');
+ assert.ok(await page.locator('#doors a.door').count()>=3);
+ assert.equal(await page.locator('#doors img').evaluateAll(images=>images.every(image=>image.complete&&image.naturalWidth>0)),true);
+ await page.reload();
+ assert.equal(await page.locator('#player-code').textContent(),'5B-12');
+ await page.screenshot({path:path.join(out,'hub-pupil.png'),fullPage:true});
+ // Class screen: the challenge wheel runs its clock and writes to the record without a player.
+ await page.goto('https://patio.test/index.html#pantalla');
+ await page.locator('[data-action="wheel"]').click();
+ await page.locator('#wheel-spin').click();
+ assert.ok((await page.locator('#wheel-title').textContent()).length>3);
+ const before=await page.locator('#wheel-clock').textContent();
+ await page.locator('#wheel-start').click();
+ await page.waitForTimeout(1250);
+ assert.notEqual(await page.locator('#wheel-clock').textContent(),before);
+ await page.screenshot({path:path.join(out,'hub-wheel.png'),fullPage:true});
+ await page.locator('#wheel .close').click();
+ // Teacher: a key for this computer opens the desk, which shows who has played here.
+ await page.goto('https://patio.test/index.html#profe');
+ assert.equal(await page.locator('#desk').isHidden(),true);
+ await page.fill('#gate-pin','2468');await page.locator('#gate button').click();
+ await page.waitForSelector('#desk:not([hidden])');
+ assert.match(await page.locator('#desk-summary').textContent(),/5B-12/);
+ await page.locator('#desk-lock').click();
+ await page.goto('https://patio.test/index.html#profe');
+ await page.fill('#gate-pin','1111');await page.locator('#gate button').click();
+ await page.waitForFunction(()=>document.getElementById('gate-status').textContent.length>0);
+ assert.equal(await page.locator('#desk').isHidden(),true);
+ for(const width of [320,390,768]){
+  await page.setViewportSize({width,height:800});
+  for(const hash of ['','#alumno','#pantalla']){
+   await page.goto('https://patio.test/index.html'+hash);
+   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`inicio ${hash} at ${width}: horizontal overflow`);
+  }
+ }
+ await page.setViewportSize({width:1440,height:1000});
  await page.goto('https://patio.test/patio.html');
  await page.waitForSelector('.world-location');
  assert.equal(await page.locator('.world-location').count(),3);

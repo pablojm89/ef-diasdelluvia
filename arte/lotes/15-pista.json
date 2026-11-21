@@ -1,0 +1,186 @@
+{
+ "_titulo": "La Pista: menú y vestuario de Mate Arena",
+ "_nota": "Lo que rodea al partido de Mate Arena en la estética común; el partido sigue en pixel art (lotes 03 y 04). Se usan solos en cuanto están en mate/assets/pista/pintados.js: los fondos los pone mate/style.css (clases con-<pedido> en el body), los retratos los usa mate/game.js en la ficha del personaje y los petos y la copa los pone mate/style.css. Mientras no llegan, el menú es pared, papel y carteles con el retrato en pixel art.",
+ "_indice": {
+  "archivo": "mate/assets/pista/pintados.js",
+  "nombre": "PINTADOS"
+ },
+ "pista-fondo": {
+  "nombre": "La Pista: el pabellón preparado para el mate",
+  "destino": "mate/assets/pista/fondo.webp",
+  "ancho": 1920,
+  "alto": 1080,
+  "transparente": false,
+  "listo": false,
+  "prompt": "El mismo pabellón de gimnasio/assets/gym.webp, misma luz de tarde y misma pintura, visto desde una esquina a la altura de los ojos y preparado para jugar al balón prisionero: el parqué dividido en dos campos por la línea central, cinta adhesiva turquesa en el campo de la izquierda y coral en el de la derecha marcando la franja de la cárcel al fondo de cada campo, un carro con pelotas blandas de espuma naranjas y amarillas junto a la pared, un banco de madera con petos turquesa y petos coral doblados encima, conos naranjas en las esquinas. Ventanales con naranjos a la izquierda y el zócalo verde azulado. Sin personajes. Encima se colocan dos paneles crema grandes que tapan casi todo el centro (de x 100 a x 1820 y de y 110 a y 900): ahí el detalle debe ser suave y sin contrastes fuertes; lo más reconocible (carro, banco, canasta, ventanales) va en los márgenes y en la franja inferior del suelo."
+ },
+ "vestuario-fondo": {
+  "nombre": "El vestuario antes del partido",
+  "destino": "mate/assets/pista/vestuario.webp",
+  "ancho": 1920,
+  "alto": 1080,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Vestuario del mismo colegio que gimnasio/assets/gym.webp, a la misma hora de la tarde: pared ocre melocotón arriba y azulejo crema con cenefa azul y naranja hasta media altura, una fila de taquillas metálicas verde azuladas con rejilla, un banco largo de madera miel delante, perchas en la pared con petos turquesa a la izquierda y petos coral a la derecha, una bolsa de deporte y una botella de agua en el banco, un tablón de corcho pequeño sin papeles legibles y una ventana alta a la izquierda por la que entra luz dorada. Suelo de baldosa clara. Sin personajes ni texto. Encima van los paneles crema del vestuario, que tapan el centro (de x 100 a x 1820 y de y 200 a y 960): detalle suave y sin contrastes fuertes ahí; las taquillas y las perchas se leen sobre todo arriba y en los lados."
+ },
+ "retrato-vega": {
+  "nombre": "Retrato pintado de Vega",
+  "destino": "mate/assets/pista/retrato-vega.webp",
+  "ancho": 480,
+  "alto": 600,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Retrato de busto pintado para el menú de Mate Arena, en el estilo de gimnasio/assets/pupil-0.webp (no en pixel art): de la cintura para arriba, cuerpo en tres cuartos y cara hacia el espectador, cabeza centrada en el tercio superior con unos 40 px libres por encima del pelo, hombros y brazos dentro del lienzo, el borde inferior corta a la altura de la cintura. Gesto alegre de antes de salir a la pista, proporciones naturales de 10 a 12 años. Se recorta dentro de un arco con fondo crema, así que la figura va sola sobre fondo transparente. Vega: la alumna de gimnasio/assets/pupil-0.webp con la misma cara y ropa: melena castaña muy rizada recogida en coleta alta con coletero amarillo, chaqueta de chándal granate con pecho crema y ribetes blancos, mochila verde azulada a un hombro; agarra el asa de la mochila con una mano y levanta el otro puño. Referencia en pixel art: mate/assets/roster/vega.png."
+ },
+ "retrato-kai": {
+  "nombre": "Retrato pintado de Kai",
+  "destino": "mate/assets/pista/retrato-kai.webp",
+  "ancho": 480,
+  "alto": 600,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Retrato de busto pintado para el menú de Mate Arena, en el estilo de gimnasio/assets/pupil-0.webp (no en pixel art): de la cintura para arriba, cuerpo en tres cuartos y cara hacia el espectador, cabeza centrada en el tercio superior con unos 40 px libres por encima del pelo, hombros y brazos dentro del lienzo, el borde inferior corta a la altura de la cintura. Gesto alegre de antes de salir a la pista, proporciones naturales de 10 a 12 años. Se recorta dentro de un arco con fondo crema, así que la figura va sola sobre fondo transparente. Kai: el personaje de gimnasio/assets/pupil-1.webp con la misma cara y ropa: pelo castaño oscuro en dos trenzas largas, aros dorados, camiseta azul celeste con ribete blanco en el cuello y las mangas; levanta el pulgar. Referencia en pixel art: mate/assets/roster/kai.png."
+ },
+ "retrato-lua": {
+  "nombre": "Retrato pintado de Lúa",
+  "destino": "mate/assets/pista/retrato-lua.webp",
+  "ancho": 480,
+  "alto": 600,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Retrato de busto pintado para el menú de Mate Arena, en el estilo de gimnasio/assets/pupil-0.webp (no en pixel art): de la cintura para arriba, cuerpo en tres cuartos y cara hacia el espectador, cabeza centrada en el tercio superior con unos 40 px libres por encima del pelo, hombros y brazos dentro del lienzo, el borde inferior corta a la altura de la cintura. Gesto alegre de antes de salir a la pista, proporciones naturales de 10 a 12 años. Se recorta dentro de un arco con fondo crema, así que la figura va sola sobre fondo transparente. Lúa: la alumna de gimnasio/assets/pupil-2.webp con la misma cara y ropa: melena cobriza muy rizada, cinta morada en el pelo, sudadera lila con capucha y raya crema en las mangas; ríe con los ojos entrecerrados y los dos puños a la altura del pecho. Referencia en pixel art: mate/assets/roster/lua.png (allí la sudadera es más clara; manda la del gimnasio)."
+ },
+ "retrato-neo": {
+  "nombre": "Retrato pintado de Neo",
+  "destino": "mate/assets/pista/retrato-neo.webp",
+  "ancho": 480,
+  "alto": 600,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Retrato de busto pintado para el menú de Mate Arena, en el estilo de gimnasio/assets/pupil-0.webp (no en pixel art): de la cintura para arriba, cuerpo en tres cuartos y cara hacia el espectador, cabeza centrada en el tercio superior con unos 40 px libres por encima del pelo, hombros y brazos dentro del lienzo, el borde inferior corta a la altura de la cintura. Gesto alegre de antes de salir a la pista, proporciones naturales de 10 a 12 años. Se recorta dentro de un arco con fondo crema, así que la figura va sola sobre fondo transparente. Neo: el personaje de gimnasio/assets/pupil-3.webp con la misma cara y ropa: pelo rizado oscuro recogido en un moño alto con coletero amarillo, camiseta amarilla con ribete blanco y la chaqueta verde del chándal anudada a la cintura; brazos cruzados y sonrisa segura. Referencia en pixel art: mate/assets/roster/neo.png."
+ },
+ "retrato-ada": {
+  "nombre": "Retrato pintado de Ada",
+  "destino": "mate/assets/pista/retrato-ada.webp",
+  "ancho": 480,
+  "alto": 600,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Retrato de busto pintado para el menú de Mate Arena, en el estilo de gimnasio/assets/pupil-0.webp (no en pixel art): de la cintura para arriba, cuerpo en tres cuartos y cara hacia el espectador, cabeza centrada en el tercio superior con unos 40 px libres por encima del pelo, hombros y brazos dentro del lienzo, el borde inferior corta a la altura de la cintura. Gesto alegre de antes de salir a la pista, proporciones naturales de 10 a 12 años. Se recorta dentro de un arco con fondo crema, así que la figura va sola sobre fondo transparente. Ada: el personaje de gimnasio/assets/pupil-4.webp con la misma cara y ropa: pelo castaño rizado y corto, camiseta roja con ribetes blancos, mochila azul marino a la espalda; mira hacia un lado y aprieta un puño como quien apunta. Referencia en pixel art: mate/assets/roster/ada.png."
+ },
+ "retrato-max": {
+  "nombre": "Retrato pintado de Max",
+  "destino": "mate/assets/pista/retrato-max.webp",
+  "ancho": 480,
+  "alto": 600,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Retrato de busto pintado para el menú de Mate Arena, en el estilo de gimnasio/assets/pupil-0.webp (no en pixel art): de la cintura para arriba, cuerpo en tres cuartos y cara hacia el espectador, cabeza centrada en el tercio superior con unos 40 px libres por encima del pelo, hombros y brazos dentro del lienzo, el borde inferior corta a la altura de la cintura. Gesto alegre de antes de salir a la pista, proporciones naturales de 10 a 12 años. Se recorta dentro de un arco con fondo crema, así que la figura va sola sobre fondo transparente. Max: el personaje de gimnasio/assets/pupil-5.webp con la misma cara y ropa: pelo rubio muy rizado, gafas redondas azules, chaqueta de chándal verde con franjas blancas abierta sobre camiseta blanca; se sube las gafas con una mano. Referencia en pixel art: mate/assets/roster/max.png."
+ },
+ "retrato-nora": {
+  "nombre": "Retrato pintado de Nora",
+  "destino": "mate/assets/pista/retrato-nora.webp",
+  "ancho": 480,
+  "alto": 600,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Retrato de busto pintado para el menú de Mate Arena, en el estilo de gimnasio/assets/pupil-0.webp (no en pixel art): de la cintura para arriba, cuerpo en tres cuartos y cara hacia el espectador, cabeza centrada en el tercio superior con unos 40 px libres por encima del pelo, hombros y brazos dentro del lienzo, el borde inferior corta a la altura de la cintura. Gesto alegre de antes de salir a la pista, proporciones naturales de 10 a 12 años. Se recorta dentro de un arco con fondo crema, así que la figura va sola sobre fondo transparente. Nora: el personaje de gimnasio/assets/pupil-6.webp con la misma cara y ropa: pelo oscuro rizado arriba y rapado a los lados, sudadera azul marino con capucha y cordones blancos, muñequera blanca; levanta el puño junto a la cara. Referencia en pixel art: mate/assets/roster/nora.png."
+ },
+ "retrato-leo": {
+  "nombre": "Retrato pintado de Leo",
+  "destino": "mate/assets/pista/retrato-leo.webp",
+  "ancho": 480,
+  "alto": 600,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Retrato de busto pintado para el menú de Mate Arena, en el estilo de gimnasio/assets/pupil-0.webp (no en pixel art): de la cintura para arriba, cuerpo en tres cuartos y cara hacia el espectador, cabeza centrada en el tercio superior con unos 40 px libres por encima del pelo, hombros y brazos dentro del lienzo, el borde inferior corta a la altura de la cintura. Gesto alegre de antes de salir a la pista, proporciones naturales de 10 a 12 años. Se recorta dentro de un arco con fondo crema, así que la figura va sola sobre fondo transparente. Leo: el personaje de gimnasio/assets/pupil-7.webp con la misma cara y ropa: gorra blanca del revés con visera azul marino, auriculares blancos al cuello, camiseta naranja con mangas crema; guiña un ojo y señala hacia delante con el dedo. Referencia en pixel art: mate/assets/roster/leo.png."
+ },
+ "retrato-iris": {
+  "nombre": "Retrato pintado de Iris",
+  "destino": "mate/assets/pista/retrato-iris.webp",
+  "ancho": 480,
+  "alto": 600,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Retrato de busto pintado para el menú de Mate Arena, en el estilo de gimnasio/assets/pupil-0.webp (no en pixel art): de la cintura para arriba, cuerpo en tres cuartos y cara hacia el espectador, cabeza centrada en el tercio superior con unos 40 px libres por encima del pelo, hombros y brazos dentro del lienzo, el borde inferior corta a la altura de la cintura. Gesto alegre de antes de salir a la pista, proporciones naturales de 10 a 12 años. Se recorta dentro de un arco con fondo crema, así que la figura va sola sobre fondo transparente. Iris: personaje nuevo a partir de mate/assets/roster/iris.png: pelo verde azulado liso y corto a la altura de la barbilla con dos horquillas de estrella amarillas, colorete en las mejillas, chaqueta de chándal amarilla mostaza con dos franjas blancas y cuello subido; boca abierta de alegría, manos abiertas y listas para atrapar. Es la portera del equipo."
+ },
+ "retrato-bruno": {
+  "nombre": "Retrato pintado de Bruno",
+  "destino": "mate/assets/pista/retrato-bruno.webp",
+  "ancho": 480,
+  "alto": 600,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Retrato de busto pintado para el menú de Mate Arena, en el estilo de gimnasio/assets/pupil-0.webp (no en pixel art): de la cintura para arriba, cuerpo en tres cuartos y cara hacia el espectador, cabeza centrada en el tercio superior con unos 40 px libres por encima del pelo, hombros y brazos dentro del lienzo, el borde inferior corta a la altura de la cintura. Gesto alegre de antes de salir a la pista, proporciones naturales de 10 a 12 años. Se recorta dentro de un arco con fondo crema, así que la figura va sola sobre fondo transparente. Bruno: personaje nuevo a partir de mate/assets/roster/bruno.png: complexión fuerte, pelo pelirrojo muy rizado, pecas, camiseta de tirantes verde de baloncesto con ribete blanco y muñequera blanca; brazos cruzados y media sonrisa tranquila. Es el pívot."
+ },
+ "retrato-sol": {
+  "nombre": "Retrato pintado de Sol",
+  "destino": "mate/assets/pista/retrato-sol.webp",
+  "ancho": 480,
+  "alto": 600,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Retrato de busto pintado para el menú de Mate Arena, en el estilo de gimnasio/assets/pupil-0.webp (no en pixel art): de la cintura para arriba, cuerpo en tres cuartos y cara hacia el espectador, cabeza centrada en el tercio superior con unos 40 px libres por encima del pelo, hombros y brazos dentro del lienzo, el borde inferior corta a la altura de la cintura. Gesto alegre de antes de salir a la pista, proporciones naturales de 10 a 12 años. Se recorta dentro de un arco con fondo crema, así que la figura va sola sobre fondo transparente. Sol: personaje nuevo a partir de mate/assets/roster/sol.png: piel morena oscura, trenzas finas recogidas con un pañuelo turquesa estampado anudado arriba con lazo, camiseta amarilla con cuello en pico blanco; sonrisa grande y mirada viva. Es la contraatacante."
+ },
+ "retrato-teo": {
+  "nombre": "Retrato pintado de Teo",
+  "destino": "mate/assets/pista/retrato-teo.webp",
+  "ancho": 480,
+  "alto": 600,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Retrato de busto pintado para el menú de Mate Arena, en el estilo de gimnasio/assets/pupil-0.webp (no en pixel art): de la cintura para arriba, cuerpo en tres cuartos y cara hacia el espectador, cabeza centrada en el tercio superior con unos 40 px libres por encima del pelo, hombros y brazos dentro del lienzo, el borde inferior corta a la altura de la cintura. Gesto alegre de antes de salir a la pista, proporciones naturales de 10 a 12 años. Se recorta dentro de un arco con fondo crema, así que la figura va sola sobre fondo transparente. Teo: personaje nuevo a partir de mate/assets/roster/teo.png: pelo negro liso con flequillo, gafas de pasta lilas, chaqueta de chándal blanca con franjas moradas; se toca la sien con dos dedos como quien ya ha pensado la jugada. Es el relevista."
+ },
+ "retrato-ines": {
+  "nombre": "Retrato pintado de Inés",
+  "destino": "mate/assets/pista/retrato-ines.webp",
+  "ancho": 480,
+  "alto": 600,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Retrato de busto pintado para el menú de Mate Arena, en el estilo de gimnasio/assets/pupil-0.webp (no en pixel art): de la cintura para arriba, cuerpo en tres cuartos y cara hacia el espectador, cabeza centrada en el tercio superior con unos 40 px libres por encima del pelo, hombros y brazos dentro del lienzo, el borde inferior corta a la altura de la cintura. Gesto alegre de antes de salir a la pista, proporciones naturales de 10 a 12 años. Se recorta dentro de un arco con fondo crema, así que la figura va sola sobre fondo transparente. Inés: personaje nuevo a partir de mate/assets/roster/ines.png: pelo negro corto y despeinado con un mechón gris plateado a un lado, cinta coral en la frente, aro dorado en la oreja, chaqueta de chándal granate rosado con dos franjas blancas; de perfil tres cuartos, sonrisa decidida. Es la remontadora."
+ },
+ "peto-cometas": {
+  "nombre": "Peto de los Cometas",
+  "destino": "mate/assets/pista/peto-cometas.webp",
+  "ancho": 160,
+  "alto": 160,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Peto de entrenamiento de malla de colegio, color turquesa #39cdbb con ribete más oscuro #197c86, visto de frente y un poco ladeado, como colgado de una percha invisible. Sin número ni letras. Contorno marrón fino, motivo grande y centrado, legible a 30 px sobre una franja turquesa oscura."
+ },
+ "peto-rayos": {
+  "nombre": "Peto de los Rayos",
+  "destino": "mate/assets/pista/peto-rayos.webp",
+  "ancho": 160,
+  "alto": 160,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "El mismo peto del pedido peto-cometas, con el mismo encuadre, en color coral #f78561 con ribete granate #a6454a. Sin número ni letras. Legible a 30 px sobre una franja granate."
+ },
+ "copa": {
+  "nombre": "Copa del partido",
+  "destino": "mate/assets/pista/copa.webp",
+  "ancho": 240,
+  "alto": 240,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Copa pequeña de torneo de colegio: dorada y algo gastada, con dos asas, sobre una peana de madera miel, con una cinta turquesa y otra coral atadas en un asa. Vista de frente. Sin texto ni placa grabada. Contorno marrón fino; se ve junto al título de la tabla de resultados, a unos 40 px."
+ }
+}

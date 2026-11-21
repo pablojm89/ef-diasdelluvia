@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+ <meta name="theme-color" content="#142e30">
+ <meta name="description" content="La Pizarra, en El Pabellón: rosco de Educación Física que se responde con el cuerpo. Cada acierto trae un reto de movimiento.">
+ <title>La Pizarra · El Pabellón</title>
+ <link rel="icon" href="../assets/mark.svg" type="image/svg+xml">
+ <link rel="stylesheet" href="../comun/base.css">
+ <link rel="stylesheet" href="./pizarra.css">
+</head>
+<body class="pizarra" data-view="start">
+ <a class="skip" href="#main">Saltar al contenido</a>
+ <!-- Chalk: the grain that eats into every stroke and letter drawn on the board. -->
+ <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <filter id="tiza" x="-4%" y="-8%" width="108%" height="116%" color-interpolation-filters="sRGB">
+   <feTurbulence type="fractalNoise" baseFrequency="1.15" numOctaves="2" seed="4" result="grano"/>
+   <feDisplacementMap in="SourceGraphic" in2="grano" scale="2.2" xChannelSelector="R" yChannelSelector="G" result="trazo"/>
+   <feColorMatrix in="grano" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.42" result="huecos"/>
+   <feComposite in="trazo" in2="huecos" operator="in"/>
+  </filter>
+ </svg>
+ <main id="main" class="wall" tabindex="-1">
+  <div class="frieze" aria-hidden="true"></div>
+  <div class="stage">
+   <figure class="host" aria-hidden="true"><img id="host-img" src="../gimnasio/assets/robles-point.webp" alt="" width="760" height="550"></figure>
+   <div class="desk">
+    <div class="board" id="board">
+     <div class="slate">
+
+      <section id="view-start" class="start" aria-labelledby="start-title">
+       <div class="start-main">
+        <p class="chalk tag">La Pizarra</p>
+        <h1 id="start-title" class="chalk title">Rosco de Educación Física</h1>
+        <p class="chalk lead" id="start-lead"></p>
+        <fieldset class="pick" id="pick-rosco"><legend class="chalk">Rosco</legend></fieldset>
+        <fieldset class="pick" id="pick-teams" hidden><legend class="chalk">Equipos</legend></fieldset>
+        <div class="start-buttons">
+         <button type="button" id="resume" class="sign gold big" hidden><strong>Seguir la partida</strong><small id="resume-note"></small></button>
+         <button type="button" id="start" class="sign gold big"><strong>Empezar</strong></button>
+        </div>
+       </div>
+       <div class="start-side">
+        <div id="key" class="key" hidden>
+         <p class="chalk side-title">Así se responde</p>
+         <ol id="key-list" class="postures"></ol>
+         <p class="chalk side-note">Todos a la vez, cada uno en su sitio. Nadie queda eliminado. Con equipos, cada letra la lee un equipo y puntúa ese equipo.</p>
+        </div>
+        <ul id="how" class="how chalk" hidden>
+         <li>Lee la definición y toca <b>A</b>, <b>B</b> o <b>C</b>. También puedes pulsar esas teclas.</li>
+         <li><b>Pasapalabra</b> (tecla P) deja la letra para la siguiente vuelta.</li>
+         <li>Cada acierto trae un <b>reto de movimiento</b> de 15 a 20 segundos. El reloj se para mientras te mueves.</li>
+         <li>Si se acaba el tiempo, puedes terminar con calma.</li>
+        </ul>
+       </div>
+      </section>
+
+      <section id="view-game" class="game" hidden aria-label="Rosco">
+       <div class="ring-box">
+        <svg id="ring" viewBox="-300 -300 600 600" role="img" aria-label="Rosco"></svg>
+        <div class="ring-centre" aria-hidden="true">
+         <span id="centre-letter" class="chalk centre-letter"></span>
+         <span id="centre-note" class="chalk centre-note"></span>
+         <span id="centre-time" class="chalk centre-time"></span>
+         <ol id="centre-teams" class="team-score" hidden></ol>
+        </div>
+       </div>
+       <div id="panel" class="panel" tabindex="-1"></div>
+      </section>
+
+      <section id="view-end" class="end" hidden aria-labelledby="end-title">
+       <div class="end-head">
+        <p class="chalk tag" id="end-tag"></p>
+        <h1 id="end-title" class="chalk title"></h1>
+        <p id="end-line" class="chalk lead"></p>
+        <ol id="end-teams" class="team-score big" hidden></ol>
+        <div class="start-buttons">
+         <button type="button" id="again" class="sign gold"><strong>Jugar otra vez</strong></button>
+         <a id="out" class="sign"><strong>Volver a las puertas</strong></a>
+        </div>
+       </div>
+       <div class="end-review">
+        <h2 class="chalk side-title" id="review-title">Para repasar</h2>
+        <ul id="review" class="review"></ul>
+       </div>
+      </section>
+
+     </div>
+    </div>
+    <div class="ledge">
+     <span class="eraser" aria-hidden="true"></span>
+     <span class="chalks" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+     <div class="tools">
+      <label class="toggle"><input type="checkbox" id="seated"> Variante sentada</label>
+      <button type="button" id="end-now" class="sign small" hidden><strong>Terminar</strong></button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="skirting" aria-hidden="true"></div>
+ </main>
+ <p id="live" class="sr-only" aria-live="polite"></p>
+ <script type="module" src="./pizarra.js"></script>
+</body>
+</html>

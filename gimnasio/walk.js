@@ -1,6 +1,7 @@
 const names = ['Vega', 'Kai', 'Lúa', 'Neo', 'Ada', 'Max', 'Nora', 'Leo'];
 const camera = document.getElementById('camera');
 const scene = document.getElementById('world');
+const stage = document.getElementById('scene');
 const sprite = document.getElementById('walker');
 const selector = document.getElementById('avatar');
 const ctx = sprite.getContext('2d');
@@ -24,6 +25,24 @@ function selectAvatar(index) {
   }
  }
  draw();
+}
+
+// Size the room picture for the screen. Floor and furniture sit in the lower 64 % of each picture,
+// so a short screen may crop the ceiling but never them; a tall one scrolls sideways instead.
+const BAND = .64;
+const shortLandscape = matchMedia('(orientation: landscape) and (max-height: 520px)');
+function fit() {
+ const W = camera.clientWidth, C = camera.clientHeight;
+ if (!W || !C) return;
+ const portrait = W < C;
+ // On a short landscape screen the game buttons live in the side margins.
+ const side = shortLandscape.matches ? 60 : 0;
+ const H = portrait ? Math.min(C, W * 4 / 3) : Math.min(Math.max(W / 1.5, C), C / BAND, (W - 2 * side) / 1.5);
+ const width = H * 1.5, wide = Math.max(W, width);
+ const top = H > C ? clamp(C - .97 * H, C - H, 0) : portrait ? C - H : (C - H) / 2;
+ stage.style.width = wide + 'px';
+ Object.assign(scene.style, {width: width + 'px', height: H + 'px', left: (wide - width) / 2 + 'px', top: top + 'px'});
+ document.body.classList.toggle('scrolls', wide > W + 1);
 }
 
 function heightAt(depth) { return .26 + (depth - .79) * .48; }
@@ -56,7 +75,7 @@ function draw(centerCamera = false) {
  sprite.style.top = y * 100 + '%';
  sprite.style.height = heightAt(y) * 100 + '%';
  sprite.style.zIndex = y < .79 ? 1 : 4;
- const relative = x * scene.clientWidth - camera.scrollLeft;
+ const relative = scene.offsetLeft + x * scene.clientWidth - camera.scrollLeft;
  if (centerCamera) camera.scrollLeft += relative - camera.clientWidth / 2;
  else camera.scrollLeft += relative - clamp(relative, camera.clientWidth * .35, camera.clientWidth * .65);
 }
@@ -115,6 +134,8 @@ function start() {
  if (frame === undefined) frame = requestAnimationFrame(tick);
 }
 
+export const position = () => ({x, y});
+
 export function walkTo(nextX, nextY, arrived, faceOnArrival) {
  arrows.clear();
  goal = {x: nextX, y: nextY, arrived, faceOnArrival};
@@ -124,10 +145,11 @@ export function walkTo(nextX, nextY, arrived, faceOnArrival) {
 export function enterRoom(next) {
  if (room === next) return;
  stop();
- x = next === 'store' ? .08 : room ? .78 : .48;
+ // In the store the pupil steps in by the front corner, clear of the cone that blocks the door.
+ x = next === 'store' ? .06 : room ? .78 : .5;
  facing = next === 'gym' && room ? -1 : 1;
  room = next;
- y = .85;
+ y = next === 'store' ? .94 : .85;
  phase = 0;
  draw(true);
 }
@@ -140,7 +162,8 @@ selector.onchange = () => {
  selectAvatar(selector.selectedIndex);
  try { localStorage.setItem('gym-avatar', String(avatar)); } catch {}
 };
-window.addEventListener('resize', () => draw(true));
+fit();
+new ResizeObserver(() => { fit(); draw(true); }).observe(camera);
 window.addEventListener('keydown', event => {
  if (!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key) || document.querySelector('dialog[open]')) return;
  event.preventDefault();

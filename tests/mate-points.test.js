@@ -3,8 +3,10 @@ import assert from 'node:assert/strict';
 import {existsSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {makeGame,stepGame,setInput,imprison,snapshot,POINTS} from '../mate/sim.js';
-import {HEROES} from '../mate/roster.js';
-import {ACTIONS,TALENT_ART,actionState} from '../mate/abilities.js';
+import {HEROES,STATS} from '../mate/roster.js';
+// Hits are plain unless a test asks for the rebound, so every outcome here is repeatable.
+const REBOUND=STATS.reboundChance;STATS.reboundChance=0;
+import {ACTIONS,actionState} from '../mate/abilities.js';
 import {equipment} from '../gimnasio/mission.js';
 import {stored} from '../gimnasio/store-layout.js';
 
@@ -54,17 +56,22 @@ test('puntos: ganar la ronda premia a todo el equipo',()=>{
  shotAt(g,b,a);stepGame(g);
  assert.equal(g.phase,'roundOver');assert.equal(a.points,POINTS.hit+POINTS.round);assert.equal(b.points,0);
 });
-test('habilidades: cada acción y cada talento tiene su imagen, y el estado refleja la jugada',()=>{
+test('habilidades: cada acción y cada definitiva tiene su imagen, y el estado refleja la jugada',()=>{
  const art=name=>fileURLToPath(new URL(`../mate/assets/abilities/${name}.svg`,import.meta.url));
- assert.equal(TALENT_ART.length,HEROES.length);
- for(const name of [...ACTIONS.map(action=>action.id),...TALENT_ART])assert.ok(existsSync(art(name)),name);
+ for(const name of [...ACTIONS.map(action=>action.id),...HEROES.map(hero=>hero.ult.art)])assert.ok(existsSync(art(name)),name);
  const g=setup(),a=player(g,'a');
  g.ball.holder='b';
- assert.equal(actionState('fire',a,g.ball).off,true);assert.equal(actionState('catch',a,g.ball).off,false);
+ assert.equal(actionState('fire',a,g).off,true);assert.equal(actionState('catch',a,g).off,false);
  g.ball.holder='a';g.ball.held=2.5;
- assert.equal(actionState('fire',a,g.ball).off,false);assert.equal(actionState('fire',a,g.ball).hold,.5);assert.equal(actionState('catch',a,g.ball).off,true);
- a.slowed=4;assert.deepEqual(actionState('dash',a,g.ball),{wait:4,total:10,locked:true});
- a.specialCooldown=30;assert.equal(actionState('special',a,g.ball).wait,30);
+ assert.equal(actionState('fire',a,g).off,false);assert.equal(actionState('fire',a,g).hold,.5);assert.equal(actionState('catch',a,g).off,true);
+ a.slowed=4;assert.deepEqual(actionState('dash',a,g),{wait:4,total:10,locked:true});
+ // Vega's ultimate: recharging, then ready, then running.
+ a.ultCooldown=30;assert.deepEqual(actionState('ult',a,g),{off:false,wait:30,total:HEROES[0].ult.recharge,active:false});
+ a.ultCooldown=0;a.turbo=3;assert.equal(actionState('ult',a,g).active,true);
+ // Nora's comet needs the ball in hand; Kai's magnet needs not to have it; Inés needs someone in prison.
+ a.character=6;assert.equal(actionState('ult',a,g).off,false);g.ball.holder='b';assert.equal(actionState('ult',a,g).off,true);
+ a.character=1;assert.equal(actionState('ult',a,g).off,false);
+ a.character=12;assert.equal(actionState('ult',a,g).off,true);imprison(g,g.players.find(p=>p.team===0&&p.id!=='a'));assert.equal(actionState('ult',a,g).off,false);
 });
 test('almacén: cada material tiene su parte pintada del cuarto ordenado',()=>{
  const art=name=>fileURLToPath(new URL(`../gimnasio/assets/${name}.webp`,import.meta.url));

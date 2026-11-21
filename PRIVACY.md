@@ -7,7 +7,7 @@ Quedan fuera: nombres y apellidos reales, correos de alumnos, identificadores es
 ## Comportamiento actual
 
 - Mate Arena sólo acepta el número de un personaje prefijado. El anfitrión genera su nombre ficticio; los campos adicionales del perfil se descartan.
-- No hay cuentas de alumnos, nombres libres, chat, subida de archivos, captura de cámara ni micrófono en la aplicación.
+- No hay cuentas con contraseña de alumnos, nombres libres, chat, subida de archivos, captura de cámara ni micrófono en la aplicación.
 - La aplicación no tiene un mecanismo para escribir partidas o resultados en GitHub. El repositorio y las partidas son sistemas separados.
 - El navegador guarda preferencias y progreso local. Las credenciales temporales de recuperación de Mate se guardan en `sessionStorage`; no se incluyen en el código ni en la lista pública de jugadores.
 - El online transmite identificadores de sesión, personajes, controles y estado de la partida. Los proveedores de conexión reciben tráfico y metadatos de red. El relevo público no constituye un canal privado ni es un lugar donde transmitir información de alumnos. Véase [la descripción del servicio online](docs/07-mate-arena.md).
@@ -25,6 +25,16 @@ Si se detecta una publicación accidental, retirar el acceso al contenido y revi
 ## Revisión del 20 de noviembre de 2026
 
 Se revisaron los archivos versionados y los 63 blobs distintos alcanzables en el historial existente. No se encontraron datos identificables de alumnos ni patrones de claves privadas en esa revisión. El único correo dentro de los textos era el contacto público de soporte incluido en PeerJS. Los siete blobs binarios correspondían a ilustraciones generadas y capturas de pruebas del juego; no a imágenes de alumnos.
+
+## Jugador y registro de El Pabellón
+
+- El alumno se identifica con curso, grupo, número de lista y uno de ocho personajes ficticios, o, si el profe lo activa y el navegador tiene el paquete de clase de La Lupa, eligiendo su alias de una lista. No existe ningún campo donde escribir un nombre.
+- Ese código o alias y lo que juega se guardan en el navegador del ordenador usado, en las claves `pabellon-jugador` y `pabellon-registro`. El despacho permite descargarlo o borrarlo. El código y el alias siguen siendo datos personales para quien conoce la lista de clase.
+- Por defecto nada de eso sale del navegador. Sólo si el profe conecta en el despacho su hoja de Google (dirección del Apps Script y código de aula, guardados en ese navegador en la clave compartida `aula-nube`, nunca en el código), se envían a esa hoja el código o alias, el curso, las notas orientativas y las anotaciones. La hoja y la correspondencia con los nombres nunca forman parte del repositorio. Véanse [registro y notas](docs/10-registro-y-notas.md) y el [contrato común con multiplicopolis](intercambio/CONTRATO.md).
+- El Pabellón lee, sin modificarlos, la conexión y el paquete de clase que La Lupa haya guardado en el mismo navegador. Los avatares del paquete se muestran en la entrada y no salen del dispositivo.
+- El servidor `backend/apps-script/aula.gs` no se ha probado todavía con Google. Antes de usarlo con alumnado real: cuenta educativa del centro, permiso de la dirección, consulta a la DPD y familias informadas.
+- La clave del despacho se guarda cifrada con sal en el navegador y sólo evita que el alumnado abra el despacho en ese ordenador.
+- El archivo que descarga el profe desde el despacho es una hoja de cálculo con datos de alumnado: no debe subirse al repositorio. La comprobación previa a publicar rechaza ese formato.
 
 ## Aventura del gimnasio
 

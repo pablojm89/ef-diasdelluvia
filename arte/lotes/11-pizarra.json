@@ -1,0 +1,130 @@
+{
+ "_titulo": "La Pizarra · Rosco de Educación Física",
+ "_nota": "Lugar La Pizarra (pizarra/). Mientras no llegan, la pizarra, las posturas y la tiza están dibujadas con CSS y SVG; cada imagen integrada sustituye sola a su versión provisional gracias al índice pizarra/assets/pintados.js.",
+ "_indice": {
+  "archivo": "pizarra/assets/pintados.js",
+  "nombre": "PINTADOS"
+ },
+ "pizarra-fondo": {
+  "nombre": "Pizarra de frente",
+  "destino": "pizarra/assets/pizarra-fondo.webp",
+  "ancho": 1536,
+  "alto": 1024,
+  "transparente": false,
+  "listo": false,
+  "clave": "fondo",
+  "prompt": "La pizarra verde del gimnasio (la de la izquierda de gimnasio/assets/gym.webp) vista totalmente de frente, sin perspectiva, llenando todo el lienzo. Marco de madera color miel con vetas, recto y del mismo grosor en los cuatro lados: ocupa exactamente los 64 px exteriores de cada borde y llega hasta el borde de la imagen, sin pared alrededor y sin repisa. El interior es pizarra verde oliva mate (#3c4a35 a #4a5540) con restos muy suaves de tiza borrada y alguna marca de borrador, repartidos de forma uniforme y sin dibujos, letras ni jugadas: el centro debe quedar despejado porque el juego dibuja encima el rosco. Luz cálida y suave desde la izquierda. Se usará estirada como marco de nueve partes, así que las esquinas deben ser limpias."
+ },
+ "pizarra-borrador": {
+  "nombre": "Borrador de pizarra",
+  "destino": "pizarra/assets/pizarra-borrador.webp",
+  "ancho": 360,
+  "alto": 160,
+  "transparente": true,
+  "listo": false,
+  "clave": "borrador",
+  "prompt": "Borrador de pizarra de madera clara con fieltro gris claro manchado de tiza blanca, visto de frente y un poco desde arriba, tumbado como si descansara en la repisa. Como el de assets/door-pizarra.webp."
+ },
+ "pizarra-tizas": {
+  "nombre": "Tizas de colores",
+  "destino": "pizarra/assets/pizarra-tizas.webp",
+  "ancho": 360,
+  "alto": 120,
+  "transparente": true,
+  "listo": false,
+  "clave": "tizas",
+  "prompt": "Cuatro tizas cilíndricas tumbadas en fila horizontal, ligeramente desordenadas: blanca, amarilla, rosa y azul claro, gastadas por un extremo y con un poco de polvo de su color. Vistas de frente y un poco desde arriba."
+ },
+ "pizarra-postura-a": {
+  "nombre": "Respuesta A: brazos arriba",
+  "destino": "pizarra/assets/pizarra-postura-a.webp",
+  "ancho": 400,
+  "alto": 560,
+  "transparente": true,
+  "listo": false,
+  "clave": "postura-a",
+  "prompt": "La alumna de gimnasio/assets/pupil-0.webp (misma cara, pelo y chándal), de cuerpo entero y totalmente de frente, de pie con los pies separados a la anchura de las caderas y los dos brazos estirados hacia arriba formando una V, palmas hacia delante, sonriendo. Postura clara y simétrica que se reconozca a 120 px de alto. Las seis posturas de este lote son la misma niña con la misma ropa, encuadre y escala."
+ },
+ "pizarra-postura-b": {
+  "nombre": "Respuesta B: manos a la cintura",
+  "destino": "pizarra/assets/pizarra-postura-b.webp",
+  "ancho": 400,
+  "alto": 560,
+  "transparente": true,
+  "listo": false,
+  "clave": "postura-b",
+  "prompt": "La misma alumna de pizarra-postura-a, de cuerpo entero y totalmente de frente, de pie con los pies separados y las dos manos apoyadas en la cintura con los codos hacia fuera (brazos en jarras), sonriendo. Mismo encuadre y escala que pizarra-postura-a."
+ },
+ "pizarra-postura-c": {
+  "nombre": "Respuesta C: en cuclillas",
+  "destino": "pizarra/assets/pizarra-postura-c.webp",
+  "ancho": 400,
+  "alto": 560,
+  "transparente": true,
+  "listo": false,
+  "clave": "postura-c",
+  "prompt": "La misma alumna de pizarra-postura-a, de frente, agachada en cuclillas con los talones apoyados, la espalda recta y los brazos estirados hacia delante a la altura de los hombros para mantener el equilibrio. Pies a la misma altura que en pizarra-postura-a: la figura ocupa sólo la mitad inferior del lienzo."
+ },
+ "pizarra-postura-a-sentado": {
+  "nombre": "Respuesta A sentada: brazos arriba",
+  "destino": "pizarra/assets/pizarra-postura-a-sentado.webp",
+  "ancho": 400,
+  "alto": 560,
+  "transparente": true,
+  "listo": false,
+  "clave": "postura-a-sentado",
+  "prompt": "La misma alumna de pizarra-postura-a, sentada de frente en una silla escolar (asiento y respaldo de madera clara, patas metálicas verde azulado), con la espalda recta, los pies apoyados en el suelo y los dos brazos estirados hacia arriba formando una V. Mismo encuadre y escala que pizarra-postura-a."
+ },
+ "pizarra-postura-b-sentado": {
+  "nombre": "Respuesta B sentada: manos a la cintura",
+  "destino": "pizarra/assets/pizarra-postura-b-sentado.webp",
+  "ancho": 400,
+  "alto": 560,
+  "transparente": true,
+  "listo": false,
+  "clave": "postura-b-sentado",
+  "prompt": "La misma alumna y la misma silla de pizarra-postura-a-sentado, sentada de frente con la espalda recta, los pies apoyados y las dos manos en la cintura con los codos hacia fuera (brazos en jarras)."
+ },
+ "pizarra-postura-c-sentado": {
+  "nombre": "Respuesta C sentada: manos a los tobillos",
+  "destino": "pizarra/assets/pizarra-postura-c-sentado.webp",
+  "ancho": 400,
+  "alto": 560,
+  "transparente": true,
+  "listo": false,
+  "clave": "postura-c-sentado",
+  "prompt": "La misma alumna y la misma silla de pizarra-postura-a-sentado, vista de frente, con el tronco inclinado hacia delante sobre las rodillas y las dos manos tocando los tobillos, la cabeza baja pero visible. Es la versión sentada de «abajo»."
+ },
+ "pizarra-robles-aplaude": {
+  "nombre": "El profe Robles aplaude",
+  "destino": "pizarra/assets/pizarra-robles-aplaude.webp",
+  "ancho": 760,
+  "alto": 550,
+  "transparente": true,
+  "listo": false,
+  "clave": "robles-aplaude",
+  "prompt": "El profe Robles de gimnasio/assets/robles-rest.webp (misma cara, cinta del pelo, polo naranja, silbato y pantalón azul), de cuerpo entero, en tres cuartos mirando hacia la derecha, aplaudiendo contento con las manos a la altura del pecho. Mismo encuadre y escala que robles-rest.webp: figura centrada con aire a los lados."
+ },
+ "pizarra-tiza-acierto": {
+  "nombre": "Marca de tiza: acierto",
+  "destino": "pizarra/assets/pizarra-tiza-acierto.webp",
+  "ancho": 160,
+  "alto": 160,
+  "transparente": true,
+  "listo": false,
+  "clave": "tiza-acierto",
+  "exacto": true,
+  "prompt": "Trazo de tiza verde claro sobre fondo transparente: un círculo dibujado a mano de un solo gesto, algo irregular y que se cierra pasándose un poco, con grano de tiza y bordes polvorientos. El círculo llena el lienzo dejando 10 px de margen; el centro vacío."
+ },
+ "pizarra-tiza-fallo": {
+  "nombre": "Marca de tiza: fallo",
+  "destino": "pizarra/assets/pizarra-tiza-fallo.webp",
+  "ancho": 160,
+  "alto": 160,
+  "transparente": true,
+  "listo": false,
+  "clave": "tiza-fallo",
+  "exacto": true,
+  "prompt": "Trazo de tiza rosa coral sobre fondo transparente: un aspa grande de dos trazos rápidos dibujada a mano, con grano de tiza y bordes polvorientos. Llena el lienzo dejando 14 px de margen."
+ }
+}

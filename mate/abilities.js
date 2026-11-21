@@ -1,33 +1,48 @@
 // What the player can do, in the order of the ability bar, and the picture of each ability.
-import {HEROES} from './roster.js';
+import {HEROES, STATS} from './roster.js';
+
+import {PINTADOS} from './assets/abilities/pintados.js';
 
 const art = new URL('./assets/abilities/', import.meta.url);
-// Change to 'webp' once the painted icons described in docs/arte/peticiones-imagenes.md are in place.
-const ART_FORMAT = 'svg';
-export const abilityArt = id => new URL(id + '.' + ART_FORMAT, art).href;
+// Painted icons replace the vector ones one by one as scripts/integrar_arte.py brings them in.
+export const abilityArt = id => new URL(id + (PINTADOS.includes(id) ? '.webp' : '.svg'), art).href;
 
 export const ACTIONS = [
- {id: 'pass', key: 'Q', name: 'Pasar', detail: 'Pasa la pelota al compañero más cercano.'},
- {id: 'catch', key: 'E', name: 'Atrapar', detail: 'Atrapa al vuelo un tiro rival.'},
- {id: 'dash', key: 'SHIFT', name: 'Esquivar', detail: 'Esquiva rápida: la pelota no te toca.'},
+ {id: 'pass', key: 'Q', name: 'Pasar', detail: 'Pasa por alto al compañero marcado con la flecha azul.'},
+ {id: 'catch', key: 'E', name: 'Atrapar', detail: 'Atrapa al vuelo un tiro rival. Recarga de 15 s.'},
+ {id: 'dash', key: 'SHIFT', name: 'Esquivar', detail: 'Esquiva rápida: la pelota no te toca. Recarga de 15 s.'},
  {id: 'fire', key: 'ESPACIO', name: 'Lanzar', detail: 'Lanza hacia donde apuntas.'},
- {id: 'special', key: 'F', name: 'Imparable', detail: 'Tiro que nadie puede atrapar. Recarga de 60 s.'},
- {id: 'gaze', key: 'G', name: 'Mirada', detail: 'Ralentiza al rival y bloquea su esquiva 10 s. Recarga de 60 s.'},
 ];
+export const ULT_KEY = 'F';
 
-// One icon per hero talent, in roster order.
-export const TALENT_ART = ['pase-expres', 'iman', 'lectura', 'zancada', 'tirachinas', 'guante', 'cometa',
- 'finta', 'manos', 'avance', 'contraataque', 'relevo', 'salida'];
-export const talentArt = character => abilityArt(TALENT_ART[character] || TALENT_ART[0]);
+export const ultArt = character => abilityArt((HEROES[character] || HEROES[0]).ult.art);
+
+// Whether the hero's ultimate is happening right now.
+function ultActive(id, me, game) {
+ const ball = game.ball;
+ if (id === 'arenga') return me.turbo > 0;
+ if (id === 'centella') return me.flash > 0;
+ if (id === 'gigante') return me.giant > 0;
+ if (id === 'burbuja') return me.shield > 0;
+ if (id === 'red') return game.net?.[me.team] > 0;
+ if (id === 'espejismo') return !!game.decoys?.some(copy => copy.owner === me.id);
+ if (id === 'iman') return ball.magnet === me.id;
+ if (id === 'quietos') return game.players.some(p => p.id !== me.id && p.frozen > 0);
+ if (id === 'mirada') return game.players.some(p => p.team !== me.team && p.slowed > 0);
+ const shot = {teledirigida: 'homing', cometa: 'comet', bumeran: 'boomerang'}[id];
+ return !!shot && ball.live && ball.kind === shot && ball.owner === me.id;
+}
 
 // wait/total: seconds left of a recharge. off: cannot be used now. active: happening now.
-export function actionState(id, me, ball) {
- const stats = HEROES[me.character].stats, holding = ball.holder === me.id;
+export function actionState(id, me, game) {
+ const ball = game.ball, holding = ball.holder === me.id;
  if (id === 'fire') return {off: !holding, active: me.throwFlash > 0, hold: holding ? Math.min(1, ball.held / 5) : 0};
  if (id === 'pass') return {off: !holding};
- if (id === 'catch') return {off: holding, wait: me.catchCooldown, total: stats.catchRecovery, active: me.catchTime > 0};
+ if (id === 'catch') return {off: holding, wait: me.catchCooldown, total: STATS.catchRecovery, active: me.catchTime > 0};
  if (id === 'dash') return me.slowed > 0 ? {wait: me.slowed, total: 10, locked: true}
-  : {wait: me.dashCooldown, total: stats.dashRecovery, active: me.dashTime > 0};
- if (id === 'special') return {off: !holding, wait: me.specialCooldown, total: 60, active: ball.live && ball.special && ball.owner === me.id};
- return {wait: me.gazeCooldown, total: 60};
+  : {wait: me.dashCooldown, total: STATS.dashRecovery, active: me.dashTime > 0};
+ const ult = HEROES[me.character].ult;
+ const off = me.frozen > 0 || (ult.ball === 'held' && !holding) || (ult.ball === 'free' && holding)
+  || (ult.id === 'fuga' && !game.players.some(p => p.team === me.team && p.prison));
+ return {off, wait: me.ultCooldown, total: ult.recharge, active: ultActive(ult.id, me, game)};
 }

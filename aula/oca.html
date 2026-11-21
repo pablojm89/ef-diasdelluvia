@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+ <meta name="theme-color" content="#142e30">
+ <title>La oca cooperativa · El Aula · El Pabellón</title>
+ <link rel="icon" href="../assets/mark.svg" type="image/svg+xml">
+ <link rel="stylesheet" href="../comun/base.css">
+ <link rel="stylesheet" href="./aula.css">
+</head>
+<body>
+ <a class="skip" href="#main">Saltar al contenido</a>
+ <main id="main" tabindex="-1">
+  <!-- Before playing: how many teams and how many rounds. -->
+  <section id="setup" class="wall aula-wall" aria-labelledby="setup-title">
+   <div class="frieze"></div>
+   <div class="wall-inner">
+    <p class="eyebrow">El Aula · Pantalla digital</p>
+    <h1 id="setup-title">La oca cooperativa</h1>
+    <p class="lead">Un equipo tira el dado y <b>toda la clase hace el reto</b>. Ganamos si todos los equipos llegan a la meta.</p>
+    <div class="setup paper">
+     <div id="resume" class="start-row" hidden>
+      <button type="button" id="resume-button" class="sign gold big"><strong>Seguir la partida guardada</strong><span id="resume-text" class="fine"></span></button>
+     </div>
+     <fieldset>
+      <legend class="field-label">Equipos</legend>
+      <div class="choices" id="team-choices"></div>
+     </fieldset>
+     <fieldset>
+      <legend class="field-label">Rondas</legend>
+      <div class="choices" id="round-choices"></div>
+     </fieldset>
+     <ul class="rules" id="rules"></ul>
+     <div class="start-row"><button type="button" id="start" class="sign gold big"><strong>Empezar partida</strong></button></div>
+    </div>
+   </div>
+   <div class="skirting"></div>
+  </section>
+
+  <!-- The game: the board and the side with the die. -->
+  <section id="game" class="game wall aula-wall" hidden aria-label="Tablero de la oca">
+   <div class="board-wrap" id="board-wrap"><svg id="board" viewBox="0 0 1536 1024" role="img" aria-label="Tablero en espiral de 31 casillas"></svg></div>
+   <aside class="side" aria-label="Turno">
+    <p class="eyebrow" id="round-label">Ronda 1 de 8</p>
+    <div class="turn"><span class="team-chip" id="turn-team"></span><span class="help" id="turn-help"></span></div>
+    <div class="dice-box"><div class="die" id="die" aria-hidden="true"></div></div>
+    <button type="button" id="roll" class="sign gold big"><strong>Tirar el dado</strong></button>
+    <p class="status" id="oca-status" role="status" aria-live="polite"></p>
+    <ul class="teams" id="teams"></ul>
+    <div class="side-links"><button type="button" id="show-rules">Reglas</button><button type="button" id="quit">Terminar partida</button></div>
+   </aside>
+  </section>
+ </main>
+
+ <dialog id="reto" class="reto" aria-labelledby="reto-title">
+  <div class="reto-head"><span class="family" id="reto-family"></span><span class="everyone" id="reto-who">Toda la clase a la vez · cada uno en su sitio</span></div>
+  <p class="news" id="reto-news" hidden></p>
+  <h2 id="reto-title"></h2>
+  <p class="challenge-text" id="reto-text"></p>
+  <p class="seated-box"><strong>Variante sentada</strong><span id="reto-seated"></span></p>
+  <p class="observe"><strong>Qué observar</strong><span id="reto-criterion"></span></p>
+  <div class="clock"><output id="reto-clock">0:40</output><button type="button" id="reto-start" class="sign"><strong>Empezar</strong></button></div>
+  <div class="reto-foot"><p class="status" id="reto-status" role="status"></p><button type="button" id="reto-done" class="sign gold"><strong>Hecho: siguiente turno</strong></button></div>
+ </dialog>
+
+ <dialog id="rules-dialog" aria-labelledby="rules-title">
+  <form method="dialog"><button class="close">Cerrar</button></form>
+  <h2 id="rules-title">Cómo se juega</h2>
+  <ul class="rules" id="rules-again"></ul>
+  <p>Los equipos se turnan para tirar el dado. El reto de la casilla lo hacen <b>todos los equipos a la vez</b>, cada uno en su sitio; quien lo necesite hace la variante sentada. Nadie retrocede ni pierde turnos. Si pasáis de la meta, os quedáis en ella. Un equipo que ya ha llegado sigue tirando el dado, pero para el equipo que va más atrás.</p>
+ </dialog>
+
+ <dialog id="final" class="final" aria-labelledby="final-title">
+  <p class="eyebrow" id="final-eyebrow">Fin de la partida</p>
+  <h2 id="final-title"></h2>
+  <p id="final-text"></p>
+  <div class="finish-teams" id="final-teams"></div>
+  <div class="start-row"><button type="button" id="again" class="sign gold"><strong>Nueva partida</strong></button><a class="sign" href="./"><strong>Volver al Aula</strong></a></div>
+ </dialog>
+ <script type="module" src="./oca.js"></script>
+</body>
+</html>

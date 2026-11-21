@@ -53,9 +53,18 @@ body[data-view=game] .arcade-header,body[data-view=game] .skip{display:none}
 .ability[data-mode=locked] .disc img{filter:grayscale(1) brightness(.5)}
 .ability[data-mode=locked] .disc{box-shadow:0 0 0 2px #0a1626,0 0 0 4px #c7a1ff,0 4px 10px #000a}
 .ability[data-command=fire] .disc::after{content:'';position:absolute;inset:-7px;border-radius:50%;background:conic-gradient(#ff8a5c var(--hold,0deg),transparent 0);mask:radial-gradient(closest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));-webkit-mask:radial-gradient(closest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));pointer-events:none}
-.ability.passive{cursor:help;margin-right:calc(var(--s)*.18);padding-right:calc(var(--s)*.3);width:auto;border-right:1px solid #47617699}
-.ability.passive .disc{width:calc(var(--s)*.84);height:calc(var(--s)*.84);margin-top:calc(var(--s)*.08);box-shadow:0 0 0 2px #0a1626,0 0 0 4px #ffe9a8,0 4px 10px #000a}
-.ability.passive kbd{background:#5a4a1e;border-color:#ffe9a8;color:#fff3cf}
+/* The ultimate: a bigger golden circle that fills as it recharges and throbs when it is ready. */
+.ability.ult{width:calc(var(--s)*1.22);margin-left:calc(var(--s)*.18);padding-left:calc(var(--s)*.3);box-sizing:content-box;border-left:1px solid #47617699}
+.ability.ult .disc{width:calc(var(--s)*1.22);height:calc(var(--s)*1.22);margin-top:calc(var(--s)*-.22);box-shadow:0 0 0 2px #0a1626,0 0 0 5px #b98a2e,0 4px 10px #000a}
+.ability.ult kbd{background:#5a4a1e;border-color:#ffe9a8;color:#fff3cf}
+.ability.ult em{display:block;max-width:calc(var(--s)*1.6);color:#ffe9a8;font-size:.58rem;white-space:normal;text-align:center}
+.ability.ult[data-mode=ready] .disc{box-shadow:0 0 0 2px #0a1626,0 0 0 5px #ffe07a,0 0 22px 6px #ffd36bcc,0 4px 10px #000a;animation:ult-ready 1s ease-in-out infinite}
+.ability.ult[data-mode=ready] kbd{animation:ult-key 1s ease-in-out infinite}
+.ability.ult[data-mode=active] .disc{box-shadow:0 0 0 2px #0a1626,0 0 0 6px #fff,0 0 26px 8px #fff9}
+.ability.ult[data-mode=off] .disc{box-shadow:0 0 0 2px #0a1626,0 0 0 5px #b98a2e,0 4px 10px #000a}
+.ability.ult[data-mode=off] .disc img{filter:grayscale(.5) brightness(.75)}
+@keyframes ult-ready{50%{transform:scale(1.09);box-shadow:0 0 0 2px #0a1626,0 0 0 6px #fff3cf,0 0 34px 12px #ffd36b,0 4px 10px #000a}}
+@keyframes ult-key{50%{background:#ffe07a;color:#3a2b0a}}
 
 /* Movement stick, shown for fingers only. */
 .stick-zone{display:none;position:absolute;z-index:3;left:0;bottom:0;width:46%;top:calc(var(--top) + 64px);touch-action:none}
@@ -67,11 +76,10 @@ body[data-view=game] .arcade-header,body[data-view=game] .skip{display:none}
 /* Fingers: stick on the left, ability circles fanned around the throw button on the right. */
 body[data-input=touch] .stick-zone{display:block}
 body[data-input=touch] #game-view{--s:clamp(46px,13.6dvh,70px)}
-body[data-input=touch] .ability-bar{left:auto;right:max(4px,env(safe-area-inset-right));bottom:var(--low);transform:none;width:calc(var(--s)*4.3);height:calc(var(--s)*4.35);padding:0;border:0;background:none;backdrop-filter:none;display:block;pointer-events:none}
+body[data-input=touch] .ability-bar{left:auto;right:max(4px,env(safe-area-inset-right));bottom:var(--low);transform:none;width:calc(var(--s)*4.3);height:calc(var(--s)*5.1);padding:0;border:0;background:none;backdrop-filter:none;display:block;pointer-events:none}
 body[data-input=touch] .ability{position:absolute;pointer-events:auto}
 body[data-input=touch] .ability kbd{display:none}
 body[data-input=touch] .ability em{display:block;margin-top:-1px}
-body[data-input=touch] .ability.passive{display:none}
 body[data-input=touch] .ability .disc{opacity:.94}
 body[data-input=touch] .ability[data-command=fire]{right:calc(var(--s)*.35);bottom:calc(var(--s)*.3);width:calc(var(--s)*1.5)}
 body[data-input=touch] .ability[data-command=fire] .disc{width:calc(var(--s)*1.5);height:calc(var(--s)*1.5)}
@@ -79,32 +87,39 @@ body[data-input=touch] .ability[data-command=fire] em{font-size:.66rem}
 body[data-input=touch] .ability[data-command=catch]{right:calc(var(--s)*2.2);bottom:calc(var(--s)*.36)}
 body[data-input=touch] .ability[data-command=dash]{right:calc(var(--s)*1.84);bottom:calc(var(--s)*1.62)}
 body[data-input=touch] .ability[data-command=pass]{right:calc(var(--s)*.66);bottom:calc(var(--s)*2.2)}
-body[data-input=touch] .ability[data-command=special]{right:calc(var(--s)*3.24);bottom:calc(var(--s)*1.34)}
-body[data-input=touch] .ability[data-command=gaze]{right:calc(var(--s)*1.81);bottom:calc(var(--s)*3.05)}
+body[data-input=touch] .ability.ult{right:calc(var(--s)*2.1);bottom:calc(var(--s)*3.22);width:calc(var(--s)*1.3);margin:0;padding:0;border:0}
+body[data-input=touch] .ability.ult .disc{width:calc(var(--s)*1.3);height:calc(var(--s)*1.3);margin:0}
+body[data-input=touch] .ability.ult em{max-width:none;white-space:nowrap}
 body[data-input=touch] .player-chip .match-talent summary span{display:none}
 
 /* Players' score table: at the end of the match, or while Tab is held. */
-.results{position:absolute;inset:0;z-index:8;display:grid;place-items:center;padding:12px;background:#07142499;backdrop-filter:blur(4px)}
+.results{position:absolute;inset:0;z-index:8;display:grid;grid-template-columns:minmax(0,1fr);place-items:center;padding:12px;background:#07142499;backdrop-filter:blur(4px)}
 .results[hidden]{display:none}
-.results-card{width:min(760px,100%);max-height:100%;display:flex;flex-direction:column;gap:10px;padding:clamp(12px,2.6dvh,24px);border-radius:16px;background:#11263bf2;border:2px solid #c8a76d;box-shadow:0 18px 50px #000a;text-align:center}
-.results-card h2{font-size:clamp(1.1rem,3.4dvh,1.7rem);color:#ffe2a2}
-.results-teams{display:flex;justify-content:center;align-items:center;gap:18px;margin-bottom:6px}
-.results-teams div{display:grid;min-width:120px}.results-teams span{font-size:.7rem;font-weight:850;letter-spacing:.12em}.results-teams strong{font-size:clamp(1.6rem,6dvh,2.6rem);line-height:1}.results-teams small{color:var(--muted);font-size:.7rem}
-.results-teams .team-0{color:#9cffee}.results-teams .team-1{color:#ffd295}.results-teams i{color:#ffebad;font-size:1.4rem;font-style:normal}
-.results-scroll{overflow:auto;min-height:0;border-radius:10px;border:1px solid #2f4a63}
-.results table{width:100%;border-collapse:collapse;font-size:clamp(.66rem,1.9dvh,.86rem);font-variant-numeric:tabular-nums}
-.results thead th{position:sticky;top:0;padding:6px 8px;background:#0c1d30;color:var(--muted);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase}
-.results td,.results tbody th{padding:4px 8px;border-top:1px solid #23394f;text-align:center}
-.results tbody th{display:flex;align-items:center;gap:8px;text-align:left;font-weight:800}
-.results tbody th img{width:34px;height:34px;border-radius:50%;background:#1f3a55;image-rendering:pixelated;object-fit:cover}
-.results tbody th small{display:block;font-size:.58rem;letter-spacing:.1em;font-weight:700}
-.results tr.team-0 th small{color:#75efdf}.results tr.team-1 th small{color:#ffb38e}
-.results tr.mine{background:#ffe9a81f}.results tr.mine th{color:#ffedac}
-.results .points{font-weight:900;color:var(--gold);font-size:1.05em}.results .place{color:var(--muted)}
-.mvp{margin-left:5px;padding:1px 6px;border-radius:99px;background:var(--gold);color:#3a2b0a;font-size:.58rem;letter-spacing:.08em}
-.results-legend{font-size:.64rem;color:var(--muted);line-height:1.4}
+/* The table is the school's: a cream board in a wooden frame, like the hub and La Grada. A phone keeps hits, catches and points. */
+@media(max-width:560px){.results :is(th,td):is(:nth-child(5),:nth-child(6),:nth-child(7)){display:none}}
+.results-card{width:min(760px,100%);min-width:0;max-height:100%;display:flex;flex-direction:column;gap:8px;padding:clamp(10px,2.4dvh,22px) clamp(12px,2.6vw,26px);border:clamp(5px,1.2dvh,9px) solid #8a5a2b;border-radius:10px;background:linear-gradient(#fff6de,#f4e2b8);color:#2f2819;box-shadow:0 0 0 2px #4a2f14,inset 0 0 0 2px #c79a5a,0 18px 50px #000a;text-align:center}
+.results-card .eyebrow{color:#8a6a2c}
+.results-card h2{font:700 clamp(1.15rem,4dvh,1.9rem)/1.1 var(--serif);color:#1f3b39}
+.results-teams{display:flex;justify-content:center;align-items:center;gap:18px;margin-bottom:4px}
+.results-teams div{display:grid;justify-items:center;gap:2px;min-width:110px}.results-teams span{font-size:.72rem;font-weight:900;letter-spacing:.12em}
+.results-teams strong{min-width:1.4em;padding:0 .25em;border-radius:6px;background:#1f3b39;color:#fff3d9;font:700 clamp(1.5rem,6dvh,2.5rem)/1.1 var(--serif)}
+.results-teams small{color:#6a5a3c;font-size:.72rem}
+.results-teams .team-0{color:#197c86}.results-teams .team-1{color:#a6454a}.results-teams i{color:#8a6a2c;font-size:1.4rem;font-style:normal}
+.results-scroll{overflow:auto;min-height:0;border:2px solid #c9a769;border-radius:8px;background:var(--paper)}
+.results table{width:100%;border-collapse:collapse;font-size:clamp(.66rem,1.9dvh,.88rem);font-variant-numeric:tabular-nums}
+.results thead th{position:sticky;top:0;padding:6px 8px;background:#ead9b6;color:#7a6230;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;text-align:center}
+.results td,.results tbody th{padding:4px 8px;border:0;text-align:center;white-space:nowrap}
+.results tbody tr{border-bottom:1px solid #e3cfa2}
+.results tbody th{display:flex;align-items:center;gap:8px;text-align:left;font-weight:800;color:#1f3b39}
+.results tbody th img{width:34px;height:34px;border-radius:50%;background:#f3d9ae;image-rendering:pixelated;object-fit:cover}
+.results tbody th small{display:block;font-size:.58rem;letter-spacing:.1em;font-weight:800}
+.results tr.team-0 th small{color:#197c86}.results tr.team-1 th small{color:#a6454a}
+.results tr.mine{background:#fff0c4}
+.results .points{font-weight:900;color:#1f3b39;font-size:1.05em}.results .place{color:#7a6230}
+.mvp{margin-left:5px;padding:1px 6px;border-radius:99px;background:#f2bd57;color:#3a2b0a;font-size:.58rem;letter-spacing:.08em}
+.results-legend{font-size:.68rem;color:#6a5a3c;line-height:1.4}
 .results-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
-.results-actions .button{min-width:0;width:auto;flex-direction:row;align-items:center;min-height:40px;padding:9px 18px;font-size:.9rem}
+.results-actions .sign{padding:8px 20px}
 .results.peek .results-actions,.results.peek #results-kicker{display:none}
 .results.peek{pointer-events:none}
 
@@ -120,4 +135,4 @@ body[data-input=touch] .player-chip .match-talent summary span{display:none}
 @media(max-width:1500px){.player-chip .match-talent summary span{display:none}.player-chip{padding-right:6px}}
 @media(max-width:480px){.player-chip .match-talent{display:none}.match-buttons{gap:4px}}
 @media(max-width:640px){.chip-text .eyebrow{display:none}}
-@media(prefers-reduced-motion:reduce){.chip-points.bump b{animation:none}}
+@media(prefers-reduced-motion:reduce){.chip-points.bump b,.ability.ult[data-mode=ready] .disc,.ability.ult[data-mode=ready] kbd{animation:none}}

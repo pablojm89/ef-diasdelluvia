@@ -1,0 +1,118 @@
+/* La Grada: the gym wall holds up to four framed matches. The match keeps its pixel art; the frame is the school's. */
+body{height:100dvh;overflow:hidden}
+.grada{min-height:0}
+
+/* A wooden shelf with the code input. */
+.bar{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:8px clamp(12px,3vw,32px);background:linear-gradient(#94653a,#7a4f29);border-bottom:3px solid #4a2f14;box-shadow:0 3px 8px #3a24124d;color:var(--cream)}
+.bar label{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.bar input::placeholder{color:#c9b58a;letter-spacing:.1em}
+.bar input{width:8.2em;padding:6px 10px;border:2px solid var(--wood);border-radius:5px;background:#fffaf0;color:#1f3b39;font:700 1.15rem/1.2 var(--serif);letter-spacing:.22em;text-transform:uppercase;text-align:center}
+.bar .sign{padding:6px 16px}.bar .sign strong{font-size:.98rem}
+.bar-status{flex:1;min-width:0;font-size:.86rem;font-weight:700;color:#ffe7b0}
+.bar-quiet{margin-left:auto;padding:6px 12px;border:1px solid #f2d9a466;border-radius:99px;background:#0000;color:var(--cream);font-size:.8rem;font-weight:700}
+.bar-quiet:hover{background:#ffffff1a}
+:fullscreen .hub-top{display:none}
+
+/* Empty wall: the teacher points at the box. */
+.empty{flex:1;display:flex;align-items:flex-end;justify-content:center;gap:clamp(8px,3vw,36px);padding:clamp(12px,3dvh,32px) 16px 0;min-height:0}
+.empty img{flex:none;width:auto;height:min(52dvh,330px);filter:drop-shadow(0 8px 10px #5a3a1a66)}
+.empty .paper{align-self:center;max-width:520px}
+.empty h1{margin:4px 0 6px;text-align:left}
+
+/* The mosaic: one, two side by side, or two by two. */
+.mosaic{flex:1;min-height:0;display:grid;gap:clamp(8px,1.4vw,18px);padding:clamp(8px,1.6dvh,18px) clamp(8px,1.6vw,22px);grid-template-columns:1fr;grid-auto-rows:minmax(0,1fr)}
+body[data-count="2"] .mosaic,body[data-count="3"] .mosaic,body[data-count="4"] .mosaic{grid-template-columns:1fr 1fr}
+
+.tile{container-type:size;position:relative;min-width:0;min-height:0;display:flex;flex-direction:column;border:clamp(4px,1.1cqmin,9px) solid #8a5a2b;border-radius:8px;background:#0e1c30;box-shadow:0 0 0 2px #4a2f14,inset 0 0 0 2px #c79a5a,0 10px 24px #5a3a1a77;overflow:hidden}
+
+.frame{display:flex;flex-direction:column;width:100%;height:100%}
+
+/* Scoreboard: a cream plate on top of the match, or down its left side when the tile is wide. */
+.board{flex:none;position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2cqw;padding:.7cqh 2.4cqw;background:linear-gradient(#fff6de,#efdcae);border-bottom:2px solid var(--wood);color:#2f2819}
+.side{display:flex;align-items:center;gap:1.6cqw;min-width:0}
+.side-1{justify-content:flex-end}
+.team-name{font-size:clamp(.6rem,3.6cqh,1.6rem);font-weight:900;letter-spacing:.12em}
+.side-0 .team-name{color:#197c86}.side-1 .team-name{color:#a6454a}
+.score{min-width:1.3em;padding:0 .25em;border-radius:6px;background:#1f3b39;color:#fff3d9;font:700 clamp(1.2rem,9cqh,4.6rem)/1.1 var(--serif);text-align:center;font-variant-numeric:tabular-nums}
+.middle{display:grid;justify-items:center;line-height:1.05;text-align:center}
+.room-code{display:flex;align-items:center;gap:.4em;font-size:clamp(.5rem,2.4cqh,.95rem);font-weight:800;letter-spacing:.14em;color:#7a6230}
+.tile[data-status=playing] .room-code::before{content:'';width:.7em;height:.7em;border-radius:50%;background:#c8412d;box-shadow:0 0 0 2px #c8412d44;animation:live 1.6s infinite}
+@keyframes live{50%{opacity:.35}}
+.timer{font:700 clamp(1.1rem,7.4cqh,3.6rem)/1.05 'Trebuchet MS',system-ui,sans-serif;font-variant-numeric:tabular-nums;color:#1f3b39}
+.round{font-size:clamp(.5rem,2.2cqh,.9rem);font-weight:800;letter-spacing:.1em;color:#5a4a2a}
+@container (min-aspect-ratio:17/10){
+ .frame{flex-direction:row}
+ .board{width:clamp(130px,19cqw,300px);grid-template-columns:1fr;grid-template-rows:1fr auto 1fr;gap:2cqh;padding:3cqh 1.4cqw;border-bottom:0;border-right:2px solid var(--wood)}
+ .side,.side-1{flex-direction:column;justify-content:center;gap:1cqh}
+ .side-1{flex-direction:column-reverse}
+ .team-name{font-size:clamp(.6rem,4.4cqh,1.7rem)}
+ .score{font-size:clamp(1.4rem,15cqh,6.5rem)}
+ .timer{font-size:clamp(1.1rem,10cqh,4.4rem)}
+ .room-code,.round{font-size:clamp(.5rem,3cqh,1rem)}
+}
+.remove{position:absolute;z-index:2;right:6px;bottom:6px;padding:2px 10px;border:1px solid #b9925c;border-radius:99px;background:#fff8e6;color:#5a4a2a;font-size:clamp(.6rem,3cqh,.8rem);font-weight:700;opacity:.4}
+.remove:hover,.remove:focus-visible{opacity:1}
+
+/* The match keeps its pixel art. Its own scoreboard band and bottom strip are cropped: the plate shows them bigger. */
+.screen{position:relative;flex:1;min-width:0;min-height:0;container-type:size;overflow:hidden;background:#0e1c30}
+.screen canvas{position:absolute;left:50%;top:50%;width:min(100cqw,calc(100cqh * 1200 / 610));height:auto;aspect-ratio:1200/760;transform:translate(-50%,calc(-50% - 1.4%));image-rendering:pixelated}
+
+/* Searching, changing room and lost link: a cream card over the empty court. */
+.notice{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1cqh;padding:3cqh 3cqw;background:#0b1b2ecc;text-align:center}
+.tile:is([data-status=playing],[data-status=paused],[data-status=over]) .notice{display:none}
+.chip{padding:.25em .9em;border-radius:99px;background:var(--gold);color:#3a2a0e;font-size:clamp(.55rem,2.4cqh,.85rem);font-weight:900;letter-spacing:.16em}
+.tile[data-status=lost] .chip{background:#f0c9b4;color:#7a2f22}
+.notice-title{font:600 clamp(1rem,6cqh,2.4rem)/1.1 var(--serif);color:#fff3d9}
+.notice-text{max-width:40em;font-size:clamp(.7rem,3cqh,1.15rem);color:#e7dcc2}
+.lineup{display:grid;grid-template-columns:1fr 1fr;gap:2cqw;width:min(100%,900px);margin-top:1cqh}
+.lineup:empty{display:none}
+.lineup .team{padding:1cqh 1.4cqw;border:2px solid var(--wood);border-radius:6px;background:var(--sign);color:#2f2819;text-align:left;overflow:hidden}
+.lineup h3{margin:0 0 .6cqh;font-size:clamp(.6rem,2.8cqh,1rem);letter-spacing:.12em}
+.lineup .team-0 h3{color:#197c86}.lineup .team-1 h3{color:#a6454a}
+.lineup h3 small{color:#7a6230;font-weight:700}
+.lineup ul{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,9.5em),1fr));gap:.4cqh 1cqw}
+.lineup li{display:flex;align-items:center;gap:.5em;font-size:clamp(.55rem,2.4cqh,.9rem);font-weight:700;white-space:nowrap;opacity:.7}
+.lineup li.ready{opacity:1}
+.lineup li span{overflow:hidden;text-overflow:ellipsis}
+.lineup li b{margin-left:auto;font-size:.75em;letter-spacing:.08em;color:#2c6b4a}
+.lineup img{width:2.1em;height:2.1em;border-radius:50%;background:#1f3a55;image-rendering:pixelated;object-fit:cover;object-position:top}
+
+/* Final whistle: everyone's points on a paper sheet. Markup comes from mate/hud.js. */
+.results{position:absolute;inset:0;display:flex;flex-direction:column;gap:1cqh;padding:2cqh 3cqw 6cqh;background:#0b1b2ed9;overflow:hidden}
+.results-title{font:600 clamp(.9rem,5.4cqh,2.2rem)/1.1 var(--serif);color:#ffe2a2;text-align:center}
+.results-body{flex:1;min-height:0;display:flex;flex-direction:column;gap:1cqh}
+.results-teams{display:flex;justify-content:center;align-items:center;gap:3cqw;color:var(--cream)}
+.results-teams div{display:grid;justify-items:center;min-width:6em}
+.results-teams span{font-size:clamp(.5rem,2.4cqh,.85rem);font-weight:900;letter-spacing:.12em}
+.results-teams strong{font:700 clamp(1rem,7cqh,3rem)/1 var(--serif)}
+.results-teams small{font-size:clamp(.5rem,2.2cqh,.8rem);color:#d9c9a3}
+.results-teams .team-0{color:#9cffee}.results-teams .team-1{color:#ffd295}
+.results-teams i{font-style:normal;color:#ffebad}
+.results-scroll{flex:0 1 auto;min-height:0;overflow:auto;border:2px solid #c9a769;border-radius:8px;background:var(--paper)}
+.results table{font-size:clamp(.5rem,2.6cqh,.95rem)}
+.results th,.results td{padding:.25em .6em;text-align:center}
+.results thead th{position:sticky;top:0;background:#ead9b6}
+.results tbody th{text-align:left;font-weight:800}
+.results tbody th img{width:2em;height:2em;margin-right:.5em;border-radius:50%;background:#1f3a55;image-rendering:pixelated;object-fit:cover;vertical-align:middle}
+.results tbody th span{display:inline-block;vertical-align:middle}
+/* A small tile keeps the essentials: hits, catches and points. */
+@container (max-width:640px){.results :is(th,td):is(:nth-child(5),:nth-child(6),:nth-child(7)){display:none}}
+.results tbody th small{display:block;font-size:.7em;letter-spacing:.1em}
+.results tr.team-0 th small{color:#197c86}.results tr.team-1 th small{color:#a6454a}
+.results .mvp{padding:0 .4em;border-radius:4px;background:#f2bd57;color:#3a2a0e;font-size:.75em}
+.results .points{font-weight:900;color:#1f3b39}
+.results .place{color:#7a6230}
+
+/* Phones and narrow windows: one match under another, the page scrolls. */
+@media (max-width:760px),(max-height:520px){
+ body{height:auto;overflow:auto}
+ .mosaic,body[data-count] .mosaic{grid-template-columns:1fr;grid-auto-rows:auto}
+ .tile{container-type:inline-size;aspect-ratio:1200/900}
+ .board{padding:4px 10px}
+ .team-name{font-size:.7rem}.score{font-size:1.5rem}.timer{font-size:1.3rem}.room-code,.round{font-size:.6rem}
+ .notice-title{font-size:1.2rem}.notice-text{font-size:.8rem}
+ .lineup{display:none}
+ .empty{flex-direction:column;align-items:center}
+ .empty img{height:180px}
+}
+@media(prefers-reduced-motion:reduce){.tile[data-status=playing] .room-code::before{animation:none}}

@@ -29,7 +29,7 @@ export function act(state,event){
  }else if(s.stage===2&&event.type==='place'){
   ok=!!item&&item.home===event.target&&!s.stored.includes(item.id);if(ok){s.stored.push(item.id);message=`Good! Put the ${item.en} away.`;if(s.stored.length===equipment.length)s.stage=3;}else message='Ese material necesita otro lugar. Mira los soportes o consulta la pista.';
  }else if(s.stage===3&&event.type==='add'){
-  ok=event.id in request&&(s.cart[event.id]||0)<request[event.id];if(ok){s.cart[event.id]=(s.cart[event.id]||0)+1;message='Added to the trolley. Puedes retirar una unidad tocando su contador.';}else message='Revisa el pedido: necesitamos cuatro conos, dos aros y una pelota blanda.';
+  ok=event.id in request&&(s.cart[event.id]||0)<request[event.id];if(ok){s.cart[event.id]=(s.cart[event.id]||0)+1;message='Added to the trolley. Si sobra, toca esa unidad en el carro para devolverla.';}else message='Revisa el pedido: necesitamos cuatro conos, dos aros y una pelota blanda.';
  }else if(s.stage===3&&event.type==='remove'){
   ok=(s.cart[event.id]||0)>0;if(ok)s.cart[event.id]--;
  }else if(s.stage===3&&event.type==='check'){

@@ -1,0 +1,82 @@
+/* Shared look of El Pabellón: the colours of the painted gym, the top bar, cream signs, the plaster wall,
+   paper sheets and dialogs. Every place links this file so that all of them belong to the same school. */
+:root{color-scheme:light dark;--ink:#142e30;--teal:#1f5753;--cream:#fff3d9;--gold:#ebc884;--sign:#e9d3a2;--wood:#463e28;--wall:#f0c79a;--paper:#fbf0d8;
+ --serif:Georgia,'Times New Roman',serif;font:16px/1.5 'Trebuchet MS',system-ui,sans-serif;color:#2c2417;background:var(--ink)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100dvh;display:flex;flex-direction:column;background:var(--ink)}
+h1,h2,p,ul,figure,fieldset{margin:0}ul{padding:0;list-style:none}fieldset{padding:0;border:0}
+a{color:inherit;text-decoration:none}
+button,select,input{font:inherit}button{cursor:pointer}
+a,button,select{touch-action:manipulation}
+:focus-visible{outline:3px solid #ffdb84;outline-offset:3px;border-radius:4px}
+[hidden]{display:none!important}
+.skip{position:fixed;top:-100px;left:12px;z-index:30;padding:12px 16px;background:var(--gold);color:var(--ink);font-weight:700}
+.skip:focus{top:10px}
+main{flex:1;display:flex;flex-direction:column}
+main:focus{outline:none}
+.eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#8a6a2c}
+.fine{font-size:.8rem;color:#6a5a3c}
+.status{min-height:1.4em;font-weight:700;color:#2c6b4a}
+
+/* Top bar, hidden on the start screen. */
+.hub-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px clamp(14px,4vw,44px);background:#142e30;color:var(--cream);border-bottom:3px solid #be994e}
+
+.lockup{display:flex;align-items:center;gap:11px;line-height:1.1}
+.lockup img{display:block;width:40px;height:40px}
+.lockup span,.player-tag span{display:grid;text-align:left}
+.lockup small,.player-tag small{font-size:.6rem;font-weight:700;letter-spacing:.16em;color:var(--gold)}
+.lockup strong{font-size:.98rem;font-weight:900;letter-spacing:.1em;color:#fff}
+.who{display:flex;align-items:center;gap:10px}
+.player-tag{display:flex;align-items:center;gap:9px;padding:3px 14px 3px 3px;border:1px solid #be994e;border-radius:99px;background:#1f4245;color:var(--cream)}
+.player-tag:hover{background:#2a5558}
+.player-tag img,.locker-head img{border-radius:50%;background:var(--wall);object-fit:cover;object-position:top}
+.player-tag img{width:40px;height:40px;border:2px solid var(--gold)}
+.player-tag strong{font-size:.95rem;letter-spacing:.04em}
+.mode-tag{padding:6px 13px;border:1px solid #be994e;border-radius:99px;font-size:.7rem;font-weight:800;letter-spacing:.14em;color:var(--gold)}
+.leave{padding:8px 13px;border-radius:8px;border:1px solid #ffffff33;font-size:.86rem;font-weight:700;color:#d9e6e4}
+.leave:hover{background:#ffffff14}
+
+/* Signs: the cream plates that name the doors inside the gym. */
+.sign{display:inline-grid;gap:1px;padding:9px 18px;border:2px solid var(--wood);border-radius:5px;background:var(--sign);color:#2f2819;text-align:center;box-shadow:0 3px 0 #2a2415,0 6px 14px #0005;transition:transform .12s,box-shadow .12s,background .12s}
+.sign strong{font:700 1.05rem/1.2 var(--serif);letter-spacing:.02em}
+.sign:hover:not(:disabled){background:#fff0c4;transform:translateY(-2px);box-shadow:0 5px 0 #2a2415,0 9px 18px #0006}
+.sign:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 #2a2415}
+.sign:disabled{opacity:.55;cursor:default}
+.sign.gold{background:linear-gradient(#ffe29a,#f2bd57);border-color:#6b4a14}
+.sign.big{padding:14px 30px}.sign.big strong{font-size:1.45rem}
+.sign.danger{background:#f0c9b4;border-color:#7a2f22}
+
+/* The wall that holds the doors, the login and the desk. */
+.wall{flex:1;display:flex;flex-direction:column;background:linear-gradient(#f6d3a433,#c98a4a2e),url('../assets/wall.webp') 0 0/360px 360px,var(--wall)}
+.frieze{height:26px;flex:none;background:url('../assets/frieze.webp') 0 50%/auto 100% repeat-x;border-bottom:2px solid #a67a4a;box-shadow:0 3px 8px #5a3a1a55}
+.skirting{height:22px;flex:none;margin-top:auto;background:linear-gradient(#2c7570,#1f5753);border-top:3px solid #17403d}
+.wall-inner{width:100%;max-width:1280px;margin:0 auto;padding:clamp(16px,3.4dvh,34px) clamp(14px,4vw,44px) clamp(22px,4dvh,40px)}
+.wall h1{font:600 clamp(1.5rem,3.6vw,2.2rem)/1.15 var(--serif);color:#3a2a14;text-align:center}
+.wall h2{font:600 1.25rem/1.2 var(--serif);color:#1f3b39}
+
+/* Paper: forms and the teacher's sheets. */
+.paper{padding:clamp(16px,3vw,28px);border:2px solid #c9a769;border-radius:10px;background:var(--paper);color:#263a37;box-shadow:0 12px 30px #5a3a1a55}
+.paper p{margin-top:6px}
+
+.table-scroll{overflow:auto;margin-top:12px}
+table{width:100%;border-collapse:collapse;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{padding:7px 10px;border-bottom:1px solid #dcc79c;text-align:left;white-space:nowrap}
+thead th{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#7a6230}
+td.wrap{white-space:normal;min-width:200px}
+
+/* Dialogs. */
+dialog{width:min(860px,94vw);max-height:94dvh;overflow:auto;padding:clamp(16px,3vw,28px);border:2px solid #c9a769;border-radius:12px;background:var(--paper);color:#263a37;box-shadow:0 24px 70px #000a}
+dialog::backdrop{background:#0b2228d9}
+dialog h2{margin:6px 0 12px;font:600 clamp(1.5rem,3.6vw,2.2rem)/1.1 var(--serif);color:#1f3b39}
+.close{float:right;padding:6px 12px;border:1px solid #b9a06a;border-radius:6px;background:#fff8e6;color:#3a3220;font-size:.82rem}
+
+.challenge-text{font-size:clamp(1.05rem,2.2vw,1.38rem);line-height:1.45}
+.observe{display:grid;gap:2px;margin-top:12px;padding:10px 14px;border-left:4px solid #2c6b4a;background:#e2ecd9;border-radius:0 8px 8px 0;font-size:.95rem}
+.observe strong{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#2c6b4a}
+.clock{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding:10px 16px;border-radius:10px;background:#ead9b6}
+.clock output{font:700 clamp(2.4rem,8vw,3.6rem)/1 'Trebuchet MS',system-ui,sans-serif;font-variant-numeric:tabular-nums;color:#1f3b39}
+.clock.done output{color:#b3402a}
+
+@media(max-width:760px){.lockup small{display:none}}
+@media(max-width:430px){.lockup span{display:none}.player-tag small{display:none}.hub-top{padding-inline:10px}.who{gap:6px}.mode-tag{padding:5px 9px;letter-spacing:.08em}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}

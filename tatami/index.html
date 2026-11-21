@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+ <meta name="theme-color" content="#142e30">
+ <meta name="description" content="El Tatami: aprende posturas de yoga en español y en inglés, crea secuencias entre todos y practicadlas en clase.">
+ <title>El Tatami · El Pabellón</title>
+ <link rel="icon" href="../assets/mark.svg" type="image/svg+xml">
+ <link rel="stylesheet" href="../comun/base.css">
+ <link rel="stylesheet" href="./tatami.css">
+</head>
+<body>
+ <a class="skip" href="#main">Saltar al contenido</a>
+ <main id="main" tabindex="-1">
+  <section class="wall">
+   <div class="frieze" aria-hidden="true"></div>
+   <div class="wall-inner">
+    <header class="tatami-head">
+     <div class="tatami-title">
+      <p class="eyebrow">Yoga · <span lang="en">Yoga</span></p>
+      <h1>El Tatami</h1>
+      <p class="lead" id="lead">Aprende las posturas, crea tu secuencia y practicadla en clase.</p>
+     </div>
+     <nav class="tabs" aria-label="Partes del tatami">
+      <a class="tab" href="#aprender" data-tab="aprender"><strong>Aprender</strong><small lang="en">Learn</small></a>
+      <a class="tab" href="#crear" data-tab="crear"><strong>Crear</strong><small lang="en">Create</small></a>
+      <a class="tab" href="#practicar" data-tab="practicar"><strong>Practicar</strong><small lang="en">Practise</small></a>
+     </nav>
+    </header>
+
+    <!-- Learn: the twelve pose cards. -->
+    <section id="v-aprender" class="view" aria-labelledby="t-aprender">
+     <h2 id="t-aprender" class="view-title">Doce posturas <span lang="en">· Twelve poses</span></h2>
+     <ul id="poses" class="pose-grid"></ul>
+    </section>
+
+    <!-- Create: poses in a row, alone or taking turns. -->
+    <section id="v-crear" class="view" aria-labelledby="t-crear" hidden>
+     <div class="builder">
+      <div class="paper palette-box">
+       <h2>Posturas</h2>
+       <p class="fine">Pulsa una postura para ponerla al final de la fila.</p>
+       <ul id="palette" class="palette"></ul>
+      </div>
+      <div class="paper sequence-box">
+       <div id="turn" class="turn" hidden aria-live="polite">
+        <div><strong id="turn-es"></strong><span lang="en" id="turn-en"></span></div>
+        <span id="turn-count" class="turn-count"></span>
+        <div class="turn-tools"><button type="button" id="turn-undo" class="sign"><strong>Deshacer la última</strong></button><button type="button" id="turn-stop" class="sign"><strong>Terminar los turnos</strong></button></div>
+       </div>
+       <div class="sequence-head">
+        <h2 id="t-crear">Mi secuencia</h2>
+        <span id="seq-count" class="count"></span>
+       </div>
+       <ol id="sequence" class="sequence" aria-describedby="seq-help"></ol>
+       <p id="seq-empty" class="empty">Todavía no hay posturas. Elige la primera.</p>
+       <p id="seq-help" class="fine">Usa ◀ y ▶ para cambiar el orden y ✕ para quitar una postura.</p>
+       <div class="seq-actions">
+        <button type="button" id="seq-practise" class="sign gold"><strong>Practicar esta secuencia</strong></button>
+        <button type="button" id="seq-save" class="sign"><strong>Guardar</strong></button>
+        <button type="button" id="seq-clear" class="sign danger"><strong>Empezar otra</strong></button>
+       </div>
+       <p id="seq-status" class="status" role="status"></p>
+       <div class="share">
+        <p class="code-plate"><small>Código</small><output id="code">—</output></p>
+        <button type="button" id="copy-link" class="sign"><strong>Copiar enlace</strong></button>
+       </div>
+       <form id="code-form" class="code-form">
+        <label for="code-input">¿Tienes el código de otra secuencia?</label>
+        <div><input id="code-input" maxlength="30" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="MSUD-TM">
+        <button class="sign" value="open"><strong>Abrir</strong></button><button class="sign" value="append"><strong>Añadir al final</strong></button></div>
+       </form>
+      </div>
+     </div>
+     <div class="builder-more">
+      <form id="turn-setup" class="paper turn-setup">
+       <h2>Entre todos, por turnos</h2>
+       <p class="fine">Cada turno añade una postura. En la pantalla digital o en un ordenador por grupo.</p>
+       <div class="pickers">
+        <label>Quién añade<select id="turn-kind"><option value="equipos">Por equipos</option><option value="personas">Una persona cada vez</option></select></label>
+        <label id="turn-teams-label">Equipos<select id="turn-teams"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label>
+        <label>Posturas<select id="turn-total"><option>4</option><option>6</option><option selected>8</option><option>10</option><option>12</option></select></label>
+       </div>
+       <button class="sign gold"><strong>Empezar por turnos</strong></button>
+      </form>
+      <section class="paper saved-box" aria-labelledby="t-saved">
+       <h2 id="t-saved">Guardadas en este ordenador</h2>
+       <ul id="saved" class="saved"></ul>
+       <p id="saved-empty" class="fine">Aún no hay secuencias guardadas.</p>
+      </section>
+     </div>
+    </section>
+
+    <!-- Practise: choose a sequence and how to do it. -->
+    <section id="v-practicar" class="view" aria-labelledby="t-practicar" hidden>
+     <div class="paper practise-box">
+      <h2 id="t-practicar">¿Qué secuencia practicamos?</h2>
+      <p class="fine">La pantalla guía cada postura: cómo se entra, las respiraciones y cómo se sale. Al final, vuelta a la calma.</p>
+      <div class="options">
+       <label class="check"><input type="checkbox" id="opt-chair"> Variante en silla</label>
+       <label class="pick">Ritmo de respiración <select id="opt-beat"><option value="3">Ágil · 3 s</option><option value="4">Tranquilo · 4 s</option><option value="5">Muy tranquilo · 5 s</option></select></label>
+      </div>
+      <ul id="choices" class="choices"></ul>
+     </div>
+    </section>
+   </div>
+   <div class="skirting" aria-hidden="true"></div>
+  </section>
+ </main>
+
+ <!-- Guided practice on the big screen. -->
+ <div id="stage" class="stage" hidden role="region" aria-label="Práctica guiada">
+  <div class="stage-top">
+   <p id="st-progress" class="stage-progress"></p>
+   <ol id="st-chips" class="chips" aria-hidden="true"></ol>
+   <button type="button" id="st-close" class="sign"><strong>Salir</strong></button>
+  </div>
+  <div class="stage-body">
+   <div class="stage-figure"><div id="st-figure" class="figure-box"></div></div>
+   <div class="stage-card">
+    <p id="st-side" class="stage-side"></p>
+    <h2 id="st-es"></h2>
+    <p id="st-en" class="en" lang="en"></p>
+    <div id="st-cue" class="cue"><p id="st-cue-es"></p><p id="st-cue-en" lang="en"></p></div>
+    <div id="st-breath" class="breath" hidden><span class="ball" id="st-ball" aria-hidden="true"></span><p><strong id="st-breath-es"></strong><span id="st-breath-en" lang="en"></span><small id="st-breath-n"></small></p></div>
+    <div id="st-end" class="stage-end" hidden>
+     <img id="st-host" src="../gimnasio/assets/robles-rest.webp" alt="" width="760" height="550">
+     <div class="seq-actions"><button type="button" id="st-again" class="sign gold"><strong>Otra vez</strong></button><button type="button" id="st-done" class="sign"><strong>Terminar</strong></button></div>
+    </div>
+   </div>
+  </div>
+  <div class="stage-controls">
+   <button type="button" id="st-prev" class="ctl" aria-label="Postura anterior">◀ <span>Anterior</span></button>
+   <button type="button" id="st-pause" class="ctl main">Pausa</button>
+   <button type="button" id="st-next" class="ctl" aria-label="Postura siguiente"><span>Siguiente</span> ▶</button>
+   <label class="ctl check"><input type="checkbox" id="st-chair"> En silla</label>
+   <button type="button" id="st-full" class="ctl">Pantalla completa</button>
+  </div>
+ </div>
+
+ <!-- One pose card. -->
+ <dialog id="card" aria-labelledby="card-es">
+  <form method="dialog"><button class="close">Cerrar</button></form>
+  <div class="card-layout">
+   <div class="card-figure">
+    <div id="card-figure" class="figure-box"></div>
+    <p id="card-phase" class="phase" aria-live="polite"></p>
+    <div class="card-buttons">
+     <button type="button" id="card-play" class="sign gold"><strong>Ver cómo se entra y se sale</strong></button>
+     <label class="check"><input type="checkbox" id="card-chair"> En silla</label>
+    </div>
+   </div>
+   <div class="card-text">
+    <p class="eyebrow" id="card-num"></p>
+    <h2 id="card-es"></h2>
+    <p class="en" lang="en" id="card-en"></p>
+    <h3>Cómo se entra</h3>
+    <ol id="card-steps" class="steps"></ol>
+    <h3>Cómo se sale</h3>
+    <p id="card-exit"></p>
+    <h3>Qué notas</h3>
+    <p id="card-feel"></p>
+    <p class="observe care"><strong>Con cuidado</strong><span id="card-safety"></span></p>
+    <p class="breaths"><span id="card-breaths"></span></p>
+    <h3>En silla</h3>
+    <p id="card-chair-text"></p>
+   </div>
+  </div>
+  <div class="card-nav">
+   <button type="button" id="card-prev" class="ctl">◀ Anterior</button>
+   <button type="button" id="card-add" class="sign"><strong>Añadir a mi secuencia</strong></button>
+   <button type="button" id="card-next" class="ctl">Siguiente ▶</button>
+  </div>
+ </dialog>
+ <script type="module" src="./tatami.js"></script>
+</body>
+</html>

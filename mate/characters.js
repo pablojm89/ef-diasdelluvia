@@ -27,7 +27,8 @@ function teamSheet(team) {
 }
 
 function actionFrame(p, time, holding) {
- if (p.stun > 0) return FRAME.stun;
+ // A frozen player stays caught mid-gesture, like a statue.
+ if (p.stun > 0 || p.frozen > 0) return FRAME.stun;
  if (p.dashTime > 0) return FRAME.dash;
  if (p.throwFlash > 0) return FRAME.throw;
  if (p.catchTime > 0) return FRAME.catch;
@@ -43,7 +44,23 @@ function actionFrame(p, time, holding) {
  return Math.floor(time * 1.4 + offset) % 2 ? FRAME.breathe : FRAME.ready;
 }
 
-export function paintCharacter(ctx, p, {scale=1, face=p.face || 1, time=0, selected=false, holding=false}={}) {
+// A spare canvas to colour one frame without touching the court.
+let scratch;
+function tinted(sheet, frame, row, tint) {
+ scratch ||= Object.assign(document.createElement('canvas'), {width: FRAME_WIDTH, height: FRAME_HEIGHT});
+ const pad = scratch.getContext('2d');
+ pad.globalCompositeOperation = 'source-over';
+ pad.clearRect(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
+ pad.imageSmoothingEnabled = false;
+ pad.drawImage(sheet, frame * FRAME_WIDTH, row * FRAME_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT, 0, 0, FRAME_WIDTH, FRAME_HEIGHT);
+ pad.globalCompositeOperation = 'source-atop';
+ pad.fillStyle = tint;
+ pad.fillRect(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
+ return scratch;
+}
+
+// tint: a translucent colour laid over the sprite, for the effects of the ultimates.
+export function paintCharacter(ctx, p, {scale=1, face=p.face || 1, time=0, selected=false, holding=false, tint=null}={}) {
  const sheet = teamSheet(p.team === 1 ? 1 : 0);
  if (!sheet.naturalWidth) return;
  const row = HEROES[p.character] ? p.character : 0;
@@ -51,7 +68,8 @@ export function paintCharacter(ctx, p, {scale=1, face=p.face || 1, time=0, selec
  ctx.save();
  ctx.scale(face * scale, scale);
  ctx.imageSmoothingEnabled = false;
- ctx.drawImage(sheet, frame * FRAME_WIDTH, row * FRAME_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT,
+ if (tint) ctx.drawImage(tinted(sheet, frame, row, tint), -28, -60);
+ else ctx.drawImage(sheet, frame * FRAME_WIDTH, row * FRAME_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT,
   -28, -60, FRAME_WIDTH, FRAME_HEIGHT);
  if (selected) {
   ctx.fillStyle = '#ffeaaa';
