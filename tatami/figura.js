@@ -106,9 +106,10 @@ export function createFigure(host, {label = ''} = {}) {
       ? `<image href="${sheetUrl(id, true)}" width="${W}" height="${H}"/>`
       : [0, 1, 2].map(i => `<svg x="0" y="0" width="${W}" height="${H}" viewBox="${i * W} 0 ${W} ${H}"><image href="${sheetUrl(id)}" width="${W * 3}" height="${H}"/></svg>`).join('');
     }
-    // The frame below stays opaque and the next one fades in over it, so the drawing never looks see-through.
-    const below = Math.min(1, Math.floor(t)), over = t - below;
-    if (!chair) [...layer.children].forEach((frame, i) => frame.setAttribute('opacity', i === below ? 1 : i === below + 1 ? f1(over) : 0));
+    // Blend adjacent drawings during the transition and show only the held pose at rest.
+    if (!chair) [...layer.children].forEach((frame, i) => {
+     frame.setAttribute('opacity', f1(Math.max(0, 1 - Math.abs(t - i))));
+    });
     return;
    }
    current = '';

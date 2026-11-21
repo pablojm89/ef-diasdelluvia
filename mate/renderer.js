@@ -6,22 +6,17 @@ function text(c,s,x,y,size=20,color='#e5f1ee',align='center',weight=800){c.fillS
 export class ArenaRenderer {
  constructor(canvas){this.canvas=canvas;this.ctx=canvas.getContext('2d');canvas.width=FIELD.width;canvas.height=FIELD.height;this.ctx.imageSmoothingEnabled=false;this.background=document.createElement('canvas');this.background.width=1200;this.background.height=760;this.buildBackground();this.lastEvent=0;this.fx=[];this.trail=[];this.lastBallTick=-1;}
  buildBackground(){
-  const c=this.background.getContext('2d');c.imageSmoothingEnabled=false;
-  const bg=c.createLinearGradient(0,0,0,760);bg.addColorStop(0,'#18283f');bg.addColorStop(1,'#0e1c30');c.fillStyle=bg;c.fillRect(0,0,1200,760);
-  // Stadium architecture, panels and spectator silhouettes, all drawn locally.
-  c.fillStyle='#24364d';c.fillRect(0,86,1200,55);c.fillStyle='#34485a';c.fillRect(0,127,1200,8);
-  for(let i=0;i<34;i++){const x=24+i*35;c.fillStyle=i%3===0?'#d6b87a':i%3===1?'#58acaa':'#997d85';c.fillRect(x,111+(i%2)*3,13,12);c.fillStyle='#182a3b';c.fillRect(x-2,121,18,10);}
-  for(const x of [80,280,920,1120]){c.fillStyle='#56777e';c.fillRect(x-20,91,40,6);c.fillStyle='#fff0af';c.fillRect(x-16,92,32,3);}
-  c.fillStyle='#514434';rounded(c,46,137,1108,513,15);c.fill();c.fillStyle='#cba56f';rounded(c,54,144,1092,500,10);c.fill();
-  for(let y=145;y<644;y+=25){c.fillStyle=(y/25|0)%2?'#c39c69':'#d3ae78';c.fillRect(55,y,1090,24);for(let x=(y%50)*6;x<1145;x+=180){c.fillStyle='#ae875c';c.fillRect(x,y,2,24);}}
-  c.fillStyle='#44a79caa';c.fillRect(159,145,441,499);c.fillStyle='#d57362aa';c.fillRect(600,145,441,499);
-  c.fillStyle='#d76b5d';c.fillRect(60,150,90,489);c.fillStyle='#2b9b94';c.fillRect(1050,150,90,489);
-  c.save();c.globalAlpha=.15;c.strokeStyle='#0b2232';c.lineWidth=7;for(let y=150;y<640;y+=34){c.beginPath();c.moveTo(65,y);c.lineTo(147,y+34);c.stroke();c.beginPath();c.moveTo(1052,y);c.lineTo(1138,y+34);c.stroke();}c.restore();
-  c.strokeStyle='#fcf2c9';c.lineWidth=4;c.strokeRect(157,150,886,489);c.beginPath();c.moveTo(600,150);c.lineTo(600,640);c.stroke();c.lineWidth=3;c.beginPath();c.arc(600,394,88,0,TAU);c.stroke();c.beginPath();c.arc(600,394,34,0,TAU);c.stroke();
-  c.save();c.globalAlpha=.16;c.fillStyle='#effad5';c.beginPath();c.moveTo(390,310);c.lineTo(340,388);c.lineTo(382,388);c.lineTo(357,460);c.lineTo(440,368);c.lineTo(397,368);c.closePath();c.fill();c.translate(405,0);c.beginPath();c.moveTo(390,310);c.lineTo(340,388);c.lineTo(382,388);c.lineTo(357,460);c.lineTo(440,368);c.lineTo(397,368);c.closePath();c.fill();c.restore();
-  for(const x of [151,1045]){c.fillStyle='#152c3e';c.fillRect(x-3,144,6,503);c.fillStyle='#ffe9ac';for(let y=151;y<640;y+=34)c.fillRect(x-1,y,2,19);}
-  c.save();c.translate(105,390);c.rotate(-Math.PI/2);text(c,'CÁRCEL RAYOS',0,0,14,'#ffddc4');c.restore();c.save();c.translate(1095,390);c.rotate(Math.PI/2);text(c,'CÁRCEL COMETAS',0,0,14,'#b0fff0');c.restore();
-  c.fillStyle='#071627';c.fillRect(0,693,1200,67);c.fillStyle='#2d455c';c.fillRect(0,693,1200,2);
+  const c=this.background.getContext('2d');
+  c.fillStyle='#172638';c.fillRect(0,0,FIELD.width,FIELD.height);
+  const court = new Image();
+  court.onload = () => {
+   c.imageSmoothingEnabled=false;
+   c.drawImage(court,0,0,FIELD.width,FIELD.height);
+   for(const [x,label,color] of [[105,'CÁRCEL RAYOS','#ffead0'],[1095,'CÁRCEL COMETAS','#cdffef']]){
+    c.save();c.translate(x,390);c.rotate(-Math.PI/2);text(c,label,0,0,14,color);c.restore();
+   }
+  };
+  court.src = new URL('./assets/court.webp',import.meta.url).href;
  }
  render(g,localId,controls={},latency=0,now=performance.now(),online=false) {
   const c=this.ctx;this.localId=localId;c.clearRect(0,0,1200,760);c.drawImage(this.background,0,0);
