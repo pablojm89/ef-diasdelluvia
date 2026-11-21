@@ -24,9 +24,9 @@ Misión Refugio, Pulso Lab y Liga Relámpago, con su mapa de islas, no siguen la
 
 ## Mate Arena · videojuego online
 
-Trece personajes de pixel art con talentos propios y una plaza por personaje en cada equipo, movimiento libre en cada campo, lanzamientos, pases, esquivas, recepción al vuelo, cárceles y rescates. Entrenamiento contra IA o salas por código para hasta 26 jugadores (13 contra 13). Reglas del mate escolar con dos variantes de recepción configurables.
+Trece personajes de pixel art, cada uno con una habilidad definitiva propia que se recarga con el tiempo (un cometa que nadie atrapa, un tiro teledirigido, un gigante, una red, pies quietos…), y una plaza por personaje en cada equipo, movimiento libre en cada campo, lanzamientos, pases, esquivas, recepción al vuelo, cárceles y rescates. Entrenamiento contra IA o salas por código para hasta 26 jugadores (13 contra 13). Reglas del mate escolar con dos variantes de recepción configurables.
 
-La partida ocupa toda la pantalla. Las habilidades se muestran en círculos con su imagen, la tecla debajo y el tiempo de recarga; en tableta y móvil se juega con una palanca y los círculos, sin teclas. Cada jugada suma puntos y al acabar se muestra la tabla de todos los jugadores.
+La partida ocupa toda la pantalla. Las habilidades se muestran en círculos con su imagen, la tecla debajo y el tiempo de recarga, con la definitiva en un círculo dorado más grande; en tableta y móvil se juega con una palanca y los círculos, sin teclas. Cada jugada suma puntos y al acabar se muestra la tabla de todos los jugadores.
 
 Abre **`/mate/`**, pulsa **Crear sala online** y comparte la invitación. Tus compañeros eligen personaje, entran con el código y marcan **Estoy listo**. El anfitrión inicia el partido y mantiene la pestaña abierta. Las plazas libres se completan con IA. El juego intenta WebRTC y ofrece relevo WSS. Los servicios públicos por defecto permiten probarlo sin configurar cuentas; para uso habitual se puede conectar un servicio propio del centro. [Reglas, arquitectura, pruebas y límites](docs/07-mate-arena.md).
 

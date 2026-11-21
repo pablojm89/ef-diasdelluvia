@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Teledirigida">
+<defs><radialGradient id="g" cx="34%" cy="26%" r="80%"><stop offset="0" stop-color="#ffd2c8"/><stop offset="1" stop-color="#c23a32"/></radialGradient></defs>
+<circle cx="48" cy="48" r="46" fill="url(#g)"/>
+<path d="M12 40A37 37 0 0 1 60 13" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/>
+<g fill="#fff6da" stroke="#17233b" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+<circle cx="48" cy="48" r="27" fill="none" stroke-width="9"/><circle cx="48" cy="48" r="27" fill="none" stroke="#fff6da" stroke-width="4"/><path d="M48 10L48 26M48 70L48 86M10 48L26 48M70 48L86 48" fill="none" stroke="#17233b" stroke-width="9"/><path d="M48 10L48 26M48 70L48 86M10 48L26 48M70 48L86 48" fill="none" stroke="#fff6da" stroke-width="4"/><circle cx="48" cy="48" r="12" fill="#ffd36b"/><path d="M38.5 43Q48 47 57.5 42.5M40 55.5Q48 50.5 56 55.5" fill="none" stroke-width="2.2"/>
+</g>
+</svg>

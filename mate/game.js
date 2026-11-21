@@ -6,7 +6,7 @@ import {ArenaRenderer} from './renderer.js';
 import {Room} from './network.js';
 import {validCode} from './protocol.js';
 import {buildBar,updateBar,attachStick,resultsMarkup} from './hud.js';
-import {talentArt} from './abilities.js';
+import {ultArt} from './abilities.js';
 import {record,topBar,player,mode as placeMode} from '../comun/lugar.js';
 import {PINTADOS} from './assets/pista/pintados.js';
 const $=id=>document.getElementById(id);
@@ -24,9 +24,9 @@ function face(index){const key='retrato-'+slug(index);return PINTADOS.includes(k
 let view='menu',room=null,lobby=null,game=null,remote=null,previousRemote=null,remoteAt=0,localId='local',mode='training',busy=false,networkDisconnected=false;
 let toastTimeout,lastFrame=performance.now(),accumulator=0,lastSend=0,lastBroadcast=0,lastAnnouncement=0,lastAudioEvent=0,latency=0,lastRemoteAt=0,lastUi=0,lastClientDraw=0;
 let rules=normalizeRules(),manualAim=false,pointerAt=0,targetIndex=0,audio=null,lastDemo=0;
-const keys=new Set(),actions={gaze:false,special:false,fire:false,catch:false,dash:false,pass:false};
+const keys=new Set(),actions={ult:false,fire:false,catch:false,dash:false,pass:false};
 const aim={ax:900,ay:390},stick={x:0,y:0};
-let shownPoints=0,resultsKey='',peeking=false,wantedFullscreen=false,matchRecorded=false;
+let shownPoints=0,resultsKey='',peeking=false,wantedFullscreen=false,matchRecorded=false,ultWasReady=true,readyChime=false;
 // Fingers get a stick and ability circles; a keyboard gets the keys written under each circle.
 function setInputMode(mode){if(document.body.dataset.input!==mode)document.body.dataset.input=mode;}
 setInputMode(matchMedia('(pointer:coarse)').matches?'touch':'keys');
@@ -36,17 +36,18 @@ function showView(next){if(next!=='game'&&view==='game')leaveFullscreen();view=n
 function toast(message){$('toast').textContent=message;$('toast').classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>$('toast').classList.remove('show'),5500);}
 function setBusy(value,message=''){busy=value;for(const id of ['host-button','train-button','join-button'])$(id).disabled=value;$('menu-status').textContent=message;}
 function saveCharacter(){try{localStorage.setItem('mate-character',selected);}catch{}}
-function talentCard(index, team = 0) {
+function heroCard(index, team = 0) {
  const hero = HEROES[index], {src, pixel} = face(index);
  return `<figure class="cromo team-${team}${pixel ? ' pixel' : ''}"><img src="${src}" alt="" width="96" height="96"></figure>
   <div class="bio"><p class="bio-name"><strong>${esc(hero.name)}</strong> <small>${esc(hero.tag)}</small></p>
-  <h3><span>Talento</span> ${esc(hero.ability)}</h3><p>${esc(hero.description)}</p>${index === hubHero ? '<p class="hub-badge">Tu personaje del Pabellón</p>' : ''}</div>`;
+  <h3><img class="ult-art" src="${ultArt(index)}" alt="" width="34" height="34"><span>Definitiva</span> ${esc(hero.ability)}</h3><p>${esc(hero.description)}</p>
+  <p class="recharge">Se recarga en ${hero.ult.recharge} s de juego.</p>${index === hubHero ? '<p class="hub-badge">Tu personaje del Pabellón</p>' : ''}</div>`;
 }
 function drawChoices(){
  $('character-grid').innerHTML=HEROES.map((hero,index)=>
   `<button class="character-choice" data-character="${index}" aria-pressed="${index===selected}" aria-label="${esc(hero.name)}, ${esc(hero.ability)}">
    <img src="${portrait(index)}" alt="" width="64" height="64"><span>${esc(hero.name)}</span></button>`).join('');
- $('character-description').innerHTML = talentCard(selected);
+ $('character-description').innerHTML = heroCard(selected);
 }
 function profile(){return {character:selected};}
 function readRules(){return normalizeRules({teamSize:Number($('team-size').value),roundSeconds:Number($('round-seconds').value),bestOf:Number($('best-of').value),catchEliminates:$('catch-eliminates').checked,catchRescues:$('catch-rescues').checked});}
@@ -101,7 +102,7 @@ function renderLobby(){
  if(me && selected!==ownHero){ selected=ownHero; saveCharacter(); drawChoices(); }
  const occupied = new Set(lobby.members.filter(m=>m.team===ownTeam && m.id!==room.myId).map(m=>m.character));
  const hadSelectFocus = document.activeElement?.id==='lobby-character';
- const lockerMarkup = `<div class="dossier">${talentCard(ownHero,ownTeam)}</div>
+ const lockerMarkup = `<div class="dossier">${heroCard(ownHero,ownTeam)}</div>
   <label for="lobby-character">Tu personaje en este equipo</label>
   <select id="lobby-character">${HEROES.map((hero,index)=>
    `<option value="${index}" ${index===ownHero?'selected':''} ${occupied.has(index)?'disabled':''}>${esc(hero.name)} · ${esc(hero.ability)}${occupied.has(index)?' (ocupado)':''}</option>`).join('')}</select>
@@ -142,13 +143,13 @@ async function enterFullscreen(){
  try{await document.documentElement.requestFullscreen({navigationUI:'hide'});wantedFullscreen=true;await screen.orientation?.lock?.('landscape');}catch{}
 }
 function leaveFullscreen(){if(wantedFullscreen&&document.fullscreenElement)document.exitFullscreen().catch(()=>{});wantedFullscreen=false;}
-function controlHint(){return document.body.dataset.input==='touch'?'Palanca para moverte · Arrastra LANZAR para apuntar. ¡Buen juego!':'Espacio lanza · E atrapa al vuelo · Shift esquiva. ¡Buen juego!';}
+function controlHint(){return document.body.dataset.input==='touch'?'Palanca para moverte · Arrastra LANZAR para apuntar · El círculo dorado es tu definitiva.':'Espacio lanza · E atrapa al vuelo · Shift esquiva · F lanza tu definitiva cuando se cargue.';}
 function updateMatchUI(){
  $('match-mode').textContent=mode==='online'?`SALA ${room?.code||''}`:'ENTRENAMIENTO';
  const member = lobby?.members.find(m=>m.id===localId);
  showMatchHero(member?.character ?? selected, member?.team ?? 0);
  $('pause-button').hidden=mode==='online'&&!room?.isHost;
- $('rematch-button').hidden=true;$('results').hidden=true;resultsKey='';peeking=false;shownPoints=0;matchRecorded=false;$('match-points').textContent='0';
+ $('rematch-button').hidden=true;$('results').hidden=true;resultsKey='';peeking=false;shownPoints=0;matchRecorded=false;ultWasReady=true;$('match-points').textContent='0';
  $('match-announcement').textContent=controlHint();
 }
 function showMatchHero(index,team) {
@@ -157,7 +158,7 @@ function showMatchHero(index,team) {
  $('match-talent-name').textContent = hero.ability;
  $('match-talent-detail').textContent = hero.description;
  $('match-portrait').src = portrait(index,team);
- $('match-talent-art').src = talentArt(index);
+ $('match-talent-art').src = ultArt(index);
  $('game-view').dataset.team = team;
  buildBar($('ability-bar'), index);
 }
@@ -172,10 +173,13 @@ function updateStateUI(state){
  $('rematch-button').hidden=state.phase!=='matchOver'||(mode==='online'&&!room?.isHost);
  $('rematch-button').textContent=mode==='online'?'Volver a la sala':'Jugar otra partida';
  if(mine && $('match-talent-name').textContent!==HEROES[mine.character].ability)showMatchHero(mine.character,mine.team);
- const event=state.events?.findLast(e=>e.id>lastAnnouncement&&['catch','hit','rescue','round','match','referee'].includes(e.type));
- if(event){lastAnnouncement=event.id;const p=state.players.find(p=>p.id===event.player);const messages={catch:`¡${p?.name||'Un jugador'} atrapa al vuelo!`,hit:`${p?.name||'Un jugador'} va a la cárcel. Puede volver si alcanza a un rival.`,rescue:`¡${p?.name||'Un jugador'} vuelve al campo!`,round:event.winner===null?'Ronda empatada.':`Ronda para ${TEAM_COLORS[event.winner??0].name}.`,match:event.winner===null?'¡Partido empatado! Buen juego.':`¡${TEAM_COLORS[event.winner??0].name} ganan el partido!`,referee:'El árbitro devuelve una pelota que había quedado fuera de alcance.'};$('match-announcement').textContent=messages[event.type];}
+ const event=state.events?.findLast(e=>e.id>lastAnnouncement&&['ult','catch','hit','rescue','round','match','referee'].includes(e.type));
+ if(event){lastAnnouncement=event.id;const p=state.players.find(p=>p.id===event.player);const messages={ult:`¡${p?.name||'Un jugador'} desata ${p?HEROES[p.character].ability.replace(/[¡!]/g,''):'su definitiva'}!`,catch:`¡${p?.name||'Un jugador'} atrapa al vuelo!`,hit:`${p?.name||'Un jugador'} va a la cárcel. Puede volver si alcanza a un rival.`,rescue:`¡${p?.name||'Un jugador'} vuelve al campo!`,round:event.winner===null?'Ronda empatada.':`Ronda para ${TEAM_COLORS[event.winner??0].name}.`,match:event.winner===null?'¡Partido empatado! Buen juego.':`¡${TEAM_COLORS[event.winner??0].name} ganan el partido!`,referee:'El árbitro devuelve una pelota que había quedado fuera de alcance.'};$('match-announcement').textContent=messages[event.type];}
  if(mine?.prison&&!event)$('match-announcement').textContent='Estás en la cárcel detrás del rival. Si le das a un jugador de campo, vuelves a jugar.';
-}
+ // Tell the player the moment the ultimate is charged.
+ const ultReady=!!mine&&mine.ultCooldown<=0;
+ if(ultReady&&!ultWasReady){$('match-announcement').textContent=`¡${HEROES[mine.character].ability.replace(/[¡!]/g,'')} a punto! ${document.body.dataset.input==='touch'?'Toca el círculo dorado.':'Pulsa F.'}`;readyChime=true;}
+ if(mine)ultWasReady=ultReady;}
 // The table of every player's points: fixed at the end of the match, or a peek while Tab is held.
 function showResults(state){
  const over=state.phase==='matchOver';
@@ -202,7 +206,8 @@ function aimFor(state){
  const mine=state?.players.find(p=>p.id===localId);
  if(!mine)return {...aim};
  if(manualAim&&performance.now()-pointerAt<8000)return {...aim};
- const candidates=state.players.filter(p=>p.team!==mine.team&&!p.prison).sort((a,b)=>Math.hypot(a.x-mine.x,a.y-mine.y)-Math.hypot(b.x-mine.x,b.y-mine.y));
+ // Leo's copies look real to the aim aid too.
+ const candidates=[...state.players,...(state.decoys||[])].filter(p=>p.team!==mine.team&&!p.prison).sort((a,b)=>Math.hypot(a.x-mine.x,a.y-mine.y)-Math.hypot(b.x-mine.x,b.y-mine.y));
  const target=candidates[targetIndex%candidates.length];
  return target?{ax:target.x+target.vx*.09,ay:target.y+target.vy*.09}:{ax:mine.team===0?900:300,ay:390};
 }
@@ -217,16 +222,27 @@ function togglePause(){
  updateStateUI(game);
  if(!game.paused)$('court').focus({preventScroll:true});
 }
+// One short tone that slides from one pitch to another.
+function sweep(type,from,to,seconds,volume,delay=0){
+ const tone=audio.createOscillator(),gain=audio.createGain(),t=audio.currentTime+delay;
+ tone.type=type;tone.frequency.setValueAtTime(from,t);tone.frequency.exponentialRampToValueAtTime(to,t+seconds*.8);
+ gain.gain.setValueAtTime(volume,t);gain.gain.exponentialRampToValueAtTime(.001,t+seconds);
+ tone.connect(gain).connect(audio.destination);tone.start(t);tone.stop(t+seconds+.02);
+}
 function playSound(state){
- if(!$('sound-enabled').checked||!audio||audio.state!=='running')return;
- for(const e of state.events||[])if(e.id>lastAudioEvent){lastAudioEvent=e.id;if(!['throw','catch','hit','rescue','start','match'].includes(e.type))continue;
-  const tone=audio.createOscillator(),gain=audio.createGain();tone.type=e.type==='throw'?'triangle':'sine';const t=audio.currentTime,frequency={throw:320,catch:740,hit:130,rescue:880,start:520,match:660}[e.type];tone.frequency.setValueAtTime(frequency,t);tone.frequency.exponentialRampToValueAtTime(e.type==='throw'?150:frequency*1.35,t+.13);gain.gain.setValueAtTime(.04,t);gain.gain.exponentialRampToValueAtTime(.001,t+.16);tone.connect(gain).connect(audio.destination);tone.start();tone.stop(t+.18);
+ if(!$('sound-enabled').checked||!audio||audio.state!=='running'){readyChime=false;return;}
+ for(const e of state.events||[])if(e.id>lastAudioEvent){lastAudioEvent=e.id;if(e.type==='ult'){sweep('sawtooth',180,900,.42,.05);sweep('square',90,45,.3,.03);continue;}
+  if(!['throw','catch','hit','rescue','start','match'].includes(e.type))continue;
+  const frequency={throw:320,catch:740,hit:130,rescue:880,start:520,match:660}[e.type];
+  sweep(e.type==='throw'?'triangle':'sine',frequency,e.type==='throw'?150:frequency*1.35,.16,.04);
  }
+ if(readyChime){readyChime=false;sweep('sine',660,990,.12,.04);sweep('sine',990,1320,.2,.04,.12);}
 }
 function interpolateRemote(now){
  if(!remote||!previousRemote)return remote;
  const alpha=Math.min(1,Math.max(0,(now-remoteAt)/67));
- return {...remote,players:remote.players.map(p=>{const prev=previousRemote.players.find(q=>q.id===p.id);if(!prev||prev.prison!==p.prison||Math.hypot(prev.x-p.x,prev.y-p.y)>180)return p;return {...p,x:prev.x+(p.x-prev.x)*alpha,y:prev.y+(p.y-prev.y)*alpha};})};
+ const glide=(list,before)=>(list||[]).map(p=>{const prev=(before||[]).find(q=>q.id===p.id);if(!prev||prev.prison!==p.prison||Math.hypot(prev.x-p.x,prev.y-p.y)>180)return p;return {...p,x:prev.x+(p.x-prev.x)*alpha,y:prev.y+(p.y-prev.y)*alpha};});
+ return {...remote,players:glide(remote.players,previousRemote.players),decoys:glide(remote.decoys,previousRemote.decoys)};
 }
 function frame(now){
  const delta=Math.min((now-lastFrame)/1000,.1);lastFrame=now;
@@ -235,7 +251,7 @@ function frame(now){
    demoRenderer.render(demo,null,{},0,now);lastDemo=now;}
  } else if(view==='game'){
   const state=currentState();
-  if(state)updateBar($('ability-bar'),state.players.find(p=>p.id===localId),state.ball);
+  if(state)updateBar($('ability-bar'),state.players.find(p=>p.id===localId),state);
   if(game){
    accumulator+=delta;let steps=0;
    while(accumulator>=1/60&&steps<6){if(!game.paused){setInput(game,localId,controls());consumeActions();}stepGame(game);accumulator-=1/60;steps++;}
@@ -273,12 +289,11 @@ $('sound-enabled').addEventListener('change',async()=>{if($('sound-enabled').che
 window.addEventListener('keydown',event=>{
  if(view!=='game'||networkDisconnected||event.target.matches('input,select,textarea'))return;
  if(event.code==='Tab'){event.preventDefault();peek(true);return;}
- const used=['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','KeyW','KeyA','KeyS','KeyD','Space','KeyE','ShiftLeft','ShiftRight','KeyQ','KeyR','KeyP','KeyF','KeyG'];
+ const used=['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','KeyW','KeyA','KeyS','KeyD','Space','KeyE','ShiftLeft','ShiftRight','KeyQ','KeyR','KeyP','KeyF'];
  if(event.code==='Space' && event.target.closest('summary,button'))return;
  if(!used.includes(event.code))return;event.preventDefault();keys.add(event.code);setInputMode('keys');
  if(event.repeat)return;
- if(event.code==='KeyG')actions.gaze=true;
- if(event.code==='KeyF')actions.special=true;if(event.code==='Space')actions.fire=true;if(event.code==='KeyE')actions.catch=true;if(event.code.startsWith('Shift'))actions.dash=true;if(event.code==='KeyQ')actions.pass=true;if(event.code==='KeyR'){targetIndex++;manualAim=false;}if(event.code==='KeyP')togglePause();
+ if(event.code==='KeyF')actions.ult=true;if(event.code==='Space')actions.fire=true;if(event.code==='KeyE')actions.catch=true;if(event.code.startsWith('Shift'))actions.dash=true;if(event.code==='KeyQ')actions.pass=true;if(event.code==='KeyR'){targetIndex++;manualAim=false;}if(event.code==='KeyP')togglePause();
 });
 window.addEventListener('keyup',event=>{keys.delete(event.code);if(event.code==='Tab')peek(false);});window.addEventListener('blur',clearKeys);
 function pointerAim(event){const rect=$('court').getBoundingClientRect();aim.ax=(event.clientX-rect.left)/rect.width*1200;aim.ay=(event.clientY-rect.top)/rect.height*760+16;manualAim=true;pointerAt=performance.now();}

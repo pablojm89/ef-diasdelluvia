@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Gigante">
+<defs><radialGradient id="g" cx="34%" cy="26%" r="80%"><stop offset="0" stop-color="#ffe1b8"/><stop offset="1" stop-color="#c4682c"/></radialGradient></defs>
+<circle cx="48" cy="48" r="46" fill="url(#g)"/>
+<path d="M12 40A37 37 0 0 1 60 13" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/>
+<g fill="#fff6da" stroke="#17233b" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+<circle cx="42" cy="26" r="13"/><path d="M18 84L18 58Q18 42 42 42Q66 42 66 58L66 84Z"/><path d="M30 84L30 66M54 84L54 66" fill="none" stroke-width="2.4"/><circle cx="80" cy="66" r="5"/><path d="M72 84Q72 73 80 73Q88 73 88 84Z"/><path d="M80 50L80 30M72 38L80 28L88 38" fill="none" stroke="#17233b" stroke-width="8"/><path d="M80 50L80 30M72 38L80 28L88 38" fill="none" stroke="#ffd36b" stroke-width="3.4"/>
+</g>
+</svg>

@@ -1,5 +1,5 @@
 // The overlay around the court: ability bar, movement stick and the players' score table.
-import {ACTIONS, abilityArt, talentArt, actionState} from './abilities.js';
+import {ACTIONS, ULT_KEY, abilityArt, ultArt, actionState} from './abilities.js';
 import {HEROES} from './roster.js';
 import {TEAM_COLORS, portrait} from './characters.js';
 
@@ -7,12 +7,12 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;',
 
 export function buildBar(bar, character) {
  const hero = HEROES[character];
- bar.innerHTML = `<div class="ability passive" title="${esc(hero.ability)}: ${esc(hero.description)}">
-   <span class="disc"><img src="${talentArt(character)}" alt=""></span><kbd>PASIVA</kbd><em>${esc(hero.ability)}</em></div>`
-  + ACTIONS.map(action => `<button type="button" class="ability" data-command="${action.id}" tabindex="-1"
-    aria-label="${esc(action.name)}, tecla ${esc(action.key)}. ${esc(action.detail)}" title="${esc(action.detail)}">
-   <span class="disc"><img src="${abilityArt(action.id)}" alt="" draggable="false"><i class="sweep"></i><b class="count"></b></span>
-   <kbd>${esc(action.key)}</kbd><em>${esc(action.name)}</em></button>`).join('');
+ const circle = (id, key, name, detail, picture, extra = '') => `<button type="button" class="ability${extra}" data-command="${id}" tabindex="-1"
+    aria-label="${esc(name)}, tecla ${esc(key)}. ${esc(detail)}" title="${esc(detail)}">
+   <span class="disc"><img src="${picture}" alt="" draggable="false"><i class="sweep"></i><b class="count"></b></span>
+   <kbd>${esc(key)}</kbd><em>${esc(name)}</em></button>`;
+ bar.innerHTML = ACTIONS.map(action => circle(action.id, action.key, action.name, action.detail, abilityArt(action.id))).join('')
+  + circle('ult', ULT_KEY, hero.ability, hero.description, ultArt(character), ' ult');
  bar.dataset.character = character;
 }
 
@@ -21,11 +21,11 @@ function put(node, key, value) {
  if (node.dataset[key] !== value) node.dataset[key] = value;
 }
 
-export function updateBar(bar, me, ball) {
- if (!me || !ball) return;
+export function updateBar(bar, me, game) {
+ if (!me || !game?.ball) return;
  if (bar.dataset.character !== String(me.character)) buildBar(bar, me.character);
  for (const button of bar.querySelectorAll('[data-command]')) {
-  const state = actionState(button.dataset.command, me, ball);
+  const state = actionState(button.dataset.command, me, game);
   const wait = state.wait || 0;
   const mode = state.locked ? 'locked' : state.active ? 'active' : wait > 0 ? 'wait' : state.off ? 'off' : 'ready';
   put(button, 'mode', mode);

@@ -4,7 +4,7 @@ Un videojuego independiente dentro de Patio Interior, accesible desde la isla de
 
 ## Qué incluye
 
-- Trece protagonistas de pixel art. Los ocho alumnos del gimnasio comparten pista con Iris, Bruno, Sol, Teo e Inés. Cada personaje tiene un talento propio que se activa al realizar la acción correspondiente.
+- Trece protagonistas de pixel art. Los ocho alumnos del gimnasio comparten pista con Iris, Bruno, Sol, Teo e Inés. Todos juegan igual en lo básico y cada uno guarda una **definitiva** distinta, con su propia animación.
 - Pista con dos campos, dos zonas de cárcel y una pelota. Movimiento, apuntado, lanzamiento, pase, recepción temporal y esquiva rápida.
 - Entrenamiento contra IA y salas online por código. Hasta trece plazas por equipo. La IA cubre las vacantes con personajes disponibles.
 - Sala de espera, elección de personaje y equipo, confirmación de listos, reglas configurables y comienzo controlado por el anfitrión.
@@ -28,23 +28,46 @@ No hay una regla escolar única para todas las regiones. Estas son las reglas im
 
 ## Elección de personaje
 
-Cada equipo puede alinear una vez a cada personaje. Por ejemplo, Cometas y Rayos pueden tener una Lúa cada uno. El vestuario muestra quién está ocupado en tu equipo. Si dos personas piden el mismo personaje a la vez, el anfitrión confirma la primera elección que recibe. La ficha de cada protagonista explica su talento antes del partido.
+Cada equipo puede alinear una vez a cada personaje. Por ejemplo, Cometas y Rayos pueden tener una Lúa cada uno. El vestuario muestra quién está ocupado en tu equipo. Si dos personas piden el mismo personaje a la vez, el anfitrión confirma la primera elección que recibe. La ficha de cada protagonista explica su definitiva y lo que tarda en recargarse antes del partido.
 
-## Habilidades de pista
+## Definitivas
 
-Cada jugador dispone de dos habilidades con recargas individuales de 60 segundos de juego. Su círculo en la barra de habilidades muestra el tiempo restante y la pausa detiene los relojes.
+Cada personaje tiene una sola habilidad definitiva, distinta de las demás. Se lanza con **F** o con el círculo dorado. Empieza el partido a media carga y se recarga con el tiempo de juego: la cuenta atrás y la pausa detienen el reloj, y la carga se conserva de una ronda a la siguiente. Al lanzarla, la pista tiembla un instante y un cartel con el retrato anuncia quién la ha usado. Los efectos se apagan al empezar otra ronda.
 
-- **F · Tiro imparable.** Con la pelota en la mano, lanza un tiro rápido con estela. Se puede esquivar. Al intentar atraparlo en vuelo, el rival queda expuesto al impacto.
-- **G · Mirada intensa.** Durante diez segundos los rivales se mueven al 50 % de su velocidad y pierden la esquiva, incluidas las esquivas ya iniciadas. Un anillo violeta marca a los afectados. Si todo el equipo sigue afectado, otra activación conserva la carga.
+| Personaje | Definitiva | Qué hace | Recarga |
+| --- | --- | --- | --- |
+| Vega | ¡A por ellos! | Todo su equipo corre un 45 % más rápido durante 6 s, recupera al instante atrapar y esquivar y los recarga el triple de rápido. Mientras dura, ni la Mirada ni el Pies quietos le afectan | 45 s |
+| Kai | Superimán | La pelota vuela a sus manos esté donde esté: suelta, en el aire o en las manos de un rival | 35 s |
+| Lúa | ¡Pies quietos! | Todos los demás, rivales y compañeros, se quedan de estatua 3 s: no se mueven, no atrapan, no esquivan y no lanzan | 55 s |
+| Neo | Centella | Durante 5 s corre el doble, la pelota le atraviesa sin tocarle y sus tiros salen un 35 % más rápidos | 40 s |
+| Ada | Teledirigida | Un tiro lento que persigue a su objetivo hasta 3,5 s. **No se puede esquivar: sólo atraparlo** | 45 s |
+| Max | Burbujas | Cada compañero del campo recibe una burbuja que para un impacto. Duran 8 s | 50 s |
+| Nora | Cometa imparable | Un tiro muy rápido en llamas. **No se puede atrapar: sólo esquivarlo** | 40 s |
+| Leo | Espejismo | Tres copias suyas corren por su campo durante 7 s. El rival las ve iguales que a él, y la pelota que da a una copia se pierde | 40 s |
+| Iris | La Red | Una red en la línea central durante 5 s: ninguna pelota del rival la cruza, ni siquiera el cometa | 50 s |
+| Bruno | Gigante | Crece durante 6 s: nada le manda a la cárcel, atrapa todo lo que le toca y lanza balonazos enormes | 50 s |
+| Sol | Bumerán | Un tiro que atraviesa a los rivales, da la vuelta y regresa a su mano. Puede dar a uno a la ida y a otro a la vuelta | 40 s |
+| Teo | Mirada intensa | Todos los rivales se mueven a la mitad de velocidad y pierden la esquiva durante 10 s, incluidas las esquivas ya iniciadas | 60 s |
+| Inés | ¡Fuga! | Todos los presos de su equipo, ella incluida, vuelven al campo | 60 s |
 
-Ambas acciones tienen su círculo táctil. Para una clase de 26, el anfitrión selecciona **13 contra 13** antes de que entren todos.
+Detalles que deciden los cruces:
+
+- Las tres que son un tiro (Teledirigida, Cometa y Bumerán) necesitan la pelota en la mano. El Superimán necesita no tenerla, y la Fuga, que haya algún compañero preso. Si no se puede usar, la carga se conserva.
+- La Mirada no se gasta si todos los rivales ya están frenados.
+- Contra el Cometa, el Gigante no lo atrapa pero tampoco cae: la pelota rebota. Una burbuja también lo para.
+- La Teledirigida ignora la esquiva, pero no la Centella, la burbuja ni al Gigante.
+- La Red no detiene los tiros de los presos rivales, que lanzan desde detrás del campo.
+- Las copias de Leo engañan también a la ayuda de apuntado y a la máquina. Sus compañeros y La Grada las ven translúcidas y con la etiqueta «copia».
+- La máquina usa la definitiva de su personaje cuando le conviene.
+
+Los números y las condiciones están en `mate/roster.js` y `mate/sim.js` (`CAST`, `EFFECT`); los dibujos, en `mate/ultfx.js`. Para una clase de 26, el anfitrión selecciona **13 contra 13** antes de que entren todos.
 
 ## Pantalla de juego
 
 La pista ocupa toda la ventana y al empezar se solicita la pantalla completa del navegador. Sobre ella flotan el retrato con los puntos, los botones de sonido, pausa, pantalla completa y salida, y la barra de habilidades.
 
-- **Con teclado:** siete círculos en la parte inferior. El primero es el talento pasivo del personaje; los otros seis son pasar, atrapar, esquivar, lanzar, imparable y mirada, cada uno con su tecla escrita debajo. Un barrido oscuro y una cuenta atrás indican la recarga. El círculo se apaga si la acción no está disponible, por ejemplo lanzar sin pelota. Un anillo naranja alrededor de «Lanzar» muestra los cinco segundos de posesión.
-- **Con los dedos:** una palanca aparece bajo el pulgar en la mitad izquierda y los círculos se abren en abanico alrededor de «Lanzar» a la derecha, con el nombre en lugar de la tecla. Tocar «Lanzar» apunta al rival más cercano; arrastrarlo apunta en esa dirección y al soltar se lanza. El juego cambia de un modo a otro según se use teclado o pantalla táctil.
+- **Con teclado:** cinco círculos en la parte inferior: pasar, atrapar, esquivar, lanzar y, más grande y con borde dorado, la definitiva del personaje. Cada uno lleva su tecla escrita debajo. Un barrido oscuro y una cuenta atrás indican la recarga, y el círculo dorado late cuando la definitiva está lista. El círculo se apaga si la acción no está disponible, por ejemplo lanzar sin pelota. Un anillo naranja alrededor de «Lanzar» muestra los cinco segundos de posesión.
+- **Con los dedos:** una palanca aparece bajo el pulgar en la mitad izquierda y los círculos se abren en abanico alrededor de «Lanzar» a la derecha, con el nombre en lugar de la tecla y la definitiva arriba. Tocar «Lanzar» apunta al rival más cercano; arrastrarlo apunta en esa dirección y al soltar se lanza. El juego cambia de un modo a otro según se use teclado o pantalla táctil.
 - Los iconos están en `mate/assets/abilities/` y la lista de acciones, en `mate/abilities.js`.
 
 ## Puntos
@@ -84,8 +107,7 @@ Para una clase mayor que la capacidad de una sala se pueden abrir varias salas i
 | Esquiva rápida | Shift más dirección |
 | Pasar al compañero más cercano | Q |
 | Cambiar objetivo automático | R |
-| Tiro imparable | F |
-| Mirada intensa | G |
+| Definitiva del personaje | F |
 | Pausar o reanudar | P; sólo anfitrión en online |
 
 Hay controles táctiles. La pista está pensada principalmente para portátil o pantalla en horizontal. El botón de pantalla completa depende de las capacidades y políticas del navegador. El audio se activa expresamente.
@@ -94,7 +116,7 @@ Hay controles táctiles. La pista está pensada principalmente para portátil o 
 
 `sim.js` contiene la simulación a 60 pasos por segundo, sin navegador ni red. El anfitrión es la autoridad sobre movimientos, posesión, colisiones, cárcel, rescates, tiempo y resultado. Los invitados envían direcciones y acciones; no envían coordenadas finales, impactos ni puntuaciones. Se validan los tipos, rangos y la secuencia de las entradas. Las entradas antiguas caducan para impedir que una tecla quede atascada al desconectar.
 
-`renderer.js` dibuja la pista, sprites, pelota, marcador y efectos en Canvas. `characters.js` carga los retratos y selecciona el fotograma de cada jugador en las hojas de animación de Cometas y Rayos. Los clientes interpolan posiciones recibidas; no deciden colisiones.
+`renderer.js` dibuja la pista, sprites, pelota, marcador y efectos en Canvas; `ultfx.js` pone lo propio de cada definitiva. `characters.js` carga los retratos y selecciona el fotograma de cada jugador en las hojas de animación de Cometas y Rayos. Los clientes interpolan posiciones recibidas; no deciden colisiones.
 
 `network.js` gestiona códigos, miembros, preparación, comienzo, pausa, reconexión y cambios de partida. Las instantáneas llevan un identificador de partido para no confundir paquetes antiguos con una revancha. La entrada se vincula a la conexión aceptada. Las credenciales de recuperación no se incluyen en la lista pública de miembros.
 
@@ -117,12 +139,12 @@ Un espectador:
 
 ### Protocolo
 
-La versión del protocolo pasa de 2 a 3. Así, un anfitrión antiguo rechaza a un espectador con el aviso de versiones distintas en lugar de sentarlo como jugador; el flujo de los jugadores, incluida la recuperación de plaza, no cambia.
+La versión del protocolo es la 4. La 3 añadió al espectador: así, un anfitrión antiguo rechaza a un espectador con el aviso de versiones distintas en lugar de sentarlo como jugador; el flujo de los jugadores, incluida la recuperación de plaza, no cambió. La 4 llega con las definitivas, que cambian los controles que se envían y el estado que se recibe: dos navegadores con versiones distintas reciben el aviso de recargar.
 
 | Mensaje | Dirección | Contenido |
 | --- | --- | --- |
-| `hello` | espectador → anfitrión | `{type:'hello', v:3, clientId, role:'spectator'}`. Sin perfil ni credencial de recuperación |
-| `welcome` | anfitrión → espectador | `{type:'welcome', v:3, id:'s-…', hostId, code, role:'spectator', started, matchId, rules}`. Va seguido de un `lobby` y, si se está jugando, de un `start` con `reconnecting:true` |
+| `hello` | espectador → anfitrión | `{type:'hello', v:4, clientId, role:'spectator'}`. Sin perfil ni credencial de recuperación |
+| `welcome` | anfitrión → espectador | `{type:'welcome', v:4, id:'s-…', hostId, code, role:'spectator', started, matchId, rules}`. Va seguido de un `lobby` y, si se está jugando, de un `start` con `reconnecting:true` |
 | `lobby` | anfitrión → todos | Añade `spectators`: cuántas pantallas miran. Es un número; no identifica a nadie |
 | `ping` / `pong` | ambos | Igual que un invitado: mide la latencia y recupera el `lobby` perdido |
 | `ended`, `rejected` | anfitrión → espectador | Igual que un invitado. Rechazos propios: versión distinta y «Ya hay demasiadas pantallas mirando esta sala» |
@@ -153,7 +175,7 @@ Los contextos de prueba se ejecutan en el mismo entorno de cómputo; esto verifi
 
 ## Verificación y ejecución
 
-- `npm test`: reglas, impactos sin bote, recepción, recargas, esquiva, rescate desde la cárcel, variantes, pases, límites de campo, pausa, caducidad de controles y posesión, final de partido, IA, validación de paquetes y trama MQTT.
+- `npm test`: reglas, impactos sin bote, recepción, recargas, esquiva, las trece definitivas y su uso por la máquina, rescate desde la cárcel, variantes, pases, límites de campo, pausa, caducidad de controles y posesión, final de partido, IA, validación de paquetes y trama MQTT.
 - `npm run test:mate`: recorrido real de entrenamiento y partida online con navegadores aislados, sin simular sockets; requiere Playwright, Chromium e internet. Genera capturas y un informe en `artifacts/`.
 - `MATE_CLIENTS=12 MATE_FULL_MATCH=0 npm run test:mate`: incorporación y controles de una sala llena. El recorrido normal comprueba además el final de partido y la vuelta al vestuario.
 - Pruebas visuales de menú y juego en 320, 390, 768 y 1366 px, sin desbordamiento horizontal.

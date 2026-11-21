@@ -1,29 +1,30 @@
-// These values use arena units and seconds. Each hero changes one part of normal play.
-const standard = {
+// Arena units and seconds. Everyone plays the same basics; the ultimate sets each hero apart.
+export const STATS = {
   passSpeed: 530, pickupRadius: 29, catchWindow: .3, runSpeed: 225,
   shotSpeed: 790, catchRadius: 32, dashSpeed: 620, dashRecovery: 1.4,
-  catchRecovery: 1.05, carrySpeed: 180, counterSpeed: 790,
-  relaySeconds: 0, rescueSeconds: 0,
+  catchRecovery: 1.05, carrySpeed: 180,
 };
 
-function hero(name, tag, ability, description, change) {
-  return {name, tag, ability, description, stats: {...standard, ...change}};
+// id: the effect in sim.js. art: the icon in assets/abilities. recharge: seconds of play.
+// ball: 'held' needs the ball in hand, 'free' needs not to have it.
+function hero(name, tag, id, ability, description, recharge, art = id, ball = null) {
+  return {name, tag, ability, description, ult: {id, art, recharge, ball}};
 }
 
 export const HEROES = [
-  hero('Vega', 'La capitana', 'Pase exprés', 'Sus pases viajan un 35 % más rápido.', {passSpeed: 715}),
-  hero('Kai', 'Radar', 'Imán', 'Recoge pelotas sueltas desde un 45 % más lejos.', {pickupRadius: 42}),
-  hero('Lúa', 'La estratega', 'Lectura de juego', 'Mantiene la recepción abierta medio segundo.', {catchWindow: .5}),
-  hero('Neo', 'Centella', 'Zancada', 'Corre un 20 % más rápido cuando va sin balón.', {runSpeed: 270}),
-  hero('Ada', 'Puntería', 'Tirachinas', 'Su lanzamiento normal viaja un 15 % más rápido.', {shotSpeed: 910}),
-  hero('Max', 'El guardián', 'Guante largo', 'Atrapa tiros en vuelo desde un 38 % más lejos.', {catchRadius: 44}),
-  hero('Nora', 'Cometa', 'Paso de cometa', 'Su esquiva recorre un 25 % más de distancia.', {dashSpeed: 775}),
-  hero('Leo', 'El soñador', 'Segunda finta', 'Recupera la esquiva en un segundo.', {dashRecovery: 1}),
-  hero('Iris', 'La portera', 'Manos listas', 'Puede volver a intentar la recepción a los 0,7 segundos.', {catchRecovery: .7}),
-  hero('Bruno', 'El pívot', 'Avance firme', 'Corre un 25 % más rápido de lo habitual con el balón.', {carrySpeed: 225}),
-  hero('Sol', 'La contraatacante', 'Contraataque', 'Al atrapar un tiro rival, su siguiente tiro normal gana un 25 % de velocidad mientras conserve el balón.', {counterSpeed: 990}),
-  hero('Teo', 'El relevista', 'Relevo', 'Al recibir un pase aliado, gana un 25 % de velocidad de carrera durante tres segundos.', {relaySeconds: 3}),
-  hero('Inés', 'La remontadora', 'Salida veloz', 'Al salir de prisión, gana un 25 % de velocidad de carrera durante cuatro segundos.', {rescueSeconds: 4}),
+  hero('Vega', 'La capitana', 'arenga', '¡A por ellos!', 'Todo tu equipo corre mucho más rápido durante 6 s, recupera al instante atrapar y esquivar, y ni la mirada ni el pies quietos le afectan.', 45, 'pase-expres'),
+  hero('Kai', 'Radar', 'iman', 'Superimán', 'La pelota vuela a tus manos esté donde esté: en el suelo, en el aire o en las manos de un rival.', 35, 'iman', 'free'),
+  hero('Lúa', 'La estratega', 'quietos', '¡Pies quietos!', 'Todos los demás, rivales y compañeros, se quedan de estatua 3 s. Solo tú te mueves.', 55),
+  hero('Neo', 'Centella', 'centella', 'Centella', 'Durante 5 s corres el doble, la pelota te atraviesa sin tocarte y tus tiros salen como rayos.', 40, 'zancada'),
+  hero('Ada', 'Puntería', 'teledirigida', 'Teledirigida', 'Un tiro que persigue a su objetivo por todo el campo. No se puede esquivar: solo atraparlo.', 45, 'teledirigida', 'held'),
+  hero('Max', 'El guardián', 'burbuja', 'Burbujas', 'Cada compañero del campo recibe una burbuja que para un impacto. Duran 8 s.', 50),
+  hero('Nora', 'Cometa', 'cometa', 'Cometa imparable', 'Un tiro en llamas que nadie puede atrapar. Solo se puede esquivar.', 40, 'special', 'held'),
+  hero('Leo', 'El soñador', 'espejismo', 'Espejismo', 'Aparecen tres copias tuyas durante 7 s. El rival no sabe cuál eres y la pelota que da a una copia se pierde.', 40),
+  hero('Iris', 'La portera', 'red', 'La Red', 'Levanta una red en la línea central durante 5 s: ninguna pelota rival la cruza.', 50),
+  hero('Bruno', 'El pívot', 'gigante', 'Gigante', 'Creces durante 6 s: nada te manda a la cárcel, atrapas todo lo que te toca y lanzas balonazos enormes.', 50),
+  hero('Sol', 'La contraatacante', 'bumeran', 'Bumerán', 'Un tiro que atraviesa a los rivales, da la vuelta y regresa a tu mano. Puede dar a la ida y a la vuelta.', 40, 'contraataque', 'held'),
+  hero('Teo', 'El de la mirada', 'mirada', 'Mirada intensa', 'Todos los rivales se mueven a la mitad de velocidad y se quedan sin esquiva durante 10 s.', 60, 'gaze'),
+  hero('Inés', 'La remontadora', 'fuga', '¡Fuga!', 'Abre la cárcel: todos los presos de tu equipo, tú incluida, vuelven al campo.', 60, 'salida'),
 ];
 
 export {HEROES as CHARACTERS};

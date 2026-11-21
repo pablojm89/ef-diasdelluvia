@@ -30,7 +30,7 @@ Sube cada imagen a `arte/entrega/` con el nombre exacto que indica su pedido, en
 
 Mantén su estilo, luz y acabado: `gimnasio/assets/gym.webp`, `gimnasio/assets/store.webp`, `gimnasio/assets/robles-rest.webp`, `gimnasio/assets/pupil-0.webp`, `gimnasio/assets/prop-cone.webp`, `mate/assets/roster/vega.png`.
 
-## Pendientes: 111
+## Pendientes: 117
 
 ### Lote `01-puertas` · Puertas de los lugares
 
@@ -50,11 +50,18 @@ Lote completo.
 
 ### Lote `03-iconos-mate` · Iconos de habilidad de Mate Arena
 
-Estilo pixel art (ver estilo_pixel). Cada icono integrado sustituye solo a su versión vectorial.
+Estilo pixel art (ver estilo_pixel). Cada icono integrado sustituye solo a su versión vectorial. Cada personaje tiene ahora una definitiva propia: los seis iconos pendientes son de las definitivas nuevas y se ven en grande, en un círculo dorado. Siguen en uso los de pasar, atrapar, esquivar y lanzar, y siete de los ya pintados (pase exprés, imán, zancada, imparable, contraataque, mirada y salida), que pasan a ser el icono de una definitiva; los otros ocho de talentos antiguos ya no aparecen en el juego.
 
 Ya integradas: 19.
 
-Lote completo.
+| Archivo que entregar | Qué es | Tamaño | Fondo | Qué debe verse |
+|---|---|---|---|---|
+| `icono-quietos.png` | Lúa · ¡Pies quietos! | 192 × 192 | transparente | Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/quietos.svg. Motivo: dos huellas de zapatilla juntas y quietas sobre una placa de hielo, con un copo de nieve encima. Color del medallón: azul hielo. Pixel art. |
+| `icono-teledirigida.png` | Ada · Teledirigida | 192 × 192 | transparente | Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/teledirigida.svg. Motivo: una pelota en el centro de un punto de mira redondo con cuatro marcas. Color del medallón: rojo. Pixel art. |
+| `icono-burbuja.png` | Max · Burbujas | 192 × 192 | transparente | Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/burbuja.svg. Motivo: una pompa de jabón grande con su brillo y una pelota dentro, y dos pompas pequeñas al lado. Color del medallón: turquesa claro. Pixel art. |
+| `icono-espejismo.png` | Leo · Espejismo | 192 × 192 | transparente | Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/espejismo.svg. Motivo: tres siluetas iguales de un jugador con gorra, la del centro sólida y las de los lados más claras, como copias. Color del medallón: violeta grisáceo. Pixel art. |
+| `icono-red.png` | Iris · La Red | 192 × 192 | transparente | Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/red.svg. Motivo: una red de voleibol tensa entre dos postes de madera, vista de frente. Color del medallón: verde. Pixel art. |
+| `icono-gigante.png` | Bruno · Gigante | 192 × 192 | transparente | Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/gigante.svg. Motivo: un jugador enorme de brazos cruzados junto a otro muy pequeño, con una flecha hacia arriba. Color del medallón: naranja tostado. Pixel art. |
 
 ### Lote `04-pista-mate` · Pista de Mate Arena
 

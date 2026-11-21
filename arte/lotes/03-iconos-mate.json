@@ -1,6 +1,6 @@
 {
  "_titulo": "Iconos de habilidad de Mate Arena",
- "_nota": "Estilo pixel art (ver estilo_pixel). Cada icono integrado sustituye solo a su versión vectorial.",
+ "_nota": "Estilo pixel art (ver estilo_pixel). Cada icono integrado sustituye solo a su versión vectorial. Cada personaje tiene ahora una definitiva propia: los seis iconos pendientes son de las definitivas nuevas y se ven en grande, en un círculo dorado. Siguen en uso los de pasar, atrapar, esquivar y lanzar, y siete de los ya pintados (pase exprés, imán, zancada, imparable, contraataque, mirada y salida), que pasan a ser el icono de una definitiva; los otros ocho de talentos antiguos ya no aparecen en el juego.",
  "_indice": {
   "archivo": "mate/assets/abilities/pintados.js",
   "nombre": "PINTADOS"
@@ -213,5 +213,71 @@
   "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/salida.svg. Motivo: candado abierto con líneas de velocidad. Color del medallón: verde hoja.",
   "pixel": true,
   "clave": "salida"
+ },
+ "icono-quietos": {
+  "nombre": "Lúa · ¡Pies quietos!",
+  "destino": "mate/assets/abilities/quietos.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/quietos.svg. Motivo: dos huellas de zapatilla juntas y quietas sobre una placa de hielo, con un copo de nieve encima. Color del medallón: azul hielo.",
+  "pixel": true,
+  "clave": "quietos"
+ },
+ "icono-teledirigida": {
+  "nombre": "Ada · Teledirigida",
+  "destino": "mate/assets/abilities/teledirigida.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/teledirigida.svg. Motivo: una pelota en el centro de un punto de mira redondo con cuatro marcas. Color del medallón: rojo.",
+  "pixel": true,
+  "clave": "teledirigida"
+ },
+ "icono-burbuja": {
+  "nombre": "Max · Burbujas",
+  "destino": "mate/assets/abilities/burbuja.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/burbuja.svg. Motivo: una pompa de jabón grande con su brillo y una pelota dentro, y dos pompas pequeñas al lado. Color del medallón: turquesa claro.",
+  "pixel": true,
+  "clave": "burbuja"
+ },
+ "icono-espejismo": {
+  "nombre": "Leo · Espejismo",
+  "destino": "mate/assets/abilities/espejismo.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/espejismo.svg. Motivo: tres siluetas iguales de un jugador con gorra, la del centro sólida y las de los lados más claras, como copias. Color del medallón: violeta grisáceo.",
+  "pixel": true,
+  "clave": "espejismo"
+ },
+ "icono-red": {
+  "nombre": "Iris · La Red",
+  "destino": "mate/assets/abilities/red.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/red.svg. Motivo: una red de voleibol tensa entre dos postes de madera, vista de frente. Color del medallón: verde.",
+  "pixel": true,
+  "clave": "red"
+ },
+ "icono-gigante": {
+  "nombre": "Bruno · Gigante",
+  "destino": "mate/assets/abilities/gigante.webp",
+  "ancho": 192,
+  "alto": 192,
+  "transparente": true,
+  "listo": false,
+  "prompt": "Medallón circular que llena el lienzo, pixel art de 48×48 ampliado ×4 sin suavizado. Degradado del color indicado con brillo arriba a la izquierda y contorno azul noche #17233b; motivo en crema #fff6da con contorno #17233b; la pelota, amarilla #ffd36b. Un solo motivo grande, legible a 46 px. Referencia de composición: mate/assets/abilities/gigante.svg. Motivo: un jugador enorme de brazos cruzados junto a otro muy pequeño, con una flecha hacia arriba. Color del medallón: naranja tostado.",
+  "pixel": true,
+  "clave": "gigante"
  }
 }
