@@ -7,7 +7,7 @@
   "ancho": 480,
   "alto": 640,
   "transparente": false,
-  "listo": false,
+  "listo": true,
   "prompt": "Vista a través de una puerta abierta; el motivo principal centrado y algo bajo, porque la imagen se recorta en forma de arco. Pista polideportiva exterior del cole con las líneas de un campo de balón prisionero y una pelota amarilla en el centro; naranjos y galería con arcos al fondo."
  },
  "door-tatami": {
@@ -16,7 +16,7 @@
   "ancho": 480,
   "alto": 640,
   "transparente": false,
-  "listo": false,
+  "listo": true,
   "prompt": "Vista a través de una puerta abierta; el motivo principal centrado y algo bajo, porque la imagen se recorta en forma de arco. Sala luminosa con esterillas de yoga de colores sobre el suelo de madera y un espejo grande al fondo."
  },
  "door-pizarra": {
@@ -25,7 +25,7 @@
   "ancho": 480,
   "alto": 640,
   "transparente": false,
-  "listo": false,
+  "listo": true,
   "prompt": "Vista a través de una puerta abierta; el motivo principal centrado y algo bajo, porque la imagen se recorta en forma de arco. La pizarra verde del gimnasio de frente, con una jugada dibujada con tiza (círculos, aspas y flechas) y el borrador en la repisa."
  },
  "door-aula": {
@@ -34,7 +34,7 @@
   "ancho": 480,
   "alto": 640,
   "transparente": false,
-  "listo": false,
+  "listo": true,
   "prompt": "Vista a través de una puerta abierta; el motivo principal centrado y algo bajo, porque la imagen se recorta en forma de arco. Aula con las mesas apartadas contra la pared y un tablero grande de juego de casillas de colores desplegado en el suelo."
  },
  "door-grada": {
@@ -43,7 +43,7 @@
   "ancho": 480,
   "alto": 640,
   "transparente": false,
-  "listo": false,
+  "listo": true,
   "prompt": "Vista a través de una puerta abierta; el motivo principal centrado y algo bajo, porque la imagen se recorta en forma de arco. Grada de madera de pabellón vista desde la pista, con un marcador electrónico apagado arriba."
  },
  "door-espalderas": {
@@ -52,7 +52,7 @@
   "ancho": 480,
   "alto": 640,
   "transparente": false,
-  "listo": false,
+  "listo": true,
   "prompt": "Vista a través de una puerta abierta; el motivo principal centrado y algo bajo, porque la imagen se recorta en forma de arco. Las espalderas de madera del gimnasio de frente, con un banco sueco delante y una ruleta de madera de seis colores apoyada en la pared."
  },
  "door-vestuario": {
@@ -61,7 +61,7 @@
   "ancho": 480,
   "alto": 640,
   "transparente": false,
-  "listo": false,
+  "listo": true,
   "prompt": "Vista a través de una puerta abierta; el motivo principal centrado y algo bajo, porque la imagen se recorta en forma de arco. Fila de taquillas verde azulado con un banco de madera delante y una mochila colgada."
  },
  "door-despacho": {
@@ -70,7 +70,7 @@
   "ancho": 480,
   "alto": 640,
   "transparente": false,
-  "listo": false,
+  "listo": true,
   "prompt": "Vista a través de una puerta abierta; el motivo principal centrado y algo bajo, porque la imagen se recorta en forma de arco. Mesa de profe con silbato, carpeta y cronómetro, y un tablón de corcho detrás."
  }
 }
