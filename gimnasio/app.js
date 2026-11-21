@@ -156,8 +156,8 @@ function render(){
     const fixed=state.hazards.includes('door'),high=state.hazards.includes('shelf');
     if(fixed||state.stage===5){const c=new Image();c.src='assets/set-cone.webp';c.alt='';c.className='spare-cone';const [l,t,w,h]=spareCone;Object.assign(c.style,{left:l+'%',top:t+'%',width:w+'%',height:h+'%'});$('objects').append(c);}
     if(state.stage===4){
-     if(!fixed){const c=button('',()=>dispatch({type:'hazard',id:'door'}),'risk risk-cone','risk-door');c.innerHTML=icon('cone');c.setAttribute('aria-label','Cono en el suelo delante de la puerta');$('objects').append(c);}
-     const m=button('',()=>dispatch({type:'hazard',id:'shelf'}),'risk risk-mat'+(high?' flagged':''),'risk-shelf');m.innerHTML=icon('mat');m.setAttribute('aria-label',high?'Colchoneta en lo alto: el profe la bajará':'Colchoneta en lo alto de la estantería');m.disabled=high;$('objects').append(m);
+     if(!fixed){const c=button('',()=>dispatch({type:'hazard',id:'door'}),'risk risk-cone','risk-door');c.innerHTML='<img alt="" src="assets/risk-cone.webp">';c.setAttribute('aria-label','Cono en el suelo delante de la puerta');$('objects').append(c);}
+     const m=button('',()=>dispatch({type:'hazard',id:'shelf'}),'risk risk-mat'+(high?' flagged':''),'risk-shelf');m.innerHTML='<img alt="" src="assets/risk-mat.webp">';m.setAttribute('aria-label',high?'Colchoneta en lo alto: el profe la bajará':'Colchoneta en lo alto de la estantería');m.disabled=high;$('objects').append(m);
      if(high){const s=document.createElement('p');s.className='help-sign';s.innerHTML='<b lang="en">Ask the teacher</b><span>La baja el profe</span>';$('objects').append(s);}
      if(!fixed)targetList.append(button('Revisar: cono delante de la puerta',fromBag({type:'hazard',id:'door'}),'',`list-risk-door`));
      if(!high)targetList.append(button('Revisar: colchoneta en lo alto',fromBag({type:'hazard',id:'shelf'}),'',`list-risk-shelf`));

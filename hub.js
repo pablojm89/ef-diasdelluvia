@@ -13,12 +13,12 @@ const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 // One entry per place of the school. `soon` places are painted on the wall but still closed.
 const PLACES = {
  gimnasio: {name: 'El Gimnasio', kicker: 'Aventura: Equipment Rescue', art: 'door-gimnasio', href: './gimnasio/', modes: 'Alumno · Pantalla', state: 'open'},
- pista: {name: 'La Pista', kicker: 'Mate Arena: balón prisionero', art: 'door-mate', pixel: true, href: './mate/', modes: 'Alumno', state: 'open'},
+ pista: {name: 'La Pista', kicker: 'Mate Arena: balón prisionero', art: 'door-mate', href: './mate/', modes: 'Alumno', state: 'open'},
  espalderas: {name: 'Las Espalderas', kicker: 'Ruleta de retos para toda la clase', art: 'door-espalderas', action: 'wheel', modes: 'Pantalla', state: 'open'},
  pizarra: {name: 'La Pizarra', kicker: 'Rosco de Educación Física', art: 'door-pizarra', href: './pizarra/', modes: 'Alumno · Pantalla', state: 'open'},
- tatami: {name: 'El Tatami', kicker: 'Yoga: posturas y secuencias', art: 'door-cerrada', href: './tatami/', modes: 'Alumno · Pantalla', state: 'open'},
- grada: {name: 'La Grada', kicker: 'Partidos de mate en directo', art: 'door-cerrada', href: './grada/', modes: 'Pantalla', state: 'open'},
- aula: {name: 'El Aula', kicker: 'La oca y el bingo en movimiento', art: 'door-cerrada', href: './aula/', modes: 'Pantalla · Tabletas', state: 'open'},
+ tatami: {name: 'El Tatami', kicker: 'Yoga: posturas y secuencias', art: 'door-tatami', href: './tatami/', modes: 'Alumno · Pantalla', state: 'open'},
+ grada: {name: 'La Grada', kicker: 'Partidos de mate en directo', art: 'door-grada', href: './grada/', modes: 'Pantalla', state: 'open'},
+ aula: {name: 'El Aula', kicker: 'La oca y el bingo en movimiento', art: 'door-aula', href: './aula/', modes: 'Pantalla · Tabletas', state: 'open'},
 };
 const MAPS = {
  alumno: {title: '¿A dónde vamos hoy?', places: ['gimnasio', 'pista', 'pizarra', 'tatami']},
