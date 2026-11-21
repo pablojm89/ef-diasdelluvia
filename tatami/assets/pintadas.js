@@ -1,2 +1,2 @@
 // Generado por scripts/integrar_arte.py: qué imágenes de este lote ya están pintadas.
-export const PINTADAS = [];
+export const PINTADAS = ['butterfly', 'butterfly-silla', 'calma', 'cat', 'cat-silla', 'chair', 'chair-silla', 'child', 'child-silla', 'cobra', 'cobra-silla', 'cow', 'cow-silla', 'downdog', 'downdog-silla', 'mountain', 'mountain-silla', 'robles-yoga', 'room', 'tree', 'tree-silla', 'triangle', 'triangle-silla', 'warrior1', 'warrior1-silla', 'warrior2', 'warrior2-silla'];
