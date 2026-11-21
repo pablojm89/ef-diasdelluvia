@@ -180,6 +180,9 @@ test('tatami: la página enlaza lo que existe y el pedido de arte cubre cada pos
   assert.ok(steps,pose.id);
   assert.deepEqual([steps.ancho,steps.alto,steps.transparente,steps.exacto,steps.clave,steps.destino],[1536,1280,true,true,pose.id+'-pasos',`tatami/assets/pasos-${pose.id}.webp`]);
   assert.equal(steps.prompt.match(/Dibujo \d:/g).length,6,pose.id);
+  // Six drawings in two rows, settled on the same floor line, with a small picture for the lists.
+  assert.deepEqual([steps.celdas,steps.suelo,steps.mini],[[3,2],590,`tatami/assets/mini-${pose.id}.webp`]);
+  if(PINTADAS.includes(pose.id+'-pasos')){assert.ok(existsSync(root+steps.mini),steps.mini);assert.ok(thumbMarkup(pose.id).includes(`mini-${pose.id}.webp`),pose.id);}
   const strip=lote['pose-'+pose.id];
   if(strip)assert.deepEqual([strip.ancho,strip.alto,strip.clave,strip.destino],[1536,640,pose.id,`tatami/assets/pose-${pose.id}.webp`]);
   else assert.ok(!PINTADAS.includes(pose.id),pose.id);

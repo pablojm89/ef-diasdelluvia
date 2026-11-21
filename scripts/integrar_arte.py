@@ -6,6 +6,10 @@ Uso:  python3 scripts/integrar_arte.py [--comprobar] [--borrar]
 - Reconoce cada PNG, JPG o WebP cuyo nombre sea el de un pedido de arte/lotes/*.json.
 - Lo lleva al tamaño del pedido (los fondos se recortan centrados; las figuras con
   transparencia se ajustan sin deformar) y lo guarda como WebP en su destino.
+- En las hojas de varios dibujos (pedidos con "celdas" y "suelo") deja el suelo de
+  todos los recuadros a la misma altura y borra lo que haya quedado por debajo.
+  Si el pedido tiene "mini", guarda además el último dibujo encuadrado en pequeño,
+  para las listas: así no hay que descargar la hoja entera para ver una miniatura.
 - Marca el pedido como listo, actualiza los índices de lote, ejecuta el paso posterior
   que indique el pedido y regenera arte/ENCARGO.md.
 - Si existe arte/entrega/MANIFIESTO, comprueba el SHA-256 de cada archivo.
@@ -31,6 +35,58 @@ def huellas():
     return {partes[-1]: partes[0].lower() for partes in (linea.split() for linea in manifiesto.read_text(encoding='utf8').splitlines()) if len(partes) >= 2}
 
 
+def asentar(imagen, pedido):
+    """Hoja de dibujos en rejilla: el borde inferior de lo pintado queda en `suelo` en todos los recuadros.
+
+    Si la hoja llegó con el suelo más bajo (figura más grande), cada recuadro se reduce desde arriba y centrado;
+    si llegó más alto, se baja. Así la esterilla no salta al pasar de una postura a otra.
+    """
+    columnas, filas = pedido['celdas']
+    suelo = pedido['suelo']
+    ancho, alto = imagen.width // columnas, imagen.height // filas
+    celdas = [imagen.crop((c * ancho, f * alto, (c + 1) * ancho, (f + 1) * alto)) for f in range(filas) for c in range(columnas)]
+
+    def fondo(celda):
+        caja = celda.getchannel('A').point(lambda valor: 255 if valor > 40 else 0).getbbox()
+        return caja[3] if caja else None
+
+    fondos = sorted(valor for valor in map(fondo, celdas) if valor)
+    if not fondos:
+        return imagen
+    base = fondos[len(fondos) // 2]
+    salida = Image.new('RGBA', imagen.size)
+    for numero, celda in enumerate(celdas):
+        if (fondo(celda) or 0) > base + 10:  # restos sueltos bajo la esterilla, venidos del recuadro de abajo
+            celda.paste((0, 0, 0, 0), (0, base + 3, ancho, alto))
+        if base - suelo > 6:
+            escala = suelo / base
+            menor = celda.resize((round(ancho * escala), round(alto * escala)), Image.LANCZOS)
+            celda = Image.new('RGBA', (ancho, alto))
+            celda.paste(menor, ((ancho - menor.width) // 2, 0))
+        elif suelo - base > 6:
+            bajada = Image.new('RGBA', (ancho, alto))
+            bajada.paste(celda, (0, suelo - base))
+            celda = bajada
+        salida.paste(celda, (numero % columnas * ancho, numero // columnas * alto))
+    return salida
+
+
+MINI = (288, 282)  # la proporción de .thumb en tatami.css
+
+
+def miniatura(hoja, pedido):
+    """El último dibujo de la hoja, encuadrado entero sobre su esterilla."""
+    columnas, filas = pedido['celdas']
+    ancho, alto = hoja.width // columnas, hoja.height // filas
+    celda = hoja.crop(((columnas - 1) * ancho, (filas - 1) * alto, columnas * ancho, filas * alto))
+    izquierda, arriba, derecha, abajo = celda.getchannel('A').point(lambda valor: 255 if valor > 40 else 0).getbbox()
+    proporcion = MINI[0] / MINI[1]
+    lado = max(abajo - arriba + 24, (derecha - izquierda + 24) / proporcion) / .978  # un poco de suelo bajo la esterilla
+    centro, base = (izquierda + derecha) / 2, abajo + .022 * lado
+    ventana = (round(centro - lado * proporcion / 2), round(base - lado), round(centro + lado * proporcion / 2), round(base))
+    return celda.crop(ventana).resize(MINI, Image.LANCZOS)
+
+
 def preparar(imagen, pedido):
     ancho, alto = pedido['ancho'], pedido['alto']
     filtro = Image.NEAREST if pedido.get('pixel') else Image.LANCZOS
@@ -48,7 +104,8 @@ def preparar(imagen, pedido):
     if pedido.get('exacto'):
         if abs(imagen.width / imagen.height - ancho / alto) > .02:
             return None, f'la proporción debe ser {ancho}:{alto}'
-        return imagen.resize((ancho, alto), filtro), None
+        imagen = imagen.resize((ancho, alto), filtro)
+        return (asentar(imagen, pedido) if pedido.get('celdas') else imagen), None
     escala = min(ancho / imagen.width, alto / imagen.height)
     return imagen.resize((max(1, round(imagen.width * escala)), max(1, round(imagen.height * escala))), filtro), None
 
@@ -88,6 +145,8 @@ def main():
             resultado.save(destino, lossless=True, method=6)
         else:
             resultado.save(destino, quality=88, method=6)
+        if pedido.get('mini'):
+            miniatura(resultado, pedido).save(RAIZ / pedido['mini'], quality=84, method=6)
         pedido['listo'] = True
         tocados.add(ruta)
         hechas.append(archivo)

@@ -28,8 +28,7 @@
 .pose-svg{display:block;width:100%;height:100%}
 .thumb{display:block;width:100%;aspect-ratio:480/470}
 .thumb.painted{background-size:300% auto;background-position:100% 72%;background-repeat:no-repeat}
-/* Six-drawing sheets have two rows: the finished pose is the last drawing of the second one. */
-.thumb.painted.pasos{background-position:100% 95%}
+img.thumb{height:auto}
 
 /* Learn: cards that look like the cream posters of the gym. */
 .pose-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:clamp(12px,2vw,20px)}

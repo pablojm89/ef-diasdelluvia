@@ -23,7 +23,7 @@ Cada lugar es una puerta. Sólo se pintan puertas abiertas o a punto de abrirse;
 | **El Gimnasio** | Aventura gráfica bilingüe con el profe Robles; hoy, *Equipment Rescue* en el cuarto de material | — | Alumno · Pantalla | Abierto |
 | **La Pista** | Mate Arena: balón prisionero con habilidades, entrenamiento y salas | — | Alumno | Abierto |
 | **Las Espalderas** | Ruleta de retos: gira, sale un tipo de reto y toda la clase lo hace a la vez con cronómetro | Ruletas de Wordwall | Pantalla | Abierto |
-| **El Tatami** | Yoga: aprender 38 posturas en cinco familias, crear secuencias propias o entre todos y practicarlas con respiraciones contadas | Yoga en vídeo y cuentos de yoga | Alumno · Pantalla | Abierto: las doce primeras posturas, pintadas; las 26 nuevas, con figura provisional |
+| **El Tatami** | Yoga: aprender 38 posturas en cinco familias, crear secuencias propias o entre todos y practicarlas con respiraciones contadas | Yoga en vídeo y cuentos de yoga | Alumno · Pantalla | Abierto, con las 38 posturas pintadas |
 | **La Pizarra** | Rosco de EF: la clase responde con una postura y cada acierto abre un microrreto; individual en el ordenador del alumno | Pasapalabra y trivial de EF | Alumno · Pantalla | Abierto |
 | **El Aula** | La oca cooperativa y el bingo en movimiento con cartones únicos | Ocas y tableros de Genially; Movement bingo | Pantalla + tabletas | Abierto |
 | **La Grada** | Ver en la pantalla, por código de sala, hasta cuatro partidos de mate a la vez | — | Pantalla | Abierto |
@@ -65,7 +65,7 @@ Petición del profe. Diseño:
 - **Practicar.** La pantalla guía la secuencia: nombre en los dos idiomas, la animación de entrada, las respiraciones contadas y la salida. La clase la hace en directo. Hay nueve secuencias preparadas, entre ellas un saludo al sol adaptado y cuatro que no necesitan colchoneta.
 - **Qué queda anotado.** Posturas vistas, secuencias creadas y secuencias practicadas.
 - **Catálogo:** 38 posturas adecuadas para Primaria y practicables junto al pupitre o en colchoneta, sin inversiones, sin apoyos de cabeza o cuello y sin extensiones fuertes de espalda. Las doce primeras conservan su letra, así que los códigos y enlaces antiguos siguen abriendo. El criterio, las fuentes y lo que se ha dejado fuera están en [11-yoga-catalogo.md](11-yoga-catalogo.md).
-- **Dibujos.** Cada postura tiene una hoja de pasos de seis dibujos (del inicio a la postura terminada) y un dibujo en silla. Las doce primeras ya tienen una hoja de tres dibujos, que sigue en uso hasta que llegue la de seis. Todo está pedido en el [encargo de imágenes](../arte/ENCARGO.md), lote `10-tatami`; mientras llega, cada postura nueva se ve con la figura provisional.
+- **Dibujos.** Cada postura tiene una hoja de pasos de seis dibujos (del inicio a la postura terminada) y un dibujo en silla; están todos pintados e integrados (lote `10-tatami`). Al integrarlas, `scripts/integrar_arte.py` deja la esterilla a la misma altura en todas las hojas y saca de cada una una miniatura ligera para las listas, de modo que la hoja completa sólo se descarga al abrir la ficha o practicar. Las hojas antiguas de tres dibujos de las doce primeras posturas siguen en `tatami/assets/` pero ya no se usan; la figura provisional queda sólo como reserva para posturas futuras.
 - **Queda por decidir:** respiraciones guiadas (abeja, globo, serpiente) y posturas en pareja, que serían la siguiente ampliación.
 
 ## Registro y notas
@@ -78,7 +78,7 @@ Mismo sistema que Agencia La Lupa, del repo de multiplicopolis: una hoja de Goog
 |---|---|---|
 | **A. Casa nueva** | Inicio de juego, tres formas de entrar, jugador sin nombres, registro local, despacho, ruleta, nombre y estética comunes, actividades antiguas apartadas | Hecha |
 | **B. Notas** | Mismo sistema que La Lupa: protocolo, servidor común `aula.gs`, conexión desde el despacho, alias de clase, tabla de qué da nota | Programada y probada contra hojas simuladas. **Falta probarla con Google real** y que el profe decida qué cuenta para nota |
-| **C. El Tatami** | Yoga completo: aprender, crear y practicar; catálogo de 38 posturas y entrada paso a paso | Hecha. Pintadas las doce primeras posturas (hojas de tres dibujos); faltan las hojas de seis pasos de todas y las sillas de las 26 nuevas |
+| **C. El Tatami** | Yoga completo: aprender, crear y practicar; catálogo de 38 posturas y entrada paso a paso | Hecha, con todos los dibujos |
 | **D. La Pizarra y El Aula** | Rosco motor, oca cooperativa, bingo en movimiento | Hecha; faltan tablero, fondos y posturas pintados |
 | **E. La Grada** | Partidos de mate en directo; espectador sin plaza | Hecha y vista funcionar por conexión directa. Sin probar por el relevo ni en la red del centro |
 | **F. Remate** | Gimnasio táctil y con el pedido en la escena; pista pintada y menús de Mate en la estética común; segunda misión del gimnasio; retirada de las actividades antiguas | En curso |

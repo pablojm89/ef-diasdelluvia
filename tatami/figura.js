@@ -99,6 +99,8 @@ export function sceneMarkup(id, p, {chair = false} = {}) {
 // Small still picture of the finished pose, painted or provisional.
 export function thumbMarkup(id) {
  const art = sheet(id);
+ // A step-by-step sheet comes with its own small picture, so lists do not download whole sheets.
+ if (art?.frames > COLS) return `<img class="thumb" src="${asset('mini-' + id)}" alt="" width="288" height="282" loading="lazy" decoding="async">`;
  return art ? `<span class="thumb painted${art.frames > COLS ? ' pasos' : ''}" style="background-image:url('${art.url}')"></span>`
   : `<svg class="thumb" viewBox="16 150 480 470" aria-hidden="true">${sceneMarkup(id, 1)}</svg>`;
 }
