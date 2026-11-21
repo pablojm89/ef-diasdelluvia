@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 import {existsSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {makeGame,stepGame,setInput,imprison,snapshot,POINTS} from '../mate/sim.js';
-import {HEROES} from '../mate/roster.js';
+import {HEROES,STATS} from '../mate/roster.js';
+// Hits are plain unless a test asks for the rebound, so every outcome here is repeatable.
+const REBOUND=STATS.reboundChance;STATS.reboundChance=0;
 import {ACTIONS,actionState} from '../mate/abilities.js';
 import {equipment} from '../gimnasio/mission.js';
 import {stored} from '../gimnasio/store-layout.js';

@@ -7,12 +7,12 @@ export const RULE_DEFAULTS={teamSize:3,roundSeconds:150,bestOf:3,catchEliminates
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const TAU=Math.PI*2;
 // Shot speed of the ultimates that are a throw.
-const SHOTS={comet:1050,homing:560,boomerang:880};
+const SHOTS={comet:1250,homing:560,boomerang:920,power:STATS.shotSpeed*STATS.powerBoost,counter:STATS.shotSpeed*STATS.counterBoost,rebound:430};
 // Seconds each effect of an ultimate lasts.
 export const EFFECT={turbo:6,frozen:3,flash:5,shield:8,giant:6,slowed:10,net:5,decoy:7};
 // How many times bigger Bruno gets, in reach and on screen.
 export const GIANT=1.85;
-const TIMERS=['boostTime','catchTime','catchCooldown','dashTime','dashCooldown','invulnerable','stun','throwFlash','ultCooldown','slowed','turbo','frozen','flash','shield','giant'];
+const TIMERS=['surge','counter','boostTime','catchTime','catchCooldown','dashTime','dashCooldown','invulnerable','stun','throwFlash','ultCooldown','slowed','turbo','frozen','flash','shield','giant'];
 const ultOf=p=>HEROES[p.character].ult;
 export const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 export function normalizeRules(raw={}) {
@@ -36,10 +36,10 @@ export function makeGame(roster=[],rawRules={},seed=1234567) {
  for(let team=0;team<2;team++) {
   const lineup=buildLineup(roster,team,rules.teamSize);
   for(const [slot,{member,character}] of lineup.entries()) {
-   players.push({id:member?.id||`bot-${team}-${slot}`,name:HEROES[character].name,character,team,bot:!member||member.bot===true,slot,prison:false,x:0,y:0,vx:0,vy:0,face:team===0?1:-1,catchTime:0,catchCooldown:0,dashTime:0,dashCooldown:0,invulnerable:0,stun:0,throwFlash:0,boostTime:0,ultCooldown:HEROES[character].ult.recharge/2,slowed:0,turbo:0,frozen:0,flash:0,shield:0,giant:0,points:0,hits:0,catches:0,dodges:0,assists:0,rescues:0,input:null,lastInput:0,aiThink:0,aiAim:0});
+   players.push({id:member?.id||`bot-${team}-${slot}`,name:HEROES[character].name,character,team,bot:!member||member.bot===true,slot,prison:false,x:0,y:0,vx:0,vy:0,face:team===0?1:-1,catchTime:0,catchCooldown:0,dashTime:0,dashCooldown:0,invulnerable:0,stun:0,throwFlash:0,boostTime:0,surge:0,counter:0,ultCooldown:HEROES[character].ult.recharge/2,slowed:0,turbo:0,frozen:0,flash:0,shield:0,giant:0,points:0,hits:0,catches:0,dodges:0,assists:0,rescues:0,input:null,lastInput:0,aiThink:0,aiAim:0});
   }
  }
- const g={v:1,rules,seed:seed>>>0||1,tick:0,time:0,phase:'countdown',phaseTime:2.7,paused:false,round:1,roundLeft:rules.roundSeconds,scores:[0,0],winner:null,roundWinner:null,players,ball:null,decoys:[],net:[0,0],events:[],eventId:0};
+ const g={v:1,rules,seed:seed>>>0||1,tick:0,time:0,phase:'countdown',phaseTime:2.7,paused:false,round:1,roundLeft:rules.roundSeconds,scores:[0,0],winner:null,roundWinner:null,players,ball:null,decoys:[],net:[0,0],tagged:[],events:[],eventId:0};
  resetRound(g);
  return g;
 }
@@ -60,13 +60,13 @@ function spawn(g,p) {
   p.x=p.team===0?left:FIELD.width-left;
   p.y=200+Math.floor(p.slot/columns)*380/Math.max(1,rows-1);
  }
- p.y=clamp(p.y,185,600);p.vx=0;p.vy=0;p.catchTime=0;p.catchCooldown=0;p.dashTime=0;p.dashCooldown=0;p.invulnerable=.25;p.stun=0;p.throwFlash=0;p.input=null;
+ p.y=clamp(p.y,185,600);p.vx=0;p.vy=0;p.catchTime=0;p.catchCooldown=0;p.dashTime=0;p.dashCooldown=0;p.invulnerable=.25;p.stun=0;p.throwFlash=0;p.surge=0;p.counter=0;p.input=null;
 }
 function resetRound(g) {
  for(const p of g.players)spawn(g,p);
  const first=g.players.find(p=>p.team===(g.round-1)%2);
- g.ball={x:first.x,y:first.y,vx:0,vy:0,holder:first.id,owner:first.id,team:first.team,live:false,age:0,held:0,loose:0,pass:false};
- g.decoys=[];g.net=[0,0];
+ g.ball={x:first.x,y:first.y,vx:0,vy:0,holder:first.id,owner:first.id,team:first.team,live:false,age:0,held:0,loose:0,pass:false,shot:0};
+ g.decoys=[];g.net=[0,0];g.tagged=[];
  g.roundLeft=g.rules.roundSeconds;
 }
 export function setInput(g,id,raw) {
@@ -101,55 +101,84 @@ function aiInput(g,p) {
   p.aiThink-=1/60;
   const margin=p.team===0?545:655;
   mx=p.prison?0:Math.sign(margin-p.x)*0.45;
-  if(target){ay=target.y+target.vy*0.16+p.aiAim;my=clamp((target.y-p.y)/160,-.65,.65);}
-  if(b.held>0.65&&p.aiThink<=0){
-   const ally=nearest(p,g.players.filter(q=>q.team===p.team && q.id!==p.id));
-   // Use a forward pass if it puts a teammate closer to the target.
-   pass=!!(ally && target && !ally.prison && !p.prison && distance(ally,target)+60<distance(p,target) && random(g)<.4);
-   fire=!pass;p.aiThink=.8+random(g)*.8;p.aiAim=(random(g)-.5)*50;
+  if(target){
+   // Aim where the target will be when the ball gets there, give or take.
+   const lead=Math.min(.45,distance(p,target)/STATS.shotSpeed)*.8;
+   ax=target.x+target.vx*lead;ay=target.y+target.vy*lead+p.aiAim;my=clamp((target.y-p.y)/160,-.65,.65);
   }
- } else if(!b.holder&&!b.live) {
+  // Now and then it answers a catch at once: the counter.
+  const quick=p.counter>0&&p.aiQuick&&b.held>.15;
+  if((b.held>0.65&&p.aiThink<=0)||quick){
+   const ally=passTarget(g,p,{x:ax,y:ay});
+   // Pass if it puts a teammate closer to the target: forward, or to a prisoner behind the rivals.
+   pass=!quick&&!!(ally&&target&&distance(ally,target)+60<distance(p,target)&&random(g)<.4);
+   fire=!pass;p.aiThink=.8+random(g)*.8;p.aiAim=(random(g)-.5)*50;p.aiQuick=false;
+   // And sometimes it dodges into the throw: the power shot.
+   dash=fire&&!quick&&p.dashCooldown<=0&&p.slowed<=0&&random(g)<.05;
+  }
+ } else if(b.pass&&b.receiver===p.id) {
+  mx=clamp((b.tx-p.x)/30,-1,1);my=clamp((b.ty-p.y)/30,-1,1);
+ } else if(!b.holder&&!b.live&&!b.pass) {
   const zone=bounds(p),accessible=b.x>=zone.left-35&&b.x<=zone.right+35;
   const teammates=g.players.filter(q=>q.team===p.team&&q.prison===p.prison);
   if(accessible&&nearest(b,teammates)?.id===p.id){mx=clamp((b.x-p.x)/45,-1,1);my=clamp((b.y-p.y)/45,-1,1);}
   else {mx=clamp(((p.team===0?455:745)+(p.prison?(p.team===0?640:-640):0)-p.x)/140,-.3,.3);my=Math.sin(g.time*.8+p.slot*2)*.35;}
  } else {
   my=Math.sin(g.time*.9+p.slot*2+p.team)*.45;
-  if(b.live&&b.team!==p.team&&distance(p,b)<180) {
+  if(b.team!==p.team&&(b.live||b.pass)&&distance(p,b)<180) {
    ax=b.x;ay=b.y;
    const approaching=(p.x-b.x)*b.vx+(p.y-b.y)*b.vy>0;
-   if(approaching){my=p.y<b.y?-1:1;if(distance(p,b)<120&&p.catchCooldown<=0&&random(g)<.16)catching=true;if(distance(p,b)<85&&p.dashCooldown<=0&&random(g)<.1)dash=true;}
+   // It decides once per throw what to try, so it does not answer every ball.
+   if(p.aiShot!==b.shot){
+    p.aiShot=b.shot;const roll=random(g);
+    p.aiPlan=b.pass?(roll<.15?'catch':null):b.kind==='rebound'?(roll<.6?'catch':null):roll<.45?'catch':roll<.8?'dash':null;
+   }
+   if(approaching&&b.live)my=p.y<b.y?-1:1;
+   if(approaching&&p.aiPlan==='catch'&&distance(p,b)<110&&p.catchCooldown<=0&&b.kind!=='comet'&&b.kind!=='power'){catching=true;p.aiPlan=null;p.aiQuick=random(g)<.15;}
+   if(approaching&&b.live&&(p.aiPlan==='dash'||(p.aiPlan==='catch'&&p.catchCooldown>0))&&distance(p,b)<85&&p.dashCooldown<=0){dash=true;p.aiPlan=null;}
   }
  }
  if(target&&p.prison&&b.holder===p.id){ax=target.x;ay=target.y;}
  const ult=aiUlt(g,p,fire&&!!target);
- if(ult&&ultOf(p).ball==='held')fire=false;
+ if(ult&&ultOf(p).ball==='held')fire=dash=false;
  return {mx,my,ax,ay,ult,fire,catch:catching,dash,pass};
 }
 // The ball stops being a threat: it has bounced, been stopped or run out of flight.
-function drop(b){b.live=false;b.pass=false;b.kind=null;b.big=false;b.target=null;b.back=false;b.struck=null;}
+function drop(b){b.live=false;b.pass=false;b.kind=null;b.big=false;b.target=null;b.back=false;b.struck=null;b.receiver=null;b.flight=0;}
+// Who gets a pass: the teammate nearest to where the passer aims.
+export function passTarget(g,p,aim){return nearest(aim,g.players.filter(q=>q.team===p.team&&q.id!==p.id));}
 // kind: null for a normal throw, or 'comet', 'homing' or 'boomerang' for the ultimates that are a throw.
 export function throwBall(g,p,aim,passing=false,kind=null) {
  const b=g.ball;if(b.holder!==p.id||p.stun>0||p.frozen>0)return false;
  let target=aim;
- if(passing){const ally=nearest(p,g.players.filter(q=>q.team===p.team&&q.id!==p.id));if(!ally)return false;target=ally;}
+ if(passing){const ally=passTarget(g,p,aim);if(!ally)return false;target=ally;}
  let dx=target.x-p.x,dy=target.y-p.y,len=Math.hypot(dx,dy);
  if(len<1){dx=p.team===0?1:-1;dy=0;len=1;}
- const speed=passing?STATS.passSpeed:kind?SHOTS[kind]:STATS.shotSpeed*(p.flash>0?1.35:1);
+ // The secret plays only change a plain throw.
+ if(!passing&&!kind)kind=p.surge>0?'power':p.counter>0?'counter':null;
+ // A pass is a lob over everyone's heads: it takes about the same time whatever the distance.
+ const flight=passing?clamp(len/650,.3,1.1):0;
+ const speed=passing?len/flight:(SHOTS[kind]||STATS.shotSpeed)*(p.flash>0?1.35:1);
  drop(b);
- b.dodged=null;
- if(!passing){b.kind=kind;b.big=p.giant>0;}
+ b.dodged=null;b.shot=(b.shot||0)+1;
+ if(passing){b.flight=flight;b.receiver=target.id;b.tx=target.x;b.ty=target.y;}
+ else{b.kind=kind;b.big=p.giant>0;}
  if(kind==='homing')b.target=nearest(aim,g.players.filter(q=>q.team!==p.team&&!q.prison))?.id||null;
+ if(kind==='counter'){p.catchCooldown=0;p.dashCooldown=0;}
+ p.surge=0;p.counter=0;
  b.holder=null;b.owner=p.id;b.team=p.team;b.live=!passing;b.pass=passing;b.age=0;b.loose=0;b.held=0;
  b.x=p.x+dx/len*25;b.y=p.y+dy/len*25;b.vx=dx/len*speed;b.vy=dy/len*speed;
  p.throwFlash=.22;p.face=dx>=0?1:-1;
- emit(g,passing?'pass':'throw',{player:p.id,x:p.x,y:p.y,team:p.team});return true;
+ emit(g,passing?'pass':'throw',{player:p.id,x:p.x,y:p.y,team:p.team});
+ if(kind==='power'||kind==='counter')emit(g,'trick',{player:p.id,x:p.x,y:p.y,team:p.team,trick:kind});
+ return true;
 }
 function hold(g,p,type='pickup') {
  const b=g.ball;
  // A pass that leads to a hit earns the passer an assist.
  b.assist=type==='pickup'&&b.pass&&b.team===p.team&&b.owner!==p.id?b.owner:null;
  drop(b);b.magnet=null;
+ if(type==='catch')p.counter=STATS.counterWindow;
  b.holder=p.id;b.team=p.team;b.owner=p.id;b.x=p.x;b.y=p.y;b.vx=0;b.vy=0;b.held=0;b.loose=0;emit(g,type,{player:p.id,x:p.x,y:p.y,team:p.team});}
 export function imprison(g,p,thrower=null) {
  if(p.prison)return false;
@@ -262,7 +291,8 @@ function stepBall(g,dt) {
  }
  if(b.x<62||b.x>1138){b.x=clamp(b.x,62,1138);if(guided){b.vx*=-1;b.back=true;}else{b.vx*=-.45;drop(b);}}
  if(b.y<148||b.y>638){b.y=clamp(b.y,148,638);if(guided){b.vy*=-1;b.back=true;}else{b.vy*=-.45;drop(b);}}
- if(b.age>(b.kind==='homing'?3.5:b.kind==='boomerang'?3:1.25))drop(b);
+ // A pass lands where it was sent; a shot dies after its flight.
+ if(b.age>(b.pass?b.flight+.12:b.kind==='homing'?3.5:b.kind==='boomerang'?3:b.kind==='rebound'?.9:1.25))drop(b);
  const ordered=[...g.players].sort((a,c)=>Math.hypot(a.x-ox,a.y-oy)-Math.hypot(c.x-ox,c.y-oy));
  for(const p of ordered) {
   if(p.id===b.owner&&b.age<.2)continue;
@@ -270,10 +300,14 @@ function stepBall(g,dt) {
   if(b.live&&p.team!==b.team){
    if(b.struck?.includes(p.id))continue;
    const reach=(FIELD.radius+7+(b.big?12:0))*(p.giant>0?GIANT:1);
-   // A giant catches whatever touches him; nobody catches a comet.
-   const grabs=b.kind!=='comet'&&p.stun<=0&&p.frozen<=0&&(p.giant>0&&!p.prison?d<reach:p.catchTime>0&&d<STATS.catchRadius);
+   // A giant catches whatever touches him; nobody catches a comet or a power shot.
+   const grabs=b.kind!=='comet'&&b.kind!=='power'&&p.stun<=0&&p.frozen<=0&&(p.giant>0&&!p.prison?d<reach:p.catchTime>0&&d<STATS.catchRadius);
    if(grabs){
-    const sender=g.players.find(q=>q.id===b.owner);hold(g,p,'catch');p.catchTime=0;award(g,p,'catch');
+    const sender=g.players.find(q=>q.id===b.owner),saved=b.kind==='rebound'?g.tagged.splice(0):[];
+    hold(g,p,'catch');p.catchTime=0;award(g,p,'catch');
+    // Catching the rebound keeps the teammate it bounced off in the game, and the catch comes back.
+    for(const {id} of saved){const mate=g.players.find(q=>q.id===id);if(!mate)continue;mate.stun=0;mate.invulnerable=.8;p.catchCooldown=0;award(g,p,'rescue');emit(g,'save',{player:mate.id,x:mate.x,y:mate.y,team:mate.team,by:p.id});}
+    if(saved.length)return;
     if(g.rules.catchEliminates&&sender&&!sender.prison)imprison(g,sender);
     if(g.rules.catchRescues){const prisoner=g.players.find(q=>q.team===p.team&&q.prison&&q.id!==p.id);if(prisoner)rescue(g,prisoner,p);}
     return;
@@ -286,12 +320,25 @@ function stepBall(g,dt) {
     emit(g,p.giant>0?'clang':'pop',{player:p.id,x:p.x,y:p.y,team:p.team});
     b.vx*=-.35;b.vy*=-.35;drop(b);b.loose=0;return;
    }
-   imprison(g,p,g.players.find(q=>q.id===b.owner));emit(g,'impact',{x:ox,y:oy,team:p.team});
-   // A boomerang carries on through whoever it hits.
-   if(b.kind==='boomerang'){(b.struck||=[]).push(p.id);continue;}
+   const thrower=g.players.find(q=>q.id===b.owner);
+   // Some plain hits bounce off: the player is out only if no teammate catches the rebound.
+   if((!b.kind||b.kind==='power'||b.kind==='counter')&&random(g)<STATS.reboundChance){
+    g.tagged.push({id:p.id,by:b.owner});p.stun=1.2;p.catchTime=0;p.dashTime=0;
+    const mates=g.players.filter(q=>q.team===p.team&&q.id!==p.id&&!q.prison&&distance(p,q)<300);
+    const to=mates.length?mates[Math.floor(random(g)*mates.length)]:null;
+    const angle=to?Math.atan2(to.y-p.y,to.x-p.x)+(random(g)-.5)*.5:random(g)*TAU;
+    b.kind='rebound';b.big=false;b.age=0;b.struck=[p.id];b.dodged=null;b.shot++;
+    b.x=p.x;b.y=p.y;b.vx=Math.cos(angle)*SHOTS.rebound;b.vy=Math.sin(angle)*SHOTS.rebound;
+    emit(g,'tagged',{player:p.id,x:p.x,y:p.y,team:p.team});emit(g,'impact',{x:ox,y:oy,team:p.team});return;
+   }
+   imprison(g,p,thrower);emit(g,'impact',{x:ox,y:oy,team:p.team});
+   // A boomerang and a comet carry on through whoever they hit.
+   if(b.kind==='boomerang'||b.kind==='comet'){(b.struck||=[]).push(p.id);continue;}
    b.vx*=.28;b.vy*=.28;drop(b);b.loose=0;return;
   }
   else if(b.kind==='boomerang'&&b.back&&p.id===b.owner&&d<STATS.pickupRadius+6&&p.frozen<=0){hold(g,p);return;}
+  // A pass flies over the rivals: only a timed catch cuts it off.
+  else if(b.pass&&p.team!==b.team){if(p.catchTime>0&&d<STATS.catchRadius&&p.stun<=0&&p.frozen<=0){hold(g,p,'catch');p.catchTime=0;award(g,p,'catch');return;}}
   else if(!b.live&&d<STATS.pickupRadius&&p.stun<=0&&p.frozen<=0){hold(g,p);return;}
  }
  if(b.live)for(const copy of g.decoys){
@@ -299,7 +346,7 @@ function stepBall(g,dt) {
   // The ball fell for a copy: it counts as a dodge for the real one.
   copy.life=0;
   const real=g.players.find(p=>p.id===copy.owner);if(real)award(g,real,'dodge');
-  if(b.kind!=='boomerang'){b.vx*=.28;b.vy*=.28;drop(b);b.loose=0;}
+  if(b.kind!=='boomerang'&&b.kind!=='comet'){b.vx*=.28;b.vy*=.28;drop(b);b.loose=0;}
   break;
  }
  if(!b.live&&!b.pass){
@@ -352,7 +399,7 @@ export function stepGame(g,dt=1/60) {
   const input=(p.frozen<=0&&inputs.get(p))||{mx:0,my:0,ax:p.x+p.face*100,ay:p.y};
   p.face=input.ax>=p.x?1:-1;
   if(input.catch&&p.catchCooldown<=0&&g.ball.holder!==p.id&&p.stun<=0){p.catchTime=STATS.catchWindow;p.catchCooldown=STATS.catchRecovery;emit(g,'guard',{player:p.id,x:p.x,y:p.y});}
-  if(input.dash&&p.slowed<=0&&p.dashCooldown<=0&&p.stun<=0){p.dashTime=.2;p.dashCooldown=STATS.dashRecovery;p.dashX=input.mx||0;p.dashY=input.my||0;if(!p.dashX&&!p.dashY)p.dashY=p.y>390?-1:1;emit(g,'dodge',{player:p.id,x:p.x,y:p.y});}
+  if(input.dash&&p.slowed<=0&&p.dashCooldown<=0&&p.stun<=0){p.dashTime=.2;p.dashCooldown=STATS.dashRecovery;if(g.ball.holder===p.id)p.surge=STATS.surgeWindow;p.dashX=input.mx||0;p.dashY=input.my||0;if(!p.dashX&&!p.dashY)p.dashY=p.y>390?-1:1;emit(g,'dodge',{player:p.id,x:p.x,y:p.y});}
   if(input.fire)throwBall(g,p,{x:input.ax,y:input.ay});
   if(input.pass)throwBall(g,p,{x:input.ax,y:input.ay},true);
   let mx=p.dashTime>0?p.dashX:input.mx||0,my=p.dashTime>0?p.dashY:input.my||0;
@@ -369,12 +416,15 @@ export function stepGame(g,dt=1/60) {
   const a=g.players[i],b=g.players[j];if(a.team!==b.team||a.prison!==b.prison)continue;
   const d=distance(a,b);if(d<33){const dx=d?(a.x-b.x)/d:1,dy=d?(a.y-b.y)/d:0,push=(33-d)*.5;for(const [p,sign] of [[a,1],[b,-1]]){const r=bounds(p);p.x=clamp(p.x+dx*push*sign,r.left,r.right);p.y=clamp(p.y+dy*push*sign,r.top,r.bottom);}}
  }
- stepDecoys(g,dt);stepBall(g,dt);checkWin(g);return g;
+ stepDecoys(g,dt);stepBall(g,dt);
+ // The rebound is over and nobody caught it: whoever it bounced off goes to prison.
+ if(g.tagged.length&&g.ball.kind!=='rebound')for(const {id,by} of g.tagged.splice(0)){const p=g.players.find(q=>q.id===id);if(p)imprison(g,p,g.players.find(q=>q.id===by));}
+ checkWin(g);return g;
 }
 const tenth=n=>Math.round(n*10)/10;
 export function snapshot(g) {
  // Only public game state, not command mailboxes, RNG or connection credentials.
  return {v:1,tick:g.tick,time:g.time,phase:g.phase,phaseTime:g.phaseTime,paused:g.paused,round:g.round,roundLeft:g.roundLeft,scores:[...g.scores],winner:g.winner,roundWinner:g.roundWinner,rules:g.rules,
- players:g.players.map(({input,lastInput,aiThink,aiAim,...p})=>({...p,x:tenth(p.x),y:tenth(p.y)})),
- decoys:g.decoys.map(({dx,dy,turn,...copy})=>({...copy,x:tenth(copy.x),y:tenth(copy.y)})),net:[...g.net],ball:{...g.ball},events:g.events};
+ players:g.players.map(({input,lastInput,aiThink,aiAim,aiShot,aiPlan,aiQuick,...p})=>({...p,x:tenth(p.x),y:tenth(p.y)})),
+ decoys:g.decoys.map(({dx,dy,turn,...copy})=>({...copy,x:tenth(copy.x),y:tenth(copy.y)})),net:[...g.net],tagged:g.tagged.map(tag=>tag.id),ball:{...g.ball},events:g.events};
 }

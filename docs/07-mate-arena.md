@@ -17,14 +17,46 @@ Un videojuego independiente dentro de Patio Interior, accesible desde la isla de
 
 1. Cada jugador permanece en su campo. Los presos se mueven en una franja detrás del campo rival.
 2. Un impacto de una pelota rival en vuelo envía a la cárcel. Una pelota que toca suelo o pared deja de eliminar hasta que alguien vuelva a lanzarla.
-3. Atrapar en la ventana de recepción evita el impacto y da posesión. No basta con mantener una tecla pulsada: hay una ventana breve y un tiempo de recarga.
+3. Atrapar en la ventana de recepción evita el impacto y da posesión. No basta con mantener una tecla pulsada: hay una ventana breve y quince segundos de recarga, igual que la esquiva.
 4. Un preso que alcanza a un jugador de campo rival vuelve a su campo; el rival va a la cárcel.
-5. No hay fuego amigo. Los pases a compañeros no eliminan.
+5. No hay fuego amigo. Los pases a compañeros no eliminan y vuelan por encima de los rivales.
 6. Gana la ronda el equipo que deja al rival sin jugadores de campo. Por tiempo, gana el que conserve más; si están empatados no se suma victoria.
 7. Por defecto se juega al mejor de tres victorias parciales: gana el primero que consigue dos rondas. También se puede elegir una sola victoria. Un máximo de dos rondas adicionales evita partidos indefinidos por empates; después se compara el marcador o se comparte empate.
 8. El anfitrión puede activar dos variantes: atrapar elimina al lanzador; atrapar rescata a un preso del equipo. Por defecto ambas están desactivadas.
 
 No hay una regla escolar única para todas las regiones. Estas son las reglas implementadas y visibles en la aplicación; el motor permite modificarlas cuando el docente concrete sus variantes.
+
+## Equilibrio: defender es una decisión
+
+Esquivar y atrapar tardan **15 segundos** en recargarse. Nadie puede responder así a cada tiro: quien gasta la esquiva queda expuesto, y eliminar depende de leer al rival, moverse, pasar y elegir el momento, no sólo de la definitiva.
+
+- **Dos puntos bajo cada jugador** dicen qué le queda: el naranja es la esquiva y el verde, la atrapada. Encendido, lista; apagado, recargando. Se ven en todos, rivales incluidos.
+- **El apuntado automático adelanta el tiro** el tiempo que tarda la pelota en llegar, así que un rival que camina en línea recta recibe el impacto. Hay que cambiar de dirección.
+- **La máquina decide una vez por tiro** si intenta atrapar (45 %), esquivar (35 %) o nada, y sólo si lo tiene recargado. Antes respondía a casi todos.
+- El tiro normal viaja a 860 unidades por segundo (antes 790).
+
+Entre máquinas, las dianas pasan de un 5–9 % de los tiros a un 13–19 %, y en 3 contra 3 la mayoría de las rondas acaba por eliminación; antes casi todas llegaban al final del reloj. Con equipos grandes la ronda sigue acabando por tiempo, con más jugadores presos. Son medidas con la máquina, no con alumnado: conviene ajustar tras jugarlo en clase. Los valores están en `STATS`, en `mate/roster.js`.
+
+### El rebote
+
+Un 30 % de los impactos de un tiro normal rebotan en el jugador. El tocado se queda quieto con una exclamación, y la pelota sale despacio hacia un compañero cercano, aún peligrosa:
+
+- Si un compañero la **atrapa** antes de que caiga, salva al tocado, se queda la pelota, recupera su atrapada y suma el rescate.
+- Si le da a otro compañero, van los dos a la cárcel.
+- Si cae al suelo, el tocado va a la cárcel.
+
+Los tiros de las definitivas no rebotan.
+
+### Los pases
+
+El pase va al compañero más cercano a donde se apunta, marcado con una flecha azul mientras se tiene la pelota. Es un globo: tarda entre 0,3 y 1,1 s según la distancia y pasa por encima de los rivales, así que un preso puede devolver la pelota a su campo y un jugador de campo puede dársela a un preso que está detrás del rival. Un rival sólo lo corta si lo atrapa a tiempo, y gasta su atrapada. Antes el pase rodaba por el suelo y el primer rival que lo tocaba se lo quedaba.
+
+### Jugadas secretas
+
+No se explican en el juego: están para que el alumnado las descubra. Cuando salen, la pelota cambia de estela y aparece un rótulo, sin decir cómo se hacen. La máquina las usa de vez en cuando.
+
+- **Cañonazo.** Esquivar con la pelota en la mano y lanzar en el medio segundo siguiente. El tiro sale un 40 % más rápido y nadie puede atraparlo. Cuesta la esquiva.
+- **Contraataque.** Lanzar en los 0,6 s siguientes a atrapar. El tiro sale un 45 % más rápido y devuelve al instante la esquiva y la atrapada.
 
 ## Elección de personaje
 
@@ -42,7 +74,7 @@ Cada personaje tiene una sola habilidad definitiva, distinta de las demás. Se l
 | Neo | Centella | Durante 5 s corre el doble, la pelota le atraviesa sin tocarle y sus tiros salen un 35 % más rápidos | 40 s |
 | Ada | Teledirigida | Un tiro lento que persigue a su objetivo hasta 3,5 s. **No se puede esquivar: sólo atraparlo** | 45 s |
 | Max | Burbujas | Cada compañero del campo recibe una burbuja que para un impacto. Duran 8 s | 50 s |
-| Nora | Cometa imparable | Un tiro muy rápido en llamas. **No se puede atrapar: sólo esquivarlo** | 40 s |
+| Nora | Cometa imparable | Un tiro muy rápido en llamas que atraviesa a quien alcanza. **No se puede atrapar: sólo esquivarlo** | 40 s |
 | Leo | Espejismo | Tres copias suyas corren por su campo durante 7 s. El rival las ve iguales que a él, y la pelota que da a una copia se pierde | 40 s |
 | Iris | La Red | Una red en la línea central durante 5 s: ninguna pelota del rival la cruza, ni siquiera el cometa | 50 s |
 | Bruno | Gigante | Crece durante 6 s: nada le manda a la cárcel, atrapa todo lo que le toca y lanza balonazos enormes | 50 s |
@@ -105,7 +137,7 @@ Para una clase mayor que la capacidad de una sala se pueden abrir varias salas i
 | Lanzar | Espacio o clic principal |
 | Atrapar al vuelo | E o clic derecho |
 | Esquiva rápida | Shift más dirección |
-| Pasar al compañero más cercano | Q |
+| Pasar al compañero más cercano a donde apuntas | Q |
 | Cambiar objetivo automático | R |
 | Definitiva del personaje | F |
 | Pausar o reanudar | P; sólo anfitrión en online |
@@ -175,7 +207,7 @@ Los contextos de prueba se ejecutan en el mismo entorno de cómputo; esto verifi
 
 ## Verificación y ejecución
 
-- `npm test`: reglas, impactos sin bote, recepción, recargas, esquiva, las trece definitivas y su uso por la máquina, rescate desde la cárcel, variantes, pases, límites de campo, pausa, caducidad de controles y posesión, final de partido, IA, validación de paquetes y trama MQTT.
+- `npm test`: reglas, impactos sin bote, recepción, recargas, esquiva, las trece definitivas y su uso por la máquina, las recargas, las jugadas secretas, el rebote, los pases por alto y el ritmo de un partido entre máquinas, rescate desde la cárcel, variantes, pases, límites de campo, pausa, caducidad de controles y posesión, final de partido, IA, validación de paquetes y trama MQTT.
 - `npm run test:mate`: recorrido real de entrenamiento y partida online con navegadores aislados, sin simular sockets; requiere Playwright, Chromium e internet. Genera capturas y un informe en `artifacts/`.
 - `MATE_CLIENTS=12 MATE_FULL_MATCH=0 npm run test:mate`: incorporación y controles de una sala llena. El recorrido normal comprueba además el final de partido y la vuelta al vestuario.
 - Pruebas visuales de menú y juego en 320, 390, 768 y 1366 px, sin desbordamiento horizontal.

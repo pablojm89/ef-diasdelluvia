@@ -1,6 +1,6 @@
 import {paintCharacter,TEAM_COLORS} from './characters.js';
-import {FIELD} from './sim.js';
-import {playerLook,auraUnder,auraOver,drawNets,ballLook,drawBurst,drawBanner,loadFaces,FX_EVENTS,BURST,BANNER} from './ultfx.js';
+import {FIELD,passTarget} from './sim.js';
+import {playerLook,auraUnder,auraOver,drawNets,ballLook,drawBurst,drawBanner,drawPips,drawPassMark,drawTagged,loadFaces,FX_EVENTS,BURST,BANNER} from './ultfx.js';
 const TAU=Math.PI*2;
 // Someone who asked their device for less motion gets no screen shake.
 const calm=typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -44,18 +44,22 @@ export class ArenaRenderer {
   if(g.tick!==this.lastBallTick)this.remember(g);
   const ordered=[...g.players,...copies].sort((a,b)=>a.y-b.y);
   for(const p of ordered)this.drawPlayer(c,g,p,local,now);
+  // With the ball in hand, show who would get the pass.
+  if(local&&g.ball.holder===local.id&&g.phase==='playing'){const mate=passTarget(g,local,{x:controls.ax??local.x,y:controls.ay??local.y});if(mate)drawPassMark(c,mate,g);}
   const b=g.ball;
   let bx=b.x,by=b.y-13;
   if(b.holder){const owner=g.players.find(p=>p.id===b.holder);if(owner){bx=owner.x+owner.face*23*playerLook(owner).scale;by=owner.y-20*playerLook(owner).scale;}this.trail.length=0;}
   else {
    if(g.tick!==this.lastBallTick){this.trail.push({x:bx,y:by});if(this.trail.length>(b.kind?12:7))this.trail.shift();}
    if(b.live){if(!b.kind)this.trail.forEach((p,i)=>{c.fillStyle=`rgba(255,229,151,${i/30})`;c.beginPath();c.arc(p.x,p.y,4+i*.5,0,TAU);c.fill();});if(!b.kind)by-=Math.sin(Math.min(b.age/1.25,1)*Math.PI)*13;}
+   // A pass is a lob: it rises over the players and comes down on its receiver.
+   if(b.pass&&b.flight)by-=Math.sin(Math.min(b.age/b.flight,1)*Math.PI)*(30+b.flight*40);
    c.fillStyle='#0a24354d';c.beginPath();c.ellipse(b.x,b.y+5,b.big?18:10,b.big?7:4,0,0,TAU);c.fill();
   }
   this.lastBallTick=g.tick;
   const size=b.holder?9:ballLook(c,g,b,bx,by,now,this.trail);
   c.fillStyle=b.live?'#ffe67a':'#ffca64';c.strokeStyle='#6d4828';c.lineWidth=2;c.beginPath();c.arc(bx,by,size,0,TAU);c.fill();c.stroke();c.strokeStyle='#e07c3e';c.lineWidth=2;c.beginPath();c.arc(bx+size*.55,by,size,1.9,4.3);c.stroke();c.fillStyle='#fff6c0';c.fillRect(bx-size*.45,by-size*.55,size*.45,size*.35);
-  if(!b.holder&&!b.live&&!b.magnet){text(c,'RECOGE',bx,by-20,9,'#fff3ba');}
+  if(!b.holder&&!b.live&&!b.magnet&&!b.pass){text(c,'RECOGE',bx,by-20,9,'#fff3ba');}
   this.drawEffects(g,now);
   if(shaking)c.restore();
   // Abilities, player and points live in the page overlay (hud.js); the canvas keeps the court.
@@ -86,12 +90,16 @@ export class ArenaRenderer {
   if(p.catchTime>0){c.strokeStyle='#a7ffef';c.lineWidth=3;c.beginPath();c.arc(p.x,p.y-12,32,-2.7,.5);c.stroke();}
   if(p.dashTime>0){for(let i=1;i<4;i++){c.globalAlpha=.12*(4-i);c.save();c.translate(p.x-(p.dashX||0)*i*13,p.y-(p.dashY||0)*i*13);paintCharacter(c,p,{scale:.98,time:g.time});c.restore();}c.globalAlpha=1;}
   (this.ghosts.get(p.id)||[]).forEach((spot,i,past)=>{c.globalAlpha=.1+.08*i;c.save();c.translate(spot.x,spot.y+4);paintCharacter(c,p,{time:g.time-(past.length-i)*.05,tint:'rgba(255,225,74,.85)'});c.restore();});
-  c.globalAlpha=(p.invulnerable>0?.72:1)*look.alpha*(hollow?.45:1);
+  const tagged=!p.copy&&g.tagged?.includes(p.id);
+  c.globalAlpha=(p.invulnerable>0?.72:1)*look.alpha*(hollow?.45:1)*(tagged&&Math.floor(now/110)%2?.45:1);
   c.translate(p.x,p.y+4);paintCharacter(c,p,{scale,time:g.time,selected:mine,holding:g.ball.holder===p.id,tint:look.tint});c.restore();
-  if(!p.copy){c.save();auraOver(c,p,g,now);c.restore();}
+  if(!p.copy){c.save();auraOver(c,p,g,now);if(tagged)drawTagged(c,p,now);c.restore();}
   const name=mine?'TÚ':p.name+(p.bot?' · IA':'')+(hollow?' · COPIA':'');
   const below=p.y+24+(scale-1)*10;
   c.fillStyle=mine?'#ffedac':'#112d3bcc';const width=Math.max(30,name.length*5.6+12);rounded(c,p.x-width/2,below,width,17,4);c.fill();text(c,name,p.x,below+9,10,mine?'#39453c':team.light);
+  // A copy shows the same dots as the real one.
+  const real=p.copy?g.players.find(q=>q.id===p.owner):p;
+  if(real&&!real.prison)drawPips(c,{...real,x:p.x},below+23);
  }
  drawEffects(g,now){
   const kept=['impact','catch','rescue','hit','dodge','points',...FX_EVENTS];

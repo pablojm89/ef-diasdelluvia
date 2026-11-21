@@ -118,6 +118,28 @@ export function auraOver(c, p, g, now) {
  }
 }
 
+// Two dots under a player: the dodge (left) and the catch (right). Lit when ready, dark while they recharge.
+export function drawPips(c, p, y) {
+ for (const [side, ready, color] of [[-1, p.dashCooldown <= 0 && p.slowed <= 0, '#ffb86b'], [1, p.catchCooldown <= 0, '#8ff2df']]) {
+  c.fillStyle = ready ? color : '#0b1b2e'; c.strokeStyle = ready ? INK : '#47617699'; c.lineWidth = 1.5;
+  c.beginPath(); c.arc(p.x + side * 6, y, 3.4, 0, TAU); c.fill(); c.stroke();
+ }
+}
+
+// The teammate who would get the pass right now.
+export function drawPassMark(c, p, g) {
+ const bob = Math.sin(g.time * 8) * 3, y = p.y - 70 + bob;
+ c.fillStyle = '#9fd8ff'; c.strokeStyle = INK; c.lineWidth = 2.5; c.lineJoin = 'round';
+ c.beginPath(); c.moveTo(p.x - 9, y); c.lineTo(p.x + 9, y); c.lineTo(p.x, y + 11); c.closePath(); c.fill(); c.stroke();
+ c.setLineDash([4, 5]); c.strokeStyle = '#9fd8ffcc'; c.lineWidth = 2; c.beginPath(); c.ellipse(p.x, p.y + 9, 29, 11, 0, 0, TAU); c.stroke(); c.setLineDash([]);
+}
+
+// Hit by a ball that bounced off: out unless a teammate catches the rebound.
+export function drawTagged(c, p, now) {
+ if (Math.floor(now / 110) % 2) return;
+ label(c, '!', p.x, p.y - 70, 26, '#ffd36b');
+}
+
 // La Red: a mesh standing on the centre line.
 export function drawNets(c, g) {
  for (const team of [0, 1]) {
@@ -190,6 +212,22 @@ export function ballLook(c, g, b, bx, by, now, trail) {
   c.restore();
   c.strokeStyle = '#ffb03a55'; c.lineWidth = 6; c.lineCap = 'round'; c.beginPath();
   trail.forEach((spot, i) => i ? c.lineTo(spot.x, spot.y) : c.moveTo(spot.x, spot.y)); c.stroke();
+ }
+ if (b.kind === 'power' || b.kind === 'counter') {
+  // The secret throws: a hot streak for the power shot, a cold one for the counter.
+  const colors = b.kind === 'power' ? ['#ff5a2caa', '#ffb03a', '#fff3a0'] : ['#3fa9ffaa', '#9fe6ff', '#ffffff'];
+  c.save(); c.translate(bx, by); c.rotate(Math.atan2(b.vy, b.vx));
+  [[96, 15], [64, 10], [38, 6]].forEach(([length, radius], i) => {
+   c.fillStyle = colors[i]; c.beginPath(); c.moveTo(-length, Math.sin(t * 40) * 4);
+   c.quadraticCurveTo(-16, -radius * 2, 6, -radius / 2); c.quadraticCurveTo(18, 0, 4, radius); c.closePath(); c.fill();
+  });
+  c.strokeStyle = colors[2]; c.lineWidth = 2;
+  for (const side of [-1, 1]) { c.beginPath(); c.moveTo(-30, side * 16); c.lineTo(-74 - rand(Math.floor(now / 60) + side) * 30, side * 16); c.stroke(); }
+  c.restore();
+ }
+ if (b.kind === 'rebound') {
+  c.strokeStyle = '#fff6da'; c.lineWidth = 3; c.setLineDash([5, 6]); c.lineDashOffset = -t * 80;
+  c.beginPath(); c.arc(bx, by, 18 + Math.sin(t * 20) * 2, 0, TAU); c.stroke(); c.setLineDash([]);
  }
  // Neo's shots under Centella leave a spark.
  if (!b.kind && speed > 1000 && trail.length > 1) { bolt(c, trail[0].x, trail[0].y, bx, by, Math.floor(now / 50), 5, '#fff3a0'); bolt(c, trail[0].x, trail[0].y, bx, by, Math.floor(now / 50), 2, '#fff'); }
@@ -316,6 +354,17 @@ const AFTER = {
   c.strokeStyle = '#fff'; c.lineWidth = 4 * (1 - age) + 1;
   for (let i = 0; i < 3; i++) { c.beginPath(); c.ellipse(e.x, e.y - 12, 10 + age * 30 + i * 8, 26 + age * 80 + i * 20, 0, 0, TAU); c.stroke(); }
   label(c, '¡A LA RED!', e.x, e.y - 60 - age * 24, 17, '#fff6da');
+ },
+ trick(c, e, age) {
+  const power = e.trick === 'power', color = power ? '#ffb03a' : '#9fe6ff';
+  c.strokeStyle = color; c.lineWidth = 6 * (1 - age) + 1; c.beginPath(); c.arc(e.x, e.y - 18, 14 + age * 60, 0, TAU); c.stroke();
+  for (let i = 0; i < 8; i++) { const a = i * TAU / 8, near = 20 + age * 40, far = near + 26 * (1 - age); c.beginPath(); c.moveTo(e.x + Math.cos(a) * near, e.y - 18 + Math.sin(a) * near); c.lineTo(e.x + Math.cos(a) * far, e.y - 18 + Math.sin(a) * far); c.stroke(); }
+  label(c, power ? '¡CAÑONAZO!' : '¡CONTRAATAQUE!', e.x, e.y - 74 - age * 26, 19, color);
+ },
+ tagged(c, e, age) { label(c, '¡REBOTE!', e.x, e.y - 74 - age * 22, 18, '#fff6da'); },
+ save(c, e, age) {
+  c.strokeStyle = '#d0f97e'; c.lineWidth = 5 * (1 - age) + 1; c.beginPath(); c.arc(e.x, e.y - 18, 20 + age * 46, 0, TAU); c.stroke();
+  label(c, '¡SALVADO!', e.x, e.y - 74 - age * 26, 19, '#d0f97e');
  },
  poof(c, e, age) { smoke(c, e.x, e.y, age, idSeed(e.id)); },
  magnet(c, e, age) { for (const [i, color] of ['#ff6b5c', '#6bb8ff'].entries()) { c.strokeStyle = color; c.lineWidth = 4 * (1 - age) + 1; c.beginPath(); c.arc(e.x, e.y - 18, 14 + age * 50 + i * 9, 0, TAU); c.stroke(); } },

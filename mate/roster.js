@@ -1,8 +1,14 @@
 // Arena units and seconds. Everyone plays the same basics; the ultimate sets each hero apart.
 export const STATS = {
-  passSpeed: 530, pickupRadius: 29, catchWindow: .3, runSpeed: 225,
-  shotSpeed: 790, catchRadius: 32, dashSpeed: 620, dashRecovery: 1.4,
-  catchRecovery: 1.05, carrySpeed: 180,
+  pickupRadius: 29, catchWindow: .35, runSpeed: 225,
+  shotSpeed: 860, catchRadius: 32, dashSpeed: 620, carrySpeed: 180,
+  // Dodging and catching are scarce: each one is a decision, not a reflex for every throw.
+  dashRecovery: 15, catchRecovery: 15,
+  // Secret plays. A throw right after a dodge with the ball is a power shot nobody can catch;
+  // a throw right after a catch is a counter that gives the dodge and the catch back.
+  surgeWindow: .5, powerBoost: 1.4, counterWindow: .6, counterBoost: 1.45,
+  // Share of hits that bounce off the player, who is only out if nobody catches the rebound.
+  reboundChance: .3,
 };
 
 // id: the effect in sim.js. art: the icon in assets/abilities. recharge: seconds of play.
@@ -18,7 +24,7 @@ export const HEROES = [
   hero('Neo', 'Centella', 'centella', 'Centella', 'Durante 5 s corres el doble, la pelota te atraviesa sin tocarte y tus tiros salen como rayos.', 40, 'zancada'),
   hero('Ada', 'Puntería', 'teledirigida', 'Teledirigida', 'Un tiro que persigue a su objetivo por todo el campo. No se puede esquivar: solo atraparlo.', 45, 'teledirigida', 'held'),
   hero('Max', 'El guardián', 'burbuja', 'Burbujas', 'Cada compañero del campo recibe una burbuja que para un impacto. Duran 8 s.', 50),
-  hero('Nora', 'Cometa', 'cometa', 'Cometa imparable', 'Un tiro en llamas que nadie puede atrapar. Solo se puede esquivar.', 40, 'special', 'held'),
+  hero('Nora', 'Cometa', 'cometa', 'Cometa imparable', 'Un tiro en llamas que nadie puede atrapar y que atraviesa a quien alcanza. Solo se puede esquivar.', 40, 'special', 'held'),
   hero('Leo', 'El soñador', 'espejismo', 'Espejismo', 'Aparecen tres copias tuyas durante 7 s. El rival no sabe cuál eres y la pelota que da a una copia se pierde.', 40),
   hero('Iris', 'La portera', 'red', 'La Red', 'Levanta una red en la línea central durante 5 s: ninguna pelota rival la cruza.', 50),
   hero('Bruno', 'El pívot', 'gigante', 'Gigante', 'Creces durante 6 s: nada te manda a la cárcel, atrapas todo lo que te toca y lanzas balonazos enormes.', 50),

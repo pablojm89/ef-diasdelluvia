@@ -1,5 +1,5 @@
 import {makeGame,stepGame,setInput,snapshot,normalizeRules,emit} from './sim.js';
-import {HEROES} from './roster.js';
+import {HEROES,STATS} from './roster.js';
 import {buildLineup} from './selection.js';
 import {TEAM_COLORS,portrait} from './characters.js';
 import {ArenaRenderer} from './renderer.js';
@@ -173,8 +173,8 @@ function updateStateUI(state){
  $('rematch-button').hidden=state.phase!=='matchOver'||(mode==='online'&&!room?.isHost);
  $('rematch-button').textContent=mode==='online'?'Volver a la sala':'Jugar otra partida';
  if(mine && $('match-talent-name').textContent!==HEROES[mine.character].ability)showMatchHero(mine.character,mine.team);
- const event=state.events?.findLast(e=>e.id>lastAnnouncement&&['ult','catch','hit','rescue','round','match','referee'].includes(e.type));
- if(event){lastAnnouncement=event.id;const p=state.players.find(p=>p.id===event.player);const messages={ult:`¡${p?.name||'Un jugador'} desata ${p?HEROES[p.character].ability.replace(/[¡!]/g,''):'su definitiva'}!`,catch:`¡${p?.name||'Un jugador'} atrapa al vuelo!`,hit:`${p?.name||'Un jugador'} va a la cárcel. Puede volver si alcanza a un rival.`,rescue:`¡${p?.name||'Un jugador'} vuelve al campo!`,round:event.winner===null?'Ronda empatada.':`Ronda para ${TEAM_COLORS[event.winner??0].name}.`,match:event.winner===null?'¡Partido empatado! Buen juego.':`¡${TEAM_COLORS[event.winner??0].name} ganan el partido!`,referee:'El árbitro devuelve una pelota que había quedado fuera de alcance.'};$('match-announcement').textContent=messages[event.type];}
+ const event=state.events?.findLast(e=>e.id>lastAnnouncement&&['ult','save','catch','hit','rescue','round','match','referee'].includes(e.type));
+ if(event){lastAnnouncement=event.id;const p=state.players.find(p=>p.id===event.player);const messages={save:`¡${state.players.find(q=>q.id===event.by)?.name||'Un compañero'} atrapa el rebote y salva a ${p?.name||'su compañero'}!`,ult:`¡${p?.name||'Un jugador'} desata ${p?HEROES[p.character].ability.replace(/[¡!]/g,''):'su definitiva'}!`,catch:`¡${p?.name||'Un jugador'} atrapa al vuelo!`,hit:`${p?.name||'Un jugador'} va a la cárcel. Puede volver si alcanza a un rival.`,rescue:`¡${p?.name||'Un jugador'} vuelve al campo!`,round:event.winner===null?'Ronda empatada.':`Ronda para ${TEAM_COLORS[event.winner??0].name}.`,match:event.winner===null?'¡Partido empatado! Buen juego.':`¡${TEAM_COLORS[event.winner??0].name} ganan el partido!`,referee:'El árbitro devuelve una pelota que había quedado fuera de alcance.'};$('match-announcement').textContent=messages[event.type];}
  if(mine?.prison&&!event)$('match-announcement').textContent='Estás en la cárcel detrás del rival. Si le das a un jugador de campo, vuelves a jugar.';
  // Tell the player the moment the ultimate is charged.
  const ultReady=!!mine&&mine.ultCooldown<=0;
@@ -209,7 +209,9 @@ function aimFor(state){
  // Leo's copies look real to the aim aid too.
  const candidates=[...state.players,...(state.decoys||[])].filter(p=>p.team!==mine.team&&!p.prison).sort((a,b)=>Math.hypot(a.x-mine.x,a.y-mine.y)-Math.hypot(b.x-mine.x,b.y-mine.y));
  const target=candidates[targetIndex%candidates.length];
- return target?{ax:target.x+target.vx*.09,ay:target.y+target.vy*.09}:{ax:mine.team===0?900:300,ay:390};
+ // Lead the target by the time the ball takes to reach it, so a rival walking in a straight line gets hit.
+ const lead=target?Math.min(.45,Math.hypot(target.x-mine.x,target.y-mine.y)/STATS.shotSpeed):0;
+ return target?{ax:target.x+target.vx*lead,ay:target.y+target.vy*lead}:{ax:mine.team===0?900:300,ay:390};
 }
 function controls(){const state=currentState();const kx=(keys.has('ArrowRight')||keys.has('KeyD')?1:0)-(keys.has('ArrowLeft')||keys.has('KeyA')?1:0),ky=(keys.has('ArrowDown')||keys.has('KeyS')?1:0)-(keys.has('ArrowUp')||keys.has('KeyW')?1:0);return {mx:kx||stick.x,my:ky||stick.y,...aimFor(state),...actions};}
 function consumeActions(){for(const key of Object.keys(actions))actions[key]=false;}
@@ -232,6 +234,8 @@ function sweep(type,from,to,seconds,volume,delay=0){
 function playSound(state){
  if(!$('sound-enabled').checked||!audio||audio.state!=='running'){readyChime=false;return;}
  for(const e of state.events||[])if(e.id>lastAudioEvent){lastAudioEvent=e.id;if(e.type==='ult'){sweep('sawtooth',180,900,.42,.05);sweep('square',90,45,.3,.03);continue;}
+  if(e.type==='trick'){sweep('sawtooth',260,1100,.22,.05);continue;}
+  if(e.type==='save'){sweep('sine',520,1040,.25,.05);continue;}
   if(!['throw','catch','hit','rescue','start','match'].includes(e.type))continue;
   const frequency={throw:320,catch:740,hit:130,rescue:880,start:520,match:660}[e.type];
   sweep(e.type==='throw'?'triangle':'sine',frequency,e.type==='throw'?150:frequency*1.35,.16,.04);

@@ -1,8 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {makeGame,stepGame,setInput,imprison,rescue,throwBall,snapshot,normalizeRules,sanitizeInput,bounds} from '../mate/sim.js';
+import {makeGame,stepGame,setInput,imprison,rescue,throwBall,passTarget,snapshot,normalizeRules,sanitizeInput,bounds} from '../mate/sim.js';
 import {inputPacket,validCode,cleanProfile,PROTOCOL} from '../mate/protocol.js';
-import {HEROES} from '../mate/roster.js';
+import {HEROES,STATS} from '../mate/roster.js';
+// Hits are plain unless a test asks for the rebound, so every outcome here is repeatable.
+const REBOUND=STATS.reboundChance;STATS.reboundChance=0;
 const controls=(extra={})=>({mx:0,my:0,ax:900,ay:390,fire:false,catch:false,dash:false,pass:false,...extra});
 
 test('mate: el perfil descarta datos identificativos y sólo conserva el personaje',()=>{
@@ -216,7 +218,7 @@ test('Lúa: ¡Pies quietos! deja de estatua a todos menos a ella, compañeros in
 test('Neo: con Centella corre el doble, la pelota le atraviesa y sus tiros salen más rápidos',()=>{
  const {g,hero,rival}=ultGame(3);
  cast(g,hero);
- assert.equal(throwBall(g,hero,{x:900,y:350}),true);assert.ok(Math.abs(g.ball.vx-790*1.35)<.001);
+ assert.equal(throwBall(g,hero,{x:900,y:350}),true);assert.ok(Math.abs(g.ball.vx-STATS.shotSpeed*1.35)<.001);
  shotAt(g,hero,rival);g.ball.vx=-790;g.ball.x=hero.x+20;
  setInput(g,hero.id,controls({my:1}));stepGame(g);
  assert.equal(hero.prison,false);assert.equal(hero.vy,450);assert.equal(hero.dodges,1);
@@ -247,12 +249,14 @@ test('Max: las Burbujas paran un impacto a cada compañero del campo y luego est
 });
 
 test('Nora: el Cometa imparable atraviesa una recepción y sólo se puede esquivar',()=>{
- const {g,hero,rival}=ultGame(6);
+ const {g,hero,rival,other}=ultGame(6);
  rival.x=640;
  cast(g,hero,{ax:rival.x,ay:rival.y});
- assert.equal(g.ball.kind,'comet');assert.ok(Math.abs(g.ball.vx-1050)<.001);
- setInput(g,rival.id,controls({catch:true}));run(g,12);
- assert.equal(rival.prison,true);assert.equal(rival.catches,0);
+ assert.equal(g.ball.kind,'comet');assert.ok(g.ball.vx>STATS.shotSpeed*1.4);
+ other.x=760;other.y=350;
+ setInput(g,rival.id,controls({catch:true}));run(g,20);
+ // It goes through the catch and through the first rival, and takes the one behind too.
+ assert.equal(rival.prison,true);assert.equal(rival.catches,0);assert.equal(other.prison,true);assert.equal(hero.hits,2);
  const dodge=ultGame(6);dodge.rival.x=640;
  cast(dodge.g,dodge.hero,{ax:640,ay:350});
  for(let n=0;n<12;n++){setInput(dodge.g,dodge.rival.id,controls({my:1,dash:n===8}));stepGame(dodge.g);}
@@ -339,6 +343,108 @@ test('Inés: ¡Fuga! devuelve al campo a todos los presos de su equipo, ella inc
  const caged=ultGame(12);imprison(caged.g,caged.hero);run(caged.g,30);
  cast(caged.g,caged.hero);
  assert.equal(caged.hero.prison,false);assert.equal(caged.hero.rescues,1);
+});
+
+test('equilibrio: esquivar y atrapar tardan quince segundos en volver',()=>{
+ const g=setup(),b=g.players.find(p=>p.id==='b');g.ball.holder='a';
+ setInput(g,b.id,controls({dash:true,my:1,catch:true}));stepGame(g);
+ assert.ok(b.dashCooldown>14.9&&b.catchCooldown>14.9);
+ run(g,60*14);
+ setInput(g,b.id,controls({dash:true,catch:true}));stepGame(g);
+ assert.equal(b.dashTime,0);assert.equal(b.catchTime,0);
+ run(g,70);
+ setInput(g,b.id,controls({dash:true,catch:true}));stepGame(g);
+ assert.ok(b.dashTime>0&&b.catchTime>0);
+});
+
+test('secreto: esquivar con la pelota y lanzar enseguida es un cañonazo que no se atrapa',()=>{
+ const {g,hero,rival}=ultGame(0);
+ rival.x=640;
+ setInput(g,hero.id,controls({dash:true,mx:1}));stepGame(g);
+ assert.ok(hero.surge>0);
+ setInput(g,hero.id,controls({fire:true,ax:rival.x,ay:rival.y}));stepGame(g);
+ assert.equal(g.ball.kind,'power');assert.ok(Math.abs(Math.hypot(g.ball.vx,g.ball.vy)-STATS.shotSpeed*STATS.powerBoost)<.001);
+ assert.ok(g.events.some(e=>e.type==='trick'&&e.trick==='power'));
+ setInput(g,rival.id,controls({catch:true}));run(g,12);
+ assert.equal(rival.prison,true);assert.equal(rival.catches,0);
+ // Too slow after the dodge, or dodging without the ball: a plain throw.
+ const late=ultGame(0);
+ setInput(late.g,late.hero.id,controls({dash:true,mx:1}));run(late.g,40);
+ setInput(late.g,late.hero.id,controls({fire:true}));stepGame(late.g);assert.equal(late.g.ball.kind,null);
+ const empty=ultGame(0);empty.g.ball.holder=empty.ally.id;
+ setInput(empty.g,empty.hero.id,controls({dash:true,mx:1}));stepGame(empty.g);assert.equal(empty.hero.surge,0);
+});
+
+test('secreto: lanzar nada más atrapar es un contraataque más rápido que devuelve esquiva y atrapada',()=>{
+ const {g,hero,rival}=ultGame(0);
+ hero.dashCooldown=9;
+ shotAt(g,hero,rival);g.ball.vx=-790;g.ball.x=hero.x+20;
+ setInput(g,hero.id,controls({catch:true}));stepGame(g);
+ assert.equal(g.ball.holder,hero.id);assert.ok(hero.counter>0&&hero.catchCooldown>14);
+ run(g,10);
+ setInput(g,hero.id,controls({fire:true,ax:rival.x,ay:rival.y}));stepGame(g);
+ assert.equal(g.ball.kind,'counter');assert.ok(Math.abs(g.ball.vx-STATS.shotSpeed*STATS.counterBoost)<.001);
+ assert.equal(hero.catchCooldown,0);assert.equal(hero.dashCooldown,0);
+ const slow=ultGame(0);
+ shotAt(slow.g,slow.hero,slow.rival);slow.g.ball.vx=-790;slow.g.ball.x=slow.hero.x+20;
+ setInput(slow.g,slow.hero.id,controls({catch:true}));run(slow.g,45);
+ setInput(slow.g,slow.hero.id,controls({fire:true}));stepGame(slow.g);
+ assert.equal(slow.g.ball.kind,null);assert.ok(slow.hero.catchCooldown>13);
+});
+
+test('rebote: el tocado sólo va a la cárcel si nadie atrapa la pelota que rebota en él',()=>{
+ STATS.reboundChance=1;
+ try{
+  const {g,hero,rival,other}=ultGame(0);
+  other.x=rival.x;other.y=rival.y+90;
+  shotAt(g,rival,hero);stepGame(g);
+  assert.equal(rival.prison,false);assert.deepEqual(g.tagged,[{id:rival.id,by:hero.id}]);
+  assert.equal(g.ball.kind,'rebound');assert.equal(g.ball.live,true);assert.equal(hero.hits,0);
+  assert.deepEqual(snapshot(g).tagged,[rival.id]);
+  // The teammate catches it on the way: nobody is out and the catch comes back.
+  for(let n=0;n<60&&g.ball.holder!==other.id;n++){setInput(g,other.id,controls({catch:Math.hypot(g.ball.x-other.x,g.ball.y-other.y)<50}));stepGame(g);}
+  assert.equal(g.ball.holder,other.id);assert.equal(rival.prison,false);assert.equal(g.tagged.length,0);
+  assert.equal(other.catchCooldown,0);assert.equal(other.rescues,1);assert.ok(g.events.some(e=>e.type==='save'&&e.player===rival.id));
+  // Nobody catches it: the rebound also takes the teammate it lands on, and both are out.
+  const lost=ultGame(0);lost.other.x=lost.rival.x;lost.other.y=lost.rival.y+90;
+  shotAt(lost.g,lost.rival,lost.hero);run(lost.g,70);
+  assert.equal(lost.rival.prison,true);assert.equal(lost.other.prison,true);assert.equal(lost.hero.hits,2);assert.equal(lost.g.tagged.length,0);
+  // Alone on the court, the rebound falls and the player is out.
+  const alone=ultGame(0);imprison(alone.g,alone.other);
+  shotAt(alone.g,alone.rival,alone.hero);run(alone.g,70);
+  assert.equal(alone.rival.prison,true);
+ }finally{STATS.reboundChance=0;}
+});
+
+test('pases: va al compañero más cercano a donde se apunta y vuela por encima de los rivales',()=>{
+ const {g,hero,ally,rival,other}=ultGame(0);
+ assert.equal(passTarget(g,hero,{x:ally.x,y:ally.y}).id,ally.id);
+ // From prison, behind the rival field, the pass crosses it without a rival picking it up.
+ imprison(g,hero);run(g,30);g.ball.holder=hero.id;
+ ally.x=500;ally.y=hero.y;rival.x=800;rival.y=hero.y;other.x=700;other.y=hero.y;
+ setInput(g,hero.id,controls({pass:true,ax:ally.x,ay:ally.y}));stepGame(g);
+ assert.equal(g.ball.pass,true);assert.equal(g.ball.receiver,ally.id);
+ run(g,80);
+ assert.equal(g.ball.holder,ally.id);assert.equal(g.ball.team,0);
+ // A rival who times a catch cuts the pass off.
+ const cut=ultGame(0);imprison(cut.g,cut.hero);run(cut.g,30);cut.g.ball.holder=cut.hero.id;
+ cut.ally.x=500;cut.ally.y=cut.hero.y;cut.rival.x=800;cut.rival.y=cut.hero.y;
+ setInput(cut.g,cut.hero.id,controls({pass:true,ax:cut.ally.x,ay:cut.ally.y}));stepGame(cut.g);
+ for(let n=0;n<80&&!cut.g.ball.holder;n++){setInput(cut.g,cut.rival.id,controls({catch:Math.abs(cut.g.ball.x-cut.rival.x)<60}));stepGame(cut.g);}
+ assert.equal(cut.g.ball.holder,cut.rival.id);assert.equal(cut.rival.catches,1);
+});
+
+test('equilibrio: entre máquinas hay eliminaciones y rondas que acaban sin esperar al reloj',()=>{
+ STATS.reboundChance=REBOUND;
+ try{
+  let hits=0,eliminations=0,saves=0,tricks=0;
+  for(const seed of [99,7,31337,555]){
+   const g=makeGame([],{teamSize:3,bestOf:3,roundSeconds:150},seed);let seen=0;
+   for(let i=0;i<120000&&g.phase!=='matchOver';i++){stepGame(g);for(const e of g.events)if(e.id>seen){seen=e.id;if(e.type==='hit')hits++;if(e.type==='round'&&e.reason==='elimination')eliminations++;if(e.type==='trick')tricks++;if(e.type==='tagged')saves++;}}
+   assert.equal(g.phase,'matchOver');
+  }
+  assert.ok(hits>=30,`dianas ${hits}`);assert.ok(eliminations>=4,`rondas por eliminación ${eliminations}`);assert.ok(tricks>0&&saves>0);
+ }finally{STATS.reboundChance=0;}
 });
 
 test('definitivas: la ronda nueva limpia los efectos y conserva la carga',()=>{

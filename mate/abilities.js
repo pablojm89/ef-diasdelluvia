@@ -8,9 +8,9 @@ const art = new URL('./assets/abilities/', import.meta.url);
 export const abilityArt = id => new URL(id + (PINTADOS.includes(id) ? '.webp' : '.svg'), art).href;
 
 export const ACTIONS = [
- {id: 'pass', key: 'Q', name: 'Pasar', detail: 'Pasa la pelota al compañero más cercano.'},
- {id: 'catch', key: 'E', name: 'Atrapar', detail: 'Atrapa al vuelo un tiro rival.'},
- {id: 'dash', key: 'SHIFT', name: 'Esquivar', detail: 'Esquiva rápida: la pelota no te toca.'},
+ {id: 'pass', key: 'Q', name: 'Pasar', detail: 'Pasa por alto al compañero marcado con la flecha azul.'},
+ {id: 'catch', key: 'E', name: 'Atrapar', detail: 'Atrapa al vuelo un tiro rival. Recarga de 15 s.'},
+ {id: 'dash', key: 'SHIFT', name: 'Esquivar', detail: 'Esquiva rápida: la pelota no te toca. Recarga de 15 s.'},
  {id: 'fire', key: 'ESPACIO', name: 'Lanzar', detail: 'Lanza hacia donde apuntas.'},
 ];
 export const ULT_KEY = 'F';
