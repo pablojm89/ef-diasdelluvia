@@ -83,17 +83,17 @@ test('tatami: cada postura tiene figura provisional apoyada en la esterilla y de
  assert.deepEqual(Object.keys(E.SUPPORTS).sort(),Object.keys(E.FIGURES).sort());
 });
 
-test('tatami: cada postura se ve paso a paso, con la hoja de seis dibujos, la de tres o la figura provisional',()=>{
+test('tatami: cada postura se ve paso a paso, con su hoja de seis dibujos o con la figura provisional',()=>{
  for(const pose of [...POSES,CALM]){
-  const expected=PINTADAS.includes(pose.id+'-pasos')?6:PINTADAS.includes(pose.id)?3:6;
-  assert.equal(frameCount(pose.id),expected,pose.id);
+  assert.equal(frameCount(pose.id),6,pose.id);
   const art=sheet(pose.id);
-  if(art)assert.match(art.url,expected===6?/pasos-[a-z0-9]+\.webp$/:/pose-[a-z0-9]+\.webp$/);
+  assert.equal(!!art,PINTADAS.includes(pose.id+'-pasos'),pose.id);
+  if(art)assert.match(art.url,/pasos-[a-z0-9]+\.webp$/);
   assert.equal(frameCount(pose.id,true),PINTADAS.includes(pose.id+'-silla')?1:3,pose.id);
   assert.match(thumbMarkup(pose.id),/class="thumb/);
  }
- // The first twelve are painted: their approved three-drawing sheets keep working until the six-drawing ones arrive.
- assert.equal(sheet('mountain')?.frames>=3,true);
+ // The index only knows step sheets, chair drawings, the room and the teacher.
+ for(const key of PINTADAS)assert.match(key,/-(pasos|silla)$|^(room|robles-yoga)$/,key);
 });
 
 test('tatami: el código de una secuencia va y vuelve, también por el enlace',()=>{
@@ -183,9 +183,8 @@ test('tatami: la página enlaza lo que existe y el pedido de arte cubre cada pos
   // Six drawings in two rows, settled on the same floor line, with a small picture for the lists.
   assert.deepEqual([steps.celdas,steps.suelo,steps.mini],[[3,2],590,`tatami/assets/mini-${pose.id}.webp`]);
   if(PINTADAS.includes(pose.id+'-pasos')){assert.ok(existsSync(root+steps.mini),steps.mini);assert.ok(thumbMarkup(pose.id).includes(`mini-${pose.id}.webp`),pose.id);}
-  const strip=lote['pose-'+pose.id];
-  if(strip)assert.deepEqual([strip.ancho,strip.alto,strip.clave,strip.destino],[1536,640,pose.id,`tatami/assets/pose-${pose.id}.webp`]);
-  else assert.ok(!PINTADAS.includes(pose.id),pose.id);
+  assert.equal(lote['pose-'+pose.id],undefined,pose.id);
+  if(steps.corregir)assert.ok(steps.listo&&steps.corregir.length>20,pose.id);
   if(pose.id!=='calma')assert.deepEqual([lote[`pose-${pose.id}-silla`].clave,lote[`pose-${pose.id}-silla`].ancho],[pose.id+'-silla',512]);
  }
  // What the index says is painted exists on disk.

@@ -9,7 +9,8 @@ from arte_comun import ARTE, estilo, lotes, imagenes
 def main():
     comun = estilo()
     todos = lotes()
-    faltan = sum(1 for _, datos in todos for imagen in imagenes(datos).values() if not imagen.get('listo'))
+    falta = lambda imagen: not imagen.get('listo') or imagen.get('corregir')
+    faltan = sum(1 for _, datos in todos for imagen in imagenes(datos).values() if falta(imagen))
     texto = ['# Encargo de imágenes · El Pabellón', '',
              '> Archivo generado por `scripts/encargo_arte.py` a partir de `arte/estilo.json` y `arte/lotes/*.json`. No lo edites a mano: cambia el lote y vuelve a generarlo.', '',
              '## Para la IA de imágenes (ChatGPT / Gemini)', '',
@@ -24,7 +25,7 @@ def main():
               'Mantén su estilo, luz y acabado: ' + ', '.join(f'`{ruta}`' for ruta in comun['aprobadas']) + '.', '',
               f'## Pendientes: {faltan}', '']
     for ruta, datos in todos:
-        pendientes = {clave: imagen for clave, imagen in imagenes(datos).items() if not imagen.get('listo')}
+        pendientes = {clave: imagen for clave, imagen in imagenes(datos).items() if falta(imagen)}
         hechas = len(imagenes(datos)) - len(pendientes)
         texto += [f'### Lote `{ruta.stem}` · {datos["_titulo"]}', '', datos.get('_nota', ''), '']
         if hechas:
@@ -36,7 +37,9 @@ def main():
         for clave, imagen in pendientes.items():
             fondo = 'transparente' if imagen.get('transparente') else 'opaco'
             pixel = ' Pixel art.' if imagen.get('pixel') else ''
-            texto.append(f'| `{clave}.png` | {imagen["nombre"]} | {imagen["ancho"]} × {imagen["alto"]} | {fondo} | {imagen["prompt"]}{pixel} |')
+            # A correction: the picture is already in the game and one thing has to be redrawn.
+            arreglo = f'**Corrección** de `{imagen["destino"]}`, que ya está en el juego: {imagen["corregir"]} Todo lo demás, igual que en esa imagen. Pedido original: ' if imagen.get('corregir') else ''
+            texto.append(f'| `{clave}.png` | {imagen["nombre"]} | {imagen["ancho"]} × {imagen["alto"]} | {fondo} | {arreglo}{imagen["prompt"]}{pixel} |')
         texto.append('')
     texto += ['## Notas del ilustrador', '', '_Si tienes dudas o propuestas, apúntalas aquí o díselas a Pablo._', '']
     (ARTE / 'ENCARGO.md').write_text('\n'.join(texto), encoding='utf8')

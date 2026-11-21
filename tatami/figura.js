@@ -1,6 +1,6 @@
 // Draws a pose on its mat: the painted sheet when it exists, otherwise the provisional jointed figure of
-// esqueleto.js in the kit's colours. A sheet is a grid of 512 × 640 drawings, three per row, read like text:
-// pasos-<id>.webp has six (the step-by-step sheet) and the older pose-<id>.webp has three.
+// esqueleto.js in the kit's colours. A sheet (pasos-<id>.webp) is a grid of six 512 × 640 drawings, three per
+// row, read like text: the way into the pose, step by step. The chair version is a single drawing.
 import {W, H, FLOOR, SEAT, figureAt} from './esqueleto.js';
 import {PINTADAS} from './assets/pintadas.js';
 
@@ -13,8 +13,7 @@ const COLS = 3;
 const asset = name => new URL(`./assets/${name}.webp`, import.meta.url).href;
 export function sheet(id, chair = false) {
  if (chair) return PINTADAS.includes(id + '-silla') ? {url: asset(`pose-${id}-silla`), frames: 1} : null;
- if (PINTADAS.includes(id + '-pasos')) return {url: asset(`pasos-${id}`), frames: 6};
- return PINTADAS.includes(id) ? {url: asset(`pose-${id}`), frames: 3} : null;
+ return PINTADAS.includes(id + '-pasos') ? {url: asset(`pasos-${id}`), frames: 6} : null;
 }
 // How many drawings the way into a pose has: the dots of the step-by-step view.
 export const frameCount = (id, chair = false) => sheet(id, chair)?.frames ?? (chair ? 3 : 6);
@@ -98,10 +97,8 @@ export function sceneMarkup(id, p, {chair = false} = {}) {
 
 // Small still picture of the finished pose, painted or provisional.
 export function thumbMarkup(id) {
- const art = sheet(id);
- // A step-by-step sheet comes with its own small picture, so lists do not download whole sheets.
- if (art?.frames > COLS) return `<img class="thumb" src="${asset('mini-' + id)}" alt="" width="288" height="282" loading="lazy" decoding="async">`;
- return art ? `<span class="thumb painted${art.frames > COLS ? ' pasos' : ''}" style="background-image:url('${art.url}')"></span>`
+ // A painted sheet comes with its own small picture (mini-<id>.webp), so lists do not download whole sheets.
+ return sheet(id) ? `<img class="thumb" src="${asset('mini-' + id)}" alt="" width="288" height="282" loading="lazy" decoding="async">`
   : `<svg class="thumb" viewBox="16 150 480 470" aria-hidden="true">${sceneMarkup(id, 1)}</svg>`;
 }
 

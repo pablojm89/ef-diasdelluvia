@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Integra en el juego las imágenes entregadas en arte/entrega/.
 
-Uso:  python3 scripts/integrar_arte.py [--comprobar] [--borrar]
+Uso:  python3 scripts/integrar_arte.py [--comprobar] [--borrar] [pedido ...]
 
 - Reconoce cada PNG, JPG o WebP cuyo nombre sea el de un pedido de arte/lotes/*.json.
 - Lo lleva al tamaño del pedido (los fondos se recortan centrados; las figuras con
@@ -10,6 +10,10 @@ Uso:  python3 scripts/integrar_arte.py [--comprobar] [--borrar]
   todos los recuadros a la misma altura y borra lo que haya quedado por debajo.
   Si el pedido tiene "mini", guarda además el último dibujo encuadrado en pequeño,
   para las listas: así no hay que descargar la hoja entera para ver una miniatura.
+  Si tiene "escala", reduce la figura desde el suelo: iguala las hojas que llegaron
+  con la figura más grande que las demás.
+- Una imagen que llega para un pedido con "corregir" lo da por corregido.
+- Con nombres de pedido (sin extensión) sólo integra esos: lo demás no se toca.
 - Marca el pedido como listo, actualiza los índices de lote, ejecuta el paso posterior
   que indique el pedido y regenera arte/ENCARGO.md.
 - Si existe arte/entrega/MANIFIESTO, comprueba el SHA-256 de cada archivo.
@@ -26,6 +30,7 @@ from PIL import Image
 from arte_comun import RAIZ, ENTREGA, lotes, imagenes, guardar
 
 comprobar, borrar = '--comprobar' in sys.argv, '--borrar' in sys.argv
+solo = {nombre for nombre in sys.argv[1:] if not nombre.startswith('--')}
 
 
 def huellas():
@@ -67,6 +72,11 @@ def asentar(imagen, pedido):
             bajada = Image.new('RGBA', (ancho, alto))
             bajada.paste(celda, (0, suelo - base))
             celda = bajada
+        if pedido.get('escala'):  # la figura, más pequeña, sin moverla del suelo ni del centro
+            factor = pedido['escala']
+            menor = celda.resize((round(ancho * factor), round(alto * factor)), Image.LANCZOS)
+            celda = Image.new('RGBA', (ancho, alto))
+            celda.paste(menor, ((ancho - menor.width) // 2, round(suelo * (1 - factor))))
         salida.paste(celda, (numero % columnas * ancho, numero // columnas * alto))
     return salida
 
@@ -121,6 +131,8 @@ def main():
     for archivo in sorted(ENTREGA.iterdir()):
         if archivo.suffix.lower() not in ('.png', '.jpg', '.jpeg', '.webp'):
             continue
+        if solo and archivo.stem not in solo:
+            continue
         if archivo.stem not in donde:
             print(f'  ? {archivo.name}: no corresponde a ningún pedido')
             continue
@@ -148,6 +160,7 @@ def main():
         if pedido.get('mini'):
             miniatura(resultado, pedido).save(RAIZ / pedido['mini'], quality=84, method=6)
         pedido['listo'] = True
+        pedido.pop('corregir', None)
         tocados.add(ruta)
         hechas.append(archivo)
         if pedido.get('despues') and pedido['despues'] not in pasos:

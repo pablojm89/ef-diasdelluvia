@@ -27,7 +27,6 @@
 .figure-box{position:relative;aspect-ratio:512/640;width:100%}
 .pose-svg{display:block;width:100%;height:100%}
 .thumb{display:block;width:100%;aspect-ratio:480/470}
-.thumb.painted{background-size:300% auto;background-position:100% 72%;background-repeat:no-repeat}
 img.thumb{height:auto}
 
 /* Learn: cards that look like the cream posters of the gym. */

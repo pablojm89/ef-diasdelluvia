@@ -30,7 +30,7 @@ Sube cada imagen a `arte/entrega/` con el nombre exacto que indica su pedido, en
 
 Mantén su estilo, luz y acabado: `gimnasio/assets/gym.webp`, `gimnasio/assets/store.webp`, `gimnasio/assets/robles-rest.webp`, `gimnasio/assets/pupil-0.webp`, `gimnasio/assets/prop-cone.webp`, `mate/assets/roster/vega.png`.
 
-## Pendientes: 117
+## Pendientes: 118
 
 ### Lote `01-puertas` · Puertas de los lugares
 
@@ -73,11 +73,13 @@ Lote completo.
 
 ### Lote `10-tatami` · El Tatami: yoga
 
-Cada postura tiene una hoja de pasos (pasos-<postura>: seis dibujos en dos filas de tres, del inicio a la postura terminada) y su versión en silla; además, la sala y el profe. Al integrar una hoja de pasos, el script deja la esterilla a la misma altura en los seis recuadros (campos "celdas" y "suelo") y guarda una miniatura de la postura terminada (campo "mini") para las listas. Las doce primeras posturas y la vuelta a la calma conservan su hoja antigua de tres dibujos (pose-<postura>), que el juego ya no usa. tatami/figura.js usa cada hoja en cuanto aparece en el índice; si falta, dibuja una figura provisional. La puerta de El Tatami está en el lote 01-puertas.
+Cada postura tiene una hoja de pasos (pasos-<postura>: seis dibujos en dos filas de tres, del inicio a la postura terminada) y su versión en silla (pose-<postura>-silla); además, la sala y el profe. Al integrar una hoja de pasos, el script deja la esterilla a la misma altura en los seis recuadros (campos "celdas" y "suelo"), reduce la figura si llegó más grande que las demás (campo "escala") y guarda una miniatura de la postura terminada (campo "mini") para las listas. Un pedido con "corregir" ya está en el juego y tiene algo que redibujar. tatami/figura.js usa cada hoja en cuanto aparece en el índice; si falta, dibuja una figura provisional. La puerta de El Tatami está en el lote 01-puertas.
 
-Ya integradas: 92.
+Ya integradas: 78.
 
-Lote completo.
+| Archivo que entregar | Qué es | Tamaño | Fondo | Qué debe verse |
+|---|---|---|---|---|
+| `pasos-warrior2.png` | El guerrero II · hoja de pasos | 1536 × 1280 | transparente | **Corrección** de `tatami/assets/pasos-warrior2.webp`, que ya está en el juego: en el dibujo 3 los brazos están levantados en V por encima de la cabeza y en el 4 bajan a la cruz, así que la animación sube y vuelve a bajar. Redibuja sólo el dibujo 3 con los brazos a media altura, a unos 45° por debajo de la horizontal, de modo que del 2 al 4 suban sin retroceder. Todo lo demás, igual que en esa imagen. Pedido original: Hoja de pasos de 1536 × 1280: seis dibujos de 512 × 640 en dos filas de tres, sin separación ni marcos, en orden de lectura (arriba, los dibujos 1, 2 y 3; abajo, el 4, el 5 y el 6): del inicio a la postura terminada, paso a paso. La salida se anima recorriéndolos al revés. Son fotogramas seguidos del mismo movimiento: entre un dibujo y el siguiente el cuerpo cambia poco. La figura, del mismo tamaño que en tatami/assets/pasos-mountain.webp (de pie) o tatami/assets/pasos-pinza.webp (sentada): la cabeza mide lo mismo en cualquier postura, también sentada o de rodillas, aunque sobre sitio en el recuadro. Los seis a la misma escala, misma cámara y la esterilla turquesa en el mismo sitio de cada recuadro (borde inferior a unos 590 px del alto del recuadro, centrada); el pie, la mano o la rodilla que no se mueve queda exactamente en el mismo punto en los seis dibujos, para que no salte al animar. Ningún miembro sale de su recuadro de 512 px. Postura correcta y prudente para Primaria: rodilla encima del tobillo, sin forzar, cuello largo, sin arquear la zona lumbar. Personaje: siempre la alumna de gimnasio/assets/pupil-2.webp (Lúa), con la misma cara, pelo rizado cobrizo, cinta morada, sudadera lila con raya crema en las mangas, pantalón de chándal morado oscuro con raya crema y zapatillas blancas y lilas. Proporciones naturales de 11 años, gesto tranquilo y concentrado. Vista de frente, de cuerpo entero, con sus zapatillas en los seis dibujos, sobre una esterilla de yoga turquesa vista con ligera perspectiva. Dibujo 1: de pie, brazos a los lados. Dibujo 2: un paso hacia el lado: piernas algo separadas, brazos a los lados. Dibujo 3: piernas muy separadas y estiradas, brazos subiendo por los lados a media altura, entre la cadera y los hombros (nunca por encima de los hombros). Dibujo 4: brazos en cruz, pie derecho girado hacia fuera, piernas todavía estiradas. Dibujo 5: rodilla derecha empezando a doblarse, la cara girando hacia la mano derecha. Dibujo 6: piernas muy separadas, rodilla derecha doblada encima del tobillo, pierna izquierda estirada, tronco vertical, brazos abiertos en horizontal a la altura de los hombros y la mirada sobre la mano derecha. |
 
 ### Lote `11-pizarra` · La Pizarra · Rosco de Educación Física
 
