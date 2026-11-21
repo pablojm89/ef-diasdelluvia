@@ -7,6 +7,7 @@ import {Room} from './network.js';
 import {validCode} from './protocol.js';
 import {buildBar,updateBar,attachStick,resultsMarkup} from './hud.js';
 import {ultArt} from './abilities.js';
+import {Prediction} from './predict.js';
 import {record,topBar,player,mode as placeMode} from '../comun/lugar.js';
 import {PINTADOS} from './assets/pista/pintados.js';
 const $=id=>document.getElementById(id);
@@ -22,10 +23,10 @@ const slug=index=>HEROES[index].name.toLowerCase().normalize('NFD').replace(/[̀
 // A painted portrait replaces the pixel one in the menus once it arrives (arte/lotes/15-pista.json).
 function face(index){const key='retrato-'+slug(index);return PINTADOS.includes(key)?{src:new URL(`./assets/pista/${key}.webp`,import.meta.url).href,pixel:false}:{src:portrait(index),pixel:true};}
 let view='menu',room=null,lobby=null,game=null,remote=null,previousRemote=null,remoteAt=0,localId='local',mode='training',busy=false,networkDisconnected=false;
-let toastTimeout,lastFrame=performance.now(),accumulator=0,lastSend=0,lastBroadcast=0,lastAnnouncement=0,lastAudioEvent=0,latency=0,lastRemoteAt=0,lastUi=0,lastClientDraw=0;
+let toastTimeout,lastFrame=performance.now(),accumulator=0,lastSend=0,lastBroadcast=0,lastAnnouncement=0,lastAudioEvent=0,latency=0,lastRemoteAt=0,lastUi=0;
 let rules=normalizeRules(),manualAim=false,pointerAt=0,targetIndex=0,audio=null,lastDemo=0;
 const keys=new Set(),actions={ult:false,fire:false,catch:false,dash:false,pass:false};
-const aim={ax:900,ay:390},stick={x:0,y:0};
+const aim={ax:900,ay:390},stick={x:0,y:0},prediction=new Prediction();
 let shownPoints=0,resultsKey='',peeking=false,wantedFullscreen=false,matchRecorded=false,ultWasReady=true,readyChime=false;
 // Fingers get a stick and ability circles; a keyboard gets the keys written under each circle.
 function setInputMode(mode){if(document.body.dataset.input!==mode)document.body.dataset.input=mode;}
@@ -133,7 +134,7 @@ async function joinRoom(code){
  if(busy)return;const resume=resumeFor(code);stopRoom();mode='online';setBusy(true,'Buscando la sala y conectando los ordenadores…');const next=new Room(callbacks());room=next;
  try{await next.join(code,profile(),resume);if(room===next){localId=next.myId;setBusy(false);}}catch(error){if(room===next){next.close();room=null;showView('menu');setBusy(false,error.message);$('room-code').value=code;}}
 }
-function stopRoom(){room?.close();room=null;lobby=null;game=null;remote=null;previousRemote=null;networkDisconnected=false;latency=0;clearKeys();}
+function stopRoom(){prediction.reset();room?.close();room=null;lobby=null;game=null;remote=null;previousRemote=null;networkDisconnected=false;latency=0;clearKeys();}
 function training(){
  if(busy)return;enterFullscreen();stopRoom();mode='training';localId='local';targetIndex=0;manualAim=false;game=makeGame([{id:localId,team:0,character:selected,name:HEROES[selected].name}],rules,crypto.getRandomValues(new Uint32Array(1))[0]);lastAnnouncement=0;lastAudioEvent=0;renderer.lastEvent=0;renderer.fx=[];accumulator=0;$('connection-label').textContent='ENTRENAMIENTO LOCAL';$('connection-overlay').hidden=true;showView('game');updateMatchUI();$('court').focus({preventScroll:true});
 }
@@ -242,11 +243,17 @@ function playSound(state){
  }
  if(readyChime){readyChime=false;sweep('sine',660,990,.12,.04);sweep('sine',990,1320,.2,.04,.12);}
 }
+// What a guest draws: everyone else glides between the last two snapshots, and the guest's own
+// player is placed where its controls have already taken it.
 function interpolateRemote(now){
- if(!remote||!previousRemote)return remote;
- const alpha=Math.min(1,Math.max(0,(now-remoteAt)/67));
+ if(!remote)return remote;
+ const alpha=previousRemote?Math.min(1,Math.max(0,(now-remoteAt)/67)):1;
  const glide=(list,before)=>(list||[]).map(p=>{const prev=(before||[]).find(q=>q.id===p.id);if(!prev||prev.prison!==p.prison||Math.hypot(prev.x-p.x,prev.y-p.y)>180)return p;return {...p,x:prev.x+(p.x-prev.x)*alpha,y:prev.y+(p.y-prev.y)*alpha};});
- return {...remote,players:glide(remote.players,previousRemote.players),decoys:glide(remote.decoys,previousRemote.decoys)};
+ const players=glide(remote.players,previousRemote?.players);
+ const mine=remote.players.find(p=>p.id===localId),index=remote.players.indexOf(mine);
+ if(mine&&remote.phase==='playing'&&!remote.paused&&!networkDisconnected)players[index]={...mine,...prediction.place(mine,remote.ball.holder===localId,remoteAt,latency,now)};
+ else prediction.reset();
+ return {...remote,players,decoys:glide(remote.decoys,previousRemote?.decoys)};
 }
 function frame(now){
  const delta=Math.min((now-lastFrame)/1000,.1);lastFrame=now;
@@ -262,8 +269,8 @@ function frame(now){
    if(room?.isHost&&now-lastBroadcast>=66){room.broadcastState(snapshot(game));lastBroadcast=now;}
    if(now-lastUi>100||$('game-view').dataset.phase!==game.phase){updateStateUI(game);lastUi=now;}playSound(game);renderer.render(game,localId,controls(),latency,now,mode==='online');
   } else if(remote){
-   if(now-lastSend>=45&&!networkDisconnected){room?.input(controls());consumeActions();lastSend=now;}
-   if(now-lastClientDraw>32){renderer.render(interpolateRemote(now),localId,controls(),latency,now,true);lastClientDraw=now;}playSound(remote);
+   if(now-lastSend>=45&&!networkDisconnected){const sent=controls();room?.input(sent);prediction.record(sent,now);consumeActions();lastSend=now;}
+   renderer.render(interpolateRemote(now),localId,controls(),latency,now,true);playSound(remote);
    if(now-lastRemoteAt>4500&&!networkDisconnected&&!remote.paused){networkDisconnected=true;$('connection-message').textContent='La partida ha dejado de responder. Espera unos segundos o intenta recuperar tu plaza.';$('connection-overlay').hidden=false;clearKeys();}
   } else renderer.render(demo,null,{},0,now);
  }

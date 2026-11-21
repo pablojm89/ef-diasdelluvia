@@ -1,7 +1,7 @@
 import {NETWORK_CONFIG} from './config.js';
 import {HEROES} from './roster.js';
 import {availableCharacter} from './selection.js';
-import {normalizeRules} from './sim.js';
+import {normalizeRules,expandSnapshot} from './sim.js';
 import {RelayHub} from './relay.js';
 import {PROTOCOL,validCode,validToken,cleanProfile,inputPacket,isSnapshot,isSpectatorHello} from './protocol.js';
 const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -184,7 +184,7 @@ export class Room {
     if(data.type==='lobby'&&Number.isSafeInteger(data.revision)&&data.revision>this.lastLobbyRevision&&Array.isArray(data.members)&&data.members.length<=26){this.lastLobbyRevision=data.revision;this.rules=normalizeRules(data.rules);if(!data.started)this.started=false;this.cb.onLobby?.(data);if(data.started)this.beginRemote(data);}
     if(data.type==='notice')this.cb.onError?.(String(data.message).slice(0,200));
     if(data.type==='start')this.beginRemote(data);
-    if(data.type==='state'&&!this.ended&&this.started&&data.matchId===this.matchId&&isSnapshot(data.state)&&data.state.tick>this.lastStateTick){this.lastStateTick=data.state.tick;this.cb.onState?.(data.state);}
+    if(data.type==='state'&&!this.ended&&this.started&&data.matchId===this.matchId&&isSnapshot(data.state)&&data.state.tick>this.lastStateTick){this.lastStateTick=data.state.tick;this.cb.onState?.(expandSnapshot(data.state));}
     if(data.type==='pong'){this.latency=Math.max(0,Math.round((performance.now()-data.at)/2));this.cb.onLatency?.(this.latency);}
     if(data.type==='ended'){this.ended=true;this.cb.onDisconnect?.('El anfitrión ha cerrado la sala.');}
    });

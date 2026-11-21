@@ -1,7 +1,8 @@
 import {sanitizeInput} from './sim.js';
 import {validCharacter} from './selection.js';
-// 3 added the spectator role. 4 replaces the shared abilities with one ultimate per hero: its controls and state differ.
-export const PROTOCOL=4;
+// 3 added the spectator role. 4 replaced the shared abilities with one ultimate per hero. 5 sends shorter snapshots,
+// which an older guest would read with players missing half their state.
+export const PROTOCOL=5;
 export const validCode=code=>typeof code==='string'&&/^[A-HJ-NP-Z2-9]{6}$/.test(code);
 export const validToken=value=>typeof value==='string'&&/^[a-zA-Z0-9-]{20,80}$/.test(value);
 export const isSpectatorHello=raw=>raw?.type==='hello'&&raw.role==='spectator';

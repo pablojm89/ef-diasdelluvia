@@ -65,6 +65,8 @@ export class ArenaRenderer {
   // Abilities, player and points live in the page overlay (hud.js); the canvas keeps the court.
   if(local)text(c,latency?`${latency} ms`:online?'ONLINE':'LOCAL',1180,744,10,'#6f8ea3','right');
   if(g.phase!=='playing'||g.paused)this.overlay(g);
+  // Before the round starts the arrow goes on top of the dimmed court, so everyone finds themselves.
+  if(local&&g.phase==='countdown'&&!g.paused)this.drawSelfMark(c,g,local,playerLook(local).scale,now);
  }
  // Where each player under Centella has just been, for the streak behind them.
  remember(g){
@@ -78,7 +80,12 @@ export class ArenaRenderer {
   // Teammates and the stands see a copy as a see-through figure; rivals cannot tell.
   const hollow=p.copy&&(!local||local.team===p.team);
   c.save();c.fillStyle='#0c233b40';c.beginPath();c.ellipse(p.x,p.y+9,22*scale,8*scale,0,0,TAU);c.fill();
-  if(mine){c.strokeStyle='#ffeab0';c.lineWidth=3;c.beginPath();c.ellipse(p.x,p.y+9,26*scale,11*scale,0,0,TAU);c.stroke();}
+  if(mine){
+   // A gold ring that breathes under the player's own character.
+   const pulse=(Math.sin(now/170)+1)/2;
+   c.strokeStyle='#ffd24a';c.lineWidth=4;c.beginPath();c.ellipse(p.x,p.y+9,27*scale,11*scale,0,0,TAU);c.stroke();
+   c.strokeStyle=`rgba(255,233,160,${.75-pulse*.6})`;c.lineWidth=3;c.beginPath();c.ellipse(p.x,p.y+9,(31+pulse*9)*scale,(13+pulse*4)*scale,0,0,TAU);c.stroke();
+  }
   if(!p.copy)auraUnder(c,p,g);
   if(p.boostTime>0||p.turbo>0){
    c.fillStyle='#feeda2';
@@ -94,12 +101,26 @@ export class ArenaRenderer {
   c.globalAlpha=(p.invulnerable>0?.72:1)*look.alpha*(hollow?.45:1)*(tagged&&Math.floor(now/110)%2?.45:1);
   c.translate(p.x,p.y+4);paintCharacter(c,p,{scale,time:g.time,selected:mine,holding:g.ball.holder===p.id,tint:look.tint});c.restore();
   if(!p.copy){c.save();auraOver(c,p,g,now);if(tagged)drawTagged(c,p,now);c.restore();}
+  if(mine&&g.phase!=='countdown')this.drawSelfMark(c,g,p,scale,now);
   const name=mine?'TÚ':p.name+(p.bot?' · IA':'')+(hollow?' · COPIA':'');
   const below=p.y+24+(scale-1)*10;
   c.fillStyle=mine?'#ffedac':'#112d3bcc';const width=Math.max(30,name.length*5.6+12);rounded(c,p.x-width/2,below,width,17,4);c.fill();text(c,name,p.x,below+9,10,mine?'#39453c':team.light);
   // A copy shows the same dots as the real one.
   const real=p.copy?g.players.find(q=>q.id===p.owner):p;
   if(real&&!real.prison)drawPips(c,{...real,x:p.x},below+23);
+ }
+ // A big gold arrow over the player's own character, larger still while the round is about to start.
+ drawSelfMark(c,g,p,scale,now){
+  const waiting=g.phase==='countdown',size=waiting?1.7:1,bob=Math.sin(now/150)*4;
+  const tip=p.y-64*scale-(p.slowed>0||p.turbo>0?16:0)+bob,half=13*size,tall=17*size;
+  c.save();c.lineJoin='round';
+  if(waiting){const close=(now/900)%1;c.strokeStyle=`rgba(255,210,74,${1-close})`;c.lineWidth=5;c.beginPath();c.arc(p.x,p.y-22,130-close*90,0,TAU);c.stroke();}
+  c.beginPath();c.moveTo(p.x-half,tip-tall);c.lineTo(p.x+half,tip-tall);c.lineTo(p.x,tip);c.closePath();
+  c.strokeStyle='#17233b';c.lineWidth=5;c.stroke();c.fillStyle='#ffd24a';c.fill();
+  c.fillStyle='#fff3cf';c.beginPath();c.moveTo(p.x-half*.45,tip-tall+3);c.lineTo(p.x+half*.1,tip-tall+3);c.lineTo(p.x-half*.12,tip-tall*.45);c.closePath();c.fill();
+  c.font=`900 ${Math.round(15*size)}px "Trebuchet MS",system-ui,sans-serif`;c.textAlign='center';c.textBaseline='alphabetic';
+  c.lineWidth=5;c.strokeStyle='#17233b';c.strokeText(waiting?'ERES TÚ':'TÚ',p.x,tip-tall-5);c.fillStyle='#ffd24a';c.fillText(waiting?'ERES TÚ':'TÚ',p.x,tip-tall-5);
+  c.restore();
  }
  drawEffects(g,now){
   const kept=['impact','catch','rescue','hit','dodge','points',...FX_EVENTS];
