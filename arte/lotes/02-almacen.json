@@ -7,7 +7,7 @@
   "ancho": 1536,
   "alto": 1024,
   "transparente": false,
-  "listo": false,
+  "listo": true,
   "prompt": "Edición de gimnasio/assets/store.webp con el mismo encuadre exacto, sin mover ni redibujar muebles, pared, puerta, ventana ni suelo. Sólo se añade el material guardado, con la misma luz y sombras suaves hacia la derecha. Usa el store-tidy.webp actual como plano: en el carro de rejilla, balón de baloncesto, pelota blanda verde y balón de fútbol detrás de la rejilla; un cono naranja encajado en la primera varilla de la balda superior del soporte; en la fila superior de cestas, saquito morado, peto naranja doblado sobre el borde y cuerda turquesa con mangos de madera; aro amarillo apoyado en el primer gancho en U de la pared; raqueta de bádminton colgada del último gancho del perchero; una segunda colchoneta azul apilada sobre la del centro de la tarima.",
   "despues": "python3 scripts/build-store-states.py --from-tidy"
  },
@@ -17,7 +17,7 @@
   "ancho": 420,
   "alto": 380,
   "transparente": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Carro bajo de gimnasio con cuatro ruedas, de madera clara y metal gris, vacío, visto en tres cuartos como los muebles del cuarto de materiales."
  },
  "risk-mat": {
@@ -26,7 +26,7 @@
   "ancho": 380,
   "alto": 260,
   "transparente": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Colchoneta azul de gimnasio mal apoyada, sobresaliendo torcida como si estuviera en lo alto de una estantería y a punto de caer."
  },
  "risk-cone": {
@@ -35,7 +35,7 @@
   "ancho": 300,
   "alto": 260,
   "transparente": true,
-  "listo": false,
+  "listo": true,
   "prompt": "Cono naranja de señalización con dos franjas blancas, volcado de lado en el suelo."
  }
 }
