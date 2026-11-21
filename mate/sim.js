@@ -30,13 +30,15 @@ export function sanitizeInput(raw) {
  for(const key of ['mx','my','ax','ay'])if(typeof raw[key]!=='number'||!Number.isFinite(raw[key]))return null;
  return {mx:clamp(raw.mx,-1,1),my:clamp(raw.my,-1,1),ax:clamp(raw.ax,0,1200),ay:clamp(raw.ay,100,680),ult:raw.ult===true,fire:raw.fire===true,catch:raw.catch===true,dash:raw.dash===true,pass:raw.pass===true};
 }
+// What a player's counters are at rest. A snapshot leaves out whatever still has this value, and the guest puts it back.
+const BLANK={prison:false,x:0,y:0,vx:0,vy:0,catchTime:0,catchCooldown:0,dashTime:0,dashCooldown:0,invulnerable:0,stun:0,throwFlash:0,boostTime:0,surge:0,counter:0,ultCooldown:0,slowed:0,turbo:0,frozen:0,flash:0,shield:0,giant:0,points:0,hits:0,catches:0,dodges:0,assists:0,rescues:0};
 export function makeGame(roster=[],rawRules={},seed=1234567) {
  const rules=normalizeRules(rawRules);
  const players=[];
  for(let team=0;team<2;team++) {
   const lineup=buildLineup(roster,team,rules.teamSize);
   for(const [slot,{member,character}] of lineup.entries()) {
-   players.push({id:member?.id||`bot-${team}-${slot}`,name:HEROES[character].name,character,team,bot:!member||member.bot===true,slot,prison:false,x:0,y:0,vx:0,vy:0,face:team===0?1:-1,catchTime:0,catchCooldown:0,dashTime:0,dashCooldown:0,invulnerable:0,stun:0,throwFlash:0,boostTime:0,surge:0,counter:0,ultCooldown:HEROES[character].ult.recharge/2,slowed:0,turbo:0,frozen:0,flash:0,shield:0,giant:0,points:0,hits:0,catches:0,dodges:0,assists:0,rescues:0,input:null,lastInput:0,aiThink:0,aiAim:0});
+   players.push({id:member?.id||`bot-${team}-${slot}`,name:HEROES[character].name,character,team,bot:!member||member.bot===true,slot,...BLANK,face:team===0?1:-1,ultCooldown:HEROES[character].ult.recharge/2,input:null,lastInput:0,aiThink:0,aiAim:0});
   }
  }
  const g={v:1,rules,seed:seed>>>0||1,tick:0,time:0,phase:'countdown',phaseTime:2.7,paused:false,round:1,roundLeft:rules.roundSeconds,scores:[0,0],winner:null,roundWinner:null,players,ball:null,decoys:[],net:[0,0],tagged:[],events:[],eventId:0};
@@ -421,10 +423,14 @@ export function stepGame(g,dt=1/60) {
  if(g.tagged.length&&g.ball.kind!=='rebound')for(const {id,by} of g.tagged.splice(0)){const p=g.players.find(q=>q.id===id);if(p)imprison(g,p,g.players.find(q=>q.id===by));}
  checkWin(g);return g;
 }
-const tenth=n=>Math.round(n*10)/10;
+// Short numbers: a snapshot goes to every guest fifteen times a second.
+const trim=item=>{const out={};for(const key in item){const value=item[key];out[key]=typeof value==='number'&&!Number.isInteger(value)?Math.round(value*(key==='x'||key==='y'?10:100))/(key==='x'||key==='y'?10:100):value;}return out;};
+const lean=p=>{for(const key in BLANK)if(p[key]===BLANK[key])delete p[key];return p;};
+// The other end of snapshot(): a guest or the stands get every player whole again.
+export function expandSnapshot(state){return {...state,players:state.players.map(p=>({...BLANK,...p}))};}
 export function snapshot(g) {
  // Only public game state, not command mailboxes, RNG or connection credentials.
- return {v:1,tick:g.tick,time:g.time,phase:g.phase,phaseTime:g.phaseTime,paused:g.paused,round:g.round,roundLeft:g.roundLeft,scores:[...g.scores],winner:g.winner,roundWinner:g.roundWinner,rules:g.rules,
- players:g.players.map(({input,lastInput,aiThink,aiAim,aiShot,aiPlan,aiQuick,...p})=>({...p,x:tenth(p.x),y:tenth(p.y)})),
- decoys:g.decoys.map(({dx,dy,turn,...copy})=>({...copy,x:tenth(copy.x),y:tenth(copy.y)})),net:[...g.net],tagged:g.tagged.map(tag=>tag.id),ball:{...g.ball},events:g.events};
+ return {v:1,tick:g.tick,time:Math.round(g.time*1000)/1000,phase:g.phase,phaseTime:Math.round(g.phaseTime*100)/100,paused:g.paused,round:g.round,roundLeft:Math.round(g.roundLeft*100)/100,scores:[...g.scores],winner:g.winner,roundWinner:g.roundWinner,rules:g.rules,
+ players:g.players.map(({input,lastInput,aiThink,aiAim,aiShot,aiPlan,aiQuick,...p})=>lean(trim(p))),
+ decoys:g.decoys.map(({dx,dy,turn,...copy})=>trim(copy)),net:g.net.map(left=>Math.round(left*100)/100),tagged:g.tagged.map(tag=>tag.id),ball:trim(g.ball),events:g.events.map(trim)};
 }

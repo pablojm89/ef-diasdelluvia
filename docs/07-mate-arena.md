@@ -100,6 +100,7 @@ La pista ocupa toda la ventana y al empezar se solicita la pantalla completa del
 
 - **Con teclado:** cinco círculos en la parte inferior: pasar, atrapar, esquivar, lanzar y, más grande y con borde dorado, la definitiva del personaje. Cada uno lleva su tecla escrita debajo. Un barrido oscuro y una cuenta atrás indican la recarga, y el círculo dorado late cuando la definitiva está lista. El círculo se apaga si la acción no está disponible, por ejemplo lanzar sin pelota. Un anillo naranja alrededor de «Lanzar» muestra los cinco segundos de posesión.
 - **Con los dedos:** una palanca aparece bajo el pulgar en la mitad izquierda y los círculos se abren en abanico alrededor de «Lanzar» a la derecha, con el nombre en lugar de la tecla y la definitiva arriba. Tocar «Lanzar» apunta al rival más cercano; arrastrarlo apunta en esa dirección y al soltar se lanza. El juego cambia de un modo a otro según se use teclado o pantalla táctil.
+- **Tu jugador** lleva una flecha dorada con «TÚ» encima y un anillo dorado que late a sus pies. Durante la cuenta atrás la flecha es más grande, dice «ERES TÚ» y se dibuja por encima de la pista oscurecida.
 - Los iconos están en `mate/assets/abilities/` y la lista de acciones, en `mate/abilities.js`.
 
 ## Puntos
@@ -150,6 +151,16 @@ Hay controles táctiles. La pista está pensada principalmente para portátil o 
 
 `renderer.js` dibuja la pista, sprites, pelota, marcador y efectos en Canvas; `ultfx.js` pone lo propio de cada definitiva. `characters.js` carga los retratos y selecciona el fotograma de cada jugador en las hojas de animación de Cometas y Rayos. Los clientes interpolan posiciones recibidas; no deciden colisiones.
 
+### Respuesta en una sala online
+
+El anfitrión envía una instantánea 15 veces por segundo y los invitados mandan sus controles cada 45 ms. Sin más, un invitado vería a su jugador reaccionar con el retraso de ida y vuelta más el de la instantánea. Para evitarlo:
+
+- **El invitado adelanta a su propio jugador** (`mate/predict.js`). Lo dibuja donde lo dejarán los controles que ya ha enviado y el anfitrión aún no ha aplicado, y lo acerca con suavidad a la posición que confirma el anfitrión. Sólo adelanta el movimiento a pie: mientras esquiva, está aturdido o congelado, manda el anfitrión. Lanzar, atrapar, esquivar y las definitivas siguen esperando la respuesta del anfitrión, que es quien decide.
+- **El invitado dibuja en cada fotograma**, no a 30 por segundo como antes, interpolando a los demás entre las dos últimas instantáneas.
+- **La instantánea ocupa la mitad.** Los números viajan con dos decimales y de cada jugador se omite lo que está en reposo; `expandSnapshot` lo repone al recibir. Un 13 contra 13 pasa de unos 16 KB a unos 7 KB por envío, y un 3 contra 3, de 5 KB a 3,4 KB.
+
+Con retardos simulados de 30 a 250 ms por trayecto, el jugador propio pasa de ir entre 28 y 107 px por detrás de las teclas a ir entre 11 y 18 px. Es una simulación: no se ha medido en la red del centro. El retraso de la propia conexión no desaparece; se nota en los tiros y en los demás jugadores. La etiqueta de conexión dice si la sala va por conexión directa o por el relevo público, que suele ser lo más lento.
+
 `network.js` gestiona códigos, miembros, preparación, comienzo, pausa, reconexión y cambios de partida. Las instantáneas llevan un identificador de partido para no confundir paquetes antiguos con una revancha. La entrada se vincula a la conexión aceptada. Las credenciales de recuperación no se incluyen en la lista pública de miembros.
 
 Se intenta conectar mediante **PeerJS 1.5.5 / WebRTC DataChannel**, con la biblioteca servida desde el propio repo. Si no se logra la conexión directa, el juego usa **MQTT sobre WebSocket seguro** a través de `relay.js`. El anfitrión abre ambas vías para que los participantes puedan usar la que funcione en su red. No se utiliza BroadcastChannel ni almacenamiento local para simular multijugador.
@@ -171,12 +182,12 @@ Un espectador:
 
 ### Protocolo
 
-La versión del protocolo es la 4. La 3 añadió al espectador: así, un anfitrión antiguo rechaza a un espectador con el aviso de versiones distintas en lugar de sentarlo como jugador; el flujo de los jugadores, incluida la recuperación de plaza, no cambió. La 4 llega con las definitivas, que cambian los controles que se envían y el estado que se recibe: dos navegadores con versiones distintas reciben el aviso de recargar.
+La versión del protocolo es la 5. La 3 añadió al espectador: así, un anfitrión antiguo rechaza a un espectador con el aviso de versiones distintas en lugar de sentarlo como jugador; el flujo de los jugadores, incluida la recuperación de plaza, no cambió. La 4 llega con las definitivas, que cambian los controles que se envían y el estado que se recibe: dos navegadores con versiones distintas reciben el aviso de recargar. La 5 acorta las instantáneas.
 
 | Mensaje | Dirección | Contenido |
 | --- | --- | --- |
-| `hello` | espectador → anfitrión | `{type:'hello', v:4, clientId, role:'spectator'}`. Sin perfil ni credencial de recuperación |
-| `welcome` | anfitrión → espectador | `{type:'welcome', v:4, id:'s-…', hostId, code, role:'spectator', started, matchId, rules}`. Va seguido de un `lobby` y, si se está jugando, de un `start` con `reconnecting:true` |
+| `hello` | espectador → anfitrión | `{type:'hello', v:5, clientId, role:'spectator'}`. Sin perfil ni credencial de recuperación |
+| `welcome` | anfitrión → espectador | `{type:'welcome', v:5, id:'s-…', hostId, code, role:'spectator', started, matchId, rules}`. Va seguido de un `lobby` y, si se está jugando, de un `start` con `reconnecting:true` |
 | `lobby` | anfitrión → todos | Añade `spectators`: cuántas pantallas miran. Es un número; no identifica a nadie |
 | `ping` / `pong` | ambos | Igual que un invitado: mide la latencia y recupera el `lobby` perdido |
 | `ended`, `rejected` | anfitrión → espectador | Igual que un invitado. Rechazos propios: versión distinta y «Ya hay demasiadas pantallas mirando esta sala» |

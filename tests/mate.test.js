@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {makeGame,stepGame,setInput,imprison,rescue,throwBall,passTarget,snapshot,normalizeRules,sanitizeInput,bounds} from '../mate/sim.js';
+import {makeGame,stepGame,setInput,imprison,rescue,throwBall,passTarget,snapshot,expandSnapshot,normalizeRules,sanitizeInput,bounds} from '../mate/sim.js';
+import {Prediction} from '../mate/predict.js';
 import {inputPacket,validCode,cleanProfile,PROTOCOL} from '../mate/protocol.js';
 import {HEROES,STATS} from '../mate/roster.js';
 // Hits are plain unless a test asks for the rebound, so every outcome here is repeatable.
@@ -464,4 +465,57 @@ test('definitivas: la máquina las usa durante un partido',()=>{
  for(let i=0;i<40000&&g.phase!=='matchOver';i++){stepGame(g);for(const e of g.events)if(e.id>seen){seen=e.id;if(e.type==='ult')used.add(e.ult);}}
  assert.equal(g.phase,'matchOver');
  assert.ok(used.size>=8,[...used].join());
+});
+
+test('red: la instantánea viaja corta y el invitado la recupera entera',()=>{
+ const g=makeGame([],{teamSize:13},5);
+ for(let i=0;i<3000;i++)stepGame(g);
+ const wire=JSON.stringify(snapshot(g)),back=expandSnapshot(JSON.parse(wire));
+ assert.ok(wire.length<10000,`ocupa ${wire.length}`);
+ const hidden=['input','lastInput','aiThink','aiAim','aiShot','aiPlan','aiQuick'];
+ g.players.forEach((p,index)=>{
+  for(const key of Object.keys(p).filter(key=>!hidden.includes(key))){
+   const value=back.players[index][key];
+   if(typeof p[key]==='number')assert.ok(Math.abs(value-p[key])<=.051,`${key}: ${value} y ${p[key]}`);else assert.deepEqual(value,p[key],key);
+  }
+  for(const key of hidden)assert.equal(back.players[index][key],undefined);
+ });
+});
+
+test('red: el invitado ve moverse a su jugador al instante y acaba donde dice el anfitrión',()=>{
+ // A host and a guest 120 ms apart each way. The guest sends controls every 45 ms and gets a snapshot every 66 ms.
+ const trip=120,g=makeGame([{id:'guest',team:0,character:0},{id:'other',team:1,character:1}],{teamSize:1});
+ g.phase='playing';
+ const me=g.players.find(p=>p.id==='guest');me.bot=false;me.x=300;me.y=300;g.ball.holder='other';
+ const prediction=new Prediction(),toHost=[],toGuest=[];
+ let latest=null,received=0,lastSend=-99,lastShot=-99,worst=0,shown=null;
+ const controls=now=>({mx:now<1500?1:now<2500?0:-1,my:now<1500?0:now<2500?1:0,ax:900,ay:390});
+ for(let now=0;now<4000;now+=1000/60){
+  while(toHost.length&&toHost[0].at<=now)setInput(g,'guest',toHost.shift().input);
+  stepGame(g);
+  if(now-lastShot>=66){toGuest.push({at:now+trip,state:expandSnapshot(JSON.parse(JSON.stringify(snapshot(g))))});lastShot=now;}
+  while(toGuest.length&&toGuest[0].at<=now){latest=toGuest.shift().state;received=now;}
+  if(now-lastSend>=45){const input=controls(now);toHost.push({at:now+trip,input});prediction.record(input,now);lastSend=now;}
+  if(!latest)continue;
+  const behind=latest.players.find(p=>p.id==='guest');
+  shown=prediction.place(behind,false,received,trip,now);
+  // One frame after the key goes down the guest is already moving, though the host has not heard yet.
+  if(now>300&&now<1400)assert.ok(shown.x>behind.x+20,`a los ${Math.round(now)} ms`);
+  // The drawing never strays far from where the host has the player right now.
+  if(now>400)worst=Math.max(worst,Math.hypot(shown.x-me.x,shown.y-me.y));
+ }
+ assert.ok(worst<75,`se separa ${worst.toFixed(0)}`);
+ // Standing still for a while, drawing and host agree.
+ for(let now=4000;now<5000;now+=1000/60){
+  while(toHost.length&&toHost[0].at<=now)setInput(g,'guest',toHost.shift().input);
+  stepGame(g);
+  const input={mx:0,my:0,ax:900,ay:390};
+  if(now-lastSend>=45){toHost.push({at:now+trip,input});prediction.record(input,now);lastSend=now;}
+  shown=prediction.place({...me},false,now,trip,now);
+ }
+ assert.ok(Math.hypot(shown.x-me.x,shown.y-me.y)<2);
+ // Frozen or stunned, the guest's drawing follows the host and does not walk off.
+ prediction.reset();prediction.record({mx:1,my:0},0);
+ const stuck=prediction.place({...me,frozen:2},false,400,trip,400);
+ assert.equal(stuck.x,me.x);
 });
