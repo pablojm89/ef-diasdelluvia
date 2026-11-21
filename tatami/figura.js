@@ -1,5 +1,6 @@
-// Draws a pose on its mat: the painted sheet when it exists (tatami/assets/pose-<id>.webp, three
-// drawings in a row), otherwise the provisional jointed figure of esqueleto.js in the kit's colours.
+// Draws a pose on its mat: the painted sheet when it exists, otherwise the provisional jointed figure of
+// esqueleto.js in the kit's colours. A sheet is a grid of 512 × 640 drawings, three per row, read like text:
+// pasos-<id>.webp has six (the step-by-step sheet) and the older pose-<id>.webp has three.
 import {W, H, FLOOR, SEAT, figureAt} from './esqueleto.js';
 import {PINTADAS} from './assets/pintadas.js';
 
@@ -8,8 +9,15 @@ const LINE = '#4a3422';
 const C = {hood: '#a88dd2', hoodFar: '#8f76bb', legs: '#5d4985', legsFar: '#4b3a6e', skin: '#f2c39d', skinFar: '#ddab85',
  hair: '#c4622b', hairDark: '#a24e20', band: '#7756b3', shoe: '#f5f1fa', sole: '#b7a5d8', stripe: '#efe3cf'};
 
-export const painted = (id, chair = false) => PINTADAS.includes(chair ? id + '-silla' : id);
-export const sheetUrl = (id, chair = false) => new URL(`./assets/pose-${id}${chair ? '-silla' : ''}.webp`, import.meta.url).href;
+const COLS = 3;
+const asset = name => new URL(`./assets/${name}.webp`, import.meta.url).href;
+export function sheet(id, chair = false) {
+ if (chair) return PINTADAS.includes(id + '-silla') ? {url: asset(`pose-${id}-silla`), frames: 1} : null;
+ if (PINTADAS.includes(id + '-pasos')) return {url: asset(`pasos-${id}`), frames: 6};
+ return PINTADAS.includes(id) ? {url: asset(`pose-${id}`), frames: 3} : null;
+}
+// How many drawings the way into a pose has: the dots of the step-by-step view.
+export const frameCount = (id, chair = false) => sheet(id, chair)?.frames ?? (chair ? 3 : 6);
 
 const f1 = n => Math.round(n * 10) / 10;
 const pt = p => `${f1(p[0])} ${f1(p[1])}`;
@@ -80,40 +88,48 @@ function chairMarkup(x) {
   <path d="M${x - 62} ${seat}H${x + 46}" stroke="${LINE}" stroke-width="15"/><path d="M${x - 62} ${seat}H${x + 46}" stroke="#d29455" stroke-width="10"/></g>`;
 }
 
-// Everything inside the 512×640 frame for one moment of a pose. t: 0 preparation, 1 half way, 2 pose.
-export function sceneMarkup(id, t, {chair = false} = {}) {
- const j = figureAt(id, t, {chair});
+// Everything inside the 512×640 frame for one moment of a pose. p: 0 preparation … 1 pose.
+export function sceneMarkup(id, p, {chair = false} = {}) {
+ const j = figureAt(id, p, {chair});
  const shadow = `<ellipse cx="${f1(chair ? 236 : (Math.min(j.a1[0], j.a2[0], j.w1[0], j.hip[0]) + Math.max(j.a1[0], j.a2[0], j.w1[0], j.hip[0])) / 2)}" cy="${FLOOR + 2}" rx="${chair ? 96 : 120}" ry="7" fill="#123f3b" opacity=".28"/>`;
  return (chair ? `<path d="M120 ${FLOOR + 12}H360" stroke="#7a5a34" stroke-width="3" opacity=".5"/>` : MAT) + shadow
   + (chair ? chairMarkup(236) : '') + `<g stroke-linecap="round" stroke-linejoin="round" fill="none">${bodyMarkup(j)}</g>`;
 }
 
-// A live drawing inside `host`. set(id, t, options) redraws it; it chooses painted art or the figure by itself.
+// Small still picture of the finished pose, painted or provisional.
+export function thumbMarkup(id) {
+ const art = sheet(id);
+ return art ? `<span class="thumb painted${art.frames > COLS ? ' pasos' : ''}" style="background-image:url('${art.url}')"></span>`
+  : `<svg class="thumb" viewBox="16 150 480 470" aria-hidden="true">${sceneMarkup(id, 1)}</svg>`;
+}
+
+// A live drawing inside `host`. set(id, p, options) redraws it; it chooses painted art or the figure by itself.
 export function createFigure(host, {label = ''} = {}) {
  host.innerHTML = `<svg class="pose-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${label}"><g class="pose-flip"></g></svg>`;
  const svg = host.firstElementChild, layer = svg.firstElementChild;
  let current = '';
  return {
   svg,
-  set(id, t, {chair = false, mirror = false, name = ''} = {}) {
+  set(id, p, {chair = false, mirror = false, name = ''} = {}) {
    layer.setAttribute('transform', mirror ? `translate(${W} 0) scale(-1 1)` : '');
    if (name) svg.setAttribute('aria-label', name);
-   if (painted(id, chair)) {
-    const key = id + chair;
-    if (current !== key) {
-     current = key;
-     layer.innerHTML = chair
-      ? `<image href="${sheetUrl(id, true)}" width="${W}" height="${H}"/>`
-      : [0, 1, 2].map(i => `<svg x="0" y="0" width="${W}" height="${H}" viewBox="${i * W} 0 ${W} ${H}"><image href="${sheetUrl(id)}" width="${W * 3}" height="${H}"/></svg>`).join('');
-    }
-    // Blend adjacent drawings during the transition and show only the held pose at rest.
-    if (!chair) [...layer.children].forEach((frame, i) => {
-     frame.setAttribute('opacity', f1(Math.max(0, 1 - Math.abs(t - i))));
-    });
+   const art = sheet(id, chair);
+   if (!art) {
+    current = '';
+    layer.innerHTML = sceneMarkup(id, p, {chair});
     return;
    }
-   current = '';
-   layer.innerHTML = sceneMarkup(id, t, {chair});
+   if (current !== art.url) {
+    current = art.url;
+    const rows = Math.ceil(art.frames / COLS);
+    layer.innerHTML = Array.from({length: art.frames}, (_, i) => `<svg x="0" y="0" width="${W}" height="${H}" viewBox="${i % COLS * W} ${Math.floor(i / COLS) * H} ${W} ${H}"><image href="${art.url}" width="${W * Math.min(COLS, art.frames)}" height="${H * rows}"/></svg>`).join('');
+   }
+   // Dissolve between neighbouring drawings: the one that leaves stays solid until the next one is solid too,
+   // so the figure never turns see-through half way.
+   const at = Math.max(0, Math.min(1, p)) * (art.frames - 1), from = Math.min(Math.max(0, art.frames - 2), Math.floor(at)), part = at - from;
+   [...layer.children].forEach((frame, i) => {
+    frame.setAttribute('opacity', i === from ? Math.min(1, 2 - 2 * part).toFixed(2) : i === from + 1 ? Math.min(1, 2 * part).toFixed(2) : 0);
+   });
   },
  };
 }

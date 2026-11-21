@@ -29,9 +29,12 @@
      </nav>
     </header>
 
-    <!-- Learn: the twelve pose cards. -->
+    <!-- Learn: the pose cards, by family. -->
     <section id="v-aprender" class="view" aria-labelledby="t-aprender">
-     <h2 id="t-aprender" class="view-title">Doce posturas <span lang="en">· Twelve poses</span></h2>
+     <div class="view-head">
+      <h2 id="t-aprender" class="view-title"></h2>
+      <div id="families" class="families" role="group" aria-label="Familias de posturas"></div>
+     </div>
      <ul id="poses" class="pose-grid"></ul>
     </section>
 
@@ -41,6 +44,7 @@
       <div class="paper palette-box">
        <h2>Posturas</h2>
        <p class="fine">Pulsa una postura para ponerla al final de la fila.</p>
+       <div id="palette-families" class="families small" role="group" aria-label="Familias de posturas"></div>
        <ul id="palette" class="palette"></ul>
       </div>
       <div class="paper sequence-box">
@@ -68,7 +72,7 @@
        </div>
        <form id="code-form" class="code-form">
         <label for="code-input">¿Tienes el código de otra secuencia?</label>
-        <div><input id="code-input" maxlength="30" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="MSUD-TM">
+        <div><input id="code-input" maxlength="60" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="MSUD-TM">
         <button class="sign" value="open"><strong>Abrir</strong></button><button class="sign" value="append"><strong>Añadir al final</strong></button></div>
        </form>
       </div>
@@ -145,6 +149,7 @@
   <div class="card-layout">
    <div class="card-figure">
     <div id="card-figure" class="figure-box"></div>
+    <ol id="card-dots" class="dots" aria-label="Paso a paso"></ol>
     <p id="card-phase" class="phase" aria-live="polite"></p>
     <div class="card-buttons">
      <button type="button" id="card-play" class="sign gold"><strong>Ver cómo se entra y se sale</strong></button>
@@ -155,6 +160,7 @@
     <p class="eyebrow" id="card-num"></p>
     <h2 id="card-es"></h2>
     <p class="en" lang="en" id="card-en"></p>
+    <p id="card-level" class="level"></p>
     <h3>Cómo se entra</h3>
     <ol id="card-steps" class="steps"></ol>
     <h3>Cómo se sale</h3>

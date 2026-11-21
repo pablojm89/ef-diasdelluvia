@@ -62,10 +62,10 @@ export function blend(a, b, t) {
 }
 
 export const ease = t => t * t * (3 - 2 * t);
-// t runs from 0 (preparation) through 1 (half way) to 2 (the pose).
-export function frameAt(frames, t) {
- const clamped = Math.max(0, Math.min(frames.length - 1, t)), i = Math.min(frames.length - 2, Math.floor(clamped));
- return blend(frames[i], frames[i + 1], ease(clamped - i));
+// p runs from 0 (preparation) to 1 (the pose), through every keyframe in between.
+export function frameAt(frames, p) {
+ const at = Math.max(0, Math.min(1, p)) * (frames.length - 1), i = Math.min(frames.length - 2, Math.floor(at));
+ return blend(frames[i], frames[i + 1], ease(at - i));
 }
 
 // --- Keyframes ---------------------------------------------------------------------
@@ -74,6 +74,13 @@ const STAND_FRONT = {view: 1, torso: 0, a1: [172, 176], a2: [188, 184], l1: [176
 const STAND_SIDE = {torso: 0, a1: [182, 178], a2: [176, 182], l1: [180, 180, 90], l2: [180, 180, 90]};
 const TABLE = {torso: 75, head: 96, a1: [180, 180], a2: [180, 180], l1: [180, 270, 270], l2: [180, 270, 270]};
 export const SITTING = {seat: true, torso: 0, a1: [172, 112], a2: [168, 116], l1: [90, 180, 90], l2: [92, 182, 90]};
+// Sitting on the heels, kneeling tall, sitting on the floor with the knees up, lying on the back and on the tummy.
+const KNEEL = {torso: 0, a1: [176, 150], a2: [172, 148], l1: [106, 270, 270], l2: [106, 270, 270]};
+const KNEEL_TALL = {torso: 0, a1: [182, 178], a2: [176, 182], l1: [180, 270, 270], l2: [180, 270, 270]};
+const SIT_KNEES = {torso: 350, a1: [135, 90, 1, .8], a2: [131, 88, 1, .8], l1: [50, 143, 90], l2: [48, 141, 90]};
+const LYING = {torso: 270, head: 270, a1: [94, 92], a2: [94, 92], l1: [35, 168, 90], l2: [33, 166, 90]};
+const PRONE = {torso: 90, head: 80, a1: [300, 150], a2: [296, 148], l1: [266, 268, 270], l2: [266, 268, 270]};
+const CROSS = {l1: [95, 262, 270, .62, 1], l2: [265, 98, 90, .62, 1]};
 
 export const FIGURES = {
  mountain: {anchor: 'hip', frames: [
@@ -138,6 +145,141 @@ export const FIGURES = {
   {torso: 48, head: 70, a1: [150, 120], a2: [146, 118], l1: [106, 270, 270], l2: [106, 270, 270]},
   {torso: 96, head: 100, a1: [100, 92], a2: [98, 92], l1: [106, 270, 270], l2: [106, 270, 270]},
  ], chair: {...SITTING, torso: 95, head: 150, a1: [178, 262], a2: [174, 258]}},
+ // --- Standing ---
+ star: {anchor: 'hip', frames: [
+  STAND_FRONT,
+  {...STAND_FRONT, a1: [110, 104], a2: [250, 256], l1: [166, 168, 100], l2: [194, 192, 260]},
+  {...STAND_FRONT, a1: [56, 54], a2: [304, 306], l1: [157, 157, 100], l2: [203, 203, 260]},
+ ], chair: {...SITTING, a1: [34, 32], a2: [22, 20], l1: [96, 145, 60], l2: [94, 143, 60]}},
+ ragdoll: {anchor: 'a1', x: 236, frames: [
+  STAND_SIDE,
+  {torso: 70, head: 95, a1: [178, 180], a2: [182, 180], l1: [176, 183, 90], l2: [176, 183, 90]},
+  {torso: 138, head: 160, a1: [172, 250], a2: [186, 110], l1: [174, 185, 90], l2: [174, 185, 90]},
+ ], chair: {...SITTING, torso: 85, head: 125, a1: [150, 215], a2: [146, 211]}},
+ crescent: {anchor: 'hip', frames: [
+  STAND_FRONT,
+  {...STAND_FRONT, a1: [12, 4], a2: [348, 356]},
+  {...STAND_FRONT, torso: 20, head: 24, a1: [32, 26], a2: [10, 20]},
+ ], chair: {...SITTING, torso: 12, head: 16, a1: [20, 24], a2: [200, 170]}},
+ goddess: {anchor: 'hip', frames: [
+  STAND_FRONT,
+  {view: 1, torso: 0, a1: [120, 60], a2: [240, 300], l1: [150, 172, 100], l2: [210, 188, 260]},
+  {view: 1, torso: 0, a1: [90, 0], a2: [270, 0], l1: [118, 180, 100], l2: [242, 180, 260]},
+ ], chair: {...SITTING, a1: [80, 0], a2: [76, 356], l1: [84, 176, 90], l2: [92, 182, 90]}},
+ peaceful: {anchor: 'hip', frames: [
+  STAND_FRONT,
+  {view: 1, torso: 0, head: 6, a1: [90, 90], a2: [270, 270], l1: [110, 180, 90], l2: [228, 228, 260]},
+  {view: 1, torso: 346, head: 352, a1: [356, 344], a2: [200, 205], l1: [110, 180, 90], l2: [228, 228, 260]},
+ ], chair: {...SITTING, torso: 352, head: 356, a1: [10, 350], a2: [200, 170]}},
+ frog: {anchor: 'hip', frames: [
+  {...STAND_FRONT, l1: [170, 174, 100], l2: [190, 186, 260]},
+  {view: 1, torso: 0, a1: [158, 292], a2: [202, 68], l1: [135, 190, 105], l2: [225, 170, 255]},
+  {view: 1, torso: 0, a1: [150, 300], a2: [210, 60], l1: [75, 200, 110, .85, 1], l2: [285, 160, 250, .85, 1]},
+ ], chair: {...SITTING, torso: 10, a1: [150, 30], a2: [146, 28], l1: [84, 176, 90], l2: [92, 182, 90]}},
+ // --- Balance ---
+ flamingo: {anchor: 'a2', x: 250, frames: [
+  STAND_SIDE,
+  {torso: 0, a1: [200, 160], a2: [196, 158], l1: [140, 190, 110], l2: [180, 180, 90]},
+  {torso: 0, a1: [200, 160], a2: [196, 158], l1: [92, 180, 110], l2: [180, 180, 90]},
+ ], chair: {...SITTING, a1: [200, 160], a2: [196, 158], l1: [60, 170, 100]}},
+ airplane: {anchor: 'a1', x: 270, frames: [
+  STAND_SIDE,
+  {torso: 32, head: 36, a1: [222, 226], a2: [218, 222], l1: [180, 180, 90], l2: [208, 208, 120]},
+  {torso: 66, head: 62, a1: [254, 256], a2: [250, 252], l1: [180, 180, 90], l2: [246, 246, 150]},
+ ], chair: {...SITTING, torso: 30, head: 36, a1: [228, 232], a2: [224, 228], l1: [92, 180, 90], l2: [96, 145, 60]}},
+ eagle: {anchor: 'a2', frames: [
+  {...STAND_FRONT, a1: [165, 292], a2: [195, 68]},
+  {view: 1, torso: 0, a1: [170, 330, 1, .8], a2: [190, 30, 1, .8], l1: [176, 184, 100, .95, .95], l2: [184, 176, 260, .95, .95]},
+  {view: 1, torso: 0, a1: [200, 355, .75, .85], a2: [160, 5, .75, .85], l1: [212, 186, 200, .95, .9], l2: [186, 174, 260, .93, .93]},
+ ], chair: {...SITTING, a1: [150, 20], a2: [146, 16], l1: [80, 186, 90], l2: [92, 180, 90]}},
+ dancer: {anchor: 'a1', x: 280, frames: [
+  STAND_SIDE,
+  {torso: 8, a1: [20, 14], a2: [210, 210], l1: [180, 180, 90], l2: [195, 345, 300]},
+  {torso: 15, head: 10, a1: [34, 30], a2: [224, 224, 1.17, 1.17], l1: [180, 180, 90], l2: [205, 338, 300]},
+ ], chair: {...SITTING, torso: 4, a1: [20, 14], a2: [210, 210, 1.08, 1.08], l2: [190, 335, 290]}, chairStart: {l2: [190, 335, 290]}},
+ // --- Hands and knees ---
+ birddog: {anchor: 'k1', x: 250, frames: [
+  TABLE,
+  {...TABLE, a1: [130, 110], l2: [215, 268, 270]},
+  {...TABLE, head: 90, a1: [80, 78], l2: [264, 266, 262]},
+ ], chair: {...SITTING, a1: [86, 84], l2: [96, 100, 30]}},
+ plank: {anchor: 'w1', x: 392, frames: [
+  TABLE,
+  {torso: 73, head: 88, a1: [180, 180], a2: [180, 180], l1: [251, 251, 180], l2: [180, 270, 270]},
+  {torso: 71, head: 84, a1: [180, 180], a2: [180, 180], l1: [251, 251, 180], l2: [251, 251, 180]},
+ ], chair: {...SITTING, torso: 352, a1: [84, 84], a2: [80, 80], l1: [96, 145, 60], l2: [94, 143, 60]}},
+ crab: {anchor: 'a1', x: 380, frames: [
+  {torso: 340, head: 350, a1: [207, 207], a2: [203, 203], l1: [50, 143, 90], l2: [50, 143, 90]},
+  {torso: 314, head: 330, a1: [194, 194], a2: [190, 190], l1: [70, 162, 90], l2: [70, 162, 90]},
+  {torso: 288, head: 312, a1: [180, 180], a2: [178, 178], l1: [90, 180, 90], l2: [90, 180, 90]},
+ ], chair: {...SITTING, torso: 348, head: 356, a1: [200, 176], a2: [196, 172], l1: [96, 145, 60], l2: [94, 143, 60]}},
+ // --- Kneeling and sitting ---
+ lunge: {anchor: 'k2', x: 170, frames: [
+  KNEEL_TALL,
+  {torso: 2, a1: [150, 110], a2: [146, 108], l1: [92, 182, 90], l2: [196, 268, 270]},
+  {torso: 4, a1: [8, 4], a2: [4, 0], l1: [80, 180, 90], l2: [220, 268, 270]},
+ ], chair: {...SITTING, a1: [150, 110], a2: [146, 108], l1: [92, 180, 90], l2: [241, 241, 100]}, chairStart: {l2: [241, 241, 100]}},
+ gate: {anchor: 'k2', x: 226, frames: [
+  {view: 1, torso: 0, a1: [172, 176], a2: [188, 184], l1: [180, 90, 90, 1, .2], l2: [180, 270, 270, 1, .2]},
+  {view: 1, torso: 0, a1: [100, 96], a2: [260, 264], l1: [124, 124, 90], l2: [180, 270, 270, 1, .2]},
+  {view: 1, torso: 24, head: 22, a1: [150, 136], a2: [22, 44], l1: [120, 120, 90], l2: [180, 270, 270, 1, .2]},
+ ], chair: {...SITTING, torso: 14, head: 12, a1: [140, 120], a2: [14, 30], l1: [96, 145, 60]}},
+ lion: {anchor: 'k1', x: 300, frames: [
+  KNEEL,
+  {...KNEEL, torso: 12, head: 14, a1: [166, 150], a2: [162, 148]},
+  {...KNEEL, torso: 25, head: 34, a1: [160, 160, 1.05, 1.05], a2: [156, 158, 1.05, 1.05]},
+ ], chair: {...SITTING, torso: 14, head: 24, a1: [150, 118], a2: [146, 116]}},
+ pinza: {anchor: 'hip', x: 170, frames: [
+  {torso: 0, a1: [150, 96, 1, .8], a2: [146, 94, 1, .8], l1: [88, 99, 10], l2: [88, 99, 10]},
+  {torso: 8, a1: [20, 14], a2: [16, 10], l1: [88, 99, 10], l2: [88, 99, 10]},
+  {torso: 52, head: 64, a1: [115, 118], a2: [113, 116], l1: [88, 99, 10], l2: [88, 99, 10]},
+ ], chair: {...SITTING, torso: 48, head: 60, a1: [112, 118], a2: [110, 116], l1: [96, 145, 60], l2: [94, 143, 60]}},
+ boat: {anchor: 'hip', x: 226, frames: [
+  SIT_KNEES,
+  {torso: 338, head: 350, a1: [112, 92, 1, .8], a2: [110, 90, 1, .8], l1: [50, 120, 70], l2: [50, 120, 70]},
+  {torso: 332, head: 346, a1: [90, 88], a2: [88, 86], l1: [48, 92, 60], l2: [46, 90, 60]},
+ ], chair: {...SITTING, torso: 346, head: 354, a1: [150, 176], a2: [146, 172], l1: [70, 150, 80], l2: [68, 148, 80]}},
+ twist: {anchor: 'hip', frames: [
+  {view: 1, torso: 0, a1: [168, 186], a2: [192, 174], ...CROSS},
+  {view: .8, torso: 0, a1: [150, 176], a2: [170, 140], ...CROSS},
+  {view: .45, torso: 0, head: 4, a1: [125, 172, 1, 1.2], a2: [146, 146, 1.08, 1.08], ...CROSS},
+ ], chair: {...SITTING, head: 356, a1: [215, 200], a2: [150, 110]}},
+ // --- Lying down ---
+ sphinx: {anchor: 'p1', x: 250, frames: [
+  PRONE,
+  {torso: 80, head: 70, a1: [200, 100, .85, 1], a2: [196, 98, .85, 1], l1: [266, 268, 270], l2: [266, 268, 270]},
+  {torso: 65, spine: -.35, head: 44, a1: [180, 90, .85, 1], a2: [178, 88, .85, 1], l1: [266, 268, 270], l2: [266, 268, 270]},
+ ], chair: {...SITTING, torso: 14, spine: -.5, head: 20, a1: [150, 96], a2: [146, 94]}},
+ locust: {anchor: 'p1', x: 270, frames: [
+  {torso: 90, head: 84, a1: [268, 266], a2: [268, 266], l1: [266, 268, 270], l2: [266, 268, 270]},
+  {torso: 84, head: 76, a1: [274, 274], a2: [272, 272], l1: [270, 272, 270], l2: [268, 270, 270]},
+  {torso: 77, spine: -.3, head: 62, a1: [282, 284], a2: [280, 282], l1: [277, 279, 276], l2: [275, 277, 274]},
+ ], chair: {...SITTING, torso: 18, head: 24, a1: [215, 225], a2: [211, 221]}},
+ bridge: {anchor: 'a1', x: 404, frames: [
+  LYING,
+  {torso: 263, head: 270, a1: [96, 94], a2: [96, 94], l1: [48, 174, 90], l2: [48, 174, 90]},
+  {torso: 257, head: 270, a1: [99, 99], a2: [99, 99], l1: [60, 180, 90], l2: [60, 180, 90]},
+ ], chair: {...SITTING, torso: 356, spine: -.5, head: 8, a1: [190, 176], a2: [186, 172]}},
+ happybaby: {anchor: 'hip', x: 330, frames: [
+  LYING,
+  {torso: 270, head: 270, a1: [40, 100], a2: [38, 98], l1: [300, 100, 90], l2: [298, 98, 90]},
+  {torso: 270, head: 270, a1: [8, 8], a2: [6, 6], l1: [290, 0, 90], l2: [288, 358, 90]},
+ ], chair: {...SITTING, torso: 15, head: 20, a1: [138, 138, 1.09, 1.09], a2: [134, 134, 1.09, 1.09], l1: [40, 140, 70]}},
+ ball: {anchor: 'hip', x: 330, frames: [
+  LYING,
+  {torso: 270, head: 270, a1: [70, 96], a2: [68, 94], l1: [345, 130, 90], l2: [343, 128, 90]},
+  {torso: 270, head: 270, a1: [40, 100], a2: [38, 98], l1: [300, 100, 90], l2: [298, 98, 90]},
+ ], chair: {...SITTING, torso: 4, a1: [135, 80, 1, .5], a2: [131, 76, 1, .5], l1: [50, 160, 90]}},
+ lyingtwist: {anchor: 'hip', x: 320, frames: [
+  LYING,
+  {torso: 270, head: 270, a1: [40, 20], a2: [94, 92], l1: [345, 130, 90], l2: [343, 128, 90]},
+  {torso: 270, head: 270, a1: [10, 350, .8, .8], a2: [94, 92], l1: [62, 118, 100, .55, .9], l2: [56, 112, 100, .5, .9]},
+ ], chair: {...SITTING, a1: [140, 100], a2: [136, 96], l1: [82, 168, 100]}},
+ rest: {anchor: 'hip', x: 290, frames: [
+  SIT_KNEES,
+  {torso: 305, head: 300, a1: [200, 100], a2: [196, 98], l1: [70, 118, 60], l2: [70, 118, 60]},
+  {torso: 270, head: 270, a1: [100, 96], a2: [100, 96], l1: [93, 94, 30], l2: [91, 92, 30]},
+ ], chair: {...SITTING, torso: 356, head: 350, a1: [176, 100, 1, .8], a2: [172, 98, 1, .8], l1: [94, 160, 80], l2: [92, 162, 80]}},
  // Cool-down at the end of a practice: sitting cross-legged, hands to the tummy.
  calma: {anchor: 'hip', frames: [
   {view: 1, torso: 0, a1: [168, 186], a2: [192, 174], l1: [95, 262, 270, .62, 1], l2: [265, 98, 90, .62, 1]},
@@ -150,6 +292,10 @@ export const FIGURES = {
 export const SUPPORTS = {
  mountain: ['a1', 'a2'], tree: ['a2'], chair: ['a1', 'a2'], warrior1: ['a1', 'a2'], warrior2: ['a1', 'a2'], triangle: ['a1', 'a2'],
  cat: ['w1', 'k1'], cow: ['w1', 'k1'], downdog: ['w1', 't1'], cobra: ['hip', 't1', 'w1'], butterfly: ['hip', 'a1', 'a2'], child: ['k1', 'head', 'w1'], calma: ['hip'],
+ star: ['a1', 'a2'], ragdoll: ['a1', 'a2'], crescent: ['a1', 'a2'], goddess: ['a1', 'a2'], peaceful: ['a1', 'a2'], frog: ['a1', 'a2'],
+ flamingo: ['a2'], airplane: ['a1'], eagle: ['a2'], dancer: ['a1'], birddog: ['w2', 'k1'], plank: ['w1', 't1'], crab: ['w1', 'a1'],
+ lunge: ['a1', 'k2'], gate: ['k2', 'a1'], lion: ['k1'], pinza: ['hip', 'a1'], boat: ['hip'], twist: ['hip'],
+ sphinx: ['hip', 'e1'], locust: ['hip'], bridge: ['a1', 'head'], happybaby: ['hip'], ball: ['hip'], lyingtwist: ['hip'], rest: ['hip', 'a1'],
 };
 
 // The chair variant starts from plain sitting, so it animates the same way: sit, half way, pose.
@@ -157,8 +303,8 @@ export function chairFrames(id) {
  const pose = FIGURES[id].chair, start = {...SITTING, ...FIGURES[id].chairStart};
  return [start, blend(start, pose, .5), pose];
 }
-export function figureAt(id, t, {chair = false} = {}) {
+export function figureAt(id, p, {chair = false} = {}) {
  const figure = FIGURES[id];
- if (chair) return place(frameAt(chairFrames(id), t), {anchor: 'hip', x: 236});
- return place(frameAt(figure.frames, t), {anchor: figure.anchor, x: figure.x ?? W / 2});
+ if (chair) return place(frameAt(chairFrames(id), p), {anchor: 'hip', x: 236});
+ return place(frameAt(figure.frames, p), {anchor: figure.anchor, x: figure.x ?? W / 2});
 }

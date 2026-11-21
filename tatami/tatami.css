@@ -10,7 +10,16 @@
 .tab:hover{background:#fff0c4;transform:translateY(-2px)}
 .tab[aria-current=page]{background:linear-gradient(#ffe29a,#f2bd57);border-color:#6b4a14}
 .view{margin-top:clamp(16px,3dvh,28px)}
-.view-title{margin-bottom:12px}
+.view-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 20px;margin-bottom:14px}
+.view-title{margin:0}
+.families{display:flex;flex-wrap:wrap;gap:8px}
+.family{display:grid;justify-items:center;padding:6px 14px 5px;border:2px solid #b9a06a;border-radius:6px;background:#fff8e6;color:#2f2819;line-height:1.15}
+.family strong{font:700 1rem/1.15 var(--serif)}
+.family small{font-size:.72rem;font-style:italic;color:#1f5753}
+.family:hover{background:#fff}
+.family[aria-pressed=true]{background:var(--teal);border-color:#0f2d2b;color:#fff}
+.family[aria-pressed=true] small{color:#ffe29a}
+.families.small{margin-top:10px;gap:6px}.families.small .family{padding:4px 9px}.families.small .family strong{font-size:.88rem}.families.small .family small{display:none}
 .view-title span{font-style:italic;color:#1f5753}
 .wall h3,#card h3{margin:14px 0 4px;font:700 .74rem/1.2 'Trebuchet MS',system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a6230}
 
@@ -19,6 +28,8 @@
 .pose-svg{display:block;width:100%;height:100%}
 .thumb{display:block;width:100%;aspect-ratio:480/470}
 .thumb.painted{background-size:300% auto;background-position:100% 72%;background-repeat:no-repeat}
+/* Six-drawing sheets have two rows: the finished pose is the last drawing of the second one. */
+.thumb.painted.pasos{background-position:100% 95%}
 
 /* Learn: cards that look like the cream posters of the gym. */
 .pose-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:clamp(12px,2vw,20px)}
@@ -34,7 +45,12 @@
 .card-layout{clear:both;display:grid;grid-template-columns:minmax(220px,380px) minmax(0,1fr);gap:clamp(16px,3vw,32px)}
 .card-figure{display:grid;align-content:start;gap:8px}
 .card-figure .figure-box{border-radius:10px;overflow:hidden;background:linear-gradient(#f8e3c4,#f1cd9d 70%,#2c7570 70%,#1f5753 82%,#b06a32 82%,#d08a48);border:2px solid #c9a769}
+.dots{display:flex;justify-content:center;gap:8px;margin:0;padding:0;list-style:none}
+.dots button{display:grid;place-items:center;width:34px;height:34px;padding:0;border:2px solid #b9a06a;border-radius:50%;background:#fff8e6;color:#2f2819;font-weight:800;font-size:.9rem}
+.dots button:hover{background:#fff}
+.dots button[aria-current=true]{background:var(--teal);border-color:#0f2d2b;color:#fff}
 .phase{min-height:1.5em;text-align:center;font-weight:800;color:#1f5753}
+.level{margin-top:4px;font-weight:700;color:#7a6230}.level .pips{letter-spacing:.12em;color:#b3542a}
 .card-buttons{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 16px}
 .card-text h2{margin:2px 0 0}
 .en{font:italic 600 1.2rem/1.2 var(--serif);color:#1f5753}
@@ -147,7 +163,7 @@ body.practising{overflow:hidden}
 .stage.paused .stage-card{outline:4px dashed var(--gold);outline-offset:6px}
 
 @media(max-width:860px){
- .builder{grid-template-columns:1fr}
+ .builder{grid-template-columns:minmax(0,1fr)}
  .card-layout{grid-template-columns:1fr}
  .card-figure .figure-box{width:min(260px,70%);margin:0 auto}
  .choice{grid-template-columns:1fr auto}
