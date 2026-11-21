@@ -96,6 +96,12 @@ svg {fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-li
 .risk-mat.flagged {filter:drop-shadow(0 0 3px #ffb35c) drop-shadow(0 0 6px #ff9a3c)}
 .help-sign {position:absolute;z-index:4;left:42%;top:37.6%;transform:translate(-50%,-50%);display:grid;margin:0;padding:3px 8px;border:1px solid var(--wood);border-top:4px solid #c2552c;border-radius:3px;background:#f3e2b8;color:#332c20;box-shadow:0 2px 3px #32241277;font:clamp(9px,1.4vh,14px)/1.15 Georgia,serif;text-align:center;white-space:nowrap}
 .help-sign b {font-size:1.05em}
+/* Painted: a hanging plate with the pictogram on its left half and the words on the right. */
+body.con-help-sign .help-sign {width:13.5%;aspect-ratio:240/140;padding:2.2% .7% .6% 6%;border:0;border-radius:0;background:url(assets/help-sign.webp) center/100% 100%;box-shadow:none;align-content:center;white-space:normal;font-size:clamp(7px,1.15vh,12px);line-height:1.1;filter:drop-shadow(0 2px 2px #32241266)}
+/* The teacher with the mat he has taken down, in front of the low platform where it belongs. */
+.prof-mat {position:absolute;z-index:3;left:80%;top:94%;height:37%;width:auto;transform:translate(-50%,-100%);pointer-events:none;filter:drop-shadow(1px 3px 2px #221c1f50)}
+/* Painted paper for the speech bubble and the small cream signs. */
+body.con-paper :is(.bubble,.look) {background:var(--paper) url(assets/paper.webp) 0 0/256px 256px}
 
 /* Top of the screen: the way back, where we are and the game buttons. */
 .hud-top {position:absolute;z-index:8;top:0;left:0;right:0;display:flex;align-items:flex-start;gap:12px;padding:max(10px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 0 max(12px,env(safe-area-inset-left));pointer-events:none}

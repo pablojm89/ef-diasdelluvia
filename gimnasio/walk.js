@@ -1,3 +1,4 @@
+import {PINTADOS} from './assets/pintados.js';
 const names = ['Vega', 'Kai', 'Lúa', 'Neo', 'Ada', 'Max', 'Nora', 'Leo'];
 const camera = document.getElementById('camera');
 const scene = document.getElementById('world');
@@ -10,18 +11,20 @@ const reduced = () => document.body.classList.contains('reduced') || matchMedia(
 const sheets = new Map();
 const arrows = new Set();
 let room, goal, frame, previousTime, speed = 0, phase = 0;
-let x = .5, y = .85, facing = 1, walking = false, avatar = 0;
+let x = .5, y = .85, facing = 1, walking = false, avatar = 0, bentUntil = 0, straighten;
 
 function selectAvatar(index) {
  avatar = index;
  if (!sheets.has(index)) {
   const poses = {};
   sheets.set(index, poses);
-  for (const type of ['pupil', 'walk']) {
+  // The bend to pick something up comes with the painted set; without it the pupil stays upright.
+  const types = PINTADOS.includes('pupil-' + index + '-reach') ? ['pupil', 'walk', 'reach'] : ['pupil', 'walk'];
+  for (const type of types) {
    const image = new Image();
    poses[type] = image;
    image.onload = () => draw();
-   image.src = 'assets/' + type + '-' + index + '.webp';
+   image.src = type === 'reach' ? 'assets/pupil-' + index + '-reach.webp' : 'assets/' + type + '-' + index + '.webp';
   }
  }
  draw();
@@ -50,7 +53,8 @@ function heightAt(depth) { return .26 + (depth - .79) * .48; }
 function draw(centerCamera = false) {
  const poses = sheets.get(avatar);
  const moving = walking && poses?.walk.naturalWidth && !reduced();
- const image = moving ? poses.walk : poses?.pupil;
+ const bent = !moving && performance.now() < bentUntil && poses?.reach?.naturalWidth;
+ const image = moving ? poses.walk : bent ? poses.reach : poses?.pupil;
  const w = sprite.width, h = sprite.height;
  ctx.clearRect(0, 0, w, h);
  if (image?.naturalWidth) {
@@ -135,6 +139,15 @@ function start() {
 }
 
 export const position = () => ({x, y});
+
+// Bend the knees to take or leave something, then stand up again.
+export function reach() {
+ if (reduced()) return;
+ bentUntil = performance.now() + 620;
+ clearTimeout(straighten);
+ straighten = setTimeout(() => draw(), 640);
+ draw();
+}
 
 export function walkTo(nextX, nextY, arrived, faceOnArrival) {
  arrows.clear();

@@ -1,6 +1,10 @@
 /* La Grada: the gym wall holds up to four framed matches. The match keeps its pixel art; the frame is the school's. */
 body{height:100dvh;overflow:hidden}
-.grada{min-height:0}
+.grada{position:relative;min-height:0;
+ /* The painted wall. Its own tile frieze is cropped off the top: the page already has one, with the code shelf under it. */
+ background:#e9b783 url('./assets/fondo.webp') center bottom/100% 107%}
+/* The class watching from the stands, in front of the wall's wooden ledge. */
+.crowd{flex:none;height:var(--crowd);margin-top:calc(var(--crowd)*-.35);position:relative;z-index:3;background:url('./assets/publico.webp') center bottom/auto 200% repeat-x;pointer-events:none;--crowd:clamp(30px,7dvh,84px)}
 
 /* A wooden shelf with the code input. */
 .bar{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:8px clamp(12px,3vw,32px);background:linear-gradient(#94653a,#7a4f29);border-bottom:3px solid #4a2f14;box-shadow:0 3px 8px #3a24124d;color:var(--cream)}
@@ -15,7 +19,7 @@ body{height:100dvh;overflow:hidden}
 
 /* Empty wall: the teacher points at the box. */
 .empty{flex:1;display:flex;align-items:flex-end;justify-content:center;gap:clamp(8px,3vw,36px);padding:clamp(12px,3dvh,32px) 16px 0;min-height:0}
-.empty img{flex:none;width:auto;height:min(52dvh,330px);filter:drop-shadow(0 8px 10px #5a3a1a66)}
+.empty img{flex:none;width:auto;height:min(58dvh,420px);filter:drop-shadow(0 8px 10px #5a3a1a66)}
 .empty .paper{align-self:center;max-width:520px}
 .empty h1{margin:4px 0 6px;text-align:left}
 
@@ -23,30 +27,39 @@ body{height:100dvh;overflow:hidden}
 .mosaic{flex:1;min-height:0;display:grid;gap:clamp(8px,1.4vw,18px);padding:clamp(8px,1.6dvh,18px) clamp(8px,1.6vw,22px);grid-template-columns:1fr;grid-auto-rows:minmax(0,1fr)}
 body[data-count="2"] .mosaic,body[data-count="3"] .mosaic,body[data-count="4"] .mosaic{grid-template-columns:1fr 1fr}
 
-.tile{container-type:size;position:relative;min-width:0;min-height:0;display:flex;flex-direction:column;border:clamp(4px,1.1cqmin,9px) solid #8a5a2b;border-radius:8px;background:#0e1c30;box-shadow:0 0 0 2px #4a2f14,inset 0 0 0 2px #c79a5a,0 10px 24px #5a3a1a77;overflow:hidden}
+/* Each match hangs in a painted wooden frame. */
+.tile{container-type:size;position:relative;min-width:0;min-height:0;display:flex;flex-direction:column;border:clamp(10px,1.3vw,22px) solid #b87a3a;border-image:url('./assets/marco.webp') 24 stretch;background:#0e1c30;box-shadow:0 12px 26px #5a3a1a88;overflow:hidden}
 
 .frame{display:flex;flex-direction:column;width:100%;height:100%}
 
-/* Scoreboard: a cream plate on top of the match, or down its left side when the tile is wide. */
-.board{flex:none;position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2cqw;padding:.7cqh 2.4cqw;background:linear-gradient(#fff6de,#efdcae);border-bottom:2px solid var(--wood);color:#2f2819}
-.side{display:flex;align-items:center;gap:1.6cqw;min-width:0}
-.side-1{justify-content:flex-end}
-.team-name{font-size:clamp(.6rem,3.6cqh,1.6rem);font-weight:900;letter-spacing:.12em}
-.side-0 .team-name{color:#197c86}.side-1 .team-name{color:#a6454a}
-.score{min-width:1.3em;padding:0 .25em;border-radius:6px;background:#1f3b39;color:#fff3d9;font:700 clamp(1.2rem,9cqh,4.6rem)/1.1 var(--serif);text-align:center;font-variant-numeric:tabular-nums}
-.middle{display:grid;justify-items:center;line-height:1.05;text-align:center}
-.room-code{display:flex;align-items:center;gap:.4em;font-size:clamp(.5rem,2.4cqh,.95rem);font-weight:800;letter-spacing:.14em;color:#7a6230}
+/* Scoreboard on top of the match: team names on cream paper and, between them, the painted plate with the two
+   scores in its slate slots and the clock in the middle. When the tile is wide it goes down the left side instead. */
+.board{flex:none;position:relative;display:flex;align-items:center;justify-content:center;gap:2.4cqw;padding:.6cqh 2cqw;background:linear-gradient(#fff6de,#efdcae);border-bottom:2px solid var(--wood);color:#2f2819}
+.team-name{flex:1;min-width:0;font-size:clamp(.55rem,min(3.2cqh,2.6cqw),1.5rem);font-weight:900;letter-spacing:.08em}
+.team-0{color:#197c86;text-align:right}.team-1{color:#a6454a}
+/* The plate image has chains above and a margin below: they are cropped so the slots stay as big as possible. */
+.plate{flex:none;position:relative;width:min(58cqw,88cqh);aspect-ratio:720/106;container-type:inline-size;background:url('./assets/marcador.webp') center 47%/100% 151%}
+.plate>*{position:absolute;top:19%;bottom:19%;display:grid;place-items:center}
+.plate .score{left:8.2%;width:20%;font:700 clamp(1rem,8cqw,3.8rem)/1 var(--serif);color:#fff3d9;font-variant-numeric:tabular-nums}
+.plate .score:last-child{left:71.8%}
+.plate .middle{left:32.6%;width:34.8%;align-content:center;line-height:1;text-align:center}
+.score{text-align:center}
+.room-code{display:flex;align-items:center;gap:.4em;font-size:clamp(.4rem,2cqw,.8rem);font-weight:800;letter-spacing:.14em;color:#7a6230}
 .tile[data-status=playing] .room-code::before{content:'';width:.7em;height:.7em;border-radius:50%;background:#c8412d;box-shadow:0 0 0 2px #c8412d44;animation:live 1.6s infinite}
 @keyframes live{50%{opacity:.35}}
-.timer{font:700 clamp(1.1rem,7.4cqh,3.6rem)/1.05 'Trebuchet MS',system-ui,sans-serif;font-variant-numeric:tabular-nums;color:#1f3b39}
-.round{font-size:clamp(.5rem,2.2cqh,.9rem);font-weight:800;letter-spacing:.1em;color:#5a4a2a}
+.timer{font:700 clamp(.85rem,5.4cqw,2.6rem)/1 'Trebuchet MS',system-ui,sans-serif;font-variant-numeric:tabular-nums;color:#1f3b39}
+.round{font-size:clamp(.38rem,1.8cqw,.75rem);font-weight:800;letter-spacing:.1em;color:#5a4a2a;white-space:nowrap}
 @container (min-aspect-ratio:17/10){
  .frame{flex-direction:row}
- .board{width:clamp(130px,19cqw,300px);grid-template-columns:1fr;grid-template-rows:1fr auto 1fr;gap:2cqh;padding:3cqh 1.4cqw;border-bottom:0;border-right:2px solid var(--wood)}
- .side,.side-1{flex-direction:column;justify-content:center;gap:1cqh}
- .side-1{flex-direction:column-reverse}
- .team-name{font-size:clamp(.6rem,4.4cqh,1.7rem)}
- .score{font-size:clamp(1.4rem,15cqh,6.5rem)}
+ /* Down the side there is no room for the plate: plain cream paper with the biggest numbers. */
+ .board{width:clamp(130px,19cqw,300px);flex-direction:column;gap:1.6cqh;padding:3cqh 1.4cqw;border-bottom:0;border-right:2px solid var(--wood)}
+ .team-name,.team-0{flex:none;text-align:center;font-size:clamp(.6rem,4.4cqh,1.7rem)}
+ .team-0{order:-2}.team-1{order:2}
+ .plate{display:contents;container-type:normal}
+ .plate>*{position:static}
+ .plate .score{order:-1;width:auto;min-width:1.3em;padding:0 .25em;border-radius:6px;background:#1f3b39;font-size:clamp(1.4rem,15cqh,6.5rem);line-height:1.1}
+ .plate .score:last-child{order:1}
+ .plate .middle{width:auto;justify-items:center;line-height:1.05}
  .timer{font-size:clamp(1.1rem,10cqh,4.4rem)}
  .room-code,.round{font-size:clamp(.5rem,3cqh,1rem)}
 }
@@ -109,7 +122,9 @@ body[data-count="2"] .mosaic,body[data-count="3"] .mosaic,body[data-count="4"] .
  .mosaic,body[data-count] .mosaic{grid-template-columns:1fr;grid-auto-rows:auto}
  .tile{container-type:inline-size;aspect-ratio:1200/900}
  .board{padding:4px 10px}
- .team-name{font-size:.7rem}.score{font-size:1.5rem}.timer{font-size:1.3rem}.room-code,.round{font-size:.6rem}
+ .plate{width:min(62cqw,330px)}
+ .team-name{font-size:.62rem}
+ .crowd{display:none}
  .notice-title{font-size:1.2rem}.notice-text{font-size:.8rem}
  .lineup{display:none}
  .empty{flex-direction:column;align-items:center}
