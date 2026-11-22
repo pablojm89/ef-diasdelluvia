@@ -13,13 +13,14 @@ Cómo lo que hace el alumnado en El Pabellón llega a ser una evidencia y, cuand
 2. **Qué se anota.** Cada lugar llama a `record(lugar, actividad, evento, datos)` (desde `comun/lugar.js`). La anotación queda en el navegador con su id, fecha y alumno.
 3. **Envío.** Si el despacho tiene la hoja conectada, las anotaciones se envían por lotes a la hoja de Google del profe. Sólo se dan por enviadas cuando la hoja lo confirma; si no, se reintenta sola (1, 2, 4… hasta 10 minutos) sin borrar nada, y repetir un envío no duplica filas.
 4. **En la hoja.** «Alumnos» (una fila por niño), «Notas» (una fila por criterio de cada resultado, junto a las de La Lupa) y «Registro EF» (una fila legible por anotación). Para Séneca: tabla dinámica de «Notas» por alumno y criterio, filtrando `app = pabellon`.
-5. **Otro ordenador.** En la taquilla, «Recuperar mi progreso» trae lo que la hoja tiene de ese jugador.
+5. **Otro ordenador.** En la taquilla de El Vestuario, «Recuperar mi progreso» trae lo que la hoja tiene de ese jugador, y con ello su álbum.
+6. **El álbum.** Lo jugado pega cromos en el álbum de cada jugador ([12-descubrimiento.md](12-descubrimiento.md)). Se guarda aparte en el navegador, clave `pabellon-album`, porque el registro de un ordenador descarta lo más antiguo al pasar de 800 anotaciones. Los cromos que no salen de otra anotación se anotan como `album`, `cromo`, `pegado` con el id del cromo, y así viajan a la hoja y vuelven al recuperar.
 
 ## El despacho
 
 Sección **Hoja de notas**: dirección del Apps Script y código de aula (se guardan sólo en ese navegador, en la clave compartida `aula-nube`; nunca en el código), «Probar conexión», «Enviar ahora», «Volver a enviar todo», «Quitar la conexión», pendientes, último envío confirmado y avisos de envío no confirmado o rechazado. Si La Lupa ya está conectada en ese navegador, ofrece «Usar la misma conexión». Debajo, si hay paquete de clase, la casilla para entrar con alias.
 
-La tabla del registro de ese ordenador muestra la nota orientativa de cada jugador cuando la hay.
+La tabla del registro de ese ordenador muestra la nota orientativa de cada jugador cuando la hay. La sección **Álbumes** enseña cuántos cromos tiene cada jugador por página y sus sellos, y permite empezar un álbum de cero: lo jugado antes deja de pegar cromos, y el registro no se toca.
 
 ## De anotación a nota
 
@@ -34,6 +35,8 @@ Decidido hoy, con prudencia:
 | Partidos de mate: asistencias, rescates, puntos, resultado | No | Evidencia. Destreza en un videojuego, no conducta motriz |
 | Ruleta de retos en la pantalla | No | Evidencia de la clase (`pantalla`), nada individual |
 | Yoga, rosco, oca, bingo (`tatami`, `pizarra`, `aula`) | No, hasta que se añadan a `NOTAS` | Llegan como evidencia en cuanto anoten |
+| El Neceser (`vestuario`, `neceser`, `nivel`): nivel, día, aciertos, fallos y preguntas acertadas | No, hasta que se decida | Evidencia de hábitos de higiene. La versión de pantalla (`neceser-movimiento`) anota como clase |
+| Cromos pegados (`album`, `cromo`, `pegado`) | No | Sólo sirven para reconstruir el álbum |
 | Cursos de 1.º a 4.º | No | La letra `.a/.b` sólo está definida para el tercer ciclo |
 
 Completar un juego no equivale a superar un criterio: la nota del juego es una evidencia más, junto a lo observado en clase. Lo observado se puede apuntar en la misma hoja, en columnas propias.
@@ -56,4 +59,5 @@ Añadir una línea a `NOTAS` en `notas.js`: `{place, activity, event, criterio, 
 - Curso, grupo y número, o el alias, siguen siendo datos personales para quien tiene la lista. Viajan sólo a la hoja del profe cuando él la conecta.
 - No viajan: avatares del paquete, PIN del despacho, nada de La Lupa.
 - Un ordenador compartido conserva el último jugador hasta «No soy yo» en la taquilla.
+- El álbum (`pabellon-album`) guarda por jugador sólo ids de cromos, sellos y fechas. Se queda en el navegador; lo que viaja es la anotación de cada cromo pegado.
 - La clave del despacho es una barrera para el alumnado en ese ordenador, no una protección de datos.

@@ -15,7 +15,7 @@
  <header class="hub-top">
   <a class="lockup" href="#" aria-label="El Pabellón, inicio"><img src="./assets/mark.svg" alt="" width="40" height="40"><span><small>EDUCACIÓN FÍSICA</small><strong>EL PABELLÓN</strong></span></a>
   <div class="who">
-   <button type="button" id="locker-button" class="player-tag" hidden><img id="player-face" alt="" width="40" height="40"><span><small>MI TAQUILLA</small><strong id="player-code"></strong></span></button>
+   <button type="button" id="locker-button" class="player-tag" hidden><img id="player-face" alt="" width="40" height="40"><span><small>MI TAQUILLA</small><strong id="player-code"></strong></span><em id="locker-new" class="tag-new" hidden></em></button>
    <span id="mode-tag" class="mode-tag" hidden></span>
    <a href="#" class="leave">Salir</a>
   </div>
@@ -90,6 +90,7 @@
       <p id="cloud-package" class="fine"></p>
       <label class="check" id="alias-entry-label" hidden><input type="checkbox" id="alias-entry"> Que el alumnado entre eligiendo su alias de la clase, el mismo que en La Lupa</label>
      </section>
+     <section class="paper"><h2>Álbumes</h2><p class="fine">Cada jugador tiene en este ordenador su álbum de cromos, que se llena con lo que juega. Empezar de cero vacía el álbum; el registro no se toca.</p><div id="desk-albums" class="table-scroll"></div><div class="desk-buttons"><button type="button" id="desk-albums-reset" class="sign danger"><strong>Vaciar todos los álbumes</strong></button></div></section>
      <section class="paper"><h2>Lugares y actividades</h2><div id="desk-catalogue" class="table-scroll"></div></section>
      <section class="paper"><h2>Clave del despacho</h2><p class="fine">Cierra el despacho al terminar, sobre todo en un ordenador compartido.</p><div class="desk-buttons"><button type="button" id="desk-lock" class="sign"><strong>Cerrar el despacho</strong></button><button type="button" id="desk-forget" class="sign danger"><strong>Cambiar la clave</strong></button></div></section>
     </div>
@@ -117,13 +118,6 @@
   </div>
  </dialog>
 
- <dialog id="locker" aria-labelledby="locker-title">
-  <form method="dialog"><button class="close" aria-label="Cerrar la taquilla">Cerrar</button></form>
-  <div class="locker-head"><img id="locker-face" alt="" width="96" height="96"><div><p class="eyebrow">Mi taquilla</p><h2 id="locker-title"></h2></div></div>
-  <ul id="locker-list" class="locker-list"></ul>
-  <div class="desk-buttons"><button type="button" id="locker-recover" class="sign gold" hidden><strong>Recuperar mi progreso</strong></button><button type="button" id="locker-leave" class="sign"><strong>No soy yo: cambiar de jugador</strong></button></div>
-  <p id="locker-status" class="status" role="status"></p>
- </dialog>
  <script type="module" src="./hub.js"></script>
 </body>
 </html>

@@ -9,7 +9,7 @@ Quedan fuera: nombres y apellidos reales, correos de alumnos, identificadores es
 - Mate Arena sólo acepta el número de un personaje prefijado. El anfitrión genera su nombre ficticio; los campos adicionales del perfil se descartan.
 - No hay cuentas con contraseña de alumnos, nombres libres, chat, subida de archivos, captura de cámara ni micrófono en la aplicación.
 - La aplicación no tiene un mecanismo para escribir partidas o resultados en GitHub. El repositorio y las partidas son sistemas separados.
-- El navegador guarda preferencias y progreso local. Las credenciales temporales de recuperación de Mate se guardan en `sessionStorage`; no se incluyen en el código ni en la lista pública de jugadores.
+- El navegador guarda preferencias y progreso local. El álbum de cromos (`pabellon-album`) guarda por jugador, con su código de lista o alias, sólo qué cromos y sellos tiene y cuándo los consiguió. Las credenciales temporales de recuperación de Mate se guardan en `sessionStorage`; no se incluyen en el código ni en la lista pública de jugadores.
 - El online transmite identificadores de sesión, personajes, controles y estado de la partida. Los proveedores de conexión reciben tráfico y metadatos de red. El relevo público no constituye un canal privado ni es un lugar donde transmitir información de alumnos. Véase [la descripción del servicio online](docs/07-mate-arena.md).
 
 ## Antes de publicar cambios

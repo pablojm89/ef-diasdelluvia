@@ -1,6 +1,10 @@
 {
  "_titulo": "El Vestuario: ¿qué hay en mi neceser?",
- "_nota": "Juego El Neceser (docs/12-descubrimiento.md, fase 1), en el lugar nuevo vestuario/. El fondo es el vestuario ya pintado (mate/assets/pista/vestuario.webp) y la puerta, assets/door-vestuario.webp: no se repiten. Los objetos se colocan sobre el banco y se arrastran al neceser; cada uno es además un cromo del álbum. Todos los objetos comparten punto de vista, luz y escala relativa (la toalla doblada mide lo mismo que la camiseta doblada; el peine, la mitad). Mientras no llegan, el juego usa formas simples con rótulo. Este lote aún no tiene índice: se le añadirá _indice cuando exista la carpeta vestuario/.",
+ "_nota": "Juego El Neceser (docs/12-descubrimiento.md, fase 1), en el lugar nuevo vestuario/. El fondo es el vestuario ya pintado (mate/assets/pista/vestuario.webp) y la puerta, assets/door-vestuario.webp: no se repiten. Los objetos se colocan sobre el banco y se arrastran al neceser; cada uno es además un cromo del álbum. Todos los objetos comparten punto de vista, luz y escala relativa (la toalla doblada mide lo mismo que la camiseta doblada; el peine, la mitad). Mientras no llegan, el juego usa formas simples con rótulo. Las piezas pintadas se usan solas en cuanto vestuario/assets/pintados.js las lista (lo escribe scripts/integrar_arte.py).",
+ "_indice": {
+  "archivo": "vestuario/assets/pintados.js",
+  "nombre": "PINTADOS"
+ },
  "neceser-abierto": {
   "nombre": "El neceser abierto",
   "destino": "vestuario/assets/neceser-abierto.webp",

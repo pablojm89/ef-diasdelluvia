@@ -27,7 +27,7 @@ Cada lugar es una puerta. Sólo se pintan puertas abiertas o a punto de abrirse;
 | **La Pizarra** | Rosco de EF: la clase responde con una postura y cada acierto abre un microrreto; individual en el ordenador del alumno | Pasapalabra y trivial de EF | Alumno · Pantalla | Abierto |
 | **El Aula** | La oca cooperativa y el bingo en movimiento con cartones únicos | Ocas y tableros de Genially; Movement bingo | Pantalla + tabletas | Abierto |
 | **La Grada** | Ver en la pantalla, por código de sala, hasta cuatro partidos de mate a la vez | — | Pantalla | Abierto |
-| **El Vestuario** | La taquilla del alumno: personaje, lo que lleva hecho, insignias | — | Alumno | Hoy es un botón; puerta propia más adelante |
+| **El Vestuario** | La taquilla del alumno, su álbum de cromos y *El Neceser*, el juego de la bolsa de aseo; en la pantalla, *Neceser en movimiento* | Ocas de higiene | Alumno · Pantalla | Abierto. El alumno entra por «Mi taquilla»; la pantalla, por su puerta |
 | **El Despacho** | Zona del profe: registro, lugares abiertos, preparar la sesión | — | Profe | Abierto, básico |
 | El Armario de los candados | Campaña por capítulos: retos de clase que dan un dígito y abren un armario | Breakout de los Pluvianos | Pantalla | Reserva |
 | La Sala de Espejos | Expresión corporal, mímica, «This or That» y ritmo | Vídeos de elección activa | Pantalla | Reserva |
@@ -83,8 +83,8 @@ Mismo sistema que Agencia La Lupa, del repo de multiplicopolis: una hoja de Goog
 | **E. La Grada** | Partidos de mate en directo; espectador sin plaza | Hecha y vista funcionar por conexión directa. Sin probar por el relevo ni en la red del centro |
 | **F. Remate** | Gimnasio táctil y con el pedido en la escena; pista pintada y menús de Mate en la estética común; segunda misión del gimnasio; retirada de las actividades antiguas | En curso |
 | **G. Arte** | Las imágenes de `arte/ENCARGO.md` sustituyen a lo provisional según llegan | Hecha para los lotes 01 a 15. Pedidos los lotes 16 a 21 del álbum, los juegos nuevos y las láminas de normas (119 imágenes). El lote 21 (pichi, pinfuvote y baloncesto) espera a que Pablo revise sus normas |
-| **H. Lo que sigue** | El profe abre y cierra lugares por clase; el Vestuario como puerta; lugares de la reserva; descubrir solas las salas de mate de una clase | Sin empezar. El profe y el Vestuario quedan dentro de la fase I |
-| **I. El Álbum** | Capa de descubrimiento: álbum de cromos en El Vestuario, pistas de Robles, mural de la clase, normas de los juegos reales antes de su versión de ordenador (El Banquillo), y los juegos de higiene, agua, material, calentamiento, juego limpio y equipo. Detalle y fases en [12-descubrimiento.md](12-descubrimiento.md) | Diseñada; pendiente de que Pablo la apruebe |
+| **H. Lo que sigue** | El profe abre y cierra lugares por clase; el Vestuario como puerta; lugares de la reserva; descubrir solas las salas de mate de una clase | Sin empezar. El profe abriendo y cerrando lugares queda dentro de la fase I; el Vestuario ya es lugar |
+| **I. El Álbum** | Capa de descubrimiento: álbum de cromos en El Vestuario, pistas de Robles, mural de la clase, normas de los juegos reales antes de su versión de ordenador (El Banquillo), y los juegos de higiene, agua, material, calentamiento, juego limpio y equipo. Detalle y fases en [12-descubrimiento.md](12-descubrimiento.md) | Diseño aprobado. **Fase 1 hecha** (El Vestuario, el álbum y El Neceser); siguen las pistas de Robles, los despistes y el mural |
 
 ## Decisiones abiertas
 

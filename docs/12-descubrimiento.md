@@ -1,6 +1,6 @@
 # El Álbum del Pabellón: descubrir, coleccionar y desbloquear
 
-22 de noviembre de 2026. Documento de diseño, **pendiente de que Pablo lo apruebe**. No hay nada programado. Acompaña al [plan del hub](08-hoja-de-ruta.md) y a [registro y notas](10-registro-y-notas.md); las imágenes que necesita están pedidas en los lotes 16 a 21 del [encargo de imágenes](../arte/ENCARGO.md).
+22 de noviembre de 2026. Documento de diseño, aprobado por Pablo. **La fase 1 está hecha**: El Vestuario, el álbum y El Neceser (apartado 10). Acompaña al [plan del hub](08-hoja-de-ruta.md) y a [registro y notas](10-registro-y-notas.md); las imágenes que necesita están pedidas en los lotes 16 a 21 del [encargo de imágenes](../arte/ENCARGO.md).
 
 ## 1. La idea en una página
 
@@ -20,9 +20,9 @@ Por qué un álbum: es un objeto de colegio real, lo conocen todos, ya trae la s
 
 | Página | Cromos | Cómo se consiguen | Arte |
 |---|---|---|---|
-| **Lugares y juegos** | Uno por lugar y por juego (hoy 7 lugares; con este plan, unos 16) | Entrando por primera vez, o cumpliendo lo que abre ese lugar (apartado 3) | Las puertas `assets/door-*.webp` que ya existen |
-| **El material** | 10 ahora (cono, aro, cuerda, raqueta, peto, colchoneta, saquito, y los tres balones); 6 más adelante | Guardando cada objeto en *Equipment Rescue*. El dorso del cromo («así sí, así no») se completa en *Cada cosa, a lo suyo* | Los `gimnasio/assets/prop-*.webp` que ya existen |
-| **El neceser** | 14 | Metiendo bien cada objeto en *El Neceser* | Lote 17 |
+| **Lugares y juegos** | Uno por lugar y por juego que el alumno puede alcanzar (hoy 6: Vestuario, Gimnasio, Pista, Pizarra, Tatami y El Neceser; con este plan, unos 16) | Entrando por primera vez, o cumpliendo lo que abre ese lugar (apartado 3) | Las puertas `assets/door-*.webp` que ya existen |
+| **El material** | 7 ahora (cono, aro, cuerda, raqueta, peto, pelota blanda y colchoneta, los que salen en *Equipment Rescue*); el saquito, los balones y otros, con *Cada cosa, a lo suyo* | Avanzando en *Equipment Rescue*: encontrar el material, ordenarlo, preparar el carro y dejar el gimnasio seguro. El dorso del cromo («así sí, así no») se completa en *Cada cosa, a lo suyo* | Los `gimnasio/assets/prop-*.webp` que ya existen |
+| **El neceser** | 14 | Metiendo bien cada objeto en *El Neceser*: 6 en «La bolsa de hoy» y 8 en «Depende del día», repartidos entre sus cuatro días, así que hay que volver a jugar para completarla | Lote 17 |
 | **El pabellón seguro** | 6: la puerta despejada y la colchoneta en su sitio (de *Equipment Rescue*), la señal de suelo mojado, la fregona, el felpudo y el banco de las botellas | *Equipment Rescue* y *Ni una gota* | `risk-*.webp` y lote 19 |
 | **En marcha** | 8 movimientos del calentamiento | Usando cada uno en un calentamiento bien montado | Lote 20 |
 | **Los petos** | Uno por juego real cuyas normas se saben (mate, pelota sentada, pichi…) | *La charla del banquillo* | Lote 18 |
@@ -62,7 +62,7 @@ El vestuario pintado (`mate/assets/pista/vestuario.webp`) ya tiene un tablón de
 2. **El reto del corcho:** una propuesta para volver a un juego ya abierto (apartado 6).
 3. **Lo último que has pegado.**
 
-La primera vez que el alumno entra, Robles le entrega el álbum con un cromo ya puesto: el de su personaje.
+La primera vez que el alumno entra, Robles le entrega el álbum con el cromo de El Vestuario ya puesto, y con lo que ya haya jugado pegado (en la fase 1 no hay cromo del personaje: su cara está en la taquilla).
 
 ### 2.5 Los despistes de Robles
 
@@ -506,7 +506,7 @@ Cada fase se puede entregar y usar sola. Las versiones de pantalla van dentro de
 
 | Fase | Qué entrega | Arte |
 |---|---|---|
-| **1. El álbum y El Neceser** | El Vestuario como lugar con taquilla, álbum y banco. `album.js`: catálogo de cromos y reglas, con sus pruebas. Páginas «Lugares y juegos», «El material» y «El neceser». Lo ya jugado pega sus cromos. *El Neceser*, niveles 1 a 3, y *Neceser en movimiento*. En el despacho, la tabla de álbumes y reiniciar | Lotes 16 (álbum) y 17. Mientras llegan: papel y formas simples, y los `prop-*.webp` para el material |
+| **1. El álbum y El Neceser** · *hecha* | El Vestuario como lugar con taquilla, álbum y banco. `album.js`: catálogo de cromos y reglas, con sus pruebas. Páginas «Lugares y juegos», «El material» y «El neceser». Lo ya jugado pega sus cromos. *El Neceser*, niveles 1 a 3, y *Neceser en movimiento*. En el despacho, la tabla de álbumes y reiniciar | Lotes 16 (álbum) y 17. Mientras llegan: papel y formas simples, y los `prop-*.webp` para el material |
 | **2. Pistas, despistes y mural** | Corcho de Robles, reto de la semana, los ocho objetos escondidos, sellos en los juegos que ya existen y el mural de la pantalla | Lote 16 (despistes) y mural del lote 19 |
 | **3. El Banquillo: normas del mate** | Ficha de normas confirmada por Pablo, charla con láminas, peto, llave de las salas de Mate Arena con veteranos, y *Repaso de normas* en pantalla. Pelota sentada, con sus cuatro normas, como segunda charla | Lote 18. Mientras llega: tiza sobre la pizarra |
 | **4. La Fuente y el material** | *Ni una gota* y *Cada cosa, a lo suyo*, con «El pabellón seguro» y los dorsos del material | Lote 19 |
@@ -516,6 +516,14 @@ Cada fase se puede entregar y usar sola. Las versiones de pantalla van dentro de
 | **Después** | Charlas de pichi, pinfuvote y baloncesto; nuevos juegos de ordenador (pelota sentada, pichi, pinfuvote, baloncesto); sesiones de alumno con contraseña; El Patio Cubierto y El Botiquín | Lote 21 para las charlas |
 
 La fase 1 no toca ningún juego existente ni cierra nada: añade un lugar, un botón y un juego.
+
+**Cómo quedó la fase 1** (22 de noviembre de 2026):
+
+- `album.js`: el catálogo de cromos, lo que pega cada anotación del registro, el guardado por jugador en `pabellon-album` y lo del despacho. Pruebas en `tests/album.test.js`.
+- `vestuario/`: la escena pintada con tres sitios que tocar (taquilla, corcho del álbum y banco), el álbum por páginas con siluetas, pistas, cromos que se dan la vuelta y sellos, la taquilla que antes estaba en el hub y *El Neceser*. Los datos están en `neceser-banco.js` y las reglas en `neceser.js`, con pruebas en `tests/vestuario.test.js`.
+- En el hub, «Mi taquilla» lleva al Vestuario y avisa de los cromos nuevos; la pantalla digital tiene la puerta de El Vestuario, y el despacho, la sección **Álbumes**.
+- Mientras llega el arte de los lotes 16 y 17, los objetos son etiquetas de papel con su nombre en inglés, y el neceser y la mochila, formas sencillas. Cada pieza se usa sola en cuanto `scripts/integrar_arte.py` la marca como pintada.
+- *El Neceser* tiene los niveles 1 a 3; la «bolsa de otro» (nivel 4) y el emparejar «¿para qué sirve?» quedan para más adelante.
 
 ## 11. Decisiones abiertas
 

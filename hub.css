@@ -19,7 +19,7 @@ body[data-view=title] .hub-top{display:none}
 .bubble span[lang=en]{font:600 1.05rem/1.25 var(--serif);color:#1f3b39}
 
 .doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,228px));justify-content:center;gap:clamp(16px,3vw,38px);margin-top:clamp(16px,3.4dvh,34px)}
-.doors.many{grid-template-columns:repeat(auto-fit,minmax(140px,178px));gap:clamp(12px,1.7vw,22px)}
+.doors.many{grid-template-columns:repeat(auto-fit,minmax(120px,150px));gap:clamp(10px,1.4vw,18px)}
 .doors.many .plate{font-size:clamp(.9rem,1.35vw,1.08rem);padding:5px 12px}
 .doors.many .kicker{font-size:.84rem}
 .door{display:grid;justify-items:center;gap:7px;width:100%;padding:0;border:0;background:none;color:inherit;text-align:center}
@@ -83,12 +83,9 @@ legend{width:100%;margin-bottom:8px;font-size:.74rem;font-weight:800;letter-spac
 .state{display:inline-block;padding:1px 9px;border-radius:99px;font-size:.72rem;font-weight:800}
 .state.open{background:#2c6b4a;color:#fff}.state.soon{background:#e3d3ad;color:#5a4a2a}.state.review{background:#f0c9b4;color:#7a2f22}
 
-#locker{width:min(460px,94vw)}
-.locker-head{display:flex;align-items:center;gap:14px;margin-bottom:10px}
-.locker-head img{width:96px;height:96px;border:3px solid var(--teal)}
-.locker-list{display:grid;gap:8px;margin:0 0 18px}
-.locker-list li{display:flex;justify-content:space-between;gap:12px;padding:9px 13px;border-radius:8px;background:#f1e2bd}
-.locker-list b{color:#1f3b39}
+.player-tag{position:relative}
+.tag-new{position:absolute;right:-8px;top:-10px;padding:1px 8px;border-radius:99px;background:#c9524a;color:#fff;font:800 .66rem/1.4 'Trebuchet MS',sans-serif;font-style:normal;white-space:nowrap;box-shadow:0 2px 5px #0006}
+.sign.small{padding:4px 10px}.sign.small strong{font-size:.85rem}
 
 .wheel-layout{clear:both;display:grid;grid-template-columns:minmax(220px,300px) minmax(0,1fr);gap:clamp(16px,3vw,32px);align-items:center}
 .wheel-side{display:grid;justify-items:center;gap:16px}

@@ -116,13 +116,18 @@ try {
  await phone.screenshot({path: out + 'notas-entrada-lista-390.png', fullPage: true});
  await phone.evaluate(() => import('./registro.js').then(r => r.setPlayer({course: 5, alias: 'Agente Relámpago', avatar: 2})));
  await phone.reload();
+ // The locker lives in El Vestuario; the first visit hands over the album.
  await phone.locator('#locker-button').click();
- assert.equal(await phone.locator('#locker-recover').isVisible(), true);
- await phone.locator('#locker-recover').click();
- await phone.waitForFunction(() => /Recuperado/.test(document.getElementById('locker-status').textContent));
- assert.match(await phone.locator('#locker-list').textContent(), /Completada/);
+ await phone.waitForURL(/vestuario/);
+ await phone.locator('#regalo button').click();
+ await phone.waitForURL(/#album$/);
+ await phone.goto(SITE + 'vestuario/#taquilla');
+ assert.equal(await phone.locator('#taquilla-recover').isVisible(), true);
+ await phone.locator('#taquilla-recover').click();
+ await phone.waitForFunction(() => /Recuperado/.test(document.getElementById('taquilla-status').textContent));
+ assert.match(await phone.locator('#taquilla-list').textContent(), /Completada/);
  await phone.screenshot({path: out + 'notas-taquilla-390.png', fullPage: true});
- await phone.locator('#locker .close').click();
+ await phone.locator('#taquilla .close').click();
  await phone.goto(SITE + 'index.html#profe');
  await phone.fill('#gate-pin', '1357'); await phone.locator('#gate button').click();
  await phone.waitForSelector('#desk:not([hidden])');
@@ -130,9 +135,9 @@ try {
  assert.equal(await phone.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, 'sin desbordamiento horizontal a 390');
  await phone.screenshot({path: out + 'notas-despacho-390.png', fullPage: true});
  await page.setViewportSize({width: 390, height: 844});
- await page.goto(SITE + 'index.html#alumno');
- await page.locator('#locker-button').click();
- await page.locator('#locker-leave').click();
+ await page.goto(SITE + 'vestuario/#taquilla');
+ if (await page.locator('#regalo').evaluate(d => d.open)) { await page.locator('#regalo button').click(); await page.waitForURL(/#album$/); await page.goto(SITE + 'vestuario/#taquilla'); }
+ await page.locator('#taquilla-leave').click();
  await page.waitForSelector('#login-class:not([hidden])');
  await page.screenshot({path: out + 'notas-entrada-alias-390.png', fullPage: true});
  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);

@@ -14,10 +14,12 @@ Un colegio que se juega. Cada actividad vive en un **lugar** del pabellón. Tres
 | `comun/base.css`, `comun/lugar.js` | Aspecto y cabecera comunes. Todo lugar los usa |
 | `registro.js` | Quién juega (curso, grupo, número o alias de clase, y personaje), qué ha hecho y su envío a la hoja del profe. `record(lugar, actividad, evento, datos)` |
 | `notas.js` | Tabla única de qué anotación genera qué nota; lo demás viaja como evidencia |
+| `album.js` | El álbum de cromos: catálogo, qué pega cada anotación y guardado por jugador. Diseño en `docs/12-descubrimiento.md` |
 | `backend/` | Servidor `aula.gs` (Apps Script + Hojas de Google), común con La Lupa |
 | `gimnasio/` | Aventura gráfica Equipment Rescue. Es el modelo de estética |
 | `mate/` | Mate Arena: balón prisionero. Simulación en `sim.js`, red en `network.js` |
 | `grada/` | Partidos de Mate Arena en directo para la pantalla (espectador) |
+| `vestuario/` | Taquilla, álbum y El Neceser (higiene); en la pantalla, Neceser en movimiento |
 | `tatami/`, `pizarra/`, `aula/` | Yoga, rosco de EF, y oca cooperativa con bingo. Cada lugar es autocontenido y tiene su lote en `arte/lotes/` |
 | `content.js`, `engine.js` | Banco de 24 retos con variante sentada y criterio |
 | `patio.html`, `app.js`, `styles.css` | Actividades de la primera etapa, apartadas. No ampliar |

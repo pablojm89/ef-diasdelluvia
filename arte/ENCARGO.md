@@ -114,7 +114,7 @@ Lote completo.
 
 ### Lote `16-descubrimiento` · El Álbum del Pabellón: cromos, sellos y despistes de Robles
 
-Capa de descubrimiento (docs/12-descubrimiento.md, fases 1 y 2). El álbum de cromos vive en El Vestuario y se abre desde el mapa del alumno. Mientras no llegan, el álbum se dibuja con gimnasio/assets/paper.webp y formas de CSS, y los cromos de material usan los gimnasio/assets/prop-*.webp que ya existen. Este lote aún no tiene índice: se le añadirá _indice cuando exista la carpeta album/.
+Capa de descubrimiento (docs/12-descubrimiento.md, fases 1 y 2). El álbum de cromos vive en El Vestuario y se abre desde el mapa del alumno. Mientras no llegan, el álbum se dibuja con gimnasio/assets/paper.webp y formas de CSS, y los cromos de material usan los gimnasio/assets/prop-*.webp que ya existen. Las piezas pintadas se usan solas en cuanto album/assets/pintados.js las lista (lo escribe scripts/integrar_arte.py).
 
 | Archivo que entregar | Qué es | Tamaño | Fondo | Qué debe verse |
 |---|---|---|---|---|
@@ -138,7 +138,7 @@ Capa de descubrimiento (docs/12-descubrimiento.md, fases 1 y 2). El álbum de cr
 
 ### Lote `17-vestuario` · El Vestuario: ¿qué hay en mi neceser?
 
-Juego El Neceser (docs/12-descubrimiento.md, fase 1), en el lugar nuevo vestuario/. El fondo es el vestuario ya pintado (mate/assets/pista/vestuario.webp) y la puerta, assets/door-vestuario.webp: no se repiten. Los objetos se colocan sobre el banco y se arrastran al neceser; cada uno es además un cromo del álbum. Todos los objetos comparten punto de vista, luz y escala relativa (la toalla doblada mide lo mismo que la camiseta doblada; el peine, la mitad). Mientras no llegan, el juego usa formas simples con rótulo. Este lote aún no tiene índice: se le añadirá _indice cuando exista la carpeta vestuario/.
+Juego El Neceser (docs/12-descubrimiento.md, fase 1), en el lugar nuevo vestuario/. El fondo es el vestuario ya pintado (mate/assets/pista/vestuario.webp) y la puerta, assets/door-vestuario.webp: no se repiten. Los objetos se colocan sobre el banco y se arrastran al neceser; cada uno es además un cromo del álbum. Todos los objetos comparten punto de vista, luz y escala relativa (la toalla doblada mide lo mismo que la camiseta doblada; el peine, la mitad). Mientras no llegan, el juego usa formas simples con rótulo. Las piezas pintadas se usan solas en cuanto vestuario/assets/pintados.js las lista (lo escribe scripts/integrar_arte.py).
 
 | Archivo que entregar | Qué es | Tamaño | Fondo | Qué debe verse |
 |---|---|---|---|---|

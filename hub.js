@@ -1,8 +1,9 @@
 // El Pabellón: who comes in (pupil, class screen or teacher) and the doors each one sees.
 import {families} from './content.js';
 import {eligibleChallenges} from './engine.js';
-import {AVATARS, COURSES, GROUPS, LAST_NUMBER, player, setPlayer, leave, playerCode, studentId, setMode, record, entries, clearEntries, summary, toSheet,
- sync, connection, lupaConnection, setConnection, forgetConnection, testConnection, resendAll, cloudState, recover, classPackage, aliasEntry, setAliasEntry} from './registro.js';
+import {AVATARS, COURSES, GROUPS, LAST_NUMBER, player, setPlayer, playerCode, setMode, record, entries, clearEntries, summary, toSheet,
+ sync, connection, lupaConnection, setConnection, forgetConnection, testConnection, resendAll, cloudState, classPackage, aliasEntry, setAliasEntry} from './registro.js';
+import {album, nuevos, albumes, reiniciar, reiniciarTodos, SELLOS} from './album.js';
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -19,10 +20,11 @@ const PLACES = {
  tatami: {name: 'El Tatami', kicker: 'Yoga: posturas y secuencias', art: 'door-tatami', href: './tatami/', modes: 'Alumno · Pantalla', state: 'open'},
  grada: {name: 'La Grada', kicker: 'Partidos de mate en directo', art: 'door-grada', href: './grada/', modes: 'Pantalla', state: 'open'},
  aula: {name: 'El Aula', kicker: 'La oca y el bingo en movimiento', art: 'door-aula', href: './aula/', modes: 'Pantalla · Tabletas', state: 'open'},
+ vestuario: {name: 'El Vestuario', kicker: 'El neceser: ¿va o no va?', art: 'door-vestuario', href: './vestuario/', modes: 'Alumno · Pantalla', state: 'open'},
 };
 const MAPS = {
  alumno: {title: '¿A dónde vamos hoy?', places: ['gimnasio', 'pista', 'pizarra', 'tatami']},
- pantalla: {title: 'Pantalla digital: elegid un lugar', places: ['espalderas', 'aula', 'pizarra', 'gimnasio', 'tatami', 'grada']},
+ pantalla: {title: 'Pantalla digital: elegid un lugar', places: ['espalderas', 'aula', 'pizarra', 'gimnasio', 'tatami', 'vestuario', 'grada']},
 };
 // Earlier experiments that no longer match the look of the school; only the teacher can still open them.
 const REVIEW = [
@@ -65,7 +67,13 @@ function showMap(kind) {
  $('locker-button').hidden = !pupil;
  $('mode-tag').hidden = kind !== 'pantalla';
  $('mode-tag').textContent = 'PANTALLA DIGITAL';
- if (pupil) { $('player-face').src = face(current.avatar); $('player-code').textContent = playerCode(current); }
+ if (pupil) {
+  $('player-face').src = face(current.avatar); $('player-code').textContent = playerCode(current);
+  // The locker is in El Vestuario; new stickers in the album show on the way there.
+  const fresh = nuevos(album()).length;
+  $('locker-new').hidden = !fresh;
+  $('locker-new').textContent = fresh === 1 ? '¡1 cromo nuevo!' : `¡${fresh} cromos nuevos!`;
+ }
  show('map');
 }
 function route() {
@@ -123,33 +131,8 @@ $('login-form').addEventListener('submit', event => {
   : {course: Number($('login-course').value), group: $('login-group').value, number: Number($('login-number').value), avatar};
  if (setPlayer(chosen)) { record('pabellon', 'entrada', 'entra'); showMap('alumno'); }
 });
-function drawLocker() {
- const current = player();
- if (!current) return false;
- const mine = summary(entries().filter(entry => entry.sid === studentId(current)))[0];
- $('locker-face').src = face(current.avatar);
- $('locker-title').textContent = `${AVATARS[current.avatar]} · ${playerCode(current)}`;
- const lines = [
-  ['Aventura del gimnasio', mine?.gymDone ? 'Completada' : mine?.gymPhase ? `Fase ${mine.gymPhase} de 5 superada` : 'Sin empezar'],
-  ['Partidos de mate', mine?.matches ? `${mine.matches} jugados · ${mine.wins} ganados` : 'Ninguno todavía'],
-  ['Mejor puntuación en mate', mine?.bestPoints ? `${mine.bestPoints} puntos` : '—'],
-  ['Yoga', mine?.poses.length || mine?.sequences || mine?.practices ? `${mine.poses.length} posturas vistas · ${mine.sequences} secuencias creadas · ${mine.practices} practicadas` : 'Sin empezar'],
-  ['Rosco de EF', mine?.roscos ? `${mine.roscos} jugados · mejor: ${mine.bestRosco} aciertos` : 'Ninguno todavía'],
- ];
- $('locker-list').innerHTML = lines.map(([label, value]) => `<li><span>${esc(label)}</span><b>${esc(value)}</b></li>`).join('');
- $('locker-recover').hidden = !connection();
- return true;
-}
-$('locker-button').addEventListener('click', () => { $('locker-status').textContent = ''; if (drawLocker()) $('locker').showModal(); });
-// Another computer: what the teacher's sheet holds for this player joins this record.
-$('locker-recover').addEventListener('click', async () => {
- $('locker-recover').disabled = true; $('locker-status').textContent = 'Buscando en la hoja del profe…';
- const result = await recover();
- $('locker-recover').disabled = false;
- $('locker-status').textContent = !result.ok ? result.motivo : result.added ? `¡Recuperado! ${result.added} ${result.added === 1 ? 'cosa' : 'cosas'} de otro ordenador.` : 'Ya lo tenías todo en este ordenador.';
- drawLocker();
-});
-$('locker-leave').addEventListener('click', () => { leave(); $('locker').close(); showLogin(); });
+// The locker and the album live in El Vestuario.
+$('locker-button').addEventListener('click', () => { location.href = './vestuario/'; });
 
 // --- Teacher: a key for this computer and the desk behind it ---------------------
 const PIN = 'pabellon-clave', OPEN = 'pabellon-despacho';
@@ -195,11 +178,25 @@ function drawDesk() {
   `<tr><th scope="row">${esc(row.who)}</th><td>${esc(when(row.last))}</td><td>${row.gymDone ? 'Completada' : row.gymPhase ? `Fase ${row.gymPhase} de 5` : '—'}</td><td>${row.matches ? `${row.matches} · ${row.wins} · ${row.bestPoints}` : '—'}</td><td>${row.poses.length || row.sequences || row.practices ? `${row.poses.length} · ${row.sequences} · ${row.practices}` : '—'}</td><td>${row.roscos ? `${row.roscos} · ${row.bestRosco}` : '—'}</td><td>${row.challenges || row.boards || row.bingos ? `${row.challenges} · ${row.boards} · ${row.bingos}` : '—'}</td><td>${marks(row)}</td></tr>`).join('')}</tbody></table>`
   : '<p>Todavía no se ha jugado nada en este ordenador.</p>';
  $('desk-download').disabled = $('desk-clear').disabled = !entries().length;
+ drawAlbums();
  drawCloud();
  const places = Object.values(PLACES).map(place => `<tr><th scope="row">${esc(place.name)}</th><td class="wrap">${esc(place.kicker)}</td><td>${esc(place.modes)}</td><td><span class="state ${place.state}">${place.state === 'open' ? 'Abierto' : 'Próximamente'}</span></td><td>${place.href ? `<a href="${place.href}"><u>Abrir</u></a>` : ''}</td></tr>`);
  const old = REVIEW.map(([name, what, href]) => `<tr><th scope="row">${esc(name)}</th><td class="wrap">${esc(what)}</td><td>Pantalla</td><td><span class="state review">Estética anterior</span></td><td><a href="${href}"><u>Abrir</u></a></td></tr>`);
  $('desk-catalogue').innerHTML = `<table><thead><tr><th>Lugar</th><th>Actividad</th><th>Se juega como</th><th>Estado</th><th></th></tr></thead><tbody>${places.join('')}${old.join('')}</tbody></table>`;
 }
+// The albums of this computer: how far each pupil has got, and starting one again.
+function drawAlbums() {
+ const rows = albumes();
+ $('desk-albums').innerHTML = rows.length ? `<table><thead><tr><th>Jugador</th>${rows[0].paginas.map(p => `<th>${esc(p.titulo)}</th>`).join('')}<th>Sellos del Neceser</th><th>Último cromo</th><th></th></tr></thead><tbody>${rows.map(row =>
+  `<tr><th scope="row">${esc(row.sid.toUpperCase())}</th>${row.paginas.map(p => `<td>${p.tiene} de ${p.de}</td>`).join('')}<td>${(row.sellos.neceser || []).map(n => esc(SELLOS[n - 1].nombre)).join(', ') || '—'}</td><td>${row.ultimo ? esc(when(row.ultimo)) : '—'}</td><td><button type="button" class="sign danger small" data-reset="${esc(row.sid)}"><strong>Empezar de cero</strong></button></td></tr>`).join('')}</tbody></table>`
+  : '<p>Todavía nadie ha abierto su álbum en este ordenador.</p>';
+ $('desk-albums-reset').disabled = !rows.length;
+}
+$('desk-albums').addEventListener('click', event => {
+ const who = event.target.closest('[data-reset]')?.dataset.reset;
+ if (who && confirm(`¿Vaciar el álbum de ${who.toUpperCase()}? Lo jugado hasta hoy deja de pegar cromos; el registro no se borra.`)) { reiniciar(who); drawAlbums(); }
+});
+$('desk-albums-reset').addEventListener('click', () => { if (confirm('¿Vaciar todos los álbumes de este ordenador? El registro no se borra.')) { reiniciarTodos(); drawAlbums(); } });
 $('desk-download').addEventListener('click', () => {
  const link = document.createElement('a');
  link.href = URL.createObjectURL(new Blob(['﻿' + toSheet()], {type: 'text/csv;charset=utf-8'}));

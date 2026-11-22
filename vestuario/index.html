@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="es">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+ <meta name="theme-color" content="#142e30">
+ <meta name="description" content="El Vestuario, en El Pabellón: tu taquilla, tu álbum de cromos y El Neceser, el juego de la bolsa de aseo.">
+ <title>El Vestuario · El Pabellón</title>
+ <link rel="icon" href="../assets/mark.svg" type="image/svg+xml">
+ <link rel="stylesheet" href="../comun/base.css">
+ <link rel="stylesheet" href="./vestuario.css">
+</head>
+<body class="vestuario" data-view="escena">
+ <a class="skip" href="#main">Saltar al contenido</a>
+ <main id="main" tabindex="-1">
+
+  <!-- The changing room: the locker, the album and the bench with the wash bag. -->
+  <section id="view-escena" class="escena-view" aria-labelledby="escena-title">
+   <div class="stage">
+    <img class="stage-bg" src="../mate/assets/pista/vestuario.webp" alt="" width="1920" height="1080">
+    <button type="button" class="spot spot-taquilla" data-go="taquilla" aria-label="Mi taquilla"><span>Mi taquilla</span></button>
+    <button type="button" class="spot spot-corcho" data-go="album" aria-label="Mi álbum"><span>Mi álbum</span></button>
+    <button type="button" class="spot spot-banco" data-go="neceser" aria-label="El Neceser"><span>El Neceser</span></button>
+    <figure class="host"><figcaption class="bubble" id="escena-bubble"><span lang="en" id="escena-en">Welcome to the changing room!</span><span id="escena-es">Bienvenido al vestuario.</span></figcaption><img id="escena-robles" src="../gimnasio/assets/teacher-robles.webp" alt="El profe Robles" width="1024" height="1536"></figure>
+   </div>
+   <div class="escena-menu">
+    <h1 id="escena-title" class="visually-hidden">El Vestuario</h1>
+    <p class="say-line" id="escena-say"></p>
+    <button type="button" class="sign" data-go="taquilla"><strong>Mi taquilla</strong><small lang="en">My locker</small></button>
+    <button type="button" class="sign gold" data-go="album"><strong>Mi álbum</strong><small lang="en">My sticker album</small><em id="album-badge" class="badge" hidden></em></button>
+    <button type="button" class="sign" data-go="neceser"><strong>El Neceser</strong><small lang="en">What’s in my wash bag?</small></button>
+   </div>
+  </section>
+
+  <!-- The album: one page at a time, stickers and empty slots with a clue. -->
+  <section id="view-album" class="wall" hidden aria-labelledby="album-title">
+   <div class="frieze" aria-hidden="true"></div>
+   <div class="wall-inner">
+    <div class="album-head">
+     <div><p class="eyebrow">Mi álbum <span id="album-who"></span></p><h1 id="album-title">El Álbum del Pabellón</h1></div>
+     <div class="tabs" id="album-tabs" role="tablist" aria-label="Páginas del álbum"></div>
+    </div>
+    <div class="book">
+     <div class="book-head"><h2 id="page-title"></h2><p class="pencil" id="page-count"></p></div>
+     <ul id="page-grid" class="stickers"></ul>
+    </div>
+    <div class="desk-buttons center"><button type="button" class="sign" data-go="escena"><strong>Volver al vestuario</strong></button></div>
+   </div>
+   <div class="skirting" aria-hidden="true"></div>
+  </section>
+
+  <!-- El Neceser. -->
+  <section id="view-neceser" class="wall" hidden aria-labelledby="neceser-title">
+   <div class="frieze" aria-hidden="true"></div>
+   <div class="wall-inner">
+    <div id="nc-levels">
+     <p class="eyebrow center">El Vestuario</p>
+     <h1 id="neceser-title">El Neceser <span lang="en">What’s in my wash bag?</span></h1>
+     <p class="lead center">Después de Educación Física toca asearse. ¿Me ayudas a preparar la bolsa?</p>
+     <ol id="level-list" class="levels"></ol>
+     <div class="desk-buttons center"><button type="button" class="sign" data-go="escena"><strong>Volver al vestuario</strong></button></div>
+    </div>
+
+    <div id="nc-theory" class="theory" hidden>
+     <h2 class="center">Antes de empezar</h2>
+     <ol id="theory-list" class="posters"></ol>
+     <div class="desk-buttons center"><button type="button" id="theory-go" class="sign gold big"><strong>¡Entendido!</strong></button></div>
+    </div>
+
+    <div id="nc-play" class="play" hidden>
+     <div class="play-head">
+      <p class="eyebrow" id="play-level"></p>
+      <p class="pencil" id="play-left"></p>
+      <button type="button" class="quiet-button" data-go="neceser">Dejar el nivel</button>
+     </div>
+     <div class="robles-line">
+      <img id="play-robles" src="../gimnasio/assets/teacher-robles.webp" alt="" width="1024" height="1536">
+      <p class="bubble-line" role="status" aria-live="polite"><span id="play-es"></span><span id="play-en" lang="en"></span><button type="button" id="play-listen" class="listen" hidden aria-label="Escuchar en inglés"><img src="../gimnasio/assets/icon-listen.webp" alt="" width="28" height="28"></button></p>
+     </div>
+     <aside id="play-note" class="note" hidden><span class="pin" aria-hidden="true"></span><strong id="note-es"></strong><span id="note-en" lang="en"></span></aside>
+     <div id="play-targets" class="targets"></div>
+     <h2 class="bench-title" id="bench-title">En el banco</h2>
+     <ul id="play-bench" class="bench"></ul>
+     <ol id="play-steps" class="steps" hidden></ol>
+    </div>
+
+    <div id="nc-quiz" class="quiz paper" hidden>
+     <p class="eyebrow" id="quiz-count"></p>
+     <h2 id="quiz-q"></h2>
+     <div id="quiz-options" class="options"></div>
+     <p id="quiz-why" class="why" role="status"></p>
+     <div class="desk-buttons center"><button type="button" id="quiz-next" class="sign gold" hidden><strong>Seguir</strong></button></div>
+    </div>
+
+    <div id="nc-end" class="end paper" hidden>
+     <div class="end-art" id="end-art"></div>
+     <h2 id="end-title">¡Bolsa lista!</h2>
+     <p id="end-text"></p>
+     <div id="end-stamp" class="stamp-big" hidden></div>
+     <ul id="end-new" class="new-stickers"></ul>
+     <div class="desk-buttons center">
+      <button type="button" id="end-next" class="sign gold"><strong>Siguiente nivel</strong></button>
+      <button type="button" id="end-again" class="sign"><strong>Otra vez</strong></button>
+      <button type="button" class="sign" data-go="album"><strong>Ver mi álbum</strong></button>
+     </div>
+     <p><button type="button" class="quiet-button" data-go="neceser">Volver a los niveles</button></p>
+    </div>
+   </div>
+   <div class="skirting" aria-hidden="true"></div>
+  </section>
+
+  <!-- Class screen: «¿Va en el neceser?», answered by everyone at once with the body. -->
+  <section id="view-clase" class="wall" hidden aria-labelledby="clase-title">
+   <div class="frieze" aria-hidden="true"></div>
+   <div class="wall-inner clase">
+    <div class="clase-head">
+     <div><p class="eyebrow">El Vestuario · toda la clase</p><h1 id="clase-title">Neceser en movimiento <span lang="en">Pack it or leave it?</span></h1></div>
+     <label class="seated"><input type="checkbox" id="clase-seated"> Variante sentada</label>
+    </div>
+    <div class="clase-body">
+     <div class="clase-card" id="clase-card">
+      <p class="eyebrow" id="clase-count"></p>
+      <div class="clase-object" id="clase-object"></div>
+      <h2 id="clase-name"></h2>
+      <p id="clase-en" lang="en" class="en"></p>
+      <p id="clase-q" class="question">¿Va en el neceser?</p>
+      <output id="clase-clock" class="countdown" hidden></output>
+      <p id="clase-answer" class="answer" role="status"></p>
+      <div class="desk-buttons center"><button type="button" id="clase-go" class="sign gold big"><strong>¡Ya!</strong></button></div>
+     </div>
+     <ol class="clase-key" id="clase-key"></ol>
+    </div>
+    <p class="fine center">Todos responden a la vez con el cuerpo, cada uno en su sitio. Nadie queda eliminado.</p>
+   </div>
+   <div class="skirting" aria-hidden="true"></div>
+  </section>
+ </main>
+
+ <dialog id="taquilla" aria-labelledby="taquilla-title">
+  <form method="dialog"><button class="close" aria-label="Cerrar la taquilla">Cerrar</button></form>
+  <div class="locker-head"><img id="taquilla-face" alt="" width="96" height="96"><div><p class="eyebrow">Mi taquilla</p><h2 id="taquilla-title"></h2></div></div>
+  <ul id="taquilla-list" class="locker-list"></ul>
+  <div class="desk-buttons"><button type="button" id="taquilla-recover" class="sign gold" hidden><strong>Recuperar mi progreso</strong></button><button type="button" id="taquilla-leave" class="sign"><strong>No soy yo: cambiar de jugador</strong></button></div>
+  <p id="taquilla-status" class="status" role="status"></p>
+ </dialog>
+
+ <dialog id="regalo" aria-labelledby="regalo-title">
+  <div class="regalo">
+   <img id="regalo-robles" src="../gimnasio/assets/teacher-robles-happy.webp" alt="" width="1024" height="1536">
+   <div>
+    <p class="eyebrow">El profe Robles</p>
+    <h2 id="regalo-title">Toma, tu álbum</h2>
+    <p lang="en" class="en">This is your sticker album.</p>
+    <p>Cada cosa que hagas en el pabellón pega un cromo. Los huecos vacíos tienen una pista mía: léela y sabrás dónde buscar.</p>
+    <p id="regalo-ya" hidden></p>
+    <form method="dialog" class="desk-buttons"><button class="sign gold big"><strong>Abrir el álbum</strong></button></form>
+   </div>
+  </div>
+ </dialog>
+ <script type="module" src="./vestuario.js"></script>
+</body>
+</html>

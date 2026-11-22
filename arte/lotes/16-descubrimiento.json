@@ -1,6 +1,10 @@
 {
  "_titulo": "El Álbum del Pabellón: cromos, sellos y despistes de Robles",
- "_nota": "Capa de descubrimiento (docs/12-descubrimiento.md, fases 1 y 2). El álbum de cromos vive en El Vestuario y se abre desde el mapa del alumno. Mientras no llegan, el álbum se dibuja con gimnasio/assets/paper.webp y formas de CSS, y los cromos de material usan los gimnasio/assets/prop-*.webp que ya existen. Este lote aún no tiene índice: se le añadirá _indice cuando exista la carpeta album/.",
+ "_nota": "Capa de descubrimiento (docs/12-descubrimiento.md, fases 1 y 2). El álbum de cromos vive en El Vestuario y se abre desde el mapa del alumno. Mientras no llegan, el álbum se dibuja con gimnasio/assets/paper.webp y formas de CSS, y los cromos de material usan los gimnasio/assets/prop-*.webp que ya existen. Las piezas pintadas se usan solas en cuanto album/assets/pintados.js las lista (lo escribe scripts/integrar_arte.py).",
+ "_indice": {
+  "archivo": "album/assets/pintados.js",
+  "nombre": "PINTADOS"
+ },
  "album-tapa": {
   "nombre": "Tapa del álbum",
   "destino": "album/assets/tapa.webp",
