@@ -1,0 +1,164 @@
+{
+ "_titulo": "El Gimnasio: Motores en marcha (calentamiento)",
+ "_nota": "Juego del calentamiento (docs/12-descubrimiento.md, fase 5), segunda misión de El Gimnasio. Ocho movimientos, cada uno de pie y en silla, para montar la secuencia y para que la pantalla guíe a toda la clase. Todas las figuras son el mismo personaje (gimnasio/assets/pupil-0.webp, Vega) con el mismo tamaño, de frente o en tres cuartos, con los pies (o las patas de la silla) en el centro del borde inferior, como en las hojas del lote 10-tatami. La silla es siempre la misma silla escolar de madera clara y patas metálicas verde azuladas. Mientras no llegan, el juego usa las posturas de pie ya pintadas del Tatami y pictogramas simples. Este lote aún no tiene índice: se añadirán las claves a gimnasio/assets/pintados.js cuando la misión exista.",
+ "calienta-tobillos": {
+  "nombre": "Calentamiento · Tobillos",
+  "destino": "gimnasio/assets/calienta-tobillos.webp",
+  "ancho": 440,
+  "alto": 520,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "El personaje de gimnasio/assets/pupil-0.webp (Vega: misma cara, peinado y chándal, sin mochila) calentando: apoya la puntera de un pie en el suelo y dibuja círculos con el tobillo, manos en la cintura. Dos o tres rayitas curvas de movimiento, del color crema del juego, indican qué parte se mueve. Gesto alegre y postura segura. Pies en el centro del borde inferior."
+ },
+ "calienta-tobillos-silla": {
+  "nombre": "Calentamiento en silla · Tobillos",
+  "destino": "gimnasio/assets/calienta-tobillos-silla.webp",
+  "ancho": 440,
+  "alto": 520,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Pareja de calienta-tobillos, con el mismo personaje (gimnasio/assets/pupil-0.webp, sin mochila), tamaño y estilo, en la variante sentada: sentada, levanta un pie del suelo y dibuja círculos con el tobillo. Silla escolar de madera clara con patas metálicas verde azuladas, los dos pies bien apoyados salvo el que se mueve. Las mismas rayitas de movimiento color crema. Patas de la silla en el centro del borde inferior."
+ },
+ "calienta-rodillas": {
+  "nombre": "Calentamiento · Rodillas",
+  "destino": "gimnasio/assets/calienta-rodillas.webp",
+  "ancho": 440,
+  "alto": 520,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "El personaje de gimnasio/assets/pupil-0.webp (Vega: misma cara, peinado y chándal, sin mochila) calentando: con los pies juntos y las manos apoyadas en los muslos, flexiona y estira las rodillas suavemente. Dos o tres rayitas curvas de movimiento, del color crema del juego, indican qué parte se mueve. Gesto alegre y postura segura. Pies en el centro del borde inferior."
+ },
+ "calienta-rodillas-silla": {
+  "nombre": "Calentamiento en silla · Rodillas",
+  "destino": "gimnasio/assets/calienta-rodillas-silla.webp",
+  "ancho": 440,
+  "alto": 520,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Pareja de calienta-rodillas, con el mismo personaje (gimnasio/assets/pupil-0.webp, sin mochila), tamaño y estilo, en la variante sentada: sentada, estira una pierna al frente y la vuelve a doblar, alternando. Silla escolar de madera clara con patas metálicas verde azuladas, los dos pies bien apoyados salvo el que se mueve. Las mismas rayitas de movimiento color crema. Patas de la silla en el centro del borde inferior."
+ },
+ "calienta-cadera": {
+  "nombre": "Calentamiento · Cadera",
+  "destino": "gimnasio/assets/calienta-cadera.webp",
+  "ancho": 440,
+  "alto": 520,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "El personaje de gimnasio/assets/pupil-0.webp (Vega: misma cara, peinado y chándal, sin mochila) calentando: con las manos en la cintura y los pies separados, dibuja círculos amplios con la cadera. Dos o tres rayitas curvas de movimiento, del color crema del juego, indican qué parte se mueve. Gesto alegre y postura segura. Pies en el centro del borde inferior."
+ },
+ "calienta-cadera-silla": {
+  "nombre": "Calentamiento en silla · Cadera",
+  "destino": "gimnasio/assets/calienta-cadera-silla.webp",
+  "ancho": 440,
+  "alto": 520,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Pareja de calienta-cadera, con el mismo personaje (gimnasio/assets/pupil-0.webp, sin mochila), tamaño y estilo, en la variante sentada: sentada al borde de la silla con las manos en la cintura, balancea la cadera a un lado y a otro. Silla escolar de madera clara con patas metálicas verde azuladas, los dos pies bien apoyados salvo el que se mueve. Las mismas rayitas de movimiento color crema. Patas de la silla en el centro del borde inferior."
+ },
+ "calienta-hombros": {
+  "nombre": "Calentamiento · Hombros",
+  "destino": "gimnasio/assets/calienta-hombros.webp",
+  "ancho": 440,
+  "alto": 520,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "El personaje de gimnasio/assets/pupil-0.webp (Vega: misma cara, peinado y chándal, sin mochila) calentando: dibuja círculos grandes con los dos brazos estirados, uno arriba y otro abajo, como un molino. Dos o tres rayitas curvas de movimiento, del color crema del juego, indican qué parte se mueve. Gesto alegre y postura segura. Pies en el centro del borde inferior."
+ },
+ "calienta-hombros-silla": {
+  "nombre": "Calentamiento en silla · Hombros",
+  "destino": "gimnasio/assets/calienta-hombros-silla.webp",
+  "ancho": 440,
+  "alto": 520,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Pareja de calienta-hombros, con el mismo personaje (gimnasio/assets/pupil-0.webp, sin mochila), tamaño y estilo, en la variante sentada: sentada, con las manos en los hombros, dibuja círculos con los codos. Silla escolar de madera clara con patas metálicas verde azuladas, los dos pies bien apoyados salvo el que se mueve. Las mismas rayitas de movimiento color crema. Patas de la silla en el centro del borde inferior."
+ },
+ "calienta-munecas": {
+  "nombre": "Calentamiento · Muñecas",
+  "destino": "gimnasio/assets/calienta-munecas.webp",
+  "ancho": 440,
+  "alto": 520,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "El personaje de gimnasio/assets/pupil-0.webp (Vega: misma cara, peinado y chándal, sin mochila) calentando: con los dedos entrelazados delante del pecho, gira las muñecas. Dos o tres rayitas curvas de movimiento, del color crema del juego, indican qué parte se mueve. Gesto alegre y postura segura. Pies en el centro del borde inferior."
+ },
+ "calienta-munecas-silla": {
+  "nombre": "Calentamiento en silla · Muñecas",
+  "destino": "gimnasio/assets/calienta-munecas-silla.webp",
+  "ancho": 440,
+  "alto": 520,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Pareja de calienta-munecas, con el mismo personaje (gimnasio/assets/pupil-0.webp, sin mochila), tamaño y estilo, en la variante sentada: sentada, con los dedos entrelazados delante del pecho, gira las muñecas. Silla escolar de madera clara con patas metálicas verde azuladas, los dos pies bien apoyados salvo el que se mueve. Las mismas rayitas de movimiento color crema. Patas de la silla en el centro del borde inferior."
+ },
+ "calienta-cuello": {
+  "nombre": "Calentamiento · Cuello",
+  "destino": "gimnasio/assets/calienta-cuello.webp",
+  "ancho": 440,
+  "alto": 520,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "El personaje de gimnasio/assets/pupil-0.webp (Vega: misma cara, peinado y chándal, sin mochila) calentando: inclina despacio la cabeza hacia un hombro, con los hombros relajados y los brazos sueltos (sin echar la cabeza atrás). Dos o tres rayitas curvas de movimiento, del color crema del juego, indican qué parte se mueve. Gesto alegre y postura segura. Pies en el centro del borde inferior."
+ },
+ "calienta-cuello-silla": {
+  "nombre": "Calentamiento en silla · Cuello",
+  "destino": "gimnasio/assets/calienta-cuello-silla.webp",
+  "ancho": 440,
+  "alto": 520,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Pareja de calienta-cuello, con el mismo personaje (gimnasio/assets/pupil-0.webp, sin mochila), tamaño y estilo, en la variante sentada: sentada con la espalda recta, inclina despacio la cabeza hacia un hombro. Silla escolar de madera clara con patas metálicas verde azuladas, los dos pies bien apoyados salvo el que se mueve. Las mismas rayitas de movimiento color crema. Patas de la silla en el centro del borde inferior."
+ },
+ "calienta-trote": {
+  "nombre": "Calentamiento · Trote en el sitio",
+  "destino": "gimnasio/assets/calienta-trote.webp",
+  "ancho": 440,
+  "alto": 520,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "El personaje de gimnasio/assets/pupil-0.webp (Vega: misma cara, peinado y chándal, sin mochila) calentando: trota suave sin moverse del sitio, una rodilla levantada y el brazo contrario adelante. Dos o tres rayitas curvas de movimiento, del color crema del juego, indican qué parte se mueve. Gesto alegre y postura segura. Pies en el centro del borde inferior."
+ },
+ "calienta-trote-silla": {
+  "nombre": "Calentamiento en silla · Trote en el sitio",
+  "destino": "gimnasio/assets/calienta-trote-silla.webp",
+  "ancho": 440,
+  "alto": 520,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Pareja de calienta-trote, con el mismo personaje (gimnasio/assets/pupil-0.webp, sin mochila), tamaño y estilo, en la variante sentada: sentada, marcha levantando una rodilla y moviendo el brazo contrario. Silla escolar de madera clara con patas metálicas verde azuladas, los dos pies bien apoyados salvo el que se mueve. Las mismas rayitas de movimiento color crema. Patas de la silla en el centro del borde inferior."
+ },
+ "calienta-saltos": {
+  "nombre": "Calentamiento · Saltos de tijera",
+  "destino": "gimnasio/assets/calienta-saltos.webp",
+  "ancho": 440,
+  "alto": 520,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "El personaje de gimnasio/assets/pupil-0.webp (Vega: misma cara, peinado y chándal, sin mochila) calentando: en el aire en mitad de un salto de tijera (jumping jack) suave: piernas abiertas y brazos en uve por encima de la cabeza. Dos o tres rayitas curvas de movimiento, del color crema del juego, indican qué parte se mueve. Gesto alegre y postura segura. Pies en el centro del borde inferior."
+ },
+ "calienta-saltos-silla": {
+  "nombre": "Calentamiento en silla · Saltos de tijera",
+  "destino": "gimnasio/assets/calienta-saltos-silla.webp",
+  "ancho": 440,
+  "alto": 520,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Pareja de calienta-saltos, con el mismo personaje (gimnasio/assets/pupil-0.webp, sin mochila), tamaño y estilo, en la variante sentada: sentada, abre a la vez piernas y brazos en uve, como un salto de tijera sin levantarse. Silla escolar de madera clara con patas metálicas verde azuladas, los dos pies bien apoyados salvo el que se mueve. Las mismas rayitas de movimiento color crema. Patas de la silla en el centro del borde inferior."
+ }
+}

@@ -1,6 +1,6 @@
 # Plan de El Pabellón, el hub de Educación Física
 
-20 de noviembre de 2026. Sustituye al plan anterior, que giraba en torno a los días de lluvia. Documentos que lo acompañan: [qué actividades digitales de EF existen y cuáles versionar](09-investigacion-dias-de-lluvia.md), [registro y notas](10-registro-y-notas.md) e [encargo de imágenes](../arte/ENCARGO.md).
+20 de noviembre de 2026. Sustituye al plan anterior, que giraba en torno a los días de lluvia. Documentos que lo acompañan: [qué actividades digitales de EF existen y cuáles versionar](09-investigacion-dias-de-lluvia.md), [registro y notas](10-registro-y-notas.md), [el álbum: descubrir, coleccionar y desbloquear](12-descubrimiento.md) e [encargo de imágenes](../arte/ENCARGO.md).
 
 ## Qué es
 
@@ -82,8 +82,9 @@ Mismo sistema que Agencia La Lupa, del repo de multiplicopolis: una hoja de Goog
 | **D. La Pizarra y El Aula** | Rosco motor, oca cooperativa, bingo en movimiento | Hecha, con tablero, fondos, fichas, dados y movimientos pintados |
 | **E. La Grada** | Partidos de mate en directo; espectador sin plaza | Hecha y vista funcionar por conexión directa. Sin probar por el relevo ni en la red del centro |
 | **F. Remate** | Gimnasio táctil y con el pedido en la escena; pista pintada y menús de Mate en la estética común; segunda misión del gimnasio; retirada de las actividades antiguas | En curso |
-| **G. Arte** | Las imágenes de `arte/ENCARGO.md` sustituyen a lo provisional según llegan | Hecha: los diez lotes están entregados e integrados, sin pedidos pendientes |
-| **H. Lo que sigue** | El profe abre y cierra lugares por clase; el Vestuario como puerta; lugares de la reserva; descubrir solas las salas de mate de una clase | Sin empezar |
+| **G. Arte** | Las imágenes de `arte/ENCARGO.md` sustituyen a lo provisional según llegan | Hecha para los lotes 01 a 15. Pedidos los lotes 16 a 20 del álbum y los juegos nuevos (94 imágenes); las láminas del mate esperan a que Pablo confirme sus normas |
+| **H. Lo que sigue** | El profe abre y cierra lugares por clase; el Vestuario como puerta; lugares de la reserva; descubrir solas las salas de mate de una clase | Sin empezar. El profe y el Vestuario quedan dentro de la fase I |
+| **I. El Álbum** | Capa de descubrimiento: álbum de cromos en El Vestuario, pistas de Robles, mural de la clase, normas de los juegos reales antes de su versión de ordenador (El Banquillo), y los juegos de higiene, agua, material, calentamiento, juego limpio y equipo. Detalle y fases en [12-descubrimiento.md](12-descubrimiento.md) | Diseñada; pendiente de que Pablo la apruebe |
 
 ## Decisiones abiertas
 

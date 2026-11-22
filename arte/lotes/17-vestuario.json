@@ -1,0 +1,254 @@
+{
+ "_titulo": "El Vestuario: ¿qué hay en mi neceser?",
+ "_nota": "Juego El Neceser (docs/12-descubrimiento.md, fase 1), en el lugar nuevo vestuario/. El fondo es el vestuario ya pintado (mate/assets/pista/vestuario.webp) y la puerta, assets/door-vestuario.webp: no se repiten. Los objetos se colocan sobre el banco y se arrastran al neceser; cada uno es además un cromo del álbum. Todos los objetos comparten punto de vista, luz y escala relativa (la toalla doblada mide lo mismo que la camiseta doblada; el peine, la mitad). Mientras no llegan, el juego usa formas simples con rótulo. Este lote aún no tiene índice: se le añadirá _indice cuando exista la carpeta vestuario/.",
+ "neceser-abierto": {
+  "nombre": "El neceser abierto",
+  "destino": "vestuario/assets/neceser-abierto.webp",
+  "ancho": 900,
+  "alto": 620,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Una bolsa de aseo (neceser) de tela verde azulada con cremallera naranja teja y asa lateral, abierta de par en par y vista en tres cuartos desde arriba, vacía, de modo que se ve bien su interior claro color crema: ahí coloca el juego los objetos. Ocupa casi todo el lienzo. Tela con textura de acuarela, contorno marrón fino. Sin marcas ni letras."
+ },
+ "neceser-cerrado": {
+  "nombre": "El neceser cerrado y listo",
+  "destino": "vestuario/assets/neceser-cerrado.webp",
+  "ancho": 900,
+  "alto": 620,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "El mismo neceser de neceser-abierto, con el mismo encuadre y tamaño, ahora con la cremallera cerrada y abultado porque va lleno; una esquina de toalla asoma por un extremo. Se muestra al terminar el nivel."
+ },
+ "neceser-mochila": {
+  "nombre": "La mochila de Educación Física",
+  "destino": "vestuario/assets/mochila.webp",
+  "ancho": 700,
+  "alto": 700,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "La mochila escolar verde azulada con bolsillo amarillo que cuelga en assets/door-vestuario.webp y que lleva gimnasio/assets/pupil-0.webp, abierta por arriba y vista en tres cuartos desde arriba, vacía, con el interior visible. En el nivel «Depende del día» los objetos que no son de aseo (gorra, botella, calcetines) van aquí."
+ },
+ "neceser-toalla": {
+  "nombre": "Toalla pequeña",
+  "destino": "vestuario/assets/toalla.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Una toalla pequeña de manos, de rizo azul claro con una franja crema, doblada en tres. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-jabon": {
+  "nombre": "Jabón",
+  "destino": "vestuario/assets/jabon.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Una pastilla de jabón blanca dentro de una jabonera de viaje verde azulada abierta, con dos burbujas pequeñas. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-desodorante": {
+  "nombre": "Desodorante de bola",
+  "destino": "vestuario/assets/desodorante.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un desodorante de bola (roll-on) pequeño, envase blanco con tapón verde azulado, sin etiqueta legible. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-camiseta": {
+  "nombre": "Camiseta limpia de repuesto",
+  "destino": "vestuario/assets/camiseta.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Una camiseta de manga corta blanca con ribete naranja teja, limpia y bien doblada. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-peine": {
+  "nombre": "Peine",
+  "destino": "vestuario/assets/peine.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un peine de bolsillo de color naranja teja con púas anchas. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-botella": {
+  "nombre": "Botella de agua",
+  "destino": "vestuario/assets/botella.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Una botella reutilizable de metal verde azulado con tapón de rosca y asa, cerrada, igual que la que hay sobre el banco en mate/assets/pista/vestuario.webp. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-calcetines": {
+  "nombre": "Calcetines de repuesto",
+  "destino": "vestuario/assets/calcetines.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un par de calcetines deportivos blancos con dos rayas verde azuladas, enrollados juntos. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-bolsa-ropa": {
+  "nombre": "Bolsa para la ropa sudada",
+  "destino": "vestuario/assets/bolsa-ropa.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Una bolsa de tela de cuerdas, color crema con cordón naranja, medio vacía y arrugada. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-crema-solar": {
+  "nombre": "Crema solar",
+  "destino": "vestuario/assets/crema-solar.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un tubo de crema solar amarillo con tapón blanco y un sol sencillo pintado, sin letras. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-gorra": {
+  "nombre": "Gorra",
+  "destino": "vestuario/assets/gorra.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Una gorra infantil de deporte amarilla con visera verde azulada. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-coletero": {
+  "nombre": "Coletero",
+  "destino": "vestuario/assets/coletero.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Dos gomas del pelo de tela (coleteros), una naranja y una verde azulada, una encima de otra. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-panuelos": {
+  "nombre": "Pañuelos de papel",
+  "destino": "vestuario/assets/panuelos.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un paquete pequeño de pañuelos de papel, envoltorio azul claro liso con un pañuelo blanco asomando. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-chanclas": {
+  "nombre": "Chanclas",
+  "destino": "vestuario/assets/chanclas.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un par de chanclas de goma azules, una sobre otra. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-cepillo-dientes": {
+  "nombre": "Cepillo de dientes con funda",
+  "destino": "vestuario/assets/cepillo-dientes.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un cepillo de dientes infantil verde con su funda de viaje transparente y un tubo pequeño de pasta blanco sin letras. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-no-consola": {
+  "nombre": "Intruso: consola portátil",
+  "destino": "vestuario/assets/no-consola.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Una consola portátil de videojuegos genérica, roja y gris, con la pantalla apagada, sin marca. No va en el neceser: el juego lo usa como distractor, pero se pinta con el mismo cariño que los demás, sin aspas ni señales de prohibido. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-no-chuches": {
+  "nombre": "Intruso: bolsa de chucherías",
+  "destino": "vestuario/assets/no-chuches.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Una bolsa de papel de rayas rosas y blancas abierta, con gominolas de colores asomando. No va en el neceser: el juego lo usa como distractor, pero se pinta con el mismo cariño que los demás, sin aspas ni señales de prohibido. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-no-colonia": {
+  "nombre": "Intruso: frasco de colonia de cristal",
+  "destino": "vestuario/assets/no-colonia.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un frasco de colonia de cristal grueso con tapón dorado y líquido ámbar: se nota que es de vidrio y frágil. No va en el neceser: el juego lo usa como distractor, pero se pinta con el mismo cariño que los demás, sin aspas ni señales de prohibido. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-no-colgante": {
+  "nombre": "Intruso: colgante y pulseras",
+  "destino": "vestuario/assets/no-colgante.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un collar con colgante metálico, dos pulseras y un reloj de pulsera amontonados: lo que hay que quitarse antes de la clase. No va en el neceser: el juego lo usa como distractor, pero se pinta con el mismo cariño que los demás, sin aspas ni señales de prohibido. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-no-movil": {
+  "nombre": "Intruso: teléfono móvil",
+  "destino": "vestuario/assets/no-movil.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un teléfono móvil genérico con funda verde azulada y la pantalla apagada, sin marca. No va en el neceser: el juego lo usa como distractor, pero se pinta con el mismo cariño que los demás, sin aspas ni señales de prohibido. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-no-refresco": {
+  "nombre": "Intruso: lata de refresco",
+  "destino": "vestuario/assets/no-refresco.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Una lata de refresco genérica naranja con gotas de frío, sin letras ni logotipo. No va en el neceser: el juego lo usa como distractor, pero se pinta con el mismo cariño que los demás, sin aspas ni señales de prohibido. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-no-toalla-mojada": {
+  "nombre": "Intruso: la toalla mojada de la semana pasada",
+  "destino": "vestuario/assets/no-toalla-mojada.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "La misma toalla azul claro de neceser-toalla pero hecha un gurruño húmedo y arrugado, con dos manchitas grises de humedad y tres rayitas onduladas de mal olor pintadas encima. No va en el neceser: el juego lo usa como distractor, pero se pinta con el mismo cariño que los demás, sin aspas ni señales de prohibido. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "neceser-no-spray": {
+  "nombre": "Intruso: desodorante en espray",
+  "destino": "vestuario/assets/no-spray.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un bote alto de desodorante en espray, metálico gris con tapón negro, sin etiqueta, con una nubecilla saliendo de la boquilla. No va en el neceser: el juego lo usa como distractor, pero se pinta con el mismo cariño que los demás, sin aspas ni señales de prohibido. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ }
+}

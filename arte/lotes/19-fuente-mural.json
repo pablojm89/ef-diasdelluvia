@@ -1,0 +1,120 @@
+{
+ "_titulo": "La Fuente y el pabellón seguro: el agua, el suelo y el mural de la clase",
+ "_nota": "Lo esencial de las fases 2 y 4 (docs/12-descubrimiento.md): el juego Ni una gota (lugar nuevo fuente/), que usa además el gimnasio ya pintado (gimnasio/assets/gym.webp) como escenario, y el Mural de azulejos de la pantalla digital. Los objetos se colocan con CSS sobre el parqué de gym.webp, así que todos se pintan vistos desde la misma altura que ese fondo. Este lote aún no tiene índice: se le añadirá _indice cuando exista la carpeta fuente/.",
+ "door-fuente": {
+  "nombre": "La Fuente",
+  "destino": "assets/door-fuente.webp",
+  "ancho": 480,
+  "alto": 640,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Vista a través de una puerta abierta; el motivo principal centrado y algo bajo, porque la imagen se recorta en forma de arco. Rincón del patio del colegio junto a la puerta del pabellón: una fuente de beber escolar adosada a una pared ocre melocotón, de piedra clara con un panel de azulejo azul y naranja detrás, dos grifos de pulsador y una pila alargada, a la altura de un niño. Suelo de baldosa de barro, un naranjo a un lado y luz dorada de tarde. Una botella reutilizable verde azulada apoyada en el borde de la pila. Sin personas ni texto."
+ },
+ "fuente-fondo": {
+  "nombre": "La fuente del patio",
+  "destino": "fuente/assets/fuente.webp",
+  "ancho": 1536,
+  "alto": 1024,
+  "transparente": false,
+  "listo": false,
+  "prompt": "El rincón de door-fuente visto de frente y completo, en formato apaisado: la fuente de beber de piedra clara con panel de azulejo azul y naranja y dos grifos de pulsador en el centro izquierda; a la derecha, la puerta verde azulada del pabellón abierta, por la que se adivina el parqué; delante de la puerta, en el suelo, un felpudo grande de fibra; junto a la pared, un banco de madera miel vacío (ahí se dejan las botellas). Suelo de baldosa de barro, naranjos, luz dorada de tarde igual que gimnasio/assets/gym.webp. El tercio inferior del suelo queda despejado. Sin personas ni texto."
+ },
+ "fuente-charco": {
+  "nombre": "Charco en el parqué",
+  "destino": "fuente/assets/charco.webp",
+  "ancho": 360,
+  "alto": 160,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un charco pequeño de agua derramada sobre parqué: mancha irregular, casi transparente, con dos reflejos claros de la luz de los ventanales y un borde húmedo algo más oscuro; debe distinguirse del suelo pero no a la primera, porque el alumnado tiene que buscarlo. Sólo el agua: sin suelo pintado alrededor. Visto desde la misma altura y con la misma luz que el suelo de gimnasio/assets/gym.webp, porque el juego lo coloca encima de ese parqué."
+ },
+ "fuente-gotas": {
+  "nombre": "Reguero de gotas",
+  "destino": "fuente/assets/gotas.webp",
+  "ancho": 360,
+  "alto": 120,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un reguero de siete u ocho gotas de agua de distinto tamaño en fila irregular, como las que deja una botella mal cerrada al caminar. Casi transparentes, con un puntito de reflejo cada una. Sólo las gotas. Visto desde la misma altura y con la misma luz que el suelo de gimnasio/assets/gym.webp, porque el juego lo coloca encima de ese parqué."
+ },
+ "fuente-botella-abierta": {
+  "nombre": "Botella volcada y abierta",
+  "destino": "fuente/assets/botella-abierta.webp",
+  "ancho": 320,
+  "alto": 200,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "La botella reutilizable de metal verde azulado de mate/assets/pista/vestuario.webp tumbada en el suelo, sin el tapón (el tapón está al lado), con un hilo de agua saliendo de la boca. Visto desde la misma altura y con la misma luz que el suelo de gimnasio/assets/gym.webp, porque el juego lo coloca encima de ese parqué."
+ },
+ "fuente-botella": {
+  "nombre": "Botella cerrada",
+  "destino": "fuente/assets/botella.webp",
+  "ancho": 160,
+  "alto": 320,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "La misma botella reutilizable de metal verde azulado de mate/assets/pista/vestuario.webp, de pie y bien cerrada. El juego la muestra en cuatro colores cambiando el tono: pinta el cuerpo de un solo color plano con pocas sombras. Visto desde la misma altura y con la misma luz que el suelo de gimnasio/assets/gym.webp, porque el juego lo coloca encima de ese parqué."
+ },
+ "fuente-senal": {
+  "nombre": "Señal de suelo mojado",
+  "destino": "fuente/assets/senal.webp",
+  "ancho": 240,
+  "alto": 320,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un caballete plegable amarillo de aviso de suelo mojado, de plástico, abierto en uve invertida, con el pictograma negro de una figura que resbala dentro de un triángulo, sin ninguna letra. Visto desde la misma altura y con la misma luz que el suelo de gimnasio/assets/gym.webp, porque el juego lo coloca encima de ese parqué."
+ },
+ "fuente-fregona": {
+  "nombre": "Fregona y cubo",
+  "destino": "fuente/assets/fregona.webp",
+  "ancho": 300,
+  "alto": 480,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un cubo de fregar azul con escurridor y una fregona de tiras blancas con palo de madera apoyada dentro, como los del cuarto de limpieza de un colegio. Visto desde la misma altura y con la misma luz que el suelo de gimnasio/assets/gym.webp, porque el juego lo coloca encima de ese parqué."
+ },
+ "fuente-felpudo": {
+  "nombre": "Felpudo de la entrada",
+  "destino": "fuente/assets/felpudo.webp",
+  "ancho": 420,
+  "alto": 180,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un felpudo rectangular grande de fibra de coco color paja con borde de goma verde azulado, visto en perspectiva de suelo, con dos huellas húmedas de zapatilla marcadas encima. Visto desde la misma altura y con la misma luz que el suelo de gimnasio/assets/gym.webp, porque el juego lo coloca encima de ese parqué."
+ },
+ "fuente-zapatillas": {
+  "nombre": "Zapatillas mojadas",
+  "destino": "fuente/assets/zapatillas.webp",
+  "ancho": 300,
+  "alto": 200,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un par de zapatillas de deporte infantiles blancas y naranjas, mojadas por la lluvia, con gotas en la puntera y un cerco pequeño de agua bajo cada suela. Visto desde la misma altura y con la misma luz que el suelo de gimnasio/assets/gym.webp, porque el juego lo coloca encima de ese parqué."
+ },
+ "mural-pabellon": {
+  "nombre": "Mural de azulejos 1: el pabellón",
+  "destino": "assets/mural-pabellon.webp",
+  "ancho": 1536,
+  "alto": 1024,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Un gran panel de azulejos andaluces pintados a mano, visto de frente y sin perspectiva, que entre todos forman una sola escena: el pabellón de Educación Física del colegio por fuera, con su tejado de teja, arcos, la puerta verde azulada y naranjos cargados de fruta delante, y una pelota amarilla botando en el patio. Estilo de azulejería sevillana tradicional adaptado a la paleta del juego: azul añil, naranja, verde azulado, ocre y blanco roto, con trazo de pincel y esmalte brillante. La escena llena todo el lienzo y está pensada para cortarse en 6 columnas por 4 filas de azulejos de 256 × 256: no pintes las juntas (las pone el juego) y evita que una cara o un detalle importante caiga justo en las líneas de corte. Alrededor no hay marco. Sin texto."
+ },
+ "mural-azulejo": {
+  "nombre": "Azulejo en blanco del mural",
+  "destino": "assets/mural-azulejo.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Un azulejo cuadrado sin decorar, de esmalte blanco roto ligeramente brillante, con el borde biselado y una cenefa finísima azul añil a 12 px del canto. Es el hueco del mural de la clase que aún no se ha ganado; se repite en mosaico. Sin dibujo central ni texto."
+ }
+}

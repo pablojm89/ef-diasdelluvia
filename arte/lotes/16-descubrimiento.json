@@ -1,0 +1,173 @@
+{
+ "_titulo": "El Álbum del Pabellón: cromos, sellos y despistes de Robles",
+ "_nota": "Capa de descubrimiento (docs/12-descubrimiento.md, fases 1 y 2). El álbum de cromos vive en El Vestuario y se abre desde el mapa del alumno. Mientras no llegan, el álbum se dibuja con gimnasio/assets/paper.webp y formas de CSS, y los cromos de material usan los gimnasio/assets/prop-*.webp que ya existen. Este lote aún no tiene índice: se le añadirá _indice cuando exista la carpeta album/.",
+ "album-tapa": {
+  "nombre": "Tapa del álbum",
+  "destino": "album/assets/tapa.webp",
+  "ancho": 720,
+  "alto": 960,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un álbum de cromos escolar cerrado, visto de frente y un poco desde arriba, que ocupa casi todo el lienzo: tapa de cartón verde azulado como el zócalo de gimnasio/assets/gym.webp, lomo de tela naranja teja, cantoneras gastadas color crema y, en el centro de la tapa, un recuadro crema liso y vacío (ahí escribe el juego el título) rodeado por una cenefa pintada de azulejo azul y naranja. Debajo del recuadro, un pequeño dibujo de un silbato con cordón naranja. Aspecto de objeto usado y querido, de papelería de barrio. Sin letras ni números."
+ },
+ "album-pagina": {
+  "nombre": "Doble página abierta del álbum",
+  "destino": "album/assets/pagina.webp",
+  "ancho": 1536,
+  "alto": 1024,
+  "transparente": false,
+  "listo": false,
+  "prompt": "El mismo álbum de album-tapa abierto por la mitad y visto exactamente desde arriba, ocupando todo el lienzo: dos páginas de papel crema #fbf0d8 con grano de acuarela muy suave, el pliegue central con una sombra cálida ligera, las esquinas apenas dobladas y el borde verde azulado de la tapa asomando 20 px alrededor. Las páginas están completamente vacías y lisas (sin recuadros, sin huecos, sin líneas): el juego dibuja encima los huecos y los cromos. Sin texto."
+ },
+ "album-icono": {
+  "nombre": "Icono: abrir el álbum",
+  "destino": "album/assets/icono.webp",
+  "ancho": 128,
+  "alto": 128,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Icono pintado: el álbum de album-tapa en pequeño, cerrado y en tres cuartos, con dos cromos crema asomando por arriba. Contorno marrón fino, motivo grande y centrado, legible a 24 px sobre un botón verde azulado oscuro, igual que gimnasio/assets/icon-mission.webp."
+ },
+ "album-hueco": {
+  "nombre": "Hueco de cromo sin descubrir",
+  "destino": "album/assets/hueco.webp",
+  "ancho": 300,
+  "alto": 400,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un hueco vacío de álbum de cromos: rectángulo vertical de esquinas redondeadas de papel crema algo más oscuro que la página, con borde de trazo discontinuo marrón claro pintado a mano y cuatro esquineras de papel para sujetar el cromo. El interior queda liso y vacío: el juego pone encima la silueta o el interrogante. Fuera del rectángulo, todo transparente. Sin texto ni números."
+ },
+ "album-sello-zapatilla": {
+  "nombre": "Sello de maestría 1: la zapatilla",
+  "destino": "album/assets/sello-zapatilla.webp",
+  "ancho": 200,
+  "alto": 200,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Marca de un sello de caucho estampado con tinta verde azulada sobre papel (sólo la tinta, el resto transparente): un círculo de borde doble algo irregular y, dentro, una zapatilla de deporte de perfil con los cordones atados. Tinta desigual, con pequeñas calvas como un tampón de verdad, girado unos 8 grados. Sin letras ni números."
+ },
+ "album-sello-silbato": {
+  "nombre": "Sello de maestría 2: el silbato",
+  "destino": "album/assets/sello-silbato.webp",
+  "ancho": 200,
+  "alto": 200,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Igual que album-sello-zapatilla (mismo círculo de borde doble, mismo tamaño y acabado de tampón), pero con tinta naranja teja y, dentro, el silbato del profe Robles con su cordón. Girado unos 6 grados al lado contrario. Sin letras ni números."
+ },
+ "album-sello-naranja": {
+  "nombre": "Sello de maestría 3: la naranja",
+  "destino": "album/assets/sello-naranja.webp",
+  "ancho": 200,
+  "alto": 200,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Igual que album-sello-zapatilla (mismo círculo de borde doble, mismo tamaño y acabado de tampón), pero con tinta azul añil y, dentro, una naranja con su rabito y dos hojas, como las de los naranjos de gimnasio/assets/gym.webp. Sin letras ni números."
+ },
+ "album-robles": {
+  "nombre": "Robles entrega el álbum",
+  "destino": "album/assets/robles-album.webp",
+  "ancho": 760,
+  "alto": 550,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "El profe Robles exactamente como en gimnasio/assets/robles-rest.webp (misma cara, cinta del pelo, polo naranja, chándal azul marino con franja, silbato), con el mismo tamaño y los pies en el mismo punto del lienzo, ahora ofreciendo hacia delante con las dos manos el álbum cerrado de album-tapa, sonriendo con complicidad, como quien comparte un secreto. Se alterna con las otras poses sin que el cuerpo salte."
+ },
+ "album-nota": {
+  "nombre": "Nota de Robles con chincheta",
+  "destino": "album/assets/nota.webp",
+  "ancho": 420,
+  "alto": 320,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un papelito crema arrancado de una libreta de cuadros muy tenues, algo torcido, sujeto arriba con una chincheta roja y con una esquina levantada. El papel está vacío: el juego escribe encima la pista. Es la nota que el profe Robles deja en el tablón de corcho del vestuario (mate/assets/pista/vestuario.webp). Fuera del papel, transparente. Sin texto."
+ },
+ "album-despiste-gorra": {
+  "nombre": "Despiste de Robles: la gorra",
+  "destino": "album/assets/despiste-gorra.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Una gorra de deporte azul marino con visera naranja teja, un poco descolorida por el sol, apoyada de lado. Es un objeto que el profe Robles ha perdido y el alumnado encuentra escondido en una escena pintada (gimnasio, cuarto de material, vestuario): debe leerse bien a 60 px de alto y también recortado a medias detrás de otro objeto. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "album-despiste-cronometro": {
+  "nombre": "Despiste de Robles: el cronómetro",
+  "destino": "album/assets/despiste-cronometro.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un cronómetro de mano de profe de Educación Física, carcasa naranja, botones metálicos arriba y cordón negro enrollado; la pantalla en blanco, sin cifras. Es un objeto que el profe Robles ha perdido y el alumnado encuentra escondido en una escena pintada (gimnasio, cuarto de material, vestuario): debe leerse bien a 60 px de alto y también recortado a medias detrás de otro objeto. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "album-despiste-carpeta": {
+  "nombre": "Despiste de Robles: la carpeta de pinza",
+  "destino": "album/assets/despiste-carpeta.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Una carpeta de pinza (portapapeles) de madera clara con pinza metálica y una hoja crema con rayas de lista sin letras, y un lápiz amarillo sujeto en la pinza. Es un objeto que el profe Robles ha perdido y el alumnado encuentra escondido en una escena pintada (gimnasio, cuarto de material, vestuario): debe leerse bien a 60 px de alto y también recortado a medias detrás de otro objeto. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "album-despiste-gafas": {
+  "nombre": "Despiste de Robles: las gafas de sol",
+  "destino": "album/assets/despiste-gafas.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Unas gafas de sol deportivas de montura verde azulada y cristales oscuros, plegadas a medias. Es un objeto que el profe Robles ha perdido y el alumnado encuentra escondido en una escena pintada (gimnasio, cuarto de material, vestuario): debe leerse bien a 60 px de alto y también recortado a medias detrás de otro objeto. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "album-despiste-llaves": {
+  "nombre": "Despiste de Robles: el manojo de llaves",
+  "destino": "album/assets/despiste-llaves.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un manojo de cinco llaves antiguas y modernas en una anilla, con un llavero de cuero en forma de balón pequeño. Es un objeto que el profe Robles ha perdido y el alumnado encuentra escondido en una escena pintada (gimnasio, cuarto de material, vestuario): debe leerse bien a 60 px de alto y también recortado a medias detrás de otro objeto. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "album-despiste-bocadillo": {
+  "nombre": "Despiste de Robles: el bocadillo",
+  "destino": "album/assets/despiste-bocadillo.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un bocadillo de pan de barra envuelto en papel de aluminio, con una punta del pan asomando, y una mandarina al lado. Es un objeto que el profe Robles ha perdido y el alumnado encuentra escondido en una escena pintada (gimnasio, cuarto de material, vestuario): debe leerse bien a 60 px de alto y también recortado a medias detrás de otro objeto. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "album-despiste-taza": {
+  "nombre": "Despiste de Robles: la taza del café",
+  "destino": "album/assets/despiste-taza.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Una taza de loza blanca con una cenefa de azulejo azul y naranja pintada alrededor, vacía, con una cucharilla dentro. Es un objeto que el profe Robles ha perdido y el alumnado encuentra escondido en una escena pintada (gimnasio, cuarto de material, vestuario): debe leerse bien a 60 px de alto y también recortado a medias detrás de otro objeto. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ },
+ "album-despiste-bomba": {
+  "nombre": "Despiste de Robles: la bomba de inflar",
+  "destino": "album/assets/despiste-bomba.webp",
+  "ancho": 256,
+  "alto": 256,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Una bomba de mano para inflar balones, azul, con su manguera corta y la aguja metálica puesta. Es un objeto que el profe Robles ha perdido y el alumnado encuentra escondido en una escena pintada (gimnasio, cuarto de material, vestuario): debe leerse bien a 60 px de alto y también recortado a medias detrás de otro objeto. Objeto suelto visto en tres cuartos desde arriba, centrado, que ocupe casi todo el lienzo, con el mismo acabado que gimnasio/assets/prop-cone.webp. Sin marcas, letras ni logotipos."
+ }
+}

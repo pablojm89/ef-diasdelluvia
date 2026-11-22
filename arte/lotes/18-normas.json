@@ -1,0 +1,225 @@
+{
+ "_titulo": "El Banquillo: láminas de normas de los juegos reales (mate y pelota sentada)",
+ "_nota": "Normas primero (docs/12-descubrimiento.md, fase 3): antes de abrir Mate Arena en el ordenador, el alumnado aprende las normas del mate que se juega de verdad en la pista. Cada norma es una lámina pintada, con muy poco texto debajo, y las preguntas son también láminas. Las láminas del mate dibujan la versión más común del juego; Pablo confirma sus normas de clase (docs/12-descubrimiento.md, apartado 5.5) antes de enviar el lote, y si cambia alguna se corrige aquí el pedido. Las de pelota sentada dibujan sólo las normas que Pablo ha dado. Las de pichi, pinfuvote, baloncesto y los juegos que vengan se pedirán cuando sus normas estén confirmadas. PLANTILLA PARA FUTUROS JUEGOS: cada juego pide el mismo juego de láminas de 1024 × 768 con el prefijo normas-<juego>-: (1) campo y colocación de los equipos, visto desde arriba; (2) el objetivo del juego en una acción; (3) y (4) el gesto permitido y el mismo gesto no permitido, con idéntico encuadre; (5) a (9) qué pasa en cada situación clave; (10) cómo se reconoce uno mismo la jugada; (11) qué se hace si alguien se cae o se hace daño; (12) cómo participa todo el equipo; (13) cómo se termina y se recoge. Mismos petos turquesa y coral, mismos ocho alumnos y misma pelota en todas. Mientras no llegan, las láminas se dibujan con tiza sobre la pizarra verde (círculos y aspas en SVG). Este lote aún no tiene índice: se le añadirá _indice cuando exista la carpeta banquillo/.",
+ "normas-mate-campo": {
+  "nombre": "Mate real · El campo y los equipos",
+  "destino": "banquillo/assets/mate-campo.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del mate (balón prisionero) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Se juega en el pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). La pelota es siempre la misma: blanda, de espuma, amarilla, del tamaño de un balón de balonmano. Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. Vista cenital exacta, como un plano, de media pista de parqué: un rectángulo grande marcado con cinta blanca, dividido en dos campos iguales por una línea central; detrás del fondo de cada campo, una franja estrecha marcada con cinta (la cárcel o cementerio): con cinta turquesa la franja que queda detrás del campo coral y con cinta coral la que queda detrás del campo turquesa, porque en cada franja se colocan los tocados del equipo contrario al campo que tienen delante. Cuatro jugadores con peto turquesa repartidos por el campo izquierdo y cuatro con peto coral repartidos por el derecho, vistos desde arriba, todos mirando al centro; uno turquesa tiene la pelota amarilla en las manos. Las dos franjas de cárcel están vacías. Es la lámina de colocación: tiene que entenderse de un vistazo dónde está cada equipo y dónde está la cárcel."
+ },
+ "normas-mate-objetivo": {
+  "nombre": "Mate real · A qué se juega: tocar con la pelota",
+  "destino": "banquillo/assets/mate-objetivo.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del mate (balón prisionero) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Se juega en el pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). La pelota es siempre la misma: blanda, de espuma, amarilla, del tamaño de un balón de balonmano. Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. Dos campos vistos desde un lateral a la altura de los ojos, con la línea central en medio de la imagen. Vega (pupil-0, peto turquesa), en el campo izquierdo, acaba de lanzar la pelota con una mano; la pelota vuela baja cruzando la línea central hacia Max (pupil-5, peto coral), que la ve venir y empieza a apartarse de un salto lateral. Una estela suave de acuarela marca la trayectoria recta de la pelota. Gestos de juego y de risa, no de miedo."
+ },
+ "normas-mate-altura-si": {
+  "nombre": "Mate real · Así sí: de hombros para abajo",
+  "destino": "banquillo/assets/mate-altura-si.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del mate (balón prisionero) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Se juega en el pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). La pelota es siempre la misma: blanda, de espuma, amarilla, del tamaño de un balón de balonmano. Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. Plano medio de Kai (pupil-1, peto coral) de pie, de frente, en su campo. La pelota amarilla le está tocando en el muslo, por debajo de la cintura. Kai sonríe con gesto de «me has dado». Al fondo, pequeña y de espaldas, la lanzadora con peto turquesa con el brazo aún extendido hacia abajo. Se tiene que ver con claridad que el toque es bajo, en la pierna."
+ },
+ "normas-mate-altura-no": {
+  "nombre": "Mate real · Así no: nunca a la cabeza",
+  "destino": "banquillo/assets/mate-altura-no.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del mate (balón prisionero) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Se juega en el pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). La pelota es siempre la misma: blanda, de espuma, amarilla, del tamaño de un balón de balonmano. Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. Exactamente el mismo encuadre, personaje y fondo que normas-mate-altura-si, pero ahora la pelota amarilla pasa a la altura de la cabeza de Kai, que se agacha a tiempo cubriéndose con el antebrazo y no recibe el golpe. Al fondo, la lanzadora con peto turquesa se lleva una mano a la boca, arrepentida, y levanta la otra pidiendo perdón. Nadie se hace daño: se entiende que ese tiro es demasiado alto y no vale."
+ },
+ "normas-mate-tocado": {
+  "nombre": "Mate real · Tocado sin bote: a la cárcel",
+  "destino": "banquillo/assets/mate-tocado.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del mate (balón prisionero) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Se juega en el pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). La pelota es siempre la misma: blanda, de espuma, amarilla, del tamaño de un balón de balonmano. Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. Vista lateral del campo coral. La pelota, que llega por el aire con una estela recta y limpia desde la izquierda (sin tocar el suelo), da en la cadera de Nora (pupil-6, peto coral), que hace el gesto de recibir el toque girando el cuerpo. El suelo entre la línea central y Nora está despejado, para que se vea que la pelota no ha botado."
+ },
+ "normas-mate-bote": {
+  "nombre": "Mate real · Si bota antes, no vale",
+  "destino": "banquillo/assets/mate-bote.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del mate (balón prisionero) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Se juega en el pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). La pelota es siempre la misma: blanda, de espuma, amarilla, del tamaño de un balón de balonmano. Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. Exactamente el mismo encuadre, personaje y fondo que normas-mate-tocado, pero ahora la estela de la pelota baja hasta el parqué, bota una vez (se ve la marca del bote con tres rayitas cortas de impacto en el suelo) y sube suave hasta rozar la espinilla de Nora, que sigue jugando tan tranquila con los brazos abiertos en gesto de «no pasa nada»."
+ },
+ "normas-mate-atrapar": {
+  "nombre": "Mate real · Si la atrapas en el aire, sigues jugando",
+  "destino": "banquillo/assets/mate-atrapar.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del mate (balón prisionero) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Se juega en el pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). La pelota es siempre la misma: blanda, de espuma, amarilla, del tamaño de un balón de balonmano. Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. Plano medio de Leo (pupil-7, peto turquesa) atrapando la pelota amarilla en el aire con las dos manos contra el pecho, con las rodillas flexionadas y cara de concentración alegre. La pelota llega de frente y no ha tocado el suelo. Detrás, un compañero turquesa celebra con el puño en alto."
+ },
+ "normas-mate-linea": {
+  "nombre": "Mate real · No se pisa la línea ni se sale del campo",
+  "destino": "banquillo/assets/mate-linea.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del mate (balón prisionero) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Se juega en el pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). La pelota es siempre la misma: blanda, de espuma, amarilla, del tamaño de un balón de balonmano. Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. Primer plano bajo del parqué con la línea central blanca cruzando la imagen de arriba abajo. A la izquierda, dos zapatillas de un jugador turquesa bien colocadas por detrás de la línea, con las puntas a un palmo. A la derecha, la zapatilla de un jugador coral que la pisa de lleno, con media suela al otro lado. Se ven sólo las piernas hasta la rodilla y el borde de los petos. La diferencia entre el pie bien colocado y el que pisa tiene que ser evidente."
+ },
+ "normas-mate-carcel": {
+  "nombre": "Mate real · Tocado: caminas por fuera hasta la cárcel",
+  "destino": "banquillo/assets/mate-carcel.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del mate (balón prisionero) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Se juega en el pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). La pelota es siempre la misma: blanda, de espuma, amarilla, del tamaño de un balón de balonmano. Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. Vista desde arriba en tres cuartos de la pista completa. Ada (pupil-4, peto coral), que acaba de ser tocada, camina tranquila con una mano levantada por el pasillo exterior de la pista, bordeando el campo turquesa por fuera de la cinta, hacia la franja de cárcel que hay detrás del campo turquesa. Un rastro de huellas pintadas en crema marca el camino que ha seguido por fuera. Dentro de los campos el juego sigue: dos jugadores de cada equipo en posición. No cruza por en medio ni corre."
+ },
+ "normas-mate-salvarse": {
+  "nombre": "Mate real · Desde la cárcel te puedes salvar",
+  "destino": "banquillo/assets/mate-salvarse.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del mate (balón prisionero) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Se juega en el pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). La pelota es siempre la misma: blanda, de espuma, amarilla, del tamaño de un balón de balonmano. Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. Vista lateral. En primer término, de espaldas a nosotros y dentro de la franja de cárcel marcada con cinta, Lúa (pupil-2, peto turquesa) lanza la pelota con una mano hacia el campo coral que tiene delante; la pelota toca en la pantorrilla a un jugador coral que está de espaldas a ella mirando al otro lado. Más allá, en el campo turquesa del fondo, dos compañeros turquesa la animan con los brazos en alto. Se entiende que Lúa estaba presa y que con ese toque vuelve a su campo."
+ },
+ "normas-mate-reconocer": {
+  "nombre": "Mate real · Si te dan, lo dices tú",
+  "destino": "banquillo/assets/mate-reconocer.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del mate (balón prisionero) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Se juega en el pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). La pelota es siempre la misma: blanda, de espuma, amarilla, del tamaño de un balón de balonmano. Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. Plano medio de Neo (pupil-3, peto turquesa) con la mano bien levantada y la otra señalándose el costado donde le acaba de rozar la pelota, que rueda ya por el suelo a su lado. Sonríe con deportividad. Enfrente, al otro lado de la línea, una rival coral le hace el gesto del pulgar hacia arriba. Nadie más lo ha visto: es él quien lo reconoce. No aparece ningún árbitro ni el profe."
+ },
+ "normas-mate-caida": {
+  "nombre": "Mate real · Si alguien se cae, el juego se para",
+  "destino": "banquillo/assets/mate-caida.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del mate (balón prisionero) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Se juega en el pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). La pelota es siempre la misma: blanda, de espuma, amarilla, del tamaño de un balón de balonmano. Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. Vista general del campo. Max (pupil-5, peto coral) está sentado en el parqué sujetándose una rodilla, con gesto de molestia leve, sin sangre ni dramatismo. Todos los demás se han quedado quietos: la jugadora turquesa que tenía la pelota la sujeta contra la cadera sin lanzarla; un compañero coral se ha agachado junto a Max y le pone una mano en el hombro; otra jugadora levanta el brazo llamando al profe Robles (el de gimnasio/assets/robles-rest.webp), que llega andando deprisa desde la derecha con el silbato en la mano. Nadie corre ni se ríe."
+ },
+ "normas-mate-pasar": {
+  "nombre": "Mate real · La pelota pasa por todo el equipo",
+  "destino": "banquillo/assets/mate-pasar.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del mate (balón prisionero) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Se juega en el pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). La pelota es siempre la misma: blanda, de espuma, amarilla, del tamaño de un balón de balonmano. Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. Dentro del campo turquesa, Vega (pupil-0, peto turquesa) tiene la pelota y, en vez de lanzar, se la pasa con las dos manos en un pase suave a Lúa (pupil-2, peto turquesa), que está a dos pasos con las manos abiertas pidiéndola y cara de ilusión. Detrás, otro compañero turquesa espera su turno aplaudiendo. Al fondo, desenfocado, el equipo coral atento."
+ },
+ "normas-mate-final": {
+  "nombre": "Mate real · Al acabar: nos saludamos y recogemos",
+  "destino": "banquillo/assets/mate-final.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del mate (balón prisionero) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Se juega en el pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). La pelota es siempre la misma: blanda, de espuma, amarilla, del tamaño de un balón de balonmano. Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. Los dos equipos en la línea central al terminar el partido: cuatro turquesas y cuatro corales chocan las manos en fila, sonriendo, sin gestos de burla ni de enfado. En primer término a la derecha, dos de ellos (uno de cada equipo) guardan juntos las pelotas amarillas en el carro metálico de balones que se ve en gimnasio/assets/gym.webp, y los petos doblados descansan sobre el banco de madera."
+ },
+ "normas-caballete": {
+  "nombre": "Caballete de las láminas",
+  "destino": "banquillo/assets/caballete.webp",
+  "ancho": 1200,
+  "alto": 1100,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un caballete escolar de madera miel con tres patas, visto de frente, que sostiene un tablero crema apaisado de proporción 4:3 totalmente vacío y liso (ahí pone el juego la lámina de normas), sujeto arriba con dos pinzas metálicas negras; en la repisa inferior, un borrador y dos tizas. El tablero ocupa el 80 % del ancho del lienzo. Sirve para todos los juegos, no sólo para el mate. Sin texto."
+ },
+ "normas-marca-si": {
+  "nombre": "Marca «así sí»",
+  "destino": "banquillo/assets/marca-si.webp",
+  "ancho": 160,
+  "alto": 160,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Una marca de aprobación pintada a mano con pincel grueso: una uve de visto bueno de color verde hoja sobre un disco crema de borde marrón fino, con el trazo algo irregular de la acuarela. El juego la superpone en la esquina de una lámina de normas. Sin letras."
+ },
+ "normas-marca-no": {
+  "nombre": "Marca «así no»",
+  "destino": "banquillo/assets/marca-no.webp",
+  "ancho": 160,
+  "alto": 160,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Pareja de normas-marca-si, con el mismo disco crema, tamaño y trazo: un aspa pintada con pincel grueso en naranja teja (no rojo chillón). Amable, de corrección de cuaderno, no de señal de tráfico. Sin letras."
+ },
+ "normas-peto": {
+  "nombre": "El peto: ya puedes jugar",
+  "destino": "banquillo/assets/peto.webp",
+  "ancho": 400,
+  "alto": 400,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "Un peto de malla de Educación Física doblado en dos sobre sí mismo, mitad turquesa y mitad coral (reversible), con los mismos colores y tejido que mate/assets/pista/peto-cometas.webp y peto-rayos.webp, visto en tres cuartos desde arriba. Es lo que el profe Robles entrega a quien ya sabe las normas de un juego y es también su cromo en el álbum. Sin números ni letras."
+ },
+ "normas-robles-peto": {
+  "nombre": "Robles entrega el peto",
+  "destino": "banquillo/assets/robles-peto.webp",
+  "ancho": 760,
+  "alto": 550,
+  "transparente": true,
+  "exacto": true,
+  "listo": false,
+  "prompt": "El profe Robles exactamente como en gimnasio/assets/robles-rest.webp (misma cara, cinta del pelo, polo naranja, chándal azul marino con franja, silbato), con el mismo tamaño y los pies en el mismo punto del lienzo, tendiendo hacia delante con una mano el peto doblado de normas-peto y con la otra mano en la cadera, orgulloso."
+ },
+ "door-banquillo": {
+  "nombre": "El Banquillo",
+  "destino": "assets/door-banquillo.webp",
+  "ancho": 480,
+  "alto": 640,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Vista a través de una puerta abierta; el motivo principal centrado y algo bajo, porque la imagen se recorta en forma de arco. El banco de madera miel que hay al borde de la pista del pabellón de gimnasio/assets/gym.webp, con petos turquesa y coral doblados encima y una pelota blanda amarilla debajo; a su lado, un caballete de madera con un tablero crema vacío. Al fondo, el parqué con las líneas blancas de la pista y las espalderas. Sin personas ni texto."
+ },
+ "normas-sentada-campo": {
+  "nombre": "Pelota sentada · Todos repartidos, sin equipos",
+  "destino": "banquillo/assets/sentada-campo.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas de la pelota sentada de verdad, la que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Se juega en el pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, sencillo). No hay equipos ni petos: cada uno juega por su cuenta con su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa, sin mochila). La pelota es la misma de las láminas del mate: blanda, de espuma, amarilla. Encuadre limpio, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer una marca en una esquina. Sin texto, números ni símbolos de prohibido dentro de la imagen. Vista desde arriba en tres cuartos de media pista: los ocho alumnos repartidos por todo el espacio, separados entre sí, cada uno mirando hacia un lado distinto y atentos; nadie lleva peto. Ada (pupil-4) tiene la pelota amarilla en las manos. No hay línea central que separe campos ni franjas de cárcel: se ve que el espacio es de todos."
+ },
+ "normas-sentada-sentado": {
+  "nombre": "Pelota sentada · Si te dan, te sientas en tu sitio",
+  "destino": "banquillo/assets/sentada-sentado.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas de la pelota sentada de verdad, la que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Se juega en el pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, sencillo). No hay equipos ni petos: cada uno juega por su cuenta con su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa, sin mochila). La pelota es la misma de las láminas del mate: blanda, de espuma, amarilla. Encuadre limpio, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer una marca en una esquina. Sin texto, números ni símbolos de prohibido dentro de la imagen. Vista lateral. La pelota acaba de tocar en la pierna a Kai (pupil-1), y Kai se está sentando en el parqué justo donde estaba, con las piernas cruzadas y media sonrisa. A su alrededor, otros dos jugadores siguen de pie y en movimiento. La pelota rueda a un metro. Se entiende que no se va a ningún otro lado: se sienta en el mismo punto."
+ },
+ "normas-sentada-cambio": {
+  "nombre": "Pelota sentada · Sentado sigues jugando: toca a quien pase cerca",
+  "destino": "banquillo/assets/sentada-cambio.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas de la pelota sentada de verdad, la que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Se juega en el pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, sencillo). No hay equipos ni petos: cada uno juega por su cuenta con su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa, sin mochila). La pelota es la misma de las láminas del mate: blanda, de espuma, amarilla. Encuadre limpio, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer una marca en una esquina. Sin texto, números ni símbolos de prohibido dentro de la imagen. Plano medio. Nora (pupil-6), sentada en el parqué con las piernas cruzadas, estira el brazo y toca con la mano en la pierna a Leo (pupil-7), que pasaba andando deprisa muy cerca de ella y pone cara de sorpresa divertida. Nora ya está empezando a levantarse apoyando la otra mano en el suelo: van a intercambiarse (ella se levanta y él se sienta). El toque es suave, con la mano abierta, sin agarrar."
+ },
+ "normas-sentada-pasos": {
+  "nombre": "Pelota sentada · Con la pelota, tres pasos como máximo",
+  "destino": "banquillo/assets/sentada-pasos.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas de la pelota sentada de verdad, la que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Se juega en el pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, sencillo). No hay equipos ni petos: cada uno juega por su cuenta con su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa, sin mochila). La pelota es la misma de las láminas del mate: blanda, de espuma, amarilla. Encuadre limpio, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer una marca en una esquina. Sin texto, números ni símbolos de prohibido dentro de la imagen. Vista lateral de Vega (pupil-0) de perfil caminando hacia la derecha con la pelota amarilla sujeta con las dos manos. Detrás de ella, en el parqué, tres huellas de zapatilla pintadas en color crema marcan los tres pasos que ha dado; delante de su pie adelantado no hay ninguna huella más, y Vega ya está armando el brazo para lanzar. Tiene que poder contarse de un vistazo: tres huellas y se acabó."
+ }
+}
