@@ -78,8 +78,8 @@ Mismo sistema que Agencia La Lupa, del repo de multiplicopolis: una hoja de Goog
 |---|---|---|
 | **A. Casa nueva** | Inicio de juego, tres formas de entrar, jugador sin nombres, registro local, despacho, ruleta, nombre y estética comunes, actividades antiguas apartadas | Hecha |
 | **B. Notas** | Mismo sistema que La Lupa: protocolo, servidor común `aula.gs`, conexión desde el despacho, alias de clase, tabla de qué da nota | Programada y probada contra hojas simuladas. **Falta probarla con Google real** y que el profe decida qué cuenta para nota |
-| **C. El Tatami** | Yoga completo: aprender, crear y practicar; catálogo de 38 posturas y entrada paso a paso | Hecha. Pintadas las doce primeras posturas (hojas de tres dibujos); faltan las hojas de seis pasos de todas y las sillas de las 26 nuevas |
-| **D. La Pizarra y El Aula** | Rosco motor, oca cooperativa, bingo en movimiento | Hecha; faltan tablero, fondos y posturas pintados |
+| **C. El Tatami** | Yoga completo: aprender, crear y practicar; catálogo de 38 posturas y entrada paso a paso | Hecha, con las 38 posturas pintadas en hojas de seis pasos y 26 de ellas también en silla |
+| **D. La Pizarra y El Aula** | Rosco motor, oca cooperativa, bingo en movimiento | Hecha, con tablero, fondos, fichas, dados y movimientos pintados |
 | **E. La Grada** | Partidos de mate en directo; espectador sin plaza | Hecha y vista funcionar por conexión directa. Sin probar por el relevo ni en la red del centro |
 | **F. Remate** | Gimnasio táctil y con el pedido en la escena; pista pintada y menús de Mate en la estética común; segunda misión del gimnasio; retirada de las actividades antiguas | En curso |
 | **G. Arte** | Las imágenes de `arte/ENCARGO.md` sustituyen a lo provisional según llegan | Hecha: los diez lotes están entregados e integrados, sin pedidos pendientes |
