@@ -82,7 +82,7 @@ Mismo sistema que Agencia La Lupa, del repo de multiplicopolis: una hoja de Goog
 | **D. La Pizarra y El Aula** | Rosco motor, oca cooperativa, bingo en movimiento | Hecha, con tablero, fondos, fichas, dados y movimientos pintados |
 | **E. La Grada** | Partidos de mate en directo; espectador sin plaza | Hecha y vista funcionar por conexión directa. Sin probar por el relevo ni en la red del centro |
 | **F. Remate** | Gimnasio táctil y con el pedido en la escena; pista pintada y menús de Mate en la estética común; segunda misión del gimnasio; retirada de las actividades antiguas | En curso |
-| **G. Arte** | Las imágenes de `arte/ENCARGO.md` sustituyen a lo provisional según llegan | Hecha para los lotes 01 a 15. Pedidos los lotes 16 a 20 del álbum y los juegos nuevos (94 imágenes); las láminas del mate esperan a que Pablo confirme sus normas |
+| **G. Arte** | Las imágenes de `arte/ENCARGO.md` sustituyen a lo provisional según llegan | Hecha para los lotes 01 a 15. Pedidos los lotes 16 a 21 del álbum, los juegos nuevos y las láminas de normas (119 imágenes). El lote 21 (pichi, pinfuvote y baloncesto) espera a que Pablo revise sus normas |
 | **H. Lo que sigue** | El profe abre y cierra lugares por clase; el Vestuario como puerta; lugares de la reserva; descubrir solas las salas de mate de una clase | Sin empezar. El profe y el Vestuario quedan dentro de la fase I |
 | **I. El Álbum** | Capa de descubrimiento: álbum de cromos en El Vestuario, pistas de Robles, mural de la clase, normas de los juegos reales antes de su versión de ordenador (El Banquillo), y los juegos de higiene, agua, material, calentamiento, juego limpio y equipo. Detalle y fases en [12-descubrimiento.md](12-descubrimiento.md) | Diseñada; pendiente de que Pablo la apruebe |
 

@@ -1,6 +1,6 @@
 # El Álbum del Pabellón: descubrir, coleccionar y desbloquear
 
-22 de noviembre de 2026. Documento de diseño, **pendiente de que Pablo lo apruebe**. No hay nada programado. Acompaña al [plan del hub](08-hoja-de-ruta.md) y a [registro y notas](10-registro-y-notas.md); las imágenes que necesita están pedidas en los lotes 16 a 20 del [encargo de imágenes](../arte/ENCARGO.md).
+22 de noviembre de 2026. Documento de diseño, **pendiente de que Pablo lo apruebe**. No hay nada programado. Acompaña al [plan del hub](08-hoja-de-ruta.md) y a [registro y notas](10-registro-y-notas.md); las imágenes que necesita están pedidas en los lotes 16 a 21 del [encargo de imágenes](../arte/ENCARGO.md).
 
 ## 1. La idea en una página
 
@@ -116,11 +116,11 @@ Regla general para todos los juegos de ordenador que representan un juego de Edu
 
 | Juego real | Versión de ordenador | Normas | Láminas |
 |---|---|---|---|
-| **Mate** (balón prisionero) | Mate Arena, en La Pista. Ya existe | La versión común, **a confirmar por Pablo** (5.5) | Pedidas, lote 18 |
-| **Pelota sentada** | Por hacer | Las que ha dado Pablo (5.5) | Pedidas, lote 18 |
-| **Pichi** (béisbol con los pies) | Por hacer | **A confirmar por Pablo**: tiene variantes locales | Se pedirán cuando estén las normas |
-| **Pinfuvote** | Por hacer | **A confirmar por Pablo** | Ídem |
-| **Baloncesto** | Por hacer | Las generales, y la versión de clase **a confirmar por Pablo** | Ídem |
+| **Mate** (balón prisionero) | Mate Arena, en La Pista. Ya existe | Confirmadas por Pablo (5.5) | Pedidas, lote 18 |
+| **Pelota sentada** | Por hacer | Las de Pablo (5.5); falta cómo termina | Pedidas, lote 18 |
+| **Pichi** (béisbol con los pies) | Por hacer | Versión escolar más extendida (5.5); Pablo la revisa | Pedidas, lote 21 |
+| **Pinfuvote** | Por hacer | Reglamento de pinfuvote.net, adaptado a clase (5.5); Pablo lo revisa | Pedidas, lote 21 |
+| **Baloncesto** | Por hacer | Minibasket (5.5); Pablo lo revisa | Pedidas, lote 21 |
 | Los que lleguen | — | Misma ficha | Misma plantilla |
 
 Sobre la pelota sentada en el ordenador: sentarse es parte del juego y quien está sentado sigue jugando, porque vuelve si toca a quien pasa cerca. La versión de ordenador tiene que conservarlo: el jugador sentado mantiene el control y una acción propia (tocar), y nunca se queda mirando.
@@ -309,7 +309,7 @@ Ejemplos: el balón de baloncesto se bota y se lanza con las manos, no se chuta 
 
 Los apartados 10 a 13 son comunes a todos los juegos: respeto al compañero, seguridad y recogida.
 
-**Mate (balón prisionero).** Versión común del juego, la que dibujan las 14 láminas pedidas. **Pablo confirma o corrige cada línea antes de enviar el lote**, porque cada centro tiene sus variantes:
+**Mate (balón prisionero).** Las normas de clase, **confirmadas por Pablo** el 22 de noviembre de 2026. Son las que dibujan las 14 láminas del lote 18:
 
 | Lámina | Norma |
 |---|---|
@@ -326,21 +326,57 @@ Los apartados 10 a 13 son comunes a todos los juegos: respeto al compañero, seg
 | Pasar | La pelota pasa por todo el equipo |
 | Final | Al acabar, nos saludamos y recogemos |
 
-**Pelota sentada.** Sólo las normas que ha dado Pablo; las láminas pedidas son cuatro:
+**Pelota sentada.** Normas de Pablo. Las láminas son cinco, y las de altura y bote se comparten con el mate:
 
 | Lámina | Norma |
 |---|---|
 | Campo | Como el mate, pero sin equipos: cada uno juega por su cuenta |
+| Altura y bote | Como en el mate: se tira de hombros para abajo, y si la pelota bota antes de darte, no vale (láminas del mate) |
 | Sentado | Si te dan, te sientas en tu sitio |
+| Atrapar | Si atrapas la pelota en el aire, **se sienta quien la ha tirado** |
 | Cambio | Si alguien pasa cerca de quien está sentado, este puede tocarlo y se intercambian |
 | Pasos | Con la pelota en la mano, tres pasos como máximo |
-| Resto de la ficha | **A confirmar por Pablo:** qué pasa si la pelota bota antes, si se puede atrapar, a qué altura se tira y cómo termina |
+| Final | **A confirmar por Pablo.** Propuesta: por tiempo, sin ganador, porque nadie queda fuera |
 
-**Pichi (béisbol con los pies).** Ficha preparada y vacía. **Todas las normas, a confirmar por Pablo:** campo y bases, quién golpea y en qué orden, cómo se consigue una carrera, cómo se elimina y cuándo se cambia de papel.
+**Las normas de pichi, pinfuvote y baloncesto** están sacadas de reglamentos y materiales de Educación Física y son la versión escolar más extendida. Cada juego cambia de un centro a otro, así que **Pablo las revisa antes de enviar el lote 21**, que pide ocho láminas por juego.
 
-**Pinfuvote.** Ficha preparada y vacía. **Todas las normas, a confirmar por Pablo:** campo y red, número de toques y de botes, con qué partes del cuerpo se puede golpear, saque y puntuación.
+**Pichi (béisbol con los pies).** Fuentes: blogs y fichas de Educación Física de Primaria; coinciden en lo básico y difieren en qué pasa tras tres fallos.
 
-**Baloncesto.** De conocimiento general: dos equipos, se puntúa encestando en la canasta contraria, el balón se juega con las manos y no con los pies, para avanzar con el balón hay que botarlo, y no se empuja ni se agarra. **A confirmar por Pablo** la versión de clase: tamaño de los equipos, cómo se cuentan los pasos y los dobles, si hay pases obligatorios antes de tirar.
+| Lámina | Norma |
+|---|---|
+| Campo | Un diamante con la casa y tres bases hechas con aros, y en el centro el aro del pichi. Un equipo golpea y el otro defiende repartido por el campo |
+| Lanzar | El pichi, con los pies dentro de su aro, lanza la pelota rodando por el suelo hacia la casa |
+| Golpear | Quien está en la casa golpea la pelota con el pie y corre hacia primera. Golpea todo el equipo, por orden |
+| Salvo | Con un pie dentro del aro de una base, estás a salvo. Sólo se sale de una base cuando un compañero golpea la pelota |
+| Aire | Si un defensor atrapa la pelota en el aire, quien la ha golpeado queda eliminado |
+| Pichi | Si la pelota llega al pichi antes de que un corredor esté en una base, ese corredor queda eliminado |
+| Así no / así sí | Nunca se tira la pelota al corredor: se pasa al pichi. Los defensores no estorban a los corredores |
+| Carrera y cambio | Quien da la vuelta y llega a la casa consigue una carrera. Con tres eliminados, los equipos cambian de papel. **Difiere entre fuentes:** tres lanzamientos sin golpear eliminan en unas versiones y en otras dan paso a primera base |
+
+**Pinfuvote.** Fuente principal: el reglamento de pinfuvote.net y el de la Xunta de Galicia; lo de clase, adaptado.
+
+| Lámina | Norma |
+|---|---|
+| Campo | Dos campos separados por una red baja, a la altura de la de tenis. Cada campo tiene zona delantera y trasera, con el mismo número de jugadores en cada una y sin invadir la otra. Equipos mixtos e iguales en número |
+| Saque | Desde el círculo central, con los dos pies dentro y sin saltar. Si toca la red y pasa, se repite |
+| Cuerpo | Se puede golpear con cualquier parte del cuerpo (en clase, sin cabezazos) |
+| Bote | Entre toque y toque, la pelota puede botar una vez como máximo |
+| Toques | Cada equipo tiene tres toques como máximo para pasarla al otro campo |
+| Así no / así sí | El mismo jugador no puede tocarla dos veces seguidas |
+| Punto | Es punto para el otro equipo si la pelota bota dos veces seguidas, no pasa la red, el equipo da más de tres toques o alguien la toca dos veces seguidas |
+| Respeto | Sin contacto con el rival y sin pasar a su campo. Los sets son a 25 con dos de diferencia; en clase, **a decidir por Pablo** (por tiempo o a menos puntos) |
+
+**Baloncesto.** Fuente: reglas de minibasket de las federaciones; lo de clase, adaptado.
+
+| Lámina | Norma |
+|---|---|
+| Campo | Dos equipos de cinco en la pista, una canasta en cada fondo. Se encesta en la canasta contraria: dos puntos, y uno el tiro libre |
+| Botar | Para avanzar con el balón hay que botarlo |
+| Pasos | Con el balón en las manos y sin botar, no se dan más de dos pasos |
+| Dobles | Se bota con una mano cada vez. Botar con las dos a la vez, o botar, coger el balón y volver a botar, son dobles |
+| Pie | El balón se juega con las manos: no se da con el pie |
+| Así no / así sí | No se empuja, ni se agarra, ni se golpea: es falta. Se defiende de frente, sin tocar |
+| Clase | **A decidir por Pablo:** si hay pases obligatorios antes de tirar y cómo se rota para que jueguen todos |
 
 **Niveles.**
 
@@ -434,7 +470,7 @@ Un juego repetido no es el mismo juego:
 - **En el navegador, por jugador.** Una clave nueva, `pabellon-album`, guarda para cada jugador de ese ordenador qué cromos, sellos y llaves tiene. Hace falta porque el registro del ordenador se queda en 800 anotaciones entre todos y descarta las antiguas: el álbum no puede depender de que sigan ahí.
 - **Y en el registro.** Cada cromo, sello o llave es además una anotación (`record('album', 'cromo', 'pegado', {id})`), así que viaja a la hoja del profe cuando está conectada.
 - **Lo ya jugado cuenta.** Al estrenar el álbum, lo anotado hasta ese día (misión del gimnasio, partidos de mate, posturas de yoga, roscos) pega sus cromos de golpe. Nadie empieza de cero.
-- **Otro ordenador.** Con la hoja conectada, «Recuperar mi progreso» de la taquilla ya trae las anotaciones del jugador, y el álbum se reconstruye con ellas. **Sin hoja, el álbum es de ese ordenador y se acepta perderlo** al cambiar; lo que se pierde es colección, nunca acceso, porque el profe puede abrir lo que haga falta. No se propone un «código de álbum» para llevarlo de un ordenador a otro: sería el primer campo de texto del alumnado.
+- **Otro ordenador.** Con la hoja conectada, «Recuperar mi progreso» de la taquilla ya trae las anotaciones del jugador, y el álbum se reconstruye con ellas. **Sin hoja, el álbum es de ese ordenador** mientras no haya otra cosa; lo que se pierde es colección, nunca acceso, porque el profe puede abrir lo que haga falta. **Más adelante habrá sesiones de alumno con contraseña** para que cada uno lleve su progreso a cualquier ordenador (decidido por Pablo). Se diseñarán aparte, con `PRIVACY.md`: la contraseña no identifica a nadie, pero no puede guardarse en claro ni en el repositorio público.
 - **Ordenador compartido.** Como hoy: cada jugador ve sólo su álbum, y «No soy yo» lo cierra.
 - Antes de programarlo se actualizan `PRIVACY.md` y el apartado de privacidad de `10-registro-y-notas.md` con la clave nueva.
 
@@ -477,7 +513,7 @@ Cada fase se puede entregar y usar sola. Las versiones de pantalla van dentro de
 | **5. Motores en marcha** | El calentamiento completo y su guiado de clase | Lote 20 |
 | **6. Tarjeta verde y Todos a una** | Los dos juegos y sus cromos de gestos | Lote por pedir |
 | **7. Puertas del profe** | Abrir y cerrar, enlace de sesión, normas primero por juego. Es la fase H de la hoja de ruta | — |
-| **Después** | Nuevos juegos de ordenador con su charla (pelota sentada, pichi, pinfuvote, baloncesto), El Patio Cubierto y El Botiquín | Láminas de cada juego cuando Pablo confirme sus normas |
+| **Después** | Charlas de pichi, pinfuvote y baloncesto; nuevos juegos de ordenador (pelota sentada, pichi, pinfuvote, baloncesto); sesiones de alumno con contraseña; El Patio Cubierto y El Botiquín | Lote 21 para las charlas |
 
 La fase 1 no toca ningún juego existente ni cierra nada: añade un lugar, un botón y un juego.
 
@@ -486,12 +522,12 @@ La fase 1 no toca ningún juego existente ni cierra nada: añade un lugar, un bo
 | Decisión | Propuesta | Por qué importa |
 |---|---|---|
 | El objeto | Un álbum de cromos. Alternativas descartadas: llavero (sólo sirve para lugares) y carné con sellos (sin siluetas) | Da nombre y forma a todo lo demás |
-| **Normas del mate** | Las doce líneas del apartado 5.5 | Las 14 láminas ya están pedidas con esa versión. Hay que confirmarlas **antes** de enviar el lote 18 |
-| Normas de pelota sentada que faltan | Pedir ahora sólo las cuatro láminas de lo que Pablo ha dicho | Bote, atrapar, altura y final cambian el juego |
-| Normas de pichi, pinfuvote y baloncesto de clase | Pablo rellena la ficha de 13 apartados de cada uno | Sin eso no hay charla ni láminas |
+| Normas del mate | **Decidido:** confirmadas por Pablo | El lote 18 se puede enviar |
+| Cómo termina la pelota sentada | Por tiempo, sin ganador | Es lo único que falta de sus normas |
+| Normas de pichi, pinfuvote y baloncesto | Las del apartado 5.5, sacadas de reglamentos y materiales escolares. Pablo las revisa antes de enviar el lote 21 | Cada centro tiene sus variantes |
 | Mate Arena con normas primero | Entrenamiento libre, salas con peto, veteranos con peto de regalo | Es lo único de este plan que pone una condición a algo que ya se usa |
 | Cuánto empieza abierto | Lo de hoy, más El Vestuario y El Banquillo | Más candados dan más intriga y más riesgo de estorbar |
-| Progreso sin hoja conectada | Aceptar que el álbum es de ese ordenador | La alternativa es un código que el alumno escribe |
+| Progreso sin hoja conectada | **Decidido:** más adelante, sesiones de alumno con contraseña. Hasta entonces, el álbum es de ese ordenador | Que el progreso siga al alumno |
 | Clase en el modo pantalla | Elegir curso y grupo al entrar | El mural necesita saber de qué clase es |
 | Tarjeta verde de verdad | Sí, con lista fija de gestos | Une el juego con lo que pasa en la pista; es una valoración del profe |
 | Qué da nota | Nada por ahora. Primera candidata: *Cada cosa, a lo suyo*, con el criterio de *Equipment Rescue* | Completar un juego no equivale a superar un criterio |
@@ -504,4 +540,13 @@ La fase 1 no toca ningún juego existente ni cierra nada: añade un lugar, un bo
 - **«Sin eliminaciones»** se aplica a las actividades digitales de clase. La cárcel del mate y el sentarse de la pelota sentada son parte del juego real y quien está en ellas sigue jugando; las láminas lo enseñan así.
 - **Texto en las imágenes.** Ninguna lámina lleva letras: la norma se escribe debajo, en el juego. Las marcas de «así sí» y «así no» son imágenes sueltas que el juego superpone.
 - **Lugar del registro.** *Equipment Rescue* anota como `material`, no como `gimnasio`. Las misiones nuevas usarían `gimnasio`; conviene decidir si se unifican.
-- **Índices de arte.** Los lotes 16 a 20 no llevan `_indice` porque `scripts/integrar_arte.py` escribe ese archivo en cada pasada y las carpetas aún no existen. Se añade al crear cada lugar.
+- **Índices de arte.** Los lotes 16 a 21 no llevan `_indice` porque `scripts/integrar_arte.py` escribe ese archivo en cada pasada y las carpetas aún no existen. Se añade al crear cada lugar.
+
+## 13. Fuentes de las normas
+
+Consultadas el 22 de noviembre de 2026. Son versiones escolares y federativas que no coinciden en todo; lo que vale en clase lo decide Pablo.
+
+- Pichi: [Pichi en EF (béisbol escolar)](https://davidvazquezcaro.wixsite.com/blog/post/pichi-en-ef-b%C3%A9isbol-escolar), [Pichi-béisbol, deporte alternativo](http://maestranuriaef.blogspot.com/2025/01/pichi-es-un-deporte-alternativo-en-el.html), [El pichi (deporte alternativo)](https://educacionfisicaceipsierraelvira.blogspot.com/2022/04/el-pichi-deporte-alternativo-rondin.html), [Rondín, pichi y kickball](http://laefdelcolegio.blogspot.com/2013/09/deporte-alternativo-rondin-pichi.html).
+- Pinfuvote: [reglamento de pinfuvote.net](https://www.pinfuvote.net/el-juego/), [preguntas frecuentes](https://www.pinfuvote.net/faq/), [reglamento de la Xunta de Galicia](https://recursos.edu.xunta.gal/sites/default/files/recurso/1639064125/regulamento_espanhol.pdf), [Pinfuvote, un nuevo deporte fusión (EFDeportes)](https://www.efdeportes.com/efd211/pinfuvote-un-nuevo-deporte-fusion.htm).
+- Baloncesto: [Minibasket de FIBA](https://www.fiba.basketball/documents/Mini-Basketball-Spanish.pdf), [reglas de minibasket de la FBCV](https://www.fbcv.es/wp-content/uploads/2014/08/Reglas-FBCV-18-19-Minibasket.pdf), [normas técnicas de baloncesto de Castilla-La Mancha](https://deportes.castillalamancha.es/sites/default/files/deporteescolar/documentos/normas_tecnicas_baloncesto.pdf).
+- Pelota sentada: no se han encontrado fuentes publicadas; las normas son las de Pablo.

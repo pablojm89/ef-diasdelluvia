@@ -1,0 +1,220 @@
+{
+ "_titulo": "El Banquillo: láminas de normas de pichi, pinfuvote y baloncesto",
+ "_nota": "Segunda tanda de Normas primero (docs/12-descubrimiento.md, apartado 5.5), con la misma plantilla y el mismo acabado que las láminas del mate del lote 18. Las normas que dibujan son la versión escolar más extendida, sacada de reglamentos y materiales de Educación Física (pinfuvote: reglamento de pinfuvote.net; baloncesto: minibasket); Pablo las revisa antes de enviar el lote, y si cambia alguna se corrige aquí el pedido. Este lote aún no tiene índice: se le añadirá _indice cuando exista la carpeta banquillo/.",
+ "normas-pichi-campo": {
+  "nombre": "Pichi real · El campo y los equipos",
+  "destino": "banquillo/assets/pichi-campo.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del pichi (béisbol jugado con los pies) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. La pelota es siempre la misma: un balón blando de goma, rojo, del tamaño de un balón de fútbol. Las bases son aros amarillos como gimnasio/assets/prop-hoop.webp tumbados en el suelo. Vista cenital exacta, como un plano, de media pista de parqué: un diamante con cuatro aros amarillos en el suelo en sus vértices (la casa abajo, primera a la derecha, segunda arriba y tercera a la izquierda) y un quinto aro en el centro, el del pichi. Cuatro jugadores con peto coral repartidos por el campo y uno de ellos dentro del aro central con la pelota roja; un jugador con peto turquesa junto a la casa, listo para golpear, y tres compañeros turquesa esperando en fila, sentados en un banco fuera del diamante, detrás de la casa."
+ },
+ "normas-pichi-lanzar": {
+  "nombre": "Pichi real · El pichi lanza la pelota rodando",
+  "destino": "banquillo/assets/pichi-lanzar.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del pichi (béisbol jugado con los pies) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. La pelota es siempre la misma: un balón blando de goma, rojo, del tamaño de un balón de fútbol. Las bases son aros amarillos como gimnasio/assets/prop-hoop.webp tumbados en el suelo. Plano medio desde un lado. Nora (pupil-6, peto coral), con los dos pies dentro del aro central, se agacha y lanza la pelota roja rodando por el suelo, con el brazo por debajo, hacia la casa. La pelota va rodando pegada al parqué, sin botar. Al fondo, desenfocado, el jugador turquesa espera junto a la casa."
+ },
+ "normas-pichi-golpe": {
+  "nombre": "Pichi real · Se golpea con el pie y se corre",
+  "destino": "banquillo/assets/pichi-golpe.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del pichi (béisbol jugado con los pies) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. La pelota es siempre la misma: un balón blando de goma, rojo, del tamaño de un balón de fútbol. Las bases son aros amarillos como gimnasio/assets/prop-hoop.webp tumbados en el suelo. Plano medio. Kai (pupil-1, peto turquesa), junto al aro de la casa, acaba de golpear con el pie la pelota roja que le llegaba rodando, que sale hacia delante a media altura; su cuerpo ya gira para echar a correr hacia primera base, a su derecha."
+ },
+ "normas-pichi-salvo": {
+  "nombre": "Pichi real · Con un pie en la base, estás a salvo",
+  "destino": "banquillo/assets/pichi-salvo.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del pichi (béisbol jugado con los pies) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. La pelota es siempre la misma: un balón blando de goma, rojo, del tamaño de un balón de fútbol. Las bases son aros amarillos como gimnasio/assets/prop-hoop.webp tumbados en el suelo. Plano medio a ras de suelo. Ada (pupil-4, peto turquesa) ha llegado corriendo y apoya un pie dentro del aro amarillo de una base, con gesto de alivio. A unos metros, un defensor coral con la pelota roja en las manos se detiene: ya no puede hacer nada."
+ },
+ "normas-pichi-aire": {
+  "nombre": "Pichi real · Si te la atrapan en el aire, quedas eliminado",
+  "destino": "banquillo/assets/pichi-aire.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del pichi (béisbol jugado con los pies) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. La pelota es siempre la misma: un balón blando de goma, rojo, del tamaño de un balón de fútbol. Las bases son aros amarillos como gimnasio/assets/prop-hoop.webp tumbados en el suelo. Plano medio. Leo (pupil-7, peto coral) atrapa en el aire con las dos manos la pelota roja que viene de un golpe alto. Al fondo, el que la golpeó, con peto turquesa, se detiene a medio camino de primera y se lleva la mano a la cabeza con una sonrisa: lo han cazado. Ningún gesto de burla."
+ },
+ "normas-pichi-pichi": {
+  "nombre": "Pichi real · Si la pelota llega al pichi antes que tú a la base, quedas eliminado",
+  "destino": "banquillo/assets/pichi-pichi.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del pichi (béisbol jugado con los pies) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. La pelota es siempre la misma: un balón blando de goma, rojo, del tamaño de un balón de fútbol. Las bases son aros amarillos como gimnasio/assets/prop-hoop.webp tumbados en el suelo. Vista elevada en tres cuartos. Un defensor coral pasa la pelota roja a Nora (pupil-6), que está dentro del aro central y la atrapa; al mismo tiempo, un corredor turquesa está a mitad de camino entre dos aros de base, todavía sin pisar ninguno."
+ },
+ "normas-pichi-tirar-no": {
+  "nombre": "Pichi real · Así no: nunca se tira la pelota al corredor",
+  "destino": "banquillo/assets/pichi-tirar-no.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del pichi (béisbol jugado con los pies) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. La pelota es siempre la misma: un balón blando de goma, rojo, del tamaño de un balón de fútbol. Las bases son aros amarillos como gimnasio/assets/prop-hoop.webp tumbados en el suelo. Plano medio. Un defensor coral, Max (pupil-5), arma el brazo con la pelota roja mirando a un corredor turquesa que pasa cerca, como si fuera a tirársela al cuerpo. Mismo encuadre que la lámina pichi-pasar."
+ },
+ "normas-pichi-pasar": {
+  "nombre": "Pichi real · Así sí: la pelota se pasa al pichi",
+  "destino": "banquillo/assets/pichi-pasar.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del pichi (béisbol jugado con los pies) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. La pelota es siempre la misma: un balón blando de goma, rojo, del tamaño de un balón de fútbol. Las bases son aros amarillos como gimnasio/assets/prop-hoop.webp tumbados en el suelo. Mismo encuadre que la lámina pichi-tirar-no: el mismo defensor coral, Max (pupil-5), pasa la pelota roja con un pase suave por arriba hacia el aro central, de espaldas al corredor turquesa, que sigue corriendo a su base sin peligro."
+ },
+ "normas-pinfuvote-campo": {
+  "nombre": "Pinfuvote real · El campo, la red y las dos zonas",
+  "destino": "banquillo/assets/pinfuvote-campo.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del pinfuvote de verdad (el deporte de red que mezcla ping-pong, fútbol, voleibol y tenis), el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. La pelota es siempre la misma: un balón de goma espuma, azul claro, blando y ligero, algo más grande que un balón de voleibol. La red es baja, a la altura de una red de tenis, tendida en el centro entre dos postes. Vista cenital exacta, como un plano: un rectángulo marcado con cinta blanca y dividido por una red baja en dos campos. Cada campo tiene una línea que lo parte en una zona delantera, junto a la red, y una zona trasera. En el centro de cada campo, un círculo de cinta (el círculo de saque). En el campo izquierdo, cuatro jugadores con peto turquesa: dos chicas y dos chicos, dos en la zona delantera y dos en la trasera; en el derecho, igual con peto coral. Equipos mixtos."
+ },
+ "normas-pinfuvote-saque": {
+  "nombre": "Pinfuvote real · El saque: desde el círculo, con los dos pies dentro y sin saltar",
+  "destino": "banquillo/assets/pinfuvote-saque.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del pinfuvote de verdad (el deporte de red que mezcla ping-pong, fútbol, voleibol y tenis), el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. La pelota es siempre la misma: un balón de goma espuma, azul claro, blando y ligero, algo más grande que un balón de voleibol. La red es baja, a la altura de una red de tenis, tendida en el centro entre dos postes. Plano medio. Lúa (pupil-2, peto turquesa), con los dos pies bien apoyados dentro del círculo de cinta, golpea con la mano abierta el balón azul por debajo para sacarlo por encima de la red. No salta."
+ },
+ "normas-pinfuvote-cuerpo": {
+  "nombre": "Pinfuvote real · Se puede golpear con cualquier parte del cuerpo",
+  "destino": "banquillo/assets/pinfuvote-cuerpo.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del pinfuvote de verdad (el deporte de red que mezcla ping-pong, fútbol, voleibol y tenis), el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. La pelota es siempre la misma: un balón de goma espuma, azul claro, blando y ligero, algo más grande que un balón de voleibol. La red es baja, a la altura de una red de tenis, tendida en el centro entre dos postes. Tres jugadores del mismo equipo turquesa en la misma escena golpeando el balón azul en tres momentos distintos, repartidos de izquierda a derecha: uno con el pie, otro con la rodilla y otro con las dos manos juntas como en voleibol. Ninguno lo golpea con la cabeza."
+ },
+ "normas-pinfuvote-bote": {
+  "nombre": "Pinfuvote real · Un bote como máximo entre toque y toque",
+  "destino": "banquillo/assets/pinfuvote-bote.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del pinfuvote de verdad (el deporte de red que mezcla ping-pong, fútbol, voleibol y tenis), el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. La pelota es siempre la misma: un balón de goma espuma, azul claro, blando y ligero, algo más grande que un balón de voleibol. La red es baja, a la altura de una red de tenis, tendida en el centro entre dos postes. Vista lateral. El balón azul bota una vez en el parqué, marcado con un pequeño círculo de polvo, y Neo (pupil-3, peto coral) lo devuelve con el pie justo después del bote. Se ve un solo bote."
+ },
+ "normas-pinfuvote-toques": {
+  "nombre": "Pinfuvote real · Tres toques por equipo para pasarla",
+  "destino": "banquillo/assets/pinfuvote-toques.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del pinfuvote de verdad (el deporte de red que mezcla ping-pong, fútbol, voleibol y tenis), el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. La pelota es siempre la misma: un balón de goma espuma, azul claro, blando y ligero, algo más grande que un balón de voleibol. La red es baja, a la altura de una red de tenis, tendida en el centro entre dos postes. Vista elevada de un campo coral: tres jugadores corales se pasan el balón azul, el primero con la mano, el segundo con el pie y el tercero lo envía por encima de la red con las dos manos. Tres posiciones del balón dibujadas en arco, como una secuencia, con trazos de movimiento suaves."
+ },
+ "normas-pinfuvote-doble-no": {
+  "nombre": "Pinfuvote real · Así no: el mismo jugador no la toca dos veces seguidas",
+  "destino": "banquillo/assets/pinfuvote-doble-no.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del pinfuvote de verdad (el deporte de red que mezcla ping-pong, fútbol, voleibol y tenis), el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. La pelota es siempre la misma: un balón de goma espuma, azul claro, blando y ligero, algo más grande que un balón de voleibol. La red es baja, a la altura de una red de tenis, tendida en el centro entre dos postes. Plano medio. Max (pupil-5, peto turquesa) golpea el balón azul hacia arriba con la rodilla y se prepara para volver a darle él mismo con la mano, mientras un compañero turquesa a su lado está libre esperando el pase. Mismo encuadre y personajes que la lámina pinfuvote-pase."
+ },
+ "normas-pinfuvote-pase": {
+  "nombre": "Pinfuvote real · Así sí: después de tu toque, la toca otro",
+  "destino": "banquillo/assets/pinfuvote-pase.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del pinfuvote de verdad (el deporte de red que mezcla ping-pong, fútbol, voleibol y tenis), el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. La pelota es siempre la misma: un balón de goma espuma, azul claro, blando y ligero, algo más grande que un balón de voleibol. La red es baja, a la altura de una red de tenis, tendida en el centro entre dos postes. Mismo encuadre y personajes que la lámina pinfuvote-doble-no: Max (pupil-5, peto turquesa) golpea el balón azul con la rodilla hacia su compañero, que lo espera con las manos preparadas."
+ },
+ "normas-pinfuvote-respeto": {
+  "nombre": "Pinfuvote real · Cada uno en su zona y sin tocar al rival",
+  "destino": "banquillo/assets/pinfuvote-respeto.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del pinfuvote de verdad (el deporte de red que mezcla ping-pong, fútbol, voleibol y tenis), el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. La pelota es siempre la misma: un balón de goma espuma, azul claro, blando y ligero, algo más grande que un balón de voleibol. La red es baja, a la altura de una red de tenis, tendida en el centro entre dos postes. Vista lateral de la red. A un lado y a otro, dos jugadores, uno turquesa y uno coral, en sus zonas delanteras, se miran a través de la red con gesto deportivo, sin tocarla ni pasar el brazo al otro lado; al acabar el punto, chocan la mano por encima de la red."
+ },
+ "normas-baloncesto-campo": {
+  "nombre": "Baloncesto real · El campo y los equipos",
+  "destino": "banquillo/assets/baloncesto-campo.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del baloncesto (minibasket) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. El balón es siempre el mismo: el balón de baloncesto naranja de gimnasio/assets/prop-basketball.webp. Las canastas son de minibasket, más bajas que las de los adultos, con tablero de madera clara. Vista cenital exacta, como un plano, de una pista de parqué con una canasta en cada fondo, vista desde arriba: líneas blancas de banda, de fondo y de medio campo con su círculo central. Cinco jugadores con peto turquesa y cinco con peto coral repartidos por la pista; el balón naranja en el círculo central."
+ },
+ "normas-baloncesto-botar": {
+  "nombre": "Baloncesto real · Para avanzar con el balón, se bota",
+  "destino": "banquillo/assets/baloncesto-botar.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del baloncesto (minibasket) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. El balón es siempre el mismo: el balón de baloncesto naranja de gimnasio/assets/prop-basketball.webp. Las canastas son de minibasket, más bajas que las de los adultos, con tablero de madera clara. Plano medio de perfil. Ada (pupil-4, peto turquesa) avanza botando el balón naranja con una sola mano, a la altura de la cintura, con la mirada levantada hacia delante."
+ },
+ "normas-baloncesto-pasos-no": {
+  "nombre": "Baloncesto real · Así no: andar con el balón en las manos sin botar",
+  "destino": "banquillo/assets/baloncesto-pasos-no.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del baloncesto (minibasket) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. El balón es siempre el mismo: el balón de baloncesto naranja de gimnasio/assets/prop-basketball.webp. Las canastas son de minibasket, más bajas que las de los adultos, con tablero de madera clara. Plano medio de perfil. Kai (pupil-1, peto coral) camina con el balón naranja agarrado con las dos manos contra el pecho; en el parqué, detrás de él, cuatro huellas de zapatilla pintadas en color crema marcan que ha dado varios pasos sin botar."
+ },
+ "normas-baloncesto-dobles-no": {
+  "nombre": "Baloncesto real · Así no: botar con las dos manos a la vez",
+  "destino": "banquillo/assets/baloncesto-dobles-no.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del baloncesto (minibasket) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. El balón es siempre el mismo: el balón de baloncesto naranja de gimnasio/assets/prop-basketball.webp. Las canastas son de minibasket, más bajas que las de los adultos, con tablero de madera clara. Plano medio de frente. Neo (pupil-3, peto coral) bota el balón naranja golpeándolo con las dos manos a la vez, con los brazos rígidos. Mismo encuadre y personaje que la lámina baloncesto-una-mano."
+ },
+ "normas-baloncesto-una-mano": {
+  "nombre": "Baloncesto real · Así sí: se bota con una mano cada vez",
+  "destino": "banquillo/assets/baloncesto-una-mano.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del baloncesto (minibasket) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. El balón es siempre el mismo: el balón de baloncesto naranja de gimnasio/assets/prop-basketball.webp. Las canastas son de minibasket, más bajas que las de los adultos, con tablero de madera clara. Mismo encuadre y personaje que la lámina baloncesto-dobles-no: Neo (pupil-3, peto coral) bota el balón naranja con una sola mano, la otra protegiendo el balón con el brazo flexionado."
+ },
+ "normas-baloncesto-pie-no": {
+  "nombre": "Baloncesto real · Así no: el balón de baloncesto no se da con el pie",
+  "destino": "banquillo/assets/baloncesto-pie-no.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del baloncesto (minibasket) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. El balón es siempre el mismo: el balón de baloncesto naranja de gimnasio/assets/prop-basketball.webp. Las canastas son de minibasket, más bajas que las de los adultos, con tablero de madera clara. Plano medio. Leo (pupil-7, peto turquesa) le da una patada al balón naranja de baloncesto, que sale disparado; un compañero se aparta y Robles, al fondo, levanta la mano para parar el juego. Tiene que quedar claro que es un balón de baloncesto, duro y pesado, no uno de fútbol."
+ },
+ "normas-baloncesto-falta-no": {
+  "nombre": "Baloncesto real · Así no: no se empuja ni se agarra",
+  "destino": "banquillo/assets/baloncesto-falta-no.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del baloncesto (minibasket) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. El balón es siempre el mismo: el balón de baloncesto naranja de gimnasio/assets/prop-basketball.webp. Las canastas son de minibasket, más bajas que las de los adultos, con tablero de madera clara. Plano medio. Un jugador coral empuja con las dos manos en la espalda a un jugador turquesa que está botando el balón naranja; el jugador turquesa pierde el equilibrio hacia delante, sin llegar a caer. Mismo encuadre que la lámina baloncesto-defender."
+ },
+ "normas-baloncesto-defender": {
+  "nombre": "Baloncesto real · Así sí: se defiende de frente y con los brazos abiertos",
+  "destino": "banquillo/assets/baloncesto-defender.webp",
+  "ancho": 1024,
+  "alto": 768,
+  "transparente": false,
+  "listo": false,
+  "prompt": "Lámina de normas del baloncesto (minibasket) de verdad, el que se juega en clase de Educación Física, para enseñar la norma con una sola imagen y casi sin texto. Mismo pabellón de gimnasio/assets/gym.webp (mismo parqué, misma luz de tarde, pared ocre y zócalo verde azulado al fondo, desenfocado y sencillo). Un equipo lleva peto turquesa como mate/assets/pista/peto-cometas.webp y el otro peto coral como mate/assets/pista/peto-rayos.webp, sobre su ropa de siempre. Los jugadores son los alumnos ya aprobados de gimnasio/assets/pupil-0.webp a pupil-7.webp (mismas caras, peinados y ropa). Encuadre limpio, pocas figuras, la acción en el centro y márgenes tranquilos de 60 px, porque el juego puede superponer en una esquina una marca de «así sí» o «así no». Sin texto, flechas rotuladas, números ni símbolos de prohibido dentro de la imagen. El balón es siempre el mismo: el balón de baloncesto naranja de gimnasio/assets/prop-basketball.webp. Las canastas son de minibasket, más bajas que las de los adultos, con tablero de madera clara. Mismo encuadre que la lámina baloncesto-falta-no: el mismo jugador coral defiende de frente al turquesa que bota, a un paso de distancia, con las piernas flexionadas y los brazos abiertos, sin tocarlo."
+ }
+}
