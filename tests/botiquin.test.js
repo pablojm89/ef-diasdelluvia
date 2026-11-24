@@ -54,12 +54,16 @@ test('botiquín: la posición lateral va paso a paso en dos idiomas y los tres p
  assert.ok(B.LATERAL.length >= 6);
  for (const step of B.LATERAL) for (const field of ['es', 'en', 'texto', 'marca']) assert.ok(step[field].length > 2, field);
  assert.match(B.LATERAL[0].es + B.LATERAL[0].texto, /respira|pecho/i, 'lo primero es comprobar');
- assert.match(B.LATERAL.at(-1).texto, /respirando/, 'lo último es vigilar');
+ assert.match(B.LATERAL.at(-1).texto, /respira/, 'lo último es vigilar');
+ assert.match(B.LATERAL.at(-1).texto, /112/);
+ assert.match(B.DE_VERDAD, /adulto/); assert.match(B.DE_VERDAD, /tras una caída no se mueve/, 'se dice cuándo no se hace');
+ assert.match(B.caso('desmayo').pasos[0].find(option => !option.bien && /sacudo/.test(option.texto)).porque, /suavidad/, 'se comprueba moviendo los hombros con suavidad');
  for (let person = 0; person < B.PAPELES.length; person++) {
   assert.equal(new Set(B.PAPELES.map((_, turn) => B.papelesDe(turn)[person])).size, B.PAPELES.length);
  }
  assert.ok(B.NORMAS_LATERAL.some(line => /colchoneta/.test(line)));
  assert.ok(B.NORMAS_LATERAL.some(line => /sentado/.test(line)), 'hay un papel que se puede hacer sentado');
+ assert.ok(B.NORMAS_LATERAL.some(line => /gafas/.test(line)));
 });
 test('botiquín: la llamada pregunta qué, dónde, cuántos y cómo está, y pide no colgar', () => {
  const script = B.LLAMADA.map(line => line.es).join(' ');

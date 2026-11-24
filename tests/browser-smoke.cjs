@@ -213,7 +213,8 @@ const out=path.join(base,'artifacts');
  assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('pabellon-registro')).find(e=>e.place==='botiquin'&&e.event==='ronda').data.intentos),10);
  await page.goto('https://patio.test/botiquin/index.html#lateral');
  await page.waitForSelector('#v-lateral:not([hidden])');
- assert.ok(await page.locator('#lat-norms li').count()>=4);
+ assert.ok(await page.locator('#lat-norms li').count()>=5);
+ assert.match(await page.locator('#lat-real').textContent(),/112/);
  await page.locator('#lat-start').click();
  assert.match(await page.locator('#lat-count').textContent(),/Turno 1 de 3 · Paso 1 de 7/);
  assert.ok(await page.locator('#lat-figure circle').count()>=2);
@@ -221,7 +222,7 @@ const out=path.join(base,'artifacts');
  assert.match(await page.locator('#lat-count').textContent(),/Turno 2 de 3 · Paso 1 de 7/);
  await page.goto('https://patio.test/botiquin/index.html#llamada');
  await page.waitForSelector('#v-llamada:not([hidden])');
- assert.equal(await page.locator('#call-script li').count(),5);
+ assert.equal(await page.locator('#call-script li').count(),6);
  assert.ok((await page.locator('#call-scene').textContent()).length>40);
  // El Tatami, winding down: the wave opens over the room, counts and can be left at any time.
  await page.setViewportSize({width:1280,height:720});

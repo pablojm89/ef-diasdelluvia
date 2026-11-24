@@ -1,6 +1,6 @@
 // El Botiquín: first aid practised by the whole class. What is taught lives in casos.js.
 import {topBar, record} from '../comun/lugar.js';
-import {PAS, CASOS, RONDA, siguienteRonda, LATERAL, PAPELES, papelesDe, NORMAS_LATERAL, LLAMADA} from './casos.js';
+import {PAS, CASOS, siguienteRonda, LATERAL, PAPELES, papelesDe, NORMAS_LATERAL, DE_VERDAD, LLAMADA} from './casos.js';
 
 topBar('El Botiquín');
 const $ = id => document.getElementById(id);
@@ -111,6 +111,7 @@ function figure(index) {
 let turn = 0, latStep = 0;
 function showRules() {
  $('lat-norms').innerHTML = NORMAS_LATERAL.map(line => `<li>${esc(line)}</li>`).join('');
+ $('lat-real').textContent = DE_VERDAD;
  $('lat-rules').hidden = false; $('lat-play').hidden = true;
 }
 function showLateral() {

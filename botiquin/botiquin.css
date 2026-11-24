@@ -42,7 +42,7 @@ body{height:100dvh;overflow:hidden}
 .feedback{min-height:2.8em;margin-top:10px;font-weight:700;color:#2c6b4a}
 .feedback.miss{color:#8a2f1f}
 .norms{display:grid;gap:6px;margin:10px 0}
-.norms li{padding:7px 12px;border-radius:8px;background:#f1e2bd}
+.norms li{padding:5px 12px;border-radius:8px;background:#f1e2bd;font-size:.95rem}
 .rules{grid-column:1/-1;max-width:760px;margin:0 auto}
 .lat-play{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(12px,2.4vw,28px);align-items:start}
 .drawing{margin:0;padding:10px}

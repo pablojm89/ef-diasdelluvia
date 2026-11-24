@@ -318,3 +318,30 @@ Ordenado por lo que aporta a la clase frente a lo que cuesta hacerlo. Pablo dio 
 4. **Qué criterios nuevos dan nota.** Varias actividades darían evidencia de 1.2, 2.1, 4.1, 4.3 y 5.1; hoy sólo cuenta el 1.3.
 5. **Personas reales en el texto.** Las candidatas nombran a inventores y deportistas; la regla actual sólo prohíbe su imagen.
 6. ~~Primeros auxilios.~~ **Decidido (24/11/2026):** lo evaluable es PAS y posición lateral; la llamada entra como complemento, sin nota.
+
+## 7. El Botiquín: ¿es correcto lo que enseña?
+
+El contenido de `botiquin/casos.js` se contrastó el 24 de noviembre de 2026, instrucción por instrucción, con guías de primeros auxilios. **Ninguna de las respuestas que el juego da por buenas era incorrecta.** Había un error de matiz y varios ajustes, ya aplicados.
+
+| Qué | Antes | Ahora | Fuente (leída) |
+|---|---|---|---|
+| Comprobar si responde | «Se le habla y se le toca el hombro, sin sacudir» | Se le habla alto y se le mueven los hombros **con suavidad** | [Cruz Roja Española](https://www.cruzroja.es/prevencion/descargas/hogar/Folletoaccidentes2015_Castellano.pdf), [061 Andalucía](https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/emergencias061/sites/default/files/mediafile_sasfile/2024/Guia_de_primeros_auxilios_web2.pdf), [St John Ambulance](https://www.sja.org.uk/first-aid-advice/primary-survey/) |
+| Caída con dolor de espalda | «Un adulto decide si hay que llamar al 112» | Con una caída así, el profe llamará al 112; que no mueva ni la cabeza | [St John Ambulance](https://www.sja.org.uk/first-aid-advice/spinal-injury/), [AEPap](https://www.aepap.org/sites/default/files/documento/archivos-adjuntos/texto_fracturas_colegios.pdf) |
+| Mareo por calor | «Está muy roja»; «sentada o tumbada» | «Pálida y sudando mucho» (la piel roja y seca es golpe de calor, más grave); tumbada con las piernas en alto; se nombran las señales para llamar al 112 | [NHS](https://www.nhs.uk/conditions/heat-exhaustion-heatstroke/), [MedlinePlus](https://medlineplus.gov/spanish/ency/article/000056.htm), [St John Ambulance](https://www.sja.org.uk/first-aid-advice/heat-exhaustion/) |
+| Sangrado de nariz | «Unos diez minutos» | Diez minutos seguidos, sin soltar para mirar y respirando por la boca | [British Red Cross](https://www.redcross.org.uk/first-aid/learn-first-aid/nosebleeds), [NHS](https://www.nhs.uk/conditions/nosebleed/), [MedlinePlus](https://medlineplus.gov/spanish/ency/article/003106.htm) |
+| Tobillo torcido | Frío envuelto | Se añade el límite: no más de 10 o 20 minutos. Reposo, frío y elevación siguen vigentes | [NHS](https://www.nhs.uk/conditions/sprains-and-strains/), [British Red Cross](https://www.redcross.org.uk/first-aid/learn-first-aid/strains-and-sprains) |
+| Herida que sangra | «Soplar lleva microbios» | «Soplar no limpia ni para la sangre»: lo de los microbios no tiene fuente seria | [British Red Cross](https://www.redcross.org.uk/first-aid/learn-first-aid/bleeding-heavily), [AEPap](https://www.aepap.org/sites/default/files/documento/archivos-adjuntos/texto_heridas_colegios.pdf) |
+| Para qué sirve ponerle de lado | «De lado respira mejor» | De lado, ni la lengua ni un vómito le tapan el aire; si deja de respirar bien, hace falta RCP | [061 Andalucía](https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/emergencias061/sites/default/files/mediafile_sasfile/2024/Guia_de_primeros_auxilios_web2.pdf) |
+| Posición lateral, paso 1 | Mirar si respira | Hasta 10 segundos | Cruz Roja Española |
+| Posición lateral, paso 2 | — | Antes: quitar las gafas y estirar las piernas | [St John Ambulance](https://www.sja.org.uk/first-aid-advice/recovery-position/) |
+| Posición lateral, paso 7 | Quedarse y vigilar | Que un adulto llame al 112 si aún no lo ha hecho; vigilar la respiración todo el rato | Cruz Roja Española, [ILCOR 2025](https://www.ilcor.org/uploads/FA-2025-COSTR-Full-Chapter.pdf) |
+| Cuándo **no** se hace | No se decía | Tras una caída o un golpe no se mueve a nadie: se dice antes de practicar | [Resuscitation Council UK 2025](https://www.resus.org.uk/library/2025-resuscitation-guidelines/first-aid-guidelines), AEPap |
+| La llamada | Cinco preguntas | Se añaden «¿Hay algún peligro cerca?» y poner el altavoz | [061 Andalucía](https://juntadeandalucia.es/temas/salud/urgencias/urgencias.html), [Gobierno de La Rioja](https://riojasalud.es/files/content/ciudadanos/escuela-salud/la-salud-en-tu-comunidad/entorno-y-salud/2023.03.31_LR_Manual%20de%20RCP_4%C2%BAEP-2%C2%BAESO.pdf) |
+
+**Lo que se confirmó sin cambios:** «Proteger, Avisar, Socorrer» es la formulación de Cruz Roja Española (en inglés no hay un equivalente fijo; se usa «Protect, call for help, give first aid»). La secuencia de la posición lateral coincide con la de St John Ambulance y el 061 de Andalucía. Echar la cabeza hacia atrás con sangre en la nariz es un error. No se da de beber a quien no responde.
+
+**¿Pueden practicar la posición lateral entre ellos?** Sí: el manual escolar del Gobierno de La Rioja la enseña desde 4.º de Primaria y el programa de la Cruz Roja británica para 5 a 11 años la incluye. Ninguna guía detalla normas para practicarla entre compañeros; las que enseña la pantalla salen de la propia técnica (gafas, bolsillos, sin tirones, nadie encima) y de sentido común docente.
+
+**Lo que no se pudo confirmar** en una fuente de primer nivel, y por eso se ha escrito con prudencia: que tirar de la zapatilla haga más daño y que echar agua en la cara no ayude (son opciones marcadas como error por prudencia, sin cita). No se pudieron abrir las guías europeas de reanimación de 2021 ni las estadounidenses de 2024; la secuencia europea se contrastó de forma indirecta, por su adaptación británica de 2025.
+
+**Límite que la pantalla dice y hay que mantener:** enseña el orden, no sustituye a un taller con alguien que sepa de primeros auxilios.
