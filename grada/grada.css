@@ -1,21 +1,24 @@
 /* La Grada: the gym wall holds up to four framed matches. The match keeps its pixel art; the frame is the school's. */
 body{height:100dvh;overflow:hidden}
 .grada{position:relative;min-height:0;
- /* The painted wall. Its own tile frieze is cropped off the top: the page already has one, with the code shelf under it. */
- background:#e9b783 url('./assets/fondo.webp') center bottom/100% 107%}
+ /* The painted wall, whole: tile frieze above, wooden ledge below. */
+ background:#e9b783 url('./assets/fondo.webp') center/100% 100%}
 /* The class watching from the stands, in front of the wall's wooden ledge. */
 .crowd{flex:none;height:var(--crowd);margin-top:calc(var(--crowd)*-.35);position:relative;z-index:3;background:url('./assets/publico.webp') center bottom/auto 200% repeat-x;pointer-events:none;--crowd:clamp(30px,7dvh,84px)}
 
-/* A wooden shelf with the code input. */
-.bar{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:8px clamp(12px,3vw,32px);background:linear-gradient(#94653a,#7a4f29);border-bottom:3px solid #4a2f14;box-shadow:0 3px 8px #3a24124d;color:var(--cream)}
+/* The code input floats at the top, between the buttons: no shelf, no band. */
+.bar{flex:none;position:relative;z-index:21;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 10px;width:fit-content;max-width:calc(100% - 24px);min-height:44px;margin:6px auto 0;padding:5px 8px 5px 16px;border:1px solid #aa966c;border-radius:12px;background:#173736eb;box-shadow:0 2px 6px #0c1d1f66;color:var(--cream)}
+.bar-status:empty{display:none}
+@media(min-width:980px){.bar{margin-top:-54px}}
 .bar label{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
 .bar input::placeholder{color:#c9b58a;letter-spacing:.1em}
 .bar input{width:8.2em;padding:6px 10px;border:2px solid var(--wood);border-radius:5px;background:#fffaf0;color:#1f3b39;font:700 1.15rem/1.2 var(--serif);letter-spacing:.22em;text-transform:uppercase;text-align:center}
 .bar .sign{padding:6px 16px}.bar .sign strong{font-size:.98rem}
-.bar-status{flex:1;min-width:0;font-size:.86rem;font-weight:700;color:#ffe7b0}
-.bar-quiet{margin-left:auto;padding:6px 12px;border:1px solid #f2d9a466;border-radius:99px;background:#0000;color:var(--cream);font-size:.8rem;font-weight:700}
+.bar-status{min-width:0;max-width:32ch;font-size:.86rem;font-weight:700;color:#ffe7b0}
+.bar-quiet{padding:6px 12px;border:1px solid #f2d9a466;border-radius:99px;background:#0000;color:var(--cream);font-size:.8rem;font-weight:700}
 .bar-quiet:hover{background:#ffffff1a}
 :fullscreen .hub-top{display:none}
+:fullscreen .grada{padding-top:0}:fullscreen .bar{margin-top:8px}
 
 /* Empty wall: the teacher points at the box. */
 .empty{flex:1;display:flex;align-items:flex-end;justify-content:center;gap:clamp(8px,3vw,36px);padding:clamp(12px,3dvh,32px) 16px 0;min-height:0}

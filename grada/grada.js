@@ -5,7 +5,7 @@ import {resultsMarkup} from '../mate/hud.js';
 import {TEAM_COLORS, portrait} from '../mate/characters.js';
 import {RoomWatch, MAX_ROOMS, parseCodes, codesFromLocation} from './sala.js';
 
-topBar('La Grada');
+topBar('La Grada', {fullscreen: false});
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
 const tiles = new Map();

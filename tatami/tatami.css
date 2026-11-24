@@ -1,10 +1,14 @@
-/* El Tatami. Shared pieces (top bar, wall, signs, paper, dialogs) come from comun/base.css. */
+/* El Tatami. Shared pieces (floating buttons, the room, signs, paper, dialogs) come from comun/base.css. */
 
-.tatami-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px 24px}
-.tatami-title h1{text-align:left}
-.tatami-title .lead{margin-top:4px;color:#4a3d24;font-size:1.02rem}
+/* The room has a low floor line, so the wall is free for posters and sheets. The floating buttons already
+   say where we are: the title stays for screen readers and the three signs hang at the top, between them. */
+.sala-fija{--suelo:88dvh;--zocalo:75dvh}
+body.con-room .sala-fija::before{background:linear-gradient(#f6d3a424,#3a24121f),url('./assets/room.webp') 50% 62%/cover,var(--wall)}
+.tatami-head{display:flex;justify-content:center}
+.tatami-title{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+@media(min-width:1000px){.tatami-head{margin-top:calc(-46px - clamp(8px,2dvh,20px));pointer-events:none}.tatami-head .tab{pointer-events:auto}}
 .tabs{display:flex;flex-wrap:wrap;gap:10px}
-.tab{display:grid;justify-items:center;min-width:118px;padding:8px 18px 7px;border:2px solid var(--wood);border-radius:5px;background:var(--sign);color:#2f2819;box-shadow:0 3px 0 #2a2415,0 6px 14px #0004;transition:transform .12s,background .12s}
+.tab{display:grid;justify-items:center;min-width:118px;padding:5px 18px 4px;border:2px solid var(--wood);border-radius:5px;background:var(--sign);color:#2f2819;box-shadow:0 3px 0 #2a2415,0 6px 14px #0004;transition:transform .12s,background .12s}
 .tab strong{font:700 1.15rem/1.15 var(--serif)}
 .tab small{font-size:.74rem;font-style:italic;color:#1f5753}
 .tab:hover{background:#fff0c4;transform:translateY(-2px)}
@@ -31,9 +35,22 @@
 /* Six-drawing sheets have two rows: the finished pose is the last drawing of the second one. */
 .thumb.painted.pasos{background-position:100% 95%}
 
-/* Learn: cards that look like the cream posters of the gym. */
-.pose-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:clamp(12px,2vw,20px)}
-.pose-card{display:grid;width:100%;height:100%;padding:0;border:2px solid #c9a769;border-radius:10px;overflow:hidden;background:var(--paper);color:inherit;text-align:center;box-shadow:0 6px 16px #5a3a1a40;transition:transform .14s,box-shadow .14s}
+/* Learn: one screen, no page scroll. The cream posters hang in a row along the wall and the row moves sideways. */
+body[data-view=aprender]{height:100dvh;overflow:hidden}
+body[data-view=aprender] .wall{min-height:0}
+body[data-view=aprender] .wall-inner{flex:1;min-height:0;display:flex;flex-direction:column;max-width:none;padding-inline:0;padding-bottom:0}
+body[data-view=aprender] .tatami-head,body[data-view=aprender] .view-head{padding-inline:clamp(14px,4vw,44px)}
+#v-aprender{flex:1;min-height:0;display:flex;flex-direction:column;margin-top:clamp(8px,1.6dvh,16px)}
+#v-aprender .view-head{justify-content:center;margin-bottom:0}
+#v-aprender .view-title{padding:5px 14px;border-radius:99px;background:#fff8e6eb;font-size:1.05rem;box-shadow:0 2px 6px #3a200a44}
+.pose-row{position:relative;flex:1;min-height:0;display:flex}
+.pose-grid{flex:1;display:flex;align-items:center;gap:clamp(14px,3dvh,28px);padding:0 clamp(14px,4vw,44px) 20dvh;overflow:auto hidden;scrollbar-width:none;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scroll-padding-inline:clamp(14px,4vw,44px)}
+.pose-grid::-webkit-scrollbar{display:none}
+.pose-grid:focus-visible{outline-offset:-4px}
+.pose-grid li{flex:none;width:clamp(150px,min(40dvh,62vw),330px);scroll-snap-align:start}
+.pose-row .pasillo-nav{bottom:max(10px,2dvh)}
+@media(max-height:480px){.pose-grid{padding-bottom:6px}#v-aprender .view-title{display:none}.pose-grid li{width:max(120px,34dvh)}}
+.pose-card{display:grid;width:100%;padding:0;border:2px solid #c9a769;border-radius:10px;overflow:hidden;background:var(--paper);color:inherit;text-align:center;box-shadow:0 6px 16px #5a3a1a40;transition:transform .14s,box-shadow .14s}
 .pose-card:hover{transform:translateY(-4px);box-shadow:0 12px 22px #5a3a1a55}
 .pose-pic{display:block;padding:6px 10px 0;background:linear-gradient(#f8e3c4,#f3d2a6 66%,#2c7570 66%,#1f5753 80%,#b06a32 80%,#d08a48)}
 .pose-names{display:grid;gap:1px;padding:8px 8px 10px;border-top:3px solid #17403d}
@@ -184,7 +201,6 @@ body.practising{overflow:hidden}
 }
 @media(max-width:430px){
  .tabs{width:100%}.tab{flex:1;min-width:0;padding:7px 8px}
- .pose-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
  .pose-names strong{font-size:.98rem}
  .palette{grid-template-columns:repeat(3,minmax(0,1fr))}
  .sequence{grid-template-columns:repeat(2,minmax(0,1fr))}

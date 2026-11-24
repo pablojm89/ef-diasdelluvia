@@ -1,5 +1,5 @@
 // El Tatami: learn the poses, build a sequence (alone or taking turns) and practise it with the whole class.
-import {topBar, record, mode} from '../comun/lugar.js';
+import {topBar, record, mode, sideways} from '../comun/lugar.js';
 import {POSES, FAMILIES, LEVELS, CALM, BREATH, SIDES, SAMPLES, byId} from './posturas.js';
 import * as S from './secuencia.js';
 import {createFigure, thumbMarkup, frameCount} from './figura.js';
@@ -36,7 +36,9 @@ const inFamily = family => POSES.filter(pose => !family || pose.family === famil
 // --- Views --------------------------------------------------------------------------
 const VIEWS = ['aprender', 'crear', 'practicar'];
 function show(view) {
+ document.body.dataset.view = view;
  for (const v of VIEWS) $('v-' + v).hidden = v !== view;
+ if (view === 'aprender') drawPoseNav?.();
  for (const tab of document.querySelectorAll('.tab')) {
   if (tab.dataset.tab === view) tab.setAttribute('aria-current', 'page'); else tab.removeAttribute('aria-current');
  }
@@ -63,7 +65,11 @@ function renderPoses() {
  familySigns($('families'), learnFamily, true);
  $('poses').innerHTML = shown.map((pose, i) => `<li><button type="button" class="pose-card" data-i="${i}">
   <span class="pose-pic">${thumb(pose.id)}</span><span class="pose-names"><strong>${esc(pose.es)}</strong><span lang="en">${esc(pose.en)}</span>${pose.sa ? `<small lang="sa">${esc(pose.sa)}</small>` : ''}</span></button></li>`).join('');
+ $('poses').scrollLeft = 0;
+ drawPoseNav?.();
 }
+// The posters hang in a row along the wall: the row is moved sideways, like the corridor.
+let drawPoseNav = null;
 $('families').addEventListener('click', event => {
  const sign = event.target.closest('.family');
  if (!sign) return;
@@ -324,6 +330,8 @@ $('opt-beat').addEventListener('change', renderChoices);
 // --- Practise: the guided session ----------------------------------------------------------
 const stageFigure = createFigure($('st-figure'));
 const room = PINTADAS.includes('room') ? './assets/room.webp' : '../gimnasio/assets/gym.webp';
+// The painted room is the backdrop of the whole place; without it, the provisional room of base.css.
+if (PINTADAS.includes('room')) document.body.classList.add('con-room');
 $('stage').style.setProperty('--room', `url('${room}')`);
 if (PINTADAS.includes('robles-yoga')) $('st-host').src = './assets/robles-yoga.webp';
 
@@ -448,6 +456,7 @@ document.addEventListener('keydown', event => {
 });
 
 renderPoses();
+drawPoseNav = sideways($('poses'), $('poses-left'), $('poses-right'));
 renderPalette();
 renderSequence();
 renderSaved();

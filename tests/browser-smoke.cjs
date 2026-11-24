@@ -27,14 +27,43 @@ const out=path.join(base,'artifacts');
  await page.locator('#login-avatars label').nth(2).click();
  await page.locator('#login-form button').click();
  assert.equal(await page.locator('#player-code').textContent(),'5B-12');
- assert.ok(await page.locator('#doors .door').count()<=4,'pocas puertas para el alumnado');
+ // The corridor: four places and the pupil's own locker, with a picture before each door and one at the end.
+ assert.ok(await page.locator('#doors .door').count()<=5,'pocas puertas para el alumnado');
  assert.ok(await page.locator('#doors a.door').count()>=3);
- assert.equal(await page.locator('#doors img').evaluateAll(images=>images.every(image=>image.complete&&image.naturalWidth>0)),true);
+ assert.equal(await page.locator('#doors .cuadro').count(),await page.locator('#doors .door').count()+1);
+ await page.waitForFunction(()=>[...document.querySelectorAll('#doors img')].every(image=>image.complete&&image.naturalWidth>0));
+ assert.equal(await page.locator('.hub-top').evaluate(bar=>getComputedStyle(bar).backgroundColor),'rgba(0, 0, 0, 0)','sin banda: los botones flotan sobre la escena');
+ assert.ok(await page.locator('#camera').evaluate(camera=>camera.scrollWidth>camera.clientWidth),'el pasillo se recorre hacia los lados');
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth&&document.documentElement.scrollHeight<=innerHeight),'el pasillo ocupa la pantalla y la página no se desplaza');
+ assert.equal(await page.locator('#walker').isVisible(),true);
+ // A curiosity: the picture opens, it goes to the album and the count and the record follow.
+ assert.match(await page.locator('#album-count').textContent(),/^0\//);
+ await page.locator('#doors .cuadro').first().click();
+ await page.waitForSelector('#curio[open]');
+ assert.ok((await page.locator('#curio-title').textContent()).length>5);
+ assert.ok((await page.locator('#curio-en').textContent()).length>5);
+ assert.ok((await page.locator('#curio-seated').textContent()).length>5,'variante sentada a la vista');
+ await page.locator('#curio-done').click();
+ assert.match(await page.locator('#album-count').textContent(),/^1\//);
+ assert.equal(await page.locator('#doors .cuadro.found').count(),1);
+ await page.locator('#curio .close').click();
+ await page.locator('#album-button').click();
+ assert.equal(await page.locator('#album-list button.album-item').count(),1);
+ await page.locator('#album .close').click();
+ assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('pabellon-registro')).filter(e=>e.activity==='curiosidades'&&e.who==='5B-12').length),1);
+ // The locker is a door of the corridor.
+ await page.locator('#doors [data-action="locker"]').click();
+ await page.waitForSelector('#locker[open]');
+ assert.match(await page.locator('#locker-list').textContent(),/1 de \d+ descubiertas/);
+ await page.locator('#locker .close').click();
  await page.reload();
  assert.equal(await page.locator('#player-code').textContent(),'5B-12');
+ assert.equal(await page.locator('#doors .cuadro.found').count(),1);
  await page.screenshot({path:path.join(out,'hub-pupil.png'),fullPage:true});
  // Class screen: the challenge wheel runs its clock and writes to the record without a player.
  await page.goto('https://patio.test/index.html#pantalla');
+ assert.equal(await page.locator('#walker').isHidden(),true,'en la pantalla de clase no camina nadie');
+ assert.equal(await page.locator('#doors .cuadro.found').count(),0,'el álbum de la clase no es el del alumno');
  await page.locator('[data-action="wheel"]').click();
  await page.locator('#wheel-spin').click();
  assert.ok((await page.locator('#wheel-title').textContent()).length>3);
@@ -62,6 +91,27 @@ const out=path.join(base,'artifacts');
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`inicio ${hash} at ${width}: horizontal overflow`);
   }
  }
+ // A wide screen without reduced motion: the character walks to the door before going through it.
+ const walking=await browser.newContext({viewport:{width:1280,height:720}});
+ await walking.route('https://patio.test/**',async route=>{
+  const name=decodeURIComponent(new URL(route.request().url()).pathname).replace(/^\//,'')||'index.html';
+  try{const body=await fs.readFile(path.resolve(base,name));const ext=path.extname(name);await route.fulfill({status:200,contentType:({'.html':'text/html','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.webp':'image/webp'}[ext]||'application/octet-stream'),body});}
+  catch{await route.fulfill({status:404,body:'Not found'});}
+ });
+ const walk=await walking.newPage();
+ walk.on('pageerror',e=>errors.push(e.message));
+ await walk.goto('https://patio.test/index.html#alumno');
+ await walk.locator('#login-form button').click();
+ const startX=await walk.locator('#walker').evaluate(walker=>walker.getBoundingClientRect().left);
+ await walk.locator('#doors [data-place="tatami"]').scrollIntoViewIfNeeded();
+ await walk.locator('#doors [data-place="tatami"]').click();
+ await walk.waitForURL('**/tatami/**');
+ await walk.goBack();
+ await walk.waitForSelector('#doors .door');
+ const door=await walk.locator('#doors [data-place="tatami"]').boundingBox(),walker=await walk.locator('#walker').boundingBox();
+ assert.ok(Math.abs(door.x+door.width/2-(walker.x+walker.width/2))<4&&walker.x!==startX,'al volver, el personaje está junto a la puerta por la que entró');
+ await walk.screenshot({path:path.join(out,'hub-corridor.png')});
+ await walking.close();
  await page.setViewportSize({width:1440,height:1000});
  await page.goto('https://patio.test/patio.html');
  await page.waitForSelector('.world-location');

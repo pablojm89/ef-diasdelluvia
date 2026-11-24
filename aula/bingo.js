@@ -43,9 +43,9 @@ let caller = null, clock = null;
 function showCallerSetup() {
  const saved = load('bingo', bingo.validCaller), pick = {size: 3, goal: 10};
  view.className = 'view wall-inner';
- view.innerHTML = `<p class="eyebrow">El Aula · Pantalla digital</p><h1>El bingo en movimiento</h1>
-  <p class="lead">La pantalla canta un movimiento y <b>toda la clase lo hace</b>. Quien lo tiene en su cartón, lo marca.</p>
-  <div class="setup paper">
+ view.innerHTML = `<div class="setup paper">
+   <header class="setup-head"><h1>El bingo en movimiento</h1>
+   <p class="lead">La pantalla canta un movimiento y <b>toda la clase lo hace</b>. Quien lo tiene en su cartón, lo marca.</p></header>
    ${saved ? `<div class="start-row"><button type="button" id="resume" class="sign gold big"><strong>Seguir la partida guardada</strong><span class="fine">${saved.called.length} cantados · cartones de ${sizeLabel(saved.size)}</span></button></div>` : ''}
    <fieldset><legend class="field-label">Cartones</legend>${choiceRow('size', bingo.SIZES, pick.size, sizeLabel)}</fieldset>
    <fieldset><legend class="field-label">Meta de la clase: líneas entre todos</legend>${choiceRow('goal', bingo.GOALS, pick.goal, value => `${value}<small>líneas</small>`)}</fieldset>

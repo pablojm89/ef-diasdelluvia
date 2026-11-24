@@ -105,7 +105,7 @@ export function summary(list = entries()) {
  const rows = new Map();
  for (const entry of list) {
   const who = entry.who || 'Pantalla de clase';
-  const row = rows.get(who) || {who, sid: entry.sid, last: entry.t, gymPhase: 0, gymDone: false, matches: 0, wins: 0, bestPoints: 0, challenges: 0, poses: [], sequences: 0, practices: 0, roscos: 0, bestRosco: 0, boards: 0, bingos: 0, marks: []};
+  const row = rows.get(who) || {who, sid: entry.sid, last: entry.t, gymPhase: 0, gymDone: false, matches: 0, wins: 0, bestPoints: 0, challenges: 0, poses: [], sequences: 0, practices: 0, roscos: 0, bestRosco: 0, boards: 0, bingos: 0, curiosities: [], marks: []};
   if (entry.t > row.last) row.last = entry.t;
   if (entry.activity === 'equipment-rescue') {
    row.gymPhase = Math.max(row.gymPhase, Number(entry.data.fase) || 0);
@@ -128,6 +128,7 @@ export function summary(list = entries()) {
   }
   if (entry.activity === 'oca' && entry.event === 'partida') row.boards++;
   if (entry.activity === 'bingo') row.bingos++;
+  if (entry.activity === 'curiosidades' && entry.event === 'descubre' && entry.data.id && !row.curiosities.includes(entry.data.id)) row.curiosities.push(entry.data.id);
   for (const mark of notasDe(entry, entry.curso)?.notas || []) row.marks.push(mark);
   rows.set(who, row);
  }

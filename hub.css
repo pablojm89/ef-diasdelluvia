@@ -1,41 +1,100 @@
 /* The hub itself: start screen, doors, login, teacher's desk and the challenge wheel. Shared pieces are in comun/base.css. */
 
-body[data-view=title] .hub-top{display:none}
+body:is([data-view=title],[data-view=login]) .hub-top{display:none}
+body[data-view=map]{height:100dvh;overflow:hidden}
 
-/* Start screen: the gym itself. */
+/* Start screen: the gym itself, with the name painted over it. No board, no frame. */
 .title-screen{position:relative;flex:1;min-height:100dvh;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:clamp(16px,4vw,60px);overflow:hidden;background:#3a2a1a url('./gimnasio/assets/gym.webp') 50% 70%/cover}
-.title-screen::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#1a110acc,#1a110a59 42%,transparent 66%),linear-gradient(0deg,#1a110a8c,transparent 34%)}
-.title-board{position:relative;width:min(470px,100%);padding:clamp(22px,4dvh,38px) clamp(22px,4vw,40px);border:9px solid #8a5a2b;border-radius:10px;background:linear-gradient(#fff6de,#f4e2b8);box-shadow:0 0 0 2px #4a2f14,inset 0 0 0 2px #c79a5a,0 22px 50px #000a;text-align:center}
-.title-board h1{margin:4px 0 6px;font:700 clamp(2.6rem,7.5vw,4.3rem)/1 var(--serif);letter-spacing:-.01em;color:#1f3b39}
-.title-board .lead{margin-bottom:clamp(16px,3dvh,26px);font-size:1.08rem;color:#4a3d24}
-.title-board .sign.big{width:100%}
-.title-doors{display:flex;justify-content:center;gap:8px;margin-top:clamp(16px,3dvh,26px);padding-top:14px;border-top:1px dashed #b9925c}
-.quiet{padding:6px 13px;border:1px solid #b9925c;border-radius:99px;font-size:.8rem;font-weight:700;color:#5a4a2a}
-.quiet:hover{background:#fff}
+.title-screen::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#1a110ae0,#1a110a8c 36%,transparent 62%),linear-gradient(0deg,#1a110a8c,transparent 34%)}
+.title-board{position:relative;width:min(480px,100%);color:var(--cream);text-shadow:0 2px 10px #1a110a}
+.title-board .eyebrow{color:var(--gold)}
+.title-board h1{margin:6px 0 8px;font:700 clamp(3rem,8.5vw,5.4rem)/.95 var(--serif);letter-spacing:-.01em;color:#fff6de}
+.title-board .lead{margin-bottom:clamp(18px,4dvh,34px);font-size:1.16rem;color:#f4e2b8}
+.title-board .sign{text-shadow:none}
+.title-board .sign.big{min-width:min(320px,100%)}
+.title-doors{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(18px,4dvh,34px)}
+.quiet{padding:8px 15px;border:1px solid #e9d3a2aa;border-radius:99px;background:#173736cc;font-size:.82rem;font-weight:700;color:var(--cream);text-shadow:none}
+.quiet:hover{background:#2a5558}
 .title-host{position:relative;flex:none;align-self:flex-end;width:clamp(230px,30vw,400px);height:min(64dvh,560px);margin-bottom:-1dvh}
 .title-host img{position:absolute;left:50%;bottom:0;width:auto;height:100%;max-width:none;transform:translateX(-50%);filter:drop-shadow(0 10px 12px #1a110a99)}
 .bubble{position:absolute;z-index:1;left:50%;top:-6%;transform:translateX(-50%);width:max-content;max-width:min(300px,80vw);display:grid;gap:3px;padding:11px 16px;border-radius:14px;background:var(--cream);color:#2a3a38;box-shadow:0 6px 18px #0007;font-size:.86rem;line-height:1.35;text-align:center}
 .bubble::after{content:'';position:absolute;left:50%;top:100%;margin-left:-9px;border:9px solid transparent;border-top-color:var(--cream)}
 .bubble span[lang=en]{font:600 1.05rem/1.25 var(--serif);color:#1f3b39}
+.login-screen{justify-content:center}
+.login-screen::before{background:#1a110a8c}
+.login-screen .login{position:relative;margin:0;max-height:calc(100dvh - 32px);overflow:auto}
 
-.doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,228px));justify-content:center;gap:clamp(16px,3vw,38px);margin-top:clamp(16px,3.4dvh,34px)}
-.doors.many{grid-template-columns:repeat(auto-fit,minmax(140px,178px));gap:clamp(12px,1.7vw,22px)}
-.doors.many .plate{font-size:clamp(.9rem,1.35vw,1.08rem);padding:5px 12px}
-.doors.many .kicker{font-size:.84rem}
-.door{display:grid;justify-items:center;gap:7px;width:100%;padding:0;border:0;background:none;color:inherit;text-align:center}
-.arch{position:relative;display:block;width:100%;aspect-ratio:4/5;border-radius:50% 50% 6px 6px/40% 40% 6px 6px;border:8px solid var(--teal);overflow:hidden;background:#17302f;box-shadow:0 0 0 2px #0f2d2b,inset 0 0 0 2px #0f2d2b,0 10px 22px #5a3a1a66,0 0 34px #ffd98a66;transition:transform .16s,box-shadow .16s}
+/* The corridor: the room of base.css (.sala), wider than the screen, so it scrolls sideways. Doors and pictures
+   are measured in hundredths of the screen height too and stand on its floor line. */
+.pasillo{position:relative;flex:1;height:100dvh;overflow:hidden;background:#3a2a1a}
+.pasillo-cam{position:absolute;inset:0;overflow:auto hidden;scrollbar-width:none;overscroll-behavior-x:contain}
+.pasillo-cam::-webkit-scrollbar{display:none}
+.pasillo-cam:focus-visible{outline-offset:-4px}
+.pasillo-world{position:relative;display:flex;align-items:flex-end;width:max-content;min-width:100%;height:100%;padding:0 12dvh 26dvh 4dvh}
+.doors{display:flex;align-items:flex-end;gap:5dvh}
+
+/* A door: its cream sign above the arch, the arch standing on the floor. */
+.door{position:relative;display:grid;justify-items:center;gap:1.6dvh;width:34dvh;padding:0;border:0;background:none;color:inherit;text-align:center}
+.plate{display:grid;gap:1px;max-width:38dvh;padding:.8dvh 2dvh;border:2px solid var(--wood);border-radius:3px;background:var(--sign);color:#2f2819;box-shadow:0 3px 3px #32241266}
+.plate strong{font:700 clamp(.92rem,3dvh,1.4rem)/1.15 var(--serif);letter-spacing:.03em;white-space:nowrap}
+.plate small{font-size:clamp(.66rem,1.75dvh,.9rem);line-height:1.2;color:#5a4a2a}
+.arch{position:relative;display:block;width:100%;height:46dvh;border-radius:50% 50% 0 0/36% 36% 0 0;border:1.2dvh solid #2c5a53;border-bottom:0;overflow:hidden;background:#17302f;box-shadow:0 0 0 2px #1a3a36,inset 0 0 0 2px #0f2d2b,0 0 5dvh #ffd98a55;transition:box-shadow .16s}
 .arch img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s}
-.arch.pixel img{image-rendering:pixelated}
-.arch::after{content:'';position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 -46px 40px -30px #0f1d1ccc,inset 0 0 26px #0f1d1c66;pointer-events:none}
-a.door:hover .arch,button.door:hover .arch,.door:focus-visible .arch{transform:translateY(-6px);box-shadow:0 0 0 2px #0f2d2b,inset 0 0 0 2px #0f2d2b,0 16px 26px #5a3a1a77,0 0 46px #ffe2a0}
-a.door:hover .arch img,button.door:hover .arch img{transform:scale(1.06)}
-.ribbon{position:absolute;z-index:1;left:50%;bottom:26px;transform:translateX(-50%);padding:3px 11px;border-radius:99px;background:#ffd98a;color:#3a2a0e;font-size:.72rem;font-weight:800;white-space:nowrap;box-shadow:0 2px 6px #0007}
-.plate{margin-top:-20px;position:relative;z-index:1;padding:6px 16px;border:2px solid var(--wood);border-radius:3px;background:var(--sign);color:#2f2819;font:700 clamp(1rem,1.7vw,1.25rem)/1.2 var(--serif);letter-spacing:.03em;box-shadow:0 3px 3px #32241266}
-.kicker{font-size:.92rem;line-height:1.3;color:#4a371c}
-.door.soon .arch{border-color:#6f7f78;box-shadow:0 0 0 2px #3a4a44,inset 0 0 0 2px #3a4a44,0 8px 16px #5a3a1a44}
-.door.soon .arch img{filter:grayscale(.55) brightness(.72)}
-.door.soon .plate{background:#d9cdb2;color:#6a5f48}
-.door.soon .ribbon{background:#17302f;color:#e9d3a2;letter-spacing:.1em}
+.arch::after{content:'';position:absolute;inset:0;box-shadow:inset 0 -6dvh 5dvh -4dvh #0f1d1c99,inset 0 0 3dvh #0f1d1c55;pointer-events:none}
+.door:hover .arch,.door:focus-visible .arch{box-shadow:0 0 0 2px #1a3a36,inset 0 0 0 2px #0f2d2b,0 0 7dvh #ffe9b0}
+.door:hover .arch img{transform:scale(1.06)}
+.door:hover .plate,.door:focus-visible .plate{background:#fff0c4}
+.ribbon{position:absolute;z-index:1;left:50%;bottom:2dvh;transform:translateX(-50%);padding:3px 11px;border-radius:99px;background:#ffd98a;color:#3a2a0e;font-size:.72rem;font-weight:800;white-space:nowrap;box-shadow:0 2px 6px #0007}
+
+/* A curiosity: a framed picture hanging on the wall between two doors, with its paper tag. */
+.cuadro{position:relative;display:block;padding:1.4dvh;border:0;border-radius:3px;background:linear-gradient(135deg,#a8713a,#7a4a1e 48%,#9a6330);box-shadow:inset 0 0 0 2px #5a3410,inset 0 0 0 .5dvh #c08a4a,0 1.2dvh 1.6dvh #5a3a1a66}
+.cuadro img{display:block;width:100%;height:100%;padding:6%;object-fit:contain;background:var(--paper) url('./gimnasio/assets/paper.webp') 0 0/200px 200px;box-shadow:inset 0 0 0 1px #c9a769,inset 0 2px 6px #5a3a1a44}
+.cuadro.painted img{padding:0;object-fit:cover}
+.doors .cuadro{width:21dvh;height:25dvh;margin-bottom:21dvh;transition:transform .16s,box-shadow .16s}
+.doors .cuadro::before{content:'';position:absolute;left:50%;bottom:100%;width:1.2dvh;height:1.2dvh;margin:0 0 .3dvh -.6dvh;border-radius:50%;background:#5a3410;box-shadow:0 1px 2px #0006}
+.doors .cuadro:hover,.doors .cuadro:focus-visible{transform:translateY(-.8dvh) rotate(-1.2deg);box-shadow:inset 0 0 0 2px #5a3410,inset 0 0 0 .5dvh #c08a4a,0 2dvh 2.4dvh #5a3a1a66,0 0 5dvh #ffe9b0}
+.tag{position:absolute;z-index:1;right:-1.6dvh;top:-1.6dvh;display:grid;place-items:center;width:5.4dvh;height:5.4dvh;min-width:26px;min-height:26px;border:2px solid #6b4a14;border-radius:50%;background:linear-gradient(#ffe29a,#f2bd57);color:#3a2a0e;font:700 clamp(.9rem,3.2dvh,1.5rem)/1 var(--serif);box-shadow:0 2px 5px #0006}
+.cuadro.found .tag{border-color:#17403d;background:#2c6b4a;color:#fff}
+.cuadro:not(.found) .tag{animation:glint 2.6s ease-in-out infinite}
+@keyframes glint{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+
+/* The teacher waits at the start of the corridor; the pupil's character walks it. */
+.pasillo-host{position:relative;flex:none;width:30dvh;height:46dvh;margin:0 16dvh -5dvh 0}
+#host{position:absolute;inset:0 22% 0 22%;padding:0;border:0;background:none}
+#host img{position:absolute;left:50%;bottom:0;width:auto;height:100%;max-width:none;transform:translateX(-46%);filter:drop-shadow(0 1dvh 1dvh #3a221677);pointer-events:none}
+#host:hover img,#host:focus-visible img{filter:drop-shadow(0 0 1.4dvh #ffe9b0)}
+.pasillo-host .bubble{top:auto;bottom:100%;left:0;transform:none;margin-bottom:.5dvh;max-width:min(300px,46dvh)}
+.pasillo-host .bubble::after{left:16dvh}
+.pasillo-host h1{font:600 clamp(.95rem,2.6dvh,1.2rem)/1.3 'Trebuchet MS',system-ui,sans-serif;color:#2a3a38}
+.walker{position:absolute;z-index:3;left:0;bottom:19dvh;width:25.6dvh;height:32dvh;margin-left:-12.8dvh;background:center bottom/contain no-repeat;pointer-events:none;filter:drop-shadow(0 .6dvh .5dvh #3a221677)}
+.walker.walking{background-size:400% 200%}
+.walker.left{transform:scaleX(-1)}
+
+/* Buttons that float over the corridor. */
+.album-pill{position:absolute;z-index:6;left:50%;bottom:max(14px,6dvh);transform:translateX(-50%);display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:4px 18px 4px 10px;border:2px solid var(--wood);border-radius:99px;background:var(--sign);color:#2f2819;font-weight:700;box-shadow:0 3px 0 #2a2415,0 6px 14px #0006;white-space:nowrap}
+.album-pill:hover{background:#fff0c4}
+.album-pill img{width:30px;height:30px}
+.album-pill b{padding:2px 9px;border-radius:99px;background:#1f5753;color:#fff;font-variant-numeric:tabular-nums}
+
+/* A curiosity opened, and the album. */
+#curio{width:min(820px,94vw)}
+.curio-layout{clear:both;display:grid;grid-template-columns:minmax(150px,230px) minmax(0,1fr);gap:clamp(14px,3vw,30px);align-items:start}
+.cuadro.big{aspect-ratio:5/6;margin-top:6px}
+.curio-en{margin:2px 0 8px;font:italic 600 1.15rem/1.3 var(--serif);color:#1f5753}
+.listen{vertical-align:middle;width:44px;height:44px;padding:0;border:1px solid #b9a06a;border-radius:50%;background:#fff8e6}
+.listen:hover{background:#fff0c4}
+.listen img{width:26px;height:26px;object-fit:contain}
+.try{display:grid;gap:3px;margin-top:12px;padding:10px 14px;border-left:4px solid #c2552c;background:#f6e3c2;border-radius:0 8px 8px 0}
+.try strong{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#a3431f}
+.try small{margin-top:3px;font-size:.88rem;color:#4a3d24}
+#album{width:min(760px,94vw)}
+.album-list{display:grid;gap:16px;margin-top:14px}
+.album-list h3{margin:0 0 8px;font:600 1.05rem/1.2 var(--serif);color:#1f3b39}
+.album-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px}
+.album-item{display:grid;justify-items:center;align-content:start;gap:6px;padding:8px 6px;border:2px solid #e3cfa2;border-radius:10px;background:#fffaf0;color:#4a3d24;font-size:.8rem;font-weight:700;line-height:1.2;text-align:center}
+button.album-item:hover{background:#fff0c4}
+.album-item img,.album-item i{display:grid;place-items:center;width:64px;height:64px;object-fit:contain;font:700 1.8rem/1 var(--serif);color:#b9a06a}
+.album-item.missing{border-style:dashed;background:none;color:#8a7a56;font-weight:400}
 
 .login,.gate{display:grid;gap:14px;width:min(620px,calc(100% - 28px));margin:clamp(16px,4dvh,44px) auto;text-align:center}
 .gate{width:min(420px,100%);margin-inline:auto}
@@ -64,6 +123,8 @@ legend{width:100%;margin-bottom:8px;font-size:.74rem;font-weight:800;letter-spac
 .aliases label:has(input:checked){border-color:var(--teal);background:#e2efe4;box-shadow:0 3px 8px #1f575355}
 .aliases label:has(input:focus-visible){outline:3px solid #ffdb84;outline-offset:2px}
 
+/* The teacher's sheets hang on the wall of a room with a low floor line. */
+.despacho{--suelo:91dvh;--zocalo:80dvh}
 #desk{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
 .paper h3{margin:18px 0 0;font:600 1.05rem/1.2 var(--serif);color:#1f3b39}
 .paper code{padding:1px 5px;border-radius:4px;background:#efe0bc;font-size:.85em}
@@ -103,8 +164,14 @@ legend{width:100%;margin-bottom:8px;font-size:.74rem;font-weight:800;letter-spac
  .wheel-layout{grid-template-columns:1fr}
  .wheel-frame{max-width:220px}
  .avatars{grid-template-columns:repeat(4,minmax(0,1fr))}
- .doors{grid-template-columns:repeat(2,minmax(0,1fr))}
  .cloud-form{grid-template-columns:1fr}
  .aliases{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .curio-layout{grid-template-columns:1fr}
+ .cuadro.big{width:150px;margin-inline:auto}
+ .album-pill span{display:none}
 }
-@media(max-height:560px) and (orientation:landscape){.title-host{height:78dvh}.title-board h1{font-size:2.4rem}}
+/* Upright phone: the corridor is taller than wide, so doors are a little narrower and one fills the screen. */
+@media(orientation:portrait){.door{width:30dvh}.doors{gap:4dvh}.doors .cuadro{width:17dvh;height:21dvh}.pasillo-host{width:24dvh;height:38dvh;margin-right:13dvh}.pasillo-host .bubble::after{left:12dvh}.walker{width:20.8dvh;height:26dvh;margin-left:-10.4dvh}}
+@media(max-height:560px) and (orientation:landscape){.title-host{height:78dvh}.title-board h1{font-size:2.6rem}}
+@media(max-height:480px){.pasillo-world{padding-left:76px}.pasillo-host .bubble{padding:6px 12px}.album-pill,.pasillo-nav{bottom:8px}}
+@media(prefers-reduced-motion:reduce){.cuadro .tag{animation:none}}

@@ -1,4 +1,4 @@
-/* Shared look of El Pabellón: the colours of the painted gym, the top bar, cream signs, the plaster wall,
+/* Shared look of El Pabellón: the colours of the painted gym, the floating buttons, cream signs, the plaster wall,
    paper sheets and dialogs. Every place links this file so that all of them belong to the same school. */
 :root{color-scheme:light dark;--ink:#142e30;--teal:#1f5753;--cream:#fff3d9;--gold:#ebc884;--sign:#e9d3a2;--wood:#463e28;--wall:#f0c79a;--paper:#fbf0d8;
  --serif:Georgia,'Times New Roman',serif;font:16px/1.5 'Trebuchet MS',system-ui,sans-serif;color:#2c2417;background:var(--ink)}
@@ -18,23 +18,27 @@ main:focus{outline:none}
 .fine{font-size:.8rem;color:#6a5a3c}
 .status{min-height:1.4em;font-weight:700;color:#2c6b4a}
 
-/* Top bar, hidden on the start screen. */
-.hub-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px clamp(14px,4vw,44px);background:#142e30;color:var(--cream);border-bottom:3px solid #be994e}
-
-.lockup{display:flex;align-items:center;gap:11px;line-height:1.1}
-.lockup img{display:block;width:40px;height:40px}
+/* Floating buttons over the scene, as in the gym: the way back on the left, who plays on the right.
+   There is no bar: the place fills the whole screen and leaves room for them with --hud. */
+:root{--hud:calc(max(10px,env(safe-area-inset-top)) + 54px)}
+.hub-top{position:absolute;z-index:20;top:0;left:0;right:0;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:max(10px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 0 max(12px,env(safe-area-inset-left));color:var(--cream);pointer-events:none}
+.hub-top a,.hub-top button{pointer-events:auto}
+.lockup,.player-tag,.mode-tag,.leave,.hud-round{display:inline-flex;align-items:center;min-height:44px;border:1px solid #aa966c;border-radius:10px;background:#173736eb;color:var(--cream);box-shadow:0 2px 6px #0c1d1f66}
+:is(a,button):is(.lockup,.player-tag,.leave,.hud-round):hover{background:#2a5558}
+.lockup{gap:9px;padding:3px 14px 3px 6px;line-height:1.1}
+.lockup img{display:block;width:34px;height:34px;object-fit:contain}
 .lockup span,.player-tag span{display:grid;text-align:left}
 .lockup small,.player-tag small{font-size:.6rem;font-weight:700;letter-spacing:.16em;color:var(--gold)}
-.lockup strong{font-size:.98rem;font-weight:900;letter-spacing:.1em;color:#fff}
-.who{display:flex;align-items:center;gap:10px}
-.player-tag{display:flex;align-items:center;gap:9px;padding:3px 14px 3px 3px;border:1px solid #be994e;border-radius:99px;background:#1f4245;color:var(--cream)}
-.player-tag:hover{background:#2a5558}
+.lockup strong{font-size:.92rem;font-weight:900;letter-spacing:.08em;color:#fff}
+.who{display:flex;align-items:center;gap:6px}
+.player-tag{gap:9px;padding:2px 13px 2px 3px;border-radius:99px}
 .player-tag img,.locker-head img{border-radius:50%;background:var(--wall);object-fit:cover;object-position:top}
-.player-tag img{width:40px;height:40px;border:2px solid var(--gold)}
+.player-tag img{width:38px;height:38px;border:2px solid var(--gold)}
 .player-tag strong{font-size:.95rem;letter-spacing:.04em}
-.mode-tag{padding:6px 13px;border:1px solid #be994e;border-radius:99px;font-size:.7rem;font-weight:800;letter-spacing:.14em;color:var(--gold)}
-.leave{padding:8px 13px;border-radius:8px;border:1px solid #ffffff33;font-size:.86rem;font-weight:700;color:#d9e6e4}
-.leave:hover{background:#ffffff14}
+.mode-tag{padding:0 13px;border-radius:99px;font-size:.68rem;font-weight:800;letter-spacing:.14em;color:var(--gold)}
+.leave{padding:0 14px;font-size:.86rem;font-weight:700}
+.hud-round{justify-content:center;width:44px;padding:0}
+.hud-round img{width:26px;height:26px;object-fit:contain;pointer-events:none}
 
 /* Signs: the cream plates that name the doors inside the gym. */
 .sign{display:inline-grid;gap:1px;padding:9px 18px;border:2px solid var(--wood);border-radius:5px;background:var(--sign);color:#2f2819;text-align:center;box-shadow:0 3px 0 #2a2415,0 6px 14px #0005;transition:transform .12s,box-shadow .12s,background .12s}
@@ -46,11 +50,33 @@ main:focus{outline:none}
 .sign.big{padding:14px 30px}.sign.big strong{font-size:1.45rem}
 .sign.danger{background:#f0c9b4;border-color:#7a2f22}
 
-/* The wall that holds the doors, the login and the desk. */
-.wall{flex:1;display:flex;flex-direction:column;background:linear-gradient(#f6d3a433,#c98a4a2e),url('../assets/wall.webp') 0 0/360px 360px,var(--wall)}
-.frieze{height:26px;flex:none;background:url('../assets/frieze.webp') 0 50%/auto 100% repeat-x;border-bottom:2px solid #a67a4a;box-shadow:0 3px 8px #5a3a1a55}
-.skirting{height:22px;flex:none;margin-top:auto;background:linear-gradient(#2c7570,#1f5753);border-top:3px solid #17403d}
-.wall-inner{width:100%;max-width:1280px;margin:0 auto;padding:clamp(16px,3.4dvh,34px) clamp(14px,4vw,44px) clamp(22px,4dvh,40px)}
+/* A plain stretch of the gym wall for the teacher's sheets. */
+.wall{position:relative;flex:1;display:flex;flex-direction:column;padding-top:var(--hud);background:linear-gradient(#f6d3a433,#c98a4a2e),url('../assets/wall.webp') 0 0/360px 360px,var(--wall)}
+
+/* A room built with the pieces of the painted gym, for the places that have no painted room of their own yet:
+   ochre wall, tile frieze, teal dado and wooden floor. Everything is measured in hundredths of the screen
+   height, so it keeps its proportions on any screen. --zocalo is where the dado starts and --suelo the floor.
+   .sala draws it on the element (it scrolls with it); .sala-fija keeps it still behind a page that scrolls. */
+.sala,.sala-fija::before{--luz:calc(var(--zocalo) - 3dvh);background:
+ linear-gradient(#4a230a66,#4a230a00 22%,#2a140433) 0 var(--suelo)/100% calc(100dvh - var(--suelo)) no-repeat,
+ url('../assets/parquet.webp') 0 var(--suelo)/auto max(26dvh,calc(100dvh - var(--suelo))) repeat-x,
+ linear-gradient(#8a4a1c,#b76624) 0 calc(var(--suelo) - 1.2dvh)/100% 1.4dvh no-repeat,
+ url('../assets/frieze.webp') 0 var(--luz)/auto 3.2dvh repeat-x,
+ linear-gradient(#578177,#446e65) 0 var(--zocalo)/100% calc(var(--suelo) - var(--zocalo)) no-repeat,
+ linear-gradient(100deg,#fff1c200 22%,#fff1c233 34%,#fff1c233 42%,#fff1c200 54%) 0 0/150dvh var(--luz) repeat-x,
+ linear-gradient(#f6d3a433,#c98a4a2e) 0 0/100% var(--suelo) no-repeat,
+ url('../assets/wall.webp') 0 0/50dvh 50dvh,#b5651f}
+.sala,.sala-fija{--suelo:74dvh;--zocalo:56dvh}
+.sala-fija{isolation:isolate;background:none}
+.sala-fija::before{content:'';position:fixed;inset:0;z-index:-1}
+
+/* Round buttons that move a room sideways, and the helper that wires them: sideways() in lugar.js. */
+.pasillo-nav{position:absolute;z-index:6;bottom:max(14px,6dvh);display:grid;place-items:center;width:max(48px,9dvh);height:max(48px,9dvh);padding:0;border:2px solid var(--wood);border-radius:50%;background:var(--sign);color:#2f2819;font:700 max(1.9rem,5.5dvh)/1 var(--serif);box-shadow:0 3px 0 #2a2415,0 6px 14px #0006}
+.pasillo-nav span{margin-top:-.14em}
+.pasillo-nav:hover{background:#fff0c4}
+.pasillo-nav.left{left:max(14px,env(safe-area-inset-left))}
+.pasillo-nav.right{right:max(14px,env(safe-area-inset-right))}
+.wall-inner{width:100%;max-width:1280px;margin:0 auto;padding:clamp(8px,2dvh,20px) clamp(14px,4vw,44px) clamp(22px,4dvh,40px)}
 .wall h1{font:600 clamp(1.5rem,3.6vw,2.2rem)/1.15 var(--serif);color:#3a2a14;text-align:center}
 .wall h2{font:600 1.25rem/1.2 var(--serif);color:#1f3b39}
 
@@ -78,5 +104,7 @@ dialog h2{margin:6px 0 12px;font:600 clamp(1.5rem,3.6vw,2.2rem)/1.1 var(--serif)
 .clock.done output{color:#b3402a}
 
 @media(max-width:760px){.lockup small{display:none}}
-@media(max-width:430px){.lockup span{display:none}.player-tag small{display:none}.hub-top{padding-inline:10px}.who{gap:6px}.mode-tag{padding:5px 9px;letter-spacing:.08em}}
+@media(max-width:430px){.lockup span{display:none}.lockup{padding:3px 6px}.player-tag small{display:none}.who{gap:5px}.mode-tag{padding:0 9px;letter-spacing:.08em}.leave{padding:0 10px}}
+/* A phone on its side: only the icon of the way back, so the scene keeps its top. */
+@media(max-height:480px){.lockup span{display:none}.lockup{padding:3px 6px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}

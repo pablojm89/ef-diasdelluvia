@@ -5,6 +5,7 @@
 .wall h1{text-align:left}
 .wall h2{margin-bottom:10px}
 body[data-view=game] .hub-top{display:none}
+body[data-view=game] .wall{padding-top:0}
 
 /* A cream board in a wooden frame, like the title board of the hub. */
 .board{border:9px solid #8a5a2b;border-radius:10px;background:linear-gradient(#fff6de,#f4e2b8);color:#2f2819;box-shadow:0 0 0 2px #4a2f14,inset 0 0 0 2px #c79a5a,0 14px 30px #5a3a1a66}

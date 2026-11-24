@@ -9,6 +9,7 @@ globalThis.localStorage=storage();globalThis.sessionStorage=storage();
 const {challenges,families}=await import('../content.js');
 const {eligibleChallenges}=await import('../engine.js');
 const registro=await import('../registro.js');
+const curiosidades=await import('../curiosidades.js');
 
 const root=fileURLToPath(new URL('..',import.meta.url));
 const read=file=>readFileSync(root+file,'utf8');
@@ -102,4 +103,62 @@ test('registro: el resumen cuenta también yoga, rosco, oca y bingo',()=>{
  const [mine,screen]=registro.summary();
  assert.deepEqual([mine.poses.length,mine.sequences,mine.practices,mine.roscos,mine.bestRosco,mine.bingos],[2,1,1,2,21,1]);
  assert.equal(screen.boards,1);
+});
+
+test('curiosidades: cada una tiene los dos idiomas, un movimiento con variante sentada y un dibujo que existe',()=>{
+ const ids=new Set();
+ for(const item of curiosidades.CURIOSIDADES){
+  assert.equal(ids.has(item.id),false,item.id);ids.add(item.id);
+  assert.ok(curiosidades.TEMAS[item.tema],item.id);
+  for(const field of ['titulo','en','texto','prueba','sentada'])assert.ok(typeof item[field]==='string'&&item[field].length>8,`${item.id}.${field}`);
+  assert.ok(existsSync(root+item.arte),item.arte);
+  if(item.segundos!==undefined)assert.ok(item.segundos>=10&&item.segundos<=30,item.id);
+  assert.match(item.prueba+item.sentada,/\S/);
+ }
+ assert.ok(curiosidades.CURIOSIDADES.length>=18);
+ for(const tema of Object.keys(curiosidades.TEMAS))assert.ok(curiosidades.CURIOSIDADES.some(item=>item.tema===tema),tema);
+});
+test('curiosidades: los cuadros del pasillo cambian cada lunes y en pocas semanas pasa el banco entero',()=>{
+ const monday=new Date(2026,10,23),sunday=new Date(2026,10,29),next=new Date(2026,10,30);
+ assert.equal(curiosidades.semana(monday),curiosidades.semana(sunday));
+ assert.equal(curiosidades.semana(next),curiosidades.semana(monday)+1);
+ for(const count of [6,7]){
+  const now=curiosidades.delPasillo(count,monday);
+  assert.equal(now.length,count);assert.equal(new Set(now.map(item=>item.id)).size,count);
+  assert.deepEqual(curiosidades.delPasillo(count,sunday),now);
+  assert.notDeepEqual(curiosidades.delPasillo(count,next).map(item=>item.id),now.map(item=>item.id));
+  const seen=new Set();
+  for(let week=0;week<8;week++)for(const item of curiosidades.delPasillo(count,new Date(2026,10,23+7*week)))seen.add(item.id);
+  assert.equal(seen.size,curiosidades.CURIOSIDADES.length,`con ${count} cuadros`);
+ }
+ assert.equal(curiosidades.delPasillo(6,new Date(2025,0,6)).length,6);
+});
+test('curiosidades: el álbum es de cada jugador, no repite y el resumen del profe las cuenta',()=>{
+ localStorage.clear();sessionStorage.clear();
+ const id=curiosidades.CURIOSIDADES[0].id,other=curiosidades.CURIOSIDADES[1].id;
+ assert.deepEqual(curiosidades.descubiertas('5b-07'),[]);
+ assert.equal(curiosidades.descubrir(id,'5b-07'),true);
+ assert.equal(curiosidades.descubrir(id,'5b-07'),false);
+ assert.equal(curiosidades.descubrir('no-existe','5b-07'),false);
+ assert.equal(curiosidades.descubrir(other,'pantalla'),true);
+ assert.deepEqual(curiosidades.descubiertas('5b-07'),[id]);
+ assert.deepEqual(curiosidades.descubiertas('pantalla'),[other]);
+ curiosidades.borrarAlbumes();
+ assert.deepEqual(curiosidades.descubiertas('pantalla'),[]);
+ localStorage.setItem('pabellon-curiosidades','{roto');
+ assert.deepEqual(curiosidades.descubiertas('5b-07'),[]);
+ localStorage.clear();
+ registro.setPlayer({course:5,group:'B',number:7,avatar:2});
+ registro.record('pasillo','curiosidades','descubre',{id,tema:'cuerpo'});
+ registro.record('pasillo','curiosidades','descubre',{id,tema:'cuerpo'});
+ registro.record('pasillo','curiosidades','descubre',{id:other,tema:'cuerpo'});
+ assert.deepEqual(registro.summary()[0].curiosities,[id,other]);
+ assert.equal(registro.summary()[0].marks.length,0,'una curiosidad es evidencia, no nota');
+});
+test('pantalla completa: ningún lugar conserva la banda ni las tiras, y todos los que usan la cabecera común dejan sitio a los botones',()=>{
+ for(const page of ['index.html','tatami/index.html','pizarra/index.html','aula/index.html','aula/oca.html','aula/bingo.html','grada/index.html','mate/index.html'])assert.equal(/class="(frieze|skirting)/.test(read(page)),false,page);
+ const base=read('comun/base.css');
+ assert.match(base,/\.hub-top\{position:absolute/);
+ assert.match(base,/\.wall\{[^}]*padding-top:var\(--hud\)/);
+ for(const style of [...base.matchAll(/url\('([^']+)'\)/g)])assert.ok(existsSync(root+target('comun/base.css',style[1])),style[1]);
 });

@@ -1,0 +1,161 @@
+{
+ "_titulo": "El Pasillo: el tramo de pared y los cuadros de las curiosidades",
+ "_nota": "El pasillo que une las puertas se recorre hacia los lados. Hoy se construye con piezas comunes (pared, cenefa, zócalo y parqué de comun/base.css) y cada curiosidad cuelga en un marco de madera con un dibujo prestado de otro lugar. Con este lote el pasillo pasa a estar pintado y cada cuadro tiene su propia ilustración. Se usan solos en cuanto están en assets/pasillo/pintados.js: hub.js cambia el dibujo prestado por el cuadro pintado y hub.css el fondo provisional por el tramo. Los textos de cada curiosidad están en curiosidades.js; el criterio, en docs/12-curiosidades.md.",
+ "_indice": {
+  "archivo": "assets/pasillo/pintados.js",
+  "nombre": "PINTADOS"
+ },
+ "pasillo-tramo": {
+  "nombre": "Un tramo del pasillo, que se repite",
+  "destino": "assets/pasillo/tramo.webp",
+  "ancho": 1536,
+  "alto": 1024,
+  "transparente": false,
+  "exacto": true,
+  "prompt": "Un tramo de pasillo del mismo colegio que gimnasio/assets/gym.webp, visto completamente de frente, sin perspectiva ni puntos de fuga, porque la imagen se repite una al lado de otra para formar un pasillo largo: el borde izquierdo y el derecho deben casar exactamente. De arriba abajo: pared ocre melocotón lisa hasta el 53 % del alto, con una mancha suave de luz dorada en diagonal como la que entra por un ventanal; cenefa de azulejo azul y naranja del 53 % al 56 %; zócalo verde azulado del 56 % al 73 %; rodapié de madera miel del 73 % al 74 %; y parqué anaranjado del 74 % hasta abajo, con las tablas en horizontal. Sin puertas, ventanas, muebles, personajes ni texto: las puertas, los cuadros y los personajes los pone el juego encima."
+ },
+ "cuadro-corazon": {
+  "nombre": "Cuadro: Tu corazón es un músculo",
+  "destino": "assets/pasillo/cuadro-corazon.webp",
+  "ancho": 600,
+  "alto": 720,
+  "transparente": false,
+  "prompt": "Una alumna recién llegada de correr, con una mano en el pecho y la otra tomándose el pulso en la muñeca, sonriente y algo sofocada. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+ },
+ "cuadro-huesos": {
+  "nombre": "Cuadro: Naces con más huesos de los que tendrás",
+  "destino": "assets/pasillo/cuadro-huesos.webp",
+  "ancho": 600,
+  "alto": 720,
+  "transparente": false,
+  "prompt": "Una lámina escolar de anatomía colgada en la pared con un esqueleto humano sencillo y amable de cuerpo entero, y un alumno al lado señalándose el codo. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+ },
+ "cuadro-equilibrio": {
+  "nombre": "Cuadro: El equilibrio está en el oído",
+  "destino": "assets/pasillo/cuadro-equilibrio.webp",
+  "ancho": 600,
+  "alto": 720,
+  "transparente": false,
+  "prompt": "Un alumno a la pata coja con los brazos abiertos y los ojos cerrados, concentrado, junto a su pupitre. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+ },
+ "cuadro-musculos": {
+  "nombre": "Cuadro: Los músculos trabajan por parejas",
+  "destino": "assets/pasillo/cuadro-musculos.webp",
+  "ancho": 600,
+  "alto": 720,
+  "transparente": false,
+  "prompt": "Una alumna doblando el brazo y tocándose el bíceps con la otra mano, con gesto de sorpresa divertida. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+ },
+ "cuadro-agua": {
+  "nombre": "Cuadro: Más de la mitad de tu cuerpo es agua",
+  "destino": "assets/pasillo/cuadro-agua.webp",
+  "ancho": 600,
+  "alto": 720,
+  "transparente": false,
+  "prompt": "Un alumno bebiendo de una cantimplora metálica lisa tras el ejercicio, con una toalla al hombro. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+ },
+ "cuadro-dormir": {
+  "nombre": "Cuadro: Dormir también es entrenar",
+  "destino": "assets/pasillo/cuadro-dormir.webp",
+  "ancho": 600,
+  "alto": 720,
+  "transparente": false,
+  "prompt": "Una alumna dormida plácidamente en su cama, con las zapatillas de deporte y un balón a los pies de la cama y la luna en la ventana. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+ },
+ "cuadro-sesenta": {
+  "nombre": "Cuadro: Sesenta minutos al día",
+  "destino": "assets/pasillo/cuadro-sesenta.webp",
+  "ancho": 600,
+  "alto": 720,
+  "transparente": false,
+  "prompt": "Tres alumnos moviéndose cada uno a su manera en el patio: una salta a la comba, otro baila y otra camina con la mochila. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+ },
+ "cuadro-calentar": {
+  "nombre": "Cuadro: Calentar es calentar de verdad",
+  "destino": "assets/pasillo/cuadro-calentar.webp",
+  "ancho": 600,
+  "alto": 720,
+  "transparente": false,
+  "prompt": "Un grupo de cuatro alumnos haciendo círculos de brazos en el gimnasio, en fila, siguiendo al profe Robles de espaldas. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+ },
+ "cuadro-baloncesto": {
+  "nombre": "Cuadro: El baloncesto nació con cestas de melocotones",
+  "destino": "assets/pasillo/cuadro-baloncesto.webp",
+  "ancho": 600,
+  "alto": 720,
+  "transparente": false,
+  "prompt": "Una cesta de mimbre de fruta clavada en lo alto de una barandilla de madera de un gimnasio antiguo, con un balón de cuero marrón entrando en ella. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+ },
+ "cuadro-maraton": {
+  "nombre": "Cuadro: 42 kilómetros y 195 metros",
+  "destino": "assets/pasillo/cuadro-maraton.webp",
+  "ancho": 600,
+  "alto": 720,
+  "transparente": false,
+  "prompt": "Una corredora y un corredor de fondo, de edad adulta, corriendo por una carretera entre olivos al amanecer, vistos de lado. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+ },
+ "cuadro-olimpia": {
+  "nombre": "Cuadro: Los primeros Juegos tenían una sola carrera",
+  "destino": "assets/pasillo/cuadro-olimpia.webp",
+  "ancho": 600,
+  "alto": 720,
+  "transparente": false,
+  "prompt": "Un estadio de la antigua Grecia: una pista recta de tierra entre laderas de hierba, columnas de piedra al fondo y una corona de olivo en primer plano. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+ },
+ "cuadro-yoga": {
+  "nombre": "Cuadro: Yoga quiere decir unión",
+  "destino": "assets/pasillo/cuadro-yoga.webp",
+  "ancho": 600,
+  "alto": 720,
+  "transparente": false,
+  "prompt": "Una alumna en la postura del árbol sobre una esterilla turquesa, con un árbol de verdad detrás de la ventana en la misma forma. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+ },
+ "cuadro-balon": {
+  "nombre": "Cuadro: El balón clásico tiene 32 piezas",
+  "destino": "assets/pasillo/cuadro-balon.webp",
+  "ancho": 600,
+  "alto": 720,
+  "transparente": false,
+  "prompt": "Un balón de fútbol clásico de hexágonos blancos y pentágonos negros en primer plano sobre el parqué, con un televisor antiguo apagado al fondo. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+ },
+ "cuadro-volante": {
+  "nombre": "Cuadro: Lo más rápido que sale de una raqueta",
+  "destino": "assets/pasillo/cuadro-volante.webp",
+  "ancho": 600,
+  "alto": 720,
+  "transparente": false,
+  "prompt": "Un volante de bádminton de plumas en pleno vuelo, con líneas de velocidad, y una raqueta que acaba de golpearlo. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+ },
+ "cuadro-comba": {
+  "nombre": "Cuadro: Saltar a la comba es un deporte",
+  "destino": "assets/pasillo/cuadro-comba.webp",
+  "ancho": 600,
+  "alto": 720,
+  "transparente": false,
+  "prompt": "Dos alumnas dando a una comba larga y un alumno saltando en el centro, con los pies en el aire. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+ },
+ "cuadro-goalball": {
+  "nombre": "Cuadro: Un deporte que se juega con el oído",
+  "destino": "assets/pasillo/cuadro-goalball.webp",
+  "ancho": 600,
+  "alto": 720,
+  "transparente": false,
+  "prompt": "Tres jugadores de goalball con antifaz opaco, tumbados de lado sobre el parqué para parar un balón azul con cascabeles. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+ },
+ "cuadro-rayuela": {
+  "nombre": "Cuadro: La rayuela se juega en medio mundo",
+  "destino": "assets/pasillo/cuadro-rayuela.webp",
+  "ancho": 600,
+  "alto": 720,
+  "transparente": false,
+  "prompt": "Una rayuela pintada con tiza de colores en el suelo del patio, sin números, y una alumna saltando a la pata coja sobre ella. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+ },
+ "cuadro-mate": {
+  "nombre": "Cuadro: El balón prisionero tiene muchos nombres",
+  "destino": "assets/pasillo/cuadro-mate.webp",
+  "ancho": 600,
+  "alto": 720,
+  "transparente": false,
+  "prompt": "Un partido de balón prisionero en el patio: un alumno esquiva agachándose una pelota blanda de espuma mientras otro la lanza desde el campo contrario. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+ }
+}

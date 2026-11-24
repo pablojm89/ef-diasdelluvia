@@ -1,6 +1,9 @@
-// El Pabellón: who comes in (pupil, class screen or teacher) and the doors each one sees.
+// El Pabellón: who comes in (pupil, class screen or teacher), the corridor each one walks, its doors and its curiosities.
 import {families} from './content.js';
 import {eligibleChallenges} from './engine.js';
+import {sideways} from './comun/lugar.js';
+import {PINTADOS} from './assets/pasillo/pintados.js';
+import {CURIOSIDADES, TEMAS, curiosidad, delPasillo, descubiertas, descubrir, borrarAlbumes} from './curiosidades.js';
 import {AVATARS, COURSES, GROUPS, LAST_NUMBER, player, setPlayer, leave, playerCode, studentId, setMode, record, entries, clearEntries, summary, toSheet,
  sync, connection, lupaConnection, setConnection, forgetConnection, testConnection, resendAll, cloudState, recover, classPackage, aliasEntry, setAliasEntry} from './registro.js';
 
@@ -10,7 +13,7 @@ const face = index => `./gimnasio/assets/pupil-${index}.webp`;
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // --- Places ------------------------------------------------------------------
-// One entry per place of the school. `soon` places are painted on the wall but still closed.
+// One entry per door of the corridor. `action` doors open something in the corridor itself.
 const PLACES = {
  gimnasio: {name: 'El Gimnasio', kicker: 'Aventura: Equipment Rescue', art: 'door-gimnasio', href: './gimnasio/', modes: 'Alumno · Pantalla', state: 'open'},
  pista: {name: 'La Pista', kicker: 'Mate Arena: balón prisionero', art: 'door-mate', href: './mate/', modes: 'Alumno', state: 'open'},
@@ -19,10 +22,11 @@ const PLACES = {
  tatami: {name: 'El Tatami', kicker: 'Yoga: posturas y secuencias', art: 'door-tatami', href: './tatami/', modes: 'Alumno · Pantalla', state: 'open'},
  grada: {name: 'La Grada', kicker: 'Partidos de mate en directo', art: 'door-grada', href: './grada/', modes: 'Pantalla', state: 'open'},
  aula: {name: 'El Aula', kicker: 'La oca y el bingo en movimiento', art: 'door-aula', href: './aula/', modes: 'Pantalla · Tabletas', state: 'open'},
+ vestuario: {name: 'El Vestuario', kicker: 'Tu taquilla y tu álbum', art: 'door-vestuario', action: 'locker', modes: 'Alumno', state: 'open'},
 };
 const MAPS = {
- alumno: {title: '¿A dónde vamos hoy?', places: ['gimnasio', 'pista', 'pizarra', 'tatami']},
- pantalla: {title: 'Pantalla digital: elegid un lugar', places: ['espalderas', 'aula', 'pizarra', 'gimnasio', 'tatami', 'grada']},
+ alumno: {title: '¿A dónde vamos hoy?', en: 'Where shall we go today?', places: ['gimnasio', 'pista', 'pizarra', 'tatami', 'vestuario']},
+ pantalla: {title: 'Elegid una puerta… o un cuadro.', en: 'Pick a door… or a picture!', places: ['espalderas', 'aula', 'pizarra', 'gimnasio', 'tatami', 'grada']},
 };
 // Earlier experiments that no longer match the look of the school; only the teacher can still open them.
 const REVIEW = [
@@ -39,34 +43,46 @@ function progressNote(id) {
  return Number.isInteger(stage) && stage > 0 ? (stage >= 5 ? 'Misión completada' : `Fase ${stage + 1} de 5`) : '';
 }
 function doorMarkup(id) {
- const place = PLACES[id], soon = place.state === 'soon';
- const note = soon ? 'PRÓXIMAMENTE' : progressNote(id);
- const inside = `<span class="arch${place.pixel ? ' pixel' : ''}"><img src="./assets/${place.art}.webp" alt="" width="480" height="640">${note ? `<span class="ribbon">${esc(note)}</span>` : ''}</span>
-  <span class="plate">${esc(place.name)}</span><span class="kicker">${esc(place.kicker)}</span>`;
- if (soon) return `<li><div class="door soon" aria-label="${esc(place.name)}, próximamente">${inside}</div></li>`;
- if (place.action) return `<li><button type="button" class="door" data-action="${place.action}">${inside}</button></li>`;
- return `<li><a class="door" href="${place.href}">${inside}</a></li>`;
+ const place = PLACES[id], note = progressNote(id);
+ const inside = `<span class="plate"><strong>${esc(place.name)}</strong><small>${esc(place.kicker)}</small></span>
+  <span class="arch"><img src="./assets/${place.art}.webp" alt="" width="480" height="640">${note ? `<span class="ribbon">${esc(note)}</span>` : ''}</span>`;
+ if (place.action) return `<li><button type="button" class="door" data-place="${id}" data-action="${place.action}">${inside}</button></li>`;
+ return `<li><a class="door" data-place="${id}" href="${place.href}">${inside}</a></li>`;
+}
+// Whose album it is: the pupil's, or the class screen's.
+const albumOwner = () => kind === 'alumno' && player() ? studentId(player()) : 'pantalla';
+// Each curiosity gets its own painting from arte/lotes/16-pasillo.json once it is integrated; until then
+// its frame shows a drawing borrowed from another place.
+const painted = item => PINTADOS.includes('cuadro-' + item.id);
+const pictureArt = item => painted(item) ? `./assets/pasillo/cuadro-${item.id}.webp` : './' + item.arte;
+function pictureMarkup(item, found) {
+ return `<li><button type="button" class="cuadro${found ? ' found' : ''}${painted(item) ? ' painted' : ''}" data-curio="${item.id}" aria-label="Curiosidad${found ? ' descubierta' : ' por descubrir'}: ${esc(item.titulo)}"><img src="${pictureArt(item)}" alt="" width="240" height="240"><span class="tag" aria-hidden="true">${found ? '✓' : '?'}</span></button></li>`;
 }
 
 // --- Views -------------------------------------------------------------------
-let view = 'title';
+let view = 'title', kind = null;
 function show(next) {
  view = next;
  document.body.dataset.view = next;
  for (const name of ['title', 'login', 'map', 'teacher']) $('view-' + name).hidden = name !== next;
  scrollTo(0, 0);
 }
-function showMap(kind) {
- const map = MAPS[kind], current = player();
+function showMap(which) {
+ kind = which;
+ const map = MAPS[kind], current = player(), pupil = kind === 'alumno' && current;
  $('map-title').textContent = map.title;
- $('doors').innerHTML = map.places.map(doorMarkup).join('');
- $('doors').classList.toggle('many', map.places.length > 4);
- const pupil = kind === 'alumno' && current;
+ $('map-en').textContent = map.en;
+ // A picture before each door and one after the last: one curiosity more than doors.
+ const found = descubiertas(albumOwner()), pictures = delPasillo(map.places.length + 1);
+ $('doors').innerHTML = map.places.map((id, index) => pictureMarkup(pictures[index], found.includes(pictures[index].id)) + doorMarkup(id)).join('')
+  + pictureMarkup(pictures[map.places.length], found.includes(pictures[map.places.length].id));
  $('locker-button').hidden = !pupil;
  $('mode-tag').hidden = kind !== 'pantalla';
  $('mode-tag').textContent = 'PANTALLA DIGITAL';
  if (pupil) { $('player-face').src = face(current.avatar); $('player-code').textContent = playerCode(current); }
+ drawAlbumCount();
  show('map');
+ enterCorridor(pupil ? current.avatar : null);
 }
 function route() {
  const where = location.hash.slice(1);
@@ -88,7 +104,170 @@ function route() {
 addEventListener('hashchange', route);
 addEventListener('pageshow', event => { if (event.persisted) route(); });
 $('enter-student').addEventListener('click', () => { location.hash = 'alumno'; });
-$('doors').addEventListener('click', event => { if (event.target.closest('[data-action="wheel"]')) openWheel(); });
+if (document.fullscreenEnabled) $('fullscreen').addEventListener('click', () => { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen().catch(() => {}); });
+else $('fullscreen').hidden = true;
+
+// --- The corridor: it is walked sideways ----------------------------------------------
+// The pupil's character walks to whatever is touched and the camera follows; on the class screen nobody
+// walks. Dragging, the wheel, the arrow keys and the two round buttons all move along the corridor.
+const camera = $('camera'), world = $('world'), walker = $('walker');
+// The painted stretch of corridor repeats along the whole room; until it arrives, the room of base.css.
+if (PINTADOS.includes('pasillo-tramo')) world.style.background = "url('./assets/pasillo/tramo.webp') 0 0/auto 100% repeat-x";
+const WHERE = 'pabellon-pasillo';
+const clamp = (value, low, high) => Math.min(high, Math.max(low, value));
+let walkerX = 0, walkFrame = 0, stride = 0, heldKey = 0, lastTime = 0, target = null, avatarNow = null;
+const centreOf = element => { const box = element.getBoundingClientRect(), base = world.getBoundingClientRect(); return box.left - base.left + box.width / 2; };
+function drawWalker(walking) {
+ walker.classList.toggle('walking', walking);
+ walker.style.backgroundImage = `url('./gimnasio/assets/${walking ? 'walk' : 'pupil'}-${avatarNow}.webp')`;
+ const cell = Math.floor(stride) % 8;
+ walker.style.backgroundPosition = walking ? `${cell % 4 * 100 / 3}% ${Math.floor(cell / 4) * 100}%` : '';
+ walker.style.left = walkerX + 'px';
+}
+function follow() {
+ const seen = walkerX - camera.scrollLeft, width = camera.clientWidth;
+ camera.scrollLeft += seen - clamp(seen, width * .3, width * .7);
+}
+function stopWalking() { cancelAnimationFrame(walkFrame); walkFrame = 0; lastTime = 0; target = null; if (avatarNow !== null) drawWalker(false); }
+function step(now) {
+ walkFrame = 0;
+ const dt = Math.min(.05, (now - (lastTime || now - 16)) / 1000), body = walker.offsetHeight || 200;
+ lastTime = now;
+ const goal = target ? target.x : clamp(walkerX + heldKey * 9999, body * .4, world.scrollWidth - body * .4);
+ const gap = goal - walkerX;
+ // A touched door is never more than a second away, however long the corridor is.
+ const speed = target ? Math.max(body * 2.2, target.distance / .9) : body * 2.4;
+ const move = Math.sign(gap) * Math.min(Math.abs(gap), speed * dt);
+ walkerX += move; stride += Math.abs(move) / body * 5;
+ if (move) walker.classList.toggle('left', move < 0);
+ drawWalker(true); follow();
+ if (Math.abs(goal - walkerX) < 1) {
+  const done = target?.then;
+  stopWalking();
+  if (heldKey) walkFrame = requestAnimationFrame(step); else done?.();
+  return;
+ }
+ walkFrame = requestAnimationFrame(step);
+}
+// Walks to an element of the corridor and then does `then`. Without a character, or without motion, at once.
+function walkTo(element, then) {
+ if (avatarNow === null || still()) { then(); return; }
+ const x = centreOf(element), width = camera.clientWidth;
+ // A character left behind off the screen comes in from the nearest edge.
+ walkerX = clamp(walkerX, camera.scrollLeft - 40, camera.scrollLeft + width + 40);
+ target = {x, distance: Math.abs(x - walkerX), then};
+ if (!walkFrame) walkFrame = requestAnimationFrame(step);
+}
+function remember(place) { try { sessionStorage.setItem(WHERE, JSON.stringify({kind, place})); } catch {} }
+function enterCorridor(avatar) {
+ stopWalking();
+ avatarNow = avatar;
+ walker.hidden = avatar === null;
+ let back = null;
+ try { back = JSON.parse(sessionStorage.getItem(WHERE)); } catch {}
+ // Coming back from a place, you stand by its door.
+ const door = back?.kind === kind && $('doors').querySelector(`[data-place="${CSS.escape(String(back.place))}"]`);
+ walkerX = door ? centreOf(door) : centreOf(document.querySelector('.pasillo-host')) + (walker.offsetHeight || 200) * .78;
+ camera.scrollLeft = door ? walkerX - camera.clientWidth / 2 : 0;
+ if (avatar !== null) drawWalker(false);
+ drawNav();
+}
+const drawNav = sideways(camera, $('go-left'), $('go-right')), slide = drawNav.slide;
+addEventListener('resize', () => { if (view === 'map') { walkerX = clamp(walkerX, 0, world.scrollWidth); if (avatarNow !== null) drawWalker(false); } });
+addEventListener('keydown', event => {
+ if (view !== 'map' || document.querySelector('dialog[open]') || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+ event.preventDefault();
+ const direction = event.key === 'ArrowLeft' ? -1 : 1;
+ if (avatarNow === null || still()) { if (!event.repeat) slide(direction); return; }
+ heldKey = direction; target = null;
+ walkerX = clamp(walkerX, camera.scrollLeft, camera.scrollLeft + camera.clientWidth);
+ if (!walkFrame) walkFrame = requestAnimationFrame(step);
+});
+addEventListener('keyup', event => { if (['ArrowLeft', 'ArrowRight'].includes(event.key)) { heldKey = 0; if (!target) stopWalking(); } });
+$('doors').addEventListener('click', event => {
+ const door = event.target.closest('.door'), picture = event.target.closest('.cuadro');
+ if (picture) { walkTo(picture, () => openCurio(picture.dataset.curio)); return; }
+ if (!door) return;
+ event.preventDefault();
+ remember(door.dataset.place);
+ const action = door.dataset.action;
+ walkTo(door, () => { if (action === 'wheel') openWheel(); else if (action === 'locker') openLocker(); else location.href = door.href; });
+});
+
+// --- Curiosities: the pictures of the corridor and the album ---------------------------
+let curioNow = null, curioLeft = 0, curioTicking = null;
+function drawAlbumCount() { $('album-count').textContent = `${descubiertas(albumOwner()).length}/${CURIOSIDADES.length}`; }
+function stopCurioClock() { clearInterval(curioTicking); curioTicking = null; }
+function openCurio(id) {
+ const item = curiosidad(id);
+ if (!item) return;
+ curioNow = item; stopCurioClock();
+ const found = descubiertas(albumOwner()).includes(id);
+ $('curio-art').src = pictureArt(item);
+ $('curio-art').parentElement.classList.toggle('painted', painted(item));
+ $('curio-theme').textContent = TEMAS[item.tema];
+ $('curio-title').textContent = item.titulo;
+ $('curio-en').textContent = item.en;
+ $('curio-text').textContent = item.texto;
+ $('curio-try').textContent = item.prueba;
+ $('curio-seated').textContent = item.sentada;
+ $('curio-clock-box').hidden = !item.segundos;
+ $('curio-clock-box').classList.remove('done');
+ curioLeft = item.segundos || 0;
+ $('curio-clock').textContent = time(curioLeft);
+ $('curio-start').firstElementChild.textContent = 'Empezar';
+ $('curio-done').hidden = found;
+ $('curio-status').textContent = found ? 'Ya está en el álbum.' : '';
+ if (!$('curio').open) $('curio').showModal();
+}
+$('curio-start').addEventListener('click', () => {
+ if (curioTicking) { stopCurioClock(); $('curio-start').firstElementChild.textContent = 'Seguir'; return; }
+ if (curioLeft <= 0) { curioLeft = curioNow.segundos; $('curio-clock-box').classList.remove('done'); }
+ $('curio-clock').textContent = time(curioLeft);
+ $('curio-start').firstElementChild.textContent = 'Pausar';
+ curioTicking = setInterval(() => {
+  curioLeft--;
+  $('curio-clock').textContent = time(Math.max(0, curioLeft));
+  if (curioLeft > 0) return;
+  stopCurioClock(); chime();
+  $('curio-clock-box').classList.add('done');
+  $('curio-start').firstElementChild.textContent = 'Repetir';
+ }, 1000);
+});
+$('curio-done').addEventListener('click', () => {
+ if (!descubrir(curioNow.id, albumOwner())) return;
+ record('pasillo', 'curiosidades', 'descubre', {id: curioNow.id, tema: curioNow.tema});
+ const picture = $('doors').querySelector(`[data-curio="${curioNow.id}"]`);
+ if (picture) { picture.classList.add('found'); picture.querySelector('.tag').textContent = '✓'; picture.setAttribute('aria-label', 'Curiosidad descubierta: ' + curioNow.titulo); }
+ $('curio-done').hidden = true;
+ $('curio-status').textContent = '¡Al álbum! Busca más cuadros por el pasillo.';
+ drawAlbumCount();
+});
+$('curio').addEventListener('close', () => { stopCurioClock(); try { speechSynthesis.cancel(); } catch {} });
+// The English sentence read aloud, as the teacher's instructions are in the gym.
+if ('speechSynthesis' in window) $('curio-listen').addEventListener('click', () => {
+ speechSynthesis.cancel();
+ const voice = new SpeechSynthesisUtterance(curioNow.en);
+ voice.lang = 'en-GB'; voice.rate = .85;
+ speechSynthesis.speak(voice);
+});
+else $('curio-listen').hidden = true;
+// The teacher keeps one for each day: the picture of this week that matches the day.
+$('host').addEventListener('click', () => {
+ const pictures = [...$('doors').querySelectorAll('.cuadro')];
+ if (pictures.length) walkTo($('host'), () => openCurio(pictures[new Date().getDay() % pictures.length].dataset.curio));
+});
+function openAlbum() {
+ const found = descubiertas(albumOwner());
+ $('album-title').textContent = `${found.length} de ${CURIOSIDADES.length} descubiertas`;
+ $('album-list').innerHTML = Object.entries(TEMAS).map(([tema, name]) => `<section><h3>${esc(name)}</h3><div class="album-row">${CURIOSIDADES.filter(item => item.tema === tema).map(item => found.includes(item.id)
+  ? `<button type="button" class="album-item" data-curio="${item.id}"><img src="${pictureArt(item)}" alt="" width="64" height="64" loading="lazy">${esc(item.titulo)}</button>`
+  : '<span class="album-item missing"><i aria-hidden="true">?</i>Por descubrir</span>').join('')}</div></section>`).join('');
+ for (const dialog of document.querySelectorAll('dialog[open]')) dialog.close();
+ $('album').showModal();
+}
+$('album-button').addEventListener('click', openAlbum);
+$('album-list').addEventListener('click', event => { const item = event.target.closest('[data-curio]'); if (item) { $('album').close(); openCurio(item.dataset.curio); } });
 
 // --- Pupil: class, list number and a character. No names -------------------------
 function fill(select, values, label) {
@@ -135,12 +314,15 @@ function drawLocker() {
   ['Mejor puntuación en mate', mine?.bestPoints ? `${mine.bestPoints} puntos` : '—'],
   ['Yoga', mine?.poses.length || mine?.sequences || mine?.practices ? `${mine.poses.length} posturas vistas · ${mine.sequences} secuencias creadas · ${mine.practices} practicadas` : 'Sin empezar'],
   ['Rosco de EF', mine?.roscos ? `${mine.roscos} jugados · mejor: ${mine.bestRosco} aciertos` : 'Ninguno todavía'],
+  ['Curiosidades', `${descubiertas(studentId(current)).length} de ${CURIOSIDADES.length} descubiertas`],
  ];
  $('locker-list').innerHTML = lines.map(([label, value]) => `<li><span>${esc(label)}</span><b>${esc(value)}</b></li>`).join('');
  $('locker-recover').hidden = !connection();
  return true;
 }
-$('locker-button').addEventListener('click', () => { $('locker-status').textContent = ''; if (drawLocker()) $('locker').showModal(); });
+function openLocker() { $('locker-status').textContent = ''; if (drawLocker()) $('locker').showModal(); }
+$('locker-button').addEventListener('click', openLocker);
+$('locker-album').addEventListener('click', openAlbum);
 // Another computer: what the teacher's sheet holds for this player joins this record.
 $('locker-recover').addEventListener('click', async () => {
  $('locker-recover').disabled = true; $('locker-status').textContent = 'Buscando en la hoja del profe…';
@@ -191,8 +373,8 @@ const when = iso => new Date(iso).toLocaleString('es-ES', {day: 'numeric', month
 function drawDesk() {
  const rows = summary();
  const marks = row => row.marks.length ? row.marks.map(m => `${m.criterio} · ${String(m.nota).replace('.', ',')} ${m.calificacion}`).join('<br>') : '—';
- $('desk-summary').innerHTML = rows.length ? `<table><thead><tr><th>Jugador</th><th>Última vez</th><th>Aventura del gimnasio</th><th>Mate: partidos · ganados · mejor</th><th>Yoga: posturas · creadas · practicadas</th><th>Rosco: jugados · mejor</th><th>Ruleta · oca · bingo</th><th>Nota orientativa</th></tr></thead><tbody>${rows.map(row =>
-  `<tr><th scope="row">${esc(row.who)}</th><td>${esc(when(row.last))}</td><td>${row.gymDone ? 'Completada' : row.gymPhase ? `Fase ${row.gymPhase} de 5` : '—'}</td><td>${row.matches ? `${row.matches} · ${row.wins} · ${row.bestPoints}` : '—'}</td><td>${row.poses.length || row.sequences || row.practices ? `${row.poses.length} · ${row.sequences} · ${row.practices}` : '—'}</td><td>${row.roscos ? `${row.roscos} · ${row.bestRosco}` : '—'}</td><td>${row.challenges || row.boards || row.bingos ? `${row.challenges} · ${row.boards} · ${row.bingos}` : '—'}</td><td>${marks(row)}</td></tr>`).join('')}</tbody></table>`
+ $('desk-summary').innerHTML = rows.length ? `<table><thead><tr><th>Jugador</th><th>Última vez</th><th>Aventura del gimnasio</th><th>Mate: partidos · ganados · mejor</th><th>Yoga: posturas · creadas · practicadas</th><th>Rosco: jugados · mejor</th><th>Ruleta · oca · bingo</th><th>Curiosidades</th><th>Nota orientativa</th></tr></thead><tbody>${rows.map(row =>
+  `<tr><th scope="row">${esc(row.who)}</th><td>${esc(when(row.last))}</td><td>${row.gymDone ? 'Completada' : row.gymPhase ? `Fase ${row.gymPhase} de 5` : '—'}</td><td>${row.matches ? `${row.matches} · ${row.wins} · ${row.bestPoints}` : '—'}</td><td>${row.poses.length || row.sequences || row.practices ? `${row.poses.length} · ${row.sequences} · ${row.practices}` : '—'}</td><td>${row.roscos ? `${row.roscos} · ${row.bestRosco}` : '—'}</td><td>${row.challenges || row.boards || row.bingos ? `${row.challenges} · ${row.boards} · ${row.bingos}` : '—'}</td><td>${row.curiosities.length || '—'}</td><td>${marks(row)}</td></tr>`).join('')}</tbody></table>`
   : '<p>Todavía no se ha jugado nada en este ordenador.</p>';
  $('desk-download').disabled = $('desk-clear').disabled = !entries().length;
  drawCloud();
@@ -257,7 +439,7 @@ $('cloud-resend').addEventListener('click', async () => { resendAll(); await syn
 $('alias-entry').addEventListener('change', event => setAliasEntry(event.target.checked));
 // What is sent while the desk is open shows up without reloading.
 setInterval(() => { if (view === 'teacher' && !$('desk').hidden) drawCloudState(); }, 4000);
-$('desk-clear').addEventListener('click', () => { if (confirm('¿Borrar todo el registro guardado en este ordenador? Descárgalo antes si lo necesitas.')) { clearEntries(); drawDesk(); } });
+$('desk-clear').addEventListener('click', () => { if (confirm('¿Borrar todo el registro y los álbumes de curiosidades guardados en este ordenador? Descarga antes el registro si lo necesitas.')) { clearEntries(); borrarAlbumes(); drawDesk(); } });
 $('desk-lock').addEventListener('click', () => { try { sessionStorage.removeItem(OPEN); } catch {} location.hash = ''; });
 $('desk-forget').addEventListener('click', () => { if (confirm('¿Borrar la clave de este ordenador para crear otra?')) { try { localStorage.removeItem(PIN); sessionStorage.removeItem(OPEN); } catch {} showTeacher(); } });
 
@@ -274,7 +456,7 @@ disc.innerHTML = `<circle r="103" fill="#463e28"/>` + KINDS.map((kind, index) =>
 }).join('') + `<circle r="17" fill="#fff3d9" stroke="#463e28" stroke-width="4"/>`;
 const bags = {};
 let turned = 0, spinning = false, current = null, left = 0, ticking = null, sound = null;
-const time = seconds => `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
+function time(seconds) { return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`; }
 function draw(kind) {
  // A shuffled bag per kind, so a challenge does not come back until the others have been used.
  if (!bags[kind]?.length) {

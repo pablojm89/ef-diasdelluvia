@@ -3,8 +3,15 @@
 .wall.aula-wall{background:linear-gradient(#f6d3a433,#c98a4a2e),var(--aula-bg,url('../assets/wall.webp') 0 0/360px 360px),var(--wall);background-size:auto,var(--aula-bg-size,360px 360px),auto}
 .lead{margin-top:6px;text-align:center;font-size:1.08rem;color:#4a3d24}
 .wall .eyebrow{display:block;text-align:center}
-/* Over the painted classroom the words need paper behind them: a hanging sign for the title, labels for the rest. */
-.painted .heading{width:fit-content;max-width:100%;margin:0 auto;padding:10px clamp(16px,3vw,34px) 12px;border:2px solid var(--wood);border-radius:6px;background:var(--sign);box-shadow:0 4px 0 #2a2415,0 10px 20px #3a200a66}
+/* In the painted classroom the floating buttons already say where we are: the title stays for screen readers,
+   the two tables stand on the floor without a frame and the words go on paper labels. */
+.painted .heading{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.painted .wall-inner{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:clamp(14px,3dvh,30px)}
+.painted .room{margin-top:0;grid-template-columns:repeat(2,minmax(0,min(400px,54dvh)))}
+.painted .tabletop{aspect-ratio:16/11;padding:0;border:0;border-radius:0;background:none;box-shadow:none}
+.painted .tabletop img{inset:0;width:100%;height:100%;filter:drop-shadow(0 12px 10px #3a200a88)}
+.painted .table:hover .tabletop,.painted .table:focus-visible .tabletop{box-shadow:none;filter:drop-shadow(0 0 22px #ffe9b0)}
+.painted .table .plate{margin-top:-6px}
 .painted .table .kicker{padding:6px 12px;border-radius:8px;background:#fff6dee6;box-shadow:0 2px 6px #3a200a44}
 .painted .quiet{background:#fff8e6e6}
 
@@ -29,6 +36,8 @@
 /* --- Goose game --------------------------------------------------------------- */
 .setup{display:grid;gap:16px;width:min(720px,100%);margin:clamp(12px,3dvh,30px) auto 0}
 .setup h2{text-align:center}
+.setup-head h1{color:#1f3b39}
+.setup-head .lead{margin-top:4px}
 .choices{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
 .choice{display:grid;justify-items:center;gap:4px;min-width:64px;padding:8px 12px;border:2px solid #c9a769;border-radius:10px;background:#fffaf0;color:#1f3b39;font:700 1.35rem/1.1 var(--serif)}
 .choice small{font:800 .66rem/1 'Trebuchet MS',system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7a6230}
@@ -40,8 +49,8 @@
 .rules svg{width:44px;height:44px}
 .start-row{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
 
-.game{flex:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(250px,24vw,320px);gap:clamp(10px,1.6vw,20px);align-items:start;padding:clamp(8px,1.4vw,16px) clamp(10px,1.6vw,20px)}
-.board-wrap{justify-self:center;width:min(100%,calc((100dvh - 92px) * 1.5));aspect-ratio:3/2;border:clamp(5px,.9vw,12px) solid #8a5a2b;border-radius:14px;background:var(--parquet);background-size:auto,50% auto;background-color:#c77a3a;box-shadow:0 0 0 2px #4a2f14,inset 0 0 0 2px #c79a5a,inset 0 0 40px #5a2f0a55,0 16px 30px #0007;overflow:hidden}
+.game{flex:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(250px,24vw,320px);gap:clamp(10px,1.6vw,20px);align-items:start;padding:var(--hud) clamp(10px,1.6vw,20px) clamp(8px,1.4vw,16px)}
+.board-wrap{justify-self:center;width:min(100%,calc((100dvh - var(--hud) - 24px) * 1.5));aspect-ratio:3/2;border:clamp(5px,.9vw,12px) solid #8a5a2b;border-radius:14px;background:var(--parquet);background-size:auto,50% auto;background-color:#c77a3a;box-shadow:0 0 0 2px #4a2f14,inset 0 0 0 2px #c79a5a,inset 0 0 40px #5a2f0a55,0 16px 30px #0007;overflow:hidden}
 .board-wrap.painted{background:var(--board-art) 0 0/100% 100%}
 #board{display:block;width:100%;height:100%}
 #board .token{transition:transform .26s cubic-bezier(.3,.7,.4,1)}

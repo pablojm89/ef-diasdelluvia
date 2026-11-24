@@ -1,25 +1,27 @@
 # Plan de El Pabellón, el hub de Educación Física
 
-20 de noviembre de 2026. Sustituye al plan anterior, que giraba en torno a los días de lluvia. Documentos que lo acompañan: [qué actividades digitales de EF existen y cuáles versionar](09-investigacion-dias-de-lluvia.md), [registro y notas](10-registro-y-notas.md) e [encargo de imágenes](../arte/ENCARGO.md).
+24 de noviembre de 2026. Sustituye al plan anterior, que giraba en torno a los días de lluvia. Documentos que lo acompañan: [qué actividades digitales de EF existen y cuáles versionar](09-investigacion-dias-de-lluvia.md), [registro y notas](10-registro-y-notas.md), [el pasillo y las curiosidades](12-curiosidades.md) e [encargo de imágenes](../arte/ENCARGO.md).
 
 ## Qué es
 
 Un colegio que se juega. El hub es el pabellón de Educación Física y cada actividad vive en uno de sus lugares. Sirve para cualquier sesión que se haga en el aula o con ordenadores, llueva o no.
 
-Cinco reglas que ordenan todo lo demás:
+Seis reglas que ordenan todo lo demás:
 
 1. **Una sola estética: la del gimnasio pintado.** Colegio andaluz, luz cálida, madera, pared ocre, zócalo verde azulado, cenefa de azulejo, carteles crema con letra de imprenta. El profe Robles es el anfitrión. Nada de islas, robots ni mundos de fantasía.
 2. **Parece un juego y enseña pocas opciones.** Quien entra ve un botón grande. Los datos de duración, material o criterios son para el profe y están en su despacho.
 3. **Tres formas de entrar:** alumno, pantalla digital y profe.
 4. **Versiones propias de formatos que los docentes ya usan** (ruleta, oca, bingo, rosco, breakout, yoga), corrigiendo sus fallos: esperas, sedentarismo, falta de inglés, una sola pantalla.
 5. **Lo que hace el alumnado queda anotado** para que pueda servir de evidencia al evaluar. Sin nombres en la web ni en el repositorio.
+6. **Pantalla completa, sin marcos.** Cada lugar es una escena que ocupa toda la pantalla, como el gimnasio. No hay barra de cabecera ni tiras de adorno alrededor: el camino de vuelta, quién juega y la pantalla completa son botones que flotan sobre la escena. Las palabras van sobre objetos del propio colegio (carteles, hojas, la pizarra), no sobre paneles.
 
 ## Los lugares
 
-Cada lugar es una puerta. Sólo se pintan puertas abiertas o a punto de abrirse; el resto de la lista es la reserva de ideas.
+Cada lugar es una puerta de **El Pasillo**, una sala larga que se recorre hacia los lados. Entre puerta y puerta cuelgan cuadros con curiosidades. Sólo se pintan puertas abiertas o a punto de abrirse; el resto de la lista es la reserva de ideas.
 
 | Lugar | Qué se hace allí | Versión propia de | Se juega como | Estado |
 |---|---|---|---|---|
+| **El Pasillo** | Recorrerlo de lado y descubrir los cuadros: 18 curiosidades en dos idiomas, cada una con un movimiento para probar; cambian cada lunes y se guardan en un álbum | Murales y «¿sabías que…?» de aula | Alumno · Pantalla | Abierto, con dibujos prestados en los marcos hasta que llegue el lote `16-pasillo` |
 | **El Gimnasio** | Aventura gráfica bilingüe con el profe Robles; hoy, *Equipment Rescue* en el cuarto de material | — | Alumno · Pantalla | Abierto |
 | **La Pista** | Mate Arena: balón prisionero con habilidades, entrenamiento y salas | — | Alumno | Abierto |
 | **Las Espalderas** | Ruleta de retos: gira, sale un tipo de reto y toda la clase lo hace a la vez con cronómetro | Ruletas de Wordwall | Pantalla | Abierto |
@@ -27,7 +29,7 @@ Cada lugar es una puerta. Sólo se pintan puertas abiertas o a punto de abrirse;
 | **La Pizarra** | Rosco de EF: la clase responde con una postura y cada acierto abre un microrreto; individual en el ordenador del alumno | Pasapalabra y trivial de EF | Alumno · Pantalla | Abierto |
 | **El Aula** | La oca cooperativa y el bingo en movimiento con cartones únicos | Ocas y tableros de Genially; Movement bingo | Pantalla + tabletas | Abierto |
 | **La Grada** | Ver en la pantalla, por código de sala, hasta cuatro partidos de mate a la vez | — | Pantalla | Abierto |
-| **El Vestuario** | La taquilla del alumno: personaje, lo que lleva hecho, insignias | — | Alumno | Hoy es un botón; puerta propia más adelante |
+| **El Vestuario** | La taquilla del alumno: personaje, lo que lleva hecho y su álbum de curiosidades | — | Alumno | Abierto: es la quinta puerta del pasillo del alumno y abre la taquilla. Faltan las insignias |
 | **El Despacho** | Zona del profe: registro, lugares abiertos, preparar la sesión | — | Profe | Abierto, básico |
 | El Armario de los candados | Campaña por capítulos: retos de clase que dan un dígito y abren un armario | Breakout de los Pluvianos | Pantalla | Reserva |
 | La Sala de Espejos | Expresión corporal, mímica, «This or That» y ritmo | Vídeos de elección activa | Pantalla | Reserva |
@@ -50,17 +52,42 @@ Cada lugar es una puerta. Sólo se pintan puertas abiertas o a punto de abrirse;
 
 ## Las tres formas de entrar
 
-**Alumno.** Botón grande «Entrar a jugar». Elige curso, grupo, número de lista y uno de los ocho personajes; no escribe nada. Si el ordenador tiene el paquete de clase de La Lupa y el profe lo activa, elige su alias de clase en una lista. Ese personaje es el mismo en el gimnasio y en la pista. Ve como mucho cuatro puertas. Su taquilla le enseña lo que lleva hecho. *Hecho.* Falta que el profe pueda decidir qué puertas ve cada clase.
+**Alumno.** Botón grande «Entrar a jugar». Elige curso, grupo, número de lista y uno de los ocho personajes; no escribe nada. Si el ordenador tiene el paquete de clase de La Lupa y el profe lo activa, elige su alias de clase en una lista. Ese personaje es el mismo en el gimnasio y en la pista, y es el que camina por el pasillo. Ve como mucho cuatro lugares y la puerta de su vestuario; en pantalla caben dos o tres a la vez. Su taquilla le enseña lo que lleva hecho. *Hecho.* Falta que el profe pueda decidir qué puertas ve cada clase.
 
-**Pantalla digital.** Sin jugador: lo que ocurre se anota como clase. Puertas pensadas para proyectar y moverse todos a la vez: ruleta, oca y bingo, rosco, yoga, gimnasio y la grada. *Hecho.*
+**Pantalla digital.** Sin jugador: lo que ocurre se anota como clase. Puertas pensadas para proyectar y moverse todos a la vez: ruleta, oca y bingo, rosco, yoga, gimnasio y la grada. Tocar al profe Robles abre la curiosidad del día, para empezar la sesión. El álbum es el de la clase. *Hecho.*
 
 **Profe.** Una clave de 4 a 8 números por ordenador abre el despacho: registro de ese ordenador, descarga, lista de lugares y acceso a las actividades antiguas. *Hecho en lo básico.* La clave sólo evita que el alumnado entre desde ese ordenador; no es una cuenta. Falta: abrir y cerrar lugares, preparar sesiones y ver el registro de toda la clase.
+
+## Pantalla completa y coherencia visual
+
+Revisión del 24 de noviembre de 2026. El gimnasio era una escena a pantalla completa y el resto parecían páginas web: banda oscura arriba, tira de cenefa, tira de zócalo y el contenido en una columna. Lo hecho:
+
+| Dónde | Antes | Ahora |
+|---|---|---|
+| Todos los lugares | Barra de cabecera oscura con borde dorado | Botones flotantes sobre la escena (`comun/base.css`, `comun/lugar.js`), con el mismo aspecto que los del gimnasio y un botón de pantalla completa |
+| Todos los lugares | Tira de cenefa arriba y de zócalo abajo | Quitadas. La cenefa y el zócalo están donde están en el colegio: dentro de la sala |
+| Inicio | Tablón con marco de madera sobre el gimnasio | El nombre pintado sobre la escena, sin caja |
+| Entrada del alumno | Hoja sobre una pared plana | La misma hoja, dentro del gimnasio |
+| Puertas | Rejilla de arcos sobre una pared | El Pasillo: una sala que se recorre de lado, con el personaje caminando |
+| El Tatami | Catálogo en rejilla que se desplazaba hacia abajo, sobre pared plana | La sala pintada de fondo en todo el lugar; las láminas de las posturas, en una fila que se mueve de lado |
+| El Aula | Cartel de título y dos mesas enmarcadas | Las dos mesas, sin marco, sobre el suelo del aula pintada |
+| La oca y el bingo | Título suelto encima del cuadro del fondo | El título, dentro de la hoja de preparación |
+| La Grada | Balda de madera a todo el ancho con el código | El código flota arriba, entre los botones; se ve la cenefa de la pared pintada |
+| El despacho | Pared plana | La sala común, con el suelo bajo |
+
+Lo que queda para que todo sea una escena (fase I):
+
+- **Las Espalderas** sigue siendo un cuadro de diálogo sobre el pasillo. Le toca escena propia: la ruleta de madera apoyada en las espalderas, como en su puerta.
+- **El Tatami, crear y practicar**: siguen siendo hojas que se desplazan hacia abajo sobre la sala. La fila de la secuencia pide ser también horizontal, sobre el suelo.
+- **La Pista**: el menú y el vestuario ya tienen fondo pintado, pero sus paneles crema tapan casi toda la escena.
+- **El Gimnasio** usa sus propios botones, iguales a los comunes pero escritos aparte: unificarlos en `comun/`.
+- **Las actividades antiguas** (`patio.html`) no se tocan: se retiran.
 
 ## El Tatami: yoga
 
 Petición del profe. Diseño:
 
-- **Aprender.** Fichas de postura con su nombre en español, en inglés y el original de yoga (sánscrito), dibujo, qué se nota en el cuerpo, una indicación de seguridad, la dificultad (fácil, media o reto) y la variante en silla. Las posturas se ordenan en cinco familias: de pie, equilibrio, a cuatro patas, de rodillas y sentadas, y tumbadas. Cada ficha enseña la entrada **paso a paso**: se anima sola y también se puede parar en cada dibujo con los puntos numerados.
+- **Aprender.** Las fichas cuelgan en fila en la sala pintada y la fila se recorre de lado. Fichas de postura con su nombre en español, en inglés y el original de yoga (sánscrito), dibujo, qué se nota en el cuerpo, una indicación de seguridad, la dificultad (fácil, media o reto) y la variante en silla. Las posturas se ordenan en cinco familias: de pie, equilibrio, a cuatro patas, de rodillas y sentadas, y tumbadas. Cada ficha enseña la entrada **paso a paso**: se anima sola y también se puede parar en cada dibujo con los puntos numerados.
 - **Crear.** Una secuencia se monta poniendo posturas en fila, eligiendo por familia. En el ordenador del alumno, la suya. En la pantalla o por grupos, colaborativa: cada persona añade una postura por turno hasta completar la secuencia de la clase.
 - **Practicar.** La pantalla guía la secuencia: nombre en los dos idiomas, la animación de entrada, las respiraciones contadas y la salida. La clase la hace en directo. Hay nueve secuencias preparadas, entre ellas un saludo al sol adaptado y cuatro que no necesitan colchoneta.
 - **Qué queda anotado.** Posturas vistas, secuencias creadas y secuencias practicadas.
@@ -82,8 +109,10 @@ Mismo sistema que Agencia La Lupa, del repo de multiplicopolis: una hoja de Goog
 | **D. La Pizarra y El Aula** | Rosco motor, oca cooperativa, bingo en movimiento | Hecha; faltan tablero, fondos y posturas pintados |
 | **E. La Grada** | Partidos de mate en directo; espectador sin plaza | Hecha y vista funcionar por conexión directa. Sin probar por el relevo ni en la red del centro |
 | **F. Remate** | Gimnasio táctil y con el pedido en la escena; pista pintada y menús de Mate en la estética común; segunda misión del gimnasio; retirada de las actividades antiguas | En curso |
-| **G. Arte** | Las imágenes de `arte/ENCARGO.md` sustituyen a lo provisional según llegan | Hecha: los diez lotes están entregados e integrados, sin pedidos pendientes |
-| **H. Lo que sigue** | El profe abre y cierra lugares por clase; el Vestuario como puerta; lugares de la reserva; descubrir solas las salas de mate de una clase | Sin empezar |
+| **G. Arte** | Las imágenes de `arte/ENCARGO.md` sustituyen a lo provisional según llegan | Los diez primeros lotes están entregados e integrados. Pendiente el lote `16-pasillo`: el tramo de pasillo y los 18 cuadros |
+| **H. Lo que sigue** | El profe abre y cierra lugares por clase; insignias en el Vestuario; lugares de la reserva; descubrir solas las salas de mate de una clase | Sin empezar. El Vestuario ya es puerta |
+| **I. Pantalla completa** | Botones flotantes y escena a pantalla completa en todos los lugares; El Pasillo; El Tatami en su sala y en horizontal; Aula, oca, bingo y Grada sin marcos | Hecha en lo común. Faltan la escena de Las Espalderas, crear y practicar de El Tatami y los paneles de La Pista |
+| **J. Curiosidades** | 18 cuadros en el pasillo con rotación semanal, álbum, curiosidad del día y anotación; lote `16-pasillo` pedido | Hecha la primera tanda. Siguientes pasos, por orden, en [12-curiosidades.md](12-curiosidades.md): cuadros dentro de cada lugar, enlaces entre curiosidades y lugares, rutas de la semana |
 
 ## Decisiones abiertas
 
@@ -94,3 +123,5 @@ Mismo sistema que Agencia La Lupa, del repo de multiplicopolis: una hoja de Goog
 | Identidad del alumno | Curso, grupo y número de lista | No hay nombres en la web; la correspondencia con el nombre sólo está en la hoja del profe |
 | Pixel art de Mate | Mantenerlo dentro del partido | Rehacer trece personajes animados en estilo pintado es mucho trabajo de imagen |
 | Qué evidencia cuenta para nota | Definirlo por criterio antes de la fase B | Completar un juego no equivale a superar un criterio |
+| Cuántas puertas ve el alumno | Cuatro lugares y su vestuario; en pantalla sólo caben dos o tres a la vez | El pasillo permite más puertas sin abrumar, pero cada puerta más aleja las del final |
+| Qué curiosidades cuelgan cada semana | Rotación automática; más adelante, que el profe elija el tema desde el despacho | Poder casarlas con la unidad que se está dando |

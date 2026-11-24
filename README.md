@@ -2,7 +2,7 @@
 
 Un colegio que se juega: cada actividad de Educación Física vive en un lugar del pabellón. Para el aula, la pantalla digital o el ordenador de cada alumno.
 
-**Tres formas de entrar.** El alumno pulsa «Entrar a jugar», elige curso, grupo, número de lista y personaje, y ve unas pocas puertas. La pantalla digital abre las actividades para toda la clase, como la ruleta de retos. El profe entra con una clave a su despacho, donde están el registro y la lista completa de lugares.
+**Tres formas de entrar.** El alumno pulsa «Entrar a jugar», elige curso, grupo, número de lista y personaje, y recorre un pasillo con unas pocas puertas y cuadros de curiosidades entre ellas. La pantalla digital abre las actividades para toda la clase, como la ruleta de retos. El profe entra con una clave a su despacho, donde están el registro y la lista completa de lugares.
 
 **Una estética.** Todo sale del gimnasio pintado y su profe Robles. Las actividades de la primera etapa con islas y robot quedan apartadas en el despacho hasta sustituirlas. El [plan](docs/08-hoja-de-ruta.md) dice qué lugares hay, cuáles vienen y en qué orden.
 

@@ -13,8 +13,7 @@
 <body>
  <a class="skip" href="#main">Saltar al contenido</a>
  <main id="main" tabindex="-1">
-  <section class="wall">
-   <div class="frieze" aria-hidden="true"></div>
+  <section class="wall sala-fija">
    <div class="wall-inner">
     <header class="tatami-head">
      <div class="tatami-title">
@@ -35,7 +34,11 @@
       <h2 id="t-aprender" class="view-title"></h2>
       <div id="families" class="families" role="group" aria-label="Familias de posturas"></div>
      </div>
-     <ul id="poses" class="pose-grid"></ul>
+     <div class="pose-row">
+      <ul id="poses" class="pose-grid" tabindex="0" aria-label="Posturas. Desliza, o usa las flechas, para verlas todas."></ul>
+      <button type="button" id="poses-left" class="pasillo-nav left" aria-label="Posturas anteriores" hidden><span aria-hidden="true">‹</span></button>
+      <button type="button" id="poses-right" class="pasillo-nav right" aria-label="Más posturas" hidden><span aria-hidden="true">›</span></button>
+     </div>
     </section>
 
     <!-- Create: poses in a row, alone or taking turns. -->
@@ -109,7 +112,6 @@
      </div>
     </section>
    </div>
-   <div class="skirting" aria-hidden="true"></div>
   </section>
  </main>
 
