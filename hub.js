@@ -211,6 +211,7 @@ function openCurio(id) {
  $('curio-text').textContent = item.texto;
  $('curio-try').textContent = item.prueba;
  $('curio-seated').textContent = item.sentada;
+ $('curio-source').textContent = item.fuente[0];
  $('curio-clock-box').hidden = !item.segundos;
  $('curio-clock-box').classList.remove('done');
  curioLeft = item.segundos || 0;

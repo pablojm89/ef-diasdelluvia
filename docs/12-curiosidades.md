@@ -23,11 +23,12 @@ Una línea de `CURIOSIDADES` en [`curiosidades.js`](../curiosidades.js):
 | `prueba` | **Pruébalo**: un movimiento de menos de medio minuto, en el sitio, que tiene que ver con lo contado |
 | `sentada` | La variante sentada, siempre a la vista |
 | `segundos` | Opcional: pone un reloj de cuenta atrás |
+| `fuente` | Quién lo afirma y la dirección donde se comprobó. La ficha enseña el nombre; sin fuente no entra |
 | `arte` | Dibujo ya pintado de otro lugar que se usa mientras no llega su cuadro del lote `16-pasillo` |
 
 Reglas para escribir una nueva:
 
-- **Tiene que ser verdad y poder comprobarse.** Datos redondos y prudentes («más de 400 km/h», «unos 300», «casi 2.800 años»), sin récords que caducan ni cifras dudosas que circulan por internet. Si no se puede comprobar en una fuente seria, no entra.
+- **Tiene que ser verdad y poder comprobarse.** Datos redondos y prudentes («más de 400 km/h», «entre 270 y 300», «unos 2.800 años»), sin récords que caducan ni cifras dudosas que circulan por internet. Si no se puede comprobar en una fuente seria, no entra.
 - **Tiene que poder moverse.** Sin un «Pruébalo» relacionado y su variante sentada no es una curiosidad del pabellón: es un dato.
 - **Sin riesgo.** Movimientos en el sitio, sin material, sin contacto obligatorio y sin apnea ni giros de cuello forzados. Los equilibrios con ojos cerrados, cerca de la mesa.
 - **Sin personas reales en imagen** y sin marcas ni emblemas registrados (por eso no hay aros olímpicos). En el texto sí caben nombres históricos.

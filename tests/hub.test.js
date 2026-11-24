@@ -112,6 +112,7 @@ test('curiosidades: cada una tiene los dos idiomas, un movimiento con variante s
   assert.ok(curiosidades.TEMAS[item.tema],item.id);
   for(const field of ['titulo','en','texto','prueba','sentada'])assert.ok(typeof item[field]==='string'&&item[field].length>8,`${item.id}.${field}`);
   assert.ok(existsSync(root+item.arte),item.arte);
+  assert.ok(Array.isArray(item.fuente)&&item.fuente[0].length>3&&/^https:\/\/\S+$/.test(item.fuente[1]),`${item.id}: cada curiosidad dice quién lo afirma y dónde`);
   if(item.segundos!==undefined)assert.ok(item.segundos>=10&&item.segundos<=30,item.id);
   assert.match(item.prueba+item.sentada,/\S/);
  }
