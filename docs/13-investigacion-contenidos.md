@@ -345,3 +345,48 @@ El contenido de `botiquin/casos.js` se contrastó el 24 de noviembre de 2026, in
 **Lo que no se pudo confirmar** en una fuente de primer nivel, y por eso se ha escrito con prudencia: que tirar de la zapatilla haga más daño y que echar agua en la cara no ayude (son opciones marcadas como error por prudencia, sin cita). No se pudieron abrir las guías europeas de reanimación de 2021 ni las estadounidenses de 2024; la secuencia europea se contrastó de forma indirecta, por su adaptación británica de 2025.
 
 **Límite que la pantalla dice y hay que mantener:** enseña el orden, no sustituye a un taller con alguien que sepa de primeros auxilios.
+
+## 8. La orientación: qué existe y qué dice la evidencia
+
+Consulta: 24 de noviembre de 2026, antes de diseñar El Circuito. **L** = fuente leída (al menos el resumen); **B** = sólo resultado de búsqueda.
+
+### Lo que ya existe en digital
+
+No hay ningún juego de navegador que enseñe a orientar el plano a los 10-12 años. Lo que hay se reparte en tres grupos:
+
+| Tipo | Ejemplos | Por qué no sirve tal cual |
+|---|---|---|
+| Simuladores 3D de bosque | [Catching Features](https://catchingfeatures.com/game.php) (L), Virtual-O (B), [The Forest](https://grelf.itch.io/forest/devlog/778564/the-forest-orienteering-simulation) (L) | Para orientadores: curvas de nivel, instalación, individual y sentado |
+| Cuestionarios de símbolos y teoría | [iKnow-O](https://iknow-o.com/quiz) (L), [Educaplay](https://www.educaplay.com/learning-resources/5892367-mapa_de_orientacion_simbologia.html) (L), [Genially](https://view.genially.com/5ecf81705173f90db7dc1720/game-orientacion) (L) | Es lo que abunda y no es la dificultad real; no se lee ningún plano |
+| Aplicaciones con GPS | MapRun, UsynligO, iOrienteering ([comparativa](https://sites.google.com/navigationgames.org/management/resources/orienteering-apps), L) | Posicionan a quien las usa: excluidas con menores |
+
+Dos referencias valen como modelo de mecánica: el simulador de TempO (una foto del terreno con varias balizas y un recorte de plano: ¿cuál es la del círculo?) y «Where Are We?», de la Universidad de Columbia y Penn State, el único diseñado desde la investigación para Primaria: vídeos de un parque enlazados a su plano ([descripción](https://www.ldeo.columbia.edu/~kastens/spatial/mapskills/index.html), L).
+
+**Formatos de entrenamiento sin terreno** que caben en una pantalla ([o-training.net](https://o-training.net/w/Category:Orienteering_exercises.html), L): memoria de plano (ver el tramo, ocultarlo e ir), encadenar muchos controles cortos, seguir una línea, ver sólo un corredor o una ventana del plano. Y los de [Navigation Games](https://navigation-games-2.gitbook.io/navigationgames/progressions/at-home-intro/list-of-games) (L), los más cercanos a «junto a la mesa»: colocar objetos según un plano de mesa, girar el plano hasta que cuadre con la sala y «¡congelados!» para comprobar si sigue orientado.
+
+### Qué cuesta de verdad a esta edad
+
+- **Los símbolos no son el problema.** A los tres años ya se entiende que un plano representa un lugar ([Uttal, 2000](https://groups.psych.northwestern.edu/uttal/vittae/documents/Seeingthebigpictureuttal2000_000.pdf), L).
+- **Lo difícil es la geometría: relacionar el plano con el espacio cuando no están alineados.** Con 259 niños de 5 a 12 años y el plano de su propia aula, se acierta más con el plano alineado que girado 180°, y cuando se mira paralelo a una pared ([Liben y Downs, 1993](https://pure.psu.edu/en/publications/understanding-person-space-map-relations-cartographic-and-develop/), L).
+- **En 4.º siguen los errores graves al situarse en un mapa.** Nadie usó la escala ni la flecha del norte, y los fallos vienen de fijarse en detalles que no informan ([Kastens y Liben, 2010](https://pure.psu.edu/en/publications/childrens-strategies-and-difficulties-while-using-a-map-to-record/), L).
+- **Rinde más quien coordina por su cuenta plano y espacio** ([Liben y otros, 2013](https://pure.psu.edu/en/publications/environmental-scale-map-use-in-middle-childhood-links-to-spatial-/), L). En 5.º y 6.º habrá niveles muy distintos.
+- **El mapa mental no se organiza por el norte, sino por los ejes del lugar** ([Brunyé y otros, 2015](https://pmc.ncbi.nlm.nih.gov/articles/PMC4564159), L, en adultos). La referencia deben ser las paredes y los objetos antes que los puntos cardinales.
+
+### Qué ayuda
+
+- **Decir en qué te has fijado.** En 4.º, quienes explicaban la pista usada cometieron menos errores graves ([Kastens y Liben, 2007](https://pure.psu.edu/en/publications/eliciting-self-explanations-improves-childrens-performance-on-a-f/), L). Sin texto libre: elegir entre tres pistas dibujadas.
+- **Señalar y nombrar los puntos de referencia útiles** ([Lingwood y otros, 2015](https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2015.00174/full), L).
+- **Ver el sitio «a pie de pista» junto al plano**, y **girar el plano uno mismo**: si gira solo, se pierde la destreza que se quiere enseñar.
+- **Precisión antes que velocidad**, con corrección inmediata y dificultad graduada.
+
+### Qué se puede prometer
+
+La orientación en la escuela tiene evidencia prometedora pero escasa: seis meses de orientación mejoraron la memoria visoespacial en niños de 8 a 10 años ([Notarnicola y otros, 2012](https://ricerca.uniba.it/handle/11586/126403), L), y una revisión de 11 estudios habla de «evidencia limitada» ([Morawietz y Muehlbauer, 2021](https://www.frontiersin.org/articles/10.3389/fspor.2021.664640/full), L). Navegar en pantalla se parece a navegar de verdad, pero la pantalla no entrena girar el propio cuerpo, las distancias reales ni leer mientras se corre. **El juego es la preparación de la orientación real en el patio, no su sustituto.**
+
+### Lo que una web puede y no debe hacer
+
+Sí, sin permisos: girar el plano con el dedo, el ratón o botones; arrastrar un marcador de «pulgar»; tocar balizas; tapar parte del plano; esconderlo para memoria; reloj y sonido. **No: GPS, cámara ni brújula del móvil.** La brújula no da ubicación, pero pide permiso ante menores, no existe en ordenadores ni en la pantalla digital, y entre mesas metálicas falla.
+
+### Del plano al movimiento de toda la clase
+
+Hay actividades publicadas de girar o correr hacia el punto que se canta, con cada pared como un punto ([The PE Dept](https://thepedept.com/activities/compass-points-navigation-game), L; Scouts, B), y la lección de 5.º de [Oak National Academy](https://www.thenational.academy/teachers/programmes/physical-education-primary-ks2/units/outdoor-adventurous-activities-orienteering/lessons/orientating-a-map-to-locate-points) (L), cuyo error típico es llevar el plano al revés. Ninguna usa una pantalla. La adaptación natural: la pantalla enseña el plano girado con una baliza y toda la clase señala con el brazo, o gira el cuerpo, hacia ese punto del espacio real.
