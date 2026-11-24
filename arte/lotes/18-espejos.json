@@ -1,0 +1,73 @@
+{
+ "_titulo": "La Sala de Espejos: ritmo y expresión",
+ "_nota": "La Sala de Espejos tiene cuatro juegos de clase: eco de ritmo con el cuerpo, estatuas con una regla que cambia, mímica y una coreografía de ocho tiempos. Hoy usa de fondo la sala de yoga (que tiene el espejo), la puerta cerrada y letras en vez de dibujos para los golpes del ritmo. Los dibujos se usan en cuanto están en espejos/assets/pintados.js. La puerta se cambia a mano: al integrarla, poner `art: 'door-espejos'` en la entrada `espejos` de PLACES en hub.js.",
+ "_indice": {
+  "archivo": "espejos/assets/pintados.js",
+  "nombre": "PINTADOS"
+ },
+ "door-espejos": {
+  "nombre": "Puerta de La Sala de Espejos",
+  "destino": "assets/door-espejos.webp",
+  "ancho": 480,
+  "alto": 640,
+  "transparente": false,
+  "prompt": "Vista a través de una puerta abierta; el motivo principal centrado y algo bajo, porque la imagen se recorta en forma de arco. Sala de expresión corporal con una pared entera de espejo y barra de madera, el parqué reflejado, un pandero y unas claves de madera sobre un banco."
+ },
+ "espejos-fondo": {
+  "nombre": "La Sala de Espejos",
+  "destino": "espejos/assets/fondo.webp",
+  "ancho": 1920,
+  "alto": 1080,
+  "transparente": false,
+  "clave": "fondo",
+  "prompt": "Sala de expresión corporal del mismo colegio que gimnasio/assets/gym.webp, con la misma luz de tarde: una pared de espejo con barra de madera al fondo, parqué anaranjado, zócalo verde azulado y cenefa de azulejo en las paredes laterales, ventanales con naranjos a la izquierda. Sitio libre abajo a la izquierda para un personaje de pie. Sin personajes ni texto. Encima van carteles y hojas crema que tapan el centro (de x 500 a x 1820 y de y 140 a y 760): ahí, detalle suave y sin contrastes fuertes."
+ },
+ "golpe-palmas": {
+  "nombre": "Golpe: palmas",
+  "destino": "espejos/assets/golpe-palmas.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "prompt": "Una alumna de 11 años como las de gimnasio/assets/pupil-2.webp, de cuerpo entero y de frente, dando una palmada delante del pecho, con unas rayitas de sonido entre las manos. La misma alumna, a la misma escala, en los seis dibujos de golpes."
+ },
+ "golpe-pecho": {
+  "nombre": "Golpe: pecho",
+  "destino": "espejos/assets/golpe-pecho.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "prompt": "Una alumna de 11 años como las de gimnasio/assets/pupil-2.webp, de cuerpo entero y de frente, golpeándose suave el pecho con la mano abierta. La misma alumna, a la misma escala, en los seis dibujos de golpes."
+ },
+ "golpe-muslos": {
+  "nombre": "Golpe: muslos",
+  "destino": "espejos/assets/golpe-muslos.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "prompt": "Una alumna de 11 años como las de gimnasio/assets/pupil-2.webp, de cuerpo entero y de frente, dándose una palmada en los muslos con las dos manos, con las rodillas algo flexionadas. La misma alumna, a la misma escala, en los seis dibujos de golpes."
+ },
+ "golpe-pisada": {
+  "nombre": "Golpe: pisada",
+  "destino": "espejos/assets/golpe-pisada.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "prompt": "Una alumna de 11 años como las de gimnasio/assets/pupil-2.webp, de cuerpo entero y de frente, dando un pisotón con un pie, con una rayita de sonido junto a la zapatilla. La misma alumna, a la misma escala, en los seis dibujos de golpes."
+ },
+ "golpe-chasquido": {
+  "nombre": "Golpe: chasquido, variante sentada",
+  "destino": "espejos/assets/golpe-chasquido.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "prompt": "Una alumna de 11 años como las de gimnasio/assets/pupil-2.webp, de cuerpo entero y de frente, sentada en una silla de aula, chascando los dedos de las dos manos. La misma alumna, a la misma escala, en los seis dibujos de golpes."
+ },
+ "golpe-silencio": {
+  "nombre": "Silencio",
+  "destino": "espejos/assets/golpe-silencio.webp",
+  "ancho": 360,
+  "alto": 360,
+  "transparente": true,
+  "prompt": "Una alumna de 11 años como las de gimnasio/assets/pupil-2.webp, de cuerpo entero y de frente, quieta, con un dedo delante de los labios y gesto divertido de silencio. La misma alumna, a la misma escala, en los seis dibujos de golpes."
+ }
+}

@@ -224,6 +224,33 @@ const out=path.join(base,'artifacts');
  await page.waitForSelector('#v-llamada:not([hidden])');
  assert.equal(await page.locator('#call-script li').count(),6);
  assert.ok((await page.locator('#call-scene').textContent()).length>40);
+ // La Sala de Espejos: four class games; the rhythm plays, the statues show their rule and a choreography is built.
+ await page.goto('https://patio.test/espejos/index.html');
+ assert.equal(await page.locator('.signs a').count(),4);
+ await page.goto('https://patio.test/espejos/index.html#eco');
+ await page.waitForSelector('#v-eco:not([hidden])');
+ assert.equal(await page.locator('#eco-beats li').count(),4);
+ await page.locator('#eco-start').click();
+ await page.waitForSelector('#eco-beats li.now');
+ await page.locator('#eco-start').click();
+ await page.goto('https://patio.test/espejos/index.html#estatuas');
+ await page.waitForSelector('#v-estatuas:not([hidden])');
+ await page.locator('#est-start').click();
+ await page.waitForSelector('#est-rule:not([hidden])');
+ assert.equal(await page.locator('#est-rule li').count(),2);
+ assert.match(await page.locator('#est-rule').textContent(),/Freeze!/);
+ await page.locator('#est-close').click();
+ assert.equal(await page.locator('#est-stage').isHidden(),true);
+ await page.goto('https://patio.test/espejos/index.html#mimica');
+ await page.waitForSelector('#v-mimica:not([hidden])');
+ assert.ok((await page.locator('#mim-en').textContent()).length>2);
+ await page.waitForFunction(()=>{const image=document.getElementById('mim-art');return image.complete&&image.naturalWidth>0;});
+ await page.goto('https://patio.test/espejos/index.html#coreo');
+ await page.waitForSelector('#v-coreo:not([hidden])');
+ for(let i=0;i<4;i++){assert.equal(await page.locator('#cor-offer [data-move]').count(),3);await page.locator('#cor-offer [data-move]').first().click();}
+ assert.equal(await page.locator('#cor-phrase li.set').count(),4);
+ assert.equal(await page.locator('#cor-offer [data-move]').count(),0);
+ assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('pabellon-registro')).filter(e=>e.place==='espejos'&&e.event==='creada').length),1);
  // El Tatami, winding down: the wave opens over the room, counts and can be left at any time.
  await page.setViewportSize({width:1280,height:720});
  await page.goto('https://patio.test/tatami/index.html#practicar');

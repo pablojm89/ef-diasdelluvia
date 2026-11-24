@@ -29,16 +29,16 @@ Cada lugar es una puerta de **El Pasillo**, una sala larga que se recorre hacia 
 | **La Pizarra** | Rosco de EF: la clase responde con una postura y cada acierto abre un microrreto; individual en el ordenador del alumno | Pasapalabra y trivial de EF | Alumno · Pantalla | Abierto |
 | **El Aula** | La oca cooperativa y el bingo en movimiento con cartones únicos | Ocas y tableros de Genially; Movement bingo | Pantalla + tabletas | Abierto |
 | **La Grada** | Ver en la pantalla, por código de sala, hasta cuatro partidos de mate a la vez | — | Pantalla | Abierto |
+| **La Sala de Espejos** | Ritmo y expresión para toda la clase: eco de percusión corporal (diez ritmos), estatuas con una regla que cambia, mímica por mitades adivinando en inglés y una coreografía de ocho tiempos que se monta fila a fila | Vídeos de elección activa y «freeze dance» | Pantalla | Abierto, con la sala de yoga de fondo y los movimientos pintados del bingo como baraja; lote `18-espejos` pedido |
 | **El Botiquín** | Primeros auxilios para toda la clase: «¿Qué hago primero?» (seis casos del cole, tres decisiones cada uno: proteger, avisar y socorrer, con un gesto por paso), la posición lateral de seguridad paso a paso por tríos y «La llamada» por parejas | Escape rooms de salud | Alumno · Pantalla | Abierto, con la sala común, un armario dibujado y esquemas provisionales; lote `17-botiquin` pedido. El contenido está contrastado con guías de primeros auxilios ([13-investigacion-contenidos.md](13-investigacion-contenidos.md)). Faltan los hábitos saludables (postura, alimentación) |
 | **El Vestuario** | La taquilla del alumno: personaje, lo que lleva hecho y su álbum de curiosidades | — | Alumno | Abierto: es la quinta puerta del pasillo del alumno y abre la taquilla. Faltan las insignias |
 | **El Despacho** | Zona del profe: registro, lugares abiertos, preparar la sesión | — | Profe | Abierto, básico |
 | El Armario de los candados | Campaña por capítulos: retos de clase que dan un dígito y abren un armario | Breakout de los Pluvianos | Pantalla | Reserva |
-| La Sala de Espejos | Expresión corporal, mímica, «This or That» y ritmo | Vídeos de elección activa | Pantalla | Reserva |
 | El Patio Cubierto | Juegos populares y tradicionales de Andalucía | — | Pantalla | Reserva |
 | La Vitrina | Logros de la clase y reto de la semana | — | Pantalla | Reserva |
 | El Circuito | Orientación con el plano del cole | — | Alumno | Reserva |
 
-**En qué orden abrir la reserva.** La [investigación de contenidos](13-investigacion-contenidos.md) cruza los lugares con el currículo andaluz de tercer ciclo. De sus 14 criterios, el juego sólo da evidencia clara de uno. Por lo que falta, el orden propuesto es: El Botiquín (primeros auxilios, criterio 1.3; ya abierto), La Sala de Espejos (expresión y ritmo, 4.3), El Circuito (competencia 5 entera), El Patio Cubierto (cultura andaluza, 4.1) y La Vitrina. El Armario de los candados queda como hilo que los une.
+**En qué orden abrir la reserva.** La [investigación de contenidos](13-investigacion-contenidos.md) cruza los lugares con el currículo andaluz de tercer ciclo. De sus 14 criterios, el juego sólo da evidencia clara de uno. Por lo que falta, el orden propuesto es: El Botiquín (primeros auxilios, criterio 1.3; ya abierto), La Sala de Espejos (expresión y ritmo, 4.3; ya abierta), El Circuito (competencia 5 entera), El Patio Cubierto (cultura andaluza, 4.1) y La Vitrina. El Armario de los candados queda como hilo que los une.
 
 ## Qué pasa con lo que había
 
@@ -56,7 +56,7 @@ Cada lugar es una puerta de **El Pasillo**, una sala larga que se recorre hacia 
 
 **Alumno.** Botón grande «Entrar a jugar». Elige curso, grupo, número de lista y uno de los ocho personajes; no escribe nada. Si el ordenador tiene el paquete de clase de La Lupa y el profe lo activa, elige su alias de clase en una lista. Ese personaje es el mismo en el gimnasio y en la pista, y es el que camina por el pasillo. Ve cinco lugares y la puerta de su vestuario; en pantalla caben dos o tres a la vez. Su taquilla le enseña lo que lleva hecho. *Hecho.* Falta que el profe pueda decidir qué puertas ve cada clase.
 
-**Pantalla digital.** Sin jugador: lo que ocurre se anota como clase. Puertas pensadas para proyectar y moverse todos a la vez: ruleta, oca y bingo, rosco, yoga, gimnasio y la grada. Tocar al profe Robles abre la curiosidad del día, para empezar la sesión. El álbum es el de la clase. *Hecho.*
+**Pantalla digital.** Sin jugador: lo que ocurre se anota como clase. Puertas pensadas para proyectar y moverse todos a la vez: ruleta, oca y bingo, sala de espejos, rosco, gimnasio, yoga, botiquín y la grada. Tocar al profe Robles abre la curiosidad del día, para empezar la sesión. El álbum es el de la clase. *Hecho.*
 
 **Profe.** Una clave de 4 a 8 números por ordenador abre el despacho: registro de ese ordenador, descarga, lista de lugares y acceso a las actividades antiguas. *Hecho en lo básico.* La clave sólo evita que el alumnado entre desde ese ordenador; no es una cuenta. Falta: abrir y cerrar lugares, preparar sesiones y ver el registro de toda la clase.
 
@@ -112,11 +112,11 @@ Mismo sistema que Agencia La Lupa, del repo de multiplicopolis: una hoja de Goog
 | **D. La Pizarra y El Aula** | Rosco motor, oca cooperativa, bingo en movimiento | Hecha; faltan tablero, fondos y posturas pintados |
 | **E. La Grada** | Partidos de mate en directo; espectador sin plaza | Hecha y vista funcionar por conexión directa. Sin probar por el relevo ni en la red del centro |
 | **F. Remate** | Gimnasio táctil y con el pedido en la escena; pista pintada y menús de Mate en la estética común; segunda misión del gimnasio; retirada de las actividades antiguas | En curso |
-| **G. Arte** | Las imágenes de `arte/ENCARGO.md` sustituyen a lo provisional según llegan | Los diez primeros lotes están entregados e integrados. Pendientes el lote `16-pasillo` (el tramo de pasillo y los 30 cuadros) y el `17-botiquin` (puerta, sala, tres gestos y los siete pasos de la posición lateral) |
+| **G. Arte** | Las imágenes de `arte/ENCARGO.md` sustituyen a lo provisional según llegan | Los diez primeros lotes están entregados e integrados. Pendientes el lote `16-pasillo` (el tramo de pasillo y los 30 cuadros) el `17-botiquin` (puerta, sala, tres gestos y los siete pasos de la posición lateral) y el `18-espejos` (puerta, sala y los seis golpes del ritmo) |
 | **H. Lo que sigue** | El profe abre y cierra lugares por clase; insignias en el Vestuario; lugares de la reserva; descubrir solas las salas de mate de una clase | Sin empezar. El Vestuario ya es puerta |
 | **I. Pantalla completa** | Botones flotantes y escena a pantalla completa en todos los lugares; El Pasillo; El Tatami en su sala y en horizontal; Aula, oca, bingo y Grada sin marcos | Hecha en lo común. Faltan la escena de Las Espalderas, crear y practicar de El Tatami y los paneles de La Pista |
 | **J. Curiosidades** | 30 cuadros en el pasillo con rotación semanal, pregunta y apuesta antes de abrir, fuente en cada ficha, álbum, curiosidad del día y anotación; lote `16-pasillo` pedido con el tramo y los 30 cuadros | Hechas dos tandas. Siguientes pasos, por orden, en [12-curiosidades.md](12-curiosidades.md): cuadros dentro de cada lugar, enlaces entre curiosidades y lugares, rutas de la semana |
-| **K. Contenidos nuevos** | Lo que propone [13-investigacion-contenidos.md](13-investigacion-contenidos.md), por orden: pregunta antes de abrir el cuadro, segunda tanda de curiosidades, vuelta a la calma, El Botiquín, La Sala de Espejos, intervalos con historia, El Circuito, El Patio Cubierto, juego limpio y La Vitrina | Aprobado por Pablo el 24/11/2026. Hechos los cuatro primeros pasos, con El Botiquín abierto; el siguiente es La Sala de Espejos |
+| **K. Contenidos nuevos** | Lo que propone [13-investigacion-contenidos.md](13-investigacion-contenidos.md), por orden: pregunta antes de abrir el cuadro, segunda tanda de curiosidades, vuelta a la calma, El Botiquín, La Sala de Espejos, intervalos con historia, El Circuito, El Patio Cubierto, juego limpio y La Vitrina | Aprobado por Pablo el 24/11/2026. Hechos los cinco primeros pasos, con El Botiquín y La Sala de Espejos abiertos; el siguiente son los intervalos con historia en Las Espalderas |
 
 ## Decisiones abiertas
 

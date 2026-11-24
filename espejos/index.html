@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+ <meta name="theme-color" content="#142e30">
+ <meta name="description" content="La Sala de Espejos, en El Pabellón: ritmo con el cuerpo, estatuas con una regla que cambia, mímica en inglés y una coreografía de ocho tiempos. Para toda la clase a la vez.">
+ <title>La Sala de Espejos · El Pabellón</title>
+ <link rel="icon" href="../assets/mark.svg" type="image/svg+xml">
+ <link rel="stylesheet" href="../comun/base.css">
+ <link rel="stylesheet" href="./espejos.css">
+</head>
+<body data-view="menu">
+ <a class="skip" href="#main">Saltar al contenido</a>
+ <main id="main" class="wall sala-fija" tabindex="-1">
+  <h1 class="oculto">La Sala de Espejos</h1>
+
+  <!-- The room: the teacher and four signs. -->
+  <section id="v-menu" class="menu" aria-label="A qué jugamos">
+   <figure class="host"><figcaption class="bubble"><span lang="en">Everybody at the same time!</span><span>Todos a la vez, cada uno en su sitio.</span></figcaption><img src="../gimnasio/assets/robles-point.webp" alt="El profe Robles" width="760" height="550"></figure>
+   <ul class="signs">
+    <li><a class="sign gold big" href="#eco"><strong>Eco de ritmo</strong><small>Palmas, pecho, muslos y pisada · 3 min</small></a></li>
+    <li><a class="sign big" href="#estatuas"><strong>Estatuas que cambian</strong><small>El color manda, y la regla cambia · 2 min</small></a></li>
+    <li><a class="sign big" href="#mimica"><strong>Mímica</strong><small>Media clase lo hace, la otra adivina en inglés</small></a></li>
+    <li><a class="sign big" href="#coreo"><strong>Coreografía</strong><small>Ocho tiempos entre todos</small></a></li>
+   </ul>
+  </section>
+
+  <!-- Echo: the screen plays a rhythm with the body and the class answers. -->
+  <section id="v-eco" class="activity one" hidden aria-labelledby="eco-phase">
+   <div class="paper">
+    <p class="eyebrow" id="eco-count"></p>
+    <h2 id="eco-phase" aria-live="polite"></h2>
+    <ol id="eco-beats" class="beats"></ol>
+    <div class="row"><button type="button" id="eco-start" class="sign gold big"><strong>Empezar</strong></button><label class="check"><input type="checkbox" id="eco-seated"> Variante sentada: la pisada es un chasquido</label><a class="quiet" href="#">Volver a la sala</a></div>
+    <p class="fine">Primero suena la pantalla y todos miran. Después, el mismo ritmo lo hace la clase, sin correr.</p>
+   </div>
+  </section>
+
+  <!-- Statues: before each phase, a sheet with the rule; then only colours. -->
+  <section id="v-estatuas" class="activity one" hidden aria-labelledby="est-title">
+   <div class="paper">
+    <p class="eyebrow">Estatuas que cambian · <span lang="en">Freeze!</span></p>
+    <h2 id="est-title">El color manda… y la regla cambia</h2>
+    <p>Cada color dice qué hacer. Tres rondas: en cada una, la regla es distinta, y hay que acordarse. Nadie queda fuera: si te equivocas, sigues.</p>
+    <p class="gesture"><b>Todos a la vez, en el sitio.</b> <small><b>Variante sentada:</b> se mueven brazos, hombros y cara.</small></p>
+    <div class="row"><button type="button" id="est-start" class="sign gold big"><strong>Empezar</strong></button><label class="check"><input type="checkbox" id="est-help"> Dejar la regla a la vista</label><a class="quiet" href="#">Volver a la sala</a></div>
+   </div>
+  </section>
+
+  <!-- Mime: half the class acts, the other half guesses in English. -->
+  <section id="v-mimica" class="activity" hidden aria-labelledby="mim-en">
+   <div class="paper">
+    <p class="eyebrow" id="mim-turn"></p>
+    <figure class="move"><img id="mim-art" alt="" width="360" height="360"></figure>
+   </div>
+   <div class="paper">
+    <p class="eyebrow">Sin hablar · <span lang="en">No talking</span></p>
+    <h2 id="mim-en" lang="en"></h2>
+    <p id="mim-es" class="en"></p>
+    <p class="gesture flow"><b>Quien actúa</b> mira la pantalla, al fondo. <b>Quien adivina</b>, delante y de espaldas a la pantalla, pregunta: <span lang="en">«Is it…?»</span> y se le contesta <span lang="en">«Yes, it is!»</span> o <span lang="en">«No, it isn't.»</span> <small><b>Variante sentada:</b> <span id="mim-seated"></span></small></p>
+    <div class="clock" id="mim-clock-box"><output id="mim-clock">0:20</output><button type="button" id="mim-start" class="sign"><strong>Empezar</strong></button></div>
+    <div class="row"><button type="button" id="mim-next" class="sign gold"><strong>Cambio de mitades</strong></button><a class="quiet" href="#">Volver a la sala</a></div>
+   </div>
+  </section>
+
+  <!-- Choreography: each row adds a move, everybody rehearses the phrase as it grows. -->
+  <section id="v-coreo" class="activity one" hidden aria-labelledby="cor-title">
+   <div class="paper">
+    <p class="eyebrow" id="cor-count"></p>
+    <h2 id="cor-title" aria-live="polite"></h2>
+    <ol id="cor-phrase" class="phrase"></ol>
+    <div id="cor-offer" class="offer"></div>
+    <div class="row"><button type="button" id="cor-play" class="sign gold big" hidden><strong>¡A bailar!</strong></button><button type="button" id="cor-new" class="sign" hidden><strong>Otra coreografía</strong></button><a class="quiet" href="#">Volver a la sala</a></div>
+    <p class="fine">Cada movimiento dura dos tiempos. Sentados se hace con su variante en silla.</p>
+   </div>
+  </section>
+ </main>
+
+ <!-- The whole screen is the colour. -->
+ <div id="est-stage" class="colour-stage" hidden role="region" aria-label="Estatuas que cambian" aria-live="polite">
+  <button type="button" id="est-close" class="sign"><strong>Salir</strong></button>
+  <div id="est-rule" class="rule" hidden></div>
+  <div id="est-shape" class="shape" hidden><i></i><strong></strong><span lang="en"></span></div>
+  <ul id="est-legend" class="legend" hidden></ul>
+ </div>
+ <script type="module" src="./espejos.js"></script>
+</body>
+</html>

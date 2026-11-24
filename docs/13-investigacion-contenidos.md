@@ -295,7 +295,7 @@ Descritas como mecánica. En todas se mueve la clase entera a la vez junto a su 
 
 ## 6. Propuesta: qué incluir y en qué orden
 
-Ordenado por lo que aporta a la clase frente a lo que cuesta hacerlo. Pablo dio el visto bueno a la propuesta entera el 24 de noviembre de 2026. **Los pasos 1 a 4 están hechos**; el resto, sin empezar.
+Ordenado por lo que aporta a la clase frente a lo que cuesta hacerlo. Pablo dio el visto bueno a la propuesta entera el 24 de noviembre de 2026. **Los pasos 1 a 5 están hechos**; el resto, sin empezar.
 
 | Paso | Qué | Por qué ahora | Qué hace falta |
 |---|---|---|---|
@@ -303,7 +303,7 @@ Ordenado por lo que aporta a la clase frente a lo que cuesta hacerlo. Pablo dio 
 | **2 · hecho** | **Segunda tanda de curiosidades:** las 12 con fuente leída y sabor propio: bolos serranos, pinfuvote, Huelva, flamenco, senderos, índice UV, agujetas, flato, vóley sentado, «¡voy!», zurdos y «soccer» | Mete la cultura andaluza (criterio 4.1), lo paralímpico (4.2) y el bloque F con poco esfuerzo, y sube el banco a 30 | Hecho: están en `curiosidades.js` con dibujos prestados y sus cuadros pedidos en el lote `16-pasillo`. Falta que Pablo las repase |
 | **3 · hecho** | **Vuelta a la calma:** «Respira con la ola» y «Tensar y soltar» en El Tatami | Es la barrera que más cita el profesorado para usar descansos activos, y cierra lo que quedaba por decidir en yoga | Hecho: `tatami/calma.js`, en la pestaña «Practicar» |
 | **4 · hecho** | **El Botiquín mínimo:** PAS en escena y posición lateral por tríos; «La llamada» como complemento | Es la mayor laguna curricular y completa el único criterio que ya da nota (1.3) | Hecho: carpeta `botiquin/`, con puerta en el pasillo, seis casos, los siete pasos y la llamada. Arte pedido en el lote `17-botiquin` |
-| **5** | **La Sala de Espejos:** eco de percusión, estatuas con regla que cambia, mímica bilingüe y coreografía de ocho tiempos | Cubre expresión y ritmo (criterio 4.3) con movimiento de toda la clase y casi sin arte | Iconos, metrónomo y reutilizar el constructor de secuencias |
+| **5 · hecho** | **La Sala de Espejos:** eco de percusión, estatuas con regla que cambia, mímica bilingüe y coreografía de ocho tiempos | Cubre expresión y ritmo (criterio 4.3) con movimiento de toda la clase y casi sin arte | Hecho: carpeta `espejos/`, con puerta en el pasillo de la pantalla. La coreografía tiene su propio constructor, más simple que el de yoga. Arte pedido en el lote `18-espejos` |
 | **6** | **Intervalos con historia** de cuatro minutos en Las Espalderas, que pasa de cuadro de diálogo a escena | La dosis con mejor relación entre tiempo y efecto; resuelve de paso la escena que le falta a Las Espalderas | Escribir cuatro o cinco historias |
 | **7** | **El Circuito:** rumbos junto a la mesa, el plano del aula y señales con el cuerpo | Abre la competencia 5, hoy sin ninguna evidencia, sin salir de clase | Un ajuste en el despacho para el plano, sin nombres |
 | **8** | **El Patio Cubierto:** juegos populares andaluces y «Juegos sentados» paralímpicos | La seña propia del currículo andaluz | Documentarse con Pablo sobre qué se juega aquí |

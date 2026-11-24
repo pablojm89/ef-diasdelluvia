@@ -62,3 +62,12 @@ test('espejos: la coreografía son cuatro movimientos de dos cuentas, ocho tiemp
  assert.deepEqual(E.enCuenta(phrase, 8), {indice: 0, entra: true, numero: 1});
  assert.deepEqual(E.enCuenta(phrase.slice(0, 2), 3), {indice: 1, entra: false, numero: 4});
 });
+test('espejos: la página enlaza lo que existe y tiene su puerta en el pasillo de la pantalla digital', () => {
+ const page = read('espejos/index.html');
+ for (const link of [...page.matchAll(/(?:href|src)="(\.{1,2}\/[^"#]+)"/g)].map(match => match[1])) assert.ok(existsSync(root + new URL(link, 'https://hub.test/espejos/').pathname.slice(1)), link);
+ for (const style of [...read('espejos/espejos.css').matchAll(/url\('([^']+)'\)/g)]) assert.ok(existsSync(root + new URL(style[1], 'https://hub.test/espejos/').pathname.slice(1)), style[1]);
+ assert.equal(/class="(frieze|skirting)/.test(page), false);
+ const hub = read('hub.js');
+ assert.match(hub, /espejos: \{name: 'La Sala de Espejos'/);
+ assert.match(hub, /pantalla: \{[^}]*'espejos'/);
+});

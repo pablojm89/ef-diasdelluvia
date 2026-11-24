@@ -30,7 +30,7 @@ Sube cada imagen a `arte/entrega/` con el nombre exacto que indica su pedido, en
 
 Mantén su estilo, luz y acabado: `gimnasio/assets/gym.webp`, `gimnasio/assets/store.webp`, `gimnasio/assets/robles-rest.webp`, `gimnasio/assets/pupil-0.webp`, `gimnasio/assets/prop-cone.webp`, `mate/assets/roster/vega.png`.
 
-## Pendientes: 43
+## Pendientes: 51
 
 ### Lote `01-puertas` · Puertas de los lugares
 
@@ -168,6 +168,21 @@ El Botiquín enseña la conducta PAS (proteger, avisar, socorrer), la posición 
 | `lateral-5.png` | Posición lateral, paso 5 de 7 | 800 × 560 | opaco | La misma escena: el alumno tira despacio de esa rodilla hacia sí y ella rueda de lado hacia él, con la mano aún en la mejilla. Vista desde arriba y algo en diagonal, para que se vean bien brazos y piernas. Los dos son alumnos de 11 años con chándal, los mismos en los siete dibujos, a la misma escala y con la colchoneta en el mismo sitio. Fondo de parqué liso. Es una práctica de clase: los dos tranquilos, sin dramatismo. |
 | `lateral-6.png` | Posición lateral, paso 6 de 7 | 800 × 560 | opaco | La alumna ya de lado, con la pierna de arriba doblada en ángulo recto y la cabeza un poco hacia atrás apoyada en su mano; el alumno le coloca la cabeza con cuidado. Vista desde arriba y algo en diagonal, para que se vean bien brazos y piernas. Los dos son alumnos de 11 años con chándal, los mismos en los siete dibujos, a la misma escala y con la colchoneta en el mismo sitio. Fondo de parqué liso. Es una práctica de clase: los dos tranquilos, sin dramatismo. |
 | `lateral-7.png` | Posición lateral, paso 7 de 7 | 800 × 560 | opaco | La alumna de lado en la posición final y el alumno arrodillado a su lado, vigilando su respiración con calma. Vista desde arriba y algo en diagonal, para que se vean bien brazos y piernas. Los dos son alumnos de 11 años con chándal, los mismos en los siete dibujos, a la misma escala y con la colchoneta en el mismo sitio. Fondo de parqué liso. Es una práctica de clase: los dos tranquilos, sin dramatismo. |
+
+### Lote `18-espejos` · La Sala de Espejos: ritmo y expresión
+
+La Sala de Espejos tiene cuatro juegos de clase: eco de ritmo con el cuerpo, estatuas con una regla que cambia, mímica y una coreografía de ocho tiempos. Hoy usa de fondo la sala de yoga (que tiene el espejo), la puerta cerrada y letras en vez de dibujos para los golpes del ritmo. Los dibujos se usan en cuanto están en espejos/assets/pintados.js. La puerta se cambia a mano: al integrarla, poner `art: 'door-espejos'` en la entrada `espejos` de PLACES en hub.js.
+
+| Archivo que entregar | Qué es | Tamaño | Fondo | Qué debe verse |
+|---|---|---|---|---|
+| `door-espejos.png` | Puerta de La Sala de Espejos | 480 × 640 | opaco | Vista a través de una puerta abierta; el motivo principal centrado y algo bajo, porque la imagen se recorta en forma de arco. Sala de expresión corporal con una pared entera de espejo y barra de madera, el parqué reflejado, un pandero y unas claves de madera sobre un banco. |
+| `espejos-fondo.png` | La Sala de Espejos | 1920 × 1080 | opaco | Sala de expresión corporal del mismo colegio que gimnasio/assets/gym.webp, con la misma luz de tarde: una pared de espejo con barra de madera al fondo, parqué anaranjado, zócalo verde azulado y cenefa de azulejo en las paredes laterales, ventanales con naranjos a la izquierda. Sitio libre abajo a la izquierda para un personaje de pie. Sin personajes ni texto. Encima van carteles y hojas crema que tapan el centro (de x 500 a x 1820 y de y 140 a y 760): ahí, detalle suave y sin contrastes fuertes. |
+| `golpe-palmas.png` | Golpe: palmas | 360 × 360 | transparente | Una alumna de 11 años como las de gimnasio/assets/pupil-2.webp, de cuerpo entero y de frente, dando una palmada delante del pecho, con unas rayitas de sonido entre las manos. La misma alumna, a la misma escala, en los seis dibujos de golpes. |
+| `golpe-pecho.png` | Golpe: pecho | 360 × 360 | transparente | Una alumna de 11 años como las de gimnasio/assets/pupil-2.webp, de cuerpo entero y de frente, golpeándose suave el pecho con la mano abierta. La misma alumna, a la misma escala, en los seis dibujos de golpes. |
+| `golpe-muslos.png` | Golpe: muslos | 360 × 360 | transparente | Una alumna de 11 años como las de gimnasio/assets/pupil-2.webp, de cuerpo entero y de frente, dándose una palmada en los muslos con las dos manos, con las rodillas algo flexionadas. La misma alumna, a la misma escala, en los seis dibujos de golpes. |
+| `golpe-pisada.png` | Golpe: pisada | 360 × 360 | transparente | Una alumna de 11 años como las de gimnasio/assets/pupil-2.webp, de cuerpo entero y de frente, dando un pisotón con un pie, con una rayita de sonido junto a la zapatilla. La misma alumna, a la misma escala, en los seis dibujos de golpes. |
+| `golpe-chasquido.png` | Golpe: chasquido, variante sentada | 360 × 360 | transparente | Una alumna de 11 años como las de gimnasio/assets/pupil-2.webp, de cuerpo entero y de frente, sentada en una silla de aula, chascando los dedos de las dos manos. La misma alumna, a la misma escala, en los seis dibujos de golpes. |
+| `golpe-silencio.png` | Silencio | 360 × 360 | transparente | Una alumna de 11 años como las de gimnasio/assets/pupil-2.webp, de cuerpo entero y de frente, quieta, con un dedo delante de los labios y gesto divertido de silencio. La misma alumna, a la misma escala, en los seis dibujos de golpes. |
 
 ## Notas del ilustrador
 
