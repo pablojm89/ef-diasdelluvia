@@ -184,3 +184,6 @@ button.choice:active{transform:translateY(1px)}
  .toggle{font-size:.82rem;padding:5px 8px}
 }
 @media(max-width:380px){.eraser{display:none}}
+
+/* Start, game and end come in instead of switching (comun/paso.css). */
+@media (prefers-reduced-motion:no-preference){:is(#view-start,#view-game,#view-end):not([hidden]){animation:paso-vista .32s cubic-bezier(.2,.7,.2,1)}}

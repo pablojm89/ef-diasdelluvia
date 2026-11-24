@@ -56,6 +56,18 @@ Cada lugar es una puerta. Sólo se pintan puertas abiertas o a punto de abrirse;
 
 **Profe.** Una clave de 4 a 8 números por ordenador abre el despacho: registro de ese ordenador, descarga, lista de lugares y acceso a las actividades antiguas. *Hecho en lo básico.* La clave sólo evita que el alumnado entre desde ese ordenador; no es una cuenta. Falta: abrir y cerrar lugares, preparar sesiones y ver el registro de toda la clase.
 
+## Moverse por el colegio: las transiciones
+
+Cambiar de pantalla es moverse por el edificio, no encender otra página. Una sola idea de movimiento para todo: lo que se deja se acerca y se apaga, y lo nuevo aparece un paso más adentro; al salir, al revés.
+
+- **Cruzar una puerta** (del pasillo de puertas a un lugar). El arco que se ha tocado viene hacia quien entra, llena la pantalla y se abre en el lugar. Al volver, el lugar se aleja y las puertas llegan una tras otra a lo largo de la pared. La cabecera común se queda quieta.
+- **Entre las vistas del inicio** (portada, quién eres, puertas, despacho): paso adelante al entrar y paso atrás al salir.
+- **Entre las dos salas del gimnasio:** la escena se oscurece, cambia y se ilumina, como en una aventura gráfica.
+- **Carteles y hojas** (ruleta, taquilla, menú, cuaderno): se cuelgan con un gesto breve, no se encienden.
+- **Dentro de un lugar** (pestañas del tatami, inicio/juego/final de la pizarra): la parte nueva entra desde abajo.
+
+Todo dura menos de seis décimas y no bloquea los toques. Con «reducir movimiento» en el sistema, o «Reducir animaciones» en el menú del gimnasio, no hay transición y todo cambia al instante, como antes. El paso entre páginas usa las transiciones de vista del navegador (Chrome, Edge y Safari recientes); donde no existen, la página cambia sin más. Las piezas comunes están en `comun/paso.css`; un lugar nuevo las recibe al enlazar `comun/base.css` y copiar en su `<head>` la línea `<style>` con `@view-transition` que llevan las demás páginas (tiene que ir en la propia página: si llega en una hoja aparte, el navegador cancela la transición en la primera visita). Si cambia de pantalla sin salir de la página usa `paso-vista`. La Pista y La Grada sólo tienen la llegada y la salida: sus pantallas de sala y partido no se han tocado.
+
 ## El Tatami: yoga
 
 Petición del profe. Diseño:

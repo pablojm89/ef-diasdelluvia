@@ -167,6 +167,9 @@ dialog {color:#273c38;background:#f9efd8;border:1px solid #d5b679;border-radius:
 dialog::backdrop {background:#0a242ad9}dialog .eyebrow{color:#74613b}dialog button,dialog a {color:#fff3d9;min-height:44px}dialog h2 {font:2rem Georgia,serif}dialog h3 {margin:1rem 0 .3rem;font:1.05rem Georgia,serif}dialog label,dialog .menu-links {display:block;margin:1rem 0}dialog a {display:inline-flex;align-items:center;background:#214240;padding:8px 12px;margin:3px;border-radius:4px}dialog input {width:20px;height:20px;vertical-align:-4px}dialog select {min-height:40px}.close {float:right}#steps {list-style:none;padding:0}#steps li {margin:.6rem 0}#steps li span{padding-right:10px}.current{font-weight:bold}#object-list,#target-list {display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}#object-list .selected {outline:3px solid #c99a3a}.fine {font-size:.82rem;color:#5d5a48}
 
 body.reduced #stored img,body.reduced .equipment {transition:none}
+/* «Reducir animaciones» in the menu also quiets the signs and the arrival from the hub (comun/paso.css). */
+body.reduced dialog[open],body.reduced dialog[open]::backdrop {animation:none}
+html:has(body.reduced)::view-transition-group(*),html:has(body.reduced)::view-transition-old(*),html:has(body.reduced)::view-transition-new(*) {animation:none}
 
 /* Narrower screens: the game buttons keep only their icon. */
 @media (max-width:980px) {

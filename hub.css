@@ -108,3 +108,12 @@ legend{width:100%;margin-bottom:8px;font-size:.74rem;font-weight:800;letter-spac
  .aliases{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 @media(max-height:560px) and (orientation:landscape){.title-host{height:78dvh}.title-board h1{font-size:2.4rem}}
+
+/* Moving between the views (comun/paso.css). Arriving here from a place, or going back towards the start, is a
+   step back; hub.js marks the steps forward. The doors come into view one after another along the wall. */
+@media (prefers-reduced-motion:no-preference){
+ :root:not(.avanza)::view-transition-old(root){animation-name:paso-salir}
+ :root:not(.avanza)::view-transition-new(root){animation-name:paso-volver}
+ .doors li{animation:puerta-llega .46s cubic-bezier(.2,.7,.2,1) calc(.12s + var(--i,0)*.05s) both}
+}
+@keyframes puerta-llega{from{opacity:0;transform:translateY(18px) scale(.96)}}

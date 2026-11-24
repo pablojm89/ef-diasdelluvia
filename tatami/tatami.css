@@ -191,3 +191,6 @@ body.practising{overflow:hidden}
  .stage-controls{gap:6px}.stage-controls .ctl,.stage-controls .check{padding:8px 10px;font-size:.92rem}
  .stage-controls .main{min-width:96px}
 }
+
+/* Changing tab brings the new view in (comun/paso.css). */
+@media (prefers-reduced-motion:no-preference){.view:not([hidden]){animation:paso-vista .32s cubic-bezier(.2,.7,.2,1)}}

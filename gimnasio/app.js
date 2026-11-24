@@ -99,7 +99,19 @@ function place(target){if($('inventory-dialog').open)$('inventory-dialog').close
 function button(text,fn,cls='',focus){const b=document.createElement('button');b.textContent=text;b.className=cls;b.onclick=fn;if(focus)b.dataset.focus=focus;return b;}
 // Every action chosen from the backpack list closes it, so the change is seen in the room.
 const fromBag=event=>()=>{$('inventory-dialog').close();dispatch(event);};
-function go(next){room=next;selected=null;closer=null;render();}
+// Crossing the door between the two rooms: the scene dims, changes and lights up again a step further in.
+let crossing=false;
+function go(next){
+ const scene=$('scene'),enter=()=>{room=next;selected=null;closer=null;render();};
+ if(crossing)return;
+ if(next===room||reduced||!scene.animate||matchMedia('(prefers-reduced-motion: reduce)').matches){enter();return;}
+ crossing=true;
+ const out=scene.animate({opacity:[1,0]},{duration:200,easing:'ease-in',fill:'forwards'});
+ out.finished.catch(()=>{}).then(()=>{
+  enter();out.cancel();crossing=false;
+  scene.animate({opacity:[0,1],transform:['scale(1.035)','scale(1)']},{duration:340,easing:'ease-out'});
+ });
+}
 // Things kept close together are too small to touch apart on a phone: the shelf is shown up close in the bubble.
 function touchPart(id){
  const home=item(id).home,group=equipment.filter(e=>e.home===home);

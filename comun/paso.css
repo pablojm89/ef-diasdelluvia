@@ -1,0 +1,31 @@
+/* Moving through the school. Going from one page to another is crossing a door: what is left behind comes
+   closer and dims, and the place appears as one steps in. The hub turns it round in hub.css, because arriving
+   there is stepping back out. Browsers without view transitions simply change page, as before.
+   Each page asks for it with @view-transition in a <style> of its own <head>, not here: the browser decides
+   whether to animate the arrival before this file is sure to have loaded, and drops it otherwise. */
+@media (prefers-reduced-motion:no-preference){
+ /* A touch during the change reaches the page instead of being lost. */
+ ::view-transition{pointer-events:none}
+ ::view-transition-old(root),::view-transition-new(root){mix-blend-mode:normal}
+ ::view-transition-old(root){animation:paso-dejar .38s cubic-bezier(.5,0,.8,.5) both}
+ ::view-transition-new(root){animation:paso-entrar .46s cubic-bezier(.2,.7,.2,1) .1s both}
+ /* The top bar is the same in every place: it stays where it is. */
+ .hub-top{view-transition-name:cabecera}
+ ::view-transition-group(cabecera){animation-duration:.4s}
+ /* The door that was touched comes towards the visitor and opens into its place. */
+ ::view-transition-group(puerta){animation:paso-centro .56s cubic-bezier(.45,0,.3,1) both}
+ ::view-transition-old(puerta){animation:paso-puerta .56s cubic-bezier(.45,0,.3,1) both}
+ /* Signs and sheets are put up, not switched on. */
+ dialog[open]{animation:paso-cartel .26s cubic-bezier(.2,.8,.3,1)}
+ dialog[open]::backdrop{animation:paso-telon .26s ease-out}
+}
+@keyframes paso-dejar{to{opacity:0;transform:scale(1.1)}}
+@keyframes paso-entrar{from{opacity:0;transform:scale(.96)}}
+@keyframes paso-salir{to{opacity:0;transform:scale(.95)}}
+@keyframes paso-volver{from{opacity:0;transform:scale(1.06)}}
+@keyframes paso-centro{to{transform:translate(calc(50vw - 50%),calc(50dvh - 50%))}}
+@keyframes paso-puerta{45%{opacity:1}to{opacity:0;transform:scale(4.6)}}
+/* For a place that changes what it shows without leaving the page: the new part comes in. */
+@keyframes paso-vista{from{opacity:0;transform:translateY(12px)}}
+@keyframes paso-cartel{from{opacity:0;transform:translateY(16px) scale(.97)}}
+@keyframes paso-telon{from{opacity:0}}

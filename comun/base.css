@@ -1,5 +1,6 @@
 /* Shared look of El Pabellón: the colours of the painted gym, the top bar, cream signs, the plaster wall,
    paper sheets and dialogs. Every place links this file so that all of them belong to the same school. */
+@import url('./paso.css');
 :root{color-scheme:light dark;--ink:#142e30;--teal:#1f5753;--cream:#fff3d9;--gold:#ebc884;--sign:#e9d3a2;--wood:#463e28;--wall:#f0c79a;--paper:#fbf0d8;
  --serif:Georgia,'Times New Roman',serif;font:16px/1.5 'Trebuchet MS',system-ui,sans-serif;color:#2c2417;background:var(--ink)}
 *{box-sizing:border-box}

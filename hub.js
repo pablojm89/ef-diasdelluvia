@@ -38,23 +38,39 @@ function progressNote(id) {
  const stage = read('ef-gym-mission-v1')?.state?.stage;
  return Number.isInteger(stage) && stage > 0 ? (stage >= 5 ? 'Misión completada' : `Fase ${stage + 1} de 5`) : '';
 }
-function doorMarkup(id) {
+function doorMarkup(id, index) {
  const place = PLACES[id], soon = place.state === 'soon';
  const note = soon ? 'PRÓXIMAMENTE' : progressNote(id);
  const inside = `<span class="arch${place.pixel ? ' pixel' : ''}"><img src="./assets/${place.art}.webp" alt="" width="480" height="640">${note ? `<span class="ribbon">${esc(note)}</span>` : ''}</span>
   <span class="plate">${esc(place.name)}</span><span class="kicker">${esc(place.kicker)}</span>`;
- if (soon) return `<li><div class="door soon" aria-label="${esc(place.name)}, próximamente">${inside}</div></li>`;
- if (place.action) return `<li><button type="button" class="door" data-action="${place.action}">${inside}</button></li>`;
- return `<li><a class="door" href="${place.href}">${inside}</a></li>`;
+ // --i staggers the doors as they come into view (hub.css).
+ const item = `<li style="--i:${index}">`;
+ if (soon) return `${item}<div class="door soon" aria-label="${esc(place.name)}, próximamente">${inside}</div></li>`;
+ if (place.action) return `${item}<button type="button" class="door" data-action="${place.action}">${inside}</button></li>`;
+ return `${item}<a class="door" href="${place.href}">${inside}</a></li>`;
 }
 
 // --- Views -------------------------------------------------------------------
-let view = 'title';
+// How far inside the building each view is: going deeper is a step forward, coming out a step back (hub.css).
+const DEPTH = {title: 0, login: 1, teacher: 1, map: 2}, calm = matchMedia('(prefers-reduced-motion: reduce)');
+let view = 'title', drawn = false;
+// Resolves when the view is on screen: at once, or after the old one has been pictured for the change.
 function show(next) {
+ const from = view, change = () => {
+  document.body.dataset.view = next;
+  for (const name of ['title', 'login', 'map', 'teacher']) $('view-' + name).hidden = name !== next;
+  scrollTo(0, 0);
+ };
  view = next;
- document.body.dataset.view = next;
- for (const name of ['title', 'login', 'map', 'teacher']) $('view-' + name).hidden = name !== next;
- scrollTo(0, 0);
+ // The first view is drawn as it comes: the page itself may be arriving with its own transition.
+ if (!drawn || from === next || calm.matches || !document.startViewTransition) { drawn = true; change(); return Promise.resolve(); }
+ const root = document.documentElement;
+ root.classList.toggle('avanza', DEPTH[next] > DEPTH[from]);
+ const step = document.startViewTransition(change);
+ // A change that is overtaken by the next one is dropped by the browser; that is not an error.
+ step.ready.catch(() => {});
+ step.finished.catch(() => {}).then(() => { if (view === next) root.classList.remove('avanza'); });
+ return step.updateCallbackDone;
 }
 function showMap(kind) {
  const map = MAPS[kind], current = player();
@@ -89,6 +105,16 @@ addEventListener('hashchange', route);
 addEventListener('pageshow', event => { if (event.persisted) route(); });
 $('enter-student').addEventListener('click', () => { location.hash = 'alumno'; });
 $('doors').addEventListener('click', event => { if (event.target.closest('[data-action="wheel"]')) openWheel(); });
+// Crossing a door: the arch that was touched is pictured on its own, so the place can open out of it (comun/paso.css).
+let crossed = null;
+$('doors').addEventListener('click', event => { crossed = event.target.closest('a.door')?.querySelector('.arch') || null; });
+addEventListener('pageswap', event => {
+ const arch = crossed;
+ crossed = null;
+ if (!event.viewTransition || !arch?.isConnected) return;
+ arch.style.viewTransitionName = 'puerta';
+ event.viewTransition.finished.catch(() => {}).then(() => { arch.style.viewTransitionName = ''; });
+});
 
 // --- Pupil: class, list number and a character. No names -------------------------
 function fill(select, values, label) {
@@ -170,8 +196,7 @@ function showTeacher() {
   $('gate-button').textContent = hasPin ? 'Entrar' : 'Guardar y entrar';
   $('gate-pin').value = ''; $('gate-status').textContent = '';
  }
- show('teacher');
- if (!open) $('gate-pin').focus();
+ show('teacher').then(() => { if (!open) $('gate-pin').focus(); });
 }
 $('gate').addEventListener('submit', async event => {
  event.preventDefault();
