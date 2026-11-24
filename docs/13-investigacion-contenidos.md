@@ -115,9 +115,9 @@ Se contrastaron una a una con organismos oficiales y sitios médicos de referenc
 | Comba | Ajustada | Las pruebas oficiales son de velocidad y de «estilo libre», no de «figuras» | [International Jump Rope Union](https://ijru.sport/events) (leído) |
 | Goalball | Correcta | Se añade «mientras se juega» al silencio del público | [Comité Paralímpico Internacional](https://www.paralympic.org/goalball) (leído) |
 | Rayuela | Ajustada | «Avioncito» no está documentado: es «avión» (México). Se dice dónde se usa cada nombre | [Diccionario de americanismos](https://www.asale.org/damer/golosa) (leído) |
-| Balón prisionero | Ajustada | Se quita «campo quemado», que sólo aparece en comentarios de un blog | Trabajo de la Universidad de La Laguna (leído), que cita a otros dos autores |
+| El mate | Ajustada | Se quita «campo quemado», que sólo aparece en comentarios de un blog. El nombre de aquí, «el mate», lo confirma Pablo | Trabajo de la Universidad de La Laguna (leído), que cita a otros dos autores |
 
-**Lo que sigue sin fuente sólida** y conviene no ampliar: en qué zonas de España se usa cada nombre del balón prisionero (no hay prueba de cuál es el habitual en Andalucía: aquí decide Pablo, que lo sabe de primera mano); el porcentaje exacto de agua a los 10-12 años («más de la mitad» está cubierto de sobra); y los datos de Olimpia, que coinciden en Britannica y el COI pero no se pudieron abrir.
+**Lo que sigue sin fuente sólida** y conviene no ampliar: en qué zonas de España se usa cada nombre del balón prisionero (las fuentes no aclaran cuál es el habitual en Andalucía; Pablo confirma que aquí es «el mate», y así lo dice ya la curiosidad); el porcentaje exacto de agua a los 10-12 años («más de la mitad» está cubierto de sobra); y los datos de Olimpia, que coinciden en Britannica y el COI pero no se pudieron abrir.
 
 **Regla nueva para el banco:** cada curiosidad lleva su fuente. El campo `fuente` de `curiosidades.js` guarda quién lo afirma y la dirección; la ficha enseña el nombre al pie, para que el profe pueda responder a un «¿y eso quién lo dice?», y una prueba impide añadir una curiosidad sin él.
 
@@ -312,7 +312,7 @@ Ordenado por lo que aporta a la clase frente a lo que cuesta hacerlo. Nada de es
 
 ### Lo que decide Pablo
 
-1. **Cómo se llama aquí el balón prisionero.** Las fuentes no lo aclaran para Andalucía; lo sabe quien da clase aquí.
+1. ~~Cómo se llama aquí el balón prisionero.~~ **Decidido (24/11/2026): «el mate».** El juego lo llama así en la puerta de La Pista, en su menú, en la curiosidad y en el rosco; «balón prisionero» queda como el nombre de otros sitios.
 2. **Qué juegos populares son «de aquí».** No hay fuente seria para el pañuelo, el elástico o las chapas, y sin embargo se juegan. Su conocimiento vale más que lo encontrado.
 3. **El micrófono en la pantalla digital** para «Una sola palmada»: sí con las condiciones de la tabla, o no.
 4. **Qué criterios nuevos dan nota.** Varias actividades darían evidencia de 1.2, 2.1, 4.1, 4.3 y 5.1; hoy sólo cuenta el 1.3.

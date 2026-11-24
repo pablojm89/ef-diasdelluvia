@@ -16,7 +16,7 @@ const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 // One entry per door of the corridor. `action` doors open something in the corridor itself.
 const PLACES = {
  gimnasio: {name: 'El Gimnasio', kicker: 'Aventura: Equipment Rescue', art: 'door-gimnasio', href: './gimnasio/', modes: 'Alumno · Pantalla', state: 'open'},
- pista: {name: 'La Pista', kicker: 'Mate Arena: balón prisionero', art: 'door-mate', href: './mate/', modes: 'Alumno', state: 'open'},
+ pista: {name: 'La Pista', kicker: 'Mate Arena: el mate del cole', art: 'door-mate', href: './mate/', modes: 'Alumno', state: 'open'},
  espalderas: {name: 'Las Espalderas', kicker: 'Ruleta de retos para toda la clase', art: 'door-espalderas', action: 'wheel', modes: 'Pantalla', state: 'open'},
  pizarra: {name: 'La Pizarra', kicker: 'Rosco de Educación Física', art: 'door-pizarra', href: './pizarra/', modes: 'Alumno · Pantalla', state: 'open'},
  tatami: {name: 'El Tatami', kicker: 'Yoga: posturas y secuencias', art: 'door-tatami', href: './tatami/', modes: 'Alumno · Pantalla', state: 'open'},

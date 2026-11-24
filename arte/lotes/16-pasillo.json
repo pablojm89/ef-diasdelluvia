@@ -151,11 +151,11 @@
   "prompt": "Una rayuela pintada con tiza de colores en el suelo del patio, sin números, y una alumna saltando a la pata coja sobre ella. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
  },
  "cuadro-mate": {
-  "nombre": "Cuadro: El balón prisionero tiene muchos nombres",
+  "nombre": "Cuadro: El mate tiene muchos nombres",
   "destino": "assets/pasillo/cuadro-mate.webp",
   "ancho": 600,
   "alto": 720,
   "transparente": false,
-  "prompt": "Un partido de balón prisionero en el patio: un alumno esquiva agachándose una pelota blanda de espuma mientras otro la lanza desde el campo contrario. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
+  "prompt": "Un partido de mate (balón prisionero) en el patio: un alumno esquiva agachándose una pelota blanda de espuma mientras otro la lanza desde el campo contrario. Es un cuadro que se cuelga enmarcado en la pared del pasillo: composición vertical, motivo centrado y grande, fondo sencillo del colegio, sin marco dibujado, sin texto ni números."
  }
 }
