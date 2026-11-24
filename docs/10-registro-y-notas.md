@@ -34,6 +34,7 @@ Decidido hoy, con prudencia:
 | Partidos de mate: asistencias, rescates, puntos, resultado | No | Evidencia. Destreza en un videojuego, no conducta motriz |
 | Ruleta de retos en la pantalla | No | Evidencia de la clase (`pantalla`), nada individual |
 | Yoga, rosco, oca, bingo (`tatami`, `pizarra`, `aula`) | No, hasta que se añadan a `NOTAS` | Llegan como evidencia en cuanto anoten |
+| Vuelta a la calma hecha hasta el final (`tatami`, `yoga`, `calma`) | No | Evidencia de que se hizo, con el tipo (`ola` o `tensar`) y los segundos |
 | Curiosidad descubierta en el pasillo (`pasillo`, `curiosidades`, `descubre`) | No | Evidencia de interés, con el `id` y el tema. En la pantalla digital se anota como clase. El álbum se guarda aparte, en `pabellon-curiosidades`, y no viaja |
 | Cursos de 1.º a 4.º | No | La letra `.a/.b` sólo está definida para el tercer ciclo |
 

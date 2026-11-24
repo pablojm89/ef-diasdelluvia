@@ -4,6 +4,7 @@ import {POSES, FAMILIES, LEVELS, CALM, BREATH, SIDES, SAMPLES, byId} from './pos
 import * as S from './secuencia.js';
 import {createFigure, thumbMarkup, frameCount} from './figura.js';
 import {PINTADAS} from './assets/pintadas.js';
+import {iniciarCalma} from './calma.js';
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -333,6 +334,9 @@ const room = PINTADAS.includes('room') ? './assets/room.webp' : '../gimnasio/ass
 // The painted room is the backdrop of the whole place; without it, the provisional room of base.css.
 if (PINTADAS.includes('room')) document.body.classList.add('con-room');
 $('stage').style.setProperty('--room', `url('${room}')`);
+$('calm').style.setProperty('--room', `url('${room}')`);
+// Winding down done to the end is written down as evidence, never as a mark.
+iniciarCalma({alTerminar: (tipo, segundos) => record('tatami', 'yoga', 'calma', {tipo, segundos})});
 if (PINTADAS.includes('robles-yoga')) $('st-host').src = './assets/robles-yoga.webp';
 
 let run = null;

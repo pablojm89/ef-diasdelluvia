@@ -295,13 +295,13 @@ Descritas como mecánica. En todas se mueve la clase entera a la vez junto a su 
 
 ## 6. Propuesta: qué incluir y en qué orden
 
-Ordenado por lo que aporta a la clase frente a lo que cuesta hacerlo. Pablo dio el visto bueno a la propuesta entera el 24 de noviembre de 2026. **Los pasos 1 y 2 están hechos**; el resto, sin empezar.
+Ordenado por lo que aporta a la clase frente a lo que cuesta hacerlo. Pablo dio el visto bueno a la propuesta entera el 24 de noviembre de 2026. **Los pasos 1, 2 y 3 están hechos**; el resto, sin empezar.
 
 | Paso | Qué | Por qué ahora | Qué hace falta |
 |---|---|---|---|
 | **1 · hecho** | **«Adivina antes de abrir»** en los cuadros: pregunta, apuesta con el cuerpo, pausa y ficha | Es lo mejor respaldado para 10-12 años y sólo cambia el orden de la ficha | Hecho: campos `pregunta`, `opciones` y `correcta` en las 30 curiosidades |
 | **2 · hecho** | **Segunda tanda de curiosidades:** las 12 con fuente leída y sabor propio: bolos serranos, pinfuvote, Huelva, flamenco, senderos, índice UV, agujetas, flato, vóley sentado, «¡voy!», zurdos y «soccer» | Mete la cultura andaluza (criterio 4.1), lo paralímpico (4.2) y el bloque F con poco esfuerzo, y sube el banco a 30 | Hecho: están en `curiosidades.js` con dibujos prestados y sus cuadros pedidos en el lote `16-pasillo`. Falta que Pablo las repase |
-| **3** | **Vuelta a la calma:** «Respira con la ola» y «Tensar y soltar» en El Tatami | Es la barrera que más cita el profesorado para usar descansos activos, y cierra lo que quedaba por decidir en yoga | Una forma animada y un reloj. Sin arte |
+| **3 · hecho** | **Vuelta a la calma:** «Respira con la ola» y «Tensar y soltar» en El Tatami | Es la barrera que más cita el profesorado para usar descansos activos, y cierra lo que quedaba por decidir en yoga | Hecho: `tatami/calma.js`, en la pestaña «Practicar» |
 | **4** | **El Botiquín mínimo:** PAS en escena y posición lateral por tríos; «La llamada» como complemento | Es la mayor laguna curricular y completa el único criterio que ya da nota (1.3) | Guion, dibujos de los pasos y una puerta nueva. Lote de arte |
 | **5** | **La Sala de Espejos:** eco de percusión, estatuas con regla que cambia, mímica bilingüe y coreografía de ocho tiempos | Cubre expresión y ritmo (criterio 4.3) con movimiento de toda la clase y casi sin arte | Iconos, metrónomo y reutilizar el constructor de secuencias |
 | **6** | **Intervalos con historia** de cuatro minutos en Las Espalderas, que pasa de cuadro de diálogo a escena | La dosis con mejor relación entre tiempo y efecto; resuelve de paso la escena que le falta a Las Espalderas | Escribir cuatro o cinco historias |

@@ -189,6 +189,20 @@ const out=path.join(base,'artifacts');
    await page.screenshot({path:path.join(out,`${screen}-${name}.png`),fullPage:true});
   }
  }
+ // El Tatami, winding down: the wave opens over the room, counts and can be left at any time.
+ await page.setViewportSize({width:1280,height:720});
+ await page.goto('https://patio.test/tatami/index.html#practicar');
+ assert.equal(await page.locator('[data-calma]').count(),2);
+ await page.locator('[data-calma="ola"]').click();
+ await page.waitForSelector('#calm:not([hidden])');
+ assert.match(await page.locator('#calm-count').textContent(),/1 de 10/);
+ assert.ok((await page.locator('#calm-en').textContent()).length>3);
+ await page.locator('#calm-close').click();
+ assert.equal(await page.locator('#calm').isHidden(),true);
+ await page.locator('[data-calma="tensar"]').click();
+ await page.waitForSelector('#calm:not([hidden])');
+ assert.match(await page.locator('#calm-count').textContent(),/Squeeze/);
+ await page.locator('#calm-close').click();
  // El Tatami: poses by family, the way into a pose step by step, and sequence codes with and without digits.
  await page.setViewportSize({width:1280,height:720});
  await page.goto('https://patio.test/tatami/index.html');

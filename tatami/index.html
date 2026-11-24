@@ -110,10 +110,39 @@
       </div>
       <ul id="choices" class="choices"></ul>
      </div>
+     <!-- Winding down: two short routines for the end of the session or for coming back to work. -->
+     <div class="paper calm-box">
+      <h2>Vuelta a la calma</h2>
+      <p class="fine">Dos minutos para toda la clase a la vez, de pie o sentados, para acabar la sesión o volver a la tarea.</p>
+      <div class="calm-choices">
+       <button type="button" class="sign gold" data-calma="ola"><strong>Respira con la ola</strong><small lang="en">Breathe with the wave · 2 min</small></button>
+       <button type="button" class="sign gold" data-calma="tensar"><strong>Tensar y soltar</strong><small lang="en">Tense and let go · 2 min</small></button>
+      </div>
+     </div>
     </section>
    </div>
   </section>
  </main>
+
+ <!-- Winding down on the big screen: a wave that grows and shrinks, and the words to follow it. -->
+ <div id="calm" class="stage calm" hidden role="region" aria-label="Vuelta a la calma">
+  <div class="stage-top">
+   <p id="calm-title" class="stage-progress"></p>
+   <span class="chips"></span>
+   <button type="button" id="calm-close" class="sign"><strong>Salir</strong></button>
+  </div>
+  <div class="calm-body">
+   <div class="calm-sea" aria-hidden="true"><div id="calm-wave" class="calm-wave"><span id="calm-left"></span></div></div>
+   <div class="stage-card" aria-live="polite">
+    <p id="calm-count" class="eyebrow"></p>
+    <h2 id="calm-es"></h2>
+    <p id="calm-en" class="en" lang="en"></p>
+    <p id="calm-order" class="calm-order"></p>
+    <p id="calm-how" class="fine"></p>
+   </div>
+  </div>
+  <div class="stage-controls"><button type="button" id="calm-pause" class="sign ctl main"><strong>Pausa</strong></button></div>
+ </div>
 
  <!-- Guided practice on the big screen. -->
  <div id="stage" class="stage" hidden role="region" aria-label="Práctica guiada">

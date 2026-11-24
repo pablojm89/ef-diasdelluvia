@@ -193,3 +193,26 @@ test('tatami: la página enlaza lo que existe y el pedido de arte cubre cada pos
  assert.equal(lote.room.destino,'tatami/assets/room.webp');
  assert.ok(Array.isArray(PINTADAS));
 });
+
+test('calma: la ola no pide retener el aire y suelta más despacio de lo que coge; tensar y soltar recorre el cuerpo en dos idiomas',async()=>{
+ const calma=await import('../tatami/calma.js');
+ const ola=calma.plan('ola');
+ assert.equal(ola.length%2,0);
+ assert.deepEqual([...new Set(ola.map(paso=>paso.fase))],['in','out'],'sólo coger y soltar: sin apneas');
+ for(let i=0;i<ola.length;i+=2)assert.ok(ola[i+1].segundos>ola[i].segundos,'la salida es más larga');
+ const tensar=calma.plan('tensar');
+ assert.ok(tensar.length>=12);
+ for(let i=0;i<tensar.length;i+=2){
+  assert.equal(tensar[i].fase,'tense');assert.equal(tensar[i+1].fase,'release');
+  assert.ok(tensar[i].segundos<=6&&tensar[i+1].segundos>tensar[i].segundos,'se aprieta poco y se suelta más');
+  assert.ok(tensar[i].es&&tensar[i].en&&tensar[i].orden);
+ }
+ for(const tipo of Object.keys(calma.RUTINAS)){
+  assert.ok(calma.duracion(tipo)>=90&&calma.duracion(tipo)<=150,`${tipo}: unos dos minutos`);
+  assert.match(calma.RUTINAS[tipo].como,/sentados/,'variante sentada a la vista');
+ }
+ assert.deepEqual(calma.plan('otra'),[]);
+ assert.equal(calma.tamano('in',0),0);assert.equal(calma.tamano('in',1),1);
+ assert.equal(calma.tamano('out',1),0);assert.equal(calma.tamano('tense',1),0);assert.equal(calma.tamano('release',1),1);
+ assert.ok(calma.tamano('in',.5)>0&&calma.tamano('in',.5)<1);
+});

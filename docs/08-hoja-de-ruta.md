@@ -95,7 +95,8 @@ Petición del profe. Diseño:
 - **Qué queda anotado.** Posturas vistas, secuencias creadas y secuencias practicadas.
 - **Catálogo:** 38 posturas adecuadas para Primaria y practicables junto al pupitre o en colchoneta, sin inversiones, sin apoyos de cabeza o cuello y sin extensiones fuertes de espalda. Las doce primeras conservan su letra, así que los códigos y enlaces antiguos siguen abriendo. El criterio, las fuentes y lo que se ha dejado fuera están en [11-yoga-catalogo.md](11-yoga-catalogo.md).
 - **Dibujos.** Cada postura tiene una hoja de pasos de seis dibujos (del inicio a la postura terminada) y un dibujo en silla. Todas las hojas del lote `10-tatami` del [encargo de imágenes](../arte/ENCARGO.md) están entregadas e integradas.
-- **Queda por decidir:** respiraciones guiadas (abeja, globo, serpiente) y posturas en pareja, que serían la siguiente ampliación.
+- **Vuelta a la calma.** En «Practicar», dos rutinas de dos minutos para toda la clase, de pie o sentados: «Respira con la ola» (diez respiraciones lentas, soltando más despacio de lo que se coge y sin retener el aire) y «Tensar y soltar» (siete zonas del cuerpo, con su nombre en inglés). Sirven para acabar la sesión o volver a la tarea; no son un programa de bienestar. Queda anotado que se hicieron.
+- **Queda por decidir:** posturas en pareja, que serían la siguiente ampliación.
 
 ## Registro y notas
 
@@ -115,7 +116,7 @@ Mismo sistema que Agencia La Lupa, del repo de multiplicopolis: una hoja de Goog
 | **H. Lo que sigue** | El profe abre y cierra lugares por clase; insignias en el Vestuario; lugares de la reserva; descubrir solas las salas de mate de una clase | Sin empezar. El Vestuario ya es puerta |
 | **I. Pantalla completa** | Botones flotantes y escena a pantalla completa en todos los lugares; El Pasillo; El Tatami en su sala y en horizontal; Aula, oca, bingo y Grada sin marcos | Hecha en lo común. Faltan la escena de Las Espalderas, crear y practicar de El Tatami y los paneles de La Pista |
 | **J. Curiosidades** | 30 cuadros en el pasillo con rotación semanal, pregunta y apuesta antes de abrir, fuente en cada ficha, álbum, curiosidad del día y anotación; lote `16-pasillo` pedido con el tramo y los 30 cuadros | Hechas dos tandas. Siguientes pasos, por orden, en [12-curiosidades.md](12-curiosidades.md): cuadros dentro de cada lugar, enlaces entre curiosidades y lugares, rutas de la semana |
-| **K. Contenidos nuevos** | Lo que propone [13-investigacion-contenidos.md](13-investigacion-contenidos.md), por orden: pregunta antes de abrir el cuadro, segunda tanda de curiosidades, vuelta a la calma, El Botiquín, La Sala de Espejos, intervalos con historia, El Circuito, El Patio Cubierto, juego limpio y La Vitrina | Aprobado por Pablo el 24/11/2026. Hechos los dos primeros pasos; el siguiente es la vuelta a la calma en El Tatami |
+| **K. Contenidos nuevos** | Lo que propone [13-investigacion-contenidos.md](13-investigacion-contenidos.md), por orden: pregunta antes de abrir el cuadro, segunda tanda de curiosidades, vuelta a la calma, El Botiquín, La Sala de Espejos, intervalos con historia, El Circuito, El Patio Cubierto, juego limpio y La Vitrina | Aprobado por Pablo el 24/11/2026. Hechos los tres primeros pasos; el siguiente es El Botiquín, que necesita guion y un lote de arte |
 
 ## Decisiones abiertas
 
