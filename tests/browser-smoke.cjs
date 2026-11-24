@@ -27,8 +27,8 @@ const out=path.join(base,'artifacts');
  await page.locator('#login-avatars label').nth(2).click();
  await page.locator('#login-form button').click();
  assert.equal(await page.locator('#player-code').textContent(),'5B-12');
- // The corridor: four places and the pupil's own locker, with a picture before each door and one at the end.
- assert.ok(await page.locator('#doors .door').count()<=5,'pocas puertas para el alumnado');
+ // The corridor: five places and the pupil's own locker, with a picture before each door and one at the end.
+ assert.ok(await page.locator('#doors .door').count()<=6,'pocas puertas para el alumnado');
  assert.ok(await page.locator('#doors a.door').count()>=3);
  assert.equal(await page.locator('#doors .cuadro').count(),await page.locator('#doors .door').count()+1);
  await page.waitForFunction(()=>[...document.querySelectorAll('#doors img')].every(image=>image.complete&&image.naturalWidth>0));
@@ -189,6 +189,40 @@ const out=path.join(base,'artifacts');
    await page.screenshot({path:path.join(out,`${screen}-${name}.png`),fullPage:true});
   }
  }
+ // El Botiquín: a case is three decisions in order; a wrong answer explains itself and lets you try again.
+ await page.setViewportSize({width:1280,height:720});
+ await page.goto('https://patio.test/index.html#pantalla');
+ await page.goto('https://patio.test/botiquin/index.html');
+ assert.equal(await page.locator('.signs a').count(),3);
+ await page.locator('a[href="#pas"]').click();
+ await page.waitForSelector('#v-pas:not([hidden])');
+ assert.match(await page.locator('#pas-count').textContent(),/Caso 1 de 3/);
+ for(let caseIndex=0;caseIndex<3;caseIndex++)for(let stepIndex=0;stepIndex<3;stepIndex++){
+  assert.equal(await page.locator('#pas-chips li.now').count(),1);
+  if(caseIndex===0&&stepIndex===0){
+   await page.locator('#pas-options [data-option="1"]').click();
+   assert.match(await page.locator('#pas-feedback').textContent(),/^Mejor no/);
+   assert.equal(await page.locator('#pas-next').isHidden(),true);
+  }
+  await page.locator('#pas-options [data-option="0"]').click();
+  assert.match(await page.locator('#pas-feedback').textContent(),/^Eso es/);
+  await page.locator('#pas-next').click();
+ }
+ assert.match(await page.locator('#pas-count').textContent(),/3 casos resueltos/);
+ assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('pabellon-registro')).filter(e=>e.place==='botiquin'&&e.event==='caso'&&e.who===null).length),3);
+ assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('pabellon-registro')).find(e=>e.place==='botiquin'&&e.event==='ronda').data.intentos),10);
+ await page.goto('https://patio.test/botiquin/index.html#lateral');
+ await page.waitForSelector('#v-lateral:not([hidden])');
+ assert.ok(await page.locator('#lat-norms li').count()>=4);
+ await page.locator('#lat-start').click();
+ assert.match(await page.locator('#lat-count').textContent(),/Turno 1 de 3 · Paso 1 de 7/);
+ assert.ok(await page.locator('#lat-figure circle').count()>=2);
+ for(let i=0;i<7;i++)await page.locator('#lat-next').click();
+ assert.match(await page.locator('#lat-count').textContent(),/Turno 2 de 3 · Paso 1 de 7/);
+ await page.goto('https://patio.test/botiquin/index.html#llamada');
+ await page.waitForSelector('#v-llamada:not([hidden])');
+ assert.equal(await page.locator('#call-script li').count(),5);
+ assert.ok((await page.locator('#call-scene').textContent()).length>40);
  // El Tatami, winding down: the wave opens over the room, counts and can be left at any time.
  await page.setViewportSize({width:1280,height:720});
  await page.goto('https://patio.test/tatami/index.html#practicar');

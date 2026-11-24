@@ -19,7 +19,7 @@ Un colegio que se juega. Cada actividad vive en un **lugar** del pabellón; los 
 | `gimnasio/` | Aventura gráfica Equipment Rescue. Es el modelo de estética |
 | `mate/` | Mate Arena: balón prisionero. Simulación en `sim.js`, red en `network.js` |
 | `grada/` | Partidos de Mate Arena en directo para la pantalla (espectador) |
-| `tatami/`, `pizarra/`, `aula/` | Yoga, rosco de EF, y oca cooperativa con bingo. Cada lugar es autocontenido y tiene su lote en `arte/lotes/` |
+| `tatami/`, `pizarra/`, `aula/`, `botiquin/` | Yoga, rosco de EF, oca cooperativa con bingo, y primeros auxilios (PAS, posición lateral y la llamada). Cada lugar es autocontenido y tiene su lote en `arte/lotes/` |
 | `content.js`, `engine.js` | Banco de 24 retos con variante sentada y criterio |
 | `patio.html`, `app.js`, `styles.css` | Actividades de la primera etapa, apartadas. No ampliar |
 | `arte/` | Encargo de imágenes a la IA ilustradora: lotes, `ENCARGO.md` generado y `entrega/` |

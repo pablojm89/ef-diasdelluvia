@@ -34,6 +34,8 @@ Decidido hoy, con prudencia:
 | Partidos de mate: asistencias, rescates, puntos, resultado | No | Evidencia. Destreza en un videojuego, no conducta motriz |
 | Ruleta de retos en la pantalla | No | Evidencia de la clase (`pantalla`), nada individual |
 | Yoga, rosco, oca, bingo (`tatami`, `pizarra`, `aula`) | No, hasta que se añadan a `NOTAS` | Llegan como evidencia en cuanto anoten |
+| El Botiquín: caso resuelto (`botiquin`, `pas`, `caso`) y ronda de tres (`botiquin`, `pas`, `ronda`) | **No, de momento.** Es el mismo criterio 1.3 que ya da nota con Equipment Rescue | Evidencia: el caso y los intentos (el mínimo son 3 por caso). La ronda trae aciertos e intentos, lista para ser nota si Pablo lo decide añadiendo una línea a `NOTAS` |
+| El Botiquín: posición lateral practicada por los tres (`botiquin`, `lateral`, `practica`) y llamada ensayada (`botiquin`, `llamada`, `ronda`) | No | Evidencia de que se practicó |
 | Vuelta a la calma hecha hasta el final (`tatami`, `yoga`, `calma`) | No | Evidencia de que se hizo, con el tipo (`ola` o `tensar`) y los segundos |
 | Curiosidad descubierta en el pasillo (`pasillo`, `curiosidades`, `descubre`) | No | Evidencia de interés, con el `id` y el tema. En la pantalla digital se anota como clase. El álbum se guarda aparte, en `pabellon-curiosidades`, y no viaja |
 | Cursos de 1.º a 4.º | No | La letra `.a/.b` sólo está definida para el tercer ciclo |

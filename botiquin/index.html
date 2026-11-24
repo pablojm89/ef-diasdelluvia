@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+ <meta name="theme-color" content="#142e30">
+ <meta name="description" content="El Botiquín, en El Pabellón: qué hacer primero ante un accidente (proteger, avisar, socorrer), la posición lateral de seguridad paso a paso y cómo se pide ayuda.">
+ <title>El Botiquín · El Pabellón</title>
+ <link rel="icon" href="../assets/mark.svg" type="image/svg+xml">
+ <link rel="stylesheet" href="../comun/base.css">
+ <link rel="stylesheet" href="./botiquin.css">
+</head>
+<body data-view="menu">
+ <a class="skip" href="#main">Saltar al contenido</a>
+ <main id="main" class="wall sala-fija" tabindex="-1">
+  <h1 class="oculto">El Botiquín</h1>
+
+  <!-- The room: the teacher, the first-aid cabinet and three signs. -->
+  <section id="v-menu" class="menu" aria-label="Qué practicamos">
+   <figure class="host"><figcaption class="bubble"><span lang="en">Protect, call for help, help.</span><span>Proteger, avisar y socorrer: siempre en ese orden.</span></figcaption><img src="../gimnasio/assets/robles-point.webp" alt="El profe Robles" width="760" height="550"></figure>
+   <div class="cabinet" aria-hidden="true"><i></i></div>
+   <ul class="signs">
+    <li><a class="sign gold big" href="#pas"><strong>¿Qué hago primero?</strong><small>Proteger, avisar, socorrer · toda la clase</small></a></li>
+    <li><a class="sign big" href="#lateral"><strong>Posición lateral</strong><small>Paso a paso · por tríos, en colchoneta</small></a></li>
+    <li><a class="sign big" href="#llamada"><strong>La llamada</strong><small>Pedir ayuda · por parejas</small></a></li>
+   </ul>
+  </section>
+
+  <!-- PAS: a case and three decisions, each one with its gesture. -->
+  <section id="v-pas" class="activity" hidden aria-labelledby="pas-title">
+   <div class="paper case">
+    <p class="eyebrow" id="pas-count"></p>
+    <h2 id="pas-title"></h2>
+    <p id="pas-scene" class="challenge-text"></p>
+    <ol id="pas-chips" class="pas-chips" aria-label="Proteger, avisar, socorrer"></ol>
+   </div>
+   <div class="paper step" id="pas-step">
+    <p class="eyebrow"><span id="pas-letter"></span> · <span id="pas-es"></span> · <span id="pas-en" lang="en"></span></p>
+    <p class="gesture"><b>Todos a la vez:</b> <span id="pas-gesture"></span> <small><b>Variante sentada:</b> <span id="pas-seated"></span></small></p>
+    <h3 id="pas-question"></h3>
+    <div id="pas-options" class="options"></div>
+    <p id="pas-feedback" class="feedback" role="status" aria-live="polite"></p>
+    <div class="row"><button type="button" id="pas-next" class="sign gold" hidden><strong>Siguiente</strong></button><a class="quiet" href="#">Volver al botiquín</a></div>
+   </div>
+  </section>
+
+  <!-- Recovery position: the drawing, the step and who does what. -->
+  <section id="v-lateral" class="activity" hidden aria-labelledby="lat-title">
+   <div class="paper rules" id="lat-rules">
+    <p class="eyebrow">Posición lateral de seguridad · <span lang="en">Recovery position</span></p>
+    <h2>Para quien no contesta, pero respira</h2>
+    <p>De lado se respira mejor mientras llega la ayuda. Se practica por tríos y se cambia de papel tres veces.</p>
+    <ul id="lat-norms" class="norms"></ul>
+    <p class="fine">La pantalla enseña el orden. No sustituye a un taller con una persona que sepa de primeros auxilios.</p>
+    <div class="row"><button type="button" id="lat-start" class="sign gold big"><strong>Empezar</strong></button><a class="quiet" href="#">Volver al botiquín</a></div>
+   </div>
+   <div class="lat-play" id="lat-play" hidden>
+    <figure class="paper drawing"><svg id="lat-figure" viewBox="0 0 320 220" role="img" aria-label="Dibujo del paso"></svg></figure>
+    <div class="paper step">
+     <p class="eyebrow" id="lat-count"></p>
+     <ul id="lat-roles" class="roles"></ul>
+     <h2 id="lat-title"></h2>
+     <p id="lat-en" class="en" lang="en"></p>
+     <p id="lat-text" class="challenge-text"></p>
+     <div class="row"><button type="button" id="lat-prev" class="sign"><strong>Anterior</strong></button><button type="button" id="lat-next" class="sign gold"><strong>Siguiente</strong></button><a class="quiet" href="#">Salir</a></div>
+     <p id="lat-status" class="status" role="status"></p>
+    </div>
+   </div>
+  </section>
+
+  <!-- The call: one explains, the other asks what the emergency line would ask. -->
+  <section id="v-llamada" class="activity" hidden aria-labelledby="call-title">
+   <div class="paper case">
+    <p class="eyebrow">Quien llama · <span lang="en">Caller</span></p>
+    <h2 id="call-title"></h2>
+    <p id="call-scene" class="challenge-text"></p>
+    <p class="gesture"><b>Por parejas, espalda con espalda,</b> de pie o sentados: sin verse, como por teléfono. Di qué ha pasado, dónde estáis y cómo está.</p>
+    <p class="fine">Es un ensayo. Al 112 sólo se llama de verdad en una emergencia, y si hay un adulto cerca, se le avisa primero.</p>
+   </div>
+   <div class="paper step">
+    <p class="eyebrow">Quien atiende · <span lang="en">Operator</span></p>
+    <ol id="call-script" class="script"></ol>
+    <div class="clock" id="call-clock-box"><output id="call-clock">0:45</output><button type="button" id="call-start" class="sign"><strong>Empezar</strong></button></div>
+    <div class="row"><button type="button" id="call-next" class="sign gold"><strong>Cambio de papel y otro caso</strong></button><a class="quiet" href="#">Volver al botiquín</a></div>
+   </div>
+  </section>
+ </main>
+ <script type="module" src="./botiquin.js"></script>
+</body>
+</html>

@@ -22,11 +22,12 @@ const PLACES = {
  tatami: {name: 'El Tatami', kicker: 'Yoga: posturas y secuencias', art: 'door-tatami', href: './tatami/', modes: 'Alumno · Pantalla', state: 'open'},
  grada: {name: 'La Grada', kicker: 'Partidos de mate en directo', art: 'door-grada', href: './grada/', modes: 'Pantalla', state: 'open'},
  aula: {name: 'El Aula', kicker: 'La oca y el bingo en movimiento', art: 'door-aula', href: './aula/', modes: 'Pantalla · Tabletas', state: 'open'},
+ botiquin: {name: 'El Botiquín', kicker: 'Primeros auxilios paso a paso', art: 'door-cerrada', href: './botiquin/', modes: 'Alumno · Pantalla', state: 'open'},
  vestuario: {name: 'El Vestuario', kicker: 'Tu taquilla y tu álbum', art: 'door-vestuario', action: 'locker', modes: 'Alumno', state: 'open'},
 };
 const MAPS = {
- alumno: {title: '¿A dónde vamos hoy?', en: 'Where shall we go today?', places: ['gimnasio', 'pista', 'pizarra', 'tatami', 'vestuario']},
- pantalla: {title: 'Elegid una puerta… o un cuadro.', en: 'Pick a door… or a picture!', places: ['espalderas', 'aula', 'pizarra', 'gimnasio', 'tatami', 'grada']},
+ alumno: {title: '¿A dónde vamos hoy?', en: 'Where shall we go today?', places: ['gimnasio', 'pista', 'pizarra', 'tatami', 'botiquin', 'vestuario']},
+ pantalla: {title: 'Elegid una puerta… o un cuadro.', en: 'Pick a door… or a picture!', places: ['espalderas', 'aula', 'pizarra', 'gimnasio', 'tatami', 'botiquin', 'grada']},
 };
 // Earlier experiments that no longer match the look of the school; only the teacher can still open them.
 const REVIEW = [
@@ -349,6 +350,7 @@ function drawLocker() {
   ['Mejor puntuación en mate', mine?.bestPoints ? `${mine.bestPoints} puntos` : '—'],
   ['Yoga', mine?.poses.length || mine?.sequences || mine?.practices ? `${mine.poses.length} posturas vistas · ${mine.sequences} secuencias creadas · ${mine.practices} practicadas` : 'Sin empezar'],
   ['Rosco de EF', mine?.roscos ? `${mine.roscos} jugados · mejor: ${mine.bestRosco} aciertos` : 'Ninguno todavía'],
+  ['Primeros auxilios', mine?.firstAid ? `${mine.firstAid} casos resueltos` : 'Sin empezar'],
   ['Curiosidades', `${descubiertas(studentId(current)).length} de ${CURIOSIDADES.length} descubiertas`],
  ];
  $('locker-list').innerHTML = lines.map(([label, value]) => `<li><span>${esc(label)}</span><b>${esc(value)}</b></li>`).join('');
@@ -408,8 +410,8 @@ const when = iso => new Date(iso).toLocaleString('es-ES', {day: 'numeric', month
 function drawDesk() {
  const rows = summary();
  const marks = row => row.marks.length ? row.marks.map(m => `${m.criterio} · ${String(m.nota).replace('.', ',')} ${m.calificacion}`).join('<br>') : '—';
- $('desk-summary').innerHTML = rows.length ? `<table><thead><tr><th>Jugador</th><th>Última vez</th><th>Aventura del gimnasio</th><th>Mate: partidos · ganados · mejor</th><th>Yoga: posturas · creadas · practicadas</th><th>Rosco: jugados · mejor</th><th>Ruleta · oca · bingo</th><th>Curiosidades</th><th>Nota orientativa</th></tr></thead><tbody>${rows.map(row =>
-  `<tr><th scope="row">${esc(row.who)}</th><td>${esc(when(row.last))}</td><td>${row.gymDone ? 'Completada' : row.gymPhase ? `Fase ${row.gymPhase} de 5` : '—'}</td><td>${row.matches ? `${row.matches} · ${row.wins} · ${row.bestPoints}` : '—'}</td><td>${row.poses.length || row.sequences || row.practices ? `${row.poses.length} · ${row.sequences} · ${row.practices}` : '—'}</td><td>${row.roscos ? `${row.roscos} · ${row.bestRosco}` : '—'}</td><td>${row.challenges || row.boards || row.bingos ? `${row.challenges} · ${row.boards} · ${row.bingos}` : '—'}</td><td>${row.curiosities.length || '—'}</td><td>${marks(row)}</td></tr>`).join('')}</tbody></table>`
+ $('desk-summary').innerHTML = rows.length ? `<table><thead><tr><th>Jugador</th><th>Última vez</th><th>Aventura del gimnasio</th><th>Mate: partidos · ganados · mejor</th><th>Yoga: posturas · creadas · practicadas</th><th>Rosco: jugados · mejor</th><th>Ruleta · oca · bingo</th><th>Botiquín: casos</th><th>Curiosidades</th><th>Nota orientativa</th></tr></thead><tbody>${rows.map(row =>
+  `<tr><th scope="row">${esc(row.who)}</th><td>${esc(when(row.last))}</td><td>${row.gymDone ? 'Completada' : row.gymPhase ? `Fase ${row.gymPhase} de 5` : '—'}</td><td>${row.matches ? `${row.matches} · ${row.wins} · ${row.bestPoints}` : '—'}</td><td>${row.poses.length || row.sequences || row.practices ? `${row.poses.length} · ${row.sequences} · ${row.practices}` : '—'}</td><td>${row.roscos ? `${row.roscos} · ${row.bestRosco}` : '—'}</td><td>${row.challenges || row.boards || row.bingos ? `${row.challenges} · ${row.boards} · ${row.bingos}` : '—'}</td><td>${row.firstAid || '—'}</td><td>${row.curiosities.length || '—'}</td><td>${marks(row)}</td></tr>`).join('')}</tbody></table>`
   : '<p>Todavía no se ha jugado nada en este ordenador.</p>';
  $('desk-download').disabled = $('desk-clear').disabled = !entries().length;
  drawCloud();

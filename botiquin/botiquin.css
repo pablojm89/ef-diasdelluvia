@@ -1,0 +1,64 @@
+/* El Botiquín. Shared pieces (floating buttons, the room, signs, paper, clock) come from comun/base.css. */
+body{height:100dvh;overflow:hidden}
+.wall{min-height:0}
+.sala-fija{--suelo:84dvh;--zocalo:68dvh}
+.oculto{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.quiet{padding:8px 15px;border:1px solid #b9925c;border-radius:99px;background:#fff8e6e6;font-size:.86rem;font-weight:700;color:#5a4a2a}
+.quiet:hover{background:#fff}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px}
+
+/* The room: the teacher on the floor, the cabinet on the wall and three signs beside it. */
+.menu{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,34dvh) minmax(0,26dvh) minmax(0,460px);justify-content:center;align-items:end;gap:clamp(12px,4vw,56px);padding:0 clamp(14px,4vw,44px) 14dvh}
+.host{position:relative;height:56dvh;margin-bottom:-6dvh}
+.host img{position:absolute;left:50%;bottom:0;width:auto;height:100%;max-width:none;transform:translateX(-46%);filter:drop-shadow(0 1dvh 1dvh #3a221677)}
+.bubble{position:absolute;z-index:1;left:0;bottom:100%;display:grid;gap:3px;width:max-content;max-width:min(300px,44dvh);margin-bottom:.5dvh;padding:10px 15px;border-radius:14px;background:var(--cream);color:#2a3a38;box-shadow:0 6px 18px #0007;font-size:.9rem;line-height:1.35;text-align:center}
+.bubble::after{content:'';position:absolute;left:18dvh;top:100%;margin-left:-9px;border:9px solid transparent;border-top-color:var(--cream)}
+.bubble span[lang=en]{font:600 1.05rem/1.25 var(--serif);color:#1f3b39}
+/* A plain cabinet with the first-aid sign: a white cross on green. Provisional until its picture arrives. */
+.cabinet{align-self:center;display:grid;place-items:center;aspect-ratio:4/5;border:1dvh solid #f4ead2;border-radius:1.4dvh;background:linear-gradient(#fffaf0,#efe2c4);box-shadow:inset 0 0 0 2px #c9a769,0 1.6dvh 2.4dvh #5a3a1a66}
+.cabinet i{position:relative;width:52%;aspect-ratio:1;border-radius:1.2dvh;background:#2f8a57}
+.cabinet i::before,.cabinet i::after{content:'';position:absolute;left:50%;top:50%;background:#fff;transform:translate(-50%,-50%)}
+.cabinet i::before{width:62%;height:20%}.cabinet i::after{width:20%;height:62%}
+.signs{align-self:center;display:grid;gap:clamp(10px,2.4dvh,20px)}
+.signs .sign{display:grid;gap:2px;width:100%}
+.signs small{font-size:.84rem;color:#5a4a2a}
+
+/* An activity: two sheets side by side that fit the screen. */
+.activity{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(12px,2.4vw,28px);align-items:start;width:100%;max-width:1240px;margin:0 auto;padding:clamp(6px,1.4dvh,16px) clamp(14px,4vw,44px) clamp(12px,3dvh,28px);overflow:auto}
+.activity h2{margin:4px 0 8px;font:600 clamp(1.4rem,3.2vw,2rem)/1.15 var(--serif);color:#1f3b39}
+.activity h3{margin:12px 0 8px;font:600 1.2rem/1.2 var(--serif);color:#1f3b39}
+.gesture{display:grid;gap:3px;margin-top:10px;padding:9px 13px;border-left:4px solid #c2552c;border-radius:0 8px 8px 0;background:#f6e3c2}
+.gesture small{font-size:.86rem;color:#4a3d24}
+.pas-chips{display:flex;gap:10px;margin:16px 0 0;padding:0;list-style:none}
+.pas-chips li{display:grid;justify-items:center;gap:2px;flex:1;padding:8px 6px;border:2px solid #c9a769;border-radius:10px;background:#fffaf0;font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7a6230}
+.pas-chips b{font:700 1.7rem/1 var(--serif);color:#1f3b39}
+.pas-chips li.now{border-color:#6b4a14;background:linear-gradient(#ffe29a,#f2bd57)}
+.pas-chips li.done{border-color:#17403d;background:#2c6b4a;color:#fff}.pas-chips li.done b{color:#fff}
+.options{display:grid;gap:8px}
+.options .sign{width:100%;padding:9px 14px;text-align:left}
+.options .sign strong{font:600 1rem/1.3 'Trebuchet MS',system-ui,sans-serif;letter-spacing:0}
+.options .sign.right{background:#d5ead8;border-color:#17403d;opacity:1}
+.options .sign.wrong{background:#f0c9b4;border-color:#7a2f22;opacity:.75}
+.feedback{min-height:2.8em;margin-top:10px;font-weight:700;color:#2c6b4a}
+.feedback.miss{color:#8a2f1f}
+.norms{display:grid;gap:6px;margin:10px 0}
+.norms li{padding:7px 12px;border-radius:8px;background:#f1e2bd}
+.rules{grid-column:1/-1;max-width:760px;margin:0 auto}
+.lat-play{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(12px,2.4vw,28px);align-items:start}
+.drawing{margin:0;padding:10px}
+.drawing svg{display:block;width:100%;height:auto;max-height:58dvh}
+.roles{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;padding:0;list-style:none}
+.roles li{padding:3px 11px;border-radius:99px;background:#1f5753;color:#fff;font-size:.8rem;font-weight:700}
+.roles b{color:#ffe29a}
+.en{font:italic 600 1.15rem/1.3 var(--serif);color:#1f5753}
+.script{display:grid;gap:8px;margin:8px 0 0;padding-left:1.3em}
+.script li{padding-left:4px}
+.script span{display:block;font:italic 600 .95rem/1.3 var(--serif);color:#1f5753}
+
+@media(max-width:820px){
+ body{height:auto;overflow:auto}
+ .menu{grid-template-columns:1fr;align-items:start;padding-bottom:16dvh}
+ .host,.cabinet{display:none}
+ .activity,.lat-play{grid-template-columns:1fr}
+ .activity{overflow:visible}
+}
