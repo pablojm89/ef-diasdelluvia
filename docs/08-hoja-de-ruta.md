@@ -1,6 +1,6 @@
 # Plan de El Pabellón, el hub de Educación Física
 
-24 de noviembre de 2026. Sustituye al plan anterior, que giraba en torno a los días de lluvia. Documentos que lo acompañan: [qué actividades digitales de EF existen y cuáles versionar](09-investigacion-dias-de-lluvia.md), [registro y notas](10-registro-y-notas.md), [el pasillo y las curiosidades](12-curiosidades.md) e [encargo de imágenes](../arte/ENCARGO.md).
+24 de noviembre de 2026. Sustituye al plan anterior, que giraba en torno a los días de lluvia. Documentos que lo acompañan: [qué actividades digitales de EF existen y cuáles versionar](09-investigacion-dias-de-lluvia.md), [registro y notas](10-registro-y-notas.md), [el pasillo y las curiosidades](12-curiosidades.md), [qué más incluir según el currículo y la evidencia](13-investigacion-contenidos.md) e [encargo de imágenes](../arte/ENCARGO.md).
 
 ## Qué es
 
@@ -37,6 +37,8 @@ Cada lugar es una puerta de **El Pasillo**, una sala larga que se recorre hacia 
 | El Patio Cubierto | Juegos populares y tradicionales de Andalucía | — | Pantalla | Reserva |
 | La Vitrina | Logros de la clase y reto de la semana | — | Pantalla | Reserva |
 | El Circuito | Orientación con el plano del cole | — | Alumno | Reserva |
+
+**En qué orden abrir la reserva.** La [investigación de contenidos](13-investigacion-contenidos.md) cruza los lugares con el currículo andaluz de tercer ciclo. De sus 14 criterios, el juego sólo da evidencia clara de uno. Por lo que falta, el orden propuesto es: El Botiquín (primeros auxilios, criterio 1.3), La Sala de Espejos (expresión y ritmo, 4.3), El Circuito (competencia 5 entera), El Patio Cubierto (cultura andaluza, 4.1) y La Vitrina. El Armario de los candados queda como hilo que los une.
 
 ## Qué pasa con lo que había
 
@@ -113,6 +115,7 @@ Mismo sistema que Agencia La Lupa, del repo de multiplicopolis: una hoja de Goog
 | **H. Lo que sigue** | El profe abre y cierra lugares por clase; insignias en el Vestuario; lugares de la reserva; descubrir solas las salas de mate de una clase | Sin empezar. El Vestuario ya es puerta |
 | **I. Pantalla completa** | Botones flotantes y escena a pantalla completa en todos los lugares; El Pasillo; El Tatami en su sala y en horizontal; Aula, oca, bingo y Grada sin marcos | Hecha en lo común. Faltan la escena de Las Espalderas, crear y practicar de El Tatami y los paneles de La Pista |
 | **J. Curiosidades** | 18 cuadros en el pasillo con rotación semanal, álbum, curiosidad del día y anotación; lote `16-pasillo` pedido | Hecha la primera tanda. Siguientes pasos, por orden, en [12-curiosidades.md](12-curiosidades.md): cuadros dentro de cada lugar, enlaces entre curiosidades y lugares, rutas de la semana |
+| **K. Contenidos nuevos** | Lo que propone [13-investigacion-contenidos.md](13-investigacion-contenidos.md), por orden: pregunta antes de abrir el cuadro, segunda tanda de curiosidades, vuelta a la calma, El Botiquín, La Sala de Espejos, intervalos con historia, El Circuito, El Patio Cubierto, juego limpio y La Vitrina | Investigado. Sin empezar: lo elige Pablo |
 
 ## Decisiones abiertas
 

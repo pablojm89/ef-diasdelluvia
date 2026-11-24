@@ -54,7 +54,7 @@ Hoy hay 18, repartidas en los cinco temas. Hay una prueba que comprueba que toda
 
 ## Lo que sigue: más descubrimiento horizontal
 
-Ideas ordenadas de más cercana a más lejana. Ninguna está empezada; se eligen con Pablo.
+Ideas ordenadas de más cercana a más lejana. Ninguna está empezada; se eligen con Pablo. La [investigación de contenidos](13-investigacion-contenidos.md) añade dos que van por delante de todas: enseñar primero una pregunta y pedir una apuesta antes de abrir el cuadro, y una segunda tanda de curiosidades ya contrastadas (48 candidatas con su fuente).
 
 | Idea | Qué añade | Qué hace falta |
 |---|---|---|

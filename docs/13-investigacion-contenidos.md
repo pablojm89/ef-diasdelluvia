@@ -201,3 +201,120 @@ Descritas como mecánica. En todas se mueve la clase entera a la vez junto a su 
 | Vibración | Pulso | Ninguno; no existe en iPhone ni iPad | Sólo adorno |
 | Cámara o detección de postura | — | Imagen de menores | **No** |
 | Reconocimiento de voz | — | El audio puede salir a un servicio externo | **No** |
+
+## 5. Curiosidades nuevas candidatas
+
+48 candidatas que no repiten ninguna de las 18 publicadas. **L** = fuente leída; **B** = sólo resultado de búsqueda: hay que abrirla a mano antes de publicar. Todas tienen pensado un «Pruébalo» en el sitio con variante sentada; aquí se resume en pocas palabras.
+
+### Juegos populares y tradicionales
+
+| # | Titular | El dato | Pruébalo | Fuente |
+|---|---|---|---|---|
+| 1 | En Jaén los bolos salen volando | Los bolos serranos de Cazorla, Segura y Las Villas son Bien de Interés Cultural desde septiembre de 2026. No basta con tumbar el bolo (el «mingo»): cuenta lo lejos que sale. La noticia más antigua es de 1625 | Cinco bolazos imaginarios a ras de suelo | L · [BOJA, Decreto 484/2026](https://www.juntadeandalucia.es/eboja/2026/171/BOJA26-171-00013-11424-01_00342654.pdf) |
+| 2 | Una anilla, un palillo y al galope | La carrera de cintas: a caballo, ensartar con un palillo la anilla de una cinta enrollada. El Atlas del Patrimonio Inmaterial de Andalucía la registra en la Axarquía | Galope en el sitio y ensartar arriba | L sólo el registro · [IAPH](https://repositorio.iaph.es/handle/11532/5712?mode=full). La descripción del juego no sale de fuente oficial |
+| 3 | Goya pintó la gallinita ciega | Un cuadro de 1788, de más de tres metros de ancho, en el Prado: un corro y alguien vendado con un cucharón | Ojos cerrados, pies quietos: señalar la puerta | L · [Fundación Goya en Aragón](https://fundaciongoyaenaragon.es/obra/la-gallina-ciega/70) |
+| 4 | Un cuadro con más de 80 juegos | «Juegos de niños», de Bruegel (1560): el museo cuenta más de 230 niños y 83 juegos | Tres juegos con mímica para que la pareja adivine | L · [Kunsthistorisches Museum](https://khm.at/en/object/321) |
+| 5 | Un libro de juegos de hace 400 años | Rodrigo Caro escribió «Días geniales o lúdicros»; un estudio cuenta en él 59 juegos: rayuela, pares y nones, trompo, tabas, bolos… | Pares y nones, cinco rondas | L · [Cultura, Ciencia y Deporte, 2017](https://ccd.ucam.edu/index.php/revista/article/download/948/402/3135). Que Caro fuera de Utrera, sin confirmar |
+| 6 | Petanca significa «pies juntos» | Nació hacia 1907 en la Provenza: un jugador que no podía tomar carrerilla lanzó con los pies quietos | Cinco lanzamientos por abajo sin mover los pies | B · [turismo de Provenza](https://provence-alpes-cotedazur.com/en/get-inspired/lifestyle/petanque/) |
+| 7 | Tirar de la cuerda fue deporte olímpico | Estuvo en cinco Juegos, entre 1900 y 1920 | Enganchar las manos y tirar cinco segundos | B · [Olympedia](https://www.olympedia.org/sports/TOW) |
+
+### Deporte adaptado y paralímpico
+
+| # | Titular | El dato | Pruébalo | Fuente |
+|---|---|---|---|---|
+| 8 | La boccia no tiene gemela olímpica | Sólo dos deportes paralímpicos no tienen equivalente olímpico: boccia y goalball. Seis bolas por lado, lo más cerca posible de la blanca | Seis lanzamientos sentados, cada vez más suaves | L · [Comité Paralímpico](https://www.paralympic.org/boccia) |
+| 9 | Dos impulsos y hay que botar | En el baloncesto en silla la canasta está igual de alta y los «pasos» se cuentan en empujones a las ruedas | Dos impulsos, bote, dos impulsos, pase | L · [Federación Internacional de Baloncesto en Silla](https://iwbf.org/rules-of-wheelchair-basketball/) |
+| 10 | Dos corredores unidos por una cuerda | Quien no ve corre con un guía, unidos por una cuerdecita; el guía avisa con la voz y no puede tirar | Marcha sincronizada por parejas, sin tocarse | L la cuerda y la voz · [Comité Paralímpico](https://www.paralympic.org/news/para-athletics-explained-guide-running); la regla de la meta, B |
+| 11 | Aquí está prohibido levantarse | Vóley sentado: nació en los Países Bajos en 1956; la pelvis tiene que tocar el suelo al golpear | Toques de dedos y antebrazos sin despegarse de la silla | L · [Comité Paralímpico](https://www.paralympic.org/sitting-volleyball) |
+| 12 | «¡Voy!», la palabra obligatoria | En el fútbol para ciegos se dice «¡voy!», en español, en todo el mundo, antes de ir al balón | Ojos cerrados: decir «¡voy!» y señalar de dónde viene la palmada | L · [Comité Paralímpico](https://www.paralympic.org/blind-football) |
+| 13 | Paralímpico quiere decir «al lado» | «Para» es «junto a» en griego. Empezaron en 1948 en un hospital inglés, con 16 personas tirando con arco | Empujar unas ruedas imaginarias 15 segundos | L · [Comité Paralímpico](https://www.paralympic.org/ipc/history) |
+| 14 | Una flecha encendió Barcelona 92 | La disparó un arquero paralímpico español; es el único deportista paralímpico que ha encendido un pebetero olímpico | Cinco flechas imaginarias | L · [Comité Paralímpico](https://www.paralympic.org/news/throwback-thursday-spain-s-antonio-rebollo) |
+
+### Deportes alternativos
+
+| # | Titular | El dato | Pruébalo | Fuente |
+|---|---|---|---|---|
+| 15 | Colpbol: prohibido agarrar el balón | Lo creó en 1997 un profesor de EF valenciano. Equipos mixtos; el balón sólo se golpea y nadie lo toca dos veces seguidas | Diez golpeos con la mano abierta | L · [EFDeportes](https://efdeportes.com/efd183/colpbol-un-nuevo-deporte-de-equipo.htm) |
+| 16 | El datchball nació en un pueblo aragonés | Hacia 2005, en el colegio de Brea de Aragón. Tres balones a la vez: nadie está parado | Lanza y esquiva, cinco veces | L · [Ayuntamiento de Zaragoza](https://zaragoza.es/sede/portal/juventud/info-joven/servicio/noticia/331539) |
+| 17 | **Un deporte inventado en Dos Hermanas** | El pinfuvote nació en 1992 en un colegio de Dos Hermanas (Sevilla). El nombre junta ping-pong, fútbol, voleibol y tenis | Tres toques con tres partes del cuerpo | L · [EFDeportes, por su creador](https://efdeportes.com/efd211/pinfuvote-un-nuevo-deporte-fusion.htm) |
+| 18 | Un balón gigante y tres equipos | Tres equipos a la vez y un balón de más de un metro; antes de golpear se dice el color del equipo que debe cogerlo | Sujetar el balón imaginario, decir un color y golpear | L una ficha docente · [CEFIRE](https://portal.edu.gva.es/cefireae/wp-content/uploads/sites/217/2019/11/THE-KINBALL.pdf). El nombre es marca: «el deporte del balón gigante» |
+| 19 | Un deporte sin árbitros | En el ultimate, con disco volador, las faltas las señalan los propios jugadores: «espíritu de juego» | Cinco lanzamientos de revés pivotando | L · [Federación Mundial de Disco Volador](https://wfdf.sport/history/history-of-sotg/) |
+| 20 | Un deporte con nombre de sonido | «Tchouk» es el ruido del balón en el marco elástico. Lo ideó un biólogo suizo que quería un juego sin choques | Lanzar, recoger el rebote y decir «¡tchouk!» | L · [Federación Internacional de Tchoukball](https://fitb.org/tchoukball/history) |
+| 21 | Chicas y chicos, mismo equipo | El korfball, de hacia 1902, es mixto desde el primer día: cuatro y cuatro | Cinco tiros a una cesta altísima | B · [Federación Internacional de Korfball](https://korfball.sport/playing-rules/) |
+
+### El cuerpo en movimiento
+
+| # | Titular | El dato | Pruébalo | Fuente |
+|---|---|---|---|---|
+| 22 | **¿Mito o verdad? Las agujetas** | No son «cristales de ácido láctico»: ese ácido desaparece en una hora y las agujetas llegan uno o dos días después. Son pequeñas roturas del músculo | Cinco sentadillas bajando en cuatro tiempos | L · [Houston Methodist](https://www.houstonmethodist.org/blog/articles/2021/oct/is-lactic-acid-buildup-really-what-causes-muscle-soreness-after-a-workout/) |
+| 23 | Nadie sabe del todo qué es el flato | Le pasa cada año a unas siete de cada diez personas que corren. La ciencia aún no tiene clara la causa | Mano en el costado y cinco respiraciones hondas | L · [Sports Medicine, 2015](https://pmc.ncbi.nlm.nih.gov/articles/PMC4281377/) |
+| 24 | El bostezo sigue siendo un misterio | No hay respuesta definitiva; lo que sí es verdad es que se contagia | Fingir un bostezo enorme y contar a cuántos se pega | L · [Cleveland Clinic](https://health.clevelandclinic.org/why-do-you-yawn-and-is-it-contagious) |
+| 25 | Una de cada diez personas es zurda | Algo más del 10 %. También tenemos un pie y un ojo preferidos | Lanzar, chutar y mirar por un catalejo; luego con el otro lado | L el resumen · [Psychological Bulletin, 2020](https://research-portal.st-andrews.ac.uk/en/publications/human-handedness-a-meta-analysis/) |
+| 26 | Tu sexto sentido se llama propiocepción | Con los ojos cerrados sabes dónde tienes la mano: te lo dicen sensores de músculos y tendones | Ojos cerrados: tocarse la nariz y juntar los índices | L · [Universidad de Washington](https://staff.washington.edu/chudler/proprio.html) |
+| 27 | Tu músculo más grande es el glúteo | El más fuerte depende de cómo se mida; el de la mandíbula es el que más aprieta | Levantarse y sentarse cinco veces sin manos | B · [Biblioteca del Congreso de EE. UU.](https://www.loc.gov/everyday-mysteries/biology-and-human-anatomy/item/what-is-the-strongest-muscle-in-the-human-body/) |
+| 28 | Tus huesos crecen por las puntas | Cerca de los extremos hay placas de cartílago donde se fabrica hueso nuevo | Estirarse de puntillas y tocar rodilla y muñeca | L · [KidsHealth](https://kidshealth.org/en/parents/growth-plates.html) |
+| 29 | Movimientos que no pasan por el cerebro | El reflejo de la rodilla va a la médula y vuelve | Golpecito bajo la rótula. No siempre sale: probar antes en clase | L · [Manual MSD](https://www.msdmanuals.com/home/multimedia/image/reflex-arc-a-no-brainer) |
+| 30 | Un cuarto de tus huesos, en los pies | 26 huesos en cada pie: 52 de los 206 | Puntillas y talones; escribir tu número con el pie | L · [Arthritis Foundation](https://www.arthritis.org/health-wellness/about-arthritis/where-it-hurts/anatomy-of-the-foot) |
+
+### Salud
+
+| # | Titular | El dato | Pruébalo | Fuente |
+|---|---|---|---|---|
+| 31 | ¿Mito o verdad? Los dos litros | No hay cifra mágica: cuenta toda el agua, también la de la fruta, la leche y la comida | Un salto por cada cosa que hoy te ha dado agua | B · [EFSA](https://www.efsa.europa.eu/en/efsajournal/pub/1459) |
+| 32 | La mochila, con las dos asas | Los pediatras aconsejan que no pese más del 10-15 % de lo que pesas | Ponerse una mochila imaginaria doblando las rodillas | B · [Asociación Española de Pediatría](https://enfamilia.aeped.es/printpdf/vida-sana/mochilas-escolares) |
+| 33 | Menos de una hora de pantalla | Recomendación de los pediatras españoles desde 2024 para los 7-12 años, contando la del colegio | Mirar 20 segundos a lo lejos y marchar en el sitio | L · [AEP, Plan Digital Familiar](https://plandigitalfamiliar.aeped.es/downloads/Infografia_Recomendaciones%20por%20edad_AEP_Plan%20Digital%20Familiar_v4.pdf) |
+| 34 | **El sol tiene nota: el índice UV** | De 0 a 2 es bajo; por encima de 11, extremo. Con nubes también puede ser alto | Prepararse con mímica: gorra, gafas y crema | L · [AEMET](https://www.aemet.es/ca/eltiempo/prediccion/radiacionuv/ayuda) |
+| 35 | No pares de golpe | Si paras en seco, el pulso y la tensión bajan deprisa y puedes marearte | Diez segundos rápido, diez lento, diez de respiración | L · [American Heart Association](https://www.heart.org/en/healthy-living/fitness/fitness-basics/warm-up-cool-down) |
+
+### Historia y cultura
+
+| # | Titular | El dato | Pruébalo | Fuente |
+|---|---|---|---|---|
+| 36 | El voleibol se llamó «mintonette» | Lo inventó William G. Morgan en 1895, cuatro años después del baloncesto | Cinco saques y cinco toques de dedos | L · [Federación Internacional de Voleibol](https://www.fivb.com/volleyball/the-game/history/) |
+| 37 | El bádminton lleva nombre de una casa | Badminton es una finca inglesa donde se jugó hacia 1873 | Cinco saques cortos de revés | B · [Britannica](https://www.britannica.com/sports/badminton) |
+| 38 | El tenis de mesa nació en la sobremesa | En la Inglaterra de 1880 se jugaba sobre la mesa del comedor, con libros como red | Diez golpes con la mano como pala | B · [ITTF](https://ittf.com/history/documents/historyoftabletennis) |
+| 39 | Judo: el «camino de la suavidad» | Lo creó Jigoro Kano en Japón en 1882; es olímpico desde 1964 | El saludo de pie, a tres personas | L · [Federación Internacional de Judo](https://www.ijf.org/history) |
+| 40 | En 1900 compitieron las primeras olímpicas | En 1896 sólo hubo hombres. En París 2024, por primera vez, las mismas plazas para mujeres que para hombres | Cinco saques de tenis imaginarios | B · [Comité Olímpico Internacional](https://olympics.com/ioc/faq/history-and-origin-of-the-games/when-did-women-first-compete-in-the-olympic-games) |
+| 41 | Gimnasio es una palabra griega | Viene de «gymnós»: en la Grecia antigua los atletas entrenaban sin ropa | El lanzador de disco, despacio | B · [Universidad de Murcia](https://revistas.um.es/cpd/article/download/356111/255561/1202561) |
+| 42 | **El flamenco es Patrimonio de la Humanidad** | Desde 2010. Cante, baile y toque, con palmas y taconeo | Compás de cuatro con palmas y luego con los pies | L · [UNESCO](https://ich.unesco.org/es/RL/el-flamenco-00363) |
+| 43 | **Blanco y rojo: vas por buen camino** | Los senderos se marcan con dos rayas: blanco y rojo los largos, blanco y amarillo los medianos, blanco y verde los cortos. Un aspa es «por aquí no» | El profe canta «rayas», «giro» o «aspa» | L · [FEDME, manual de senderos](https://fmm.es/wp-content/uploads/2023/05/ManualSenderosFEDME_18.pdf) |
+| 44 | **El club de fútbol más antiguo: Huelva** | Fundado el 23 de diciembre de 1889; su actividad es Bien de Interés Cultural de Andalucía | Diez pases con el interior del pie | L · [BOJA, Decreto 139/2016](https://www.juntadeandalucia.es/boja/2016/148/BOJA16-148-00006-14100-01_00096459.pdf) |
+| 45 | El pádel llegó a España por Marbella | Se inventó en México en 1969; las dos primeras pistas de España se hicieron en Marbella en 1974 | Dejar que la pelota rebote detrás y golpear | L · [federación británica de tenis](https://www.ltapadel.org.uk/what-we-do/what-is-the-history-of-padel/) |
+
+### Inglés útil en Educación Física
+
+| # | Titular | El dato | Pruébalo | Fuente |
+|---|---|---|---|---|
+| 46 | «Soccer» es una palabra inglesa | Nació en Inglaterra: es «Association football» acortado | British or American? Salto a un lado u otro: football/soccer, pitch/field | L · [Oxford University Press](https://blog.oup.com/2014/07/football-soccer-vocabulary/) |
+| 47 | En inglés británico, cero es «nil» | Un 2-0 es «two–nil»; la ropa de deporte es el «kit» y el campo, el «pitch» | La pareja dice un resultado y se hace con saltos | L · la misma |
+| 48 | Chutar viene de «shoot» | Y fútbol, de «foot» y «ball» | Cinco chuts con cada pie diciendo «shoot!» | B · [Diccionario de la RAE](https://dle.rae.es/chutar) |
+
+**Descartadas por falta de fuente seria:** el pañuelo, las canciones de comba, el elástico y las chapas (sólo webs de crianza y blogs); el trompo (fechas contradictorias); el tiro con honda (sólo prensa local, y el movimiento invita a lanzar); el balonmano (orígenes contradictorios); «la medalla de oro es de plata» (ninguna fuente del COI). **Mitos que no deben entrar como dato:** el 10 % del cerebro, los ocho vasos de agua, el ácido láctico de las agujetas, la lengua como músculo más fuerte, bostezar por falta de oxígeno. Algunos sirven para una serie «¿Mito o verdad?».
+
+**Cuidados al escribirlas:** las curiosidades «de oído» (goalball, fútbol para ciegos, gallinita ciega) no deben colgar la misma semana. Las marcas y los escudos se pueden nombrar en texto, nunca dibujar. Las personas reales aparecen sólo en texto. Con ojos cerrados, siempre junto a la mesa y con los pies quietos.
+
+## 6. Propuesta: qué incluir y en qué orden
+
+Ordenado por lo que aporta a la clase frente a lo que cuesta hacerlo. Nada de esto está empezado.
+
+| Paso | Qué | Por qué ahora | Qué hace falta |
+|---|---|---|---|
+| **1** | **«Adivina antes de abrir»** en los cuadros: pregunta, apuesta con el cuerpo, pausa y ficha | Es lo mejor respaldado para 10-12 años y sólo cambia el orden de la ficha | Un campo `pregunta` por curiosidad. Sin arte |
+| **2** | **Segunda tanda de curiosidades:** las 12 con fuente leída y sabor propio: bolos serranos, pinfuvote, Huelva, flamenco, senderos, índice UV, agujetas, flato, vóley sentado, «¡voy!», zurdos y «soccer» | Mete la cultura andaluza (criterio 4.1), lo paralímpico (4.2) y el bloque F con poco esfuerzo, y sube el banco a 30 | Escribirlas, que Pablo las repase y pedir sus cuadros en un lote nuevo |
+| **3** | **Vuelta a la calma:** «Respira con la ola» y «Tensar y soltar» en El Tatami | Es la barrera que más cita el profesorado para usar descansos activos, y cierra lo que quedaba por decidir en yoga | Una forma animada y un reloj. Sin arte |
+| **4** | **El Botiquín mínimo:** PAS en escena y posición lateral por tríos; «La llamada» como complemento | Es la mayor laguna curricular y completa el único criterio que ya da nota (1.3) | Guion, dibujos de los pasos y una puerta nueva. Lote de arte |
+| **5** | **La Sala de Espejos:** eco de percusión, estatuas con regla que cambia, mímica bilingüe y coreografía de ocho tiempos | Cubre expresión y ritmo (criterio 4.3) con movimiento de toda la clase y casi sin arte | Iconos, metrónomo y reutilizar el constructor de secuencias |
+| **6** | **Intervalos con historia** de cuatro minutos en Las Espalderas, que pasa de cuadro de diálogo a escena | La dosis con mejor relación entre tiempo y efecto; resuelve de paso la escena que le falta a Las Espalderas | Escribir cuatro o cinco historias |
+| **7** | **El Circuito:** rumbos junto a la mesa, el plano del aula y señales con el cuerpo | Abre la competencia 5, hoy sin ninguna evidencia, sin salir de clase | Un ajuste en el despacho para el plano, sin nombres |
+| **8** | **El Patio Cubierto:** juegos populares andaluces y «Juegos sentados» paralímpicos | La seña propia del currículo andaluz | Documentarse con Pablo sobre qué se juega aquí |
+| **9** | **Tarjeta verde** tras los partidos de mate y **Verdad o mito** | Juego limpio, igualdad e imagen corporal (criterios 1.4, 3.2, 3.3) | Escribir los dilemas con mucho cuidado |
+| **10** | **La Vitrina:** reto de la clase de la semana, con sellos de «lo hicimos» | Da sentido de conjunto sin clasificaciones | Que existan las actividades anteriores |
+
+### Lo que decide Pablo
+
+1. **Cómo se llama aquí el balón prisionero.** Las fuentes no lo aclaran para Andalucía; lo sabe quien da clase aquí.
+2. **Qué juegos populares son «de aquí».** No hay fuente seria para el pañuelo, el elástico o las chapas, y sin embargo se juegan. Su conocimiento vale más que lo encontrado.
+3. **El micrófono en la pantalla digital** para «Una sola palmada»: sí con las condiciones de la tabla, o no.
+4. **Qué criterios nuevos dan nota.** Varias actividades darían evidencia de 1.2, 2.1, 4.1, 4.3 y 5.1; hoy sólo cuenta el 1.3.
+5. **Personas reales en el texto.** Las candidatas nombran a inventores y deportistas; la regla actual sólo prohíbe su imagen.
+6. **Primeros auxilios:** quedarse en lo que pide Primaria (PAS y posición lateral) o añadir la llamada y el ritmo de las compresiones como complemento.

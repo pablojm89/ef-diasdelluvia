@@ -36,7 +36,7 @@ Un colegio que se juega. Cada actividad vive en un **lugar** del pabellón; los 
 - **Sin build ni dependencias:** HTML, CSS y módulos JavaScript. Rutas relativas (se publica en `/ef-diasdelluvia/`).
 - **Alumnado menor de edad:** el repo es público. Nunca nombres, listas ni notas. El jugador es curso, grupo y número de lista; sin campos de texto libre para identificarse. Ver `PRIVACY.md`.
 - **Imágenes:** si una pantalla necesita arte que no existe, se pide añadiendo un lote en `arte/lotes/` y regenerando `arte/ENCARGO.md`; mientras llega, el lugar funciona con una figura provisional sobria hecha con el arte existente o con formas simples. No se generan ni se descargan imágenes de terceros.
-- Todo lo decidido queda escrito: plan en `docs/08-hoja-de-ruta.md`, datos y notas en `docs/10-registro-y-notas.md`, pasillo y curiosidades en `docs/12-curiosidades.md`.
+- Todo lo decidido queda escrito: plan en `docs/08-hoja-de-ruta.md`, datos y notas en `docs/10-registro-y-notas.md`, pasillo y curiosidades en `docs/12-curiosidades.md`, currículo, evidencia y contenidos por hacer en `docs/13-investigacion-contenidos.md`.
 
 ## Comprobar
 
