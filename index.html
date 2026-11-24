@@ -127,20 +127,34 @@
   <div class="desk-buttons"><button type="button" id="locker-album" class="sign gold"><strong>Mi álbum de curiosidades</strong></button><button type="button" id="locker-recover" class="sign" hidden><strong>Recuperar mi progreso</strong></button><button type="button" id="locker-leave" class="sign"><strong>No soy yo: cambiar de jugador</strong></button></div>
   <p id="locker-status" class="status" role="status"></p>
  </dialog>
- <dialog id="curio" aria-labelledby="curio-title">
+ <dialog id="curio" aria-label="Curiosidad">
   <form method="dialog"><button class="close" aria-label="Cerrar la curiosidad">Cerrar</button></form>
   <div class="curio-layout">
    <figure class="cuadro big"><img id="curio-art" alt="" width="240" height="240"></figure>
    <div class="curio-card">
     <p class="eyebrow">¿Sabías que…? · <span lang="en">Did you know?</span> · <span id="curio-theme"></span></p>
-    <h2 id="curio-title"></h2>
-    <p class="curio-en"><span id="curio-en" lang="en"></span> <button type="button" id="curio-listen" class="listen" aria-label="Escuchar la frase en inglés"><img src="./gimnasio/assets/icon-listen.webp" alt="" width="26" height="26"></button></p>
-    <p id="curio-text" class="challenge-text"></p>
-    <div class="try"><strong>Pruébalo · <span lang="en">Try it</span></strong><span id="curio-try"></span><small><b>Variante sentada:</b> <span id="curio-seated"></span></small></div>
-    <div class="clock" id="curio-clock-box" hidden><output id="curio-clock">0:20</output><button type="button" id="curio-start" class="sign"><strong>Empezar</strong></button></div>
-    <div class="desk-buttons"><button type="button" id="curio-done" class="sign gold"><strong>¡Hecho! Al álbum</strong></button></div>
-    <p id="curio-status" class="status" role="status"></p>
-    <p class="fine">Fuente: <span id="curio-source"></span></p>
+    <!-- First the picture asks and the class bets with the body; only then does it open. -->
+    <div id="curio-ask" class="ask">
+     <h2 id="curio-question"></h2>
+     <div class="ask-options">
+      <button type="button" class="sign big" data-bet="0"><small>A · de pie, brazos arriba</small><strong></strong></button>
+      <button type="button" class="sign big" data-bet="1"><small>B · en cuclillas</small><strong></strong></button>
+     </div>
+     <p class="ask-how" id="curio-how"></p>
+     <p class="fine"><b>Variante sentada:</b> A, brazos arriba; B, brazos cruzados.</p>
+     <p id="curio-count" class="ask-count" role="status" aria-live="polite"></p>
+    </div>
+    <div id="curio-answer" hidden>
+     <p id="curio-verdict" class="verdict"></p>
+     <h2 id="curio-title"></h2>
+     <p class="curio-en"><span id="curio-en" lang="en"></span> <button type="button" id="curio-listen" class="listen" aria-label="Escuchar la frase en inglés"><img src="./gimnasio/assets/icon-listen.webp" alt="" width="26" height="26"></button></p>
+     <p id="curio-text" class="challenge-text"></p>
+     <div class="try"><strong>Pruébalo · <span lang="en">Try it</span></strong><span id="curio-try"></span><small><b>Variante sentada:</b> <span id="curio-seated"></span></small></div>
+     <div class="clock" id="curio-clock-box" hidden><output id="curio-clock">0:20</output><button type="button" id="curio-start" class="sign"><strong>Empezar</strong></button></div>
+     <div class="desk-buttons"><button type="button" id="curio-done" class="sign gold"><strong>¡Hecho! Al álbum</strong></button></div>
+     <p id="curio-status" class="status" role="status"></p>
+     <p class="fine">Fuente: <span id="curio-source"></span></p>
+    </div>
    </div>
   </div>
  </dialog>

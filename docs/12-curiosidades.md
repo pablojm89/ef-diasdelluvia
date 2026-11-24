@@ -18,6 +18,7 @@ Una línea de `CURIOSIDADES` en [`curiosidades.js`](../curiosidades.js):
 | Campo | Qué es |
 |---|---|
 | `id`, `tema` | Identificador y uno de los cinco temas: el cuerpo, salud, deportes, juegos, historia |
+| `pregunta`, `opciones`, `correcta` | Lo que el cuadro pregunta antes de abrirse, sus dos respuestas posibles y cuál es la buena |
 | `titulo`, `texto` | La curiosidad en español: un titular y dos o tres frases |
 | `en` | Una frase en inglés británico que dice lo esencial; se puede escuchar |
 | `prueba` | **Pruébalo**: un movimiento de menos de medio minuto, en el sitio, que tiene que ver con lo contado |
@@ -34,12 +35,14 @@ Reglas para escribir una nueva:
 - **Sin personas reales en imagen** y sin marcas ni emblemas registrados (por eso no hay aros olímpicos). En el texto sí caben nombres históricos.
 - **Inglés con función:** el vocabulario que hace falta para la actividad (partes del cuerpo, nombres de deportes y juegos), no una traducción de adorno.
 
-Hoy hay 18, repartidas en los cinco temas. Hay una prueba que comprueba que todas tienen los dos idiomas, movimiento, variante sentada y dibujo.
+Hoy hay 30, repartidas en los cinco temas: las 18 primeras, contrastadas una a una, y una segunda tanda de 12 elegidas en la [investigación de contenidos](13-investigacion-contenidos.md) entre las que tenían la fuente leída (bolos serranos, pinfuvote, el club de Huelva, flamenco, senderos, índice UV, agujetas, flato, voleibol sentado, «¡voy!», zurdos y «soccer»). Una prueba comprueba que todas tienen pregunta, los dos idiomas, movimiento, variante sentada, fuente y dibujo.
 
 ## Cómo se descubren
 
-- **En el pasillo.** Hay un cuadro antes de cada puerta y uno al final. Un cuadro sin descubrir lleva una etiqueta «?»; al tocarlo, el personaje camina hasta él y se abre la ficha. «¡Hecho! Al álbum» lo guarda y la etiqueta pasa a «✓».
-- **Cambian cada lunes.** `delPasillo()` cuelga esta semana un tramo del banco y la siguiente el tramo de después, así que en tres semanas pasa el banco entero y cada lunes hay algo nuevo sin que nadie tenga que hacer nada. No hay servidor: se calcula con la fecha.
+- **En el pasillo.** Hay un cuadro antes de cada puerta y uno al final. Un cuadro sin descubrir lleva una etiqueta «?»; al tocarlo, el personaje camina hasta él.
+- **Primero pregunta.** El cuadro no cuenta nada todavía: hace una pregunta con dos respuestas. Se apuesta con el cuerpo (A, de pie con los brazos arriba; B, en cuclillas; sentados, brazos arriba o cruzados), se toca la respuesta, hay tres tiempos de espera y entonces se abre la ficha diciendo cuál era. Lo que se intenta adivinar antes se recuerda mejor, aunque se falle. No se anota si se acertó: fallar forma parte del juego. Desde el álbum, la ficha se abre directamente.
+- **Al álbum.** «¡Hecho! Al álbum» lo guarda y la etiqueta pasa a «✓».
+- **Cambian cada lunes.** `delPasillo()` cuelga esta semana un tramo del banco y la siguiente el tramo de después, así que en cinco semanas pasa el banco entero y cada lunes hay algo nuevo sin que nadie tenga que hacer nada. No hay servidor: se calcula con la fecha.
 - **La curiosidad de hoy.** Tocar al profe Robles, que espera al principio del pasillo, abre el cuadro que corresponde al día. Pensado para empezar la sesión en la pantalla digital: dos minutos, toda la clase a la vez.
 - **El álbum.** El botón «Curiosidades» y la puerta de El Vestuario enseñan lo descubierto, por temas, y lo que falta. El del alumno es suyo; el de la pantalla digital es el de la clase. Se guarda en el navegador (`pabellon-curiosidades`), aparte del registro.
 - **Qué queda anotado.** `record('pasillo', 'curiosidades', 'descubre', {id, tema})`. Es evidencia, no nota: descubrir un cuadro no es superar un criterio. El despacho muestra cuántas lleva cada jugador.
@@ -54,7 +57,7 @@ Hoy hay 18, repartidas en los cinco temas. Hay una prueba que comprueba que toda
 
 ## Lo que sigue: más descubrimiento horizontal
 
-Ideas ordenadas de más cercana a más lejana. Ninguna está empezada; se eligen con Pablo. La [investigación de contenidos](13-investigacion-contenidos.md) añade dos que van por delante de todas: enseñar primero una pregunta y pedir una apuesta antes de abrir el cuadro, y una segunda tanda de curiosidades ya contrastadas (48 candidatas con su fuente).
+Ideas ordenadas de más cercana a más lejana. Ninguna está empezada; se eligen con Pablo. La [investigación de contenidos](13-investigacion-contenidos.md) añadió dos que iban por delante de todas y ya están hechas: el cuadro pregunta y pide una apuesta antes de abrirse, y hay una segunda tanda de 12 curiosidades. Quedan 36 candidatas con su fuente para tandas siguientes.
 
 | Idea | Qué añade | Qué hace falta |
 |---|---|---|
@@ -64,7 +67,7 @@ Ideas ordenadas de más cercana a más lejana. Ninguna está empezada; se eligen
 | **4. El profe elige el tema** | En el despacho, colgar esta semana los cuadros de un tema, a juego con la unidad que se está dando, en vez de la rotación automática | Ajuste en el despacho, guardado en el navegador de la pantalla |
 | **5. El rosco repasa lo descubierto** | Tres letras del rosco salen de curiosidades que la clase ya tiene en el álbum | Una definición corta por curiosidad en el banco de La Pizarra |
 | **6. Más cosas que cuadros** | El pasillo gana objetos de verdad: la fuente (hidratación), el tablón (reto de la semana), el plano del cole (El Circuito), el botiquín, la vitrina de trofeos de la clase | Imágenes propias; cada objeto es la puerta pequeña de un lugar de la reserva |
-| **7. Tramos temáticos** | El pasillo crece por alas: la del cuerpo, la de los deportes, la de los juegos de Andalucía. Al fondo se ven las puertas que están por abrir | Más curiosidades (objetivo: 40) y el tramo pintado del lote `16-pasillo` |
+| **7. Tramos temáticos** | El pasillo crece por alas: la del cuerpo, la de los deportes, la de los juegos de Andalucía. Al fondo se ven las puertas que están por abrir | Más curiosidades (hay 30; objetivo: 40) y el tramo pintado del lote `16-pasillo` |
 | **8. Curiosidades de casa** | Juegos populares andaluces, el flamenco como actividad física, deportes que se practican en la comarca | Documentarse bien; decidir con Pablo qué es de aquí |
 | **9. Con otras áreas** | Cuadros que tocan Matemáticas (medir 42,195 km, contar pulsaciones), Conocimiento del Medio (huesos, músculos) e Inglés. Posible puente con La Lupa | Hablarlo en `intercambio/` antes de tocar nada |
 

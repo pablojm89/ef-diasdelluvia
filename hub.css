@@ -84,6 +84,16 @@ body[data-view=map]{height:100dvh;overflow:hidden}
 .listen{vertical-align:middle;width:44px;height:44px;padding:0;border:1px solid #b9a06a;border-radius:50%;background:#fff8e6}
 .listen:hover{background:#fff0c4}
 .listen img{width:26px;height:26px;object-fit:contain}
+.ask h2{margin-top:2px}
+.ask-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.ask-options .sign{display:grid;align-content:center;gap:4px;padding:12px 10px}
+.ask-options .sign small{font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#7a6230}
+.ask-options .sign strong{font-size:1.15rem}
+.ask-options .sign[aria-pressed=true]{background:linear-gradient(#ffe29a,#f2bd57);border-color:#6b4a14;opacity:1}
+.ask-how{margin-top:12px;font-weight:700;color:#1f3b39}
+.ask-count{min-height:1.2em;margin-top:8px;font:700 clamp(2rem,6vw,3rem)/1 var(--serif);color:#c2552c;text-align:center}
+.verdict{margin:0 0 8px;padding:8px 14px;border-radius:8px;background:#e2ecd9;font-weight:700;color:#2c6b4a}
+.verdict.miss{background:#f6e3c2;color:#8a4a1c}
 .try{display:grid;gap:3px;margin-top:12px;padding:10px 14px;border-left:4px solid #c2552c;background:#f6e3c2;border-radius:0 8px 8px 0}
 .try strong{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#a3431f}
 .try small{margin-top:3px;font-size:.88rem;color:#4a3d24}
@@ -168,6 +178,7 @@ legend{width:100%;margin-bottom:8px;font-size:.74rem;font-weight:800;letter-spac
  .aliases{grid-template-columns:repeat(3,minmax(0,1fr))}
  .curio-layout{grid-template-columns:1fr}
  .cuadro.big{width:150px;margin-inline:auto}
+ .ask-options{grid-template-columns:1fr}
  .album-pill span{display:none}
 }
 /* Upright phone: the corridor is taller than wide, so doors are a little narrower and one fills the screen. */

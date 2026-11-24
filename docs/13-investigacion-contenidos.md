@@ -295,12 +295,12 @@ Descritas como mecánica. En todas se mueve la clase entera a la vez junto a su 
 
 ## 6. Propuesta: qué incluir y en qué orden
 
-Ordenado por lo que aporta a la clase frente a lo que cuesta hacerlo. Nada de esto está empezado.
+Ordenado por lo que aporta a la clase frente a lo que cuesta hacerlo. Pablo dio el visto bueno a la propuesta entera el 24 de noviembre de 2026. **Los pasos 1 y 2 están hechos**; el resto, sin empezar.
 
 | Paso | Qué | Por qué ahora | Qué hace falta |
 |---|---|---|---|
-| **1** | **«Adivina antes de abrir»** en los cuadros: pregunta, apuesta con el cuerpo, pausa y ficha | Es lo mejor respaldado para 10-12 años y sólo cambia el orden de la ficha | Un campo `pregunta` por curiosidad. Sin arte |
-| **2** | **Segunda tanda de curiosidades:** las 12 con fuente leída y sabor propio: bolos serranos, pinfuvote, Huelva, flamenco, senderos, índice UV, agujetas, flato, vóley sentado, «¡voy!», zurdos y «soccer» | Mete la cultura andaluza (criterio 4.1), lo paralímpico (4.2) y el bloque F con poco esfuerzo, y sube el banco a 30 | Escribirlas, que Pablo las repase y pedir sus cuadros en un lote nuevo |
+| **1 · hecho** | **«Adivina antes de abrir»** en los cuadros: pregunta, apuesta con el cuerpo, pausa y ficha | Es lo mejor respaldado para 10-12 años y sólo cambia el orden de la ficha | Hecho: campos `pregunta`, `opciones` y `correcta` en las 30 curiosidades |
+| **2 · hecho** | **Segunda tanda de curiosidades:** las 12 con fuente leída y sabor propio: bolos serranos, pinfuvote, Huelva, flamenco, senderos, índice UV, agujetas, flato, vóley sentado, «¡voy!», zurdos y «soccer» | Mete la cultura andaluza (criterio 4.1), lo paralímpico (4.2) y el bloque F con poco esfuerzo, y sube el banco a 30 | Hecho: están en `curiosidades.js` con dibujos prestados y sus cuadros pedidos en el lote `16-pasillo`. Falta que Pablo las repase |
 | **3** | **Vuelta a la calma:** «Respira con la ola» y «Tensar y soltar» en El Tatami | Es la barrera que más cita el profesorado para usar descansos activos, y cierra lo que quedaba por decidir en yoga | Una forma animada y un reloj. Sin arte |
 | **4** | **El Botiquín mínimo:** PAS en escena y posición lateral por tríos; «La llamada» como complemento | Es la mayor laguna curricular y completa el único criterio que ya da nota (1.3) | Guion, dibujos de los pasos y una puerta nueva. Lote de arte |
 | **5** | **La Sala de Espejos:** eco de percusión, estatuas con regla que cambia, mímica bilingüe y coreografía de ocho tiempos | Cubre expresión y ritmo (criterio 4.3) con movimiento de toda la clase y casi sin arte | Iconos, metrónomo y reutilizar el constructor de secuencias |
@@ -314,7 +314,7 @@ Ordenado por lo que aporta a la clase frente a lo que cuesta hacerlo. Nada de es
 
 1. ~~Cómo se llama aquí el balón prisionero.~~ **Decidido (24/11/2026): «el mate».** El juego lo llama así en la puerta de La Pista, en su menú, en la curiosidad y en el rosco; «balón prisionero» queda como el nombre de otros sitios.
 2. **Qué juegos populares son «de aquí».** No hay fuente seria para el pañuelo, el elástico o las chapas, y sin embargo se juegan. Su conocimiento vale más que lo encontrado.
-3. **El micrófono en la pantalla digital** para «Una sola palmada»: sí con las condiciones de la tabla, o no.
+3. ~~El micrófono en la pantalla digital.~~ **Decidido (24/11/2026): sí**, con las condiciones de la tabla: sólo en la pantalla digital, activado por el profe, midiendo el volumen sin grabar ni enviar nada, escrito en `PRIVACY.md` y con alternativa sin micrófono. Se hará con «Una sola palmada», en La Vitrina.
 4. **Qué criterios nuevos dan nota.** Varias actividades darían evidencia de 1.2, 2.1, 4.1, 4.3 y 5.1; hoy sólo cuenta el 1.3.
 5. **Personas reales en el texto.** Las candidatas nombran a inventores y deportistas; la regla actual sólo prohíbe su imagen.
-6. **Primeros auxilios:** quedarse en lo que pide Primaria (PAS y posición lateral) o añadir la llamada y el ritmo de las compresiones como complemento.
+6. ~~Primeros auxilios.~~ **Decidido (24/11/2026):** lo evaluable es PAS y posición lateral; la llamada entra como complemento, sin nota.

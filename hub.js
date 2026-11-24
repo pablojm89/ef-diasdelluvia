@@ -198,14 +198,36 @@ $('doors').addEventListener('click', event => {
 let curioNow = null, curioLeft = 0, curioTicking = null;
 function drawAlbumCount() { $('album-count').textContent = `${descubiertas(albumOwner()).length}/${CURIOSIDADES.length}`; }
 function stopCurioClock() { clearInterval(curioTicking); curioTicking = null; }
+// A picture not yet in the album asks first: the class bets with the body, a short wait, and then it opens.
+// What is guessed before being told is remembered better (docs/13-investigacion-contenidos.md). From the album
+// it opens straight away.
+let curioWait = null;
+function stopCurioWait() { clearInterval(curioWait); curioWait = null; }
+function revealCurio(bet) {
+ stopCurioWait();
+ const item = curioNow, right = item.opciones[item.correcta];
+ $('curio-ask').hidden = true; $('curio-answer').hidden = false;
+ $('curio-verdict').hidden = bet === null;
+ if (bet !== null) {
+  $('curio-verdict').classList.toggle('miss', bet !== item.correcta);
+  $('curio-verdict').textContent = bet === item.correcta ? `¡Bien apostado! ${right}.` : `Era la otra: ${right.charAt(0).toLowerCase() + right.slice(1)}. Ahora ya lo sabes.`;
+ }
+}
 function openCurio(id) {
  const item = curiosidad(id);
  if (!item) return;
- curioNow = item; stopCurioClock();
+ curioNow = item; stopCurioClock(); stopCurioWait();
  const found = descubiertas(albumOwner()).includes(id);
  $('curio-art').src = pictureArt(item);
  $('curio-art').parentElement.classList.toggle('painted', painted(item));
  $('curio-theme').textContent = TEMAS[item.tema];
+ $('curio-question').textContent = item.pregunta;
+ $('curio-how').textContent = kind === 'pantalla' ? 'Apostad todos a la vez con el cuerpo y tocad lo que diga la mayoría.' : 'Apuesta con el cuerpo y toca tu respuesta.';
+ $('curio-count').textContent = '';
+ for (const button of $('curio-ask').querySelectorAll('[data-bet]')) {
+  button.disabled = false; button.removeAttribute('aria-pressed');
+  button.querySelector('strong').textContent = item.opciones[Number(button.dataset.bet)];
+ }
  $('curio-title').textContent = item.titulo;
  $('curio-en').textContent = item.en;
  $('curio-text').textContent = item.texto;
@@ -219,8 +241,20 @@ function openCurio(id) {
  $('curio-start').firstElementChild.textContent = 'Empezar';
  $('curio-done').hidden = found;
  $('curio-status').textContent = found ? 'Ya está en el álbum.' : '';
+ $('curio-ask').hidden = found; $('curio-answer').hidden = !found;
+ if (found) revealCurio(null);
  if (!$('curio').open) $('curio').showModal();
 }
+$('curio-ask').addEventListener('click', event => {
+ const button = event.target.closest('[data-bet]');
+ if (!button || curioWait) return;
+ const bet = Number(button.dataset.bet);
+ for (const other of $('curio-ask').querySelectorAll('[data-bet]')) { other.disabled = true; other.setAttribute('aria-pressed', String(other === button)); }
+ // Three beats of suspense before the answer.
+ let left = 3;
+ $('curio-count').textContent = left;
+ curioWait = setInterval(() => { left--; if (left > 0) $('curio-count').textContent = left; else revealCurio(bet); }, 800);
+});
 $('curio-start').addEventListener('click', () => {
  if (curioTicking) { stopCurioClock(); $('curio-start').firstElementChild.textContent = 'Seguir'; return; }
  if (curioLeft <= 0) { curioLeft = curioNow.segundos; $('curio-clock-box').classList.remove('done'); }
@@ -244,7 +278,7 @@ $('curio-done').addEventListener('click', () => {
  $('curio-status').textContent = '¡Al álbum! Busca más cuadros por el pasillo.';
  drawAlbumCount();
 });
-$('curio').addEventListener('close', () => { stopCurioClock(); try { speechSynthesis.cancel(); } catch {} });
+$('curio').addEventListener('close', () => { stopCurioClock(); stopCurioWait(); try { speechSynthesis.cancel(); } catch {} });
 // The English sentence read aloud, as the teacher's instructions are in the gym.
 if ('speechSynthesis' in window) $('curio-listen').addEventListener('click', () => {
  speechSynthesis.cancel();

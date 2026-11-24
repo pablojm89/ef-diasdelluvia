@@ -113,10 +113,15 @@ test('curiosidades: cada una tiene los dos idiomas, un movimiento con variante s
   for(const field of ['titulo','en','texto','prueba','sentada'])assert.ok(typeof item[field]==='string'&&item[field].length>8,`${item.id}.${field}`);
   assert.ok(existsSync(root+item.arte),item.arte);
   assert.ok(Array.isArray(item.fuente)&&item.fuente[0].length>3&&/^https:\/\/\S+$/.test(item.fuente[1]),`${item.id}: cada curiosidad dice quién lo afirma y dónde`);
+  assert.ok(item.pregunta.length>8&&item.pregunta.includes('?'),`${item.id}: pregunta antes de abrir`);
+  assert.ok(Array.isArray(item.opciones)&&item.opciones.length===2&&item.opciones.every(option=>option.length>1)&&item.opciones[0]!==item.opciones[1],item.id);
+  assert.ok(item.correcta===0||item.correcta===1,item.id);
   if(item.segundos!==undefined)assert.ok(item.segundos>=10&&item.segundos<=30,item.id);
   assert.match(item.prueba+item.sentada,/\S/);
  }
- assert.ok(curiosidades.CURIOSIDADES.length>=18);
+ assert.ok(curiosidades.CURIOSIDADES.length>=30);
+ const first=curiosidades.CURIOSIDADES.filter(item=>item.correcta===0).length;
+ assert.ok(first>=10&&curiosidades.CURIOSIDADES.length-first>=10,'la respuesta buena no cae siempre en la misma opción');
  for(const tema of Object.keys(curiosidades.TEMAS))assert.ok(curiosidades.CURIOSIDADES.some(item=>item.tema===tema),tema);
 });
 test('curiosidades: los cuadros del pasillo cambian cada lunes y en pocas semanas pasa el banco entero',()=>{

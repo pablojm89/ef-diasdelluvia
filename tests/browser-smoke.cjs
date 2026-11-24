@@ -40,6 +40,13 @@ const out=path.join(base,'artifacts');
  assert.match(await page.locator('#album-count').textContent(),/^0\//);
  await page.locator('#doors .cuadro').first().click();
  await page.waitForSelector('#curio[open]');
+ // It asks first: the fact stays hidden until the class has bet.
+ assert.ok((await page.locator('#curio-question').textContent()).length>8);
+ assert.equal(await page.locator('#curio-answer').isHidden(),true,'la curiosidad no se cuenta antes de apostar');
+ assert.equal(await page.locator('#curio-ask [data-bet]').count(),2);
+ await page.locator('#curio-ask [data-bet="0"]').click();
+ await page.waitForSelector('#curio-answer:not([hidden])');
+ assert.ok((await page.locator('#curio-verdict').textContent()).length>5);
  assert.ok((await page.locator('#curio-title').textContent()).length>5);
  assert.ok((await page.locator('#curio-en').textContent()).length>5);
  assert.ok((await page.locator('#curio-seated').textContent()).length>5,'variante sentada a la vista');
@@ -49,7 +56,12 @@ const out=path.join(base,'artifacts');
  await page.locator('#curio .close').click();
  await page.locator('#album-button').click();
  assert.equal(await page.locator('#album-list button.album-item').count(),1);
- await page.locator('#album .close').click();
+ // From the album it opens straight away, without asking again.
+ await page.locator('#album-list button.album-item').click();
+ await page.waitForSelector('#curio[open]');
+ assert.equal(await page.locator('#curio-ask').isHidden(),true);
+ assert.equal(await page.locator('#curio-answer').isVisible(),true);
+ await page.locator('#curio .close').click();
  assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('pabellon-registro')).filter(e=>e.activity==='curiosidades'&&e.who==='5B-12').length),1);
  // The locker is a door of the corridor.
  await page.locator('#doors [data-action="locker"]').click();

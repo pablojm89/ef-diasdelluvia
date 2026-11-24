@@ -21,7 +21,7 @@ Cada lugar es una puerta de **El Pasillo**, una sala larga que se recorre hacia 
 
 | Lugar | Qué se hace allí | Versión propia de | Se juega como | Estado |
 |---|---|---|---|---|
-| **El Pasillo** | Recorrerlo de lado y descubrir los cuadros: 18 curiosidades en dos idiomas, cada una con un movimiento para probar; cambian cada lunes y se guardan en un álbum | Murales y «¿sabías que…?» de aula | Alumno · Pantalla | Abierto, con dibujos prestados en los marcos hasta que llegue el lote `16-pasillo` |
+| **El Pasillo** | Recorrerlo de lado y descubrir los cuadros: 30 curiosidades en dos idiomas, contrastadas con su fuente. Cada cuadro pregunta primero, la clase apuesta con el cuerpo y al abrirse trae un movimiento para probar; cambian cada lunes y se guardan en un álbum | Murales y «¿sabías que…?» de aula | Alumno · Pantalla | Abierto, con dibujos prestados en los marcos hasta que llegue el lote `16-pasillo` |
 | **El Gimnasio** | Aventura gráfica bilingüe con el profe Robles; hoy, *Equipment Rescue* en el cuarto de material | — | Alumno · Pantalla | Abierto |
 | **La Pista** | Mate Arena: balón prisionero con habilidades, entrenamiento y salas | — | Alumno | Abierto |
 | **Las Espalderas** | Ruleta de retos: gira, sale un tipo de reto y toda la clase lo hace a la vez con cronómetro | Ruletas de Wordwall | Pantalla | Abierto |
@@ -111,11 +111,11 @@ Mismo sistema que Agencia La Lupa, del repo de multiplicopolis: una hoja de Goog
 | **D. La Pizarra y El Aula** | Rosco motor, oca cooperativa, bingo en movimiento | Hecha; faltan tablero, fondos y posturas pintados |
 | **E. La Grada** | Partidos de mate en directo; espectador sin plaza | Hecha y vista funcionar por conexión directa. Sin probar por el relevo ni en la red del centro |
 | **F. Remate** | Gimnasio táctil y con el pedido en la escena; pista pintada y menús de Mate en la estética común; segunda misión del gimnasio; retirada de las actividades antiguas | En curso |
-| **G. Arte** | Las imágenes de `arte/ENCARGO.md` sustituyen a lo provisional según llegan | Los diez primeros lotes están entregados e integrados. Pendiente el lote `16-pasillo`: el tramo de pasillo y los 18 cuadros |
+| **G. Arte** | Las imágenes de `arte/ENCARGO.md` sustituyen a lo provisional según llegan | Los diez primeros lotes están entregados e integrados. Pendiente el lote `16-pasillo`: el tramo de pasillo y los 30 cuadros |
 | **H. Lo que sigue** | El profe abre y cierra lugares por clase; insignias en el Vestuario; lugares de la reserva; descubrir solas las salas de mate de una clase | Sin empezar. El Vestuario ya es puerta |
 | **I. Pantalla completa** | Botones flotantes y escena a pantalla completa en todos los lugares; El Pasillo; El Tatami en su sala y en horizontal; Aula, oca, bingo y Grada sin marcos | Hecha en lo común. Faltan la escena de Las Espalderas, crear y practicar de El Tatami y los paneles de La Pista |
-| **J. Curiosidades** | 18 cuadros en el pasillo con rotación semanal, álbum, curiosidad del día y anotación; lote `16-pasillo` pedido | Hecha la primera tanda. Siguientes pasos, por orden, en [12-curiosidades.md](12-curiosidades.md): cuadros dentro de cada lugar, enlaces entre curiosidades y lugares, rutas de la semana |
-| **K. Contenidos nuevos** | Lo que propone [13-investigacion-contenidos.md](13-investigacion-contenidos.md), por orden: pregunta antes de abrir el cuadro, segunda tanda de curiosidades, vuelta a la calma, El Botiquín, La Sala de Espejos, intervalos con historia, El Circuito, El Patio Cubierto, juego limpio y La Vitrina | Investigado. Sin empezar: lo elige Pablo |
+| **J. Curiosidades** | 30 cuadros en el pasillo con rotación semanal, pregunta y apuesta antes de abrir, fuente en cada ficha, álbum, curiosidad del día y anotación; lote `16-pasillo` pedido con el tramo y los 30 cuadros | Hechas dos tandas. Siguientes pasos, por orden, en [12-curiosidades.md](12-curiosidades.md): cuadros dentro de cada lugar, enlaces entre curiosidades y lugares, rutas de la semana |
+| **K. Contenidos nuevos** | Lo que propone [13-investigacion-contenidos.md](13-investigacion-contenidos.md), por orden: pregunta antes de abrir el cuadro, segunda tanda de curiosidades, vuelta a la calma, El Botiquín, La Sala de Espejos, intervalos con historia, El Circuito, El Patio Cubierto, juego limpio y La Vitrina | Aprobado por Pablo el 24/11/2026. Hechos los dos primeros pasos; el siguiente es la vuelta a la calma en El Tatami |
 
 ## Decisiones abiertas
 
