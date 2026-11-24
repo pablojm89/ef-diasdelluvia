@@ -69,10 +69,15 @@ try {
  await page.evaluate(() => localStorage.setItem('ef-gym-mission-v1', JSON.stringify({support: true, reduced: true, state: {version: 1, stage: 4, found: ['hoop', 'cone', 'rope'],
   stored: ['cone', 'hoop', 'rope', 'racket', 'bib', 'mat', 'beanbag', 'basketball', 'football', 'softball'], cart: {cone: 4, hoop: 2, softball: 1}, hazards: [], reason: false, attempts: 22, hints: 1}})));
  await page.goto(SITE + 'gimnasio/');
- await page.locator('#switch-room').click();
- await page.locator('.exit-risk').click();
- await page.locator('.shelf-risk').click();
- await page.locator('#actions .answer').first().click();
+ // The pupil walks to whatever is touched in the scene before acting, and each action redraws the room: wait for each step to show.
+ await page.locator('#choices [data-focus="go-store"]').click();
+ await page.waitForSelector('#scene.store');
+ await page.locator('#objects .risk-cone').click();
+ await page.waitForFunction(() => /1\/2$/.test(document.getElementById('step-tag').textContent));
+ await page.locator('#objects .risk-mat').click();
+ await page.waitForFunction(() => /2\/2$/.test(document.getElementById('step-tag').textContent));
+ await page.locator('#choices [data-focus="reason-safe"]').click();
+ await page.waitForFunction(() => document.body.dataset.stage === '5');
  await page.waitForFunction(() => JSON.parse(localStorage.getItem('pabellon-registro')).some(e => e.event === 'completada'));
  await page.waitForFunction(() => JSON.parse(localStorage.getItem('pabellon-registro')).every(e => e.sent), null, {timeout: 10000});
 
