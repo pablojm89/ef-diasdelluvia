@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+ <meta name="theme-color" content="#142e30">
+ <meta name="description" content="El Circuito, en El Pabellón: orientación con el plano del gimnasio. Leer el plano, orientarlo, señalar la baliza y completar un recorrido.">
+ <title>El Circuito · El Pabellón</title>
+ <link rel="icon" href="../assets/mark.svg" type="image/svg+xml">
+ <link rel="stylesheet" href="../comun/base.css">
+ <link rel="stylesheet" href="./circuito.css">
+</head>
+<body data-view="menu">
+ <a class="skip" href="#main">Saltar al contenido</a>
+ <main id="main" class="wall" tabindex="-1">
+  <h1 class="oculto">El Circuito</h1>
+
+  <!-- The gym itself, the teacher and the four sheets pinned to the wall. -->
+  <section id="v-menu" class="menu" aria-label="Las cuatro hojas de orientación">
+   <figure class="host"><figcaption class="bubble"><span lang="en">Think first, then run!</span><span>Primero pensar y luego correr.</span></figcaption><img src="../gimnasio/assets/robles-point.webp" alt="El profe Robles" width="760" height="550"></figure>
+   <ol id="hojas" class="signs"></ol>
+  </section>
+
+  <!-- A sheet: what you see on the left, the plan in your hands on the right. -->
+  <section id="v-hoja" class="activity" hidden aria-labelledby="hoja-title">
+   <div class="paper sight">
+    <p class="eyebrow" id="hoja-count"></p>
+    <h2 id="hoja-title"></h2>
+    <div id="sight" class="sight-box"></div>
+    <p id="sight-note" class="fine"></p>
+   </div>
+   <div class="paper hands">
+    <p id="task" class="task" aria-live="polite"></p>
+    <p id="task-en" class="en" lang="en"></p>
+    <div class="manos">
+    <div class="plan-row">
+     <button type="button" id="turn-left" class="turn" aria-label="Girar el plano a la izquierda">↺</button>
+     <svg id="plan" class="plan" viewBox="0 0 120 120" role="img" aria-label="Plano del gimnasio"><g id="giro"></g></svg>
+     <button type="button" id="turn-right" class="turn" aria-label="Girar el plano a la derecha">↻</button>
+    </div>
+    <div class="resp">
+    <p id="move" class="gesture"></p>
+    <div id="options" class="options"></div>
+    <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+    <div class="row"><button type="button" id="next" class="sign gold" hidden><strong>Siguiente</strong></button><a class="quiet" href="#">Volver a las hojas</a></div>
+    </div>
+    </div>
+   </div>
+  </section>
+ </main>
+ <script type="module" src="./circuito.js"></script>
+</body>
+</html>

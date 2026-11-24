@@ -305,7 +305,7 @@ Ordenado por lo que aporta a la clase frente a lo que cuesta hacerlo. Pablo dio 
 | **4 · hecho** | **El Botiquín mínimo:** PAS en escena y posición lateral por tríos; «La llamada» como complemento | Es la mayor laguna curricular y completa el único criterio que ya da nota (1.3) | Hecho: carpeta `botiquin/`, con puerta en el pasillo, seis casos, los siete pasos y la llamada. Arte pedido en el lote `17-botiquin` |
 | **5 · hecho** | **La Sala de Espejos:** eco de percusión, estatuas con regla que cambia, mímica bilingüe y coreografía de ocho tiempos | Cubre expresión y ritmo (criterio 4.3) con movimiento de toda la clase y casi sin arte | Hecho: carpeta `espejos/`, con puerta en el pasillo de la pantalla. La coreografía tiene su propio constructor, más simple que el de yoga. Arte pedido en el lote `18-espejos` |
 | **6** | **Intervalos con historia** de cuatro minutos en Las Espalderas, que pasa de cuadro de diálogo a escena | La dosis con mejor relación entre tiempo y efecto; resuelve de paso la escena que le falta a Las Espalderas | Escribir cuatro o cinco historias |
-| **7** | **El Circuito:** rumbos junto a la mesa, el plano del aula y señales con el cuerpo | Abre la competencia 5, hoy sin ninguna evidencia, sin salir de clase | Un ajuste en el despacho para el plano, sin nombres |
+| **7 · hecho en su primera parte** | **El Circuito:** orientación con el plano del gimnasio (secciones 8 y 9). Quedan para después el plano del aula y las señales con el cuerpo | Abre la competencia 5, hoy sin ninguna evidencia, sin salir de clase | Hecho: carpeta `circuito/`, con puerta en los dos pasillos y cuatro hojas. Arte pedido en el lote `19-circuito` |
 | **8** | **El Patio Cubierto:** juegos populares andaluces y «Juegos sentados» paralímpicos | La seña propia del currículo andaluz | Documentarse con Pablo sobre qué se juega aquí |
 | **9** | **Tarjeta verde** tras los partidos de mate y **Verdad o mito** | Juego limpio, igualdad e imagen corporal (criterios 1.4, 3.2, 3.3) | Escribir los dilemas con mucho cuidado |
 | **10** | **La Vitrina:** reto de la clase de la semana, con sellos de «lo hicimos» | Da sentido de conjunto sin clasificaciones | Que existan las actividades anteriores |
@@ -390,3 +390,75 @@ Sí, sin permisos: girar el plano con el dedo, el ratón o botones; arrastrar un
 ### Del plano al movimiento de toda la clase
 
 Hay actividades publicadas de girar o correr hacia el punto que se canta, con cada pared como un punto ([The PE Dept](https://thepedept.com/activities/compass-points-navigation-game), L; Scouts, B), y la lección de 5.º de [Oak National Academy](https://www.thenational.academy/teachers/programmes/physical-education-primary-ks2/units/outdoor-adventurous-activities-orienteering/lessons/orientating-a-map-to-locate-points) (L), cuyo error típico es llevar el plano al revés. Ninguna usa una pantalla. La adaptación natural: la pantalla enseña el plano girado con una baliza y toda la clase señala con el brazo, o gira el cuerpo, hacia ese punto del espacio real.
+
+### Qué se enseña y en qué orden
+
+Las progresiones publicadas coinciden en el orden; cambian los nombres y la edad exacta. Fuentes leídas: el [sistema de pasos](https://www.britishorienteering.org.uk/document/b59e3524efd9ceaab452980bd12793a3/coaching_support_stepsystem.pdf) y el [curso para docentes](https://www.britishorienteering.org.uk/document/4817a779f7097235d40ea98215f47227/coaching_teachingorienteering_part_1.pdf) de British Orienteering, las [cinco lecciones de Scottish Orienteering](https://www.scottish-orienteering.org/download/57/schools-teachers/15573/schools-self-help-orienteering.pdf), los [niveles irlandeses](https://www.orienteering.ie/wp-content/uploads/2025/11/Orienteering-Skills-Levels-Descriptors.pdf), el [documento francés de ciclo 3](https://eduscol.education.fr/document/16669/download), el [libro del CSD y la FEDO](https://www.fedo.org/web/ficheros/area-tecnica/eeto/libros/libro-001.pdf) y la [unidad de 4.º del CEFIRE valenciano](https://portal.edu.gva.es/cefireae/wp-content/uploads/sites/217/2019/09/UD4o-PRIMARIA.pdf). No se encontró ningún programa escolar publicado por la federación andaluza.
+
+| Paso | Habilidad | ¿A los 10-12 años? |
+|---|---|---|
+| 0 | Entender qué es un plano: vista de pájaro, objeto y símbolo | Sí, es la base |
+| 1 | **Orientar el plano** con el espacio y mantenerlo orientado al girar | Sí, es la prioridad |
+| 2 | Leyenda corta: colores y símbolos habituales | Sí, con pocos símbolos |
+| 3 | Símbolos del recorrido: triángulo, círculos, doble círculo, orden | Sí |
+| 4 | Doblar el plano y técnica del pulgar | Sí |
+| 5 | Seguir caminos y elementos lineales; decidir en los cruces | Sí, es el núcleo de la edad |
+| 6 | Salir de la línea a un control visible y volver; línea de parada | Sí, al final |
+| 7 | Elección de ruta simple | Sí, sencilla |
+| 8 en adelante | Rumbos con brújula, talonamiento, curvas de nivel | Después de los 12 |
+
+Espacios, siempre en este orden: aula, gimnasio, patio, parque. Lema de la unidad valenciana: «primero pensar y luego correr».
+
+### Convenciones reales que el juego respeta
+
+- **Recorrido** (norma de sprint, traducida por la FEDO): la salida es un triángulo; cada control, un círculo, y **el control está en el centro del círculo**, no donde está el número; la meta son dos círculos concéntricos. Todo en magenta. Las líneas que unen controles indican el orden, no el camino.
+- **Número y código.** El número del plano es el orden. La baliza lleva un código distinto, que nunca es menor de 31, y hay que comprobarlo antes de picar ([reglamento de la FEDO de 2025](https://fedo.org/web/ficheros/competicion/o-pie/reglamentos/2025/Reglamento-Orientacion-2025.pdf), leído).
+- **La baliza** es un prisma de tres caras; cada cara, un cuadrado de 30 cm partido por la diagonal, mitad blanco y mitad naranja (mismo reglamento).
+- **El norte** es el borde de arriba del papel cuando se leen las letras, no «lo que tengo delante». El método escolar sueco pinta de rojo el borde norte del plano y lo hace coincidir con una pared marcada: «rojo a rojo».
+- **Colores**: blanco, bosque por el que se corre bien; amarillo, terreno abierto; verde, vegetación que frena; verde oliva, zona prohibida; azul, agua; negro, lo construido; gris, edificios; magenta, el recorrido. En el plano de un gimnasio casi todo es negro sobre el suelo.
+- **Formatos de recorrido**: en línea (orden obligatorio), score (orden libre y tiempo límite), estrella (se vuelve al centro tras cada control), laberinto y rejilla de conos.
+
+### Errores típicos y cómo se corrigen
+
+| Error | Corrección que proponen las fuentes |
+|---|---|
+| No orientar el plano, o dejar de hacerlo al girar | Reorientarlo en cada cambio de dirección; «rojo a rojo» |
+| Salir corriendo sin plan | «Primero pensar y luego correr»; decir sobre qué objeto está la baliza antes de salir |
+| Anteponer velocidad a precisión | Puntuar aciertos, no tiempo, al principio |
+| Picar una baliza que no es la suya | Comparar siempre el código |
+| Ante el fallo, cambiar de recorrido en vez de analizar | Repetir el mismo y repasar la ruta |
+| Perderse y seguir andando | Parar, orientar el plano y volver al último punto seguro |
+
+### Seguridad en la sesión real
+
+Parejas o tríos que no se separan; límites y zonas prohibidas explicados antes de salir; hora de regreso y pasar siempre por meta; una señal sonora que significa «volved ya»; si te pierdes, quédate en una baliza ([guía de seguridad de British Orienteering](https://www.britishorienteering.org.uk/doc/coaching/deployer-safety-guidelines-2026.pdf), leída).
+
+### Lo que la pantalla no enseña
+
+Talonamiento, rumbos con brújula real, curvas de nivel, relocalizarse de verdad, leer el plano corriendo y estimar distancias reales. El aprendizaje se cierra en el patio.
+
+## 9. El Circuito: la propuesta
+
+Lugar nuevo: **El Circuito**, en el pasillo del alumno y en el de la pantalla digital. Todo ocurre en un sitio que el alumnado ya conoce, el gimnasio pintado, y su plano.
+
+**Cuatro hojas**, en el orden de las progresiones (y como las «hojas de orientación» de dificultad creciente que Pablo ya programaba):
+
+| Hoja | Qué se hace | Habilidad | Cómo se mueve la clase |
+|---|---|---|---|
+| 1 · **El plano** | El gimnasio pintado y su plano, lado a lado. Se señala un objeto en el cuadro y hay que tocarlo en el plano | Vista de pájaro y leyenda, en dos idiomas | Antes de tocar, todos señalan con el brazo hacia dónde está ese objeto en la sala real… o en el cuadro |
+| 2 · **Orienta el plano** | Se ve el gimnasio desde una de sus cuatro paredes y el plano sale girado. Hay que girarlo hasta que lo que se tiene delante quede arriba | Orientar el plano: la que más cuesta | El plano sólo se gira con las manos: nunca gira solo |
+| 3 · **Señala la baliza** | Desde el centro del gimnasio, mirando a una pared: ¿dónde está la baliza del plano, delante, detrás, a la izquierda o a la derecha? | Relacionar plano y espacio | Toda la clase gira el cuerpo o señala con el brazo; sentados, con el brazo |
+| 4 · **El recorrido** | Un recorrido en línea con triángulo, cinco controles y meta. En cada control hay tres balizas con su código: se pica la que está en el centro del círculo. Entre control y control, a correr | Símbolos del recorrido, centro del círculo, código | «Primero pensar y luego correr»: ocho segundos de carrera en el sitio entre controles |
+
+**Decisiones de diseño que salen de la investigación:**
+
+- **El plano no gira solo.** Girarlo es la destreza.
+- **La referencia son las paredes y los objetos**, no los puntos cardinales. El borde norte del plano va en rojo y siempre mira a la pared de la canasta: «rojo a rojo».
+- **Tras un fallo, «¿en qué te has fijado?»**, con tres pistas para elegir. Sin texto libre.
+- **Precisión, no velocidad.** No hay reloj que puntúe; se anotan aciertos e intentos.
+- **Nada de GPS, cámara ni brújula del móvil.**
+- **Las vistas del gimnasio desde tres de sus paredes no están pintadas**: se dibujan con formas simples y se piden en el lote `19-circuito`.
+
+**Hecho el 24/11/2026:** carpeta `circuito/` (`plano.js` son el gimnasio y las reglas, con sus pruebas; `dibujos.js`, el plano y las vistas), puerta en el pasillo del alumno y en el de la pantalla, y anotación `record('circuito', 'orientacion', 'hoja', …)`.
+
+**Lo que queda para después:** elección de ruta y recorrido score; memoria de plano; el plano del aula que el profe configura para señalar balizas en la sala real; y la ficha para la sesión de patio, con las normas de seguridad.

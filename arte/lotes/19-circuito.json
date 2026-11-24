@@ -1,0 +1,40 @@
+{
+ "_titulo": "El Circuito: orientación con el plano del gimnasio",
+ "_nota": "El Circuito enseña a leer el plano del gimnasio, a orientarlo y a seguir un recorrido de controles. Hoy funciona con el gimnasio pintado como fondo, un plano dibujado con formas y, para la hoja «Orienta el plano», el gimnasio visto desde el suelo hecho con formas simples. Las tres vistas se usan sólo cuando están las tres en circuito/assets/pintados.js (la cuarta, hacia la canasta, es gimnasio/assets/gym.webp): una pintada junto a otras de formas daría la respuesta. La puerta se cambia a mano: al integrarla, poner `art: 'door-circuito'` en la entrada `circuito` de PLACES en hub.js (hoy usa la puerta cerrada). Importante para las tres vistas: es el MISMO gimnasio de gimnasio/assets/gym.webp y cada cosa tiene que estar donde dice el plano de circuito/plano.js. Mirando a la canasta: la canasta en el centro de la pared del fondo y la puerta verde del almacén a su derecha; a la izquierda, la pared de los ventanales, las espalderas y la pizarra, con un banco sueco corto delante; a la derecha, una pared lisa con un banco largo; detrás, la puerta doble de la entrada con un reloj encima. En el suelo, cerca de la pared de la canasta y hacia la izquierda, una pila de colchonetas azules y un carro de balones. Sin personajes ni texto.",
+ "_indice": {
+  "archivo": "circuito/assets/pintados.js",
+  "nombre": "PINTADOS"
+ },
+ "door-circuito": {
+  "nombre": "Puerta de El Circuito",
+  "destino": "assets/door-circuito.webp",
+  "ancho": 480,
+  "alto": 640,
+  "transparente": false,
+  "prompt": "Vista a través de una puerta abierta; el motivo principal centrado y algo bajo, porque la imagen se recorta en forma de arco. El gimnasio del colegio preparado para una carrera de orientación: en primer plano, una baliza de orientación (prisma de tela con cada cara partida en diagonal, mitad blanca arriba y mitad naranja abajo) colgada de un cono, y junto a ella un plano del gimnasio sujeto en una tablilla. Al fondo, el parqué, las espalderas y la canasta."
+ },
+ "vista-E": {
+  "nombre": "El gimnasio mirando a la pared del banco largo",
+  "destino": "circuito/assets/vista-E.webp",
+  "ancho": 1536,
+  "alto": 1024,
+  "transparente": false,
+  "prompt": "El mismo gimnasio de gimnasio/assets/gym.webp, con su misma luz, visto a la altura de los ojos de un alumno que está de espaldas a la pared de los ventanales y mira a la pared de enfrente: una pared lisa, sin ventanas, con un banco sueco largo pegado a ella. A la izquierda queda la pared de la canasta, con la puerta verde del almacén en el rincón del fondo; a la derecha, la pared de la entrada con su puerta doble de madera y un reloj encima. En el suelo, a la izquierda y junto a la pared de la canasta, una pila de colchonetas azules y un carro de balones; las líneas blancas de la pista y el círculo central."
+ },
+ "vista-S": {
+  "nombre": "El gimnasio mirando a la pared de la entrada",
+  "destino": "circuito/assets/vista-S.webp",
+  "ancho": 1536,
+  "alto": 1024,
+  "transparente": false,
+  "prompt": "El mismo gimnasio de gimnasio/assets/gym.webp, con su misma luz, visto a la altura de los ojos de un alumno que está bajo la canasta y mira a la pared de enfrente: en el centro, la puerta doble de madera de la entrada con un reloj redondo encima. A la derecha queda la pared de los ventanales, con las espalderas, la pizarra verde y un banco sueco corto delante; a la izquierda, la pared lisa con el banco largo. En el suelo, muy cerca de quien mira y a su derecha, una pila de colchonetas azules y un carro de balones; las líneas blancas de la pista y el círculo central."
+ },
+ "vista-O": {
+  "nombre": "El gimnasio mirando a la pared de las espalderas",
+  "destino": "circuito/assets/vista-O.webp",
+  "ancho": 1536,
+  "alto": 1024,
+  "transparente": false,
+  "prompt": "El mismo gimnasio de gimnasio/assets/gym.webp, con su misma luz, visto a la altura de los ojos de un alumno que está de espaldas al banco largo y mira a la pared de enfrente: de izquierda a derecha, la pizarra verde, las espalderas de madera y los ventanales altos, con un banco sueco corto delante de la pizarra. A la derecha queda la pared de la canasta; a la izquierda, la pared de la entrada con su puerta doble. En el suelo, al fondo a la derecha, cerca de los ventanales, una pila de colchonetas azules y un carro de balones; las líneas blancas de la pista y el círculo central."
+ }
+}

@@ -23,12 +23,13 @@ const PLACES = {
  grada: {name: 'La Grada', kicker: 'Partidos de mate en directo', art: 'door-grada', href: './grada/', modes: 'Pantalla', state: 'open'},
  aula: {name: 'El Aula', kicker: 'La oca y el bingo en movimiento', art: 'door-aula', href: './aula/', modes: 'Pantalla · Tabletas', state: 'open'},
  espejos: {name: 'La Sala de Espejos', kicker: 'Ritmo, mímica y coreografía', art: 'door-cerrada', href: './espejos/', modes: 'Pantalla', state: 'open'},
+ circuito: {name: 'El Circuito', kicker: 'Orientación con el plano del gimnasio', art: 'door-cerrada', href: './circuito/', modes: 'Alumno · Pantalla', state: 'open'},
  botiquin: {name: 'El Botiquín', kicker: 'Primeros auxilios paso a paso', art: 'door-cerrada', href: './botiquin/', modes: 'Alumno · Pantalla', state: 'open'},
  vestuario: {name: 'El Vestuario', kicker: 'Tu taquilla y tu álbum', art: 'door-vestuario', action: 'locker', modes: 'Alumno', state: 'open'},
 };
 const MAPS = {
- alumno: {title: '¿A dónde vamos hoy?', en: 'Where shall we go today?', places: ['gimnasio', 'pista', 'pizarra', 'tatami', 'botiquin', 'vestuario']},
- pantalla: {title: 'Elegid una puerta… o un cuadro.', en: 'Pick a door… or a picture!', places: ['espalderas', 'aula', 'espejos', 'pizarra', 'gimnasio', 'tatami', 'botiquin', 'grada']},
+ alumno: {title: '¿A dónde vamos hoy?', en: 'Where shall we go today?', places: ['gimnasio', 'pista', 'circuito', 'pizarra', 'tatami', 'botiquin', 'vestuario']},
+ pantalla: {title: 'Elegid una puerta… o un cuadro.', en: 'Pick a door… or a picture!', places: ['espalderas', 'aula', 'espejos', 'circuito', 'pizarra', 'gimnasio', 'tatami', 'botiquin', 'grada']},
 };
 // Earlier experiments that no longer match the look of the school; only the teacher can still open them.
 const REVIEW = [

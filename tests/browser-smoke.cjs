@@ -28,7 +28,7 @@ const out=path.join(base,'artifacts');
  await page.locator('#login-form button').click();
  assert.equal(await page.locator('#player-code').textContent(),'5B-12');
  // The corridor: five places and the pupil's own locker, with a picture before each door and one at the end.
- assert.ok(await page.locator('#doors .door').count()<=6,'pocas puertas para el alumnado');
+ assert.ok(await page.locator('#doors .door').count()<=7,'pocas puertas para el alumnado');
  assert.ok(await page.locator('#doors a.door').count()>=3);
  assert.equal(await page.locator('#doors .cuadro').count(),await page.locator('#doors .door').count()+1);
  await page.waitForFunction(()=>[...document.querySelectorAll('#doors img')].every(image=>image.complete&&image.naturalWidth>0));
@@ -187,6 +187,44 @@ const out=path.join(base,'artifacts');
    const sizes=await page.evaluate(()=>({content:document.documentElement.scrollWidth,viewport:innerWidth}));
    assert.ok(sizes.content<=sizes.viewport,`${hash} at ${width}: horizontal overflow ${sizes.content}`);
    await page.screenshot({path:path.join(out,`${screen}-${name}.png`),fullPage:true});
+  }
+ }
+ // El Circuito: the plan only turns when you turn it, and a sheet ends with its hits written down.
+ await page.setViewportSize({width:1280,height:720});
+ await page.goto('https://patio.test/index.html#pantalla');
+ await page.goto('https://patio.test/circuito/index.html');
+ assert.equal(await page.locator('#hojas a').count(),4);
+ await page.locator('a[href="#orienta"]').click();
+ await page.waitForSelector('#v-hoja:not([hidden])');
+ assert.match(await page.locator('#hoja-count').textContent(),/Hoja 2 · Set the map · 1 de 6/);
+ const quarter=()=>page.evaluate(()=>((Math.round(parseFloat(document.getElementById('giro').style.transform.slice(7))/90)%4)+4)%4);
+ const quarterBefore=await quarter();
+ await page.locator('#check').click();
+ assert.match(await page.locator('#feedback').textContent(),/Todavía no/,'el plano sale sin orientar');
+ assert.equal(await quarter(),quarterBefore,'el plano no gira solo');
+ assert.equal(await page.locator('[data-pista]').count(),3,'tras fallar pregunta en qué te has fijado');
+ await page.locator('[data-pista="referencia"]').click();
+ for(let round=0;round<6;round++){
+  for(let turns=0;turns<4&&await page.locator('#next').isHidden();turns++){
+   if(turns)await page.locator('#turn-right').click();
+   await page.locator('#check').click();
+   if(await page.locator('[data-pista]').count())await page.locator('[data-pista]').first().click();
+  }
+  assert.ok(await page.locator('#next').isVisible(),`ronda ${round+1} orientada`);
+  await page.locator('#next').click();
+ }
+ assert.match(await page.locator('#hoja-title').textContent(),/Hoja terminada/);
+ const sheet=await page.evaluate(()=>JSON.parse(localStorage.getItem('pabellon-registro')).find(e=>e.place==='circuito'&&e.event==='hoja'));
+ assert.equal(sheet.who,null,'la pantalla no identifica a nadie');
+ assert.equal(sheet.data.hoja,'orienta');assert.equal(sheet.data.rondas,6);assert.ok(sheet.data.aciertos<=5&&sheet.data.intentos>=7);
+ for(const [width,height] of [[1280,720],[390,844]]){
+  await page.setViewportSize({width,height});
+  for(const hash of ['','#plano','#orienta','#senala','#recorrido']){
+   await page.goto('https://patio.test/circuito/index.html'+hash);
+   await page.waitForTimeout(150);
+   const sizes=await page.evaluate(()=>({content:document.documentElement.scrollWidth,viewport:innerWidth,tall:document.documentElement.scrollHeight,height:innerHeight}));
+   assert.ok(sizes.content<=sizes.viewport,`circuito ${hash} at ${width}: horizontal overflow`);
+   if(width===1280)assert.ok(sizes.tall<=sizes.height,`circuito ${hash}: cabe en la pantalla digital`);
   }
  }
  // El Botiquín: a case is three decisions in order; a wrong answer explains itself and lets you try again.

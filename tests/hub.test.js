@@ -162,7 +162,7 @@ test('curiosidades: el álbum es de cada jugador, no repite y el resumen del pro
  assert.equal(registro.summary()[0].marks.length,0,'una curiosidad es evidencia, no nota');
 });
 test('pantalla completa: ningún lugar conserva la banda ni las tiras, y todos los que usan la cabecera común dejan sitio a los botones',()=>{
- for(const page of ['index.html','tatami/index.html','pizarra/index.html','aula/index.html','aula/oca.html','aula/bingo.html','grada/index.html','mate/index.html','botiquin/index.html','espejos/index.html'])assert.equal(/class="(frieze|skirting)/.test(read(page)),false,page);
+ for(const page of ['index.html','tatami/index.html','pizarra/index.html','aula/index.html','aula/oca.html','aula/bingo.html','grada/index.html','mate/index.html','botiquin/index.html','espejos/index.html','circuito/index.html'])assert.equal(/class="(frieze|skirting)/.test(read(page)),false,page);
  const base=read('comun/base.css');
  assert.match(base,/\.hub-top\{position:absolute/);
  assert.match(base,/\.wall\{[^}]*padding-top:var\(--hud\)/);
