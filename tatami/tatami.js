@@ -366,7 +366,7 @@ function enterStep() {
  $('st-en').textContent = pose.en;
  $('st-sa').textContent = pose.sa;
  $('st-sa').hidden = !pose.sa;
- $('st-side').textContent = step.side === null ? '' : `${SIDES[step.side].es} · ${SIDES[step.side].en}`;
+ $('st-side').textContent = step.side === null ? '' : SIDES[step.side].es + (document.documentElement.classList.contains('con-ingles') ? ' · '+SIDES[step.side].en : '');
  $('st-side').hidden = step.side === null;
  $('st-breath').hidden = step.kind !== 'breathe';
  $('st-end').hidden = step.kind !== 'end';

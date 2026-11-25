@@ -20,13 +20,13 @@ const target=(page,value)=>{
  return resolved===''||resolved.endsWith('/')?resolved+'index.html':resolved;
 };
 
-test('portada: todo lo enlazado existe y un niño sólo ve una forma de entrar',()=>{
+test('portada: todo lo enlazado existe y el alumnado puede elegir entre dos modos',()=>{
  const page=read('index.html');
  const links=[...page.matchAll(/(?:href|src)="([^"]+)"/g)].map(match=>match[1]).filter(local);
  for(const link of links)assert.ok(existsSync(root+target('index.html',link)),link);
  for(const style of [...read('hub.css').matchAll(/url\('([^']+)'\)/g)])assert.ok(existsSync(root+target('hub.css',style[1])),style[1]);
  const start=page.slice(page.indexOf('id="view-title"'),page.indexOf('id="view-login"'));
- assert.equal((start.match(/class="sign/g)||[]).length,1);
+ assert.equal((start.match(/class="sign/g)||[]).length,2);
  assert.equal((start.match(/class="quiet"/g)||[]).length,2);
  const script=read('hub.js');
  for(const art of [...script.matchAll(/art: '([^']+)'/g)])assert.ok(existsSync(`${root}assets/${art[1]}.webp`),art[1]);
@@ -102,4 +102,29 @@ test('registro: el resumen cuenta también yoga, rosco, oca y bingo',()=>{
  const [mine,screen]=registro.summary();
  assert.deepEqual([mine.poses.length,mine.sequences,mine.practices,mine.roscos,mine.bestRosco,mine.bingos],[2,1,1,2,21,1]);
  assert.equal(screen.boards,1);
+});
+
+test('historia: los hitos son personales y una derrota abre el tatami', async () => {
+ const {currentJourney, missions} = await import('../comun/recorrido.js');
+ localStorage.clear(); sessionStorage.clear();
+ const first = {course:5,group:'B',number:1,avatar:0};
+ registro.setPlayer(first);
+ assert.deepEqual([...currentJourney().unlocked],['gimnasio']);
+ registro.record('material','equipment-rescue','fase',{fase:1});
+ assert.deepEqual([...currentJourney().unlocked],['gimnasio','pista']);
+ registro.setPlayer({...first,number:2});
+ assert.equal(currentJourney().index,0);
+ registro.setPlayer(first);
+ registro.record('pista','mate','partido',{resultado:'derrota'});
+ assert.equal(currentJourney().index,2);
+ registro.record('tatami','yoga','postura',{id:'arbol'});
+ assert.equal(currentJourney().index,3);
+ registro.record('pizarra','rosco','partida',{aciertos:0});
+ assert.equal(currentJourney().index,4);
+ registro.record('tatami','yoga','secuencia-creada',{n:2});
+ assert.equal(currentJourney().index,4);
+ registro.record('tatami','yoga','secuencia-practicada',{segundos:30});
+ assert.equal(currentJourney().index,5);
+ registro.record('material','equipment-rescue','completada',{fase:5});
+ assert.equal(currentJourney().index,missions.length);
 });

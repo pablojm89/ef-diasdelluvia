@@ -108,3 +108,10 @@ legend{width:100%;margin-bottom:8px;font-size:.74rem;font-weight:800;letter-spac
  .aliases{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 @media(max-height:560px) and (orientation:landscape){.title-host{height:78dvh}.title-board h1{font-size:2.4rem}}
+
+.title-board .sign + .sign {margin-top:10px}
+#mission {max-width:60ch;margin:10px auto;color:#302711;text-align:center;background:#fff2d0;padding:12px 16px;border-radius:6px}
+#mission:empty {display:none}
+#switch-mode {display:block;width:fit-content;margin:12px auto;color:#fff;background:#214745;padding:8px 14px;border-radius:5px}
+#switch-mode[hidden] {display:none}
+.doors:has(> li:only-child) {grid-template-columns:minmax(145px,200px)}

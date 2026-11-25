@@ -20,7 +20,7 @@ const out=path.join(base,'artifacts');
  await fs.mkdir(out,{recursive:true});
  // Start screen: one way in for pupils, who pick class, list number and character.
  await page.goto('https://patio.test/index.html');
- assert.equal(await page.locator('#view-title .sign').count(),1);
+ assert.equal(await page.locator('#view-title .sign').count(),2);
  await page.locator('#enter-student').click();
  await page.selectOption('#login-group','B');
  await page.selectOption('#login-number','12');
@@ -28,7 +28,8 @@ const out=path.join(base,'artifacts');
  await page.locator('#login-form button').click();
  assert.equal(await page.locator('#player-code').textContent(),'5B-12');
  assert.ok(await page.locator('#doors .door').count()<=4,'pocas puertas para el alumnado');
- assert.ok(await page.locator('#doors a.door').count()>=3);
+ assert.equal(await page.locator('#doors a.door').count(),1);
+ assert.match(await page.locator('#mission').textContent(),/aro/);
  assert.equal(await page.locator('#doors img').evaluateAll(images=>images.every(image=>image.complete&&image.naturalWidth>0)),true);
  await page.reload();
  assert.equal(await page.locator('#player-code').textContent(),'5B-12');

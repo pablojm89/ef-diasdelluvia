@@ -1,0 +1,1 @@
+html:not(.con-ingles) :is([lang="en"], #listen, #location, label:has(#translation)) {display:none !important}
