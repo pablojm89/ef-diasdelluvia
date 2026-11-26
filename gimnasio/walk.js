@@ -10,6 +10,8 @@ const clamp = (value, low, high) => Math.min(high, Math.max(low, value));
 const reduced = () => document.body.classList.contains('reduced') || matchMedia('(prefers-reduced-motion: reduce)').matches;
 const sheets = new Map();
 const arrows = new Set();
+// Use the clean contact, passing and raised-knee poses in both halves of the stride.
+const stride = [0,1,2,1];
 let room, goal, frame, previousTime, speed = 0, phase = 0;
 let x = .5, y = .85, facing = 1, walking = false, avatar = 0, bentUntil = 0, straighten;
 
@@ -66,7 +68,7 @@ function draw(centerCamera = false) {
   ctx.fill();
   ctx.scale(facing, 1);
   if (moving) {
-   const cell = Math.floor(phase * 8) % 8;
+   const cell = stride[Math.floor(phase * 8) % stride.length];
    const cw = image.width / 4, ch = image.height / 2;
    ctx.drawImage(image, cell % 4 * cw, Math.floor(cell / 4) * ch, cw, ch, -w/2, -h+3, w, h);
   } else {
@@ -180,7 +182,7 @@ selector.onchange = () => {
 fit();
 new ResizeObserver(() => { fit(); draw(true); }).observe(camera);
 window.addEventListener('keydown', event => {
- if (!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key) || document.querySelector('dialog[open]')) return;
+ if (stage.inert || !['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key) || document.querySelector('dialog[open]')) return;
  event.preventDefault();
  goal = null;
  arrows.add(event.key);
