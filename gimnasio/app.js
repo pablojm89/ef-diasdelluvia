@@ -213,24 +213,64 @@ function render(){
 
  if(focusKey&&document.activeElement===document.body){const again=document.querySelector(`[data-focus="${focusKey}"]:not(:disabled)`);if(again)again.focus({preventScroll:true});else if(selected)$('destinations').querySelector('button')?.focus({preventScroll:true});else (choices.querySelector('button,a')||$('objects').querySelector('button:not(:disabled)'))?.focus({preventScroll:true});}
 }
+let pages=[], pageIndex=0, writing=0;
+function showPage(instant=false){
+ cancelAnimationFrame(writing);
+ const [en,es]=pages[pageIndex];
+ const lines=[];
+ $('english').hidden=!en;
+ $('spanish').hidden=!!en && english && !support;
+ if(english && en)lines.push([$('english'),en]);
+ if(!$('spanish').hidden)lines.push([$('spanish'),es]);
+ $('listen').hidden=!en;
+ const total=lines.reduce((n,[,line])=>n+line.length,0);
+ const start=performance.now();
+ const last=pageIndex===pages.length-1;
+ $('accessible-line').textContent=lines.map(([,line])=>line).join(' ');
+ $('responses').hidden=true;
+ $('advance').hidden=false;
+ $('advance').textContent='Ver frase ▸';
+ function draw(now){
+  let count=instant || reduced || matchMedia('(prefers-reduced-motion: reduce)').matches ? total : Math.floor((now-start)/28);
+  const complete=count>=total;
+  for(const [node,line] of lines){
+   node.textContent=line.slice(0,Math.max(0,count));
+   count-=line.length;
+  }
+  if(!complete){writing=requestAnimationFrame(draw);return;}
+  writing=0;
+  $('advance').textContent='Siguiente ▸';
+  $('advance').hidden=last;
+  $('responses').hidden=!last;
+  if(last && $('dialogue').open)$('talk-choices').querySelector('a,button')?.focus({preventScroll:true});
+ }
+ draw(start);
+}
+function advance(){
+ if(writing)showPage(true);
+ else if(pageIndex+1<pages.length){pageIndex++;showPage();}
+}
+$('advance').onclick=advance;
+$('lines').onclick=advance;
 $('prof').onclick=()=>{
  speakAndPoint();
- const [en,es]=room==='gym' && state.stage<5 ? [
-  'Let’s prepare the equipment. '+storePrompt()[0],
-  'Vamos a preparar la clase. '+storePrompt()[1]
- ] : prompts();
- $('english').textContent=en;
- $('spanish').textContent=es;
- $('spoken-hint').textContent='';
+ pages=state.stage===5 ? [prompts()] : [
+  ['Can you help me get the gym ready?',state.stage===0?'¡Qué bien que hayas venido! ¿Me ayudas a preparar la clase de hoy?':'¡Ya estás aquí! Aún nos queda algo por preparar.'],
+  state.stage===0 ? ['Let’s go to the equipment room. '+storePrompt()[0], '¿Ves la puerta del almacén? Entra y busca '+item(find[state.found.length]).es+'.'] : storePrompt()
+ ];
+ pageIndex=0;
  $('dialogue').showModal();
+ showPage();
 };
 $('dialogue').addEventListener('close',()=>{
+ cancelAnimationFrame(writing);writing=0;
  window.speechSynthesis?.cancel();
  if(room==='gym')$('prof').focus({preventScroll:true});
 });
 $('hint').onclick=()=>{
- $('spoken-hint').textContent=hints[state.stage]();
+ pages=[['',hints[state.stage]()]];pageIndex=0;
  state=act(state,{type:'hint'}).state;persist();ponder();
+ showPage();
 };
 $('listen').onclick=()=>{if(!('speechSynthesis'in window)){say('Este navegador no ofrece voz. La instrucción está disponible por escrito.');return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance($('english').textContent);u.lang='en-GB';u.rate=.85;speechSynthesis.speak(u);};
 $('settings').onclick=()=>$('settings-dialog').showModal();$('translation').onchange=e=>{support=e.target.checked;persist();render();};$('motion').onchange=e=>{reduced=e.target.checked;persist();render();};

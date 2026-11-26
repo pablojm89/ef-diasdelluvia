@@ -184,19 +184,35 @@ body.reduced #stored img,body.reduced .equipment {transition:none}
 }
 
 .prof::after {content:"Hablar";position:absolute;bottom:100%;left:50%;translate:-50% 0;padding:3px 10px;background:#fff3d9;color:#29392f;border:1px solid #72572d;border-radius:12px;font-size:.85rem}
-#dialogue {width:min(650px,95vw);padding:0;border:2px solid #927246;box-shadow:0 12px 50px #12272780}
-#dialogue::backdrop {background:#162d3080}
-.conversation {display:grid;grid-template-columns:30% 1fr}
-.portrait {position:relative;overflow:hidden;background:#dec799}
-.portrait img {position:absolute;top:4%;left:50%;translate:-50% 0;height:max(200%,380px);max-width:none}
-.speech {padding:clamp(14px,3vw,28px)}
-#speaker {font:700 1.4rem Georgia,serif;color:#735126}
-#spanish,#english {font-size:1.06rem;line-height:1.45}
-#spoken-hint:empty {display:none}
-#dialogue .talk-tools {display:flex;flex-flow:row wrap;gap:6px;margin-top:12px}
-#dialogue .choices {width:auto;min-width:0;max-width:100%}
+#dialogue {position:fixed;inset:auto 0 0;width:min(1120px,100%);max-width:100%;max-height:95dvh;margin:0 auto;padding:0;border:0;border-radius:0;background:transparent;overflow:visible;color:#342719}
+#dialogue::backdrop {background:linear-gradient(0deg,#122524a6,transparent 67%)}
+.conversation {display:grid;grid-template-columns:34% 1fr;align-items:end;padding-right:4%;isolation:isolate}
+.portrait {position:relative;height:min(57dvh,480px);overflow:hidden;pointer-events:none;z-index:-1}
+.portrait img {position:absolute;left:52%;top:0;transform:translateX(-50%);height:215%;width:auto;max-width:none;filter:drop-shadow(2px 3px 5px #18252558)}
+.speech {position:relative;margin:0 0 clamp(24px,5dvh,56px) -3%;padding:28px clamp(16px,3vw,38px) 16px;border:3px solid #483323;border-radius:30px 27px 32px 18px;background:linear-gradient(155deg,#fffbed,#fff0ce);box-shadow:0 5px 0 #805d39,0 12px 24px #251b1e40}
+.speech::before {content:"";position:absolute;left:-14px;top:34%;width:20px;height:20px;background:#fff7df;border:solid #483323;border-width:0 0 3px 3px;transform:skewY(-18deg) rotate(33deg)}
+#speaker {position:absolute;top:-18px;left:24px;padding:4px 18px;color:#fff3cc;background:#285754;border:2px solid #e6ba72;border-radius:9px;transform:rotate(-2deg);font:700 1.08rem Georgia,serif}
+#lines {min-height:3.3em;font:clamp(18px,2vw,27px)/1.4 Georgia,serif;cursor:pointer}
+#lines p {font:inherit;margin:0 0 .3em}
+#advance {display:block;margin-left:auto;border:none;background:transparent;color:#245450;font-weight:bold}
+#advance[hidden]{display:none}
+#dialogue .talk-tools {display:flex;align-items:center;flex-flow:row wrap;gap:4px 12px;margin-top:5px}
+#dialogue .talk-tools button {border:none;padding:3px 6px;background:transparent;color:#28534d;font-weight:bold}
+#dialogue .choices {width:fit-content;min-width:0;max-width:100%}
+.visually-hidden {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+@keyframes robles-arrives {from{transform:translateY(35%);opacity:0}to{transform:none;opacity:1}}
+@media(prefers-reduced-motion:no-preference){body:not(.reduced) #dialogue[open] .portrait {animation:robles-arrives .32s ease-out}}
+@media(max-width:600px){
+ .conversation {grid-template-columns:1fr;padding:0 12px}
+ .portrait {height:30dvh;width:70%;margin-bottom:-30px}
+ .portrait img {height:240%}
+ .speech {margin:0 0 16px;padding:20px 16px 10px;border-radius:20px}
+ .speech::before {top:-11px;left:43%;transform:rotate(135deg)}
+ #speaker {left:12px}
+}
+@media(max-height:500px){.speech {max-height:88dvh;overflow:auto;margin-bottom:8px}.portrait{height:70dvh}}
 #field-actions,#feedback {position:absolute;left:50%;translate:-50% 0;z-index:6}
 #field-actions {top:max(72px,10dvh);max-width:95vw}
 #feedback {bottom:10px;width:max-content;max-width:92vw;margin:0;padding:7px 14px;border-radius:8px;background:#fff3d9;color:#253b32;pointer-events:none}
 #feedback:not(.visible),#feedback:empty {display:none}
-@media(max-width:500px){.conversation {grid-template-columns:24% 1fr}.portrait img {height:155%;top:8%}}
+body:has(#dialogue[open])  .prof::after, body:has(#dialogue[open]) .rotate-tip {visibility:hidden}

@@ -25,10 +25,14 @@
   <div class="portrait"><img id="portrait" src="assets/teacher-robles.webp" alt=""></div>
   <div class="speech">
    <strong id="speaker">Profe Robles</strong>
-   <p id="english" lang="en"></p><p id="spanish"></p>
-   <p id="spoken-hint" role="status"></p>
+   <div id="lines" aria-hidden="true"><p id="english" lang="en"></p><p id="spanish"></p></div>
+   <p id="accessible-line" class="visually-hidden" role="status"></p>
+   <button id="advance" autofocus>Siguiente ▸</button>
+   <div id="responses" hidden>
+
    <div id="talk-choices"></div>
-   <div class="talk-tools"><button id="listen" aria-label="Escuchar en inglés">Escuchar</button><button id="hint">Pedir pista</button><form method="dialog"><button autofocus>Seguir explorando</button></form></div>
+   <div class="talk-tools"><button id="listen" aria-label="Escuchar en inglés">Escuchar</button><button id="hint">Pedir pista</button><form method="dialog"><button>Seguir explorando</button></form></div>
+   </div>
   </div>
  </div>
 </dialog>
