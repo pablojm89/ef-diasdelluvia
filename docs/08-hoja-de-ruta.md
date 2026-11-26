@@ -9,10 +9,20 @@ Un colegio que se juega. El hub es el pabellón de Educación Física y cada act
 Cinco reglas que ordenan todo lo demás:
 
 1. **Una sola estética: la del gimnasio pintado.** Colegio andaluz, luz cálida, madera, pared ocre, zócalo verde azulado, cenefa de azulejo, carteles crema con letra de imprenta. El profe Robles es el anfitrión. Nada de islas, robots ni mundos de fantasía.
-2. **Parece un juego y enseña pocas opciones.** Quien entra ve un botón grande. Los datos de duración, material o criterios son para el profe y están en su despacho.
+2. **Parece un juego y enseña pocas opciones.** El alumnado elige Mi historia o Acceso directo. Los datos de duración, material o criterios son para el profe y están en su despacho.
 3. **Tres formas de entrar:** alumno, pantalla digital y profe.
 4. **Versiones propias de formatos que los docentes ya usan** (ruleta, oca, bingo, rosco, breakout, yoga), corrigiendo sus fallos: esperas, sedentarismo, falta de inglés, una sola pantalla.
 5. **Lo que hace el alumnado queda anotado** para que pueda servir de evidencia al evaluar. Sin nombres en la web ni en el repositorio.
+
+## Recorrido individual · revisión del 25 de noviembre de 2026
+
+Antes, las cuatro puertas individuales aparecían juntas y la taquilla resumía las partidas después de jugar. Un alumno podía entrar al mate desde el gimnasio sin haber tocado el material. La partida del almacén se compartía en el ordenador y el diálogo repetía cada consigna en dos idiomas.
+
+El encargo es que un niño pueda contestar «¿qué hago ahora?», «¿para qué?» y «¿cómo sigo mañana?». Robles le pide preparar una sesión, jugarla y dejar el gimnasio listo para la clase siguiente. Cada misión indica una acción comprobable. Encontrar tres objetos abre Mate. Terminar un partido abre yoga. Ver una demostración completa abre el rosco. Después se propone diseñar y practicar una secuencia y terminar el almacén. La taquilla aporta las evidencias anteriores del mismo alumno. Las puertas descubiertas se pueden repetir desde Acceso directo.
+
+Las escenas dejan libre el espacio de juego. El diálogo de Robles se abre al acercarse para hablar con él y se cierra al seguir explorando. Las instrucciones de la actividad se consultan en sus propios controles.
+
+El profe decide si muestra inglés en cada ordenador. Pantalla digital reúne los juegos colectivos. El despacho conserva los prototipos de la primera etapa.
 
 ## Los lugares
 

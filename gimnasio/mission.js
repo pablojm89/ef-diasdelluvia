@@ -23,21 +23,21 @@ export function act(state,event){
  if(event.type==='hint'){s.hints++;return {state:s,ok:true,message:'La pista está abierta. Puedes volver a intentarlo.'};}
  s.attempts++;
  if(s.stage===0&&event.type==='find'){
-  ok=event.id===find[s.found.length];if(ok){s.found.push(event.id);message='That’s it! Bien localizado.';if(s.found.length===3)s.stage=1;}else message='Escucha la consigna y mira la forma del material. Try again.';
+  ok=event.id===find[s.found.length];if(ok){s.found.push(event.id);message='Bien localizado.';if(s.found.length===3)s.stage=1;}else message='Escucha la consigna y mira la forma del material.';
  }else if(s.stage===1&&event.type==='place'){
-  ok=event.id==='cone'&&event.target==='rack';if(ok){s.stored.push('cone');s.stage=2;message='Keep the doorway clear. ¡Ahora podemos pasar!';}else message='Primero despeja la puerta: coloca el cono en su soporte.';
+  ok=event.id==='cone'&&event.target==='rack';if(ok){s.stored.push('cone');s.stage=2;message='¡Ahora podemos pasar!';}else message='Primero despeja la puerta: coloca el cono en su soporte.';
  }else if(s.stage===2&&event.type==='place'){
-  ok=!!item&&item.home===event.target&&!s.stored.includes(item.id);if(ok){s.stored.push(item.id);message=`Good! Put the ${item.en} away.`;if(s.stored.length===equipment.length)s.stage=3;}else message='Ese material necesita otro lugar. Mira los soportes o consulta la pista.';
+  ok=!!item&&item.home===event.target&&!s.stored.includes(item.id);if(ok){s.stored.push(item.id);message=`¡Bien! Material guardado.`;if(s.stored.length===equipment.length)s.stage=3;}else message='Ese material necesita otro lugar. Mira los soportes o consulta la pista.';
  }else if(s.stage===3&&event.type==='add'){
-  ok=event.id in request&&(s.cart[event.id]||0)<request[event.id];if(ok){s.cart[event.id]=(s.cart[event.id]||0)+1;message='Added to the trolley. Si sobra, toca esa unidad en el carro para devolverla.';}else message='Revisa el pedido: necesitamos cuatro conos, dos aros y una pelota blanda.';
+  ok=event.id in request&&(s.cart[event.id]||0)<request[event.id];if(ok){s.cart[event.id]=(s.cart[event.id]||0)+1;message='En el carro. Si sobra, toca esa unidad en el carro para devolverla.';}else message='Revisa el pedido: necesitamos cuatro conos, dos aros y una pelota blanda.';
  }else if(s.stage===3&&event.type==='remove'){
   ok=(s.cart[event.id]||0)>0;if(ok)s.cart[event.id]--;
  }else if(s.stage===3&&event.type==='check'){
-  ok=Object.entries(request).every(([id,n])=>s.cart[id]===n);if(ok){s.stage=4;message='Order ready! Ahora revisa una situación nueva.';}else message='Aún falta material. Compara las cantidades con el pedido.';
+  ok=Object.entries(request).every(([id,n])=>s.cart[id]===n);if(ok){s.stage=4;message='Ahora revisa una situación nueva.';}else message='Aún falta material. Compara las cantidades con el pedido.';
  }else if(s.stage===4&&event.type==='hazard'){
-  ok=['door','shelf'].includes(event.id)&&!s.hazards.includes(event.id);if(ok){s.hazards.push(event.id);message=event.id==='door'?'Correct: keep the exit clear.':'Correct: ask the teacher for help. Una colchoneta no debe quedar en alto.';}
+  ok=['door','shelf'].includes(event.id)&&!s.hazards.includes(event.id);if(ok){s.hazards.push(event.id);message=event.id==='door'?'¡Correcto! Deja la salida libre.':'¡Correcto! Pide ayuda al profe. Una colchoneta no debe quedar en alto.';}
  }else if(s.stage===4&&event.type==='reason'){
-  ok=s.hazards.length===2&&event.id==='safe';if(ok){s.reason=true;s.stage=5;message='Mission complete! El gimnasio está listo.';}else message=s.hazards.length<2?'Primero localiza los dos riesgos.':'Piensa en cómo evitar tropiezos y caídas de material.';
+  ok=s.hazards.length===2&&event.id==='safe';if(ok){s.reason=true;s.stage=5;message='El gimnasio está listo.';}else message=s.hazards.length<2?'Primero localiza los dos riesgos.':'Piensa en cómo evitar tropiezos y caídas de material.';
  }
  return {state:s,ok,message};
 }

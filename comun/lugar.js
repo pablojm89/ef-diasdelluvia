@@ -1,10 +1,26 @@
 // What every place of El Pabellón shares: the top bar with the way back, who is playing and the record.
-import {AVATARS, player, playerCode, mode, record} from '../registro.js';
+import {AVATARS, player, playerCode, mode, record as logActivity} from '../registro.js';
 
-export {record, player, playerCode, mode};
+import {currentJourney} from './recorrido.js';
+
+export function record(...args) {
+ const story = mode() === 'alumno' && player() && sessionStorage.getItem('pabellon-vuelta') === 'alumno';
+ const before = story && currentJourney().index;
+ const entry = logActivity(...args);
+ if (story && currentJourney().index > before) {
+  const link = document.querySelector('.hub-top .leave');
+  if (link) {
+   link.textContent = 'Misión cumplida · Continuar';
+   link.setAttribute('aria-live','polite');
+  }
+ }
+ return entry;
+}
+
+export {player, playerCode, mode};
 
 // Back to the doors the visitor came from: the pupil's or the class screen's.
-export const backToHub = () => '../#' + (mode() === 'pantalla' ? 'pantalla' : player() ? 'alumno' : '');
+export const backToHub = () => '../#' + (mode() === 'pantalla' ? 'pantalla' : player() ? (sessionStorage.getItem('pabellon-vuelta') === 'directo' ? 'directo' : 'alumno') : '');
 
 // Draws the top bar as the first thing in the page. `name` is the place, e.g. 'El Tatami'.
 export function topBar(name) {

@@ -9,7 +9,7 @@
  <link rel="icon" href="./assets/mark.svg" type="image/svg+xml">
  <link rel="stylesheet" href="./comun/base.css">
  <link rel="stylesheet" href="./hub.css">
-</head>
+<script src="./comun/idioma.js"></script><link rel="stylesheet" href="./comun/idioma.css"></head>
 <body data-view="title">
  <a class="skip" href="#main">Saltar al contenido</a>
  <header class="hub-top">
@@ -26,11 +26,12 @@
    <div class="title-board">
     <p class="eyebrow">Educación Física</p>
     <h1 id="title-name">El Pabellón</h1>
-    <p class="lead">Entra, elige un lugar y juega.</p>
-    <button type="button" id="enter-student" class="sign gold big"><strong>Entrar a jugar</strong></button>
+    <p class="lead">¿Seguimos la historia o repetimos un juego?</p>
+    <button type="button" id="enter-student" class="sign gold big"><strong>Mi historia</strong></button>
+    <a class="sign big" href="#directo"><strong>Acceso directo</strong></a>
     <div class="title-doors"><a href="#pantalla" class="quiet">Pantalla digital</a><a href="#profe" class="quiet">Soy profe</a></div>
    </div>
-   <figure class="title-host"><figcaption class="bubble"><span lang="en">Welcome! Are you ready to play?</span><span>¡Bienvenidos! ¿Listos para jugar?</span></figcaption><img src="./gimnasio/assets/robles-rest.webp" alt="El profe Robles" width="760" height="550"></figure>
+   <figure class="title-host"><img src="./gimnasio/assets/robles-rest.webp" alt="El profe Robles" width="760" height="550"></figure>
   </section>
 
   <section id="view-login" class="wall" hidden aria-labelledby="login-title">
@@ -54,6 +55,7 @@
    <div class="frieze" aria-hidden="true"></div>
    <div class="wall-inner">
     <h1 id="map-title"></h1>
+    <p id="mission" class="lead"></p><a id="switch-mode" hidden></a>
     <ul id="doors" class="doors"></ul>
    </div>
    <div class="skirting" aria-hidden="true"></div>
@@ -90,6 +92,7 @@
       <p id="cloud-package" class="fine"></p>
       <label class="check" id="alias-entry-label" hidden><input type="checkbox" id="alias-entry"> Que el alumnado entre eligiendo su alias de la clase, el mismo que en La Lupa</label>
      </section>
+     <section class="paper"><h2>Idioma</h2><label><input type="checkbox" id="english-setting"> Mostrar también las consignas en inglés en este ordenador</label></section>
      <section class="paper"><h2>Lugares y actividades</h2><div id="desk-catalogue" class="table-scroll"></div></section>
      <section class="paper"><h2>Clave del despacho</h2><p class="fine">Cierra el despacho al terminar, sobre todo en un ordenador compartido.</p><div class="desk-buttons"><button type="button" id="desk-lock" class="sign"><strong>Cerrar el despacho</strong></button><button type="button" id="desk-forget" class="sign danger"><strong>Cambiar la clave</strong></button></div></section>
     </div>

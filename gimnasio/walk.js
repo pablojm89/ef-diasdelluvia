@@ -75,6 +75,8 @@ function draw(centerCamera = false) {
   }
   ctx.restore();
  }
+ // Robles stands at 62% in the gym and at 80% while carrying the mat.
+ scene.style.setProperty('--robles-facing', x < (room === 'store' ? .80 : .62) ? '-1' : '1');
  sprite.style.left = x * 100 + '%';
  sprite.style.top = y * 100 + '%';
  sprite.style.height = heightAt(y) * 100 + '%';

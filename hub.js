@@ -1,3 +1,4 @@
+import {missions,currentJourney} from './comun/recorrido.js';
 // El Pabellón: who comes in (pupil, class screen or teacher) and the doors each one sees.
 import {families} from './content.js';
 import {eligibleChallenges} from './engine.js';
@@ -12,7 +13,7 @@ const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 // --- Places ------------------------------------------------------------------
 // One entry per place of the school. `soon` places are painted on the wall but still closed.
 const PLACES = {
- gimnasio: {name: 'El Gimnasio', kicker: 'Aventura: Equipment Rescue', art: 'door-gimnasio', href: './gimnasio/', modes: 'Alumno · Pantalla', state: 'open'},
+ gimnasio: {name: 'El Gimnasio', kicker: 'Rescate del material', art: 'door-gimnasio', href: './gimnasio/', modes: 'Alumno · Pantalla', state: 'open'},
  pista: {name: 'La Pista', kicker: 'Mate Arena: balón prisionero', art: 'door-mate', href: './mate/', modes: 'Alumno', state: 'open'},
  espalderas: {name: 'Las Espalderas', kicker: 'Ruleta de retos para toda la clase', art: 'door-espalderas', action: 'wheel', modes: 'Pantalla', state: 'open'},
  pizarra: {name: 'La Pizarra', kicker: 'Rosco de Educación Física', art: 'door-pizarra', href: './pizarra/', modes: 'Alumno · Pantalla', state: 'open'},
@@ -32,15 +33,9 @@ const REVIEW = [
  ['Libro de retos', 'Los 24 retos de la ruleta', './patio.html#biblioteca'],
 ];
 
-function progressNote(id) {
- const read = key => { try { return JSON.parse(localStorage.getItem(key)); } catch { return null; } };
- if (id !== 'gimnasio') return '';
- const stage = read('ef-gym-mission-v1')?.state?.stage;
- return Number.isInteger(stage) && stage > 0 ? (stage >= 5 ? 'Misión completada' : `Fase ${stage + 1} de 5`) : '';
-}
 function doorMarkup(id) {
  const place = PLACES[id], soon = place.state === 'soon';
- const note = soon ? 'PRÓXIMAMENTE' : progressNote(id);
+ const note = soon ? 'PRÓXIMAMENTE' : '';
  const inside = `<span class="arch${place.pixel ? ' pixel' : ''}"><img src="./assets/${place.art}.webp" alt="" width="480" height="640">${note ? `<span class="ribbon">${esc(note)}</span>` : ''}</span>
   <span class="plate">${esc(place.name)}</span><span class="kicker">${esc(place.kicker)}</span>`;
  if (soon) return `<li><div class="door soon" aria-label="${esc(place.name)}, próximamente">${inside}</div></li>`;
@@ -59,9 +54,23 @@ function show(next) {
 function showMap(kind) {
  const map = MAPS[kind], current = player();
  $('map-title').textContent = map.title;
- $('doors').innerHTML = map.places.map(doorMarkup).join('');
- $('doors').classList.toggle('many', map.places.length > 4);
  const pupil = kind === 'alumno' && current;
+ let places = map.places;
+ $('switch-mode').hidden = !pupil;
+ $('mission').textContent = '';
+ if (pupil) {
+  const direct = location.hash === '#directo';
+  sessionStorage.setItem('pabellon-vuelta', direct ? 'directo' : 'alumno');
+  const {index, unlocked} = currentJourney(), mission = missions[index];
+  const catalogue = direct || !mission;
+  places = catalogue ? [...unlocked] : [mission.place];
+  $('map-title').textContent = direct ? 'Mis actividades' : mission ? mission.title : '¡El pabellón está listo!';
+  $('mission').textContent = direct ? (unlocked.size === 4 ? 'Ya conoces todos los lugares. Elige qué quieres jugar.' : 'Elige un juego. En tu historia descubrirás más actividades.') : mission ? 'Misión ' + (index+1) + ' de ' + missions.length + '. ' + mission.task : 'Has preparado una sesión completa con Robles. Elige qué quieres volver a jugar.';
+  $('switch-mode').href = direct ? '#alumno' : '#directo';
+  $('switch-mode').textContent = direct ? 'Continuar mi historia' : 'Ver mis actividades';
+ }
+ $('doors').innerHTML = places.map(doorMarkup).join('');
+ $('doors').classList.toggle('many', places.length > 4);
  $('locker-button').hidden = !pupil;
  $('mode-tag').hidden = kind !== 'pantalla';
  $('mode-tag').textContent = 'PANTALLA DIGITAL';
@@ -71,7 +80,7 @@ function showMap(kind) {
 function route() {
  const where = location.hash.slice(1);
  for (const dialog of document.querySelectorAll('dialog[open]')) dialog.close();
- if (where === 'alumno') {
+ if (where === 'alumno' || where === 'directo') {
   setMode('alumno');
   if (player()) showMap('alumno'); else showLogin();
  } else if (where === 'pantalla') {
@@ -147,7 +156,7 @@ $('locker-recover').addEventListener('click', async () => {
  const result = await recover();
  $('locker-recover').disabled = false;
  $('locker-status').textContent = !result.ok ? result.motivo : result.added ? `¡Recuperado! ${result.added} ${result.added === 1 ? 'cosa' : 'cosas'} de otro ordenador.` : 'Ya lo tenías todo en este ordenador.';
- drawLocker();
+ drawLocker(); showMap('alumno');
 });
 $('locker-leave').addEventListener('click', () => { leave(); $('locker').close(); showLogin(); });
 
@@ -188,7 +197,12 @@ $('gate').addEventListener('submit', async event => {
  showTeacher();
 });
 const when = iso => new Date(iso).toLocaleString('es-ES', {day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'});
+$('english-setting').onchange = e => {
+ localStorage.setItem('pabellon-ingles',String(e.target.checked));
+ document.documentElement.classList.toggle('con-ingles',e.target.checked);
+};
 function drawDesk() {
+ $('english-setting').checked = localStorage.getItem('pabellon-ingles') === 'true';
  const rows = summary();
  const marks = row => row.marks.length ? row.marks.map(m => `${m.criterio} · ${String(m.nota).replace('.', ',')} ${m.calificacion}`).join('<br>') : '—';
  $('desk-summary').innerHTML = rows.length ? `<table><thead><tr><th>Jugador</th><th>Última vez</th><th>Aventura del gimnasio</th><th>Mate: partidos · ganados · mejor</th><th>Yoga: posturas · creadas · practicadas</th><th>Rosco: jugados · mejor</th><th>Ruleta · oca · bingo</th><th>Nota orientativa</th></tr></thead><tbody>${rows.map(row =>
