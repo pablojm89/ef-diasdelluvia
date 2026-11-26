@@ -1,7 +1,7 @@
 import {equipment,targets,find,request,fresh,valid,act} from './mission.js?v=touch-1';
 import {walkTo, enterRoom, position, reach} from './walk.js?v=touch-1';
 import {stored as parts} from './store-layout.js';
-import {currentJourney} from '../comun/recorrido.js';
+import {currentJourney,missions} from '../comun/recorrido.js';
 import {player,studentId,mode,record} from '../registro.js';
 import {backToHub} from '../comun/lugar.js';
 import {speakAndPoint, celebrate} from './robles.js';
@@ -17,6 +17,18 @@ const label = e => english ? e.en : e.es;
 const item=id=>equipment.find(e=>e.id===id);
 let closer=null,state=fresh(),room='gym',selected=null,support=true,reduced=false,sound=true;
 try{const saved=JSON.parse(localStorage.getItem(saveKey));if(valid(saved?.state)){state=saved.state;support=saved.support!==false;reduced=!!saved.reduced;sound=saved.sound!==false;}}catch{}
+let delivery='meet';
+try { delivery=JSON.parse(localStorage.getItem(saveKey))?.delivery || 'meet'; } catch {}
+const chapter = pupil ? currentJourney().index : null;
+if(pupil && chapter===0 && delivery==='ready')delivery='carry';
+const preparing = mode()!=='pantalla' && (pupil ? chapter===0 : state.stage===0);
+const returning = pupil && sessionStorage.getItem('pabellon-vuelta')==='alumno' && chapter>0 && chapter<5;
+const deliveryLines = {
+ meet:['Talk to Robles in the gym.','Busca a Robles en el gimnasio y acércate a hablar con él.'],
+ find:['Find the soft ball in the equipment room.','Busca la pelota blanda en el almacén. La necesitamos para el partido de mate.'],
+ carry:['Take the soft ball back to Robles.','Llevas la pelota blanda. Vuelve al gimnasio y entrégasela a Robles.'],
+ ready:['Walk to the court sign to play.','La pelota ya está en la pista. Acércate al cartel «PISTA · MATE» para jugar.']
+};
 setSound(sound);
 const steps=['Localiza el material','Despeja la puerta','Cada cosa en su lugar','Prepara el pedido','Revisa y explica'];
 // Furniture of the store as tappable areas, in % of the room picture: left, top, width, height.
@@ -39,11 +51,13 @@ const storePrompt=()=>{
  ][state.stage];
 };
 const prompts=()=>{
+ if(preparing)return deliveryLines[delivery];
+ if(returning)return chapter===1 ? deliveryLines.ready : ['Your next activity is in the pavilion.',missions[chapter].task+' Vuelve al pabellón para continuar.'];
  if(room==='gym'&&state.stage<5)return state.stage===0?['Can you help me get the equipment ready? Let’s go to the equipment room.','¿Me ayudas a preparar el material? Vamos al almacén.']:['Let’s go back to the equipment room. There is more to do.',`Volvamos al cuarto de materiales. Ahora toca: ${steps[state.stage].toLowerCase()}.`];
  return storePrompt();
 };
 const hints=[()=>`Busca ${item(find[state.found.length])?.es}. Si no lo ves, abre la mochila: tiene la lista de objetos.`,()=> 'El cono naranja está delante de la puerta. Tócalo y después toca el soporte de conos.',()=> 'Balones al rack; conos a su soporte; aros y raquetas al soporte de pared; cuerdas, petos y saquitos a las cajas; colchoneta a su zona baja.',()=> 'Coge del soporte cuatro conos, de la pared dos aros y del rack la pelota verde. Si sobra algo, toca esa unidad en el carro para devolverla. Después, «Comprobar el carro».',()=> state.hazards.length<2?'Mira el suelo delante de la puerta y lo alto de la estantería de las cajas. Toca el objeto que puede hacer daño.':'Piensa en tropiezos y en material que puede caer.',()=> 'Explica a un compañero cómo prepararías una estación real y qué paso debe quedar libre.'];
-function persist(){try{localStorage.setItem(saveKey,JSON.stringify({state,support,reduced,sound}));}catch{say(' El navegador no permite guardar; puedes continuar sin cerrar esta pestaña.',false,true);}}
+function persist(){try{localStorage.setItem(saveKey,JSON.stringify({state,delivery,support,reduced,sound}));}catch{say(' El navegador no permite guardar; puedes continuar sin cerrar esta pestaña.',false,true);}}
 // The teacher's face in the dialogue follows what he says: pleased, encouraging or neutral.
 const faces={ok:'teacher-robles-happy',retry:'teacher-robles-think'};
 function say(text,ok,append){
@@ -68,7 +82,7 @@ function dispatch(event){
  }
  // Each finished phase goes to the player's record, with how many tries and hints it took so far.
  if(state.stage>before)record('material','equipment-rescue',state.stage===5?'completada':'fase',{fase:state.stage,intentos:state.attempts,pistas:state.hints});
- if(pupil && state.stage===1 && before===0){
+ if(pupil && state.stage===1 && before===0 && chapter===0){
   say('¡Has encontrado el material! Vuelve al gimnasio y acércate al cartel de la pista para jugar al mate.',true);
  }
 
@@ -120,13 +134,29 @@ function touchPart(id){
 }
 // A small painted-looking thing placed on the room picture, anchored at its feet.
 function anchor(el,[x,bottom,width]){Object.assign(el.style,{left:x+'%',top:bottom+'%',width:width+'%'});return el;}
+function showMatchBalls(list){
+ for(const id of ['basketball','football','softball']){
+  const ball=item(id);
+  const take=()=>{
+   $('inventory-dialog').close();
+   if(id!=='softball'){say('Ese balón es duro. Para el mate necesitamos uno blando.',false);return;}
+   delivery='carry';persist();render();play('pick');say(deliveryLines.carry[1],true);
+  };
+  const prop=button('',take,'equipment','item-'+id);
+  prop.innerHTML=icon(id)+'<span>'+ball.es+'</span>';prop.dataset.item=id;prop.setAttribute('aria-label',ball.es);
+  prop.style.left=ball.x+'%';prop.style.top=ball.y+'%';$('objects').append(prop);
+  list.append(button(ball.es,()=>{$('inventory-dialog').close();prop.click();},'','list-'+id));
+ }
+}
 function render(){
- document.querySelector('.menu-links a[href="../mate/"]').hidden = pupil && !currentJourney().unlocked.has('pista');
+ const courtOpen=preparing ? delivery==='ready' : !pupil || currentJourney().unlocked.has('pista');
+ document.querySelector('.menu-links a[href="../mate/"]').hidden = !courtOpen;
+ $('carried-ball').hidden=!(preparing && delivery==='carry');
  const focusKey=document.activeElement?.dataset?.focus;
  document.body.dataset.stage=state.stage;document.body.dataset.room=room;document.body.classList.toggle('reduced',reduced);$('translation').checked=support;$('motion').checked=reduced;$('sound').checked=sound;
  $('scene').className=`scene ${room}`;$('room-title').textContent=room==='gym'?'El gimnasio':'El cuarto de materiales';$('location').textContent=room==='gym'?'THE GYM':'THE EQUIPMENT ROOM';
  $('prof').classList.toggle('hidden',room==='store');celebrate(state.stage===5);
- $('steps').innerHTML=steps.map((s,i)=>`<li class="${i<state.stage?'done':i===state.stage?'current':''}"><span>${i<state.stage?'✓':i+1}</span>${s}</li>`).join('');$('stage-count').textContent=state.stage===5?'COMPLETADA':`${state.stage+1} / 5`;
+ $('journal-title').textContent=preparing ? 'Una pelota para el primer partido' : returning ? missions[chapter].title : (steps[state.stage] || 'Gimnasio preparado');
  const [en,es]=prompts();$('english').textContent=en;$('spanish').textContent=es;$('spanish').hidden=english&&!support;
  $('objective').textContent=es;
 
@@ -136,12 +166,18 @@ function render(){
  const list=$('object-list'),targetList=$('target-list');
  let help='Selecciona un objeto y después su destino. Puedes usar Tab y Enter; no necesitas arrastrar.',objectTitle='Material',targetTitle='Lugares';
  if(room==='gym'){
-  $('hotspots').append(button('ALMACÉN',()=>go('store'),'scene-link door','door'),...(!pupil || currentJourney().unlocked.has('pista') ? [button('PISTA · MATE',()=>{location.href='../mate/';},'scene-link board','board')] : []));
+  $('hotspots').append(button('ALMACÉN',()=>{if(returning || preparing && delivery!=='find'){say(prompts()[1]);return;}go('store');},'scene-link door','door'),...(courtOpen ? [button('PISTA · MATE',()=>{location.href='../mate/';},'scene-link board','board')] : []));
   if(state.stage<3||state.stage===5)$('objects').append(anchor(trolley(state.stage===5?state.cart:{},names,null,state.stage===5),trolleyAt.gym));
   help=state.stage===5?'Misión completada.':'El material está en el cuarto de materiales.';objectTitle='';targetTitle='Ir a';
-  if(state.stage<5)targetList.append(button('Ir a la puerta del almacén',()=>{$('inventory-dialog').close();$('hotspots').querySelector('[data-focus=door]').click();},'','list-go-store'));
+  if(preparing || returning)help=prompts()[1];
+  if(state.stage<5 && !returning && (!preparing || delivery==='find'))targetList.append(button('Ir a la puerta del almacén',()=>{$('inventory-dialog').close();$('hotspots').querySelector('[data-focus=door]').click();},'','list-go-store'));
  }else{
   $('hotspots').append(button('GIMNASIO',()=>go('gym'),'scene-link return-door','return-door'));
+  if (preparing || returning) {
+   help=prompts()[1];
+   targetTitle='';
+   if(preparing && delivery==='find')showMatchBalls(list);
+  }else {
   if(state.stage<3){
    for(const [id,[en,es,x,y]] of Object.entries(targets)){
     const [left,top,width,height]=furniture[id];
@@ -205,6 +241,7 @@ function render(){
    if(state.stage===5){help='Misión completada. Puedes volver al gimnasio o reiniciarla desde el menú.';objectTitle='';targetTitle='';}
   }
  }
+ }
  $('inventory-help').textContent=help;$('object-title').textContent=objectTitle;$('target-title').textContent=targetTitle;
  $('object-title').hidden=!list.childElementCount;$('target-title').hidden=!targetList.childElementCount;
 
@@ -250,6 +287,17 @@ $('prof').onclick=()=>{
   ['Let’s get the gym ready for class.',state.stage===0?'¡Qué bien que hayas venido! Hoy vamos a preparar el gimnasio.':'¡Ya estás aquí! Aún nos queda algo por preparar.'],
   state.stage===0 ? ['Let’s go to the equipment room. '+storePrompt()[0], 'Entra por la puerta del almacén y busca '+item(find[state.found.length]).es+'.'] : storePrompt()
  ];
+ if(preparing){
+  if(delivery==='meet'){
+   delivery='find';persist();
+   pages=[['We are playing dodgeball today. We need a ball that is soft when it hits.', 'Hoy jugamos al mate. Vamos a lanzar la pelota hacia otros jugadores, así que tiene que ser blanda.'],['Find the soft ball in the equipment room and bring it back to me.', 'En el almacén hay varios balones. Encuentra la pelota blanda y tráemela.']];
+  }else if(delivery==='carry'){
+   if(pupil)record('material','preparar-mate','entrega');
+   delivery='ready';persist();
+   pages=[['You found it! Now we can play.', '¡Esa es! Con esta pelota ya podemos jugar.'],deliveryLines.ready];
+  }else pages=[deliveryLines[delivery]];
+  render();
+ }else if(returning)pages=[prompts()];
  pageIndex=0;
  $('dialogue').showModal();
  showPage();
@@ -260,13 +308,13 @@ $('dialogue').addEventListener('close',()=>{
  if(room==='gym')$('prof').focus({preventScroll:true});
 });
 $('hint').onclick=()=>{
- $('journal-hint').textContent=hints[state.stage]();
+ $('journal-hint').textContent=preparing && delivery==='find' ? 'Busca la pelota verde. Las de fútbol y baloncesto son más duras.' : preparing || returning ? prompts()[1] : hints[state.stage]();
  state=act(state,{type:'hint'}).state;persist();
 };
 $('listen').onclick=()=>{if(!('speechSynthesis'in window)){say('Este navegador no ofrece voz. La instrucción está disponible por escrito.');return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(prompts()[0]);u.lang='en-GB';u.rate=.85;speechSynthesis.speak(u);};
 $('settings').onclick=()=>$('settings-dialog').showModal();$('translation').onchange=e=>{support=e.target.checked;persist();render();};$('motion').onchange=e=>{reduced=e.target.checked;persist();render();};
 $('sound').onchange=e=>{sound=e.target.checked;setSound(sound);persist();play('pick');};
-$('reset').onclick=()=>{if(!confirm('¿Borrar el progreso de esta misión en este navegador?'))return;state=fresh();room='gym';selected=null;persist();render();$('settings-dialog').close();say('Nueva misión. Habla con el profe y entra al almacén.');};
+$('reset').onclick=()=>{if(!confirm('¿Borrar el progreso de esta misión en este navegador?'))return;state=fresh();delivery='meet';room='gym';selected=null;persist();render();$('settings-dialog').close();say('Nueva misión. Habla con el profe y entra al almacén.');};
 $('home').href=$('menu-home').href=backToHub();
 // Painted pieces switch themselves on in style.css as they are delivered (arte/lotes/14-gimnasio.json).
 for(const piece of PINTADOS)document.body.classList.add('con-'+piece);

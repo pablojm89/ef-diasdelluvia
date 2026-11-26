@@ -216,3 +216,6 @@ body.reduced #stored img,body.reduced .equipment {transition:none}
 #feedback {bottom:10px;width:max-content;max-width:92vw;margin:0;padding:7px 14px;border-radius:8px;background:#fff3d9;color:#253b32;pointer-events:none}
 #feedback:not(.visible),#feedback:empty {display:none}
 body:has(#dialogue[open])  .prof::after, body:has(#dialogue[open]) .rotate-tip {visibility:hidden}
+
+#inventory {position:relative}
+#carried-ball {position:absolute;bottom:-7px;right:-5px;width:26px;height:26px;object-fit:contain;background:#fff3d9;border:1px solid #594222;border-radius:50%}

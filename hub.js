@@ -65,7 +65,7 @@ function showMap(kind) {
   const catalogue = direct || !mission;
   places = catalogue ? [...unlocked] : [mission.place];
   $('map-title').textContent = direct ? 'Mis actividades' : mission ? mission.title : '¡El pabellón está listo!';
-  $('mission').textContent = direct ? (unlocked.size === 4 ? 'Ya conoces todos los lugares. Elige qué quieres jugar.' : 'Elige un juego. En tu historia descubrirás más actividades.') : mission ? 'Misión ' + (index+1) + ' de ' + missions.length + '. ' + mission.task : 'Has preparado una sesión completa con Robles. Elige qué quieres volver a jugar.';
+  $('mission').textContent = direct ? (unlocked.size === 4 ? 'Ya conoces todos los lugares. Elige qué quieres jugar.' : 'Elige un juego. En tu historia descubrirás más actividades.') : mission ? mission.task : 'Has preparado una sesión completa con Robles. Elige qué quieres volver a jugar.';
   $('switch-mode').href = direct ? '#alumno' : '#directo';
   $('switch-mode').textContent = direct ? 'Continuar mi historia' : 'Ver mis actividades';
  }

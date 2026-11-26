@@ -29,7 +29,7 @@ const out=path.join(base,'artifacts');
  assert.equal(await page.locator('#player-code').textContent(),'5B-12');
  assert.ok(await page.locator('#doors .door').count()<=4,'pocas puertas para el alumnado');
  assert.equal(await page.locator('#doors a.door').count(),1);
- assert.match(await page.locator('#mission').textContent(),/aro/);
+ assert.match(await page.locator('#mission').textContent(),/pelota/);
  assert.equal(await page.locator('#doors img').evaluateAll(images=>images.every(image=>image.complete&&image.naturalWidth>0)),true);
  await page.reload();
  assert.equal(await page.locator('#player-code').textContent(),'5B-12');

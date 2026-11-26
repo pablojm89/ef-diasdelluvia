@@ -1,11 +1,11 @@
 import {entries, player, studentId, summary} from '../registro.js';
 
 export const missions = [
- {place:'gimnasio', title:'Encuentra el material', task:'Robles necesita un aro, un cono y una cuerda para preparar la pista. Entra al almacén y localízalos en ese orden.', done:r=>r.gymPhase >= 1 || r.gymDone},
- {place:'pista', title:'Estrena la pista de mate', task:'Ya tienes el material. Juega un partido de balón prisionero hasta el final. Tanto si ganas como si pierdes, después toca volver a la calma.', done:r=>r.matches > 0},
+ {place:'gimnasio', title:'Una pelota para el primer partido', task:'Hoy toca mate y falta la pelota. Entra al gimnasio y habla con Robles para preparar el partido.', done:r=>r.ballDelivered || r.gymPhase >= 1 || r.gymDone},
+ {place:'pista', title:'Estrena la pista de mate', task:'La pista está preparada. Pulsa «Entrenar» y juega tu primer partido de mate hasta el final. Tanto si ganas como si pierdes, después toca volver a la calma.', done:r=>r.matches > 0},
  {place:'tatami', title:'Vuelve a la calma', task:'Después del partido, entra en Aprender y abre la ficha de una postura de yoga. Pulsa «Ver cómo se entra y se sale» y acompaña la demostración hasta el final.', done:r=>r.poses?.length > 0},
- {place:'pizarra', title:'Completa el rosco', task:'Pon a prueba lo que sabes sobre Educación Física. Termina un rosco y vuelve para preparar la próxima sesión.', done:r=>r.roscos > 0},
- {place:'tatami', title:'Diseña la vuelta a la calma', task:'En Crear, combina tus posturas favoritas y guarda la secuencia. Después practícala hasta el final para poder enseñársela a la clase.', done:r=>r.sequences > 0 && r.practices > 0},
+ {place:'pizarra', title:'Completa el rosco', task:'Ya has jugado y has vuelto a la calma. Cierra la sesión en la pizarra: resuelve un rosco con palabras de EF. Después prepararás tú la próxima clase.', done:r=>r.roscos > 0},
+ {place:'tatami', title:'Diseña la vuelta a la calma', task:'Ahora te toca guiar la vuelta a la calma. En Crear, combina la postura que aprendiste con otra y guarda tu secuencia. Después practícala hasta el final para poder enseñársela a la clase.', done:r=>r.sequences > 0 && r.practices > 0},
  {place:'gimnasio', title:'Deja listo el gimnasio', task:'Vuelve al almacén. Guarda el material, prepara el carro y localiza los dos riesgos para que la siguiente clase pueda jugar.', done:r=>r.gymDone}
 ];
 export function journey(row = {}, checkpoint = 0) {
