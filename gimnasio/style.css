@@ -9,9 +9,6 @@
   color: var(--cream);
   background: var(--ink);
 }
-/* Height of the teacher's dialogue at the foot of the screen; the scene fills the rest. */
-body {--rail:148px}
-body.folded {--rail:62px}
 * {box-sizing:border-box}
 body {margin:0;overflow:hidden}
 button,select,a {font:inherit}
@@ -25,7 +22,7 @@ svg {fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-li
 .adventure {position:fixed;inset:0;background:#162d30}
 
 /* The scene: the room picture is sized by walk.js and scrolls sideways when it is wider than the screen. */
-#camera {position:absolute;inset:0 0 var(--rail);overflow:auto hidden;scrollbar-width:none;overscroll-behavior-x:contain}
+#camera {position:absolute;inset:0;overflow:auto hidden;scrollbar-width:none;overscroll-behavior-x:contain}
 #camera::-webkit-scrollbar {display:none}
 #camera:focus-visible {outline-offset:-3px}
 .scene {position:relative;isolation:isolate;min-width:100%;height:100%;overflow:hidden;background-size:cover;background-position:center}
@@ -44,7 +41,7 @@ svg {fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-li
 .prof,#walker,.equipment,.risk,.trolley {position:absolute;transform:translate(-50%,-100%);background:none;border:0;padding:0;filter:drop-shadow(1px 3px 2px #221c1f50)}
 .equipment::before,.risk::before,.unit::before,.pick::before,.scene-link::before {content:'';position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%)}
 .prof {z-index:2;width:12%;height:37%;left:62%;top:79%}
-.prof img {position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:auto;height:100%;max-width:none;pointer-events:none}
+.prof img {position:absolute;bottom:0;left:50%;transform:translateX(-50%) scaleX(var(--robles-facing,-1));width:auto;height:100%;max-width:none;pointer-events:none}
 .equipment img,.risk img {display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
 .prof:hover:not(:disabled),.equipment:hover:not(:disabled),.risk:hover:not(:disabled) {background:none;filter:drop-shadow(0 0 4px #ffe4a3)}
 #walker {pointer-events:none;width:auto}
@@ -99,7 +96,7 @@ svg {fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-li
 /* Painted: a hanging plate with the pictogram on its left half and the words on the right. */
 body.con-help-sign .help-sign {width:13.5%;aspect-ratio:240/140;padding:2.2% .7% .6% 6%;border:0;border-radius:0;background:url(assets/help-sign.webp) center/100% 100%;box-shadow:none;align-content:center;white-space:normal;font-size:clamp(7px,1.15vh,12px);line-height:1.1;filter:drop-shadow(0 2px 2px #32241266)}
 /* The teacher with the mat he has taken down, in front of the low platform where it belongs. */
-.prof-mat {position:absolute;z-index:3;left:80%;top:94%;height:37%;width:auto;transform:translate(-50%,-100%);pointer-events:none;filter:drop-shadow(1px 3px 2px #221c1f50)}
+.prof-mat {position:absolute;z-index:3;left:80%;top:94%;height:37%;width:auto;transform:translate(-50%,-100%) scaleX(var(--robles-facing,-1));pointer-events:none;filter:drop-shadow(1px 3px 2px #221c1f50)}
 /* Painted paper for the speech bubble and the small cream signs. */
 body.con-paper :is(.bubble,.look) {background:var(--paper) url(assets/paper.webp) 0 0/256px 256px}
 
@@ -120,23 +117,6 @@ h1 {font:600 clamp(22px,2.8vw,38px)/1 Georgia,serif;margin:4px 0}
 .rotate-tip button {min-width:44px;min-height:44px;padding:0;background:none;border:0;color:#2c2417;font-size:1.1rem}
 @media (orientation:portrait) {body.scrolls:not(.rotate-ok) .rotate-tip {display:flex}}
 
-/* The teacher's dialogue: portrait, a cream speech bubble, what can be answered and the talk buttons. */
-.dialogue {position:absolute;z-index:9;left:0;right:0;bottom:0;height:var(--rail);display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;grid-template-areas:"face bubble choices tools";align-items:center;gap:14px;padding:10px max(16px,calc((100vw - 1180px)/2)) max(10px,env(safe-area-inset-bottom));border-top:2px solid #be994e;background:linear-gradient(100deg,#122729,#284344 52%,#192f32)}
-.portrait {grid-area:face;align-self:end;width:84px;height:100%;padding:0;border:0;border-radius:0;background:none;overflow:hidden}
-.portrait:hover:not(:disabled) {background:none}
-.portrait img {display:block;width:310%;margin-left:-80%;pointer-events:none}
-.bubble {grid-area:bubble;position:relative;align-self:stretch;display:flex;flex-direction:column;min-width:0;padding:6px 16px;background:var(--paper);color:#2c2417;border:2px solid var(--wood);border-radius:12px;box-shadow:0 3px 0 #0b1a1b;overflow:auto;scrollbar-width:thin}
-.bubble::before {content:'';position:absolute;left:-11px;bottom:22px;border:9px solid transparent;border-right:11px solid var(--wood);border-left:0}
-.speaker-row {display:flex;flex-wrap:wrap;gap:0 6px;font-size:.66rem;letter-spacing:.12em;font-weight:bold;color:#8a6a2c}
-.speaker-row .speaker {color:#6b5222}
-.bubble p {margin:0}
-/* Centred while it fits; scrolls from the top when it does not. */
-.bubble>:first-child {margin-top:auto}.bubble>:last-child {margin-bottom:auto!important}
-.reaction {display:none;margin:2px 0 1px!important;font-weight:700;font-size:.86rem;line-height:1.25;color:#2c6b4a}
-.reaction.visible {display:block}
-.reaction[data-tone=retry] {color:#9a4512}
-#english {margin:1px 0!important;font:clamp(16px,1.8vw,23px)/1.2 Georgia,serif;color:#1d2622}
-#spanish {font-size:.86rem;line-height:1.3;color:#5c4a2e}
 .choices {grid-area:choices;display:grid;gap:6px;width:max-content;min-width:200px;max-width:min(330px,30vw);align-content:center}
 .choices:empty {display:none}
 .choice {display:flex;align-items:center;justify-content:center;min-height:46px;padding:6px 14px;border-radius:9px;font-size:.92rem;line-height:1.2;text-align:center;text-decoration:none}
@@ -151,18 +131,6 @@ h1 {font:600 clamp(22px,2.8vw,38px)/1 Georgia,serif;margin:4px 0}
 .talk-tools {grid-area:tools;display:flex;gap:6px}
 .round {display:grid;justify-items:center;align-content:center;gap:2px;min-width:56px;min-height:56px;padding:5px 4px;border-radius:10px;background:#173736;border:1px solid #aa966c;font-size:.7rem;line-height:1.1}
 .round svg {width:22px;height:22px}
-body.folded .fold svg {rotate:180deg}
-
-/* Folded: one line of the bubble, so the scene keeps almost all the screen. */
-body.folded .dialogue {gap:10px;padding-top:6px;padding-bottom:max(6px,env(safe-area-inset-bottom))}
-body.folded .portrait {width:44px}
-body.folded .bubble {padding:2px 14px}
-body.folded :is(.speaker-row,#spanish,.choices,#hint) {display:none}
-body.folded #english,body.folded .reaction {white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:15px}
-body.folded .bubble:has(.reaction.visible) #english {display:none}
-body.folded .round {min-height:46px;min-width:46px}
-body.folded .round span {display:none}
-
 dialog {color:#273c38;background:#f9efd8;border:1px solid #d5b679;border-radius:8px;padding:24px;width:min(480px,92vw);max-height:85dvh;overflow:auto}
 dialog::backdrop {background:#0a242ad9}dialog .eyebrow{color:#74613b}dialog button,dialog a {color:#fff3d9;min-height:44px}dialog h2 {font:2rem Georgia,serif}dialog h3 {margin:1rem 0 .3rem;font:1.05rem Georgia,serif}dialog label,dialog .menu-links {display:block;margin:1rem 0}dialog a {display:inline-flex;align-items:center;background:#214240;padding:8px 12px;margin:3px;border-radius:4px}dialog input {width:20px;height:20px;vertical-align:-4px}dialog select {min-height:40px}.close {float:right}#steps {list-style:none;padding:0}#steps li {margin:.6rem 0}#steps li span{padding-right:10px}.current{font-weight:bold}#object-list,#target-list {display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}#object-list .selected {outline:3px solid #c99a3a}.fine {font-size:.82rem;color:#5d5a48}
 
@@ -183,21 +151,13 @@ body.reduced #stored img,body.reduced .equipment {transition:none}
 }
 /* Short landscape phones: buttons move to the side margins and the dialogue gets compact. */
 @media (orientation:landscape) and (max-height:520px) {
-  body {--rail:112px}
-  body.folded {--rail:56px}
   .hud-top {position:static;display:block}
   .location-hud {display:none}
   .home span {display:none}
   .home {padding:0;position:absolute;z-index:8;left:max(8px,env(safe-area-inset-left));top:8px}
   .game-tools {position:absolute;z-index:8;right:max(8px,env(safe-area-inset-right));top:8px;flex-direction:column}
-  .dialogue {gap:8px;padding:7px max(10px,env(safe-area-inset-right)) max(7px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))}
-  .portrait {width:52px}
-  .bubble {padding:3px 12px}
-  .bubble::before {bottom:14px}
-  .speaker-row {display:none}
   #english {font-size:15px}
   #spanish {font-size:.76rem;line-height:1.25}
-  .reaction {font-size:.78rem}
   .choices {min-width:0;max-width:min(270px,34vw);gap:5px}
   .choices:has(.answer) {width:min(300px,36vw);max-width:none}
   .choices:has(.answer) {grid-template-columns:1fr 1fr}
@@ -211,18 +171,10 @@ body.reduced #stored img,body.reduced .equipment {transition:none}
 }
 /* Portrait phones: the room scrolls sideways under the game buttons, the dialogue sits below. */
 @media (orientation:portrait) and (max-width:700px) {
-  body {--rail:226px}
-  body.folded {--rail:62px}
   .location-hud {visibility:hidden}
-  .dialogue {grid-template-columns:50px minmax(0,1fr) auto;grid-template-rows:minmax(0,1fr) auto;grid-template-areas:"face bubble tools" "choices choices choices";gap:8px;padding:8px 10px max(8px,env(safe-area-inset-bottom))}
-  body.folded .dialogue {grid-template-rows:1fr;grid-template-areas:"face bubble tools"}
-  .portrait {width:50px;align-self:start;height:80px}
-  .bubble {padding:5px 11px}
-  .bubble::before {top:22px;bottom:auto}
   #english {font-size:16px}
   #spanish {font-size:.8rem}
   .talk-tools {flex-direction:column;align-self:start}
-  body.folded .talk-tools {flex-direction:row;align-self:center}
   .round {min-width:44px;min-height:44px}
   .round span {display:none}
   .choices {width:auto;max-width:none}
@@ -230,3 +182,21 @@ body.reduced #stored img,body.reduced .equipment {transition:none}
   .choices:has(.order) {grid-template-columns:auto 1fr}
   .choice {font-size:.84rem;padding:4px 10px}
 }
+
+.prof::after {content:"Hablar";position:absolute;bottom:100%;left:50%;translate:-50% 0;padding:3px 10px;background:#fff3d9;color:#29392f;border:1px solid #72572d;border-radius:12px;font-size:.85rem}
+#dialogue {width:min(650px,95vw);padding:0;border:2px solid #927246;box-shadow:0 12px 50px #12272780}
+#dialogue::backdrop {background:#162d3080}
+.conversation {display:grid;grid-template-columns:30% 1fr}
+.portrait {position:relative;overflow:hidden;background:#dec799}
+.portrait img {position:absolute;top:4%;left:50%;translate:-50% 0;height:max(200%,380px);max-width:none}
+.speech {padding:clamp(14px,3vw,28px)}
+#speaker {font:700 1.4rem Georgia,serif;color:#735126}
+#spanish,#english {font-size:1.06rem;line-height:1.45}
+#spoken-hint:empty {display:none}
+#dialogue .talk-tools {display:flex;flex-flow:row wrap;gap:6px;margin-top:12px}
+#dialogue .choices {width:auto;min-width:0;max-width:100%}
+#field-actions,#feedback {position:absolute;left:50%;translate:-50% 0;z-index:6}
+#field-actions {top:max(72px,10dvh);max-width:95vw}
+#feedback {bottom:10px;width:max-content;max-width:92vw;margin:0;padding:7px 14px;border-radius:8px;background:#fff3d9;color:#253b32;pointer-events:none}
+#feedback:not(.visible),#feedback:empty {display:none}
+@media(max-width:500px){.conversation {grid-template-columns:24% 1fr}.portrait img {height:155%;top:8%}}

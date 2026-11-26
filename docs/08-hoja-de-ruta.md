@@ -20,6 +20,8 @@ Antes, las cuatro puertas individuales aparecían juntas y la taquilla resumía 
 
 El encargo es que un niño pueda contestar «¿qué hago ahora?», «¿para qué?» y «¿cómo sigo mañana?». Robles le pide preparar una sesión, jugarla y dejar el gimnasio listo para la clase siguiente. Cada misión indica una acción comprobable. Encontrar tres objetos abre Mate. Terminar un partido abre yoga. Ver una demostración completa abre el rosco. Después se propone diseñar y practicar una secuencia y terminar el almacén. La taquilla aporta las evidencias anteriores del mismo alumno. Las puertas descubiertas se pueden repetir desde Acceso directo.
 
+Las escenas dejan libre el espacio de juego. El diálogo de Robles se abre al acercarse para hablar con él y se cierra al seguir explorando. Las instrucciones de la actividad se consultan en sus propios controles.
+
 El profe decide si muestra inglés en cada ordenador. Pantalla digital reúne los juegos colectivos. El despacho conserva los prototipos de la primera etapa.
 
 ## Los lugares

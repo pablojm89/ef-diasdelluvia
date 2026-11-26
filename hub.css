@@ -13,7 +13,7 @@ body[data-view=title] .hub-top{display:none}
 .quiet{padding:6px 13px;border:1px solid #b9925c;border-radius:99px;font-size:.8rem;font-weight:700;color:#5a4a2a}
 .quiet:hover{background:#fff}
 .title-host{position:relative;flex:none;align-self:flex-end;width:clamp(230px,30vw,400px);height:min(64dvh,560px);margin-bottom:-1dvh}
-.title-host img{position:absolute;left:50%;bottom:0;width:auto;height:100%;max-width:none;transform:translateX(-50%);filter:drop-shadow(0 10px 12px #1a110a99)}
+.title-host img{position:absolute;left:50%;bottom:0;width:auto;height:100%;max-width:none;transform:translateX(-50%) scaleX(-1);filter:drop-shadow(0 10px 12px #1a110a99)}
 .bubble{position:absolute;z-index:1;left:50%;top:-6%;transform:translateX(-50%);width:max-content;max-width:min(300px,80vw);display:grid;gap:3px;padding:11px 16px;border-radius:14px;background:var(--cream);color:#2a3a38;box-shadow:0 6px 18px #0007;font-size:.86rem;line-height:1.35;text-align:center}
 .bubble::after{content:'';position:absolute;left:50%;top:100%;margin-left:-9px;border:9px solid transparent;border-top-color:var(--cream)}
 .bubble span[lang=en]{font:600 1.05rem/1.25 var(--serif);color:#1f3b39}

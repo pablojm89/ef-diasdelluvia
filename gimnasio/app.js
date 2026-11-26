@@ -15,7 +15,7 @@ const saveKey = pupil ? key+'-'+studentId(pupil) : key;
 const english = document.documentElement.classList.contains('con-ingles');
 const label = e => english ? e.en : e.es;
 const item=id=>equipment.find(e=>e.id===id);
-let closer=null,state=fresh(),room='gym',selected=null,support=true,reduced=false,sound=true,folded=false,lastPrompt='';
+let closer=null,state=fresh(),room='gym',selected=null,support=true,reduced=false,sound=true;
 try{const saved=JSON.parse(localStorage.getItem(saveKey));if(valid(saved?.state)){state=saved.state;support=saved.support!==false;reduced=!!saved.reduced;sound=saved.sound!==false;}}catch{}
 setSound(sound);
 const steps=['Localiza el material','Despeja la puerta','Cada cosa en su lugar','Prepara el pedido','Revisa y explica'];
@@ -27,9 +27,8 @@ const trolleyAt={store:[56,95.5,24],gym:[37,79,13]};
 const spareCone=[40.75,43.26,3.84,6.25];
 const names=Object.fromEntries(equipment.map(e=>[e.id,[e.en,e.es]]));
 const plural={cone:['cones','conos'],hoop:['hoops','aros'],softball:['soft ball','pelota blanda']};
-const prompts=()=>{
+const storePrompt=()=>{
  const next=item(find[state.found.length]);
- if(room==='gym'&&state.stage<5)return state.stage===0?['Can you help me get the equipment ready? Let’s go to the equipment room.','¿Me ayudas a preparar el material? Vamos al almacén.']:['Let’s go back to the equipment room. There is more to do.',`Volvamos al cuarto de materiales. Ahora toca: ${steps[state.stage].toLowerCase()}.`];
  return [
   [`Find a ${next?.en||'hoop'}.`,`Busca y toca: ${next?.es||'aro'}.`],
   ['Look at the door. Keep the doorway clear: put the cone on the cone stand.','Mira la puerta. Despeja el paso: toca el cono y después su soporte.'],
@@ -39,13 +38,17 @@ const prompts=()=>{
   ['Mission complete! Tell your partner: where do the hoops go?','¡Misión cumplida! Explica a tu compañero dónde van los aros y qué paso dejarías libre en el gimnasio real.']
  ][state.stage];
 };
+const prompts=()=>{
+ if(room==='gym'&&state.stage<5)return state.stage===0?['Can you help me get the equipment ready? Let’s go to the equipment room.','¿Me ayudas a preparar el material? Vamos al almacén.']:['Let’s go back to the equipment room. There is more to do.',`Volvamos al cuarto de materiales. Ahora toca: ${steps[state.stage].toLowerCase()}.`];
+ return storePrompt();
+};
 const hints=[()=>`Busca ${item(find[state.found.length])?.es}. Si no lo ves, abre la mochila: tiene la lista de objetos.`,()=> 'El cono naranja está delante de la puerta. Tócalo y después toca el soporte de conos.',()=> 'Balones al rack; conos a su soporte; aros y raquetas al soporte de pared; cuerdas, petos y saquitos a las cajas; colchoneta a su zona baja.',()=> 'Coge del soporte cuatro conos, de la pared dos aros y del rack la pelota verde. Si sobra algo, toca esa unidad en el carro para devolverla. Después, «Comprobar el carro».',()=> state.hazards.length<2?'Mira el suelo delante de la puerta y lo alto de la estantería de las cajas. Toca el objeto que puede hacer daño.':'Piensa en tropiezos y en material que puede caer.',()=> 'Explica a un compañero cómo prepararías una estación real y qué paso debe quedar libre.'];
 function persist(){try{localStorage.setItem(saveKey,JSON.stringify({state,support,reduced,sound}));}catch{say(' El navegador no permite guardar; puedes continuar sin cerrar esta pestaña.',false,true);}}
 // The teacher's face in the dialogue follows what he says: pleased, encouraging or neutral.
 const faces={ok:'teacher-robles-happy',retry:'teacher-robles-think'};
 function say(text,ok,append){
  const f=$('feedback');f.dataset.tone=ok===true?'ok':ok===false?'retry':'';f.textContent=append?f.textContent+text:text;
- const face=PINTADOS.includes(faces[f.dataset.tone])?faces[f.dataset.tone]:'teacher-robles',image=$('fold').querySelector('img');
+ const face=PINTADOS.includes(faces[f.dataset.tone])?faces[f.dataset.tone]:'teacher-robles',image=$('portrait');
  if(!image.src.endsWith(face+'.webp'))image.src='assets/'+face+'.webp';
 }
 const rect=el=>el?.getBoundingClientRect();
@@ -109,7 +112,7 @@ function place(target){if($('inventory-dialog').open)$('inventory-dialog').close
 function button(text,fn,cls='',focus){const b=document.createElement('button');b.textContent=text;b.className=cls;b.onclick=fn;if(focus)b.dataset.focus=focus;return b;}
 // Every action chosen from the backpack list closes it, so the change is seen in the room.
 const fromBag=event=>()=>{$('inventory-dialog').close();dispatch(event);};
-function go(next){room=next;selected=null;closer=null;render();}
+function go(next){if($('dialogue').open)$('dialogue').close();room=next;selected=null;closer=null;render();}
 // Things kept close together are too small to touch apart on a phone: the shelf is shown up close in the bubble.
 function touchPart(id){
  const home=item(id).home,group=equipment.filter(e=>e.home===home);
@@ -126,12 +129,13 @@ function render(){
  $('prof').classList.toggle('hidden',room==='store');celebrate(state.stage===5);
  $('steps').innerHTML=steps.map((s,i)=>`<li class="${i<state.stage?'done':i===state.stage?'current':''}"><span>${i<state.stage?'✓':i+1}</span>${s}</li>`).join('');$('stage-count').textContent=state.stage===5?'COMPLETADA':`${state.stage+1} / 5`;
  const [en,es]=prompts();$('english').textContent=en;$('spanish').textContent=es;$('spanish').hidden=english&&!support;
- $('step-tag').textContent=state.stage===5?'· MISIÓN COMPLETADA':`· ${state.stage+1}/5 ${steps[state.stage].toUpperCase()}`+(state.stage===0?` · ${state.found.length}/3`:state.stage===4?` · ${state.hazards.length}/2`:'');
- // A new instruction always opens the speech bubble again.
- if(en!==lastPrompt){lastPrompt=en;fold(false);}
+ $('objective').textContent=es;
+
  for(const id of ['objects','destinations','hotspots','object-list','target-list','choices'])$(id).replaceChildren();
  enterRoom(room);showStored();
- const choices=$('choices'),list=$('object-list'),targetList=$('target-list');
+ const choices=$('choices');
+ (room==='gym' ? $('talk-choices') : $('field-actions')).append(choices);
+ const list=$('object-list'),targetList=$('target-list');
  let help='Selecciona un objeto y después su destino. Puedes usar Tab y Enter; no necesitas arrastrar.',objectTitle='Material',targetTitle='Lugares';
  if(room==='gym'){
   $('hotspots').append(button('ALMACÉN',()=>go('store'),'scene-link door','door'),...(!pupil || currentJourney().unlocked.has('pista') ? [button('PISTA · MATE',()=>{location.href='../mate/';},'scene-link board','board')] : []));
@@ -155,7 +159,7 @@ function render(){
     const b=button('',()=>choose(e.id),`equipment ${selected===e.id?'selected':''}`,'item-'+e.id);b.innerHTML=icon(e.id)+`<span>${label(e)}</span>`;b.setAttribute('aria-label',`${label(e)} · ${e.es}`);b.setAttribute('aria-pressed',selected===e.id);
     b.dataset.item=e.id;b.style.left=(e.id==='cone'?14:e.x)+'%';b.style.top=e.y+'%';$('objects').append(b);
    });
-   if(state.stage===0){help='Toca en la lista el objeto que pide el profe.';targetTitle='';}
+   if(state.stage===0){help=storePrompt()[1];targetTitle='';}
   }
   if(state.stage>=3){
    // Everything put away can be touched: in the order to take a unit, in the review to inspect it.
@@ -206,18 +210,28 @@ function render(){
  }
  $('inventory-help').textContent=help;$('object-title').textContent=objectTitle;$('target-title').textContent=targetTitle;
  $('object-title').hidden=!list.childElementCount;$('target-title').hidden=!targetList.childElementCount;
- $('dialogue').classList.toggle('has-choices',!!choices.childElementCount);
+
  if(focusKey&&document.activeElement===document.body){const again=document.querySelector(`[data-focus="${focusKey}"]:not(:disabled)`);if(again)again.focus({preventScroll:true});else if(selected)$('destinations').querySelector('button')?.focus({preventScroll:true});else (choices.querySelector('button,a')||$('objects').querySelector('button:not(:disabled)'))?.focus({preventScroll:true});}
 }
-function fold(next){folded=next;document.body.classList.toggle('folded',folded);for(const b of [$('fold'),$('fold-btn')]){b.setAttribute('aria-expanded',String(!folded));b.setAttribute('aria-label',folded?'Desplegar el diálogo del profe':'Plegar el diálogo del profe');}$('fold-btn').querySelector('span').textContent=folded?'Abrir':'Plegar';}
-$('fold').onclick=$('fold-btn').onclick=()=>fold(!folded);
 $('prof').onclick=()=>{
- speakAndPoint();fold(false);
- $('english').textContent=state.stage===5?'Thank you! The gym is ready.':'We need the gym for our next lesson. Can you help me get the equipment ready?';
- $('spanish').textContent=state.stage===5?'¡Gracias! El gimnasio está listo.':'Necesitamos el gimnasio para la próxima clase. ¿Me ayudas a preparar el material? Entra al almacén por la puerta.';
- say('Robles se gira hacia ti.');
+ speakAndPoint();
+ const [en,es]=room==='gym' && state.stage<5 ? [
+  'Let’s prepare the equipment. '+storePrompt()[0],
+  'Vamos a preparar la clase. '+storePrompt()[1]
+ ] : prompts();
+ $('english').textContent=en;
+ $('spanish').textContent=es;
+ $('spoken-hint').textContent='';
+ $('dialogue').showModal();
 };
-$('hint').onclick=()=>{const msg=hints[state.stage]();state=act(state,{type:'hint'}).state;persist();fold(false);say(msg);ponder();};
+$('dialogue').addEventListener('close',()=>{
+ window.speechSynthesis?.cancel();
+ if(room==='gym')$('prof').focus({preventScroll:true});
+});
+$('hint').onclick=()=>{
+ $('spoken-hint').textContent=hints[state.stage]();
+ state=act(state,{type:'hint'}).state;persist();ponder();
+};
 $('listen').onclick=()=>{if(!('speechSynthesis'in window)){say('Este navegador no ofrece voz. La instrucción está disponible por escrito.');return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance($('english').textContent);u.lang='en-GB';u.rate=.85;speechSynthesis.speak(u);};
 $('settings').onclick=()=>$('settings-dialog').showModal();$('translation').onchange=e=>{support=e.target.checked;persist();render();};$('motion').onchange=e=>{reduced=e.target.checked;persist();render();};
 $('sound').onchange=e=>{sound=e.target.checked;setSound(sound);persist();play('pick');};
@@ -261,13 +275,14 @@ $('scene').addEventListener('click', event => {
   const hit = target.getBoundingClientRect();
   const isTeacher = target.id === 'prof';
   const stand = standFor(target, bounds);
-  const footX = isTeacher ? hit.left - hit.width * .14 : hit.left + hit.width / 2;
+  const approachFromLeft = position().x < (hit.left + hit.width/2 - bounds.left)/bounds.width;
+  const footX = isTeacher ? (approachFromLeft ? hit.left-hit.width*.14 : hit.right+hit.width*.14) : hit.left + hit.width / 2;
   const x = stand ? stand[0] : (footX - bounds.left) / bounds.width;
   const y = stand ? stand[1] : (hit.bottom - bounds.top) / bounds.height;
   // The pupil turns to the thing and bends down for whatever is taken, left or checked.
   const handles = target.matches('.pick,.equipment,.risk,.unit,.destination');
   const side = handles ? ((hit.left + hit.width / 2 - bounds.left) / bounds.width >= x ? 1 : -1) : undefined;
-  walkTo(x, y, () => { if (!target.isConnected) return; if (handles && !target.disabled) reach(); target.onclick?.(); }, isTeacher ? 1 : side);
+  walkTo(x, y, () => { if (!target.isConnected) return; if (handles && !target.disabled) reach(); target.onclick?.(); }, isTeacher ? (approachFromLeft ? 1 : -1) : side);
  } else {
   walkTo((event.clientX - bounds.left) / bounds.width, (event.clientY - bounds.top) / bounds.height);
  }
