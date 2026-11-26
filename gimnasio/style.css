@@ -219,3 +219,5 @@ body:has(#dialogue[open])  .prof::after, body:has(#dialogue[open]) .rotate-tip {
 
 #inventory {position:relative}
 #carried-ball {position:absolute;bottom:-7px;right:-5px;width:26px;height:26px;object-fit:contain;background:#fff3d9;border:1px solid #594222;border-radius:50%}
+
+.prof.calling::after {content:"¡Por aquí!";background:#ffedb6;border:2px solid #715226;font-weight:bold;white-space:nowrap;box-shadow:0 2px 4px #37250e44}
