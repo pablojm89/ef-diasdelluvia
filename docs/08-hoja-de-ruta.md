@@ -18,11 +18,19 @@ Cinco reglas que ordenan todo lo demás:
 
 Antes, las cuatro puertas individuales aparecían juntas y la taquilla resumía las partidas después de jugar. Un alumno podía entrar al mate desde el gimnasio sin haber tocado el material. La partida del almacén se compartía en el ordenador y el diálogo repetía cada consigna en dos idiomas.
 
-El encargo es que un niño pueda contestar «¿qué hago ahora?», «¿para qué?» y «¿cómo sigo mañana?». Robles le pide preparar una sesión, jugarla y dejar el gimnasio listo para la clase siguiente. Cada misión indica una acción comprobable. Encontrar tres objetos abre Mate. Terminar un partido abre yoga. Ver una demostración completa abre el rosco. Después se propone diseñar y practicar una secuencia y terminar el almacén. La taquilla aporta las evidencias anteriores del mismo alumno. Las puertas descubiertas se pueden repetir desde Acceso directo.
+El encargo es que un niño pueda contestar «¿qué hago ahora?», «¿para qué?» y «¿cómo sigo mañana?». Robles le pide preparar una sesión, jugarla y dejar el gimnasio listo para la clase siguiente. Cada misión indica una acción comprobable. Entregar a Robles la pelota blanda abre Mate. La primera fase de almacén guardada en versiones anteriores también conserva ese acceso. Terminar un partido abre yoga. Ver una demostración completa abre el rosco. Después se propone diseñar y practicar una secuencia y terminar el almacén. La taquilla aporta las evidencias anteriores del mismo alumno. Las puertas descubiertas se pueden repetir desde Acceso directo.
 
 Las escenas dejan libre el espacio de juego. El diálogo de Robles se abre al acercarse para hablar con él y se cierra al seguir explorando. Las instrucciones de la actividad se consultan en sus propios controles.
 
 El profe decide si muestra inglés en cada ordenador. Pantalla digital reúne los juegos colectivos. El despacho conserva los prototipos de la primera etapa.
+
+### Cómo se aprende el primer encargo
+
+Robles espera en el gimnasio. El primer encuentro enseña a acercarse y hablar. El partido necesita una pelota blanda porque se lanza hacia otros jugadores. En el almacén el alumno aplica ese criterio entre tres balones. Puede equivocarse, recibir una explicación y volver a probar. La pelota elegida aparece en la mochila. Entregarla abre la pista y el cuaderno pasa a indicar cómo llegar. Ordenar el almacén corresponde a la preparación de la siguiente clase.
+
+Esta secuencia adapta dos decisiones de diseño. Miyamoto explica cómo los primeros obstáculos y la seta de Mario enseñan sus efectos al jugar. Gee describe la utilidad de ordenar los problemas y ofrecer la información cuando el jugador puede aplicarla. [Entrevista de Nintendo](https://iwataasks.nintendo.com/interviews/wii/nsmb/0/3/) · [Good Video Games and Good Learning](https://jamespaulgee.com/pubs/Good%20Games%20and%20Good%20Learning.pdf)
+
+Prueba de aula pendiente: observar si un alumno nuevo puede decir qué falta y por qué, volver con ello sin indicaciones del adulto y encontrar el partido. Anotar en qué acción pide ayuda por primera vez.
 
 ## Los lugares
 

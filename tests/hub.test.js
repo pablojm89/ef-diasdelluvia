@@ -128,3 +128,12 @@ test('historia: los hitos son personales y una derrota abre el tatami', async ()
  registro.record('material','equipment-rescue','completada',{fase:5});
  assert.equal(currentJourney().index,missions.length);
 });
+
+test('entregar la pelota abre Mate sin dar por superada la recogida del almacén', async () => {
+ const {currentJourney}=await import('../comun/recorrido.js');
+ localStorage.clear();sessionStorage.clear();
+ registro.setPlayer({course:5,group:'A',number:1,avatar:0});
+ registro.record('material','preparar-mate','entrega');
+ assert.equal(currentJourney().index,1);
+ assert.equal(registro.summary()[0].gymPhase,0);
+});

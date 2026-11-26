@@ -1,16 +1,17 @@
 // What every place of El Pabellón shares: the top bar with the way back, who is playing and the record.
 import {AVATARS, player, playerCode, mode, record as logActivity} from '../registro.js';
 
-import {currentJourney} from './recorrido.js';
+import {currentJourney, missions} from './recorrido.js';
 
 export function record(...args) {
  const story = mode() === 'alumno' && player() && sessionStorage.getItem('pabellon-vuelta') === 'alumno';
  const before = story && currentJourney().index;
  const entry = logActivity(...args);
- if (story && currentJourney().index > before) {
+ const next = story && currentJourney().index;
+ if (story && next > before) {
   const link = document.querySelector('.hub-top .leave');
   if (link) {
-   link.textContent = 'Misión cumplida · Continuar';
+   link.textContent = missions[next] ? 'Continuar · '+missions[next].title : 'Sesión completa · Volver';
    link.setAttribute('aria-live','polite');
   }
  }

@@ -107,6 +107,7 @@ export function summary(list = entries()) {
   const who = entry.who || 'Pantalla de clase';
   const row = rows.get(who) || {who, sid: entry.sid, last: entry.t, gymPhase: 0, gymDone: false, matches: 0, wins: 0, bestPoints: 0, challenges: 0, poses: [], sequences: 0, practices: 0, roscos: 0, bestRosco: 0, boards: 0, bingos: 0, marks: []};
   if (entry.t > row.last) row.last = entry.t;
+  if (entry.place === 'material' && entry.activity === 'preparar-mate' && entry.event === 'entrega') row.ballDelivered = true;
   if (entry.activity === 'equipment-rescue') {
    row.gymPhase = Math.max(row.gymPhase, Number(entry.data.fase) || 0);
    if (entry.event === 'completada') row.gymDone = true;
