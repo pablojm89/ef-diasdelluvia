@@ -4,7 +4,7 @@ import {stored as parts} from './store-layout.js';
 import {currentJourney} from '../comun/recorrido.js';
 import {player,studentId,mode,record} from '../registro.js';
 import {backToHub} from '../comun/lugar.js';
-import {speakAndPoint, celebrate, ponder} from './robles.js';
+import {speakAndPoint, celebrate} from './robles.js';
 import {trolley, slotOf} from './trolley.js?v=touch-1';
 import {play, setSound} from './sound.js?v=touch-1';
 import {PINTADOS} from './assets/pintados.js';
@@ -69,8 +69,7 @@ function dispatch(event){
  // Each finished phase goes to the player's record, with how many tries and hints it took so far.
  if(state.stage>before)record('material','equipment-rescue',state.stage===5?'completada':'fase',{fase:state.stage,intentos:state.attempts,pistas:state.hints});
  if(pupil && state.stage===1 && before===0){
-  say('¡Has encontrado el material! Ya puedes jugar al mate.',true);
-  $('choices').append(Object.assign(document.createElement('a'),{className:'choice primary',href:backToHub(),textContent:'Continuar en la pista'}));
+  say('¡Has encontrado el material! Vuelve al gimnasio y acércate al cartel de la pista para jugar al mate.',true);
  }
 
 }
@@ -134,15 +133,13 @@ function render(){
  for(const id of ['objects','destinations','hotspots','object-list','target-list','choices'])$(id).replaceChildren();
  enterRoom(room);showStored();
  const choices=$('choices');
- (room==='gym' ? $('talk-choices') : $('field-actions')).append(choices);
  const list=$('object-list'),targetList=$('target-list');
  let help='Selecciona un objeto y después su destino. Puedes usar Tab y Enter; no necesitas arrastrar.',objectTitle='Material',targetTitle='Lugares';
  if(room==='gym'){
   $('hotspots').append(button('ALMACÉN',()=>go('store'),'scene-link door','door'),...(!pupil || currentJourney().unlocked.has('pista') ? [button('PISTA · MATE',()=>{location.href='../mate/';},'scene-link board','board')] : []));
   if(state.stage<3||state.stage===5)$('objects').append(anchor(trolley(state.stage===5?state.cart:{},names,null,state.stage===5),trolleyAt.gym));
   help=state.stage===5?'Misión completada.':'El material está en el cuarto de materiales.';objectTitle='';targetTitle='Ir a';
-  if(state.stage<5)targetList.append(button('Entrar al almacén',()=>{$('inventory-dialog').close();go('store');},'','list-go-store'));
-  choices.append(state.stage===5?Object.assign(document.createElement('a'),{className:'choice primary',href:backToHub(),textContent:'Volver a El Pabellón'}):button('Entrar al almacén',()=>go('store'),'choice primary','go-store'));
+  if(state.stage<5)targetList.append(button('Ir a la puerta del almacén',()=>{$('inventory-dialog').close();$('hotspots').querySelector('[data-focus=door]').click();},'','list-go-store'));
  }else{
   $('hotspots').append(button('GIMNASIO',()=>go('gym'),'scene-link return-door','return-door'));
   if(state.stage<3){
@@ -205,7 +202,7 @@ function render(){
     help='Revisa el almacén: toca lo que sea un riesgo.';objectTitle='Revisar lo guardado';targetTitle='Revisar los riesgos';
     if(state.hazards.length===2)choices.append(button('Para evitar tropiezos y caídas de material.',()=>dispatch({type:'reason',id:'safe'}),'choice answer','reason-safe'),button('Solo para que el almacén quede bonito.',()=>dispatch({type:'reason',id:'pretty'}),'choice answer','reason-pretty'));
    }
-   if(state.stage===5){help='Misión completada. Puedes volver al gimnasio o reiniciarla desde el menú.';objectTitle='';targetTitle='';choices.append(button('Volver al gimnasio',()=>go('gym'),'choice primary','go-gym'));}
+   if(state.stage===5){help='Misión completada. Puedes volver al gimnasio o reiniciarla desde el menú.';objectTitle='';targetTitle='';}
   }
  }
  $('inventory-help').textContent=help;$('object-title').textContent=objectTitle;$('target-title').textContent=targetTitle;
@@ -222,13 +219,10 @@ function showPage(instant=false){
  $('spanish').hidden=!!en && english && !support;
  if(english && en)lines.push([$('english'),en]);
  if(!$('spanish').hidden)lines.push([$('spanish'),es]);
- $('listen').hidden=!en;
  const total=lines.reduce((n,[,line])=>n+line.length,0);
  const start=performance.now();
  const last=pageIndex===pages.length-1;
  $('accessible-line').textContent=lines.map(([,line])=>line).join(' ');
- $('responses').hidden=true;
- $('advance').hidden=false;
  $('advance').textContent='Ver frase ▸';
  function draw(now){
   let count=instant || reduced || matchMedia('(prefers-reduced-motion: reduce)').matches ? total : Math.floor((now-start)/28);
@@ -239,24 +233,22 @@ function showPage(instant=false){
   }
   if(!complete){writing=requestAnimationFrame(draw);return;}
   writing=0;
-  $('advance').textContent='Siguiente ▸';
-  $('advance').hidden=last;
-  $('responses').hidden=!last;
-  if(last && $('dialogue').open)$('talk-choices').querySelector('a,button')?.focus({preventScroll:true});
+  $('advance').textContent=last?'Cerrar ▾':'Siguiente ▸';
  }
  draw(start);
 }
 function advance(){
  if(writing)showPage(true);
  else if(pageIndex+1<pages.length){pageIndex++;showPage();}
+ else $('dialogue').close();
 }
 $('advance').onclick=advance;
 $('lines').onclick=advance;
 $('prof').onclick=()=>{
  speakAndPoint();
  pages=state.stage===5 ? [prompts()] : [
-  ['Can you help me get the gym ready?',state.stage===0?'¡Qué bien que hayas venido! ¿Me ayudas a preparar la clase de hoy?':'¡Ya estás aquí! Aún nos queda algo por preparar.'],
-  state.stage===0 ? ['Let’s go to the equipment room. '+storePrompt()[0], '¿Ves la puerta del almacén? Entra y busca '+item(find[state.found.length]).es+'.'] : storePrompt()
+  ['Let’s get the gym ready for class.',state.stage===0?'¡Qué bien que hayas venido! Hoy vamos a preparar el gimnasio.':'¡Ya estás aquí! Aún nos queda algo por preparar.'],
+  state.stage===0 ? ['Let’s go to the equipment room. '+storePrompt()[0], 'Entra por la puerta del almacén y busca '+item(find[state.found.length]).es+'.'] : storePrompt()
  ];
  pageIndex=0;
  $('dialogue').showModal();
@@ -268,11 +260,10 @@ $('dialogue').addEventListener('close',()=>{
  if(room==='gym')$('prof').focus({preventScroll:true});
 });
 $('hint').onclick=()=>{
- pages=[['',hints[state.stage]()]];pageIndex=0;
- state=act(state,{type:'hint'}).state;persist();ponder();
- showPage();
+ $('journal-hint').textContent=hints[state.stage]();
+ state=act(state,{type:'hint'}).state;persist();
 };
-$('listen').onclick=()=>{if(!('speechSynthesis'in window)){say('Este navegador no ofrece voz. La instrucción está disponible por escrito.');return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance($('english').textContent);u.lang='en-GB';u.rate=.85;speechSynthesis.speak(u);};
+$('listen').onclick=()=>{if(!('speechSynthesis'in window)){say('Este navegador no ofrece voz. La instrucción está disponible por escrito.');return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(prompts()[0]);u.lang='en-GB';u.rate=.85;speechSynthesis.speak(u);};
 $('settings').onclick=()=>$('settings-dialog').showModal();$('translation').onchange=e=>{support=e.target.checked;persist();render();};$('motion').onchange=e=>{reduced=e.target.checked;persist();render();};
 $('sound').onchange=e=>{sound=e.target.checked;setSound(sound);persist();play('pick');};
 $('reset').onclick=()=>{if(!confirm('¿Borrar el progreso de esta misión en este navegador?'))return;state=fresh();room='gym';selected=null;persist();render();$('settings-dialog').close();say('Nueva misión. Habla con el profe y entra al almacén.');};
@@ -283,7 +274,8 @@ for(const piece of PINTADOS)document.body.classList.add('con-'+piece);
 for(const el of document.querySelectorAll('[data-icon]'))if(PINTADOS.includes('icon-'+el.dataset.icon))el.querySelector('svg').outerHTML=`<img class="icon" alt="" draggable="false" src="assets/icon-${el.dataset.icon}.webp">`;
 render();
 
-$('journal').onclick=()=>$('journal-dialog').showModal();
+$('journal').onclick=()=>{$('journal-hint').textContent='';$('journal-dialog').showModal();};
+$('journal-dialog').addEventListener('close',()=>window.speechSynthesis?.cancel());
 $('inventory').onclick=()=>$('inventory-dialog').showModal();
 if(!document.fullscreenEnabled)$('fullscreen').hidden=true;
 $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{say('El navegador no permite activar pantalla completa. La escena sigue ocupando toda la ventana.');}};
