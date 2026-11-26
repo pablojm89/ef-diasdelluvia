@@ -17,12 +17,17 @@ const label = e => english ? e.en : e.es;
 const item=id=>equipment.find(e=>e.id===id);
 let closer=null,state=fresh(),room='gym',selected=null,support=true,reduced=false,sound=true;
 try{const saved=JSON.parse(localStorage.getItem(saveKey));if(valid(saved?.state)){state=saved.state;support=saved.support!==false;reduced=!!saved.reduced;sound=saved.sound!==false;}}catch{}
-let delivery='meet';
-try { delivery=JSON.parse(localStorage.getItem(saveKey))?.delivery || 'meet'; } catch {}
+let delivery='meet', arrivalSeen=false;
+try {
+ const saved=JSON.parse(localStorage.getItem(saveKey));
+ delivery=saved?.delivery || 'meet';
+ arrivalSeen=saved?.arrivalSeen===true;
+} catch {}
 const chapter = pupil ? currentJourney().index : null;
 if(pupil && chapter===0 && delivery==='ready')delivery='carry';
 const preparing = mode()!=='pantalla' && (pupil ? chapter===0 : state.stage===0);
-const returning = pupil && sessionStorage.getItem('pabellon-vuelta')==='alumno' && chapter>0 && chapter<5;
+const inStory = pupil && sessionStorage.getItem('pabellon-vuelta')==='alumno';
+const returning = inStory && chapter>0 && chapter<5;
 const deliveryLines = {
  meet:['Talk to Robles in the gym.','Busca a Robles en el gimnasio y acércate a hablar con él.'],
  find:['Find the soft ball in the equipment room.','Busca la pelota blanda en el almacén. La necesitamos para el partido de mate.'],
@@ -57,7 +62,7 @@ const prompts=()=>{
  return storePrompt();
 };
 const hints=[()=>`Busca ${item(find[state.found.length])?.es}. Si no lo ves, abre la mochila: tiene la lista de objetos.`,()=> 'El cono naranja está delante de la puerta. Tócalo y después toca el soporte de conos.',()=> 'Balones al rack; conos a su soporte; aros y raquetas al soporte de pared; cuerdas, petos y saquitos a las cajas; colchoneta a su zona baja.',()=> 'Coge del soporte cuatro conos, de la pared dos aros y del rack la pelota verde. Si sobra algo, toca esa unidad en el carro para devolverla. Después, «Comprobar el carro».',()=> state.hazards.length<2?'Mira el suelo delante de la puerta y lo alto de la estantería de las cajas. Toca el objeto que puede hacer daño.':'Piensa en tropiezos y en material que puede caer.',()=> 'Explica a un compañero cómo prepararías una estación real y qué paso debe quedar libre.'];
-function persist(){try{localStorage.setItem(saveKey,JSON.stringify({state,delivery,support,reduced,sound}));}catch{say(' El navegador no permite guardar; puedes continuar sin cerrar esta pestaña.',false,true);}}
+function persist(){try{localStorage.setItem(saveKey,JSON.stringify({state,delivery,arrivalSeen,support,reduced,sound}));}catch{say(' El navegador no permite guardar; puedes continuar sin cerrar esta pestaña.',false,true);}}
 // The teacher's face in the dialogue follows what he says: pleased, encouraging or neutral.
 const faces={ok:'teacher-robles-happy',retry:'teacher-robles-think'};
 function say(text,ok,append){
@@ -149,6 +154,7 @@ function showMatchBalls(list){
  }
 }
 function render(){
+ $('prof').classList.toggle('calling',inStory && chapter===0 && delivery==='meet');
  const courtOpen=preparing ? delivery==='ready' : !pupil || currentJourney().unlocked.has('pista');
  document.querySelector('.menu-links a[href="../mate/"]').hidden = !courtOpen;
  $('carried-ball').hidden=!(preparing && delivery==='carry');
@@ -298,10 +304,13 @@ $('prof').onclick=()=>{
   }else pages=[deliveryLines[delivery]];
   render();
  }else if(returning)pages=[prompts()];
- pageIndex=0;
+ openSpeech(pages);
+};
+function openSpeech(lines){
+ pages=lines;pageIndex=0;
  $('dialogue').showModal();
  showPage();
-};
+}
 $('dialogue').addEventListener('close',()=>{
  cancelAnimationFrame(writing);writing=0;
  window.speechSynthesis?.cancel();
@@ -321,6 +330,14 @@ for(const piece of PINTADOS)document.body.classList.add('con-'+piece);
 // Painted icons replace the line drawings.
 for(const el of document.querySelectorAll('[data-icon]'))if(PINTADOS.includes('icon-'+el.dataset.icon))el.querySelector('svg').outerHTML=`<img class="icon" alt="" draggable="false" src="assets/icon-${el.dataset.icon}.webp">`;
 render();
+
+if(inStory && chapter===0 && delivery==='meet' && !arrivalSeen){
+ openSpeech([
+  ['Listen to that rain! The playground is soaked. Today we’ll play dodgeball here in the gym.', '¡Cómo llueve! El patio está empapado. Hoy jugaremos al mate aquí, en el gimnasio.'],
+  ['Over here! Come and talk to me. I need a hand before the match can start.', '¡Eh, por aquí! Acércate a hablar conmigo. Me falta una cosa para empezar el partido.']
+ ]);
+ $('dialogue').addEventListener('close',()=>{arrivalSeen=true;persist();},{once:true});
+}
 
 $('journal').onclick=()=>{$('journal-hint').textContent='';$('journal-dialog').showModal();};
 $('journal-dialog').addEventListener('close',()=>window.speechSynthesis?.cancel());
