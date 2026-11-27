@@ -191,3 +191,16 @@ body.practising{overflow:hidden}
  .stage-controls{gap:6px}.stage-controls .ctl,.stage-controls .check{padding:8px 10px;font-size:.92rem}
  .stage-controls .main{min-width:96px}
 }
+
+#story-mat {position:relative;min-height:min(78dvh,700px);display:grid;justify-items:center;align-content:space-between}
+#story-mat h1 {margin:0}
+#mountain {height:clamp(170px,40dvh,380px);width:auto;aspect-ratio:4/5}
+.coach {width:min(800px,100%);display:grid;grid-template-columns:26% 1fr;align-items:end}
+.coach>img {width:100%;height:clamp(150px,31dvh,300px);object-fit:cover;object-position:top}
+.coach-speech {align-self:center;position:relative;border:3px solid #60452d;border-radius:22px;background:#fff1d2;padding:18px 20px;color:#35271b;box-shadow:0 4px #936b43}
+.coach-speech::before {content:'';position:absolute;left:-12px;top:38%;width:17px;height:17px;background:#fff1d2;border:solid #60452d;border-width:0 0 3px 3px;transform:rotate(45deg)}
+.coach-speech>strong {color:#275751;font:700 1.15rem Georgia,serif}
+#coach-line {font:1.15rem/1.4 Georgia,serif;min-height:2.8em;margin:6px 0 12px}
+#chair-option {display:block;margin-bottom:12px}
+#coach-accessible {position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden}
+@media(max-width:540px){.coach{grid-template-columns:20% 1fr}.coach-speech{padding:12px}.coach>img{align-self:center}#coach-line{font-size:1rem}}

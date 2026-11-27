@@ -1,3 +1,5 @@
+import {atStoryMission,currentJourney,missions} from '../comun/recorrido.js';
+import {player,studentId} from '../registro.js';
 // El Tatami: learn the poses, build a sequence (alone or taking turns) and practise it with the whole class.
 import {topBar, record, mode} from '../comun/lugar.js';
 import {POSES, FAMILIES, LEVELS, CALM, BREATH, SIDES, SAMPLES, byId} from './posturas.js';
@@ -9,7 +11,7 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const screen = mode() === 'pantalla';
-const store = (() => { try { return localStorage; } catch { return {getItem: () => null, setItem() {}}; } })();
+const store = (() => { try { return localStorage; } catch { return {getItem: () => null, setItem() {}, removeItem() {}}; } })();
 
 topBar('El Tatami');
 if (screen) {
@@ -447,9 +449,73 @@ document.addEventListener('keydown', event => {
  else if (event.key === 'Escape' && !document.fullscreenElement) stopPractice();
 });
 
+// The post-match lesson takes place on the mat. Each press follows one movement.
+function enterStoryMat(){
+ const lesson=$('story-mat');
+ lesson.hidden=false;
+ document.querySelector('.tatami-head').hidden=true;
+ for(const v of VIEWS)$('v-'+v).hidden=true;
+ const storageKey='pabellon-montana-'+studentId(player());
+ const saved=Number(store.getItem(storageKey));
+ let step=Number.isInteger(saved) && saved>=0 && saved<4 ? saved : 0;
+ $('story-chair').checked=store.getItem(storageKey+'-silla')==='true';
+ let timer, frame, posture=0, fullLine='';
+ const figure=createFigure($('mountain'));
+ function finishLine(){
+  clearInterval(timer);
+  $('coach-line').textContent=fullLine;
+ }
+ function draw(){
+  clearInterval(timer);
+  const chair=$('story-chair').checked;
+  const instructions=[
+   '¡Vaya partido! Ven a la esterilla. Vamos a hacer la montaña para recuperar el aliento.',
+   chair?'Siéntate con los pies bien apoyados. Alarga la espalda y relaja los hombros.':'Apoya bien los dos pies. Crece hacia el techo y deja los hombros sueltos.',
+   'Sube los brazos hasta donde estés a gusto. Respira a tu ritmo.',
+   'Baja los brazos despacio. Nota cómo entra y sale el aire una vez más.',
+   step===4 && missions[currentJourney().index]?.place==='pizarra' ? 'Ya hemos vuelto a la calma. En la pizarra nos espera el rosco para cerrar la sesión.' : 'Ya hemos vuelto a la calma. Vamos a ver qué toca ahora.'
+  ];
+  fullLine=instructions[step];
+  $('chair-option').hidden=step===4;
+  $('story-next').hidden=step===4;
+  $('story-onward').hidden=step!==4;
+  $('story-next').textContent=['Acercarme a la esterilla','Elevar los brazos','Bajar los brazos','Terminar la postura'][step] || '';
+  const target=step===2 ? 1 : 0, from=posture, start=performance.now();
+  cancelAnimationFrame(frame);
+  function move(now){
+   const t=still() || target===from ? 1 : Math.min(1,(now-start)/1400);
+   posture=from+(target-from)*t;
+   figure.set('mountain',posture,{chair,name:chair?'La montaña en silla':'La montaña de pie'});
+   if(t<1)frame=requestAnimationFrame(move);
+  }
+  move(start);
+  $('coach-accessible').textContent=fullLine;
+  $('coach-line').textContent='';
+  if(still())finishLine();
+  else timer=setInterval(()=>{
+   const length=$('coach-line').textContent.length+2;
+   $('coach-line').textContent=fullLine.slice(0,length);
+   if(length>=fullLine.length)clearInterval(timer);
+  },32);
+ }
+ $('coach-line').onclick=finishLine;
+ $('story-chair').onchange=()=>{store.setItem(storageKey+'-silla',String($('story-chair').checked));draw();};
+ $('story-next').onclick=()=>{
+  if($('coach-line').textContent!==fullLine){finishLine();return;}
+  step++;
+  if(step===4){
+   record('tatami','yoga','postura',{id:'mountain',silla:$('story-chair').checked});
+   store.removeItem(storageKey);store.removeItem(storageKey+'-silla');
+  }else store.setItem(storageKey,String(step));
+  draw();
+  if(step===4)$('story-onward').focus();
+ };
+ draw();
+}
+
 renderPoses();
 renderPalette();
 renderSequence();
 renderSaved();
-route();
-addEventListener('hashchange', route);
+if(!location.hash && atStoryMission(2))enterStoryMat();
+else {route();addEventListener('hashchange',route);}
