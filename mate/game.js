@@ -1,3 +1,4 @@
+import {atStoryMission} from '../comun/recorrido.js';
 import {makeGame,stepGame,setInput,snapshot,normalizeRules,emit} from './sim.js';
 import {HEROES,STATS} from './roster.js';
 import {buildLineup} from './selection.js';
@@ -197,6 +198,8 @@ function showResults(state){
  const winner=state.winner;
  $('results-kicker').textContent=over?'FIN DEL PARTIDO':'';
  $('results-title').textContent=!over?'Tabla de puntos':winner===null?'¡Empate! Buen juego':`¡${TEAM_COLORS[winner].name} ganan el partido!`;
+ const nextIsTatami=over && atStoryMission(2);
+ $('to-tatami').hidden=$('walk-off').hidden=!nextIsTatami;
  $('results-body').innerHTML=resultsMarkup(state,localId);
  $('results').classList.toggle('peek',!over);
  $('results').hidden=false;
