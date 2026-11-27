@@ -517,5 +517,5 @@ renderPoses();
 renderPalette();
 renderSequence();
 renderSaved();
-if(!location.hash && atStoryMission(2))enterStoryMat();
+if(location.hash==='#demostracion' || (!location.hash && atStoryMission(2)))enterStoryMat();
 else {route();addEventListener('hashchange',route);}

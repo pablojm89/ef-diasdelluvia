@@ -1,0 +1,15 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><title>El Pabellón · Partida de muestra</title>
+<script src="./demo-storage.js"></script>
+<p>Abriendo la partida de muestra…</p>
+<script type="module">
+import {setPlayer,setMode,record,entries} from './registro.js';
+setPlayer({course:5,alias:'Demo',avatar:0});
+setMode('alumno');
+if (!entries().length) {
+ record('material','preparar-mate','entrega');
+ record('pista','mate','partido',{resultado:'empate'});
+}
+const catalogue=location.hash==='#actividades';
+sessionStorage.setItem('pabellon-vuelta',catalogue?'directo':'alumno');
+location.replace(catalogue?'./index.html#directo':'./tatami/index.html#demostracion');
+</script></html>

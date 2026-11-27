@@ -19,7 +19,7 @@ export function currentJourney() {
  const saved = Number(localStorage.getItem(key));
  const result = journey(summary(entries().filter(e=>e.sid===sid))[0], Number.isInteger(saved) && saved <= missions.length ? saved : 0);
  if (result.index !== saved) localStorage.setItem(key,String(result.index));
- return result;
+ return {...result,unlocked:new Set(missions.map(m=>m.place))};
 }
 
 export function atStoryMission(index) {
