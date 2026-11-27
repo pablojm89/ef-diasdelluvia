@@ -1,3 +1,5 @@
+import {atStoryMission} from '../comun/recorrido.js';
+import {nota} from './nota.js';
 // La Pizarra: the rosco drawn in chalk. Class screen (everyone answers with a posture) or the pupil's own computer.
 import {topBar, record, mode, player, playerCode, backToHub} from '../comun/lugar.js';
 import {ROSCOS, rosco} from './banco.js';
@@ -20,7 +22,8 @@ for (const key of PINTADOS) document.body.classList.add('con-' + key);
 if (painted('robles-aplaude')) $('host-img').dataset.end = art('robles-aplaude');
 
 const screen = mode() === 'pantalla', me = screen ? null : player();
-const SAVE = 'pizarra-partida-' + (screen ? 'pantalla' : me ? playerCode(me) : 'libre'), PREFS = 'pizarra-ajustes';
+const story=atStoryMission(3);
+const SAVE = (story ? 'pizarra-nota-' : 'pizarra-partida-') + (screen ? 'pantalla' : me ? playerCode(me) : 'libre'), PREFS = 'pizarra-ajustes';
 const load = key => { try { return JSON.parse(localStorage.getItem(key)); } catch { return null; } };
 const store = (key, value) => { try { if (value === null) localStorage.removeItem(key); else localStorage.setItem(key, JSON.stringify(value)); } catch {} };
 const prefs = {rosco: me?.course === 6 ? 'sexto' : 'quinto', equipos: 0, sentado: false, ...load(PREFS)};
@@ -89,19 +92,19 @@ function show(next) {
  view = next;
  document.body.dataset.view = next;
  for (const name of ['start', 'game', 'end']) $('view-' + name).hidden = name !== next;
- $('end-now').hidden = next !== 'game';
+ $('end-now').hidden = next !== 'game' || story;
  seatedBox.parentElement.hidden = next === 'end' || (next === 'start' && !screen);
 }
 function save() {
  if (game && !game.done) store(SAVE, {game, phase: phase === 'cuenta' ? 'leer' : phase, last, picked});
 }
 function offerResume() {
- const saved = load(SAVE), savedBank = saved && rosco(saved.game?.rosco);
+ const saved = load(SAVE), savedBank = saved && (story ? nota : rosco(saved.game?.rosco));
  const ok = savedBank && R.validGame(saved.game, savedBank) && !saved.game.done;
  $('resume').hidden = !ok;
  if (!ok) {
   store(SAVE, null);
-  $('start').firstElementChild.textContent = 'Empezar';
+  $('start').firstElementChild.textContent = story ? 'Coger la tiza' : 'Empezar';
   $('start').classList.add('gold', 'big');
   return;
  }
@@ -112,13 +115,13 @@ function offerResume() {
 }
 $('resume').addEventListener('click', () => {
  const saved = load(SAVE);
- bank = rosco(saved.game.rosco); game = saved.game;
+ bank = story ? nota : rosco(saved.game.rosco); game = saved.game;
  // A letter that was being answered or celebrated is picked up from its question.
  phase = 'leer'; last = -1; picked = -1;
  begin();
 });
 $('start').addEventListener('click', () => {
- bank = rosco(prefs.rosco);
+ bank = story ? nota : rosco(prefs.rosco);
  game = R.createGame(bank, {teams: screen ? prefs.equipos : 0});
  phase = 'leer'; last = -1; picked = -1; overtimeSaid = false;
  begin();
@@ -180,6 +183,7 @@ function drawCentre() {
  drawTime();
 }
 function drawTime() {
+ if(story){$('centre-time').textContent='';return;}
  if (screen) { $('centre-time').textContent = game.round > 1 ? `Vuelta ${game.round}` : ''; return; }
  const left = bank.segundos - game.seconds;
  $('centre-time').textContent = left >= 0 ? clock(left) : `Tiempo extra ${clock(-left)}`;
@@ -221,12 +225,16 @@ function drawPanel() {
   actions = `<p class="chalk ask">¿Acertó la mayoría ${who}?</p><button type="button" class="sign gold" data-do="yes"><strong>Sí, la mayoría</strong></button><button type="button" class="sign" data-do="no"><strong>No</strong></button>`;
  }
  if (!screen) actions = `<button type="button" class="sign" data-do="pass" aria-keyshortcuts="p"><strong>Pasapalabra</strong></button>`;
- const overtime = !screen && game.seconds > bank.segundos ? '<p class="chalk soft">Se acabó el tiempo, pero puedes terminar con calma: las que quedan cuentan igual.</p>' : '';
+ const overtime = !story && !screen && game.seconds > bank.segundos ? '<p class="chalk soft">Se acabó el tiempo, pero puedes terminar con calma: las que quedan cuentan igual.</p>' : '';
  const revealLine = reveal ? `<p class="reveal">Es la <b class="chalk">${'ABC'[R.rightChoice(game)]}</b>: ${answerLine(item)}</p>` : '';
  panel.innerHTML = `<p class="chalk clue">${esc(R.clueText(item))}${turn}</p><p class="chalk definition">${esc(item.definicion)}</p>${choicesMarkup(item, game.current, reveal)}${revealLine}<div class="actions">${actions}</div>${overtime}`;
 }
 function drawAfter() {
  const item = entry(last), ok = phase === 'acierto', panel = $('panel');
+ if(story){
+  panel.innerHTML='<p class="chalk clue">'+(ok?'¡Eso es!':'La palabra era '+esc(item.respuesta)+'.')+'</p><p class="chalk definition">'+esc(item.frase)+'</p><div class="actions"><button class="sign gold" data-do="next"><strong>'+(game.done?'Leer nuestra nota':'Escribir y seguir')+'</strong></button></div>';
+  return;
+ }
  if (!ok) {
   panel.innerHTML = `<p class="chalk clue ko">${esc(R.clueText(item))} · Para repasar</p><p class="chalk definition small">${esc(item.definicion)}</p>${screen ? '' : choicesMarkup(item, last, true).replace('class="choices', 'class="choices compact')}<p class="reveal">Era ${answerLine(item)}</p><div class="actions"><button type="button" class="sign gold" data-do="next"><strong>${game.done ? 'Ver el resultado' : 'Siguiente letra'}</strong></button></div>`;
   return;
@@ -307,6 +315,9 @@ function resolve(correct) {
  const item = entry(last);
  game = R.answer(game, correct);
  phase = correct ? 'acierto' : 'fallo';
+ if(story){
+  say(item.frase);drawRing();drawPanel();save();focusAction();return;
+ }
  retoLeft = item.reto.s; retoRunning = false;
  say(correct ? `¡Acierto! ${item.respuesta}. Microrreto: ${prefs.sentado ? item.reto.sentado : item.reto.pie}` : `Era ${item.respuesta}.`);
  drawRing(); drawPanel(); save();
@@ -359,12 +370,12 @@ function end() {
  clearInterval(ticker); stopReto(); clearInterval(countTimer);
  const data = R.result(game, bank);
  if (game.teams.length) data.equipos = game.teams.join('-');
- record('pizarra', 'rosco', 'partida', data);
+ record('pizarra', story ? 'nota-del-pabellon' : 'rosco', 'partida', data);
  store(SAVE, null);
  const {aciertos, fallos, pasadas, segundos, repasar} = data;
  $('end-tag').textContent = bank.nombre;
  $('end-title').textContent = `${aciertos} ${aciertos === 1 ? 'acierto' : 'aciertos'} de ${game.size}`;
- const extra = !screen && segundos > bank.segundos ? ` (${clock(segundos - bank.segundos)} de tiempo extra)` : '';
+ const extra = !story && !screen && segundos > bank.segundos ? ` (${clock(segundos - bank.segundos)} de tiempo extra)` : '';
  $('end-line').textContent = `${fallos} ${fallos === 1 ? 'fallo' : 'fallos'} · ${pasadas} ${pasadas === 1 ? 'pasapalabra' : 'pasapalabras'} · ${clock(segundos)}${extra}`;
  const best = Math.max(...game.teams, 0);
  $('end-teams').hidden = !game.teams.length;
@@ -373,6 +384,17 @@ function end() {
  $('review-title').textContent = review.length ? 'Para repasar' : '¡Rosco completo, sin nada que repasar!';
  $('review').innerHTML = review.map(item => `<li><span class="chalk key-letter">${item.letra}</span><span><span class="chalk answer">${esc(cap(item.respuesta))}</span>${item.ingles ? ` <span class="chalk en" lang="en">${esc(item.ingles)}</span>` : ''}<small class="chalk">${esc(item.definicion)}</small></span></li>`).join('');
  if ($('host-img').dataset.end) $('host-img').src = $('host-img').dataset.end;
+ if(story){
+  $('end-title').textContent='¡Nota lista!';
+  $('end-line').textContent=nota.entradas.map(item=>item.frase).join(' ');
+  $('review-title').textContent='Para la próxima clase';
+  $('review').innerHTML='<li class="chalk">Ya sabes volver a la calma. Ahora te toca elegir las posturas que enseñarás al grupo.</li>';
+  $('again').hidden=true;
+  if(atStoryMission(4)){
+   $('out').href='../tatami/#crear';
+   $('out').firstElementChild.textContent='Preparar mi secuencia';
+  }
+ }
  show('end');
  say(`Rosco terminado: ${aciertos} aciertos.`);
  $('end-title').setAttribute('tabindex', '-1'); $('end-title').focus({preventScroll: true});
@@ -398,5 +420,25 @@ function chime() { try { tone(660, 0); tone(880, .16); } catch {} }
 
 addEventListener('pagehide', save);
 document.addEventListener('visibilitychange', () => { if (document.hidden) save(); });
+if(story){
+ document.body.classList.add('story-note');
+ $('note-host').hidden=false;
+ $('start-title').textContent=nota.nombre;
+ $('start-lead').textContent='La clase que viene después quiere saber cómo hemos jugado. Completa conmigo tres pistas y les dejaremos la nota escrita en la pizarra.';
+ const line=$('start-lead'), words=line.textContent;
+ if(!still()){
+  line.setAttribute('aria-label',words);
+  let started=performance.now();
+  function write(now){
+   const count=Math.floor((now-started)/22);
+   line.textContent=words.slice(0,count);
+   if(view==='start' && count<words.length)requestAnimationFrame(write);
+   else line.textContent=words;
+  }
+  requestAnimationFrame(write);
+  line.onclick=()=>{started=-Infinity;line.textContent=words;};
+ }
+ $('pick-rosco').hidden=$('how').hidden=true;
+}
 offerResume();
 show('start');

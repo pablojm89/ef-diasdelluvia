@@ -123,6 +123,7 @@ export function summary(list = entries()) {
    if (entry.event === 'secuencia-creada') row.sequences++;
    if (entry.event === 'secuencia-practicada') row.practices++;
   }
+  if (entry.place === 'pizarra' && entry.activity === 'nota-del-pabellon' && entry.event === 'partida') row.notaEscrita = true;
   if (entry.activity === 'rosco' && entry.event === 'partida') {
    row.roscos++;
    row.bestRosco = Math.max(row.bestRosco, Number(entry.data.aciertos) || 0);

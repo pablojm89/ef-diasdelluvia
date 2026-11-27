@@ -14,6 +14,7 @@ const screen = mode() === 'pantalla';
 const store = (() => { try { return localStorage; } catch { return {getItem: () => null, setItem() {}, removeItem() {}}; } })();
 
 topBar('El Tatami');
+if(atStoryMission(4))$('lead').textContent='Ahora guías tú. En Crear, elige la montaña y otra postura, guarda tu secuencia y practícala para enseñársela al grupo.';
 if (screen) {
  document.body.classList.add('screen');
  $('lead').textContent = 'Aprended las posturas, cread la secuencia de la clase entre todos y hacedla juntos.';
@@ -508,7 +509,13 @@ function enterStoryMat(){
    store.removeItem(storageKey);store.removeItem(storageKey+'-silla');
   }else store.setItem(storageKey,String(step));
   draw();
-  if(step===4)$('story-onward').focus();
+  if(step===4){
+   if(atStoryMission(3)){
+    $('story-onward').href='../pizarra/';
+    $('story-onward').textContent='Ir a la pizarra';
+   }
+   $('story-onward').focus();
+  }
  };
  draw();
 }
