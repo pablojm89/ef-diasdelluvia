@@ -2,7 +2,7 @@
 (() => {
  const tab = window.sessionStorage;
  function scoped(area) {
-  const prefix = 'demo-postmate-v1/' + area + '/';
+  const prefix = 'demo-nota-v1/' + area + '/';
   return {
    getItem: key => tab.getItem(prefix + key),
    setItem: (key, value) => tab.setItem(prefix + key, value),

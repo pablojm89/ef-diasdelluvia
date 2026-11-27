@@ -8,8 +8,9 @@ setMode('alumno');
 if (!entries().length) {
  record('material','preparar-mate','entrega');
  record('pista','mate','partido',{resultado:'empate'});
+ record('tatami','yoga','postura',{id:'mountain'});
 }
 const catalogue=location.hash==='#actividades';
 sessionStorage.setItem('pabellon-vuelta',catalogue?'directo':'alumno');
-location.replace(catalogue?'./index.html#directo':'./tatami/index.html#demostracion');
+location.replace(catalogue?'./index.html#directo':'./pizarra/index.html');
 </script></html>
